@@ -25,6 +25,9 @@ pnpm dev
 
 Opens at **http://localhost:4000**. Navigate with arrow keys; press `S` for speaker notes.
 
+During install, pnpm may print a warning about ignored build scripts for
+`esbuild`. The deck still installs and builds normally.
+
 ## Building and previewing
 
 ```bash
@@ -32,7 +35,7 @@ pnpm build
 pnpm preview
 ```
 
-`pnpm build` writes the static site to `dist/`. `pnpm preview` serves that built output locally.
+`pnpm build` writes the static site to `dist/`. `pnpm preview` serves that built output locally, usually at **http://localhost:4173**.
 
 ## Editing
 
