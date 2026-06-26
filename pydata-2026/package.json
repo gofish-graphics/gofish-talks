@@ -1,0 +1,24 @@
+{
+  "name": "pydata-2026-talk",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "packageManager": "pnpm@10.28.1",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "gofish-graphics": "nightly",
+    "lodash": "^4.17.21",
+    "reveal.js": "^5.1.0",
+    "solid-js": "^1.9.5"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.17.16",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.0",
+    "vite-plugin-solid": "^2.11.6"
+  }
+}
