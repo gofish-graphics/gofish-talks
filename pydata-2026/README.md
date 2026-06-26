@@ -2,14 +2,37 @@
 
 A 30+15 min conference talk introducing GoFish to Python data practitioners.
 
-## Running the presentation
+## Prerequisites
+
+- Node.js 20 or newer
+- pnpm 10
+- GitHub access to this private repository
+
+If pnpm is not already available:
 
 ```bash
+corepack enable
+```
+
+## Running the presentation locally
+
+```bash
+git clone git@github.com:gofish-graphics/pydata-2026-talk.git
+cd pydata-2026-talk
 pnpm install
 pnpm dev
 ```
 
 Opens at **http://localhost:4000**. Navigate with arrow keys; press `S` for speaker notes.
+
+## Building and previewing
+
+```bash
+pnpm build
+pnpm preview
+```
+
+`pnpm build` writes the static site to `dist/`. `pnpm preview` serves that built output locally.
 
 ## Editing
 
@@ -66,13 +89,6 @@ Key layout classes:
 ### reveal.js config — `main.ts`
 
 Presentation is fixed at 1280×720 with `transition: "none"`. To change theme, swap `white.css` for another file in `node_modules/reveal.js/dist/theme/`.
-
-## Building
-
-```bash
-pnpm build      # outputs to dist/
-pnpm preview    # serves the built output
-```
 
 ## Data sources
 
