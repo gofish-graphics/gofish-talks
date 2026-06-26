@@ -219,6 +219,10 @@
   margin-top: -20px;
 }
 
+#chart-flower svg {
+  margin-top: 0;
+}
+
 /* ─── Title slide ───────────────────────────────────────────────────── */
 .title-slide {
   text-align: center;

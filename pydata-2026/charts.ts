@@ -348,7 +348,7 @@ function renderScatterPieChart() {
   Chart(scatterByLake)
     .flow(scatter("lake", { x: "x", y: "y" }))
     .mark((data) =>
-      Chart(data[0].collection, { coord: clock() })
+      Chart(data[0].collection, { coord: clock(), axes: false })
         .flow(stack("species", { dir: "x", h: 20 }))
         .mark(rect({ w: "count", fill: "species" }))
     )
