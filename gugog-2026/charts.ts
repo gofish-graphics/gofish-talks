@@ -26,6 +26,8 @@ import {
   arrow,
   Constraint,
   Shape,
+  Unit,
+  Trait,
 } from "gofish-graphics";
 import seafood from "./data/seafood.json";
 
@@ -238,6 +240,53 @@ const seafoodRibbon = () =>
     .layer(ribbon({ by: "species", opacity: 0.8 }));
 // (The slides show both seafood specs with spacing and opacity elided.)
 
+// ─── Section 4: expressive vs. structured (CanAdd) ────────────────────────
+// Two ordinary programs that differ only in the unit of "value". USD
+// declares Trait.summable(), so stack can add the amounts. °C does not, so
+// GoFish refuses to stack it; the slide shows the error it throws (see
+// data-expect-error in renderCharts). The numbers are illustrative.
+const sales = [
+  { month: "Jan", city: "Boston", value: 120 },
+  { month: "Jan", city: "Chicago", value: 95 },
+  { month: "Feb", city: "Boston", value: 135 },
+  { month: "Feb", city: "Chicago", value: 110 },
+  { month: "Mar", city: "Boston", value: 150 },
+  { month: "Mar", city: "Chicago", value: 128 },
+];
+
+const temps = [
+  { month: "Jan", city: "Boston", value: -1 },
+  { month: "Jan", city: "Chicago", value: -4 },
+  { month: "Feb", city: "Boston", value: 0 },
+  { month: "Feb", city: "Chicago", value: -2 },
+  { month: "Mar", city: "Boston", value: 4 },
+  { month: "Mar", city: "Chicago", value: 4 },
+];
+
+const salesStacked = () =>
+  chart(sales, {
+    schema: {
+      value: Unit("USD", { traits: [Trait.summable()] }),
+    },
+  })
+    .flow(
+      spread({ by: "month", dir: "x" }),
+      stack({ by: "city", dir: "y" }),
+    )
+    .mark(rect({ h: "value", fill: "city" }));
+
+const tempsStacked = () =>
+  chart(temps, {
+    schema: {
+      value: Unit("°C"),
+    },
+  })
+    .flow(
+      spread({ by: "month", dir: "x" }),
+      stack({ by: "city", dir: "y" }),
+    )
+    .mark(rect({ h: "value", fill: "city" }));
+
 type Renderable = {
   render: (el: HTMLElement, options: Record<string, unknown>) => unknown;
 };
@@ -249,6 +298,8 @@ const charts: Record<string, (fontSize: number) => Renderable> = {
   "planets-label": planetsLabeled,
   "seafood-stacked": seafoodStacked,
   "seafood-ribbon": seafoodRibbon,
+  "sales-stacked": salesStacked,
+  "temps-stacked": tempsStacked,
 };
 
 export function renderCharts(root: ParentNode = document) {
@@ -261,6 +312,20 @@ export function renderCharts(root: ParentNode = document) {
     const w = Number(el.dataset.w);
     const h = Number(el.dataset.h);
     const fontSize = Number(el.dataset.fontSize ?? 26);
+    // data-expect-error: the chart is meant to be refused. Show the message
+    // GoFish throws, in place of the chart, instead of letting it escape.
+    if (el.dataset.expectError !== undefined) {
+      Promise.resolve()
+        .then(() => make(fontSize).render(el, { w, h, legend: false }))
+        .then(
+          () => console.error(`Chart "${el.dataset.chart}" was expected to throw`),
+          (err: unknown) => {
+            el.replaceChildren();
+            el.textContent = err instanceof Error ? err.message : String(err);
+          }
+        );
+      return;
+    }
     make(fontSize).render(el, { w, h, legend: false });
   });
 }

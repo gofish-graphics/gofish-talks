@@ -263,33 +263,51 @@
         <section class="code-slide">
           <p class="part">4 · Two tradeoffs verbs dissolve</p>
           <h2>expressive vs. structured</h2>
-          <div class="two-col">
-            <pre><code class="language-ts" data-line-numbers data-char-marks="5:7-11, 12:35-50, 18:19-28">const stacked = (schema: object, mark: unknown) =&gt;
-  chart(sales, { schema })
-    .flow(
-      spread({ by: "region", dir: "x" }),
-      stack({ by: "product", dir: "y" })
-    )
-    .mark(mark)
-    .toDisplayList(SIZE);
-
-const usd = await errorOf(() =&gt;
-  stacked(
-    { usd: Unit("USD", { traits: [Trait.summable()] }) },
-    rect({ h: "usd" })
-  )
-);
-…
-const celsius = await errorOf(() =&gt;
-  stacked({ temp: Unit("°C") }, rect({ h: "temp" }))
-);</code></pre>
+          <div class="canadd-pair">
             <div>
-              <p class="big-claim"><code>CanAdd</code> keeps both.</p>
-              <p class="canadd-error"><code>Unit("°C")</code> has no
-                <code>CanAdd</code>, so <code>stack</code> throws: "cannot be
-                summed: it has no CanAdd."</p>
+              <p class="code-pair-label">USD <span class="code-pair-sub">· declared summable: it stacks</span></p>
+              <div class="canadd-out" data-chart="sales-stacked" data-w="520" data-h="190" data-font-size="16"></div>
+              <pre><code class="language-ts" data-line-numbers data-char-marks="9:12-54">const sales = [
+  { month: "Jan", city: "Boston", value: 120 },
+  { month: "Jan", city: "Chicago", value: 95 },
+  ...
+];
+
+chart(sales, {
+  schema: {
+    value: Unit("USD", { traits: [Trait.summable()] }),
+  },
+})
+  .flow(
+    spread({ by: "month", dir: "x" }),
+    stack({ by: "city", dir: "y" }),
+  )
+  .mark(rect({ h: "value", fill: "city" }))</code></pre>
+            </div>
+            <div>
+              <p class="code-pair-label">°C <span class="code-pair-sub">· no CanAdd: GoFish refuses</span></p>
+              <!-- Runs tempsStacked() from ../charts.ts and shows the error
+                   GoFish throws (data-expect-error), not a chart. -->
+              <div class="canadd-out canadd-error-box" data-chart="temps-stacked" data-expect-error data-w="520" data-h="190"></div>
+              <pre><code class="language-ts" data-line-numbers data-char-marks="9:12-21">const temps = [
+  { month: "Jan", city: "Boston", value: -1 },
+  { month: "Jan", city: "Chicago", value: -4 },
+  ...
+];
+
+chart(temps, {
+  schema: {
+    value: Unit("°C"),
+  },
+})
+  .flow(
+    spread({ by: "month", dir: "x" }),
+    stack({ by: "city", dir: "y" }),
+  )
+  .mark(rect({ h: "value", fill: "city" }))</code></pre>
             </div>
           </div>
+          <p class="canadd-footnote">Inspired by Bartonicek, Urbanek &amp; Murrell (JCGS 2025), Flint (Wang et al., VIS 2026), and Huang &amp; Kay (GUGOG 2026).</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:55 (after the 0:15 quote). <strong>Running total:</strong>
               6:50 of 7:00 (budget; the deck now runs 9:05).</p>
@@ -305,20 +323,47 @@ const celsius = await errorOf(() =&gt;
               <code>stack</code> needs values that add up. USD declared
               <code>Trait.summable()</code> stacks. Degrees Celsius doesn't
               have <code>CanAdd</code>, so the same chart is a loud error that
-              names the missing capability, not a wrong picture.</p>
-            <p><strong>Source:</strong> code from the GoFish repo at
-              <code>HEAD</code> <code>00635d2d0</code>,
-              <code>packages/gofish-graphics/src/tests/measure.test.ts</code>,
-              lines 1105 to 1124 (the "CanAdd: only amounts that add up are
-              summed" test). Dedented by two spaces; lines 1120 and 1121 (the
-              assertion on <code>usd</code>) are replaced with
-              <code>…</code>. The test asserts that the USD stack succeeds and
-              that the °C stack throws an error matching "cannot be summed".
-              The quoted error text is the fixed part of
-              <code>checkSummable</code>'s message in
-              <code>src/ast/measure.ts</code> (lines 155 to 161). The type
-              itself is <code>export type CanAdd = Record&lt;string,
-              never&gt;;</code> in <code>src/ast/schema.ts</code>, line 152:
-              "The class of a unit whose amounts can be added".</p>
+              names the missing capability and says what to do instead, not a
+              wrong picture.</p>
+            <p>The error on the right is not typed in: the slide runs the °C
+              spec live and prints the message GoFish throws. It is
+              <code>checkSummable</code>'s error in
+              <code>src/ast/measure.ts</code> (origin/main, lines 155 to 161):
+              "... which cannot be summed: it has no CanAdd. If its amounts add
+              up (money, counts, lengths), declare it with Unit(...,
+              { traits: [Trait.summable()] }). If they do not (temperatures,
+              prices, rates), average them instead ...".</p>
+            <p><strong>Source:</strong> written for this slide, after the
+              GoFish repo's CanAdd test
+              (<code>packages/gofish-graphics/src/tests/measure.test.ts</code>,
+              "CanAdd: only amounts that add up are summed"), which stacks a
+              <code>Unit("USD", { traits: [Trait.summable()] })</code> column
+              and a <code>Unit("°C")</code> column the same way. The two specs
+              here are ordinary programs and differ only in the unit line
+              (highlighted) and their data. The data is illustrative: made-up
+              monthly sales and average temperatures for two cities. The data
+              rows after the first two are elided as <code>...</code>; the
+              live render uses all six rows (<code>../charts.ts</code>). The
+              type itself is <code>export type CanAdd = Record&lt;string,
+              never&gt;;</code> in <code>src/ast/schema.ts</code>: "The class
+              of a unit whose amounts can be added".</p>
+            <p><strong>Footnote citations:</strong></p>
+            <ul>
+              <li>A. Bartonicek, S. Urbanek, and P. Murrell, "No More, No Less
+                than Sum of Its Parts: Groups, Monoids, and the Algebra of
+                Graphics, Statistics, and Interaction," <em>Journal of
+                Computational and Graphical Statistics</em> 34(3), 2025.</li>
+              <li>Yunhai Wang, Kecheng Lu, Junhao Chen, Alper Sarikaya, and
+                Chenglong Wang, "Flint: A Semantics-Driven Data Visualization
+                Intermediate Language," IEEE VIS 2026 (arXiv:2607.20775)
+                (microsoft.github.io/flint-chart). The VIS program spells the
+                title "Semantic-driven"; this follows arXiv. Its semantic types and
+                traits (<code>aggRole</code> decides sum vs. mean) are what
+                <code>CanAdd</code> draws on; see the GoFish repo's
+                <code>apps/docs/docs/internals/design/flint-chart-notes.md</code>.</li>
+              <li>C. A. Huang and M. Kay, "Semantic Validity vs. Graphical
+                Arrangement in Visualization Grammars," GUGOG @ IEEE VIS
+                2026.</li>
+            </ul>
           </aside>
         </section>

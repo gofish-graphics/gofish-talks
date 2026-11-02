@@ -143,11 +143,6 @@
   margin-top: 0.4em !important;
 }
 
-.canadd-error {
-  font-size: 0.6em !important;
-  line-height: 1.35 !important;
-}
-
 /* The GoFish crash course (03b): three auto-animated states of one layout.
    Left: the core level (planets render, then code). Right: the chart level
    (seafood render, then code). Every state uses the same boxes, so only
@@ -235,4 +230,52 @@
 .reveal .quote-slide blockquote.long-quote.quote-short {
   font-size: 1.3em;
   margin-top: 3.2rem;
+}
+
+/* expressive vs. structured (04): two standalone specs, each under what it
+   produces. USD renders a chart; °C shows the error GoFish throws, in the
+   same box, where the chart would be. */
+.canadd-pair {
+  display: grid;
+  gap: 0 1.1rem;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 0.2rem;
+}
+
+.reveal .code-slide .canadd-pair pre {
+  font-size: 0.57em;
+  margin: 0;
+}
+
+.reveal .code-slide .canadd-pair pre code {
+  line-height: 1.2;
+  max-height: none;
+}
+
+.canadd-out {
+  align-items: center;
+  display: flex;
+  height: 190px;
+  justify-content: center;
+  margin-bottom: 0.35rem;
+}
+
+.canadd-error-box {
+  background: #fbeeea;
+  border: 2px solid var(--accent);
+  border-radius: 6px 9px 5px 8px;
+  box-sizing: border-box;
+  color: #7a2a1f;
+  font-family: "Fira Code", monospace;
+  font-size: 0.56em;
+  font-variant-ligatures: none;
+  line-height: 1.35;
+  padding: 0.6em 0.8em;
+  text-align: left;
+}
+
+.reveal .code-slide .canadd-footnote {
+  color: var(--muted);
+  font-size: 0.45em;
+  margin: 0.45rem 0 0;
 }
