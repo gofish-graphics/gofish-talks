@@ -1,18 +1,64 @@
-        <!-- ═══ SECTION 3: KEY IDEA, VERBS, ~1:30 ══════════════════════ -->
-        <section>
-          <p class="part">3 · Key idea</p>
-          <h2>the grammar of graphics has nouns, but no verbs</h2>
-          <div class="two-col">
-            <ul>
-              <li>Verbs let grammars integrate.</li>
-              <li>Charts, diagrams, and UIs share structure.</li>
-            </ul>
-            <div class="placeholder-box">
-              <p class="placeholder-label">Placeholder: nouns vs. verbs</p>
-              <p>Comparison of a nouns-only grammar with one that has
-                verbs</p>
+        <!-- ═══ SECTION 3: KEY IDEA, VERBS, ~1:30 ══════════════════════
+             For now this is the "Data, Marks, Channels, Coordinates" slide
+             from the thesis defense deck
+             (phd-thesis-20260618/presentation/sections/03-gofish.html),
+             copied as is. Its CSS is in ../style.css. -->
+        <section class="gog-concepts-slide">
+          <h2>Data, Marks, Channels, Coordinates</h2>
+          <div class="gog-concepts-grid">
+            <div class="fragment" data-fragment-index="1">
+              <h3>Data <span class="h3-sub">records</span></h3>
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>lake</th>
+                    <th>species</th>
+                    <th>count</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Primrose</td>
+                    <td>Bass</td>
+                    <td>23</td>
+                  </tr>
+                  <tr>
+                    <td>Primrose</td>
+                    <td>Trout</td>
+                    <td>31</td>
+                  </tr>
+                  <tr>
+                    <td>Primrose</td>
+                    <td>Catfish</td>
+                    <td>29</td>
+                  </tr>
+                  <tr class="ellipsis-row">
+                    <td>&#8942;</td>
+                    <td>&#8942;</td>
+                    <td>&#8942;</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="fragment" data-fragment-index="2">
+              <h3>Marks <span class="h3-sub">shapes</span></h3>
+              <img src="./images/verbs/gog-marks.png" alt="Gallery of Observable Plot mark types" />
+              <p class="source-line">Observable Plot</p>
+            </div>
+            <div class="fragment" data-fragment-index="3">
+              <h3>Channels <span class="h3-sub">shape attributes</span></h3>
+              <img src="./images/verbs/gog-channels.png" alt="Munzner's ranking of visual channels by accuracy" />
+              <p class="source-line">Munzner, <em>Visualization Analysis and Design</em> (2014)</p>
+            </div>
+            <div class="fragment" data-fragment-index="4">
+              <h3>Coordinates <span class="h3-sub">space transformations</span></h3>
+              <div class="gog-coordinate-image-frame">
+                <img src="./images/verbs/gog-coordinates-thompson.png" alt="Thompson's growth transformation: a fish and its coordinate grid progressively warped into two curved forms" />
+              </div>
+              <p class="source-line">Thompson's growth transformation &middot; via Wilkinson, <em>The Grammar of Graphics</em></p>
             </div>
           </div>
+          <p class="big-claim fragment" data-fragment-index="5">A rich set of nouns, but almost no verbs.</p>
           <aside class="notes">
             <p><strong>Target:</strong> 1:30. <strong>Running total:</strong>
               3:00 of 7:00.</p>
@@ -21,5 +67,9 @@
               <li>What verbs are, and how they let grammars integrate.</li>
               <li>Charts, diagrams, and UIs share structure.</li>
             </ul>
+            <p><strong>From thesis deck:</strong></p>
+            <p>Data comes first, because everything after it is a mapping from it. This is the seafood catch table the whole rest of the talk runs on: one row per lake and species, with a count. Thirty rows, three fields. Point at it and say the audience will see this exact table again in a few minutes when GoFish builds its first chart -- it is the same data, and that is deliberate.</p>
+            <p>Marks are the shapes; channels are how data maps onto them, with Munzner's famous accuracy ranking: position and length beat angle, area, and color. Coordinate systems can transform the space those marks are drawn in, as Thompson's growth transformation shows. That's the grammar's vocabulary for precision: how exactly one value can be read. But marks and channels are blind to arrangement, to how things are grouped and laid out. The next slides pick up that thread: GoFish asks where the chart's spatial structure went.</p>
+            <p>Takeaway: Marks, channels, and coordinates say how values are read — none of them name the chart's spatial structure. GoFish asks where it went.</p>
           </aside>
         </section>

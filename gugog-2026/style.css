@@ -1,0 +1,144 @@
+/* Styles for this talk only. The shared theme is in ../talk-template/src/style.css. */
+
+/* Section 3 (sections/03-verbs.html): the "Data, Marks, Channels, Coordinates"
+   slide, copied for now from the thesis defense deck
+   (phd-thesis-20260618/presentation/styles.css, the .gog-concepts rules). */
+.gog-concepts-grid {
+  align-items: start;
+  display: grid;
+  gap: 0.8rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: 0.5em;
+}
+
+.gog-concepts-grid h3 {
+  font-size: 0.6em;
+  line-height: 1.15;
+  margin-bottom: 0.25em;
+  margin-top: 0;
+}
+
+.gog-concepts-grid .h3-sub {
+  color: var(--muted);
+  display: block;
+  font-size: 0.62em;
+  font-weight: 400;
+}
+
+.gog-concepts-grid > div > img {
+  background: white;
+  border: 2px solid #27231f;
+  border-radius: 6px 9px 5px 8px;
+  box-shadow: 4px 5px 0 rgba(30, 30, 30, 0.11);
+  display: block;
+  margin: 0 auto;
+  max-height: 250px;
+  max-width: 100%;
+  object-fit: contain;
+  padding: 8px;
+}
+
+.gog-concepts-grid .source-line {
+  font-size: 0.44em !important;
+  margin-top: 0.5em !important;
+}
+
+/* The data cell reuses the "Start with the Data" table markup, so it needs
+   its own card treatment here (that table's other styling is scoped to
+   .gofish-stage-slide and does not reach this slide). Sized down to match
+   the 2x2 grid's shorter cells. */
+.gog-concepts-grid .data-table {
+  background: white;
+  border: 2px solid #27231f;
+  border-collapse: collapse;
+  border-radius: 6px 9px 5px 8px;
+  box-shadow: 4px 5px 0 rgba(30, 30, 30, 0.11);
+  font-family: "Shantell Sans Local", ui-monospace, "SF Mono", monospace;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.gog-concepts-grid .data-table th,
+.gog-concepts-grid .data-table td {
+  border: 1px solid rgba(39, 35, 31, 0.2);
+  font-size: 0.42em;
+  padding: 0.3em 0.45em;
+  text-align: left;
+}
+
+.gog-concepts-grid .data-table thead th {
+  color: var(--accent);
+  font-weight: 760;
+  text-transform: lowercase;
+}
+
+.gog-concepts-grid .data-table tbody td {
+  color: var(--muted);
+}
+
+.gog-concepts-grid .data-table .ellipsis-row td {
+  color: var(--muted);
+  font-style: italic;
+  text-align: center;
+}
+
+/* This slide's big-claim is the conclusion of the three-concept build-up
+   (marks, channels, coordinates), not its premise -- it now sits below the
+   grid as the fourth, final fragment. Tightened margin and size keep it
+   clear of the grid's images at the deck's real 1280x720 slide size. Scoped
+   to .gog-concepts-slide so it cannot affect any other big-claim slide. */
+.gog-concepts-slide .big-claim {
+  margin-top: 0.5em !important;
+  margin-bottom: 0 !important;
+}
+
+.gog-coordinate-image-frame {
+  align-items: center;
+  background: white;
+  border: 2px solid #27231f;
+  border-radius: 6px 9px 5px 8px;
+  box-shadow: 4px 5px 0 rgba(30, 30, 30, 0.11);
+  display: flex;
+  height: 250px;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.gog-coordinate-image-frame img {
+  border: none !important;
+  box-shadow: none !important;
+  display: block;
+  height: auto;
+  max-width: none;
+  padding: 0 !important;
+  transform: rotate(90deg);
+  width: 235px;
+}
+
+/* The base type the thesis deck lays this slide out in, scoped to this slide
+   so it looks the same here: Reveal's 42px body size (the template uses
+   28px), left-aligned text, Reveal's Source Sans Pro for headings, and
+   Reveal's paragraph spacing. */
+.reveal .slides section.gog-concepts-slide {
+  font-size: 42px;
+  text-align: left;
+}
+
+.reveal .gog-concepts-slide h2,
+.reveal .gog-concepts-slide h3 {
+  font-family: "Source Sans Pro", Helvetica, sans-serif;
+}
+
+.reveal .gog-concepts-slide h2 {
+  margin-bottom: 0.42em;
+}
+
+.reveal .gog-concepts-slide p {
+  line-height: 1.37;
+  margin: 20px 0;
+}
+
+/* The thesis deck centers every .source-line; the template's does not. */
+.gog-concepts-slide .source-line {
+  text-align: center;
+}
