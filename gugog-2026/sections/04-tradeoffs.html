@@ -1,8 +1,9 @@
         <!-- ═══ SECTION 4: TWO TRADEOFFS VERBS DISSOLVE, ~2:00 ═════════
              Keep this section intact even when running long: it connects
              to the talks on either side.
-             The first tradeoff is built around one counterexample, GoTree
-             rebuilt as a GoFish library (two slides). Its framing follows the
+             The first tradeoff opens with Andrew McNutt's call for small
+             modular language components and is built around one example of
+             it, GoTree rebuilt as a GoFish library (two slides). Its framing follows the
              v3 draft of the GUGOG paper ("False tradeoff 1. Domain needs and
              shared structure", gugog-2026-position-paper-v3/main.typ); its
              code and render are the final paper's Figure 5
@@ -11,35 +12,52 @@
              system), not v3's, which predates the type system. Its code is
              from the current GoFish source, where the class is named CanAdd.
              Styles for the code slides: ../gofish-compare.css. -->
-        <!-- The position the GoTree slide answers: McNutt, "No Grammar to
-             Rule Them All", IEEE VIS 2022 (arXiv:2207.07998). Condensed with an ellipsis;
-             the full passage is in the notes. -->
+        <!-- The idea the GoTree slides build on: McNutt, "No Grammar to
+             Rule Them All", IEEE VIS 2022 (arXiv:2207.07998). The end of the
+             passage, in the paper's order, opening with an ellipsis; the full
+             passage is in the notes. McNutt will be in the room: present
+             his position as something GoFish builds on. -->
         <section class="quote-slide">
           <p class="part">4 · Two tradeoffs verbs dissolve</p>
           <blockquote class="long-quote quote-short">
-            <p>Fowler notes that one of the biggest dangers in DSL design is
-              “Sliding into generality.” … There are many tasks, and no one
+            <p>… we suggest that consideration of <strong>small modular
+              language components</strong> may be helpful in the continuation
+              and extension of this ecosystem. There are many tasks, and no one
               DSL will be able to capture all of them without compromising
               essential parts of its domain design. <span class="nowrap">That
-              is, <strong>there is no grammar to rule them all.</strong></span></p>
+              is, there is no grammar to rule them all.</span></p>
           </blockquote>
           <p class="long-quote-cite">Andrew McNutt, <em>No Grammar to Rule Them All</em>, IEEE VIS 2022</p>
           <aside class="notes">
             <p><strong>Full passage</strong> (reference markers removed): Park et al. argue that efforts should be made to “find a definitive grammar that can unify many of these existing grammars”. However, Greenspun’s tenth rule quips that any sufficiently complicated program contains an ad hoc, informally specified, bug-ridden, slow implementation of half of Lisp. Less satirically Fowler notes that one of the biggest dangers in DSL design is “Sliding into generality.” While tools like Vega-Lite are probably not in danger of becoming Lisp, we suggest that consideration of small modular language components may be helpful in the continuation and extension of this ecosystem. There are many tasks, and no one DSL will be able to capture all of them without compromising essential parts of its domain design. That is, there is no grammar to rule them all.</p>
             <p><strong>Target:</strong> 0:15 (shown, not recited; read the
-              last sentence aloud). <strong>Running total:</strong> 4:40 of
+              accent phrase and the last sentence aloud). <strong>Running total:</strong> 4:40 of
               7:00 (budget; the deck now runs 9:05).</p>
-            <p><strong>Say:</strong> "Here's the strongest version of the
-              case against a universal grammar. Andrew McNutt surveyed the
-              JSON visualization grammars and concluded: there is no grammar
-              to rule them all." Then go to the next slide: this is the claim
-              the GoTree slide answers. A domain grammar like GoTree can keep
-              its own design and still sit on a shared core, so you get both.</p>
+            <p><strong>Say:</strong> "Andrew's survey concluded there's no
+              grammar to rule them all, and I agree. One language that does
+              everything slides into generality. What he suggested instead was
+              small modular components, and languages that build on each
+              other. GoTree is an example of that: it keeps its own domain
+              design and compiles to a shared core." Then go to the next
+              slide.</p>
+            <p>Andrew is in the room. This is his idea, credited, not a
+              position to argue against. The same paper argues for "compile
+              towers": "Compilations may be chained together in a compile
+              tower in a manner supported by targeted languages that do one
+              thing well (akin to the Unix credo)", and "As the ecosystem of
+              JSON-style DSLs continues to grow it may be advantageous to
+              select designs that re-use as much work of the previous DSLs as
+              possible." It even suggests that "DSLs like Atom may be well
+              matched with a compile tower-style strategy". GoTree on GoFish
+              is one such tower.</p>
             <p>The quote is verbatim from Andrew McNutt, "No Grammar to Rule
               Them All: A Survey of JSON-style DSLs for Visualization", IEEE
               VIS 2022 (arXiv:2207.07998), except that its reference markers
               ([82] after "Park et al.", [29] after "tenth rule", [24] after
-              "Fowler") were removed. The bold on the last sentence is ours.</p>
+              "Fowler") were removed. The excerpt keeps the paper's order and
+              opens with an ellipsis for "While tools like Vega-Lite are
+              probably not in danger of becoming Lisp,". The accent color on
+              "small modular language components" is ours.</p>
           </aside>
         </section>
 
@@ -97,14 +115,21 @@
             </ul>
             <p>Keep section 4 intact even if running long: it connects to the
               talks on either side.</p>
-            <p><strong>The claim being refuted:</strong> you have to choose
-              between a universal grammar and a domain-specific one. McNutt's
-              survey puts the conflict as "there is no grammar to rule them
-              all" (quoted in the v3 draft).</p>
+            <p><strong>The tradeoff:</strong> you have to choose between a
+              universal grammar and a domain-specific one. Andrew McNutt's
+              survey (the previous slide) already points the way out: small
+              modular language components, and domain languages that compile
+              to ones that do one thing well. This slide is one instance of
+              that idea, credited to him, not an argument with him.</p>
+            <p>GoFish is not trying to be the single definitive grammar that
+              Park et al. call for (the call McNutt pushes back on). It is a
+              shared core that domain grammars can build on, which is
+              consistent with McNutt's point.</p>
             <p><strong>Say</strong> (v3 draft's framing): "Domain grammars need
               words and syntax that fit their tasks. That rules out one surface
               interface for all visualization work. It does not rule out one
-              language system." Here's the counterexample. On the left is
+              language system." Here's an example of the modular approach
+              Andrew described. On the left is
               GoTree, a grammar for trees, in its own JSON language. On the
               right is GoTree rebuilt as a library on GoFish. It keeps GoTree's
               tree words: a node, a link, a parent-child rule, a sibling rule.
@@ -158,7 +183,7 @@
         } …</code></pre>
           <p class="source-line gotree-source">gofish-gotree/src/helpers.ts · the whole library is about 550 lines</p>
           <p class="big-claim">
-            Domain grammars can be layered on a shared core. You get both.
+            Domain grammars keep their own design and share a core.
           </p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:25. <strong>Running total:</strong>
@@ -172,8 +197,9 @@
               is plain GoFish: same renderer, same constraints. The paper: "we
               get support for coordinate transforms, scales, and custom marks
               without having to design them from scratch." Domain grammars can
-              be layered on a shared core instead of being separate languages.
-              You get both.</p>
+              be layered on a shared core instead of being separate languages:
+              Andrew's compile tower, with GoFish as one floor of it. They
+              keep their own design and share the core.</p>
             <p>v3 draft wording, if useful: "The compiler turns this program
               into ordinary GoFish structure, so GoTree can use the GoFish
               graphics pipeline and renderer. Its alignment and containment
