@@ -19,6 +19,9 @@ The dev server is at `http://localhost:4003/`. `pnpm build` writes `dist/`.
 
 - Slides: `sections/*.html`, one file per outline section. Their order is set
   in `vite.config.ts`.
+- To edit slides in the browser, run `pnpm dev` and press `e`. Edits save into
+  `sections/*.html` and are committed to git a few seconds later. See
+  `../talk-template/README.md`.
 - Speaker notes are in each slide's `<aside class="notes">`, with the outline
   bullets, the target time, and the running total. Press `S` to open them.
 - Every figure is a labeled placeholder box. Replace each one with the real

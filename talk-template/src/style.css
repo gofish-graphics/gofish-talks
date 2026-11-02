@@ -260,6 +260,9 @@
   font-size: 3.1em;
   line-height: 1.05;
   margin: 0.2em auto 0.15em;
+  /* The editor's width handle stores a width as data-w, which
+     slide-layout.js turns into --title-h1-w. */
+  max-width: var(--title-h1-w, 980px);
 }
 
 .title-slide .title-product,
@@ -399,4 +402,77 @@
 
 .todo-note code {
   font-size: 0.9em;
+}
+
+/* ─── Placed by the slide editor ─────────────────────────────────────
+   The in-browser editor (src/editor/, dev only) writes these elements and
+   attributes into a talk's sections/*.html. These rules are what the
+   published slides need to show them; the edit-mode-only rules are in
+   src/editor/editor.css. */
+
+/* Free-floating text annotations, created with the editor's Text tool.
+   data-x/data-y hold the top-left corner as a percent of the 1280x720
+   slide; slide-layout.js applies them as left/top on every load (CSS can't
+   read a data-* attribute for positioning). The containing <section>
+   doesn't need position:relative added here -- reveal.js's own base rule
+   already makes every slide section position:absolute, which is just as
+   good a positioning context. */
+.slide-annotation {
+  position: absolute;
+  margin: 0;
+  font-size: 0.56em;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.25;
+  white-space: pre-wrap;
+  max-width: 30%;
+  /* No background by default. Ignores clicks outside edit mode so an
+     annotation never blocks a fragment click or other slide interaction. */
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* Inserted photos/images, created with the editor's Image tool or by
+   dropping a file onto a slide. data-x/data-y/data-w hold the top-left
+   corner and width as a percent of the 1280x720 slide, and data-z the
+   stacking order; slide-layout.js applies them on every load, same as
+   .slide-annotation. Height is always auto -- see the img rule below -- so
+   the aspect ratio can't drift. */
+.slide-image {
+  position: absolute;
+  margin: 0;
+  z-index: 5;
+  pointer-events: none;
+  /* The figure must be exactly the picture and nothing else, because that
+     box is what data-w names, what the selection outline traces, and what
+     the corner handles pin to. An inherited line-height would leave a strip
+     of empty line box under the image. */
+  line-height: 0;
+}
+
+.slide-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+  /* reveal caps every slide img at 95% of its container and adds a 20px
+     vertical margin, for the flow of a normal slide. An inserted image is
+     placed by hand, so it takes its size from data-w alone and its box is
+     the picture exactly. */
+  max-width: none;
+  max-height: none;
+  margin: 0;
+}
+
+/* Character-level code marks (data-char-marks, wrapped by slide-layout.js):
+   the same amber family as a highlighted line, but with an underline and a
+   box so it still reads as its own thing inside a highlighted line. */
+.reveal pre code .char-mark {
+  background: rgba(255, 179, 71, 0.65);
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px rgba(232, 151, 31, 0.55);
+  text-decoration: underline;
+  text-decoration-color: #e8971f;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 2px;
 }

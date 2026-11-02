@@ -13,6 +13,12 @@ The shared parts of a GoFish talk deck, taken from `scipy-2026/`:
   `sections/*.html` files, in the order you give, where `index.html` has the
   `<!-- sections -->` marker, so Vite bundles the images they use. It also
   adds the web font links and lets the dev server read the template's files.
+  Under `pnpm dev` it also runs the slide editor's save endpoints.
+- `src/editor/`: the in-browser slide editor. See "Editing slides in the
+  browser" below.
+- `src/slide-layout.js`: places the annotations and images that the editor
+  adds, and draws the code character highlights it adds. The published
+  slides need this, so it is not part of `src/editor/`.
 
 ## Using it in a talk
 
@@ -25,6 +31,87 @@ See `gugog-2026/` for a complete example. A talk needs:
   `gofishTalk({ sectionsDir, sections: [...] })` in `plugins`
 - `main.ts` that calls `startDeck()` from `@gofish-talks/template`
 - `index.html` with `<div class="reveal"><div class="slides"><!-- sections --></div></div>`
+
+## Editing slides in the browser
+
+Run `pnpm dev` in the talk's folder and open the deck. Press `e` to turn edit
+mode on or off. You can also add `?edit` to the URL to start with it on. A
+blue "EDIT MODE" badge shows while it is on. Every change is saved straight
+into the talk's `sections/*.html` files, so there is nothing to export.
+
+The editor is the one from the thesis defense deck
+(`phd-thesis-20260618/presentation/edit-mode.js`, `highlight-edit.js` and
+`edit-server.mjs`), moved here with the same keys and behavior.
+
+### Text
+
+- Double-click a heading, paragraph, list item, caption, quote or table cell
+  to edit its text in place.
+- Click outside it or press Cmd+Enter to save. Press Esc to cancel.
+- Click a text element once to select it, then press Backspace or Delete to
+  remove it from the file. Table cells cannot be removed.
+
+### Annotations and images
+
+A tool shelf sits at the left edge of the window while edit mode is on.
+
+- Text tool (`t`, or the "T" button): click the slide to add a free-floating
+  label, type, then press Cmd+Enter. An empty label is discarded. Press Esc to
+  go back to the Select tool.
+- Image button: pick an image file to add it to the current slide. You can
+  also drag a file from the Finder onto a slide. PNG, JPEG, GIF, WebP, SVG and
+  HEIC are accepted, and HEIC photos are converted to JPEG with macOS `sips`.
+  The file is saved in the talk's `images/inserted/` folder, and the build
+  bundles it like any other image in a section.
+- Select tool: drag a label or image to move it. Drag an image's corner
+  handle to resize it, and hold Option to resize about its center.
+- Press Backspace or Delete to remove the selected label or image. The image
+  file stays in `images/inserted/`.
+- Right-click an image for a menu that changes its stacking order or crops it.
+  You can also press `c` to crop the selected image. In crop mode, drag the
+  box or its corners, then press Enter or `c` to keep the crop or Esc to
+  cancel. The crop does not change the image file.
+- Select the title slide's `<h1>` to get a handle on its right edge that sets
+  its width. The `<h1>` needs an `id` for this width to save.
+
+A label can have `data-link="<name>"`. Moving it then moves every other label
+with the same `data-link` to the same place, even on other slides.
+
+### Code highlights
+
+These work on a code block that has a `data-line-numbers` attribute.
+
+- Hold Option and click a line number to turn the highlight on that line on
+  or off. On a block with build steps (`data-line-numbers="1|2-3"`), this
+  changes the step that is showing.
+- Hold Option and drag across part of one line to highlight just those
+  characters. The editor saves them as `data-char-marks`. Hold Option and click
+  a character highlight to remove it.
+
+### How saving works
+
+- In dev only, the plugin adds `data-src-file` and `data-src-index` to each
+  top-level slide `<section>`. These name the section file and the slide's
+  position in that file. The editor sends them with every save, and the
+  server finds the slide with the same scan that added them. Builds do not
+  have these attributes.
+- The server changes only the part of the file that was edited, and keeps the
+  rest of the file byte for byte. It accepts only the section files listed in
+  `gofishTalk({ sections })`.
+- The page does not reload after a save from the editor, because the page
+  already shows the change. If you edit a section file by hand, the page
+  reloads as usual.
+- A few seconds after the last save, the server makes a git commit with the
+  files it wrote, e.g., "Edit mode: update gugog-2026/sections/03-verbs.html".
+  It stages and commits only those files, and only if they are inside the
+  talk's folder, so other changes in the repo are left alone. It commits on
+  whatever branch is checked out, and it commits the whole file, including
+  any hand edits in that same file. Start the server with `AUTOCOMMIT=0 pnpm
+  dev` to turn this off.
+
+The built site has none of the editor code and no save endpoints. It only has
+`src/slide-layout.js` and the CSS rules in `style.css` that place the labels,
+images and character highlights.
 
 ## Slide classes
 
@@ -41,9 +128,6 @@ See `gugog-2026/` for a complete example. A talk needs:
 
 - Live GoFish charts. scipy-2026 renders them from `charts.ts` with the
   `gofish-graphics` package. No talk that uses the template needs them yet.
-- The click-to-edit mode. It is not in scipy-2026. It lives in the thesis
-  defense deck (`phd-thesis-20260618/presentation/edit-mode.js` and
-  `edit-server.mjs`), which is built differently, so it was not moved here.
 
 ## TODO: version drift
 

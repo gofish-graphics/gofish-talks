@@ -1,0 +1,163 @@
+/* Edit-mode-only styles for the in-browser slide editor, taken from the
+   thesis defense deck's styles.css. Loaded only under `pnpm dev`, with the
+   rest of src/editor/. The rules the published slides need
+   (.slide-annotation, .slide-image, .char-mark) are in ../style.css. Every
+   rule here is scoped under body.slide-edit-on or targets an element only
+   the editor creates, so nothing here changes how a slide looks while edit
+   mode is off. edit-mode.js also injects a few rules of its own (badge,
+   toast, tool shelf, menus, outlines) at startup. */
+
+/* highlight-edit.js: alt+click a gutter number to toggle a line, alt+drag
+   across characters in a code line to add a highlight range. The pointer
+   hint only appears while both edit mode is on and Alt is held. */
+body.slide-edit-on.hle-alt-down .reveal pre code table.hljs-ln td.hljs-ln-numbers,
+body.slide-edit-on.hle-alt-down .reveal pre code table.hljs-ln td.hljs-ln-code {
+  cursor: pointer;
+}
+
+body.slide-edit-on.hle-alt-down .reveal pre code table.hljs-ln td.hljs-ln-numbers:hover {
+  background: rgba(80, 130, 255, 0.18);
+}
+
+body.slide-edit-on.hle-alt-down .reveal pre code .char-mark {
+  cursor: pointer;
+}
+
+body.slide-edit-on .slide-annotation {
+  pointer-events: auto;
+}
+
+body.slide-edit-on .slide-image {
+  pointer-events: auto;
+  cursor: move;
+}
+
+/* Selected-image outline, matching .slide-annotation[data-edit-selected]'s
+   color language. Corner resize handles only render in edit mode on the
+   selected image. */
+body.slide-edit-on .slide-image[data-edit-selected] {
+  outline: 2px dashed #b24a3b;
+  outline-offset: 3px;
+}
+
+.dm-image-handle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  margin: -5px;
+  background: #b24a3b;
+  border: 1px solid #fff;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+  display: none;
+}
+
+body.slide-edit-on .slide-image[data-edit-selected] .dm-image-handle {
+  display: block;
+}
+
+.dm-image-handle[data-corner="nw"] { top: 0; left: 0; cursor: nwse-resize; }
+.dm-image-handle[data-corner="ne"] { top: 0; left: 100%; cursor: nesw-resize; }
+.dm-image-handle[data-corner="sw"] { top: 100%; left: 0; cursor: nesw-resize; }
+.dm-image-handle[data-corner="se"] { top: 100%; left: 100%; cursor: nwse-resize; }
+
+/* Width-resize handle for the title slide's h1: a single shared element
+   living in document.body, not a child of the h1. It can't be a child like
+   .dm-image-handle is of .slide-image, because the h1 is one of
+   edit-mode.js's EDITABLE_TAGS and double-click text edits commit via that
+   element's own innerHTML; a handle nested inside would get saved as part
+   of the text. edit-mode.js instead positions this one element in viewport
+   pixels from the h1's getBoundingClientRect() and toggles the -visible
+   class. The body.slide-edit-on scoping below is the only thing that hides
+   it when edit mode is off -- ensureWidthHandleEl never removes it, so this
+   rule must not depend on inline display. */
+.ann-width-handle {
+  display: none;
+  position: fixed;
+  width: 8px;
+  transform: translateX(-50%);
+  background: #b24a3b;
+  border: 1px solid #fff;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+  cursor: ew-resize;
+  z-index: 20;
+}
+
+body.slide-edit-on .ann-width-handle.ann-width-handle-visible {
+  display: block;
+}
+
+/* Crop mode (see the crop-mode block in edit-mode.js): a full-size,
+   unclipped view of the source image, appended as a sibling of the
+   .slide-image figure it belongs to and sized/positioned to exactly cover
+   that image's full (uncropped) extent. */
+body.slide-edit-on .crop-overlay {
+  position: absolute;
+  overflow: hidden;
+  z-index: 9999;
+  line-height: 0;
+  cursor: default;
+}
+
+body.slide-edit-on .crop-overlay-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* The live .slide-image sits directly behind its crop-overlay while a crop
+   session is open; hiding it avoids two copies of the picture fighting for
+   the same pixels while the overlay's own <img> is unclipped and therefore a
+   different size. */
+.crop-mode-hidden {
+  visibility: hidden;
+}
+
+/* Dimming: a separate clipped layer from the crop-rect/handles below.
+   dimMask is overflow:hidden and exactly overlay's own size, so dimRect's
+   oversized box-shadow paints dark everywhere outside dimRect and is
+   clipped to the source image's bounds. Keeping this off the interactive
+   .crop-rect matters because a corner handle's hit area extends past the
+   crop window's own edge; if the handles lived inside this clipped element,
+   any handle on the source image's own edge would have half its hit area
+   clipped away along with the dimming. */
+body.slide-edit-on .crop-dim-mask {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+body.slide-edit-on .crop-dim-rect {
+  position: absolute;
+  box-shadow: 0 0 0 2000px rgba(0, 0, 0, 0.55);
+}
+
+/* The kept-region rectangle: border plus the four corner handles, drawn on
+   top of and NOT clipped by the dim mask above. Positioned in percent OF
+   THE OVERLAY -- which is sized to exactly the source image's own box, so
+   these percentages are the same l/t/w/h numbers data-crop stores. */
+body.slide-edit-on .crop-rect {
+  position: absolute;
+  box-sizing: border-box;
+  border: 1px solid #fff;
+  cursor: move;
+}
+
+body.slide-edit-on .crop-rect-handle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  margin: -5px;
+  background: #b24a3b;
+  border: 1px solid #fff;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+}
+
+.crop-rect-handle[data-corner="nw"] { top: 0; left: 0; cursor: nwse-resize; }
+.crop-rect-handle[data-corner="ne"] { top: 0; left: 100%; cursor: nesw-resize; }
+.crop-rect-handle[data-corner="sw"] { top: 100%; left: 0; cursor: nesw-resize; }
+.crop-rect-handle[data-corner="se"] { top: 100%; left: 100%; cursor: nwse-resize; }

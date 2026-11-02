@@ -17,7 +17,9 @@ To run a talk, go into its folder and follow its README (usually `pnpm install` 
 
 [`talk-template/`](talk-template/) holds the look shared by new talks: the
 Reveal setup, the theme and fonts, code highlighting, and a Vite plugin that
-inlines a talk's `sections/*.html` files. `gugog-2026/` uses it. `scipy-2026/`
+inlines a talk's `sections/*.html` files. It also has a slide editor that runs
+in the browser during `pnpm dev` and saves into those files. `gugog-2026/`
+uses it. `scipy-2026/`
 and `pydata-2026/` are finished talks and do not use it.
 
 A talk that uses the template has its own `pnpm-workspace.yaml` that lists
