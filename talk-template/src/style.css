@@ -476,3 +476,59 @@
   text-decoration-thickness: 2px;
   text-underline-offset: 2px;
 }
+
+/* Code regions (data-code-regions, wrapped by slide-layout.js): matching
+   parts of two code blocks share a role, a color and a gutter letter. The
+   regions and the six role colors follow the GUGOG 2026 paper's comparison
+   figures (comparison-highlighting.typ): a region is filled with its role
+   color lightened 93%, and its gutter letter is in the role color. The fill
+   sits behind the code, so the usual syntax colors stay as they are. */
+.reveal pre code.has-code-regions {
+  overflow: hidden;
+}
+
+.code-region {
+  background: var(--region-tint);
+  /* Stretch the tint down to the next row, so a block has no gaps between
+     its rows. Only downward: the next row paints after this one, so a tint
+     reaching up would cover this row's descenders. */
+  padding: 0 0 0.1em;
+}
+
+/* A region that continues on the next line fills this one to the edge. */
+.code-region-open {
+  margin-right: -100vw;
+  padding-right: 100vw;
+}
+
+/* The gutter shows role letters instead of line numbers. */
+.reveal pre code.has-code-regions .hljs-ln-n::before {
+  content: none;
+}
+
+.reveal pre code.has-code-regions td.hljs-ln-numbers {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.85em;
+  font-weight: 700;
+  padding-right: 0.5em;
+  text-align: center;
+  vertical-align: middle;
+  width: 1em;
+}
+
+.code-region-badge {
+  color: var(--region-ink);
+}
+
+.code-region[data-role="A"],
+.code-region-badge[data-role="A"] { --region-ink: #165d83; --region-tint: #eff4f6; }
+.code-region[data-role="B"],
+.code-region-badge[data-role="B"] { --region-ink: #8d4700; --region-tint: #f7f2ed; }
+.code-region[data-role="C"],
+.code-region-badge[data-role="C"] { --region-ink: #67438a; --region-tint: #f4f2f7; }
+.code-region[data-role="D"],
+.code-region-badge[data-role="D"] { --region-ink: #007368; --region-tint: #edf5f4; }
+.code-region[data-role="E"],
+.code-region-badge[data-role="E"] { --region-ink: #9c3d59; --region-tint: #f8f1f3; }
+.code-region[data-role="F"],
+.code-region-badge[data-role="F"] { --region-ink: #625900; --region-tint: #f4f3ed; }

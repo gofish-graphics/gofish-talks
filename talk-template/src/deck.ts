@@ -9,7 +9,11 @@ import "reveal.js/dist/reveal.css";
 import "reveal.js/dist/theme/white.css";
 import "./hljs-github-light.css";
 import "./style.css";
-import { layoutSlides, renderCharMarksWhenReady } from "./slide-layout.js";
+import {
+  layoutSlides,
+  renderCharMarksWhenReady,
+  renderCodeRegionsWhenReady,
+} from "./slide-layout.js";
 
 // The same settings scipy-2026 uses: a fixed 1280x720 canvas, no transitions,
 // top-anchored slides, and the code-highlight and speaker-notes plugins.
@@ -38,11 +42,13 @@ export async function startDeck(): Promise<Reveal> {
   }
 
   // Positions the annotations and images the editor places, and the code
-  // character marks it draws. The published slides need these too.
+  // character marks it draws, and colors code regions (data-code-regions).
+  // The published slides need these too.
   const slides = document.querySelector<HTMLElement>(".reveal .slides");
   if (slides) {
     layoutSlides(slides);
     renderCharMarksWhenReady(deck, slides);
+    renderCodeRegionsWhenReady(deck, slides);
   }
 
   await deck.initialize();

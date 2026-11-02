@@ -1,0 +1,149 @@
+/* Styles for the slides that show code side by side:
+   sections/03b-gofish-intro.html, sections/03c-code-comparisons.html, and
+   the GoTree slides at the top of sections/04-tradeoffs.html.
+   Linked from sections/03b-gofish-intro.html, so it loads with the deck. */
+
+/* Code on these slides is sized for the back of the room: 17px at the
+   1280x720 canvas (the theme's base is 28px), with tighter line spacing than
+   the template so 22 lines fit. Line numbers are hidden; the char marks do
+   the pointing. Ligatures are off so the code reads exactly as written
+   (Fira Code would draw "=>" as an arrow and "..." as one glyph). */
+.reveal .code-slide pre {
+  border: 2px solid #27231f;
+  border-radius: 6px 9px 5px 8px;
+  box-shadow: 4px 5px 0 rgba(30, 30, 30, 0.11);
+  font-size: 0.61em;
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0, "calt" 0;
+}
+
+.reveal .code-slide pre code {
+  line-height: 1.28;
+  max-height: none;
+  padding: 0.4em 0.6em;
+}
+
+/* Plain blocks hide the line-number gutter; region blocks keep it for their
+   role letters (talk-template's data-code-regions). */
+.reveal .code-slide code:not(.has-code-regions) .hljs-ln-numbers {
+  display: none;
+}
+
+.reveal .code-slide h2 {
+  margin-bottom: 0.25em;
+}
+
+/* Two specs side by side, each with a small label above it. */
+.code-pair {
+  align-items: start;
+  display: grid;
+  gap: 0.9rem;
+  grid-template-columns: 1fr 1fr;
+}
+
+.code-pair-label {
+  font-size: 0.5em !important;
+  font-weight: 700;
+  margin: 0 0 0.25em !important;
+}
+
+.code-pair-label .code-pair-sub {
+  color: var(--muted);
+  font-weight: 400;
+}
+
+/* Reveal caps slide images with ".reveal section img", so these rules
+   name the section too. */
+.reveal .code-slide .code-pair img {
+  display: block;
+  margin: 0 auto 0.4em;
+}
+
+/* GoFish intro: logo beside the title, then the figure beside its code. */
+.gofish-intro-head {
+  align-items: center;
+  display: flex;
+  gap: 0.8rem;
+}
+
+.reveal .code-slide .gofish-intro-head img {
+  height: 64px;
+  margin: 0;
+  object-fit: contain;
+}
+
+.gofish-intro-head h2 {
+  margin: 0;
+}
+
+.gofish-intro-tag {
+  color: var(--muted);
+  font-size: 0.55em !important;
+  margin: 0 !important;
+}
+
+/* Left: the figure with the core code under it. Right: the chart-level
+   code, which is tall and narrow. */
+.gofish-intro-body {
+  align-items: start;
+  display: grid;
+  gap: 0.3rem 1.2rem;
+  grid-template-areas:
+    "fig chart"
+    "core chart";
+  grid-template-columns: 1.25fr 0.75fr;
+  margin-top: 0.3rem;
+}
+
+.reveal .code-slide img.gofish-intro-fig {
+  grid-area: fig;
+  justify-self: center;
+  margin: 0;
+  max-height: 360px;
+  max-width: 100%;
+}
+
+.gofish-intro-chart {
+  grid-area: chart;
+}
+
+.gofish-intro-core {
+  grid-area: core;
+}
+
+/* PiCCL bottles sit beside the title to leave room for two long specs. */
+.compare-head {
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.reveal .code-slide .compare-head img {
+  height: 92px;
+  margin: 0;
+}
+
+/* The punchline under the GoTree layering code. */
+.reveal .code-slide .big-claim {
+  margin-top: 0.5em;
+}
+
+/* Figures above the GoFish code in a pair. */
+.reveal .code-slide img.compare-atom-fig {
+  max-height: 250px;
+}
+
+.reveal .code-slide img.gotree-fig {
+  max-width: 100%;
+}
+
+/* The source line under the combine() excerpt sits close to it. */
+.reveal .code-slide .gotree-source {
+  margin-top: 0.4em !important;
+}
+
+.canadd-error {
+  font-size: 0.6em !important;
+  line-height: 1.35 !important;
+}

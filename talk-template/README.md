@@ -88,6 +88,18 @@ These work on a code block that has a `data-line-numbers` attribute.
   characters. The editor saves them as `data-char-marks`. Hold Option and click
   a character highlight to remove it.
 
+### Code regions
+
+To show which parts of two code blocks correspond, as the GUGOG paper's
+comparison figures do, add `data-code-regions` to each `<code>` (with a
+`data-line-numbers` attribute, like character highlights). The value is a
+comma-separated list of `ROLE L1:C1-L2:C2` entries, e.g., `"A 3:5-5:28, B
+9:5-14:33"`. Each region runs from line L1, column C1 through line L2, column
+C2. Lines and columns start at 1, and both ends are included. Each region gets
+a light fill in its role's color behind the code, and its letter shows in the
+gutter on the line where the role begins. Roles `A` to `F` have colors in
+`src/style.css`. The editor does not edit regions; change them in the HTML.
+
 ### How saving works
 
 - In dev only, the plugin adds `data-src-file` and `data-src-index` to each

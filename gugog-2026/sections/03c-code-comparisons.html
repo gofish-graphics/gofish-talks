@@ -1,0 +1,198 @@
+        <!-- ═══ SECTION 3c: GRAMMARS IN ONE LANGUAGE, ~0:55 ══════════════
+             Code comparisons from the GUGOG camera-ready paper, section 3
+             "Specialized Grammars in a Shared Vocabulary"
+             (phd-thesis-20260618/gugog-2026-camera-ready-v3). The code is
+             copied exactly from the paper's examples/ files; the figures are
+             the paper's own figures/ files. The colored regions, letters and
+             colors are the paper's own (comparison-highlighting.typ), shown
+             with talk-template's data-code-regions.
+             GoTree (paper Figure 5) is used in section 4 instead, not here.
+             Styles: ../gofish-compare.css. -->
+        <section class="code-slide">
+          <p class="part">Grammars in one language look alike</p>
+          <h2>Atom's <code>gridxy</code> is GoFish's <code>spread</code></h2>
+          <div class="code-pair">
+            <div>
+              <p class="code-pair-label">Atom <span class="code-pair-sub">· its own JSON grammar</span></p>
+              <pre><code class="language-json" data-line-numbers data-code-regions="A 3:5-5:28, B 9:5-14:33, C 16:3-17:54">{
+  "layouts": [{
+    "type": "gridxy",
+    "subgroup": {"type": "groupby", "key": "pclass"},
+    "aspect_ratio": "fillX",
+    "size": { "type": "uniform", "isShared": false },
+    "direction": "LRBT", "align": "LB"
+  }, {
+    "type": "gridxy",
+    "subgroup": { "type": "flatten" },
+    "aspect_ratio": "maxfill",
+    "size": { "type": "uniform", "isShared": true },
+    "direction": "LRBT", "align": "LB",
+    "sort": { "key": "survived" }
+  }],
+  "mark": { "shape": "circle",
+    "color": {"key":"survived", "type":"categorical"},
+    "size": { "type": "max", "isShared": false },
+    "isColorScaleShared": true }
+}</code></pre>
+            </div>
+            <div>
+              <p class="code-pair-label">GoFish</p>
+              <img class="compare-atom-fig" src="./images/comparisons/gofish-atom-unit-columns.svg" alt="GoFish rendering of Atom's Titanic unit column chart: one column of circles per passenger class, blue for survived" />
+              <pre><code class="language-ts" data-line-numbers data-code-regions="A 3:5-4:38, B 5:5-9:36, C 11:9-11:42">chart(titanicPassengers)
+  .flow(
+    spread({ by: "pclass", dir: "x",
+      spacing: 24, alignment: "end" }),
+    derive(rows =&gt; orderBy(rows,
+      ["survived"], ["desc"])),
+    derive(rows =&gt; chunk(rows, 14)),
+    spread({ dir: "y", spacing: 2, reverse: true }),
+    spread({ dir: "x", spacing: 2 })
+  )
+  .mark(circle({ r: 4, fill: "survived" }));</code></pre>
+            </div>
+          </div>
+          <aside class="notes">
+            <p><strong>Target:</strong> 0:25. <strong>Running total:</strong>
+              3:55 of 7:00 (budget; the deck now runs 8:35).</p>
+            <p><strong>The beat (this slide and the next):</strong> 1. A shared
+              language makes it possible to compare grammars: once each
+              grammar's idea is written in GoFish, you can put them side by side
+              and see exactly what differs. 2. The grammars are not so different
+              after all: they share most of their structure, and the
+              differences come down to small, nameable pieces.</p>
+            <p><strong>Say:</strong> Here's Atom, a grammar for unit
+              visualizations, and its Titanic example: group passengers by
+              class, then lay out each class's passengers as circles colored by
+              survival. On the right is the same construction in GoFish. Every
+              part has a counterpart. Atom's first <code>gridxy</code> is
+              GoFish's first <code>spread</code>, by class. The second
+              <code>gridxy</code> is two more spreads, rows and columns. And
+              Atom's circle mark is GoFish's circle mark. Same idea, different
+              name.</p>
+            <p><strong>Source:</strong> GUGOG camera-ready paper, Figure 3
+              (section 3.1 "Atom"); code from
+              <code>examples/atom-unit-columns.json</code> and
+              <code>examples/gofish-unit-columns.ts</code>, figure from
+              <code>figures/gofish-atom-unit-columns.svg</code>, all copied
+              exactly. The title is the paper's own sentence from section 3.4:
+              "In Atom, <code>spread</code> is called <code>gridxy</code> with
+              the <code>fillX</code> aspect ratio."</p>
+            <p>The colored regions are the paper's roles: A, Atom's first layout
+              (lines 3 to 5) = <code>spread({ by: "pclass" ... })</code>; B, the
+              second layout (lines 9 to 14) = the two <code>derive</code>s and
+              the two inner spreads; C, Atom's <code>mark</code> =
+              <code>circle({ r: 4, fill: "survived" })</code>.</p>
+            <p><strong>Honest difference</strong> (paper caption): "Atom packs
+              units automatically; GoFish uses a fixed 14-column grid." That is
+              the <code>maxfill</code> vs. <code>chunk(rows, 14)</code> pair.
+              Setup (data, palette, axes) is omitted on both sides, as in the
+              paper.</p>
+          </aside>
+        </section>
+
+        <section class="code-slide">
+          <div class="compare-head">
+            <div>
+              <p class="part">Grammars in one language look alike</p>
+              <h2>PiCCL lines up with GoFish</h2>
+            </div>
+            <img src="./images/comparisons/gofish-bottle-annotated.png" alt="GoFish bottle chart: four bottles filled green to 30, 60, 75, and 100 percent, each with a line and a percentage label" />
+          </div>
+          <div class="code-pair">
+            <div>
+              <p class="code-pair-label">PiCCL</p>
+              <pre><code class="language-ts" data-line-numbers data-code-regions="A 2:1-4:2, A 5:1-7:42, A 8:1-10:52, B 11:1-13:37, C 14:1-17:32, D 18:1-18:52, E 19:4-19:45, F 20:1-21:23">const scale = new PICCL.LinearScale({range: [0,400]});
+const pic = new PICCL.Picture({
+  url: pictureUrl, height: 400, color: "#fff"
+});
+const colorFill = new PICCL.Rect({
+  height: 400, fill: "#00ff00"
+}).mapValue("height", "amount", { scale });
+const coloredPic = PICCL.atop(
+  pic, colorFill, "luminosity")
+  .lengthMatch(colorFill, pic, { channel: "width" });
+const line = new PICCL.Line({
+  x1: 0, y1: 0, x2: 250, y2: 0
+}).mapValue("y", "amount", { scale });
+const label = new PICCL.Text({
+  fontSize: 36, fill: "#666",
+  textAnchor: "end", suffix: "%"
+}).mapValue("content", "amount");
+const glyph = PICCL.union([coloredPic, line, label])
+  .pointSnap(label, line, { anchor: [1, 0] });
+const collection = PICCL.replicate(glyph)
+  .stackLayout("x", 10);
+await PICCL.show([[collection, data]],
+  container, { pictures });</code></pre>
+            </div>
+            <div>
+              <p class="code-pair-label">GoFish</p>
+              <pre><code class="language-ts" data-line-numbers data-code-regions="A 1:1-1:49, A 2:1-3:20, A 4:1-5:34, B 6:1-7:43, C 8:1-9:45, D 10:1-10:46, E 11:4-16:4, F 17:1-17:47, F 18:9-19:18">const pic = image({ href: bottlePng, h: v(100) });
+const colorFill = rect({ h: "amount", w: 175,
+  fill: "#00ff00" });
+const coloredPic = paint({ blendMode: "color" },
+  [pic, colorFill]).name("bottle");
+const line = rect({ h: 1, w: 175,
+  y: "amount", fill: "#666" }).name("line");
+const label = text({ text: d =&gt; `${d.amount}%`,
+  fontSize: 35, fill: "#666" }).name("label");
+const glyph = layer([coloredPic, line, label])
+  .relate(({ bottle, line, label }) =&gt; [
+    Constraint.align({ x: "start" }, [bottle, line]),
+    Constraint.distribute({ dir: "y", spacing: 0 },
+      [line, label]),
+    Constraint.align({ x: "end" }, [label, line]),
+  ]);
+const collection = chart(data, { axes: false })
+  .flow(spread({ by: "category", dir: "x",
+    spacing: 20 }))
+  .mark(glyph);</code></pre>
+            </div>
+          </div>
+          <aside class="notes">
+            <p><strong>Target:</strong> 0:30. <strong>Running total:</strong>
+              4:25 of 7:00 (budget; the deck now runs 8:35).</p>
+            <p><strong>Say:</strong> PiCCL comes from graphics editors, GoFish
+              from the grammar of graphics. Both build this bottle chart the
+              same way: an image composited with a data-sized rectangle, a line
+              and a percentage label snapped to it, and the glyph repeated for
+              four categories. The matching colors and letters are the paper's
+              (Figure 4): every part on the left has a counterpart on the
+              right, A to F. Where do they differ? In two places, both inside
+              those regions. First, how data-driven values are written:
+              PiCCL's <code>.mapValue()</code>, GoFish's encoding channels like
+              <code>h: "amount"</code>. Second, how repetition is written:
+              PiCCL's <code>replicate</code> plus <code>stackLayout</code>,
+              GoFish's <code>spread</code> operator, which also groups the data
+              by a key. That's it. Two independently designed grammars
+              converged on the same abstractions.</p>
+            <p><strong>Lead into section 4:</strong> "Once grammars are written
+              in one language, a lot of the tradeoffs we argue about stop
+              looking forced. Two of them in particular."</p>
+            <p><strong>Source:</strong> GUGOG camera-ready paper, Figure 4
+              (section 3.2 "PiCCL and Mascot"); code from
+              <code>examples/piccl-bottle.ts</code> and
+              <code>examples/gofish-bottle.ts</code>, image from
+              <code>figures/gofish-bottle-annotated.png</code>, all copied
+              exactly. The two differences are the paper's own words: "Where
+              PiCCL and GoFish differ in this example is mainly in how
+              data-driven values are described (<code>.mapValue()</code> vs
+              polymorphic encoding channels) and how operators are defined
+              (<code>replicate</code> and layouts vs operators that also group
+              data by a specific key)." And: "they have independently converged
+              on very similar abstractions."</p>
+            <p>The slide's role letters and colors are the paper's: A, image + fill rectangle +
+              compositing (<code>Picture</code>/<code>Rect</code>/<code>atop</code>
+              = <code>image</code>/<code>rect</code>/<code>paint</code>); B,
+              <code>Line</code> = the thin <code>rect</code>; C,
+              <code>Text</code> = <code>text</code>; D, <code>union</code> =
+              <code>layer</code>; E, <code>pointSnap</code> = the
+              <code>.relate()</code> constraints; F,
+              <code>replicate</code>/<code>stackLayout</code> =
+              <code>spread</code>. Paper caption: "Data, imports, and asset
+              setup are omitted; image sizing and blending differ." The README
+              notes the PiCCL excerpt inlines <code>createChart</code> and
+              renames a few variables to match the GoFish side; all
+              construction calls are kept.</p>
+          </aside>
+        </section>

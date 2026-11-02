@@ -1,16 +1,63 @@
-        <!-- ═══ SECTION 4: TWO TRADEOFFS VERBS DISSOLVE, ~1:45 ═════════
+        <!-- ═══ SECTION 4: TWO TRADEOFFS VERBS DISSOLVE, ~2:00 ═════════
              Keep this section intact even when running long: it connects
-             to the talks on either side. -->
-        <section>
+             to the talks on either side.
+             The first tradeoff is built around one counterexample, GoTree
+             rebuilt as a GoFish library (two slides). Its framing follows the
+             v3 draft of the GUGOG paper ("False tradeoff 1. Domain needs and
+             shared structure", gugog-2026-position-paper-v3/main.typ); its
+             code and render are the final paper's Figure 5
+             (gugog-2026-camera-ready-v3) and the gofish-gotree source.
+             The second tradeoff keeps the outline's CanSum framing (the type
+             system), not v3's, which predates the type system. Its code is
+             from the current GoFish source, where the class is named CanAdd.
+             Styles for the code slides: ../gofish-compare.css. -->
+        <section class="code-slide">
           <p class="part">4 · Two tradeoffs verbs dissolve</p>
           <h2>universal vs. domain-specific</h2>
-          <p class="big-claim">
-            Domain grammars can be layered on a shared core, instead of being
-            separate languages.
-          </p>
+          <div class="code-pair">
+            <div>
+              <p class="code-pair-label">GoTree <span class="code-pair-sub">· its own language</span></p>
+              <pre><code class="language-json" data-line-numbers data-code-regions="A 2:16-2:31, B 3:16-3:33, C 7:5-7:44, D 8:7-9:37, E 11:5-12:34, F 13:7-14:39">{
+  "Element": { "Node": "circle",
+               "Link": "straight" },
+  "CoordinateSystem": { "Category": "cartesian" },
+  "Layout": {
+    "Category":"AxisIndependent", "Mode":"bottom-up",
+    "X": { "Root": { "Relation": "within" },
+      "Subtree": { "Relation": "flatten",
+                   "Margin": "0.3w" }
+    },
+    "Y": { "Root": { "Relation": "juxtapose",
+                "Margin": "0.2" },
+      "Subtree": { "Relation": "align",
+                   "Alignment": "top" }
+    },
+    "SubtreeWidth": "adaptive",
+    "SubtreeHeight": "adaptive"
+  }
+}</code></pre>
+            </div>
+            <div>
+              <p class="code-pair-label">gofish-gotree <span class="code-pair-sub">· a library on GoFish</span></p>
+              <img class="gotree-fig" src="./images/tradeoffs/gofish-gotree-node-link.svg" alt="GoFish rendering of GoTree's node-link tree: a root, a row of children, and a row of leaves joined by straight lines" />
+              <pre><code class="language-ts" data-line-numbers data-code-regions="A 2:3-2:30, B 3:3-3:41, C 5:5-5:45, E 6:5-6:42, D 9:5-9:42, F 10:5-10:44">tree({
+  node: () =&gt; circle({ r: 9 }),
+  link: { kind: "line", curve: "linear" },
+  parentChild: combine({
+    x: { kind: "align", alignment: "middle" },
+    y: { kind: "distribute", spacing: 90 },
+  }),
+  sibling: combine({
+    x: { kind: "distribute", spacing: 24 },
+    y: { kind: "align", alignment: "start" },
+  }),
+}, hierarchy);</code></pre>
+            </div>
+          </div>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:50 (1:45 for section 4).
-              <strong>Running total:</strong> 3:50 of 7:00.</p>
+            <p><strong>Target:</strong> 0:35 (1:00 for this tradeoff, over two
+              slides; 2:00 for section 4). <strong>Running total:</strong> 5:00
+              of 7:00 (budget; the deck now runs 8:35).</p>
             <ul>
               <li>Universal vs. domain-specific: respond to Jason. Domain
                 grammars can be layered on a shared core instead of being
@@ -18,27 +65,170 @@
             </ul>
             <p>Keep section 4 intact even if running long: it connects to the
               talks on either side.</p>
+            <p><strong>The claim being refuted:</strong> you have to choose
+              between a universal grammar and a domain-specific one. McNutt's
+              survey puts the conflict as "there is no grammar to rule them
+              all" (quoted in the v3 draft).</p>
+            <p><strong>Say</strong> (v3 draft's framing): "Domain grammars need
+              words and syntax that fit their tasks. That rules out one surface
+              interface for all visualization work. It does not rule out one
+              language system." Here's the counterexample. On the left is
+              GoTree, a grammar for trees, in its own JSON language. On the
+              right is GoTree rebuilt as a library on GoFish. It keeps GoTree's
+              tree words: a node, a link, a parent-child rule, a sibling rule.
+              And each of GoTree's relations is a GoFish verb:
+              <code>within</code> and <code>align</code> are
+              <code>align</code>, <code>juxtapose</code> and
+              <code>flatten</code> are <code>distribute</code>.</p>
+            <p><strong>Sources:</strong> code and render are the final GUGOG
+              paper's Figure 5 (section 3.3 "GoTree"), from
+              <code>examples/gotree-node-link.json</code>,
+              <code>examples/gofish-gotree-node-link.ts</code> and
+              <code>figures/gofish-gotree-node-link.svg</code>, copied exactly.
+              The paper's role letters: A node = <code>circle</code>, B link =
+              <code>line</code>, C <code>within</code> = x
+              <code>align</code> middle, D <code>flatten</code> = x
+              <code>distribute</code>, E <code>juxtapose</code> = y
+              <code>distribute</code>, F <code>align</code> top = y
+              <code>align</code> start. Paper caption: "GoTree uses relative
+              margins and adaptive dimensions; GoFish here uses fixed gaps."
+              The v3 draft has its own GoTree listing (<code>parentChild:
+              spread(...)</code>, <code>link: { interpolation }</code>), but it
+              uses an older API and has no render, so the final paper's
+              executed figure is used here instead.</p>
+            <p>GoTree appears only here, not in the 03c code comparisons, so
+              each example does one job.</p>
           </aside>
         </section>
 
-        <section>
+        <section class="code-slide">
+          <p class="part">4 · Two tradeoffs verbs dissolve</p>
+          <h2><code>combine</code> compiles to GoFish constraints</h2>
+          <pre><code class="language-ts" data-line-numbers data-char-marks="7:13-28, 11:13-33">export const combine = (opts: CombineOptions): Combiner =&gt; {
+  …
+    return layer(named).relate((c: any) =&gt; {
+      …
+        if (spec.kind === "align") {
+          cs.push(
+            Constraint.align({ [axis]: spec.alignment ?? "middle" }, refs(c))
+          );
+        } else if (spec.kind === "distribute") {
+          cs.push(
+            Constraint.distribute(
+              {
+                dir: axis,
+                spacing: spec.spacing ?? 0,
+                …
+              },
+              refs(c)
+            )
+          );
+        } …</code></pre>
+          <p class="source-line gotree-source">gofish-gotree/src/helpers.ts · the whole library is about 550 lines</p>
+          <p class="big-claim">
+            Domain grammars can be layered on a shared core. You get both.
+          </p>
+          <aside class="notes">
+            <p><strong>Target:</strong> 0:25. <strong>Running total:</strong>
+              5:25 of 7:00 (budget; the deck now runs 8:35).</p>
+            <p><strong>Say:</strong> And here's how it's layered. The
+              <code>combine</code> that the tree spec called turns each axis
+              into an ordinary GoFish constraint, <code>Constraint.align</code>
+              or <code>Constraint.distribute</code>, inside a
+              <code>layer(...).relate(...)</code>, the same core form from the
+              intro slide. So GoTree keeps its own tree words, and underneath it
+              is plain GoFish: same renderer, same constraints. The paper: "we
+              get support for coordinate transforms, scales, and custom marks
+              without having to design them from scratch." Domain grammars can
+              be layered on a shared core instead of being separate languages.
+              You get both.</p>
+            <p>v3 draft wording, if useful: "The compiler turns this program
+              into ordinary GoFish structure, so GoTree can use the GoFish
+              graphics pipeline and renderer. Its alignment and containment
+              relations also use the same constraints as other GoFish programs.
+              Researchers can therefore use these shared terms to state what
+              GoTree adds, even though GoTree keeps its own tree interface."</p>
+            <p><strong>Source:</strong> <code>combine</code> in
+              <code>packages/gofish-gotree/src/helpers.ts</code>, lines 144 to
+              181, GoFish repo (<code>~/gofish-20250316</code>) at
+              <code>HEAD</code> <code>00635d2d0</code>; the file is unchanged
+              since <code>f84201153</code>, the commit the paper's figures were
+              rendered from. Shortened with <code>…</code> elisions: the lines
+              that name each child and resolve the axis spec, the remaining
+              <code>distribute</code> options (<code>order</code>,
+              <code>anchor</code>), and the <code>nest</code> branch. The
+              lines shown are exact. "About 550 lines": the seven files of
+              <code>packages/gofish-gotree/src</code> at <code>HEAD</code>
+              total 550 lines, comments included. The recursion that calls the
+              combiners at each node is <code>renderSubtree</code> in
+              <code>src/recursion.ts</code> (64 lines).</p>
+          </aside>
+        </section>
+
+        <section class="code-slide">
           <p class="part">4 · Two tradeoffs verbs dissolve</p>
           <h2>expressive vs. structured</h2>
           <div class="two-col">
-            <p class="big-claim"><code>CanSum</code> keeps both.</p>
-            <div class="placeholder-box">
-              <p class="placeholder-label">Placeholder: CanSum code</p>
-              <p>The <code>CanSum</code> example</p>
+            <pre><code class="language-ts" data-line-numbers data-char-marks="5:7-11, 12:35-50, 18:19-28">const stacked = (schema: object, mark: unknown) =&gt;
+  chart(sales, { schema })
+    .flow(
+      spread({ by: "region", dir: "x" }),
+      stack({ by: "product", dir: "y" })
+    )
+    .mark(mark)
+    .toDisplayList(SIZE);
+
+const usd = await errorOf(() =&gt;
+  stacked(
+    { usd: Unit("USD", { traits: [Trait.summable()] }) },
+    rect({ h: "usd" })
+  )
+);
+…
+const celsius = await errorOf(() =&gt;
+  stacked({ temp: Unit("°C") }, rect({ h: "temp" }))
+);</code></pre>
+            <div>
+              <p class="big-claim"><code>CanAdd</code> keeps both.</p>
+              <p class="canadd-error"><code>Unit("°C")</code> has no
+                <code>CanAdd</code>, so <code>stack</code> throws: "cannot be
+                summed: it has no CanAdd."</p>
             </div>
           </div>
           <aside class="notes">
             <p><strong>Target:</strong> 0:55. <strong>Running total:</strong>
-              4:45 of 7:00.</p>
+              6:20 of 7:00 (budget; the deck now runs 8:35).</p>
             <ul>
               <li>Expressive vs. structured: the <code>CanSum</code> example
                 keeps both.</li>
             </ul>
             <p><strong>Hand off:</strong> "Cynthia and Matt are about to argue
               this carefully. Here's a mechanism to push on."</p>
+            <p><strong>Name:</strong> the outline calls this
+              <code>CanSum</code>. In the current GoFish source it is
+              <code>CanAdd</code> (renamed in PR #1197, "Units as a domain plus
+              traits, with CanAdd", #1200); older branches' design doc still
+              says <code>CanSum</code>. The slide uses the current name.</p>
+            <p><strong>Say:</strong> The same <code>stack</code> verb works on
+              anything, which is the expressive part. The structure comes from
+              the data's type: a unit declares what it can do, and
+              <code>stack</code> needs values that add up. USD declared
+              <code>Trait.summable()</code> stacks. Degrees Celsius doesn't
+              have <code>CanAdd</code>, so the same chart is a loud error that
+              names the missing capability, not a wrong picture.</p>
+            <p><strong>Source:</strong> code from the GoFish repo at
+              <code>HEAD</code> <code>00635d2d0</code>,
+              <code>packages/gofish-graphics/src/tests/measure.test.ts</code>,
+              lines 1105 to 1124 (the "CanAdd: only amounts that add up are
+              summed" test). Dedented by two spaces; lines 1120 and 1121 (the
+              assertion on <code>usd</code>) are replaced with
+              <code>…</code>. The test asserts that the USD stack succeeds and
+              that the °C stack throws an error matching "cannot be summed".
+              The quoted error text is the fixed part of
+              <code>checkSummable</code>'s message in
+              <code>src/ast/measure.ts</code> (lines 155 to 161). The type
+              itself is <code>export type CanAdd = Record&lt;string,
+              never&gt;;</code> in <code>src/ast/schema.ts</code>, line 152:
+              "The class of a unit whose amounts can be added".</p>
           </aside>
         </section>

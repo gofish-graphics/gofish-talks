@@ -195,9 +195,12 @@ export function collectTextNodes(root) {
   return nodes;
 }
 
-// charStart/charEnd are 0-based, half-open [charStart, charEnd).
-function wrapCharRange(td, charStart, charEnd, markKey) {
+// Wraps the text of `td` in [charStart, charEnd) (0-based, half-open) in
+// spans made by makeSpan(), one per text node the range touches. Returns the
+// spans in text order. Used by data-char-marks and data-code-regions.
+function wrapTextRange(td, charStart, charEnd, makeSpan) {
   var nodes = collectTextNodes(td);
+  var spans = [];
   var offset = 0;
   for (var i = 0; i < nodes.length; i++) {
     var node = nodes[i];
@@ -216,12 +219,22 @@ function wrapCharRange(td, charStart, charEnd, markKey) {
     if (localEnd < len) target.splitText(localEnd);
     if (localStart > 0) target = target.splitText(localStart);
 
+    var span = makeSpan();
+    target.parentNode.insertBefore(span, target);
+    span.appendChild(target);
+    spans.push(span);
+  }
+  return spans;
+}
+
+// charStart/charEnd are 0-based, half-open [charStart, charEnd).
+function wrapCharRange(td, charStart, charEnd, markKey) {
+  wrapTextRange(td, charStart, charEnd, function () {
     var span = document.createElement("span");
     span.className = "char-mark";
     span.setAttribute("data-mark-key", markKey);
-    target.parentNode.insertBefore(span, target);
-    span.appendChild(target);
-  }
+    return span;
+  });
 }
 
 function stripCharMarks(codeEl) {
@@ -294,6 +307,98 @@ export function renderCharMarksWhenReady(deck, root) {
     blocks.forEach(function (b) {
       var pre = b.code.closest("pre");
       if (pre) applyCharMarksAll(pre, b.marks);
+    });
+  });
+}
+
+// ---------------------------------------------------------------------
+// data-code-regions: colored regions that tie the corresponding parts of two
+// code blocks together, the way a paper figure pairs two specs (e.g., the
+// GUGOG paper's comparison figures). The value is comma-separated
+// "ROLE L1:C1-L2:C2" entries: ROLE is a short name such as "A" (style.css
+// colors A to F), and the region runs from line L1, column C1 through line
+// L2, column C2, 1-based and both ends inclusive, with columns counted over
+// each line's plain text as for data-char-marks.
+//
+// A region is filled with a light tint of its role's color, behind the
+// code's usual syntax colors (style.css). A region that continues past the
+// end of a line fills that line to the block's edge, so a multi-line region
+// reads as one block. A line where a role begins shows the role's name in
+// the line-number gutter, so the pairing doesn't rely on color alone.
+//
+// Like data-char-marks, regions need reveal's hljs-ln table, i.e. a
+// data-line-numbers attribute on the block. Not for stepped blocks.
+// ---------------------------------------------------------------------
+
+export function parseCodeRegions(str) {
+  var regions = [];
+  (str || "").split(",").forEach(function (tok) {
+    var m = /^\s*([A-Za-z0-9_-]+)\s+(\d+):(\d+)-(\d+):(\d+)\s*$/.exec(tok);
+    if (!m) return;
+    regions.push({
+      role: m[1],
+      l1: Number(m[2]),
+      c1: Number(m[3]),
+      l2: Number(m[4]),
+      c2: Number(m[5]),
+    });
+  });
+  return regions;
+}
+
+function applyCodeRegionsToElement(codeEl, regions) {
+  var table = codeEl.querySelector("table.hljs-ln");
+  if (!table) return;
+  codeEl.classList.add("has-code-regions");
+  var rows = table.querySelectorAll("tr");
+  var previousRoles = [];
+  for (var i = 0; i < rows.length; i++) {
+    var line = i + 1;
+    var td = rows[i].querySelector("td.hljs-ln-code");
+    var gutter = rows[i].querySelector("td.hljs-ln-numbers");
+    if (!td) continue;
+    var lineLength = td.textContent.length;
+    var roles = [];
+    regions.forEach(function (r) {
+      if (line < r.l1 || line > r.l2) return;
+      var start = line === r.l1 ? r.c1 - 1 : 0;
+      var end = line === r.l2 ? r.c2 : lineLength;
+      var spans = wrapTextRange(td, start, end, function () {
+        var span = document.createElement("span");
+        span.className = "code-region";
+        span.setAttribute("data-role", r.role);
+        return span;
+      });
+      if (line < r.l2 && spans.length) {
+        spans[spans.length - 1].classList.add("code-region-open");
+      }
+      if (roles.indexOf(r.role) === -1) roles.push(r.role);
+    });
+    if (gutter) {
+      roles.forEach(function (role) {
+        if (previousRoles.indexOf(role) !== -1) return;
+        var badge = document.createElement("span");
+        badge.className = "code-region-badge";
+        badge.setAttribute("data-role", role);
+        badge.textContent = role;
+        gutter.appendChild(badge);
+      });
+    }
+    previousRoles = roles;
+  }
+}
+
+// Reads every block's data-code-regions and applies them once reveal's
+// highlight plugin has built the per-line tables. Called once by
+// startDeck(), before Reveal starts.
+export function renderCodeRegionsWhenReady(deck, root) {
+  var blocks = Array.prototype.map.call(root.querySelectorAll("code[data-code-regions]"), function (code) {
+    return { code: code, regions: parseCodeRegions(code.getAttribute("data-code-regions")) };
+  });
+  if (!blocks.length) return;
+  deck.on("ready", function () {
+    blocks.forEach(function (b) {
+      applyCodeRegionsToElement(b.code, b.regions);
     });
   });
 }
