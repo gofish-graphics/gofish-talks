@@ -2,28 +2,37 @@
         <section>
           <p class="part">5 · The open one: big vs. small</p>
           <h2>the usage curve</h2>
-          <div class="two-col">
-            <div class="placeholder-box">
-              <p class="placeholder-label">Placeholder: usage curve</p>
-              <p>Frequency vs. chart complexity, a power law. Bar, line, and
-                scatter on the left; one-lab infographics and diagrams on the
-                right.</p>
-            </div>
-            <div>
-              <p><strong>One function per chart type:</strong> short specs,
-                but the language grows with every tail chart.</p>
-              <p><strong>Low-level primitives:</strong> a tiny language, but
-                long specs, even for the head charts.</p>
-              <p class="callout">A good grammar is a good compression.</p>
-            </div>
-          </div>
+          <!-- A live GoFish chart, drawn by renderCharts() in ../charts.ts. -->
+          <div data-chart="usage-curve" data-w="1100" data-h="510"
+            style="display: flex; justify-content: center; margin-top: 0.6em"></div>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:30 (1:30 for section 5).
-              <strong>Running total:</strong> 5:15 of 7:00.</p>
+            <p><strong>Target:</strong> 0:15 (1:30 for section 5).
+              <strong>Running total:</strong> 5:00 of 7:00.</p>
+            <p><strong>Callback:</strong> the two levels of GoFish from the
+              intro. The high level keeps specs short; the low level is a
+              small core.</p>
             <ul>
               <li>The usage curve: frequency vs. chart complexity, a power law.
                 Bar/line/scatter on the left; one-lab infographics and
                 diagrams on the right.</li>
+              <li>The curve is schematic, not measured.</li>
+            </ul>
+          </aside>
+        </section>
+
+        <section>
+          <p class="part">5 · The open one: big vs. small</p>
+          <h2>a good grammar is a good compression</h2>
+          <!-- A live GoFish chart, drawn by renderCharts() in ../charts.ts. -->
+          <div data-chart="compression" data-w="1000" data-h="420" data-font-size="28"
+            style="display: flex; justify-content: center; margin-top: 0.4em"></div>
+          <p style="color: var(--muted); font-size: 0.6em; margin-top: 0.6em">
+            Bar length: the size of the language, plus every spec written in
+            it, weighted by how often each chart is made.</p>
+          <aside class="notes">
+            <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
+              5:15 of 7:00.</p>
+            <ul>
               <li>Two naive endpoints:
                 <ul>
                   <li>One function per chart type: specs stay short, but the
@@ -35,6 +44,7 @@
               <li>A good grammar is a good compression: short specs for common
                 charts, and tail charts still reachable without new
                 primitives.</li>
+              <li>The bar sizes are schematic, not measured.</li>
             </ul>
           </aside>
         </section>
@@ -110,15 +120,14 @@
 
         <!-- BACKUP for running long: the one-slide version of section 5.
              To use it, remove data-visibility="hidden" here and add it to
-             the four section 5 slides above. -->
+             the five section 5 slides above. -->
         <section data-visibility="hidden">
           <p class="part">5 · The open one: big vs. small</p>
           <h2>what's the lambda calculus of layout?</h2>
           <div class="two-col">
-            <div class="placeholder-box">
-              <p class="placeholder-label">Placeholder: usage curve</p>
-              <p>The usage curve with its two endpoints</p>
-            </div>
+            <!-- The same live GoFish chart as the first section 5 slide. -->
+            <div data-chart="usage-curve" data-w="600" data-h="450"
+              data-font-size="20"></div>
             <div>
               <p><strong>One function per chart type:</strong> the language
                 grows with every tail chart.</p>
@@ -127,10 +136,11 @@
             </div>
           </div>
           <aside class="notes">
-            <p><strong>Backup slide.</strong> Use it in place of the four
+            <p><strong>Backup slide.</strong> Use it in place of the five
               section 5 slides if you are running long (after cutting the
               Haskell aside). Aim to reach the panel slide by 6:15.</p>
             <ul>
+              <li>Callback: the two levels of GoFish from the intro.</li>
               <li>Shrink section 5 to one slide: the curve with the endpoints,
                 plus the open question.</li>
             </ul>
