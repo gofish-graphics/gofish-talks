@@ -1,4 +1,4 @@
-        <!-- ═══ SECTION 3c: GRAMMARS IN ONE LANGUAGE, ~0:30 ══════════════
+        <!-- ═══ SECTION 3c: GRAMMARS IN ONE LANGUAGE, ~0:55 ══════════════
              Code comparisons from the GUGOG camera-ready paper, section 3
              "Specialized Grammars in a Shared Vocabulary"
              (phd-thesis-20260618/gugog-2026-camera-ready-v3). The code is
@@ -7,11 +7,89 @@
              colors are the paper's own (comparison-highlighting.typ), shown
              with talk-template's data-code-regions.
              GoTree (paper Figure 5) is used in section 4 instead, not here.
-             The Atom comparison (paper Figure 3, "Atom's gridxy is GoFish's
-             spread") was cut to keep PiCCL; restore it from git commit
-             f49d46d (this file and images/comparisons/
-             gofish-atom-unit-columns.svg).
              Styles: ../gofish-compare.css. -->
+        <section class="code-slide">
+          <p class="part">Grammars in one language look alike</p>
+          <h2>Atom's <code>gridxy</code> is GoFish's <code>spread</code></h2>
+          <div class="code-pair">
+            <div>
+              <p class="code-pair-label">Atom <span class="code-pair-sub">· its own JSON grammar</span></p>
+              <pre><code class="language-json" data-line-numbers data-code-regions="A 3:5-5:28, B 9:5-14:33, C 16:3-17:54">{
+  "layouts": [{
+    "type": "gridxy",
+    "subgroup": {"type": "groupby", "key": "pclass"},
+    "aspect_ratio": "fillX",
+    "size": { "type": "uniform", "isShared": false },
+    "direction": "LRBT", "align": "LB"
+  }, {
+    "type": "gridxy",
+    "subgroup": { "type": "flatten" },
+    "aspect_ratio": "maxfill",
+    "size": { "type": "uniform", "isShared": true },
+    "direction": "LRBT", "align": "LB",
+    "sort": { "key": "survived" }
+  }],
+  "mark": { "shape": "circle",
+    "color": {"key":"survived", "type":"categorical"},
+    "size": { "type": "max", "isShared": false },
+    "isColorScaleShared": true }
+}</code></pre>
+            </div>
+            <div>
+              <p class="code-pair-label">GoFish</p>
+              <img class="compare-atom-fig" src="./images/comparisons/gofish-atom-unit-columns.svg" alt="GoFish rendering of Atom's Titanic unit column chart: one column of circles per passenger class, blue for survived" />
+              <pre><code class="language-ts" data-line-numbers data-code-regions="A 3:5-4:38, B 5:5-9:36, C 11:9-11:42">chart(titanicPassengers)
+  .flow(
+    spread({ by: "pclass", dir: "x",
+      spacing: 24, alignment: "end" }),
+    derive(rows =&gt; orderBy(rows,
+      ["survived"], ["desc"])),
+    derive(rows =&gt; chunk(rows, 14)),
+    spread({ dir: "y", spacing: 2, reverse: true }),
+    spread({ dir: "x", spacing: 2 })
+  )
+  .mark(circle({ r: 4, fill: "survived" }));</code></pre>
+            </div>
+          </div>
+          <aside class="notes">
+            <p><strong>Target:</strong> 0:25. <strong>Running total:</strong>
+              3:55 of 7:00 (budget; the deck now runs 9:20).</p>
+            <p><strong>The beat (this slide and the next):</strong> 1. A shared
+              language makes it possible to compare grammars: once each
+              grammar's idea is written in GoFish, you can put them side by side
+              and see exactly what differs. 2. The grammars are not so different
+              after all: they share most of their structure, and the
+              differences come down to small, nameable pieces.</p>
+            <p><strong>Say:</strong> Here's Atom, a grammar for unit
+              visualizations, and its Titanic example: group passengers by
+              class, then lay out each class's passengers as circles colored by
+              survival. On the right is the same construction in GoFish. Every
+              part has a counterpart. Atom's first <code>gridxy</code> is
+              GoFish's first <code>spread</code>, by class. The second
+              <code>gridxy</code> is two more spreads, rows and columns. And
+              Atom's circle mark is GoFish's circle mark. Same idea, different
+              name.</p>
+            <p><strong>Source:</strong> GUGOG camera-ready paper, Figure 3
+              (section 3.1 "Atom"); code from
+              <code>examples/atom-unit-columns.json</code> and
+              <code>examples/gofish-unit-columns.ts</code>, figure from
+              <code>figures/gofish-atom-unit-columns.svg</code>, all copied
+              exactly. The title is the paper's own sentence from section 3.4:
+              "In Atom, <code>spread</code> is called <code>gridxy</code> with
+              the <code>fillX</code> aspect ratio."</p>
+            <p>The colored regions are the paper's roles: A, Atom's first layout
+              (lines 3 to 5) = <code>spread({ by: "pclass" ... })</code>; B, the
+              second layout (lines 9 to 14) = the two <code>derive</code>s and
+              the two inner spreads; C, Atom's <code>mark</code> =
+              <code>circle({ r: 4, fill: "survived" })</code>.</p>
+            <p><strong>Honest difference</strong> (paper caption): "Atom packs
+              units automatically; GoFish uses a fixed 14-column grid." That is
+              the <code>maxfill</code> vs. <code>chunk(rows, 14)</code> pair.
+              Setup (data, palette, axes) is omitted on both sides, as in the
+              paper.</p>
+          </aside>
+        </section>
+
         <section class="code-slide">
           <div class="compare-head">
             <div>
@@ -73,13 +151,7 @@ const collection = chart(data, { axes: false })
           </div>
           <aside class="notes">
             <p><strong>Target:</strong> 0:30. <strong>Running total:</strong>
-              4:00 of 7:00 (budget; the deck now runs 8:55).</p>
-            <p><strong>The beat (this one slide):</strong> 1. A shared
-              language makes it possible to compare grammars: once each
-              grammar's idea is written in GoFish, you can put them side by
-              side and see exactly what differs. 2. The grammars are not so
-              different after all: they share most of their structure, and the
-              differences come down to small, nameable pieces.</p>
+              4:25 of 7:00 (budget; the deck now runs 9:20).</p>
             <p><strong>Say:</strong> PiCCL comes from graphics editors, GoFish
               from the grammar of graphics. Both build this bottle chart the
               same way: an image composited with a data-sized rectangle, a line
@@ -93,14 +165,7 @@ const collection = chart(data, { axes: false })
               PiCCL's <code>replicate</code> plus <code>stackLayout</code>,
               GoFish's <code>spread</code> operator, which also groups the data
               by a key. That's it. Two independently designed grammars
-              converged on the same abstractions. And once they're in one
-              language, the names line up: GoFish's <code>spread</code> is
-              PiCCL's <code>stackLayout</code>, and Atom's
-              <code>gridxy</code> too.</p>
-            <p>That last sentence is the paper's section 3.4: "In Atom,
-              <code>spread</code> is called <code>gridxy</code> with the
-              <code>fillX</code> aspect ratio, while in PiCCL it's a
-              <code>stackLayout</code>."</p>
+              converged on the same abstractions.</p>
             <p><strong>Lead into section 4:</strong> "Once grammars are written
               in one language, a lot of the tradeoffs we argue about stop
               looking forced. Two of them in particular."</p>
