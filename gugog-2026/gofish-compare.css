@@ -309,3 +309,64 @@
   font-size: 0.62em;
   margin: 0.6rem 0 0;
 }
+
+/* Recap after the GoTree beat (04): three columns, one per shape of data,
+   each a render over a cut-down spec, on one shared core. Code is 13px. */
+.recap-grid {
+  align-items: start;
+  display: grid;
+  gap: 0 0.8rem;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-top: 0.2rem;
+}
+
+.recap-grid > div {
+  min-width: 0;
+}
+
+.reveal .code-slide .recap-grid pre {
+  font-size: 0.465em;
+  margin: 0;
+}
+
+.reveal .code-slide .recap-grid pre code {
+  line-height: 1.25;
+  max-height: none;
+}
+
+.recap-render {
+  align-items: center;
+  display: flex;
+  height: 180px;
+  justify-content: center;
+  margin-bottom: 0.3rem;
+  overflow: hidden;
+}
+
+.recap-planets > div {
+  transform: scale(0.84);
+}
+
+.reveal .code-slide .recap-render img {
+  margin: 0;
+  max-height: 170px;
+  max-width: 100%;
+}
+
+.reveal .code-slide .recap-core {
+  border-top: 3px solid var(--accent);
+  color: var(--muted);
+  font-size: 0.55em;
+  margin: 0.7rem 2% 0;
+  padding-top: 0.3rem;
+  text-align: center;
+}
+
+.recap-ribbon > div {
+  flex: none;
+  transform: scale(0.7);
+}
+
+.recap-planets > div {
+  flex: none;
+}

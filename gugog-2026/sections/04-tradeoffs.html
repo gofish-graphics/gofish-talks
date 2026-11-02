@@ -32,7 +32,7 @@
             <p><strong>Full passage</strong> (reference markers removed): Park et al. argue that efforts should be made to “find a definitive grammar that can unify many of these existing grammars”. However, Greenspun’s tenth rule quips that any sufficiently complicated program contains an ad hoc, informally specified, bug-ridden, slow implementation of half of Lisp. Less satirically Fowler notes that one of the biggest dangers in DSL design is “Sliding into generality.” While tools like Vega-Lite are probably not in danger of becoming Lisp, we suggest that consideration of small modular language components may be helpful in the continuation and extension of this ecosystem. There are many tasks, and no one DSL will be able to capture all of them without compromising essential parts of its domain design. That is, there is no grammar to rule them all.</p>
             <p><strong>Target:</strong> 0:15 (shown, not recited; read the
               accent phrase and the last sentence aloud). <strong>Running total:</strong> 4:40 of
-              7:00 (budget; the deck now runs 9:05).</p>
+              7:00 (budget; the deck now runs 9:20).</p>
             <p><strong>Say:</strong> "Andrew's survey concluded there's no
               grammar to rule them all, and I agree. One language that does
               everything slides into generality. What he suggested instead was
@@ -92,7 +92,7 @@
             <p><strong>Target:</strong> 0:15 (the GoTree beat stays 1:00
               over three slides: 0:15 here, 0:20 for the specs, 0:25 for
               <code>combine</code>). <strong>Running total:</strong> 4:55 of
-              7:00 (budget; the deck now runs 9:05).</p>
+              7:00 (budget; the deck now runs 9:20).</p>
             <p><strong>Say:</strong> "Here's a domain grammar of the kind
               Andrew describes: GoTree, a grammar for tree layouts. Its input
               is a tree, a root with children with children, and this is the
@@ -166,8 +166,8 @@
           <aside class="notes">
             <p><strong>Target:</strong> 0:20 (was 0:35; the data slide before
               it took 0:15. 1:15 for this tradeoff, over four slides with the
-              quote; 2:30 for section 4, with both quotes). <strong>Running total:</strong> 5:15
-              of 7:00 (budget; the deck now runs 9:05).</p>
+              quote; 2:45 for section 4, with both quotes and the recap). <strong>Running total:</strong> 5:15
+              of 7:00 (budget; the deck now runs 9:20).</p>
             <ul>
               <li>Universal vs. domain-specific: respond to Jason. Domain
                 grammars can be layered on a shared core instead of being
@@ -250,7 +250,7 @@
           </p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:25. <strong>Running total:</strong>
-              5:40 of 7:00 (budget; the deck now runs 9:05).</p>
+              5:40 of 7:00 (budget; the deck now runs 9:20).</p>
             <p><strong>Say:</strong> And here's how it's layered. The
               <code>combine</code> that the tree spec called turns each axis
               into an ordinary GoFish constraint, <code>Constraint.align</code>
@@ -286,6 +286,80 @@
           </aside>
         </section>
 
+        <!-- Recap after the GoTree beat: the crash course's two final
+             states plus the tree, each labeled by the shape of data it works
+             on. Renders: the same charts.ts functions as the crash course
+             (planets-label, seafood-ribbon) and the paper's Figure 5 SVG. -->
+        <section class="code-slide recap-slide">
+          <p class="part">4 · Two tradeoffs verbs dissolve</p>
+          <h2>same core, three shapes of data</h2>
+          <div class="recap-grid">
+            <div>
+              <p class="code-pair-label">low-level <span class="code-pair-sub">· marks and relations</span></p>
+              <div class="recap-render recap-planets"><div data-chart="planets-label" data-w="440" data-h="160"></div></div>
+              <pre><code class="language-ts" data-line-numbers>const planets = enclose({ ... }, [ ... ]);
+const label = text({ ... }).name("label");
+
+layer([planets, label])
+  .relate(({ mercury, planets, label }) =&gt; [
+    Constraint.align({ x: "middle" }, ...),
+    Constraint.distribute({ dir: "y", ... }, ...),
+    arrow({ ... }, [label, mercury]),
+  ])</code></pre>
+            </div>
+            <div>
+              <p class="code-pair-label">tabular <span class="code-pair-sub">· rows</span></p>
+              <div class="recap-render recap-ribbon"><div data-chart="seafood-ribbon" data-w="540" data-h="230"></div></div>
+              <pre><code class="language-ts" data-line-numbers>chart(seafood)
+  .flow(
+    spread({ by: "lake", dir: "x", ... }),
+    stack({ by: field("species")..., ... }),
+  )
+  .mark(rect({ h: "count", fill: "species" }))
+  .layer(ribbon({ by: "species", ... }))</code></pre>
+            </div>
+            <div>
+              <p class="code-pair-label">hierarchical <span class="code-pair-sub">· a nested tree</span></p>
+              <div class="recap-render"><img src="./images/tradeoffs/gofish-gotree-node-link.svg" alt="The GoTree node-link tree rendered by gofish-gotree" /></div>
+              <pre><code class="language-ts" data-line-numbers>tree({
+  node: () =&gt; circle({ r: 9 }),
+  link: { kind: "line", ... },
+  parentChild: combine({ x: ..., y: ... }),
+  sibling: combine({ x: ..., y: ... }),
+}, hierarchy)</code></pre>
+            </div>
+          </div>
+          <p class="recap-core">one core underneath: the same verbs and constraints</p>
+          <aside class="notes">
+            <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
+              5:55 of 7:00 (budget; the deck now runs 9:20).</p>
+            <p><strong>Say:</strong> "Back to our two examples, plus the tree.
+              What differs isn't the core, it's the shape of the data:
+              low-level marks, tabular rows, a hierarchy. Each level adds what
+              its data needs, and they all share the same verbs and
+              constraints. That's the modular, layered ecosystem Andrew
+              described, with GoFish as the shared floor."</p>
+            <p>The specs are cut down to their essential lines with
+              <code>...</code>, more than on the earlier slides, to fit three
+              columns. Low-level: the crash course's final planets spec with
+              the <code>enclose</code> body and the label's options elided,
+              and the align and distribute operands elided (they are
+              <code>[mercury, label]</code> and <code>[planets, label]</code>).
+              Tabular: the crash course's ribbon spec, with
+              <code>field("species").sort("count")</code> shortened to
+              <code>field("species")...</code>. Hierarchical: the paper's
+              Figure 5 gofish-gotree spec with the <code>combine</code>
+              options elided (shown in full two slides back).</p>
+            <p><strong>Sources:</strong> the planets and ribbon renders are
+              drawn live by the same <code>charts.ts</code> functions as the
+              crash course (<code>planetsLabeled</code>,
+              <code>seafoodRibbon</code>); both are drawn at the crash course's
+              size and scaled down to fit their columns. The tree is the paper's Figure 5 render. No
+              "zoom out" animation from the crash course: it is too far back
+              in the deck for auto-animate to connect.</p>
+          </aside>
+        </section>
+
         <!-- The open question the CanAdd slide gives one data point on:
              Huang and Kay, "Semantic Validity vs. Graphical Arrangement in
              Visualization Grammars", GUGOG @ IEEE VIS 2026
@@ -307,8 +381,8 @@
           <p class="long-quote-cite">Cynthia Huang &amp; Matthew Kay, <em>Semantic Validity vs. Graphical Arrangement in Visualization Grammars</em>, GUGOG 2026</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:15 (shown, not recited; read the
-              accent phrase aloud). <strong>Running total:</strong> 5:55 of
-              7:00 (budget; the deck now runs 9:05).</p>
+              accent phrase aloud). <strong>Running total:</strong> 6:10 of
+              7:00 (budget; the deck now runs 9:20).</p>
             <p><strong>Say:</strong> "Cynthia and Matt, who are on the
               panel, frame this as a tradeoff: validate every operation and
               you constrain what you can draw; maximize what you can draw and
@@ -399,7 +473,7 @@ chart(temps, {
           <p class="canadd-footnote">Inspired by Bartonicek, Urbanek &amp; Murrell (JCGS 2025), Flint (Wang et al., VIS 2026), and Huang &amp; Kay (GUGOG 2026).</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:55 (after the 0:15 quote). <strong>Running total:</strong>
-              6:50 of 7:00 (budget; the deck now runs 9:05).</p>
+              7:05 of 7:00 (budget; the deck now runs 9:20).</p>
             <ul>
               <li>Expressive vs. structured: one data point on Cynthia and
                 Matt's open question.</li>
