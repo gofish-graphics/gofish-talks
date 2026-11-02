@@ -36,7 +36,7 @@
           <aside class="notes">
             <p><strong>Target:</strong> 0:15 (shown, not recited; read the
               last sentence aloud). <strong>Running total:</strong> 4:40 of
-              7:00 (budget; the deck now runs 8:50).</p>
+              7:00 (budget; the deck now runs 9:05).</p>
             <p><strong>Say:</strong> "Here's the strongest version of the
               case against a universal grammar. Andrew McNutt surveyed the
               JSON visualization grammars and concluded: there is no grammar
@@ -96,8 +96,8 @@
           </div>
           <aside class="notes">
             <p><strong>Target:</strong> 0:35 (1:15 for this tradeoff, over three
-              slides with the quote; 2:15 for section 4). <strong>Running total:</strong> 5:15
-              of 7:00 (budget; the deck now runs 8:50).</p>
+              slides with the quote; 2:30 for section 4, with both quotes). <strong>Running total:</strong> 5:15
+              of 7:00 (budget; the deck now runs 9:05).</p>
             <ul>
               <li>Universal vs. domain-specific: respond to Jason. Domain
                 grammars can be layered on a shared core instead of being
@@ -170,7 +170,7 @@
           </p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:25. <strong>Running total:</strong>
-              5:40 of 7:00 (budget; the deck now runs 8:50).</p>
+              5:40 of 7:00 (budget; the deck now runs 9:05).</p>
             <p><strong>Say:</strong> And here's how it's layered. The
               <code>combine</code> that the tree spec called turns each axis
               into an ordinary GoFish constraint, <code>Constraint.align</code>
@@ -205,6 +205,61 @@
           </aside>
         </section>
 
+        <!-- The challenge the CanAdd slide answers: Huang and Kay,
+             "Semantic Validity vs. Graphical Arrangement in Visualization
+             Grammars", GUGOG @ IEEE VIS 2026
+             (gugog-vis.github.io/2026/papers/pdf/huang-kay.pdf). An excerpt,
+             verbatim, with ellipses where text is skipped and the reference
+             marker removed. -->
+        <section class="quote-slide">
+          <p class="part">4 · Two tradeoffs verbs dissolve</p>
+          <blockquote class="long-quote quote-short">
+            <p>Bartonicek et al. … argue that only statistics with monoidal
+              structure (e.g. counts, sums, products) should be displayed as
+              stacked bars … Bartonicek et al. explicitly caution against
+              treating stacking as a purely graphical operation – a view that
+              appears to <strong>directly challenge the validity and
+              usefulness of the stacking operator in GoFish.</strong></p>
+          </blockquote>
+          <p class="long-quote-cite">Cynthia Huang &amp; Matthew Kay, <em>Semantic Validity vs. Graphical Arrangement in Visualization Grammars</em>, GUGOG 2026</p>
+          <aside class="notes">
+            <p><strong>Target:</strong> 0:15 (shown, not recited; read the
+              accent phrase aloud). <strong>Running total:</strong> 5:55 of
+              7:00 (budget; the deck now runs 9:05).</p>
+            <p><strong>Say:</strong> "The second tradeoff comes from Cynthia
+              and Matt, who are on the panel. They point out that Bartonicek
+              et al. say stacking only makes sense for statistics that add up,
+              which directly challenges GoFish's stacking operator." Then go
+              to the next slide: this is the challenge the CanAdd slide
+              answers. Keep the hand-off line there.</p>
+            <p>The excerpt is verbatim, with ellipses where text is skipped
+              and the reference marker [2] removed. The first ellipsis
+              skips "[2] examine ... They then proceed to", so the opening
+              reads "Bartonicek et al. ... argue" without inserting any
+              words. The second skips from "with linked highlighting" through
+              "In fact,". The accent color is ours.</p>
+            <p>Full original paragraph (section 1 of the paper), for
+              reference:</p>
+            <blockquote>Bartonicek et al. [2] examine the widespread usage of
+              stacked bar charts over dodged bar charts in interactive
+              graphics, and offer an explanation for this preference based in
+              Gestalt principles. They then proceed to argue that only
+              statistics with monoidal structure (e.g. counts, sums, products)
+              should be displayed as stacked bars with linked highlighting of
+              single group subsets (parts of whole), based on the algebraic
+              properties of summary functions. The authors offer this result,
+              and a similar one for multi-group selection, as a preliminary
+              contribution towards complete algebraic foundations for
+              ‘coherent and well-behaved’ interactive graphics. They invoke a
+              more constrained notion of expressivity that is conditional on
+              statistical and mathematical validity. In fact, Bartonicek et
+              al. [2] explicitly caution against treating stacking as a purely
+              graphical operation – a view that appears to directly challenge
+              the validity and usefulness of the stacking operator in
+              GoFish.</blockquote>
+          </aside>
+        </section>
+
         <section class="code-slide">
           <p class="part">4 · Two tradeoffs verbs dissolve</p>
           <h2>expressive vs. structured</h2>
@@ -236,8 +291,8 @@ const celsius = await errorOf(() =&gt;
             </div>
           </div>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:55. <strong>Running total:</strong>
-              6:35 of 7:00 (budget; the deck now runs 8:50).</p>
+            <p><strong>Target:</strong> 0:55 (after the 0:15 quote). <strong>Running total:</strong>
+              6:50 of 7:00 (budget; the deck now runs 9:05).</p>
             <ul>
               <li>Expressive vs. structured: the <code>CanAdd</code> example
                 keeps both.</li>

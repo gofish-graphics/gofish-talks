@@ -207,3 +207,10 @@
 .reveal .quote-slide .nowrap {
   white-space: nowrap;
 }
+
+/* A shorter quote (the Huang and Kay excerpt) gets larger type and sits
+   lower, so it fills the slide like the long one. */
+.reveal .quote-slide blockquote.long-quote.quote-short {
+  font-size: 1.3em;
+  margin-top: 3.2rem;
+}
