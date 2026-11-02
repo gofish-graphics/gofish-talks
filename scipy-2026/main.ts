@@ -6,40 +6,9 @@ import "reveal.js/dist/theme/white.css";
 import "./hljs-github-light.css";
 import "./style.css";
 import { renderCharts, chartRenderers } from "./charts";
-import openingHtml from "./sections/01-opening.html?raw";
-import walkthroughHtml from "./sections/02-walkthrough.html?raw";
-import glyphsHtml from "./sections/03-glyphs.html?raw";
-import closingHtml from "./sections/04-closing.html?raw";
-import closingPolarRibbonUrl from "./gallery-images/polar-ribbon-chart.png";
-import closingInsertionSortUrl from "./gallery-images/insertion-sort.png";
-import closingSilhouetteTreeUrl from "./gallery-images/multilevel-silhouette-tree.png";
-import closingLayeredBarsAreaUrl from "./gallery-images/layered-bars-and-area.png";
-import closingTitanicCircleTreemapUrl from "./gallery-images/titanic-fare-circle-treemap.png";
-import closingFlowerChartUrl from "./gallery-images/flower-chart.png";
-
-// Slides live in ./sections/*.html; assemble them before Reveal initializes.
+// Slides live in ./sections/*.html; vite.config.ts inlines them into index.html.
 const slidesEl = document.querySelector(".slides");
 if (slidesEl) {
-  slidesEl.innerHTML = [
-    openingHtml,
-    walkthroughHtml,
-    glyphsHtml,
-    closingHtml,
-  ].join("\n");
-
-  const closingExampleUrls: Record<string, string> = {
-    "polar-ribbon": closingPolarRibbonUrl,
-    "insertion-sort": closingInsertionSortUrl,
-    "silhouette-tree": closingSilhouetteTreeUrl,
-    "layered-bars-area": closingLayeredBarsAreaUrl,
-    "titanic-circle-treemap": closingTitanicCircleTreemapUrl,
-    "flower-chart": closingFlowerChartUrl,
-  };
-  slidesEl.querySelectorAll<HTMLImageElement>("img[data-closing-example]").forEach((img) => {
-    const key = img.dataset.closingExample;
-    if (key && closingExampleUrls[key]) img.src = closingExampleUrls[key];
-  });
-
   // Introduce the conventional grammar immediately after GoFish, then teach
   // its Gestalt basis before showing how far the same structure scales.
   const grammarOfGraphicsSlide = slidesEl.querySelector<HTMLElement>(

@@ -1,0 +1,62 @@
+name: Deploy talks to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # Add a new talk folder here.
+        talk: [scipy-2026, pydata-2026]
+    defaults:
+      run:
+        working-directory: ${{ matrix.talk }}
+    steps:
+      - uses: actions/checkout@v4
+      # Reads the pnpm version from the talk's packageManager field.
+      - uses: pnpm/action-setup@v4
+        with:
+          package_json_file: ${{ matrix.talk }}/package.json
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+          cache-dependency-path: ${{ matrix.talk }}/pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.talk }}
+          path: ${{ matrix.talk }}/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      # Each talk's dist lands in site/<talk>/, next to the root index.html.
+      - uses: actions/download-artifact@v4
+        with:
+          path: site
+      - run: cp index.html site/
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: site
+      - id: deployment
+        uses: actions/deploy-pages@v4
