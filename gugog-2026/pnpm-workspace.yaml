@@ -1,0 +1,11 @@
+# This talk is its own pnpm workspace, so it installs on its own and other
+# talks are unaffected. It includes the shared template from the repo root.
+# There is deliberately no pnpm-workspace.yaml at the repo root: pnpm would
+# treat it as the workspace for every talk folder that has no workspace file
+# of its own (pydata-2026), and installing there would stop working.
+packages:
+  - .
+  - ../talk-template
+
+allowBuilds:
+  esbuild: true

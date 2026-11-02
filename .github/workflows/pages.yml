@@ -19,8 +19,10 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        # Add a new talk folder here.
-        talk: [scipy-2026, pydata-2026]
+        # Add a new talk folder here. A talk that uses talk-template/ has its
+        # own pnpm-workspace.yaml that includes ../talk-template, so the same
+        # install step installs the template too.
+        talk: [scipy-2026, pydata-2026, gugog-2026]
     defaults:
       run:
         working-directory: ${{ matrix.talk }}
