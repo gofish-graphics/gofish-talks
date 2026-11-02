@@ -129,10 +129,6 @@
   margin-top: 0.5em;
 }
 
-/* Figures above the GoFish code in a pair. */
-.reveal .code-slide img.compare-atom-fig {
-  max-height: 250px;
-}
 
 .reveal .code-slide img.gotree-fig {
   max-width: 100%;
