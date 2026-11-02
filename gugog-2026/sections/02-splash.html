@@ -1,13 +1,112 @@
         <!-- ═══ SECTION 2: SPLASH SCREEN, ~0:30 ════════════════════════ -->
-        <section>
+        <section class="splash">
           <p class="part">2 · Splash screen</p>
-          <h2>all of these are GoFish programs</h2>
-          <div class="placeholder-box" style="height: 380px; margin-top: 1rem">
-            <p class="placeholder-label">Placeholder: montage</p>
-            <p>Atom units, GoTree trees, Bluefish diagrams, Canis animation,
-              etc.</p>
+          <h2>All of these are GoFish programs.</h2>
+          <p class="splash-how">How?</p>
+          <style>
+            .reveal .splash .splash-how {
+              color: var(--accent);
+              font-size: 1.1em;
+              font-weight: 760;
+              margin: 0;
+              position: absolute;
+              right: 0.4em;
+              top: 0.75em;
+            }
+            .reveal .splash .splash-grid {
+              display: grid;
+              gap: 14px;
+              grid-template-columns: repeat(4, 1fr);
+              grid-template-rows: repeat(3, 172px);
+              margin-top: 22px;
+            }
+            .reveal .splash figure {
+              background: #fff;
+              border: 2px solid #27231f;
+              border-radius: 7px 9px 6px 8px;
+              box-shadow: 3px 4px 0 rgba(30, 30, 30, 0.1);
+              display: flex;
+              flex-direction: column;
+              margin: 0;
+              min-height: 0;
+              overflow: hidden;
+              padding: 8px 10px 4px;
+            }
+            .reveal .splash figure img,
+            .reveal .splash figure video {
+              border-radius: 0;
+              flex: 1 1 auto;
+              height: 100%;
+              margin: 0;
+              max-height: none;
+              max-width: none;
+              min-height: 0;
+              object-fit: contain;
+              width: 100%;
+            }
+            .reveal .splash figcaption {
+              color: var(--muted);
+              flex: 0 0 auto;
+              font-size: 15px;
+              line-height: 1.2;
+              padding-top: 4px;
+              text-align: center;
+            }
+            .reveal .splash figcaption b {
+              color: var(--ink);
+              font-weight: 760;
+            }
+          </style>
+          <div class="splash-grid">
+            <figure>
+              <img src="./images/splash/atom-titanic-unit-mosaic.png" alt="Titanic unit mosaic, one dot per passenger" />
+              <figcaption><b>Atom</b> · unit mosaic</figcaption>
+            </figure>
+            <figure>
+              <img src="./images/splash/atom-titanic-unit-violin.png" alt="Titanic age violins built from unit dots" />
+              <figcaption><b>Atom</b> · unit violins</figcaption>
+            </figure>
+            <figure>
+              <img src="./images/splash/gotree-multilevel-silhouette-tree.png" alt="Multilevel silhouette tree" />
+              <figcaption><b>GoTree</b> · silhouette tree</figcaption>
+            </figure>
+            <figure>
+              <img src="./images/splash/gotree-oval-treemap.png" alt="Oval treemap" />
+              <figcaption><b>GoTree</b> · oval treemap</figcaption>
+            </figure>
+            <figure>
+              <img src="./images/splash/gotree-radial-deep-tree.png" alt="Radial node-link tree" />
+              <figcaption><b>GoTree</b> · radial tree</figcaption>
+            </figure>
+            <figure>
+              <img src="./images/splash/bluefish-pulley.png" alt="Pulley system diagram" />
+              <figcaption><b>Bluefish</b> · pulley</figcaption>
+            </figure>
+            <figure>
+              <img src="./images/splash/bluefish-insertion-sort.png" alt="Insertion sort diagram" />
+              <figcaption><b>Bluefish</b> · insertion sort</figcaption>
+            </figure>
+            <figure>
+              <img src="./images/splash/hyperedges-over-a-graph.png" alt="Hyperedges drawn as enclosures over a graph" />
+              <figcaption>hyperedges over a graph</figcaption>
+            </figure>
+            <figure>
+              <video src="./images/splash/canis-fig1b-build.mp4" poster="./images/splash/canis-fig1b-build-poster.png" data-autoplay autoplay loop muted playsinline></video>
+              <figcaption><b>Canis</b> · staged build</figcaption>
+            </figure>
+            <figure>
+              <img src="./images/splash/polar-ribbon-chart.png" alt="Polar ribbon chart" />
+              <figcaption>polar ribbon chart</figcaption>
+            </figure>
+            <figure>
+              <img src="./images/splash/flower-chart.png" alt="Flower chart" />
+              <figcaption>flower chart</figcaption>
+            </figure>
+            <figure>
+              <img src="./images/splash/bubble-treemap.png" alt="Bubble treemap" />
+              <figcaption>bubble treemap</figcaption>
+            </figure>
           </div>
-          <p class="big-claim">How?</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:30. <strong>Running total:</strong>
               1:30 of 7:00.</p>
@@ -15,6 +114,11 @@
               <li>Montage: Atom units, GoTree trees, Bluefish diagrams, Canis
                 animation, etc.</li>
               <li>"All of these are GoFish programs." How?</li>
+              <li>Tiles, in order: Atom unit mosaic, Atom unit violins, GoTree
+                silhouette tree, GoTree oval treemap, GoTree radial tree,
+                Bluefish pulley, Bluefish insertion sort, hyperedges over a
+                graph, Canis staged build (animated), polar ribbon chart,
+                flower chart, bubble treemap.</li>
             </ul>
           </aside>
         </section>
