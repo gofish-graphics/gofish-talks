@@ -1,7 +1,7 @@
 # The Grammar of Graphics Needs Verbs: Towards a GUGOG
 
 A 7-minute talk at the GUGOG workshop, IEEE VIS 2026 (Nov 9). It sets up the
-panel. Slides: https://gofish-graphics.github.io/gofish-talks/gugog-2026/
+panel. Slides: https://talks.gofish.graphics/gugog-2026/
 
 The deck uses the shared template in `../talk-template/` for its look and its
 Reveal setup.

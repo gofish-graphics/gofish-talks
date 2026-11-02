@@ -5,11 +5,11 @@ Each folder is a separate Reveal/Vite deck with its own dependencies.
 
 | Talk | Folder | Slides |
 | --- | --- | --- |
-| SciPy 2026 | [`scipy-2026/`](scipy-2026/) | https://gofish-graphics.github.io/gofish-talks/scipy-2026/ |
-| PyData 2026 | [`pydata-2026/`](pydata-2026/) | https://gofish-graphics.github.io/gofish-talks/pydata-2026/ |
-| GUGOG @ IEEE VIS 2026 | [`gugog-2026/`](gugog-2026/) | https://gofish-graphics.github.io/gofish-talks/gugog-2026/ |
+| SciPy 2026 | [`scipy-2026/`](scipy-2026/) | https://talks.gofish.graphics/scipy-2026/ |
+| PyData 2026 | [`pydata-2026/`](pydata-2026/) | https://talks.gofish.graphics/pydata-2026/ |
+| GUGOG @ IEEE VIS 2026 | [`gugog-2026/`](gugog-2026/) | https://talks.gofish.graphics/gugog-2026/ |
 
-All talks are listed at https://gofish-graphics.github.io/gofish-talks/.
+All talks are listed at https://talks.gofish.graphics/.
 
 To run a talk, go into its folder and follow its README (usually `pnpm install` then `pnpm dev`).
 
