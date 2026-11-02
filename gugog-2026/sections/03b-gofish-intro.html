@@ -17,8 +17,9 @@
              of the code printed beside it (gofish-graphics nightly).
              Planets code: the GoFish repo's tutorial stories (origin/main
              7b902ed38), packages/gofish-graphics/stories/tutorials/
-             Basics.stories.tsx and Diagrams.stories.tsx, shown with styling
-             elided; charts.ts runs the stories' code unchanged.
+             Basics.stories.tsx and Diagrams.stories.tsx, restructured into
+             consts so the second state only adds lines (see charts.ts), and
+             shown with styling elided.
              Seafood code: the thesis deck's ribbon walkthrough
              (phd-thesis-20260618/presentation/sections/03-gofish.html,
              "Spread the Lakes Apart", and the .layer(ribbon) step of its
@@ -36,12 +37,12 @@
               <div class="crash-planets-box" data-id="crash-planets-box">
                 <div class="crash-render" data-id="crash-planets" data-chart="planets" data-w="440" data-h="160"></div>
               </div>
-              <pre data-id="crash-core-code"><code class="language-ts" data-line-numbers>enclose({ ... }, [
+              <pre data-id="crash-core-code"><code class="language-ts" data-line-numbers>const planets = enclose({ ... }, [
   spread(
     { dir: "x", alignment: "middle", ... },
-    data.map((d) =&gt; circle({ r: d.r, ... }))
+    data.map((d) =&gt; circle({ r: d.r, ... }).name(d.name))
   ),
-])</code></pre>
+]).name("planets");</code></pre>
             </div>
             <div class="crash-col">
               <p class="code-pair-label" data-id="crash-chart-label">chart level <span class="code-pair-sub">· big: short specs</span></p>
@@ -88,9 +89,10 @@
               <li>Planets: the GoFish repo's Basics tutorial story
                 (<code>packages/gofish-graphics/stories/tutorials/Basics.stories.tsx</code>
                 on origin/main), styled after the thesis deck's Bluefish
-                planets. The story writes <code>circle(...)</code> on one
-                line; here it is shown here with its styling
-                elided. It already uses <code>circle({ r })</code>, not
+                planets. Restructured from the story: the
+                <code>enclose</code> is bound to <code>const planets</code>,
+                and the circles and the group are named from the start, ready
+                for the next state. Shown with its styling elided. It already uses <code>circle({ r })</code>, not
                 <code>ellipse</code>. Rendered live.</li>
               <li>Stacked bars: the thesis deck's "Spread the Lakes Apart" slide
                 (<code>presentation/sections/03-gofish.html</code>), with the
@@ -113,15 +115,16 @@
               <div class="crash-planets-box" data-id="crash-planets-box">
                 <div class="crash-render" data-id="crash-planets-label" data-chart="planets-label" data-w="440" data-h="160"></div>
               </div>
-              <pre data-id="crash-core-code"><code class="language-ts" data-line-numbers data-char-marks="1:1-7, 5:46-58, 7:5-20, 8:3-47, 9:1-2, 10:3-44, 11:5-56, 12:5-63, 13:5-37, 14:3-4">layer([
-  enclose({ ... }, [
-    spread(
-      { dir: "x", alignment: "middle", ... },
-      data.map((d) =&gt; circle({ r: d.r, ... }).name(d.name))
-    ),
-  ]).name("planets"),
-  text({ text: "Mercury", ... }).name("label"),
-])
+              <pre data-id="crash-core-code"><code class="language-ts" data-line-numbers data-char-marks="8:1-59, 10:1-23, 11:3-44, 12:5-56, 13:5-63, 14:5-37, 15:3-4">const planets = enclose({ ... }, [
+  spread(
+    { dir: "x", alignment: "middle", ... },
+    data.map((d) =&gt; circle({ r: d.r, ... }).name(d.name))
+  ),
+]).name("planets");
+
+const label = text({ text: "Mercury", ... }).name("label");
+
+layer([planets, label])
   .relate(({ mercury, planets, label }) =&gt; [
     Constraint.align({ x: "middle" }, [mercury, label]),
     Constraint.distribute({ dir: "y", ... }, [planets, label]),
@@ -155,16 +158,23 @@
               <code>.relate()</code> says the label lines up with Mercury and
               sits below the background, and an arrow runs from the label to
               Mercury. A new mark and new relations.</p>
-            <p>The highlights mark only what changed from the previous state.
-              The rest of the code moved one indent level when it went inside
-              the <code>layer</code>; that is not highlighted.</p>
+            <p>The highlights mark only what changed from the previous state:
+              the label and the <code>layer</code> with its relations are new
+              lines after the unchanged ones.</p>
             <p><strong>Sources:</strong> the GoFish repo's Diagrams tutorial
               story (<code>packages/gofish-graphics/stories/tutorials/Diagrams.stories.tsx</code>
               on origin/main), the Basics picture plus the label, the
               <code>Constraint.align</code> and
               <code>Constraint.distribute</code> relations, and the
-              <code>arrow</code>. The arrow code is the story's own. Shown with styling elided; the render runs the
-              story's full code, <code>circle({ r })</code> included. Rendered live.</p>
+              <code>arrow</code>. The arrow code is the story's own. The code is restructured from the story: the
+              background group and the label are bound to consts
+              (<code>const planets</code>, <code>const label</code>), and the
+              names the relations need (<code>.name(d.name)</code>,
+              <code>.name("planets")</code>) are there from the first state.
+              So this state only adds lines after the first one, and the
+              transition keeps the old lines in place. The marks, options and
+              relations are the story's own. Shown with styling elided; the
+              render runs the full code. Rendered live.</p>
           </aside>
         </section>
 
@@ -181,15 +191,16 @@
               <div class="crash-planets-box" data-id="crash-planets-box">
                 <div class="crash-render" data-id="crash-planets-label" data-chart="planets-label" data-w="440" data-h="160"></div>
               </div>
-              <pre data-id="crash-core-code"><code class="language-ts" data-line-numbers data-char-marks="1:1-7, 5:46-58, 7:5-20, 8:3-47, 9:1-2, 10:3-44, 11:5-56, 12:5-63, 13:5-37, 14:3-4">layer([
-  enclose({ ... }, [
-    spread(
-      { dir: "x", alignment: "middle", ... },
-      data.map((d) =&gt; circle({ r: d.r, ... }).name(d.name))
-    ),
-  ]).name("planets"),
-  text({ text: "Mercury", ... }).name("label"),
-])
+              <pre data-id="crash-core-code"><code class="language-ts" data-line-numbers data-char-marks="8:1-59, 10:1-23, 11:3-44, 12:5-56, 13:5-63, 14:5-37, 15:3-4">const planets = enclose({ ... }, [
+  spread(
+    { dir: "x", alignment: "middle", ... },
+    data.map((d) =&gt; circle({ r: d.r, ... }).name(d.name))
+  ),
+]).name("planets");
+
+const label = text({ text: "Mercury", ... }).name("label");
+
+layer([planets, label])
   .relate(({ mercury, planets, label }) =&gt; [
     Constraint.align({ x: "middle" }, [mercury, label]),
     Constraint.distribute({ dir: "y", ... }, [planets, label]),

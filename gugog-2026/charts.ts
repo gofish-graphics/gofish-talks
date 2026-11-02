@@ -157,11 +157,14 @@ function compression(fontSize: number) {
 
 // ─── Section 3b: the GoFish crash course ──────────────────────────────────
 // The core level: the four inner planets on a dark background, from the
-// GoFish repo's tutorial stories (origin/main 7b902ed38), copied exactly
-// without the .render() call:
+// GoFish repo's tutorial stories (origin/main 7b902ed38):
 // packages/gofish-graphics/stories/tutorials/Basics.stories.tsx (no label)
-// and Diagrams.stories.tsx (label and arrow). The slides show these with the
-// styling parameters elided as "...".
+// and Diagrams.stories.tsx (label and arrow). The marks, operators, options
+// and relations are the stories' own. The code is restructured: the
+// background group and the label are bound to consts, and the names
+// Diagrams needs are there from the first state. That way the second state
+// only adds lines after the first, so Reveal keeps the first state's lines
+// in place. The slides show this with styling elided as "...".
 const data = [
   { name: "mercury", r: 15, fill: "#F5E3C8", stroke: "#EFC9A2" },
   { name: "venus", r: 36, fill: "#D2913C", stroke: "#A96F26" },
@@ -169,8 +172,9 @@ const data = [
   { name: "mars", r: 21, fill: "#F4BC80", stroke: "#E0954C" },
 ];
 
-const planetsRow = () =>
-  enclose(
+// A fresh copy per call: a slide may draw it more than once.
+const makePlanets = () => {
+  const planets = enclose(
     {
       padding: 20,
       fill: "#252150",
@@ -178,44 +182,37 @@ const planetsRow = () =>
       shape: Shape.box({ rx: 16 }),
     },
     [
-    spread(
-      { dir: "x", spacing: 50, alignment: "middle" },
-      data.map((d) =>
-        circle({ r: d.r, fill: d.fill, stroke: d.stroke, strokeWidth: 3 })
-      )
-    ),
-  ]);
+      spread(
+        { dir: "x", spacing: 50, alignment: "middle" },
+        data.map((d) =>
+          circle({
+            r: d.r,
+            fill: d.fill,
+            stroke: d.stroke,
+            strokeWidth: 3,
+          }).name(d.name)
+        )
+      ),
+    ]
+  ).name("planets");
+  return planets;
+};
 
-const planetsLabeled = () =>
-  layer([
-    enclose(
-      {
-        padding: 20,
-        fill: "#252150",
-        stroke: "none",
-        shape: Shape.box({ rx: 16 }),
-      },
-      [
-        spread(
-          { dir: "x", spacing: 50, alignment: "middle" },
-          data.map((d) =>
-            circle({
-              r: d.r,
-              fill: d.fill,
-              stroke: d.stroke,
-              strokeWidth: 3,
-            }).name(d.name)
-          )
-        ),
-      ]
-    ).name("planets"),
-    text({ text: "Mercury", fill: "#E94560", fontSize: 14 }).name("label"),
-  ])
-    .relate(({ mercury, planets, label }) => [
-      Constraint.align({ x: "middle" }, [mercury, label]),
-      Constraint.distribute({ dir: "y", spacing: 20 }, [planets, label]),
-      arrow({ stroke: "#E94560" }, [label, mercury]),
-    ]);
+const planetsRow = () => makePlanets();
+
+const planetsLabeled = () => {
+  const planets = makePlanets();
+
+  const label = text({ text: "Mercury", fill: "#E94560", fontSize: 14 }).name(
+    "label"
+  );
+
+  return layer([planets, label]).relate(({ mercury, planets, label }) => [
+    Constraint.align({ x: "middle" }, [mercury, label]),
+    Constraint.distribute({ dir: "y", spacing: 20 }, [planets, label]),
+    arrow({ stroke: "#E94560" }, [label, mercury]),
+  ]);
+};
 
 // The chart level: the thesis deck's seafood walkthrough. The stacked bars
 // are its "Spread the Lakes Apart" slide; the ribbon chart adds the
