@@ -287,3 +287,25 @@
   margin: -0.3rem 0 0.1rem;
   text-align: center;
 }
+
+/* GoTree step 1 (04): the input tree beside the picture, no specs. */
+.gotree-data {
+  align-items: start;
+  display: grid;
+  gap: 0 1.2rem;
+  grid-template-columns: 0.9fr 1.1fr;
+  margin-top: 0.3rem;
+}
+
+.reveal .code-slide img.gotree-big {
+  display: block;
+  margin: 2.2rem auto 0;
+  max-height: 380px;
+  max-width: 100%;
+}
+
+.reveal .code-slide .gotree-gesture {
+  color: var(--accent);
+  font-size: 0.62em;
+  margin: 0.6rem 0 0;
+}

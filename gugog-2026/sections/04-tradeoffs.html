@@ -61,9 +61,69 @@
           </aside>
         </section>
 
-        <section class="code-slide">
-          <p class="part">4 · Two tradeoffs verbs dissolve</p>
-          <h2>universal vs. domain-specific</h2>
+        <!-- GoTree, step 1: the data and the picture, no specs. The
+             fragment is step 2: this data is a tree, not a table. -->
+        <section class="code-slide" data-auto-animate data-auto-animate-id="gotree">
+          <p class="part" data-id="gotree-part">4 · Two tradeoffs verbs dissolve</p>
+          <h2 data-id="gotree-title">universal vs. domain-specific</h2>
+          <div class="gotree-data">
+            <div>
+              <p class="code-pair-label">the data <span class="code-pair-sub">· a nested tree</span></p>
+              <pre><code class="language-ts" data-line-numbers>const hierarchy = {
+  name: "root",
+  children: [
+    { name: "a", children: [
+      { name: "a0" }, { name: "a1" }, { name: "a2" },
+    ] },
+    { name: "b", children: [{ name: "b0" }, { name: "b1" }] },
+    { name: "c" },
+    ...
+    { name: "n", children: [ ... ] },
+  ],
+};</code></pre>
+              <p class="gotree-gesture fragment">not rows: where does <code>chart(data).flow(...)</code> go?</p>
+            </div>
+            <div>
+              <p class="code-pair-label">the picture <span class="code-pair-sub">· GoTree's node-link tree</span></p>
+              <img class="gotree-big" src="./images/tradeoffs/gofish-gotree-node-link.svg" alt="A node-link tree: a root, a row of fourteen children, and a row of leaves joined by straight lines" />
+            </div>
+          </div>
+          <aside class="notes">
+            <p><strong>Target:</strong> 0:15 (the GoTree beat stays 1:00
+              over three slides: 0:15 here, 0:20 for the specs, 0:25 for
+              <code>combine</code>). <strong>Running total:</strong> 4:55 of
+              7:00 (budget; the deck now runs 9:05).</p>
+            <p><strong>Say:</strong> "Here's a domain grammar of the kind
+              Andrew describes: GoTree, a grammar for tree layouts. Its input
+              is a tree, a root with children with children, and this is the
+              picture it makes." Click for the line: "That's a different kind
+              of data from everything so far. It isn't a table of rows, so
+              it's not obvious where it goes in a GoFish
+              <code>chart(data).flow(...).mark(...)</code> pipeline."</p>
+            <p>The paper says the same (section 3.3, "GoTree"): "Unlike Atom
+              and PiCCL, which are based on array data structures, GoTree is
+              based on hierarchical data. This poses a different kind of
+              challenge for a GUGOG than the previous two systems ... We
+              designed GoFish's operator syntax to work well with arrays, and
+              it is not well-suited to trees."</p>
+            <p><strong>Sources:</strong> the data is the
+              <code>hierarchy</code> the paper's Figure 5 was rendered from
+              (<code>phd-thesis-20260618/scripts/gugog-gotree-figure/main.ts</code>,
+              lines 7 to 25): a root with fourteen children,
+              <code>a</code> to <code>n</code>. The script builds the leaf
+              lists with a helper, <code>leaves(3, "a")</code>; here they are
+              written out as the objects it returns, and the children after
+              <code>c</code> are elided with <code>...</code>. The picture is
+              the paper's Figure 5 render
+              (<code>figures/gofish-gotree-node-link.svg</code>), made by
+              gofish-gotree from that data. No spec is shown on this slide on
+              purpose; the next slide shows both.</p>
+          </aside>
+        </section>
+
+        <section class="code-slide" data-auto-animate data-auto-animate-id="gotree">
+          <p class="part" data-id="gotree-part">4 · Two tradeoffs verbs dissolve</p>
+          <h2 data-id="gotree-title">universal vs. domain-specific</h2>
           <div class="code-pair">
             <div>
               <p class="code-pair-label">GoTree <span class="code-pair-sub">· its own language</span></p>
@@ -89,7 +149,6 @@
             </div>
             <div>
               <p class="code-pair-label">gofish-gotree <span class="code-pair-sub">· a library on GoFish</span></p>
-              <img class="gotree-fig" src="./images/tradeoffs/gofish-gotree-node-link.svg" alt="GoFish rendering of GoTree's node-link tree: a root, a row of children, and a row of leaves joined by straight lines" />
               <pre><code class="language-ts" data-line-numbers data-code-regions="A 2:3-2:30, B 3:3-3:41, C 5:5-5:45, E 6:5-6:42, D 9:5-9:42, F 10:5-10:44">tree({
   node: () =&gt; circle({ r: 9 }),
   link: { kind: "line", curve: "linear" },
@@ -105,8 +164,9 @@
             </div>
           </div>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:35 (1:15 for this tradeoff, over three
-              slides with the quote; 2:30 for section 4, with both quotes). <strong>Running total:</strong> 5:15
+            <p><strong>Target:</strong> 0:20 (was 0:35; the data slide before
+              it took 0:15. 1:15 for this tradeoff, over four slides with the
+              quote; 2:30 for section 4, with both quotes). <strong>Running total:</strong> 5:15
               of 7:00 (budget; the deck now runs 9:05).</p>
             <ul>
               <li>Universal vs. domain-specific: respond to Jason. Domain
@@ -129,14 +189,17 @@
               words and syntax that fit their tasks. That rules out one surface
               interface for all visualization work. It does not rule out one
               language system." Here's an example of the modular approach
-              Andrew described. On the left is
-              GoTree, a grammar for trees, in its own JSON language. On the
-              right is GoTree rebuilt as a library on GoFish. It keeps GoTree's
+              Andrew described. Same tree as the
+              last slide; now here's how it's written. On the left is GoTree's
+              own spec, in its own JSON language. On the right is GoTree
+              rebuilt as a library on GoFish. It keeps GoTree's
               tree words: a node, a link, a parent-child rule, a sibling rule.
               And each of GoTree's relations is a GoFish verb:
               <code>within</code> and <code>align</code> are
               <code>align</code>, <code>juxtapose</code> and
               <code>flatten</code> are <code>distribute</code>.</p>
+            <p>The render is on the previous slide; this slide shows only
+              the two specs, so they get the room.</p>
             <p><strong>Sources:</strong> code and render are the final GUGOG
               paper's Figure 5 (section 3.3 "GoTree"), from
               <code>examples/gotree-node-link.json</code>,
