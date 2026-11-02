@@ -1,0 +1,36 @@
+{
+  "name": "scipy-2026-graphics",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@types/d3-array": "^3.2.1",
+    "bubblesets-js": "^3.0.0",
+    "chroma-js": "^3.1.2",
+    "culori": "^4.0.2",
+    "d3-array": "^3.2.4",
+    "d3-dsv": "^3.0.1",
+    "fast-kde": "^0.2.2",
+    "gofish-graphics": "0.1.0-nightly.20260716",
+    "lodash": "^4.17.21",
+    "perfect-arrows": "^0.3.7",
+    "reveal.js": "^5.1.0",
+    "rybitten": "^0.22.0",
+    "solid-js": "^1.9.5",
+    "spectral.js": "^2.0.2",
+    "vega-datasets": "^3.2.1"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.17.16",
+    "playwright": "^1.61.1",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.0",
+    "vite-plugin-solid": "^2.11.6"
+  },
+  "packageManager": "pnpm@10.28.1+sha512.7d7dbbca9e99447b7c3bf7a73286afaaf6be99251eb9498baefa7d406892f67b879adb3a1d7e687fc4ccc1a388c7175fbaae567a26ab44d1067b54fcb0d6a316"
+}

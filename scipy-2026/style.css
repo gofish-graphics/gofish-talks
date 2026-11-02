@@ -1,0 +1,2459 @@
+/* ─── Slide theme overrides ─────────────────────────────────────────── */
+.reveal {
+  font-family: "Source Sans 3", "Helvetica Neue", sans-serif;
+  font-size: 28px;
+}
+
+.reveal h1 {
+  font-size: 2.2em;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 0.15em;
+}
+
+.reveal h2 {
+  font-family: "Shantell Sans", "Source Sans 3", "Helvetica Neue", sans-serif;
+  font-size: 1.4em;
+  font-weight: 600;
+  color: #16213e;
+  text-transform: lowercase;
+}
+
+.reveal h3 {
+  font-size: 1.15em;
+  font-weight: 600;
+  color: #0f3460;
+  text-transform: none;
+  margin-bottom: 0.4em;
+}
+
+.reveal p {
+  margin: 0.4em 0;
+  line-height: 1.5;
+}
+
+.reveal ul {
+  list-style: none;
+  padding: 0;
+}
+
+.reveal ul li {
+  margin: 0.3em 0;
+  padding-left: 1.4em;
+  position: relative;
+}
+
+.reveal ul li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: #e94560;
+}
+
+/* Plain disc bullets (no ::before arrows — list markers only) */
+.reveal ul.stack-queries-list {
+  list-style: disc;
+  padding-left: 1.25rem;
+}
+.reveal ul.stack-queries-list li {
+  padding-left: 0;
+}
+.reveal ul.stack-queries-list li::before {
+  content: none;
+}
+
+.reveal ul.stack-queries-list li.stack-query-highlight {
+  background: rgba(255, 235, 150, 0.55);
+  border-radius: 3px;
+  padding: 0.12em 0.35em 0.12em 0.45em;
+  margin-left: -0.45em;
+}
+
+/* Stack slide: bar then stacked code in the same slot (no fade-out gap) */
+.stack-code-swap {
+  display: grid;
+  grid-template-columns: 1fr;
+  position: relative;
+}
+.stack-code-swap > .stack-code-pre {
+  grid-row: 1;
+  grid-column: 1;
+  align-self: start;
+}
+/* Hidden stacked fragment: no layout gap before it appears */
+.stack-code-swap > .stack-code-stacked.fragment:not(.visible) {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 0;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+/* Show stacked code and drop the bar block from layout */
+.stack-code-swap:has(.stack-code-stacked-base.visible) .stack-code-bar {
+  visibility: hidden;
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  pointer-events: none;
+}
+/* Comment variant: same slot as base stacked (Reveal keeps prior fragments visible) */
+.stack-code-swap:has(.stack-code-stacked-comment.visible)
+  .stack-code-stacked-base {
+  visibility: hidden;
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  pointer-events: none;
+}
+
+/* ─── Two-column layout ─────────────────────────────────────────────── */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.two-col .col-code {
+  text-align: left;
+}
+
+.two-col .col-chart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 320px;
+}
+
+/* stack() slide: chart with optional caption below */
+.two-col .col-chart.stack-slide-chart-col {
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 0.65rem;
+  min-height: 0;
+}
+
+.stack-slide-kv-box {
+  background: #f5f5f5;
+  border-radius: 6px;
+  padding: 0.5rem 0.7rem;
+  font-family: monospace;
+  font-size: 0.95em;
+  text-align: center;
+}
+
+.stack-slide-kv-aside {
+  color: #888;
+  font-size: 0.85em;
+}
+
+/* Gestalt taxonomy slide body (Reveal: avoid overlap with stacked content) */
+.gestalt-taxonomy-slide-body {
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── Code blocks ───────────────────────────────────────────────────── */
+.reveal pre {
+  font-size: 0.58em;
+  border-radius: 6px;
+  box-shadow: none;
+  border: 1px solid #ddd;
+  margin: 0;
+  width: 100%;
+}
+
+.reveal pre code {
+  padding: 0.8em 1em;
+  font-family: "Fira Code", "Consolas", monospace;
+  line-height: 1.6;
+  max-height: 380px;
+  overflow: auto;
+}
+
+/* Line highlights: full opacity on all lines; emphasize highlights with a band (reveal.js default dims non-highlighted lines) */
+.reveal .hljs.has-highlights tr:not(.highlight-line) {
+  opacity: 1;
+}
+
+.reveal .hljs.has-highlights tr.highlight-line td {
+  background: rgba(255, 235, 150, 0.55);
+}
+
+.reveal .hljs.has-highlights tr.highlight-line .hljs-ln-numbers {
+  opacity: 1;
+}
+
+/* ─── Chart containers ──────────────────────────────────────────────── */
+.chart-container {
+  width: 100%;
+  min-height: 0;
+  height: 372px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  background: #fafafa;
+  border-radius: 6px;
+  border: 1px solid #eee;
+  overflow: hidden;
+}
+
+.chart-container svg {
+  display: block;
+  margin-top: -20px;
+}
+
+#chart-flower svg {
+  margin-top: 0;
+}
+
+/* ─── Title slide ───────────────────────────────────────────────────── */
+.title-slide {
+  text-align: center;
+  padding: 2rem;
+}
+
+.title-slide .subtitle {
+  font-size: 1.1em;
+  color: #555;
+  margin-top: 0.5em;
+}
+
+.title-slide .conference {
+  font-size: 0.85em;
+  color: #999;
+  margin-top: 2em;
+}
+
+/* ─── Tag / badge ───────────────────────────────────────────────────── */
+.tag {
+  display: inline-block;
+  background: #e94560;
+  color: white;
+  padding: 0.15em 0.6em;
+  border-radius: 4px;
+  font-size: 0.7em;
+  font-weight: 600;
+  vertical-align: middle;
+  margin-left: 0.4em;
+}
+
+/* ─── Ladder / step boxes ───────────────────────────────────────────── */
+.ladder {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.ladder-step {
+  background: #f0f4ff;
+  border-left: 4px solid #e94560;
+  padding: 0.5em 1em;
+  border-radius: 0 4px 4px 0;
+  text-align: left;
+  font-size: 0.82em;
+}
+
+.ladder-step code {
+  font-family: "Fira Code", monospace;
+  font-size: 0.9em;
+  color: #333;
+}
+
+.ladder-step .step-num {
+  font-weight: 700;
+  color: #e94560;
+  margin-right: 0.5em;
+}
+
+/* ─── Grammar definitions ───────────────────────────────────────────── */
+.grammar-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem 2rem;
+  margin-top: 0.8rem;
+  text-align: left;
+}
+
+.grammar-term {
+  font-weight: 700;
+  color: #e94560;
+}
+
+.grammar-def {
+  color: #333;
+  font-size: 0.88em;
+}
+
+/* Grammar of Graphics primer: marks, channels, then the coordinate system
+   that transforms the drawing space. The source image stays landscape on
+   disk and is rotated here so its left-to-right progression reads top-down. */
+.gog-concepts-grid {
+  align-items: start;
+  display: grid;
+  gap: 1.3rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 0.5rem;
+}
+
+.gog-concepts-grid h3 {
+  font-size: 0.78em;
+  line-height: 1.12;
+  margin-bottom: 0.4rem;
+}
+
+.gog-concepts-grid > div > img {
+  display: block;
+  margin: 0 auto;
+  max-height: 360px;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.gog-coordinate-image-frame {
+  align-items: center;
+  display: flex;
+  height: 360px;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.gog-coordinate-image-frame img {
+  display: block;
+  height: auto;
+  max-width: none;
+  transform: rotate(90deg);
+  width: 350px;
+}
+
+.gog-coordinate-source {
+  line-height: 1.25 !important;
+  margin-top: 0.55em !important;
+}
+
+/* ─── AST diagram ───────────────────────────────────────────────────── */
+.ast-box {
+  display: inline-block;
+  border: 2px solid #0f3460;
+  border-radius: 6px;
+  padding: 0.3em 0.8em;
+  margin: 0.2em;
+  font-size: 0.75em;
+  background: #f0f4ff;
+}
+
+.ast-tree {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.ast-tree .level {
+  margin: 0.4em 0;
+}
+
+.ast-connector {
+  color: #aaa;
+  font-size: 1.2em;
+}
+
+/* ─── Highlight ─────────────────────────────────────────────────────── */
+.highlight {
+  color: #e94560;
+  font-weight: 600;
+}
+
+/* ─── Callout box ───────────────────────────────────────────────────── */
+.callout {
+  background: #fff8e1;
+  border-left: 4px solid #f9a825;
+  padding: 0.6em 1em;
+  border-radius: 0 4px 4px 0;
+  font-size: 0.88em;
+  margin-top: 0.8em;
+  text-align: left;
+}
+
+/* ─── Slide subtitle ────────────────────────────────────────────────── */
+.slide-subtitle {
+  font-size: 0.7em;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.3em;
+}
+
+/* ─── Footer / timing ───────────────────────────────────────────────── */
+.timing-note {
+  position: absolute;
+  bottom: 0.4em;
+  right: 1em;
+  font-size: 0.45em;
+  color: #ccc;
+}
+
+/* ─── Data table ────────────────────────────────────────────────────── */
+.data-table {
+  font-size: 0.72em;
+  border-collapse: collapse;
+  margin: 0.5em auto;
+  min-width: 60%;
+}
+
+.data-table th {
+  background: #0f3460;
+  color: white;
+  padding: 0.4em 1em;
+  font-weight: 600;
+}
+
+.data-table td {
+  border: 1px solid #ddd;
+  padding: 0.3em 1em;
+  text-align: center;
+}
+
+.data-table tr:nth-child(even) {
+  background: #f5f5f5;
+}
+
+/* ─── Mini data table (reference overlay) ────────────────────────────
+   Quiet reminder of the barley fields, pinned to the upper-right corner
+   of the walkthrough slides that build up the spec one operator at a
+   time. Reveal.js sections are position:absolute and sized to the full
+   slide area regardless of a section's own content height or display
+   mode (grid/flex/centered) — the same containing block .timing-note
+   already relies on below — so this anchors the same way. */
+.mini-data-table {
+  position: absolute;
+  top: 0.35em;
+  right: 0.5em;
+  z-index: 2;
+}
+
+.mini-data-table table {
+  font-size: 0.34em;
+  border-collapse: collapse;
+  background: rgba(255, 253, 248, 0.88);
+  border: 1px solid rgba(36, 33, 31, 0.25);
+  border-radius: 4px;
+  box-shadow: 2px 2px 0 rgba(30, 30, 30, 0.06);
+}
+
+.mini-data-table th {
+  background: rgba(15, 52, 96, 0.82);
+  color: white;
+  font-weight: 600;
+  padding: 0.15em 0.5em;
+  white-space: nowrap;
+}
+
+.mini-data-table td {
+  border: 1px solid rgba(221, 221, 221, 0.8);
+  padding: 0.12em 0.5em;
+  text-align: center;
+  color: #403c37;
+  white-space: nowrap;
+}
+
+.mini-data-table tr:nth-child(even) {
+  background: rgba(245, 245, 245, 0.7);
+}
+
+/* ─── Arch diagram boxes ────────────────────────────────────────────── */
+.arch-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 0.3rem 0;
+  font-size: 0.8em;
+}
+
+.arch-box {
+  background: #0f3460;
+  color: white;
+  padding: 0.4em 0.9em;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+.arch-box.accent {
+  background: #e94560;
+}
+
+.arch-arrow {
+  color: #aaa;
+  font-size: 1.3em;
+}
+
+/* ─── Placeholder slides ────────────────────────────────────────────── */
+.placeholder-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 380px;
+}
+
+.placeholder-box {
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  padding: 2em 3em;
+  color: #bbb;
+  font-style: italic;
+  font-size: 0.85em;
+  text-align: center;
+  min-width: 60%;
+  line-height: 1.8;
+}
+
+/* ─── Image placeholder grid ────────────────────────────────────────── */
+.img-placeholder {
+  background: #f0f0f0;
+  border: 2px dashed #ccc;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7em;
+  color: #aaa;
+  font-style: italic;
+}
+
+/* ─── Install slide ─────────────────────────────────────────────────── */
+.install-block {
+  background: #1a1a2e;
+  color: #e0e0e0;
+  border-radius: 6px;
+  padding: 0.7em 1.2em;
+  font-family: "Fira Code", monospace;
+  font-size: 0.8em;
+  text-align: left;
+  margin: 0.5em 0;
+  display: inline-block;
+  min-width: 60%;
+}
+
+.install-block .prompt {
+  color: #e94560;
+  margin-right: 0.5em;
+}
+
+/* ─── Spec slide layout (bar chart builder) ─────────────────────────── */
+.spec-slide-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 0.8rem;
+}
+
+/* Two columns (not a 2×2 grid): breaks are independent — code→chart is higher
+   than diagram→queries, so the horizontal splits don’t line up across the slide. */
+.spec-slide-main.spec-slide-cols {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.spec-slide-col {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Left: code then chart — keep gap small so the code/chart break sits higher */
+.spec-slide-col-left {
+  gap: 0.35rem;
+}
+
+/* Right: diagram then queries — larger gap so that break sits lower */
+.spec-slide-col-right {
+  gap: 1.1rem;
+}
+
+.spec-slide-code {
+  min-width: 0;
+}
+
+.spec-slide-diagram {
+  min-width: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.spec-slide-diagram svg {
+  width: 100%;
+  max-width: 360px;
+  max-height: min(36vh, 300px);
+  height: auto;
+}
+
+.spec-slide-chart-cell {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.spec-slide-query {
+  min-width: 0;
+  font-size: 0.72em;
+  line-height: 1.85;
+}
+
+.spec-slide-query--empty {
+  min-height: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.chart-container.spec-slide-chart {
+  width: 100%;
+  max-width: min(88vw, 640px);
+  /* Override global .chart-container height: 372px — shorter box reads higher on the slide */
+  height: 300px;
+  min-height: 220px;
+}
+
+.spec-table {
+  text-align: left;
+}
+
+.spec-row {
+  display: grid;
+  grid-template-columns: 7em 1fr;
+  gap: 0.3em;
+  margin-bottom: 0.6em;
+  align-items: baseline;
+  transition: opacity 0.2s;
+}
+
+.spec-row.dim {
+  opacity: 0.18;
+}
+
+.spec-label {
+  font-size: 0.68em;
+  color: #888;
+  font-family: "Source Sans 3", "Helvetica Neue", sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding-top: 0.15em;
+}
+
+.spec-code {
+  font-family: "Fira Code", "Consolas", monospace;
+  font-size: 0.78em;
+  color: #222;
+  background: none;
+  padding: 0;
+}
+
+/* Nesting-order slide: three columns in one flex row; fragments 2–3 use Reveal’s
+   default opacity/visibility so hidden builds still occupy space (no reflow). */
+.kv-nesting-builder {
+  flex-wrap: nowrap;
+  gap: 0.9rem !important;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1120px;
+}
+
+.kv-nesting-builder > div {
+  min-width: 0;
+}
+
+.kv-nesting-builder .chart-container {
+  height: 330px;
+}
+
+.kv-nesting-builder pre {
+  font-size: 0.76em !important;
+}
+
+/* ─── Before/after transition slides ───────────────────────────────── */
+.before-after {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 1.2rem;
+  align-items: center;
+  margin-top: 0.5rem;
+  height: 430px;
+}
+
+.ba-arrow {
+  font-size: 2.8em;
+  color: #4e79a7;
+  line-height: 1;
+}
+
+/* Close slide: tiled logo strips (top/bottom repeat-x, sides repeat-y) */
+.close-slide-logo-border-end {
+  width: 100%;
+  height: 38px;
+  box-sizing: border-box;
+  background-image: url(gofish-logo.png);
+  /* Space whole fish across the strip instead of cropping a partial tile at
+     either end when the panel width is not a multiple of the fish width. */
+  background-repeat: space no-repeat;
+  background-size: auto 38px;
+  background-position: center;
+  opacity: 0.88;
+}
+
+.close-slide-logo-border-end--top {
+  margin-bottom: 0.45rem;
+}
+
+.close-slide-logo-border-end--bottom {
+  margin-top: 0.45rem;
+  transform: scaleX(-1);
+}
+
+/* Close slide: two side-by-side boxes, each with its own logo frame */
+.close-slide-two-boxes {
+  display: grid;
+  grid-template-columns: 1.09fr 0.91fr;
+  gap: 2.5rem;
+  align-items: stretch;
+  width: 100%;
+}
+
+.close-slide-logo-frame {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.close-slide-logo-frame .close-slide-frame-mid {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+/* Close slide: vertical logo strips — completes a frame with top/bottom strips */
+.close-slide-frame-mid {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 0.45rem;
+  margin-top: 0;
+}
+
+.close-slide-frame-mid > .close-slide-box-content {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.close-slide-logo-border-side {
+  flex: 0 0 38px;
+  background-image: url(gofish-logo.png);
+  /* The same treatment vertically keeps the top and bottom fish whole. */
+  background-repeat: no-repeat space;
+  background-size: 38px auto;
+  background-position: center;
+  opacity: 0.88;
+}
+
+.close-slide-logo-border-side--right {
+  transform: scaleX(-1);
+}
+
+/* Close slide: full-width, candid next-step callout beneath the two link boxes. */
+.close-slide-next {
+  display: grid;
+  grid-template-columns: 0.3fr 1fr;
+  align-items: center;
+  gap: 1.6rem;
+  margin-top: 1.45rem;
+  padding: 1rem 1.35rem;
+  border-top: 3px solid #4a7fb5;
+  border-bottom: 3px solid #4a7fb5;
+  background: #f7f2e8;
+  text-align: left;
+}
+
+.close-slide-next h2 {
+  margin: 0;
+  font-size: 1.15em;
+  white-space: nowrap;
+}
+
+.close-slide-next p {
+  margin: 0;
+  color: #3e3a35;
+  font-size: 0.73em;
+  line-height: 1.42;
+}
+
+
+/* ─── SciPy / thesis-talk skin ─────────────────────────────────────── */
+:root {
+  --ink: #1e1e1e;
+  --muted: #66615b;
+  --paper: #faf8f2;
+  --water: #d9eef7;
+  --accent: #b24a3b;
+}
+
+@font-face {
+  font-family: "Shantell Sans Local";
+  src: url("./fonts/ShantellSans-Regular.ttf") format("truetype");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Shantell Sans Local";
+  src: url("./fonts/ShantellSans-Bold.ttf") format("truetype");
+  font-weight: 760;
+}
+
+@font-face {
+  font-family: "Shantell Sans Local";
+  src: url("./fonts/ShantellSans-SemiBold.ttf") format("truetype");
+  font-weight: 650;
+}
+
+.reveal {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Shantell Sans Local", "Shantell Sans", "Source Sans 3", sans-serif;
+}
+
+.reveal h1,
+.reveal h2,
+.reveal h3 {
+  color: var(--ink);
+  font-family: "Shantell Sans Local", "Shantell Sans", "Source Sans 3", sans-serif;
+  font-weight: 760;
+  letter-spacing: 0;
+  line-height: 1.04;
+  text-transform: none;
+}
+
+.reveal h2 {
+  display: inline-block;
+  position: relative;
+}
+
+.reveal h2::after {
+  background: var(--accent);
+  border-radius: 999px;
+  bottom: -0.12em;
+  content: "";
+  height: 0.08em;
+  left: 0.03em;
+  opacity: 0.8;
+  position: absolute;
+  transform: rotate(-0.7deg);
+  width: 94%;
+}
+
+.scipy-title-slide {
+  text-align: center;
+}
+
+.scipy-title-slide .title-gofish-logo {
+  display: block;
+  height: 90px;
+  margin: 0 auto 0.15em;
+  width: auto;
+}
+
+.scipy-title-slide h1,
+.scipy-title-slide .subtitle,
+.scipy-title-slide .meta {
+  max-width: 980px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.scipy-title-slide h1 {
+  font-size: 3.1em;
+  line-height: 1.05;
+  margin: 0.2em auto 0.15em;
+}
+
+.scipy-title-slide .title-product,
+.scipy-title-slide .title-claim {
+  display: block;
+}
+
+.scipy-title-slide .title-claim {
+  font-size: 0.58em;
+  margin-top: 0.22em;
+}
+
+.title-logo-row {
+  align-items: center;
+  display: flex;
+  gap: 2.2em;
+  justify-content: center;
+  margin-top: 2.2em;
+}
+
+.title-logo-row img {
+  height: 58px;
+  width: auto;
+}
+
+.eyebrow,
+.part {
+  color: var(--accent);
+  font-size: 0.48em !important;
+  font-weight: 760;
+  letter-spacing: 0.08em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.scipy-title-slide .subtitle {
+  color: #3e3a35;
+  font-size: 0.82em;
+}
+
+.meta {
+  color: var(--muted);
+  font-size: 0.52em !important;
+  margin-top: 2.4em;
+}
+
+.split {
+  align-items: start;
+  display: grid;
+  gap: 1.1em;
+  grid-template-columns: 1fr 1fr;
+}
+
+.reveal .slides section.present.split {
+  display: grid !important;
+}
+
+/* ─── Title positioning contract (center: false) ─────────────────────
+   Every slide's <h2> is the first child of its <section>. A modest,
+   consistent padding-top on every section is where that title sits —
+   titled and untitled slides alike land at the same spot instead of
+   the old vertically-centered float. h2's own top margin is already 0
+   (theme's --r-heading-margin), so this padding is the only offset. */
+.reveal .slides section {
+  padding-top: 0.6em;
+}
+
+/* .split / .viz-step.split sections are CSS grid: a first-child h2
+   would otherwise auto-place into column 1 only, squeezing the title
+   into half the slide and leaving the second column title-less. Span
+   it across the row above both columns, and keep it shrink-wrapped
+   (not stretched) so its underline accent still hugs the title text. */
+.reveal .slides section.split > h2:first-child {
+  grid-column: 1 / -1;
+  justify-self: start;
+}
+
+/* Title/statement slides are designed centered, not top-anchored —
+   give them their own vertical centering so center:false doesn't
+   flatten them to the top of the slide. */
+.reveal .slides section.scipy-title-slide,
+.reveal .slides section.scipy-statement {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.big-claim {
+  font-size: 1.08em !important;
+  line-height: 1.2 !important;
+}
+
+.tight-copy {
+  font-size: 0.58em !important;
+}
+
+.lake-slide {
+  grid-template-columns: 0.82fr 1.18fr;
+}
+
+.lake-slide .big-claim {
+  font-size: 0.95em !important;
+}
+
+.runway-pl-slide {
+  grid-template-columns: 0.94fr 1.06fr;
+}
+
+.runway-pl-slide .big-claim {
+  font-size: 0.92em !important;
+}
+
+.source-line {
+  color: var(--muted);
+  font-size: 0.42em !important;
+  margin-top: 1.5em !important;
+}
+
+.fashion-board {
+  display: flex;
+  justify-content: center;
+}
+
+.runway-photo-frame {
+  background: #fffdf8;
+  border: 3px solid #24211f;
+  border-radius: 9px 6px 8px 6px;
+  box-shadow: 6px 7px 0 rgba(30, 30, 30, 0.13);
+  margin: 0;
+  overflow: hidden;
+  width: min(100%, 430px);
+}
+
+.runway-photo {
+  display: block;
+  height: 485px;
+  object-fit: cover;
+  object-position: 50% 46%;
+  width: 100%;
+}
+
+.runway-photo-frame figcaption {
+  border-top: 2px solid #24211f;
+  color: #24211f;
+  font-family: "Shantell Sans Local", sans-serif;
+  font-size: 0.5em;
+  font-weight: 760;
+  margin: 0;
+  padding: 0.28em 0.5em 0.36em;
+  text-align: center;
+}
+
+.lake-map {
+  background: #eef8fb;
+  border: 3px solid #24211f;
+  border-radius: 10px 7px 12px 8px;
+  box-shadow: 6px 7px 0 rgba(30, 30, 30, 0.13);
+  width: 100%;
+}
+
+.lake-map text {
+  dominant-baseline: middle;
+  fill: #24211f;
+  font-family: "Shantell Sans Local", sans-serif;
+  font-size: 27px;
+  font-weight: 760;
+  text-anchor: middle;
+}
+
+.water {
+  fill: var(--water);
+  stroke: #24211f;
+  stroke-linejoin: round;
+  stroke-width: 4;
+}
+
+.route {
+  fill: none;
+  stroke: var(--accent);
+  stroke-dasharray: 8 10;
+  stroke-linecap: round;
+  stroke-width: 4;
+}
+
+.fish ellipse,
+.fish path {
+  fill: #f1cf68;
+  stroke: #24211f;
+  stroke-linejoin: round;
+  stroke-width: 3;
+}
+
+.scipy-statement h2 {
+  font-size: 2.8em;
+  margin: 0.08em 0 0.35em;
+}
+
+.scipy-statement h2::after {
+  content: none;
+}
+
+.scipy-statement p:not(.part) {
+  max-width: 950px;
+}
+
+.long-tail-questions {
+  background: #f7f2e8;
+  border: 1px solid #d8cfba;
+  border-radius: 6px;
+  font-size: 0.9em;
+  margin: 0.6rem auto 0;
+  padding: 0.3em 0.9em;
+  text-align: center;
+  width: fit-content;
+}
+
+.long-tail-questions p {
+  margin: 0.1em 0;
+}
+
+.note-card {
+  background: #fffdf8;
+  border: 3px solid #24211f;
+  border-radius: 8px 5px 9px 6px;
+  box-shadow: 5px 6px 0 rgba(30, 30, 30, 0.12);
+  padding: 0.75em;
+  transform: rotate(0.4deg);
+}
+
+.chart-spec-slide {
+  align-items: start;
+  display: grid;
+  gap: 0.7rem;
+  grid-template-columns: 1.1fr 0.9fr;
+  margin-top: 1.05rem;
+}
+
+.chart-spec-slide .chart-container {
+  max-width: none !important;
+}
+
+/* Full-size chart slides with a lone chart (no accompanying spec-mini code
+   block) collapse into the grid's first (1.1fr) column and read off-center;
+   center them explicitly. */
+.chart-spec-slide:has(> .chart-container:only-child) {
+  grid-template-columns: 1fr;
+}
+
+.chart-spec-slide:has(> .chart-container:only-child) .chart-container {
+  margin: 0 auto;
+  max-width: 80% !important;
+}
+
+.reveal pre.spec-mini {
+  align-self: start;
+  border: 2px solid #27231f;
+  border-radius: 6px 9px 5px 8px;
+  box-shadow: 4px 5px 0 rgba(30, 30, 30, 0.11);
+  font-size: 0.48em;
+  margin-top: 0.2rem;
+}
+
+.reveal pre.spec-mini code {
+  max-height: none;
+}
+
+.chart-container {
+  background: #fffdf8;
+  border: 2px solid #27231f;
+  border-radius: 6px 9px 5px 8px;
+  box-shadow: 4px 5px 0 rgba(30, 30, 30, 0.11);
+}
+
+.reveal img {
+  border-radius: 6px;
+}
+
+.balloon-slide pre {
+  font-size: 0.43em;
+}
+
+.flower-slide pre,
+.balloon-slide pre {
+  font-size: 0.39em;
+}
+
+.flower-slide pre code,
+.balloon-slide pre code {
+  line-height: 1.38;
+  max-height: none;
+}
+
+.balloon-slide pre {
+  font-size: 0.28em;
+}
+
+.balloon-slide pre code {
+  line-height: 1.2;
+}
+
+.todo-note {
+  border-left: 5px solid var(--accent);
+  color: #5d554d;
+  font-size: 0.48em;
+  line-height: 1.35;
+  margin-top: 0.65rem;
+  padding-left: 0.65rem;
+}
+
+.todo-note code {
+  font-size: 0.9em;
+}
+
+/* ── VizChitra-style barley walkthrough (ported from presentation-scipy-vizchitra-walkthrough) ── */
+.viz-step {
+  --viz-op: #49a66a;
+  --viz-mark: #d6a62f;
+  --viz-transform: #4d90cf;
+  --viz-ink: #24211f;
+}
+
+.viz-step.split {
+  grid-template-columns: 1.08fr 0.92fr;
+}
+
+/* The points → lines → delta → emphasis → annotation run mirrors the
+   earlier walkthrough slides: the evolving spec stays on the left while
+   the resulting chart stays on the right. Explicit grid placement also
+   handles the annotation slide, whose chart precedes its code in the DOM. */
+.viz-step-side-by-side {
+  align-items: start;
+  column-gap: 1.1rem;
+  display: grid !important;
+  grid-template-columns:
+    var(--viz-step-left-column-width, fit-content(430px))
+    minmax(0, 1fr);
+  grid-template-rows: auto 1fr;
+  row-gap: 3rem;
+}
+
+.viz-step-side-by-side > h2,
+.viz-step-side-by-side > .viz-query {
+  grid-column: 1 / -1;
+}
+
+.reveal .slides section.viz-step-side-by-side > h2:first-child {
+  display: block;
+  grid-row: 1;
+  justify-self: start;
+  margin-left: 0;
+  margin-right: auto;
+  text-align: left;
+  width: fit-content;
+}
+
+.viz-step-side-by-side > .viz-query {
+  display: none !important;
+}
+
+.viz-step-side-by-side > .viz-code,
+.viz-step-side-by-side > .annotation-code-row {
+  align-self: start;
+  grid-column: 1;
+  grid-row: 2;
+  margin-top: 0;
+  max-width: 430px;
+  min-width: 0;
+  width: fit-content;
+}
+
+.viz-step-side-by-side > .viz-code {
+  box-sizing: border-box;
+}
+
+.viz-step-side-by-side > .viz-gofish-chart {
+  align-self: start;
+  grid-column: 2;
+  grid-row: 2;
+  max-width: 100% !important;
+  min-width: 0;
+  width: 100% !important;
+}
+
+.viz-step-side-by-side .annotation-code-row {
+  display: block;
+  margin-top: 0;
+}
+
+.viz-step-side-by-side .annotation-code-row > :only-child {
+  max-width: 100%;
+}
+
+.viz-step h2 {
+  font-size: 1.85em;
+  margin-bottom: 0.35em;
+}
+
+.nesting-order-slide > h2:first-child {
+  display: block;
+  margin-left: 0;
+  margin-right: auto;
+  text-align: left;
+  width: fit-content;
+}
+
+.viz-code {
+  background: #fffdf8;
+  border: 2px solid var(--viz-ink);
+  border-radius: 6px 9px 5px 8px;
+  box-shadow: 4px 5px 0 rgba(30, 30, 30, 0.11);
+  color: #222;
+  font-size: 0.52em !important;
+  line-height: 1.34 !important;
+  margin: 0.4em 0 0;
+  padding: 0.72em 0.85em !important;
+  white-space: pre-wrap;
+}
+
+.viz-code.compact {
+  font-size: 0.38em !important;
+  margin-top: 0.35em;
+}
+
+/* "each line of the spec is a cut": the spec is the row's visual anchor, so
+   it renders at the same effective size as the plain code blocks on the
+   "nesting order matters" slide (0.72em row x 0.9em pre = ~0.65em of slide
+   base; here 0.95em row x 0.68em = the same). Overrides .viz-code's own
+   !important size. */
+.viz-code.cut-spec {
+  font-size: 0.68em !important;
+}
+
+.viz-op {
+  color: var(--viz-op);
+  font-weight: 760;
+}
+
+/* "each line of the spec is a cut" slide: the same .viz-code snippet
+   repeated per column, one line singled out per cut stop. .cut-highlight
+   reuses the gained-clause pill blue from the closing section's query
+   chips (rgba(74, 127, 181, 0.18)); .cut-collapsed fades the lines below
+   the cut, standing in for their collapse into the summary glyph. */
+.viz-code .cut-line {
+  display: block;
+}
+
+.viz-code .cut-highlight {
+  background: rgba(74, 127, 181, 0.18);
+  -webkit-box-decoration-break: clone;
+  border-radius: 3px;
+  box-decoration-break: clone;
+}
+
+.viz-code .cut-line.cut-collapsed {
+  opacity: 0.35;
+}
+
+/* "add a second grouping": progressively expose the implicit data work under
+   the pipeline code. The diagram stays deliberately schematic—three of the
+   six site groups are enough to make the nested fan-out legible at talk size. */
+.transform-build {
+  color: #403c37;
+  display: flex;
+  flex-direction: column;
+  font-size: 0.43em;
+  gap: 0.18rem;
+  margin: 0.16rem auto 0;
+  max-width: 560px;
+  text-align: center;
+}
+
+.viz-step .transform-heading {
+  color: #403c37;
+  font-family: "Shantell Sans", "Source Sans 3", sans-serif;
+  font-size: 0.58em;
+  font-weight: 650;
+  margin: 0.42rem auto 0;
+  max-width: 560px;
+  text-align: left;
+}
+
+.transform-stage {
+  align-items: baseline;
+  background: #fffdf8;
+  border: 1.5px solid rgba(36, 33, 31, 0.65);
+  border-radius: 5px 8px 5px 7px;
+  display: flex;
+  gap: 0.55rem;
+  justify-content: center;
+  padding: 0.22rem 0.5rem;
+}
+
+.transform-stage-label,
+.transform-group b,
+.transform-leaf b {
+  color: #24211f;
+  font-weight: 760;
+}
+
+.transform-stage-detail,
+.transform-group span {
+  color: #6b645c;
+}
+
+.transform-fields {
+  color: #6b645c;
+  font-family: "Fira Code", monospace;
+  font-size: 0.9em;
+}
+
+.transform-step {
+  align-items: center;
+  display: flex;
+  gap: 0.35rem;
+  justify-content: center;
+  line-height: 1;
+  min-height: 1rem;
+}
+
+.transform-step code,
+.transform-leaf-note code {
+  color: var(--viz-transform);
+  font-family: "Fira Code", monospace;
+  font-weight: 650;
+}
+
+.transform-arrow {
+  color: #777067;
+  font-size: 1.25em;
+  line-height: 0.8;
+}
+
+.transform-groups {
+  align-items: stretch;
+  display: grid;
+  gap: 0.28rem;
+  grid-template-columns: 1fr 1fr 0.16fr 1fr;
+}
+
+.transform-group {
+  background: rgba(73, 166, 106, 0.09);
+  border: 1.5px solid var(--viz-op);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 1.05;
+  min-height: 1.65rem;
+  padding: 0.15rem 0.22rem;
+}
+
+.transform-group b {
+  font-size: 0.9em;
+  white-space: nowrap;
+}
+
+.transform-group span {
+  font-size: 0.78em;
+}
+
+.transform-ellipsis {
+  align-self: center;
+  color: #777067;
+  font-size: 1.25em;
+}
+
+.transform-years > div {
+  display: grid;
+  gap: 0.18rem;
+  grid-template-columns: 1fr 1fr;
+}
+
+.transform-years > div > span {
+  background: rgba(73, 166, 106, 0.055);
+  border: 1px solid rgba(73, 166, 106, 0.75);
+  border-radius: 999px;
+  padding: 0.11rem 0.18rem;
+}
+
+.transform-rects > div {
+  display: grid;
+  gap: 0.18rem;
+  grid-template-columns: 1fr 1fr;
+}
+
+.transform-rect-cell {
+  align-items: center;
+  background: rgba(214, 166, 47, 0.08);
+  border: 1.5px solid rgba(214, 166, 47, 0.9);
+  border-radius: 4px 6px 4px 5px;
+  display: flex;
+  gap: 0.25rem;
+  justify-content: center;
+  min-height: 1.55rem;
+  padding: 0.12rem 0.18rem;
+}
+
+.transform-rect-cell i {
+  background: #d5a62f;
+  border: 1px solid #24211f;
+  display: inline-block;
+  height: 0.95rem;
+  width: 0.52rem;
+}
+
+.transform-rect-cell b,
+.transform-leaf-note b {
+  color: #24211f;
+  font-weight: 760;
+}
+
+.transform-leaf-note {
+  align-items: center;
+  display: flex;
+  gap: 0.42rem;
+  justify-content: center;
+  padding-top: 0.08rem;
+}
+
+.transform-leaf-note code + code {
+  border-left: 1px solid rgba(36, 33, 31, 0.22);
+  padding-left: 0.42rem;
+}
+
+.transform-leaf-note code i {
+  color: #24211f;
+  font-style: normal;
+}
+
+/* "place one slot per site": empty placeholder slots are outlined only.
+   GoFish's rect mark doesn't forward strokeDasharray through to the SVG
+   attribute, so the dash is applied here instead of in the mark spec. */
+#chart-viz-site-slots rect {
+  stroke-dasharray: 6 4;
+}
+
+.viz-mark {
+  color: var(--viz-mark);
+  font-weight: 760;
+}
+
+.viz-transform {
+  color: var(--viz-transform);
+  font-weight: 760;
+}
+
+.viz-keyword {
+  color: #8b5ba8;
+  font-weight: 760;
+}
+
+.viz-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55em;
+  margin-top: 0.75em;
+}
+
+.viz-legend span {
+  align-items: center;
+  color: #403c37;
+  display: inline-flex;
+  font-size: 0.46em;
+  gap: 0.35em;
+}
+
+.viz-legend b {
+  border: 2px solid var(--viz-ink);
+  border-radius: 999px;
+  display: inline-block;
+  height: 0.85em;
+  width: 0.85em;
+}
+
+.viz-legend .viz-op {
+  background: var(--viz-op);
+}
+
+.viz-legend .viz-mark {
+  background: var(--viz-mark);
+}
+
+.viz-legend .viz-transform {
+  background: var(--viz-transform);
+}
+
+.viz-step-copy {
+  color: #403c37;
+  font-size: 0.58em !important;
+  line-height: 1.28 !important;
+  margin-top: 0.75em !important;
+}
+
+.annotation-code-row {
+  align-items: center;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1.05fr 0.95fr;
+  margin-top: 0.45rem;
+}
+
+.annotation-code-row .viz-code {
+  margin: 0 !important;
+}
+
+.annotation-code-row > :only-child {
+  grid-column: 1 / -1;
+  justify-self: center;
+  max-width: 760px;
+  width: 100%;
+}
+
+.annotation-code-proposal {
+  position: relative;
+}
+
+.annotation-code-proposal .viz-code {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.annotation-code-row > .annotation-code-full:only-child {
+  max-width: 1080px;
+}
+
+.annotation-code-full .viz-code.compact {
+  font-size: 0.38em !important;
+}
+
+.annotation-code-status {
+  color: #746d64;
+  font-family: "Shantell Sans", "Source Sans 3", sans-serif;
+  font-size: 0.32em;
+  font-weight: 650;
+  letter-spacing: 0.03em;
+  margin-bottom: 0.18rem;
+  text-align: left;
+}
+
+/* Live chart tiles in the "stranger structures" montage: no card chrome,
+   natural SVG size scaled per-tile via an inline zoom to fit the grid. */
+.chart-container.viz-ex-tile {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  height: auto;
+  overflow: visible;
+  display: inline-flex;
+  width: auto;
+}
+
+.closing-example-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: 1rem;
+  row-gap: 0.35rem;
+  margin: 0.35rem auto 0;
+  max-width: 1120px;
+}
+
+.closing-example {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-width: 0;
+  text-align: center;
+}
+
+.closing-example img {
+  border-radius: 0;
+  display: block;
+  height: 178px;
+  max-width: 100%;
+  object-fit: contain;
+  width: 100%;
+}
+
+.closing-example--wide img {
+  height: 168px;
+}
+
+/* Captions under the "stranger structures" montage tiles */
+.viz-ex-caption {
+  color: #403c37;
+  font-size: 0.5em !important;
+  line-height: 1.3 !important;
+  margin: 0.35em 0 0 !important;
+  font-family: "Shantell Sans", sans-serif;
+}
+
+.viz-ex-caption .viz-ex-ops {
+  display: block;
+  color: #777;
+}
+
+.viz-ex-caption .viz-ex-ops code {
+  font-size: 0.92em;
+}
+
+/* Overlay labels on the pre-rendered Titanic mosaic SVG */
+.mosaic-row-label {
+  position: absolute;
+  left: 7.5%;
+  transform: translateY(-50%);
+  font-family: "Shantell Sans", sans-serif;
+  font-size: 0.44em;
+  color: #2b2b2b;
+  text-shadow:
+    0 0 3px rgba(255, 255, 255, 0.9),
+    0 0 6px rgba(255, 255, 255, 0.7);
+  pointer-events: none;
+}
+
+.mosaic-col-label {
+  position: absolute;
+  bottom: 4.5%;
+  transform: translate(-50%, 100%);
+  font-family: "Shantell Sans", sans-serif;
+  font-size: 0.44em;
+  color: #555;
+  pointer-events: none;
+}
+
+.viz-data-card,
+.viz-compare-card {
+  background: #fffdf8;
+  border: 3px solid var(--viz-ink);
+  border-radius: 8px 5px 9px 6px;
+  box-shadow: 5px 6px 0 rgba(30, 30, 30, 0.12);
+}
+
+.viz-data-card {
+  padding: 0.55em;
+}
+
+.viz-data-card div {
+  align-items: baseline;
+  border-bottom: 2px solid rgba(36, 33, 31, 0.18);
+  display: grid;
+  gap: 0.5em;
+  grid-template-columns: 0.48fr 1fr;
+  padding: 0.38em 0;
+}
+
+.viz-data-card div:last-child {
+  border-bottom: 0;
+}
+
+.viz-data-card strong {
+  color: #24211f;
+  font-family: "Fira Code", monospace;
+  font-size: 0.62em;
+}
+
+.viz-data-card span {
+  color: #403c37;
+  font-size: 0.54em;
+  line-height: 1.2;
+}
+
+.viz-gofish-chart {
+  min-height: 340px;
+  width: 100%;
+  /* fitContainerToSvg (main.ts) sets an inline pixel width sized to the
+     rendered svg, which overrides the width:100% above and can leave the
+     container narrower than its slide (e.g. the bars/heatmap slides, whose
+     svgs render at 560/960px against a ~984px slide column). Centering here
+     is a no-op when the container is already full width, and recenters it
+     when the inline width is narrower. */
+  margin: 0 auto;
+}
+
+.viz-gofish-chart > svg {
+  display: block;
+  height: auto;
+  margin: 0 auto;
+  width: 91% !important;
+  overflow: visible;
+}
+
+.viz-gofish-compare {
+  margin-top: 0.4em;
+  min-height: 170px;
+  width: 100%;
+}
+
+.viz-callout {
+  background: rgba(77, 144, 207, 0.1);
+  border: 2px solid var(--viz-transform);
+  border-radius: 7px;
+  display: inline-block;
+  font-size: 0.62em !important;
+  margin-top: 0.85em !important;
+  padding: 0.35em 0.55em;
+}
+
+.viz-compare {
+  display: grid;
+  gap: 0.75em;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 0.45em;
+}
+
+.viz-compare-card {
+  padding: 0.55em;
+}
+
+.viz-compare-card h3 {
+  color: #24211f;
+  font-size: 0.8em;
+  margin: 0 0 0.2em;
+}
+
+.viz-compare-card p {
+  color: #403c37;
+  font-size: 0.46em !important;
+  line-height: 1.2 !important;
+  min-height: 2.5em;
+}
+
+/* ── Query chips: the (speculative) visual query language ───────────────
+   Dashed border = "not shipped yet": these chips notate the query a
+   structure makes cheap, in the talk's foreach notation. Keywords take
+   .q-kw; an optional plain-language gloss line takes .q-gloss. */
+.viz-query {
+  /* Kept in source for research notes and hidden alternates, but removed
+     from the audience-facing version of this talk. */
+  display: none !important;
+  background: #eef4fb;
+  border: 1.5px dashed #4a7fb5;
+  border-radius: 6px;
+  padding: 0.35rem 0.75rem;
+  font-family: monospace;
+  color: #1a1a2e;
+  line-height: 1.6;
+  text-align: left;
+}
+
+.viz-query .q-kw {
+  color: #c05621;
+  font-weight: 700;
+}
+
+/* Field/key token style: purple italics for a field/key name reference
+   (key, value, x, y, row, col, or a concrete dataset field like site/
+   year/variety/yield/species/...). Shared with the operator-table
+   signature <code> cells, which sit outside .viz-query, hence the bare
+   .q-field fallback below. */
+.viz-query .q-field,
+.q-field {
+  font-style: italic;
+  color: #8a5fbf;
+}
+
+/* Value-operation words (what the reader runs against the structure),
+   as opposed to .q-kw's structural/arrangement words. Same weight/size
+   as .q-kw — only the color differs. A darkened solid version of the
+   chip's own accent blue, rgba(74, 127, 181, …) / #4a7fb5 (used for
+   gained-clause pills elsewhere), for legible contrast as text. */
+.viz-query .q-val {
+  color: #3a6a9a;
+  font-weight: 700;
+}
+
+.viz-query .q-line {
+  display: block;
+}
+
+/* Context header zone of the "each line of the spec is a cut" chips: dimmed
+   field = value bindings for one EXAMPLE region (e.g. "city = Boulder"),
+   sitting above the query body it applies to. Omitted entirely when there's
+   nothing yet bound (the outermost cut). */
+.viz-query .q-ctx {
+  display: block;
+  opacity: 0.45;
+  font-size: 0.85em;
+  margin-bottom: 0.3em;
+}
+
+/* A hole in a query body: the not-yet-filled-in part of the query, wrapped
+   in literal ⟨angle brackets⟩. Dashed outline echoes the chip's own dashed
+   border — "still speculative" at two nesting levels. */
+.viz-query .q-hole {
+  border: 1.5px dashed #4a7fb5;
+  border-radius: 4px;
+  padding: 0 0.3em;
+}
+
+.viz-query .q-arrow {
+  color: #555;
+}
+
+/* "each line of the spec is a cut" slides: a chip not yet reached in the
+   bottom-up build stays in the DOM (so the site slide's later chips don't
+   shift) but is invisible until its slide reaches it. visibility:hidden,
+   not display:none, so it still reserves its layout space. */
+.chip-pending {
+  visibility: hidden;
+}
+
+/* "every hole is a collapsed chip": the hole's ?-placeholder and its filled
+   phrase share one grid cell so the crossfade doesn't jump the layout
+   vertically; the ⟨ ⟩ brackets live outside this element and never move.
+   ~2ch keeps the "?" state from collapsing the hole to nothing; the "?" is
+   centered in the (filled-phrase-sized) cell so it reads as an awaiting
+   slot rather than a left-stranded character. */
+.viz-query .q-hole-swap {
+  display: inline-grid;
+  min-width: 2ch;
+  justify-items: center;
+}
+
+.viz-query .q-hole-swap > span {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+/* On the docking slide the hole must be one unbreakable inline unit —
+   brackets hugging the swap cell on both sides. Without this, the grid
+   cell (pre-sized to the hidden filled phrase) wraps onto its own line
+   and strands the ⟨ bracket at the end of the verb's line. The q-line
+   may still wrap BETWEEN verb / hole / trailing words, never inside. */
+.dock-column .q-hole {
+  display: inline-flex;
+  align-items: baseline;
+  white-space: nowrap;
+}
+
+/* Docking: an inner chip flies into the outer chip's socket and collapses,
+   landing roughly on the socket it fills. reveal's `fragment custom` ships
+   no default styling, so both the resting and .visible states are defined
+   here; distances are hardcoded against the fixed-size .dock-column layout
+   above and were measured against the rendered slide.
+   Specificity note: reveal.css sets `.reveal .fragment { transition: all
+   .2s ease }` (two classes) — a plain `.dock-away` rule loses that fight
+   and silently collapses this transition to reveal's default 0.2s, so the
+   selector below matches `.reveal .fragment`'s specificity and wins on
+   source order instead. */
+.reveal .fragment.dock-away {
+  transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out;
+  transform: translate(0, 0) scale(1);
+  opacity: 1;
+}
+
+.dock-chip-b.dock-away.visible {
+  transform: translateY(-226px) translateX(64px) scale(0.12);
+  opacity: 0;
+}
+
+.dock-chip-c.dock-away.visible {
+  transform: translateY(-162px) translateX(16px) scale(0.12);
+  opacity: 0;
+}
+
+.viz-query .q-gloss {
+  display: block;
+  font-family: "Shantell Sans", sans-serif;
+  color: #555;
+  font-size: 0.85em;
+}
+
+/* Weak/afforded-but-not-cheap query chips: same chip styling, faded.
+   The plan doesn't forbid the other query — it prices it. */
+.viz-query.q-weak {
+  opacity: 0.55;
+}
+
+/* Bulleted list of compares inside a single chip (e.g. "back to those bar
+   charts"): one box, multiple q-lines, each with its own bullet marker.
+   .q-weak-item is the item-level equivalent of .q-weak for list entries. */
+.viz-query .q-list {
+  list-style: none;
+  margin: 0.4em 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.viz-query .q-list .q-item {
+  position: relative;
+  padding-left: 1.1em;
+}
+
+.viz-query .q-list .q-item::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #4a7fb5;
+}
+
+.viz-query .q-list .q-item.q-weak-item {
+  opacity: 0.55;
+}
+
+/* Math case-expression form for multi-channel encode clauses:
+   the encode keyword, then one tall "{" grouping one data → channel
+   mapping per line. Text+CSS only; the brace is a literal character
+   scaled to span the mapping block. */
+.viz-query .q-cases {
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+}
+
+.viz-query .q-cases .q-brace {
+  font-size: 2.2em;
+  line-height: 1;
+  font-weight: 300;
+  color: #c05621; /* keyword orange, matches .viz-query .q-kw */
+}
+
+.viz-query .q-cases .q-case-lines {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.45;
+}
+
+.viz-query .q-cases .q-arrow {
+  color: #555;
+}
+
+/* Opening route through graphical space. The regions are deliberately flat,
+   not boxed cards: this is a path through the talk, not a three-bin taxonomy. */
+.chart-space-map h2 {
+  margin-bottom: 0.95rem;
+}
+
+.chart-space-route {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 2.6rem minmax(0, 1fr) 2.6rem minmax(0, 1fr);
+  align-items: center;
+  gap: 0.8rem;
+  max-width: 64rem;
+  margin: 0 auto;
+}
+
+.chart-space-region {
+  min-width: 0;
+  text-align: center;
+}
+
+.chart-space-region h3 {
+  margin: 0 0 0.35rem;
+  color: #1a1a2e;
+  font-family: "Shantell Sans", "Comic Sans MS", cursive, sans-serif;
+  font-size: 0.7em;
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.chart-space-arrow {
+  color: #4a7fb5;
+  font-size: 1.45em;
+  line-height: 1;
+  transform: translateY(-0.2rem);
+}
+
+.chart-space-familiar,
+.chart-space-grid {
+  display: grid;
+  gap: 0.45rem 0.45rem;
+  align-items: start;
+}
+
+.chart-space-familiar {
+  grid-template-columns: 1fr;
+}
+
+.chart-space-grid {
+  grid-template-columns: 1fr 1fr;
+}
+
+.chart-space-map figure {
+  min-width: 0;
+  margin: 0;
+}
+
+.chart-space-map figcaption {
+  margin-top: 0.12rem;
+  color: #555;
+  font-family: "Shantell Sans", "Comic Sans MS", cursive, sans-serif;
+  font-size: 0.42em;
+  line-height: 1.1;
+}
+
+.chart-space-thumb {
+  position: relative;
+  height: 7.8rem;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.45);
+  border-radius: 3px;
+}
+
+.chart-space-thumb-wide {
+  height: 4.6rem;
+}
+
+.chart-space-thumb > img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.chart-space-thumb .chart-container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: max-content;
+  transform: translate(-50%, -50%) scale(0.46);
+  transform-origin: center;
+}
+
+.chart-space-thumb-wide .chart-container {
+  transform: translate(-50%, -50%) scale(0.36);
+}
+
+.chart-space-promise {
+  margin: 0.7rem auto 0;
+  color: #1a1a2e;
+  font-family: "Shantell Sans", "Comic Sans MS", cursive, sans-serif;
+  font-size: 0.68em;
+  font-weight: 700;
+}
+
+/* Paired GoFish specs on the closing move slides. Keep the code visually tied
+   to the before and after charts while reusing the deck's syntax colors. */
+.move-code-pair {
+  --viz-op: #49a66a;
+  --viz-mark: #d6a62f;
+  --viz-transform: #4d90cf;
+  --viz-ink: #24211f;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0.75rem;
+  max-width: 60rem;
+  margin: 0.35rem auto 0;
+  text-align: left;
+}
+
+.move-code-pair > div {
+  min-width: 0;
+}
+
+.move-code-label {
+  margin: 0 0 0.08rem;
+  color: #555;
+  font-family: "Shantell Sans", "Comic Sans MS", cursive, sans-serif;
+  font-size: 0.38em;
+  font-weight: 700;
+  text-align: center;
+}
+
+.move-code-pair .viz-code.compact {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  padding: 0.45em 0.65em !important;
+  font-size: 0.38em !important;
+  line-height: 1.2 !important;
+}
+
+/* In the paired snippets, highlight only the changed code itself. The
+   walkthrough's full-line bands are useful for a one-line-at-a-time build,
+   but they create visual gutters when several regions are highlighted here. */
+.move-code-pair .cut-line {
+  display: inline;
+}
+
+.move-code-pair .cut-highlight {
+  background: rgba(74, 127, 181, 0.2);
+  border-radius: 3px;
+  box-shadow: none;
+}
+
+.move-code-pair-tight {
+  margin-top: 0.18rem;
+}
+
+.move-code-pair-tight .viz-code.compact {
+  font-size: 0.33em !important;
+}
+
+/* Move slides are code builders. Reserve the final comparison layout from the
+   first reveal, then make each later spec visible in its already-sized slot. */
+.move-code-builder {
+  --viz-op: #49a66a;
+  --viz-mark: #d6a62f;
+  --viz-transform: #4d90cf;
+  margin: 0.45rem auto 0;
+  max-width: 820px;
+  position: relative;
+  display: grid;
+  gap: 0.55rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.move-code-builder .move-code-stage {
+  text-align: center;
+}
+
+.move-code-builder .move-code-stage.fragment:not(.visible) {
+  visibility: hidden;
+}
+
+.move-code-builder:has(.move-code-stage:nth-child(3)) {
+  grid-template-columns: 0.8fr 0.8fr 1.4fr;
+  max-width: 1080px;
+}
+
+.move-code-builder:has(.move-code-stage:nth-child(3)) .viz-code.compact {
+  font-size: 0.32em !important;
+}
+
+.move-code-builder .viz-code.compact {
+  box-sizing: border-box;
+  margin: 0;
+  text-align: left;
+  width: 100%;
+}
+
+.move-code-builder .move-code-label {
+  margin-bottom: 0.16rem;
+}
+
+.move-code-builder .cut-line {
+  display: inline;
+}
+
+.move-code-builder .cut-highlight {
+  background: rgba(74, 127, 181, 0.2);
+  border-radius: 3px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.waffle-mark-definition {
+  margin-top: 0.35rem;
+}
+
+.waffle-mark-definition .viz-code.compact {
+  font-size: 0.28em !important;
+}
+
+/* API tiers: one bar chart elaborated from a proposed template down to the
+   constraint relations. The proposed tier uses the deck's dashed convention
+   for research/design ideas that are not yet the stable surface. */
+.api-tiers-slide {
+  --viz-op: #49a66a;
+  --viz-mark: #d6a62f;
+  --viz-transform: #4d90cf;
+}
+
+.api-tiers-slide h2 {
+  margin-bottom: 0.05em;
+}
+
+.api-tier-count {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.2em;
+}
+
+.api-tier-count-four.fragment:not(.visible) {
+  display: none;
+}
+
+.api-tier-count-four.fragment.visible {
+  display: inline-block;
+}
+
+.api-tiers-slide h2:has(.api-tier-count-four.visible) .api-tier-count-three {
+  color: #777;
+  text-decoration-line: line-through;
+  text-decoration-color: #e94560;
+  text-decoration-thickness: 4px;
+}
+
+.api-tiers-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  margin-bottom: 0.35rem;
+}
+
+.api-tiers-header > div:first-child {
+  text-align: right;
+}
+
+.api-tiers-header .api-tier-bars {
+  width: 96px;
+  height: 64px;
+  flex: 0 0 96px;
+}
+
+.api-tier-stack {
+  display: grid;
+  gap: 0.58rem;
+  max-width: 1120px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.api-tier-arrow {
+  position: absolute;
+  z-index: 2;
+  top: -0.3rem;
+  left: calc((175px + 610px + 2.1rem) / 2);
+  padding: 0 0.12rem;
+  transform: translate(-50%, -50%);
+  background: #f7f2e8;
+  color: #706b64;
+  font-family: "Source Sans 3", "Helvetica Neue", sans-serif;
+  font-size: 0.72em;
+  font-weight: 700;
+  line-height: 0.8;
+}
+
+.api-tier-arrow.fragment:not(.visible) {
+  visibility: hidden;
+}
+
+.api-tier {
+  box-sizing: border-box;
+  position: relative;
+  z-index: 0;
+  min-height: 108px;
+  display: grid;
+  grid-template-columns: 175px 610px minmax(0, 1fr);
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.45rem 0.65rem;
+  border: 0;
+  background: transparent;
+  transition: opacity 180ms ease;
+}
+
+.api-tier::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0 auto 0 0;
+  width: calc(175px + 610px + 2.1rem);
+  box-sizing: border-box;
+  border: 1px solid #d9d3c8;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.72);
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    background-color 180ms ease;
+}
+
+.api-tier-focus {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.api-tier-stack:has(.api-tier-focus.visible) > .api-tier:not(:has(.api-tier-focus)) {
+  opacity: 0.28;
+}
+
+.api-tier:has(.api-tier-focus.visible) {
+  background: transparent;
+  box-shadow: none;
+}
+
+.api-tier:has(.api-tier-focus.visible)::before {
+  border-color: var(--viz-op);
+  background: rgba(73, 166, 106, 0.1);
+  box-shadow: 0 0 0 4px rgba(73, 166, 106, 0.2);
+}
+
+.api-tier-template {
+  min-height: 78px;
+}
+
+.api-tier-template::before {
+  border: 2px dashed #4a7fb5;
+  background: rgba(74, 127, 181, 0.055);
+}
+
+.api-tier.fragment:not(.visible) {
+  visibility: hidden;
+}
+
+.api-tier-name {
+  color: #16213e;
+  font-family: "Shantell Sans", "Comic Sans MS", cursive, sans-serif;
+  font-size: 0.73em;
+  line-height: 1.05;
+}
+
+.api-tier-name strong {
+  display: block;
+}
+
+.api-tier-name span {
+  display: inline-block;
+  margin-top: 0.25rem;
+  color: #4a7fb5;
+  font-family: "Source Sans 3", "Helvetica Neue", sans-serif;
+  font-size: 0.62em;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.api-tier pre {
+  box-sizing: border-box;
+  width: max-content;
+  max-width: 100%;
+  margin: 0;
+  padding: 0.42em 0.62em;
+  border-color: #e2ded6;
+  background: #fff;
+  font-size: 0.49em;
+  line-height: 1.22;
+  white-space: pre-wrap;
+}
+
+.api-tier-use {
+  color: #4f4a44;
+  font-size: 0.57em;
+  font-weight: 650;
+  line-height: 1.25;
+}
+
+.api-tier-template pre {
+  font-size: 0.53em;
+}
+
+.api-tier-bars {
+  position: relative;
+  height: 70px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 7px;
+  border-bottom: 2px solid #4a4a4a;
+}
+
+.api-tier-bars::before {
+  content: "";
+  position: absolute;
+  left: 8px;
+  bottom: -2px;
+  width: 2px;
+  height: calc(100% + 1px);
+  background: #4a4a4a;
+}
+
+.api-tier-bars i {
+  width: 20px;
+  height: var(--bar-h);
+  display: block;
+  border-radius: 2px 2px 0 0;
+  background: #4a7fb5;
+}

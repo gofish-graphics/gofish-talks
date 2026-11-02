@@ -1,0 +1,1428 @@
+        <!-- ═══ COLUMN 3: PART 2 ════════════════════════════════ -->
+        <section>
+          <!-- ══════════════════════════════════════════════════════
+             PART 2: SAME STRUCTURE, DIFFERENT GLYPHS
+             ══════════════════════════════════════════════════════ -->
+
+          <!-- ─── SCATTER PIE ───────────────────────────────────── -->
+
+          <section data-visibility="hidden">
+            <!-- HIDDEN: scatter-pie beat cut from the SciPy story (Morris is about
+                 magnitude/change, not composition). Remove data-visibility to restore. -->
+            <!-- <div class="slide-subtitle">Part 2 · Scatter pie</div> -->
+            <h2>scatter -> pie = scatterpie</h2>
+            <div class="two-col">
+              <div class="col-code">
+                <pre><code class="language-python">chart(scatter_data).flow(
+    scatter(by="lake", x="x", y="y")
+).mark(
+    chart(coord=clock())
+    .flow(stack(by="species", dir="x", size="count"))
+    .mark(rect(fill="species"))
+)</code></pre>
+                <div
+                  style="
+                    margin-top: 0.8rem;
+                    font-size: 0.72em;
+                    line-height: 1.8;
+                  "
+                >
+                  <p>
+                    <strong>Outer structure:</strong>
+                    <code>scatter()</code> affords "where?" queries.
+                  </p>
+                  <p>
+                    <strong>Inner structure:</strong> pie affords "what
+                    fraction?" queries.
+                  </p>
+                  <!-- <p>The mark method takes a chart, same as faceting.</p> -->
+                  <div
+                    class="spec-slide-query fragment"
+                    style="margin-top: 0.65rem"
+                  >
+                    <p style="margin-bottom: 0.35rem">
+                      <strong>Queries:</strong>
+                    </p>
+                    <ul class="stack-queries-list">
+                      <li>
+                        which species dominates each lake? (largest slice)
+                      </li>
+                      <li>
+                        how does species composition vary across geography?
+                      </li>
+                      <li>
+                        which lakes have similar mixes? (visual comparison)
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col-chart">
+                <div id="chart-scatter-pie" class="chart-container"></div>
+              </div>
+            </div>
+            <aside class="notes">
+              This is composition, nesting one query-affording structure inside
+              another. It's the same idea as faceting: spreading a chart-making
+              function. Pie affords proportion queries easily; magnitude queries
+              are hard because arc angle is a weaker encoding than length.
+              Cross-lake magnitude comparison is impossible because pies are
+              normalized. ~18 min mark.
+
+              <br /><br />
+
+              Now that we know what structures and queries we want to afford, we
+              can play a little looser with our representation.
+            </aside>
+          </section>
+
+          <!-- ─── BARLEY SCATTER PIE: 1931 vs 1932 ───────────────── -->
+
+          <section data-visibility="hidden">
+            <!-- HIDDEN: barley scatter-pie beat cut. Remove data-visibility to restore. -->
+            <h2>same glyph, new dataset: barley, two years</h2>
+            <div class="two-col">
+              <div class="col-code">
+                <pre><code class="language-python"># x, y: each site's Minnesota lon/lat
+def site_pie(data):
+    total_yield = total_yield_for(1931, data[0]["site"])
+    return (
+        chart(data[0]["collection"], coord=clock())
+        .flow(stack(by="variety", dir="x", h=pie_radius(total_yield), size="yield"))
+        .mark(rect(fill="variety"))
+    )
+
+chart(barley_scatter_by_year(1931)).flow(
+    scatter(by="site", x="x", y="y")
+).mark(site_pie)</code></pre>
+                <div
+                  style="
+                    margin-top: 0.8rem;
+                    font-size: 0.72em;
+                    line-height: 1.8;
+                  "
+                >
+                  <p>
+                    Same construction as the lake scatter-pie: each trial site
+                    sits at its real Minnesota location, and each glyph is a
+                    pie of that site's variety mix.
+                  </p>
+                  <p>
+                    <strong>New move:</strong> pie radius (<code>h</code>)
+                    scales with each site's <em>total</em> yield that year, on
+                    a shared scale across both charts.
+                  </p>
+                  <div
+                    class="spec-slide-query fragment"
+                    style="margin-top: 0.65rem"
+                  >
+                    <p style="margin-bottom: 0.35rem">
+                      <strong>Watch Morris:</strong>
+                    </p>
+                    <ul class="stack-queries-list">
+                      <li>
+                        every other site's pie shrinks from 1931 → 1932,
+                        Morris's grows
+                      </li>
+                      <li>
+                        radius affords the magnitude query the seafood
+                        version couldn't; angle still affords the mix query
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col-chart" style="flex-direction: column; gap: 0.6rem">
+                <div style="display: flex; gap: 0.8rem; width: 100%">
+                  <div style="flex: 1; text-align: center">
+                    <div
+                      id="chart-viz-barley-pie-1931"
+                      class="chart-container viz-gofish-chart"
+                      style="height: 300px"
+                    ></div>
+                    <p style="margin-top: 0.3rem; font-size: 0.6em; color: #666">
+                      1931
+                    </p>
+                  </div>
+                  <div style="flex: 1; text-align: center">
+                    <div
+                      id="chart-viz-barley-pie-1932"
+                      class="chart-container viz-gofish-chart"
+                      style="height: 300px"
+                    ></div>
+                    <p style="margin-top: 0.3rem; font-size: 0.6em; color: #666">
+                      1932
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <aside class="notes">
+              This is the famous Minnesota barley anomaly (Fisher/Immer data,
+              popularized by Cleveland &amp; via the trellis-display
+              literature): nearly every site's yield fell from 1931 to 1932,
+              except Morris, which rose. The pies sit at each site's actual
+              geography, Crookston in the far northwest, Duluth on Lake
+              Superior in the northeast, Waseca in the south, Morris
+              mid-west, so the chart doubles as a map of Minnesota.
+              Encoding total yield as pie radius (instead of a fixed radius,
+              as in the lake version) makes the flip visible at a glance
+              without giving up the proportion read inside each pie. Same
+              outer/inner grammar as the seafood scatter-pie, only the
+              radius channel is new.
+            </aside>
+          </section>
+
+          <!-- ─── BRIDGE: THE SLOPE CHART'S FIRST LAYER ───────────── -->
+
+          <section class="viz-step viz-step-side-by-side" data-background-color="#f7f2e8">
+            <h2>first, just the points</h2>
+            <div class="viz-query" style="margin: 0.2rem 0 0.5rem; font-size: 0.58em">
+              <span class="q-line"><span class="q-val">find</span> <span class="q-hole">⟨each <em class="q-field">variety</em>'s trend⟩</span> at each <em class="q-field">site</em>, one variety, or all?</span>
+            </div>
+            <pre class="viz-code compact">chart(barley)
+  .<span class="viz-op">flow</span>(
+    <span class="viz-op">spread</span>(by="site", dir="x"),
+    <span class="viz-op">spread</span>(by="year", dir="x"),
+    <span class="cut-highlight"><span class="viz-op">scatter</span>(by="variety", y="yield")</span>
+  )
+  <span class="cut-highlight">.<span class="viz-mark">mark</span>(<span class="viz-mark">circle</span>(r=3, fill="variety"))</span></pre>
+            <div
+              id="chart-viz-barley-slope-points"
+              class="chart-container viz-gofish-chart"
+              style="height: 312px; min-height: 312px"
+            ></div>
+            <aside class="notes">
+              Same site-then-year spread skeleton as the normalized stacks we
+              just saw. Now swap stack for scatter: instead of accumulating
+              variety into a whole, scatter places one point per variety in
+              each site-year cell, and circle draws it. The next slide connects
+              each variety along the year axis.
+            </aside>
+          </section>
+
+          <!-- ─── SLOPE PANELS: CONNECT THE POINTS WITH LINES ─────── -->
+
+          <section class="viz-step viz-step-side-by-side" data-background-color="#f7f2e8">
+            <h2>connect the points with lines</h2>
+            <div class="viz-query" style="margin: 0.2rem 0 0.5rem; font-size: 0.58em">
+              <span class="q-line"><span class="q-val">find</span> <span class="q-hole">⟨each <em class="q-field">variety</em>'s trend⟩</span> at each <em class="q-field">site</em>, one variety, or all?</span>
+            </div>
+            <pre class="viz-code compact">chart(barley)
+  .<span class="viz-op">flow</span>(
+    <span class="viz-op">spread</span>(by="site", dir="x"),
+    <span class="viz-op">spread</span>(by="year", dir="x"),
+    <span class="viz-op">scatter</span>(by="variety", y="yield"),
+  )
+  <span class="cut-highlight">.<span class="viz-mark">mark</span>(<span class="viz-mark">line</span>(by="variety", along="year", fill="variety"))</span></pre>
+            <div
+              id="chart-viz-barley-slope"
+              class="chart-container viz-gofish-chart"
+              style="height: 312px; min-height: 312px"
+            ></div>
+            <aside class="notes">
+              In the grouped bars, each variety's years were finally adjacent,
+              but the change still had to be estimated between two tiny bar
+              heights. Here the line makes that relation a single trajectory.
+              Spread still creates the six site panels and the two year
+              positions. Scatter creates one entity per variety, and line
+              connects that variety's two values. One quantifier, site, is a
+              scan across panels. The other, variety, is a scan down each
+              panel's ten lines. The sign
+              predicate reads from each line's slope. This is Trellis-style:
+              Becker and Cleveland's own display for this dataset. It preserves
+              both absolute yields and each year-to-year trajectory, but the
+              reader still has to aggregate ten slope signs per panel to recover
+              the sentence. The delta bars ahead trade away those endpoints and
+              trajectories so every signed change can share one positional
+              baseline.
+            </aside>
+          </section>
+
+          <!-- ─── CHANNEL EFFECTIVENESS: ANGLE TO POSITION ────────── -->
+
+<section class="scipy-statement" data-background-color="#f7f2e8" data-visibility="hidden">
+  <!-- HIDDEN: the point-to-line transition now leads directly into the
+       delta-bar tradeoff, so this statement repeats its motivation. -->
+            <h2>for change, position beats angle</h2>
+            <p class="big-claim" style="margin-top: 1.1rem">
+              Slope gives direction immediately. But comparing how much each
+              variety changed means comparing line angles.
+            </p>
+            <p style="margin-top: 0.8rem; font-size: 0.6em; color: #555">
+              Delta bars put every signed change against the same zero baseline.
+              We give up the two absolute yields and the explicit trajectory.
+            </p>
+            <aside class="notes">
+              Bring back channel effectiveness from the opening. For the
+              question "how much did yield change?", the slope chart asks us
+              to compare orientations while tracking many lines. Position
+              against a shared baseline is more precise. So compute one delta
+              per variety and put every delta against zero. This is a trade,
+              not a free improvement: the slope chart preserves the 1931 and
+              1932 values and shows the year-to-year trajectory. The delta bar
+              keeps only signed change. That narrower structure is exactly
+              what makes the comparison cheaper.
+            </aside>
+          </section>
+
+          <!-- ─── SIMPLIFY YOUR MESSAGE: STEP 1 OF 4, THE SLOPE ──── -->
+
+          <section class="viz-step" data-background-color="#f7f2e8" data-visibility="hidden">
+            <!-- HIDDEN: the faceted slope chart already establishes this spec;
+                 the channel-effectiveness slide now motivates the direct jump
+                 to delta bars. -->
+            <h2>simplify your message</h2>
+            <div class="viz-query" style="margin: 0.2rem 0 0.5rem; font-size: 0.58em">
+              <span class="q-line"><span class="q-val">find</span> <span class="q-hole">⟨each <em class="q-field">variety</em>'s trend⟩</span> at each <em class="q-field">site</em>, one variety, or all?</span>
+            </div>
+            <pre class="viz-code compact">chart(barley)
+  .<span class="viz-op">flow</span>(
+    <span class="viz-op">spread</span>(by="site", dir="x"),
+    <span class="viz-op">spread</span>(by="year", dir="x"),
+    <span class="viz-op">scatter</span>(by="variety", y="yield"),
+  )
+  .<span class="viz-mark">mark</span>(<span class="viz-mark">line</span>(stroke="variety"))</pre>
+            <div
+              id="chart-viz-barley-slope-restate"
+              class="chart-container viz-gofish-chart"
+              style="height: 312px; min-height: 312px"
+            ></div>
+            <aside class="notes">
+              Same chart, same spec, as the "connect the points with lines" slide,
+              deliberately, so it re-anchors the through-line right after the
+              section break. This is the through-line for the next four
+              slides: each step is exactly one edit to this spec, and each
+              edit gives something up in exchange for a faster read of the
+              sign. Nothing changes yet; watch what changes next.
+            </aside>
+          </section>
+
+          <!-- ─── SIMPLIFY YOUR MESSAGE: STEP 2 OF 4, ANCHORED ───── -->
+
+          <section class="viz-step" data-background-color="#f7f2e8" data-visibility="hidden">
+            <!-- HIDDEN: the direct slope-to-delta transition makes this anchored
+                 slope intermediate unnecessary. -->
+            <h2>anchor the comparison</h2>
+            <div class="viz-query" style="margin: 0.2rem 0 0.5rem; font-size: 0.58em">
+              <span class="q-line"><span class="q-val">compare</span> <span class="q-hole">⟨Δ <em class="q-field">yield</em> from 1931⟩</span>, site by site</span>
+            </div>
+            <pre class="viz-code compact"><span class="cut-line">chart(barley)</span
+><span class="cut-line">  .<span class="viz-op">flow</span>(</span
+><span class="cut-line cut-highlight">    <span class="viz-transform">derive</span>(anchor_to_1931),</span
+><span class="cut-line">    <span class="viz-op">spread</span>(by="site", dir="x"),</span
+><span class="cut-line">    <span class="viz-op">spread</span>(by="year", dir="x"),</span
+><span class="cut-line cut-highlight">    <span class="viz-op">scatter</span>(by="variety", y="delta_from_1931"),</span
+><span class="cut-line">  )</span
+><span class="cut-line">  .<span class="viz-mark">mark</span>(<span class="viz-mark">line</span>(stroke="variety"))</span></pre>
+            <div
+              id="chart-viz-barley-slope-anchored"
+              class="chart-container viz-gofish-chart"
+              style="height: 312px; min-height: 312px"
+            ></div>
+            <aside class="notes">
+              One edit from the last slide: `derive` computes each variety's
+              delta from its own 1931 yield, and `y` is rebound to that delta
+              instead of raw yield. Every line still starts at the same
+              baseline (zero), so nothing about "up is more" is lost, the
+              slope metaphor survives intact. What's new is that the line's
+              ANGLE now IS the delta, not just a byproduct of two absolute
+              values. Nothing is thrown away yet; this step only compresses
+              information that was already implicit in the previous chart.
+            </aside>
+          </section>
+
+          <!-- ─── SIMPLIFY YOUR MESSAGE: STEP 3 OF 4, BARS ───────── -->
+
+          <section class="viz-step viz-step-side-by-side" data-background-color="#f7f2e8">
+            <h2>trade angle for position</h2>
+            <div class="viz-query" style="margin: 0.2rem 0 0.5rem; font-size: 0.58em">
+              <span class="q-line"><span class="q-val">find</span> <span class="q-hole">⟨the sign of Δ <em class="q-field">yield</em>⟩</span>, by <em class="q-field">site</em></span>
+            </div>
+            <pre class="viz-code compact"><span class="cut-line">chart(barley)</span
+><span class="cut-line">  .<span class="viz-op">flow</span>(</span
+><span class="cut-line">    <span class="viz-op">spread</span>(by="site", dir="x"),</span
+><span class="cut-line">    <span class="viz-op">spread</span>(by="variety", dir="x"),</span
+><span class="cut-line cut-highlight">    <span class="viz-transform">derive</span>(lambda rows: [{</span
+><span class="cut-line cut-highlight">      **rows[0], "delta": rows[1]["yield"] - rows[0]["yield"]</span
+><span class="cut-line cut-highlight">    }]),</span
+><span class="cut-line">  )</span
+><span class="cut-line cut-highlight">  .<span class="viz-mark">mark</span>(<span class="viz-mark">rect</span>(h="delta"))</span></pre>
+            <div
+              id="chart-viz-barley-delta-bars"
+              class="chart-container viz-gofish-chart"
+              style="height: 312px; min-height: 312px"
+            ></div>
+            <aside class="notes">
+              Here is the trade made concrete. `derive` folds each variety's
+              two years into one delta. The year spread disappears and
+              variety becomes the inner facet. With one value per variety,
+              there is no second endpoint for a line to connect, so a signed
+              bar places that delta against zero. Comparing magnitude and sign
+              is now positional and shares a baseline across every site. What
+              disappeared matters: we can no longer recover either absolute
+              yield or inspect the two-year trajectory. We chose the cheaper
+              reading because signed change is the question this section is
+              trying to answer.
+            </aside>
+          </section>
+
+          <!-- HIDDEN ALTERNATE: dots instead of bars for the same delta
+               data. Same spec shape as the bars slide, swapping the mark
+               for a small rounded rect standing in for a dot, bars read
+               sign faster, but dots are the more literal "scatter" analog
+               and worth having on hand. To swap it in for the bars slide:
+               remove data-visibility="hidden" here, and either add
+               data-visibility="hidden" to the bars slide above or delete
+               it, keeping the h2/copy from whichever one stays. -->
+          <section
+            class="viz-step"
+            data-background-color="#f7f2e8"
+            data-visibility="hidden"
+          >
+            <h2>the line has nothing left to connect</h2>
+            <pre class="viz-code compact"><span class="cut-line">chart(barley)</span
+><span class="cut-line">  .<span class="viz-op">flow</span>(</span
+><span class="cut-line cut-highlight">    <span class="viz-transform">derive</span>(delta),</span
+><span class="cut-line">    <span class="viz-op">spread</span>(by="site", dir="x"),</span
+><span class="cut-line cut-highlight">    <span class="viz-op">scatter</span>(by="variety", y="delta"),</span
+><span class="cut-line">  )</span
+><span class="cut-line cut-highlight">  .<span class="viz-mark">mark</span>(<span class="viz-mark">circle</span>(r=4))</span></pre>
+            <div
+              id="chart-viz-barley-delta-dots"
+              class="chart-container viz-gofish-chart"
+              style="height: 312px; min-height: 312px"
+            ></div>
+            <aside class="notes">
+              Same beat as the bars slide: derive collapses the year pair, so
+              there is nothing left for a line to connect. A dot marks each
+              (site, variety)'s single delta against a dashed zero baseline
+              instead of a bar's filled rect, more literally "a scatter with
+              one point," but a signed bar reads the sign faster because its
+              length and its direction from the baseline are the same
+              gesture. Kept as a hideable alternate to flip between on stage.
+            </aside>
+          </section>
+
+          <!-- ─── COLOR: HIGHLIGHT THE EXCEPTION (now on the delta bars) ── -->
+
+          <section class="viz-step viz-step-side-by-side" data-background-color="#f7f2e8">
+            <h2>use color for emphasis</h2>
+            <div class="viz-query" style="margin: 0.2rem 0 0.5rem; font-size: 0.58em">
+              <span class="q-line"><span class="q-val">find</span> <span class="q-hole">⟨the sign of Δ <em class="q-field">yield</em>⟩</span>, by <em class="q-field">site</em></span>
+            </div>
+            <pre class="viz-code compact">chart(barley, <span class="cut-highlight">color=<span class="viz-op">palette</span>({"Morris": "#e08214"})</span>)
+  .<span class="viz-op">flow</span>(
+    <span class="viz-op">spread</span>(by="site", dir="x"),
+    <span class="viz-op">spread</span>(by="variety", dir="x"),
+    <span class="viz-transform">derive</span>(lambda rows: [{
+      **rows[0], "delta": rows[1]["yield"] - rows[0]["yield"]
+    }]),
+  )
+  .<span class="viz-mark">mark</span>(<span class="viz-mark">rect</span>(h="delta", <span class="cut-highlight">fill="site"</span>))</pre>
+            <div
+              id="chart-viz-barley-delta-bars-highlight"
+              class="chart-container viz-gofish-chart"
+              style="height: 312px; min-height: 312px"
+            ></div>
+            <aside class="notes">
+              Identical to the previous delta-bars slide, but the bars are
+              now filled by site through a Morris-orange palette; everything
+              else goes gray. This is deliberately late in the arc: the sign
+              question was already answered structurally (bar direction from
+              a zero baseline), so color isn't recruited to encode sign, it
+              only has to say "look here." That's the whole point of moving
+              color to this slide instead of the slope chart: on the slope
+              panels color would have had to do two jobs (which lines are
+              which site, and which site to look at) where here it only has
+              one. Own it honestly on stage: GoFish has no `emphasize()`
+              primitive yet. What's on screen is a hand-written conditional
+              in the render function (`highlight ? palette(...) : the
+              default color scale`), not a first-class operator, filed as
+              gofish#641, and worth fixing precisely because "highlight one
+              category, gray out the rest" is common enough to deserve its
+              own name instead of a per-chart if/else.
+            </aside>
+          </section>
+
+          <!-- Labels/annotations: emphasize the message (now on the delta bars) -->
+          <section class="viz-step viz-step-side-by-side" data-background-color="#f7f2e8">
+            <h2>annotations can emphasize your message</h2>
+            <div class="viz-query" style="margin: 0.2rem 0 0.5rem; font-size: 0.58em">
+              <span class="q-line"><span class="q-val">find</span> <span class="q-hole">⟨the sign of Δ <em class="q-field">yield</em>⟩</span>, by <em class="q-field">site</em></span>
+            </div>
+            <div
+              id="chart-viz-barley-delta-bars-annotated"
+              class="chart-container viz-gofish-chart"
+              style="height: 312px; min-height: 312px"
+            ></div>
+            <div class="annotation-code-row">
+              <div class="annotation-code-proposal annotation-code-full">
+                <div class="annotation-code-status">proposed in #805</div>
+                <pre class="viz-code compact"><span class="cut-line">chart(barley, color=<span class="viz-op">palette</span>({"Morris": "#e08214"}))</span
+><span class="cut-line">  .<span class="viz-op">flow</span>(</span
+><span class="cut-line">    <span class="viz-op">spread</span>(by="site", dir="x")</span
+><span class="cut-line cut-highlight">      .<span class="viz-op">label</span>(</span
+><span class="cut-line cut-highlight">        <span class="viz-transform">field</span>("site").map({</span
+><span class="cut-line cut-highlight">          "Morris": "Only Morris rose across every variety"</span
+><span class="cut-line cut-highlight">        }),</span
+><span class="cut-line cut-highlight">        position="outset-top", color="#e08214"</span
+><span class="cut-line cut-highlight">      ),</span
+><span class="cut-line">    <span class="viz-op">spread</span>(by="variety", dir="x"),</span
+><span class="cut-line">    <span class="viz-transform">derive</span>(lambda rows: [{</span
+><span class="cut-line">      **rows[0], "delta": rows[1]["yield"] - rows[0]["yield"]</span
+><span class="cut-line">    }]),</span
+><span class="cut-line">  )</span
+><span class="cut-line">  .<span class="viz-mark">mark</span>(<span class="viz-mark">rect</span>(h="delta", fill="site"))</span></pre>
+              </div>
+            </div>
+            <aside class="notes">
+              The last step of explanatory polish: annotate. If the sentence
+              is the point, write the sentence on the chart, don't leave the
+              reader to reconstruct it from a color cue alone. Same delta
+              bars, same Morris-orange highlight, color already made
+              Morris's bars pop; the callout states the conclusion directly
+              instead of leaving the reader to scan six site groups of signed
+              bars. The visible code is the proposed field-map spelling from
+              draft PR #805: it is a serializable partial mapping, and an
+              unmapped value produces no label. Until that PR lands, this live
+              chart uses the already-merged equivalent: a derived takeaway
+              field that is empty for five sites and contains the sentence for
+              Morris, labeled on the outer site spread. Exploratory charts help
+              you find the story; explanatory charts tell it.
+            </aside>
+          </section>
+
+          <!-- ─── FLOWER CHART ──────────────────────────────────── -->
+
+          <section class="flower-slide" data-visibility="hidden"><!-- HIDDEN: flower glyph beat parked with the scatter-pie material; restore by removing data-visibility -->
+            <!-- <div class="slide-subtitle">Part 2 · Flower chart</div> -->
+            <h2>Swap the inner chart for a different part-to-whole viz</h2>
+            <div class="two-col">
+              <div class="col-code">
+                <pre><code class="language-python">FLOWER_RADIUS = 40
+stem_data = [{**d, "x": catch_locations[d["lake"]]["x"]} for d in seafood]
+
+layer([
+  chart(stem_data)
+    .flow(scatter(by="lake", x="x"))
+    .mark(
+      rect(w=4, h="count", fill=color.green[5])
+        .name("stems")
+    ),
+  chart(selectAll("stems"))
+    .flow(group(by="lake"))
+    .mark(lambda d: spread(
+        [
+          d[0],
+          layer([
+            stackX(
+              [
+                petal(w=v(r["count"]), fill=v(r["species"]).lighten(0.5))
+                for r in d[0]["datum"]
+              ],
+              h=FLOWER_RADIUS, spacing=0,
+              alignment="start", sharedScale=True,
+            ),
+          ], coord=polar()),
+        ],
+        dir="y", alignment="middle",
+        spacing=-FLOWER_RADIUS,
+    )),
+])</code></pre>
+                <!-- <pre><code class="language-python">chart(scatter_data).flow(
+    scatter(by="lake", x="x", y="y")
+).mark(
+    FlowerChart(
+        petal(
+            w="count",
+            fill=species_color["species"],
+        )
+    )
+)</code></pre> -->
+                <!-- <div
+                  style="
+                    margin-top: 0.75rem;
+                    font-size: 0.72em;
+                    line-height: 1.85;
+                  "
+                >
+                  <p class="fragment">
+                    <strong>Tasks / queries</strong> (glyph change): which
+                    species has the highest count at each lake? (longest petal)
+                  </p>
+                  <p class="fragment" style="margin-top: 0.35rem">
+                    how does total activity compare across lakes? (flower
+                    fullness)
+                  </p>
+                  <p
+                    class="fragment"
+                    style="margin-top: 0.35rem; opacity: 0.55"
+                  >
+                    what fraction of catch is Bass?, <em>harder</em> (length
+                    doesn't naturally read as proportion)
+                  </p>
+                  <div
+                    class="callout fragment"
+                    style="margin-top: 0.55rem; font-size: 0.95em"
+                  >
+                    Pie → proportion queries easy, magnitude hard.<br />
+                    Flower → magnitude comparison easy, proportion hard.<br />
+                    <strong
+                      >Same data, same outer structure, different inner
+                      affordances.</strong
+                    >
+                  </div>
+                </div> -->
+              </div>
+              <div class="col-chart">
+                <div id="chart-flower" class="chart-container"></div>
+              </div>
+            </div>
+            <aside class="notes">
+              Same outer scatter. Different inner glyph. The petal encodes
+              magnitude differently from a pie slice, it affords comparison of
+              absolute values rather than proportions. Petal length is a
+              stronger encoding for magnitude than arc angle, but it gives up
+              proportion legibility, the tradeoff the grammar makes explicit.
+              ~21 min mark.
+            </aside>
+          </section>
+
+          <!-- <section>
+            <h2>Data schema</h2>
+            <div
+              class="grammar-grid"
+              style="margin-top: 2rem; font-size: 0.95em"
+            >
+              <div class="grammar-term">outer key</div>
+              <div class="grammar-def">
+                <code>lake: discrete</code><br />
+                <span style="font-size: 0.85em; color: #888"
+                  >same scatter positioning as pie, unchanged</span
+                >
+              </div>
+              <div class="grammar-term">inner key</div>
+              <div class="grammar-def">
+                <code>species: discrete → petal</code><br />
+                <span style="font-size: 0.85em; color: #888"
+                  >polar layout; one petal per species</span
+                >
+              </div>
+              <div class="grammar-term">value</div>
+              <div class="grammar-def">
+                <code>count: continuous → petal length</code><br />
+                <span style="font-size: 0.85em; color: #888"
+                  >absolute magnitude, not normalized</span
+                >
+              </div>
+            </div>
+            <aside class="notes">
+              Key difference from pie: count maps to petal length (a linear
+              scale), not arc angle. The outer structure is identical. Only the
+              inner glyph changed.
+            </aside>
+          </section> -->
+
+          <!-- ─── BALLOON CHART ─────────────────────────────────── -->
+
+          <section class="balloon-slide" data-visibility="hidden"><!-- HIDDEN: balloon glyph beat parked with the scatter-pie material; restore by removing data-visibility -->
+            <!-- <div class="slide-subtitle">Part 2 · Balloon chart</div> -->
+            <h2>balloons???</h2>
+            <div class="two-col">
+              <div class="col-code">
+                <pre><code class="language-python">def balloon(x, y, scale, colors):
+  return Frame(
+    [
+      ellipse(cx=15, cy=15, w=24, h=30, fill=colors["body"]),
+      ellipse(cx=12, cy=11, w=7, h=11, fill=colors["highlight"]),
+      rect(cx=15, cy=32, w=8, h=4,
+        fill=colors["knot"], rx=3, ry=2),
+      rect(cx=15, cy=32, w=5, h=2.4,
+        fill=colors["knot"], rx=2, ry=1),
+    ],
+    x=x - 15 * scale,
+    y=y + 27 * scale,
+    box=True,
+    transform={"scale": {"x": scale, "y": -scale}},
+  )
+
+
+def balloon_for_sample(sample):
+  top3 = sorted(
+    sample["collection"],
+    key=lambda r: r["count"],
+    reverse=True,
+  )[:3]
+
+  return Frame([
+    rect(x=0, y=0, w=1, h=sample["y"], emY=True),
+    balloon(0, sample["y"], 1, {
+      "body": species_color_map[top3[0]["species"]],
+      "highlight": species_color_map[top3[1]["species"]],
+      "knot": species_color_map[top3[2]["species"]],
+    }),
+  ], x=sample["x"])
+
+
+Frame(
+  [balloon_for_sample(sample) for sample in scatter_by_lake],
+  coord=wavy(), x=0, y=0,
+)</code></pre>
+                <div class="todo-note">
+                  TODO Python: expose a balloon glyph helper with
+                  <code>body</code>, <code>highlight</code>, and
+                  <code>knot</code> channels.
+                </div>
+                <!-- <div
+                  style="
+                    margin-top: 0.75rem;
+                    font-size: 0.72em;
+                    line-height: 1.85;
+                  "
+                >
+                  <p class="fragment">
+                    <strong>Tasks / queries:</strong> which lake has the highest
+                    total catch? (biggest balloon)
+                  </p>
+                  <p class="fragment" style="margin-top: 0.35rem">
+                    which species dominates each lake? (color)
+                  </p>
+                  <p
+                    class="fragment"
+                    style="margin-top: 0.35rem; opacity: 0.55"
+                  >
+                    what's the Bass count at Lake Ontario?,
+                    <em>impossible</em> (not encoded)
+                  </p>
+                  <p
+                    class="fragment"
+                    style="margin-top: 0.35rem; opacity: 0.55"
+                  >
+                    how does species composition vary?,
+                    <em>impossible</em> (breakdown gone)
+                  </p>
+                  <div
+                    class="callout fragment"
+                    style="margin-top: 0.55rem; font-size: 0.95em"
+                  >
+                    Balloon loses all per-species breakdown. Gains:
+                    <strong>total magnitude is now the primary read</strong>
+                    for a cleaner, more memorable, but radically reduced information
+                    density.
+                  </div>
+                </div> -->
+              </div>
+              <div class="col-chart">
+                <div id="chart-balloon" class="chart-container"></div>
+              </div>
+            </div>
+            <aside class="notes">
+              Third iteration. Each one changes the inner glyph, keeps the outer
+              scatter. Different encodings, different affordances. Each glyph
+              swap is a deliberate trade: pie → proportion focus, flower →
+              magnitude comparison, balloon → total + dominant only. The grammar
+              makes these trades explicit and nameable. ~23 min mark.
+            </aside>
+          </section>
+
+          <!-- ─── PIVOT ──────────────────────────────────────────── -->
+
+          <section data-visibility="hidden">
+            <!-- HIDDEN: structure-vs-gallery takeaway cut for pacing. Restore by removing data-visibility. -->
+            <div
+              style="
+                margin-top: 1.4rem;
+                font-size: 0.98em;
+                line-height: 1.9;
+                color: #222;
+                font-weight: 500;
+                text-align: left;
+              "
+            >
+              When we think with structure instead of chart types, we can move
+              between the familiar charts from first principles.
+              <div style="margin-top: 1.1em">
+                An example gallery helps when you already know what you want.
+                Structure helps when you don't.
+              </div>
+            </div>
+            <aside class="notes">
+              Part 1 takeaway: thinking in structure lets us rebuild and move
+              between the familiar charts from first principles. It complements
+              example galleries and task taxonomies, and it works when you
+              don't know exactly what you want yet. Sets up the pivot: next we
+              reflect on the moves we made, compress them into the operator
+              table, and use that to reach charts you wouldn't think to pick.
+              ~26 min mark.
+            </aside>
+          </section>
+
+          <!-- ─── INTERLUDE ─────────────────────────────────────── -->
+
+          <section data-visibility="hidden"><!-- HIDDEN: "what just happened" synthesis likely no longer needed; the rewritten pivot takeaway carries this beat and the operator table is now the reflection. Restore by removing data-visibility. -->
+            <!-- <div class="slide-subtitle">Part 1 · Interlude</div> -->
+            <h2>What just happened?</h2>
+            <div
+              style="
+                margin-top: 1.5rem;
+                font-size: 0.88em;
+                line-height: 2.1;
+                text-align: left;
+              "
+            >
+              <p class="fragment">
+                We took <strong>one dataset</strong> and made a series of
+                <strong>deliberate structural moves</strong>.
+              </p>
+              <p class="fragment">
+                Each move changed what was easy or hard to see.
+              </p>
+              <p class="fragment">
+                We didn't have to pick from a menu of charts... though those are
+                useful shorthands for common structures!
+              </p>
+              <p class="fragment">
+                Instead, chart type labels like bar or pie were just structural
+                motifs we encountered along the way.
+              </p>
+            </div>
+            <aside class="notes">
+              Synthesis after the scatter-pie → flower → balloon sequence (and
+              the bar→polar arc before it). Let this breathe. ~24 min mark.
+            </aside>
+          </section>
+
+          <!-- ─── OPERATOR / GESTALT TABLE ─────────────────────── -->
+
+          <section class="viz-step" data-background-color="#f7f2e8">
+            <h2>choose by the structure you need</h2>
+            <table
+              style="
+                width: 100%;
+                margin-top: 0.7rem;
+                border-collapse: collapse;
+                font-size: 0.76em;
+                line-height: 1.4;
+              "
+            >
+              <thead>
+                <tr style="border-bottom: 2px solid #1a1a2e">
+                  <th style="text-align: left; padding: 0.3rem 0.7rem; width: 45%">What you want to see</th>
+                  <th style="text-align: left; padding: 0.3rem 0.7rem; width: 33%">Operator</th>
+                  <th style="text-align: center; padding: 0.3rem 0.7rem; width: 22%">Visual structure</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom: 1px solid #d8d3ca">
+                  <td style="padding: 0.34rem 0.7rem">compare the same measure across discrete groups</td>
+                  <td style="padding: 0.34rem 0.7rem"><code><span class="viz-op">spread</span>(by=key)</code></td>
+                  <td style="padding: 0.18rem 0.7rem">
+                    <div style="width: 150px; height: 40px; display: flex; align-items: center; justify-content: center; overflow: hidden; margin: auto">
+                      <div id="chart-viz-op-spread"></div>
+                    </div>
+                  </td>
+                </tr>
+                <tr style="border-bottom: 1px solid #d8d3ca">
+                  <td style="padding: 0.34rem 0.7rem">see how parts add up to a whole</td>
+                  <td style="padding: 0.34rem 0.7rem"><code><span class="viz-op">stack</span>(by=key, size=value)</code></td>
+                  <td style="padding: 0.18rem 0.7rem">
+                    <div style="width: 150px; height: 40px; display: flex; align-items: center; justify-content: center; overflow: hidden; margin: auto">
+                      <div id="chart-viz-op-stack"></div>
+                    </div>
+                  </td>
+                </tr>
+                <tr style="border-bottom: 1px solid #d8d3ca">
+                  <td style="padding: 0.34rem 0.7rem">see how two measures vary together</td>
+                  <td style="padding: 0.34rem 0.7rem"><code><span class="viz-op">scatter</span>(by=key, x=x, y=y)</code></td>
+                  <td style="padding: 0.18rem 0.7rem">
+                    <div style="width: 150px; height: 40px; display: flex; align-items: center; justify-content: center; overflow: hidden; margin: auto">
+                      <div id="chart-viz-op-scatter"></div>
+                    </div>
+                  </td>
+                </tr>
+                <tr style="border-bottom: 1px solid #d8d3ca">
+                  <td style="padding: 0.34rem 0.7rem">follow the same item across positions</td>
+                  <td style="padding: 0.34rem 0.7rem">
+                    <code><span class="viz-mark">line</span>(by=key)</code> or
+                    <code><span class="viz-mark">ribbon</span>(by=key)</code>
+                  </td>
+                  <td style="padding: 0.18rem 0.7rem">
+                    <div style="width: 150px; height: 40px; display: flex; align-items: center; justify-content: center; overflow: hidden; margin: auto">
+                      <div id="chart-viz-op-ribbon"></div>
+                    </div>
+                  </td>
+                </tr>
+                <tr style="border-bottom: 1px solid #d8d3ca">
+                  <td style="padding: 0.34rem 0.7rem">look up a value by two discrete keys</td>
+                  <td style="padding: 0.34rem 0.7rem"><code><span class="viz-op">table</span>(by=(row, col))</code></td>
+                  <td style="padding: 0.18rem 0.7rem">
+                    <div style="width: 150px; height: 40px; display: flex; align-items: center; justify-content: center; overflow: hidden; margin: auto">
+                      <div id="chart-viz-op-table" style="margin-left: -40px"></div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <p style="font-size: 0.58em; color: #666; margin-top: 0.7rem; text-align: left">
+              Beyond layout: data transforms change the values, color changes grouping and emphasis,
+              and coordinate transforms change the geometry.
+            </p>
+            <aside class="notes">
+              This is a little like choosing a chart type: start with what you
+              want the reader to see, then choose a structure that supports
+              it. The difference is that these are composable moves, not
+              mutually exclusive finished answers. A slope chart, for example,
+              combines spread, scatter, and line. A mosaic nests several
+              stacks. The small note below keeps the wider toolbox visible
+              without turning this into another taxonomy: transforms change
+              data, color changes grouping and emphasis, and coordinates
+              change geometry.
+            </aside>
+          </section>
+
+          <section data-visibility="hidden">
+            <h2>each operator makes one query cheap</h2>
+            <table
+              style="
+                width: 100%;
+                margin-top: 0.6rem;
+                border-collapse: collapse;
+                font-size: 0.76em;
+                line-height: 1.42;
+              "
+            >
+              <thead>
+                <tr style="border-bottom: 2px solid #1a1a2e">
+                  <th
+                    style="
+                      text-align: left;
+                      padding: 0.32rem 0.7rem;
+                      color: #1a1a2e;
+                      font-weight: 700;
+                      width: 17%;
+                    "
+                  >
+                    Operator
+                  </th>
+                  <th
+                    style="
+                      text-align: left;
+                      padding: 0.32rem 0.7rem;
+                      color: #1a1a2e;
+                      font-weight: 700;
+                      width: 20%;
+                    "
+                  >
+                    shape
+                  </th>
+                  <th
+                    style="
+                      text-align: left;
+                      padding: 0.32rem 0.7rem;
+                      color: #1a1a2e;
+                      font-weight: 700;
+                      width: 22%;
+                    "
+                  >
+                    index
+                    <span
+                      style="
+                        display: block;
+                        font-weight: 400;
+                        font-size: 0.75em;
+                        color: #888;
+                      "
+                      >what <code>by=</code> builds</span
+                    >
+                  </th>
+                  <th
+                    style="
+                      text-align: left;
+                      padding: 0.32rem 0.7rem;
+                      color: #1a1a2e;
+                      font-weight: 700;
+                      width: 41%;
+                    "
+                  >
+                    ask
+                    <span
+                      style="
+                        display: block;
+                        font-weight: 400;
+                        font-size: 0.75em;
+                        color: #888;
+                      "
+                      >the queries it makes cheap</span
+                    >
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom: 1px solid #e8e8e8">
+                  <td style="padding: 0.18rem 0.7rem">
+                    <code>spread(by=<em class="q-field">key</em>)</code>
+                  </td>
+                  <td style="padding: 0.18rem 0.7rem">
+                    <div
+                      style="
+                        width: 150px;
+                        height: 40px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        overflow: hidden;
+                      "
+                    >
+                      <div data-archive-id="chart-viz-op-spread"></div>
+                    </div>
+                    <div
+                      style="
+                        font-size: 0.62em;
+                        color: #999;
+                        text-align: center;
+                      "
+                    >
+                      1 axis · discrete
+                    </div>
+                  </td>
+                  <td style="padding: 0.18rem 0.7rem; color: #555; font-size: 0.85em">
+                    <code><em class="q-field">key</em> → its own slot</code>, side by side
+                  </td>
+                  <td style="padding: 0.18rem 0.7rem; color: #555">
+                    <div class="viz-query" style="font-size: 0.85em">
+                      <span class="q-line"><span class="q-val">look up</span> <span class="q-hole">⟨an entity⟩</span> <span style="white-space: nowrap">at its <em class="q-field">key</em></span></span>
+                      <span class="q-line"><span class="q-val">compare</span> <span class="q-hole">⟨summaries⟩</span> across <em class="q-field">key</em></span>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="fragment" data-fragment-index="1" style="border-bottom: 1px solid #e8e8e8">
+                  <td style="padding: 0.18rem 0.7rem">
+                    <code>stack(by=<em class="q-field">key</em>, size=<em class="q-field">value</em>)</code>
+                  </td>
+                  <td style="padding: 0.18rem 0.7rem">
+                    <div
+                      style="
+                        width: 150px;
+                        height: 40px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        overflow: hidden;
+                      "
+                    >
+                      <div data-archive-id="chart-viz-op-stack"></div>
+                    </div>
+                    <div
+                      style="
+                        font-size: 0.62em;
+                        color: #999;
+                        text-align: center;
+                      "
+                    >
+                      1 axis · discrete · slots sized by value
+                    </div>
+                  </td>
+                  <td style="padding: 0.18rem 0.7rem; color: #555; font-size: 0.85em">
+                    <code><em class="q-field">key</em> → a segment sized by <em class="q-field">value</em></code>, tiled end to end in order
+                  </td>
+                  <td style="padding: 0.18rem 0.7rem; color: #555">
+                    <div class="viz-query" style="font-size: 0.85em">
+                      <span class="q-line"><span class="q-val">look up</span> <span class="q-hole">⟨<em class="q-field">key</em>'s segment⟩</span> in order</span>
+                      <span class="q-line"><span class="q-val">compare</span> <span class="q-hole">⟨sizes⟩</span> across <em class="q-field">key</em></span>
+                      <span class="q-line"><span class="q-val">read</span> <span class="q-hole">⟨the total = Σ <em class="q-field">size</em>⟩</span> at <span style="white-space: nowrap">the far edge</span></span>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="fragment" data-fragment-index="2" style="border-bottom: 1px solid #e8e8e8">
+                  <td style="padding: 0.18rem 0.7rem">
+                    <code>scatter(by=<em class="q-field">key</em>, x=<em class="q-field">x</em>, y=<em class="q-field">y</em>)</code>
+                  </td>
+                  <td style="padding: 0.18rem 0.7rem">
+                    <div
+                      style="
+                        width: 150px;
+                        height: 40px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                      "
+                    >
+                      <div data-archive-id="chart-viz-op-scatter"></div>
+                    </div>
+                    <div
+                      style="
+                        font-size: 0.62em;
+                        color: #999;
+                        text-align: center;
+                      "
+                    >
+                      1–2 axes · continuous
+                    </div>
+                  </td>
+                  <td style="padding: 0.18rem 0.7rem; color: #555; font-size: 0.85em">
+                    <code><em class="q-field">key</em> → a point at (<em class="q-field">x</em>, <em class="q-field">y</em>)</code>
+                  </td>
+                  <td style="padding: 0.18rem 0.7rem; color: #555">
+                    <div class="viz-query" style="font-size: 0.85em">
+                      <span class="q-line"><span class="q-val">look up</span> <span class="q-hole">⟨an entity⟩</span> at <span style="white-space: nowrap">(<em class="q-field">x</em>, <em class="q-field">y</em>)</span></span>
+                      <span class="q-line"><span class="q-val">collect</span> <span class="q-hole">⟨the shape of the crowd⟩</span></span>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="fragment" data-fragment-index="3" style="border-bottom: 1px solid #e8e8e8">
+                  <td style="padding: 0.18rem 0.7rem">
+                    <code>table(by=<span style="white-space: nowrap">(<em class="q-field">row</em>, <em class="q-field">col</em>)</span>)</code>
+                  </td>
+                  <td style="padding: 0.18rem 0.7rem">
+                    <div
+                      style="
+                        width: 150px;
+                        height: 40px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: flex-start;
+                        overflow: hidden;
+                      "
+                    >
+                      <!-- GoFish pads every side by 40px; pull the svg left so
+                           the grid's left edge aligns with the other rows'
+                           (whose 40px margins are symmetrically clipped by
+                           their centered 150px windows). -->
+                      <div
+                        data-archive-id="chart-viz-op-table"
+                        style="margin-left: -40px"
+                      ></div>
+                    </div>
+                    <div
+                      style="
+                        font-size: 0.62em;
+                        color: #999;
+                        text-align: center;
+                      "
+                    >
+                      2 axes · discrete
+                    </div>
+                  </td>
+                  <td style="padding: 0.18rem 0.7rem; color: #555; font-size: 0.85em">
+                    <code>(<em class="q-field">row</em>, <em class="q-field">col</em>) → a cell</code>, a grid both ways
+                  </td>
+                  <td style="padding: 0.18rem 0.7rem; color: #555">
+                    <div class="viz-query" style="font-size: 0.85em">
+                      <span class="q-line"><span class="q-val">look up</span> <span class="q-hole">⟨a value⟩</span> at <span style="white-space: nowrap">(<em class="q-field">row</em>, <em class="q-field">col</em>)</span></span>
+                      <span class="q-line"><span class="q-val">compare</span> <span class="q-hole">⟨…⟩</span> along a row or a column</span>
+                    </div>
+                  </td>
+                </tr>
+                <!-- <tr>
+                  <td style="padding: 0.22rem 0.8rem">
+                    <code>align / distribute</code>
+                  </td>
+                  <td style="padding: 0.22rem 0.8rem; color: #aaa">
+                    <em>discrete?</em>
+                  </td>
+                  <td style="padding: 0.22rem 0.8rem; color: #555">
+                    alignment &amp; uniform density
+                  </td>
+                </tr> -->
+                <tr class="fragment" data-fragment-index="4">
+                  <td
+                    colspan="4"
+                    style="
+                      padding: 0.3rem 0.7rem 0.05rem;
+                      border-top: 2px solid #1a1a2e;
+                      color: #999;
+                      font-size: 0.62em;
+                      letter-spacing: 0.04em;
+                      text-transform: uppercase;
+                    "
+                  >
+                    relational, draws over an index, builds none
+                  </td>
+                </tr>
+                <tr class="fragment" data-fragment-index="4">
+                  <td style="padding: 0.18rem 0.7rem">
+                    <code>line() / ribbon()</code>
+                  </td>
+                  <td style="padding: 0.18rem 0.7rem">
+                    <div
+                      style="
+                        width: 150px;
+                        height: 40px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        overflow: hidden;
+                      "
+                    >
+                      <div data-archive-id="chart-viz-op-ribbon"></div>
+                    </div>
+                    <div
+                      style="
+                        font-size: 0.62em;
+                        color: #999;
+                        text-align: center;
+                      "
+                    >
+                      no index, draws over one
+                    </div>
+                  </td>
+                  <td style="padding: 0.18rem 0.7rem; color: #555; font-size: 0.85em">
+                    <span style="color: #bbb">none</span>
+                  </td>
+                  <td style="padding: 0.18rem 0.7rem; color: #555">
+                    <div class="viz-query" style="font-size: 0.85em">
+                      <span class="q-line"><span class="q-val">follow</span> <span class="q-hole">⟨an entity⟩</span> across scopes</span>
+                      <span class="q-line"><span class="q-val">read</span> <span class="q-hole">⟨crossings⟩</span> as overtakes</span>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- DISABLED: color footnote hidden on-slide (speaker notes below still cover it). -->
+            <!--
+            <div
+              class="fragment"
+              data-fragment-index="5"
+              style="
+                text-align: left;
+                font-size: 0.62em;
+                color: #666;
+                margin-top: 0.3rem;
+                padding: 0 0.7rem;
+              "
+            >
+              <strong>color</strong>: groups by similarity, nonlocally; ties
+              marks across the layout without building a spatial index;
+              weaker than proximity by default
+            </div>
+            -->
+            <div
+              style="
+                text-align: right;
+                font-size: 0.55em;
+                color: #aaa;
+                margin-top: 0.15rem;
+              "
+            >
+              queries after Brehmer &amp; Munzner (2013)
+            </div>
+            <aside class="notes">
+              spread, discrete; alignment &amp; uniform density.
+              <br />
+              stack, partitioned continuous; part-to-whole.
+              <br />
+              scatter, continuous × continuous; proximity.
+              <br />
+              area / line / ribbon, continuous or contiguous; connection.
+              <br />
+              table, discrete × discrete; uniform density.
+              <br /><br />
+              Every operator does two jobs: an addressing move (what's where,
+              what's locatable) and a pricing move (which readings become one
+              perceptual act). Connection is the only pure pricing move, and
+              the scatterpie works by keeping scatter's addressing while
+              swapping the value payload.
+              <br /><br />
+              The scatterpie composes two of these: scatter contributes how
+              the distribution varies across space, the pie glyph contributes
+              share-within-entity.
+              <br /><br />
+              Connection is the strongest grouping cue there is, stronger
+              than proximity, stronger than color or shape similarity
+              (Franconeri, Bemis, Burlingham &amp; Kramer 2021, PSPI, Fig. 8).
+              Explicit connecting lines improve relation judgments by
+              25–95% (Nothelfer &amp; Franconeri 2020). Note this is a
+              strength ranking, not Palmer &amp; Rock's 1994 claim about
+              processing priority (which is about order of computation, not
+              which cue wins).
+              <br /><br />
+              That ranking is a default, not a total order: connection >
+              common region/connectedness > proximity > similarity (color >
+              shape). Cue strength is parametric and cues combine additively
+              in log-odds (Kubovy &amp; van den Berg 2008; Brooks 2015), so a
+              strong enough similarity cue can override a weak proximity cue
+              (Quinlan &amp; Wilton 1998). In grouped bar charts specifically,
+              spatial proximity beats color grouping for comparisons about
+              63/37 of the time (Bearfield, Stokes, Lovett &amp; Franconeri
+              2024, TVCG). Full notes: notes/gestalt-grouping-strength.md.
+              <br /><br />
+              The bottom line about color is the nonlocal grouping cue:
+              similarity groups marks without adjacency and without building
+              a spatial index, no by= to point to. By default it sits below
+              proximity in the strength ranking above, but that ordering is
+              parametric, not fixed: a large enough color difference, or
+              tight enough spacing, can flip it (same Quinlan &amp; Wilton
+              1998 / Bearfield et al. 2024 point as above, applied to this
+              table's own operators).
+              <br /><br />
+              the ask column's verbs are Brehmer &amp; Munzner's: look up and
+              follow are their search actions, compare/read/collect their
+              query actions. Their identify/compare/summarize ladder maps onto
+              this table three ways: identify is a mark-level read, compare
+              is the operator's ask line, summarize is what the hole
+              collapses down to once a scope docks upward, worth saying out
+              loud, since the chip no longer prints a price for it.
+              <br /><br />
+              spread is align + distribute: distribute builds the index (the
+              index cell, one slot per key), align prices the comparison
+              itself (the ask line). Which align anchor you pick decides
+              which comparison is precise: baseline anchoring gives
+              common-scale length comparisons, middle anchoring gives
+              symmetric deviation comparisons.
+              <br /><br />
+              stack trades per-key comparison accuracy, interior segments
+              lose the shared baseline the moment they're not first, for a
+              free read of the total at the far edge. That far edge, Σ size,
+              is itself a size an enclosing operator can consume. Normalize
+              it (size: field(...).normalize()) and the far edge reads as
+              ⟨each key's share⟩ instead of an absolute total.
+              <br /><br />
+              scatter's key is one field, with x/y carried as attributes
+              (by= is optional, omit it for a per-item scatter). A 1D
+              scatter, with only x or only y bound, is a strip plot, hence
+              "1–2 axes" under the preview. table's key is two fields
+              crossed (by={row, col}); that row/col split is what makes it
+              discrete both ways, versus scatter's continuous one-or-two.
+              <br /><br />
+              ⟨the shape of the crowd⟩ = trends, clusters, outliers, the
+              gestalt reads a scatter affords for free. Scagnostics is the
+              formalization of exactly that list.
+              <br /><br />
+              What each operator's "places" used to say, before the shape
+              column replaced the prose: spread, one slot per value of a
+              field. stack, scopes tiled end to end; boundaries at the
+              running totals. scatter, each entity at its location in space.
+              area / line / ribbon, nothing new; draws over existing
+              placements. table, two independently addressable axes.
+            </aside>
+          </section>
+
+          <!-- <section>
+            <h2>Data schema</h2>
+            <div
+              class="grammar-grid"
+              style="margin-top: 2rem; font-size: 0.95em"
+            >
+              <div class="grammar-term">outer key</div>
+              <div class="grammar-def">
+                <code>lake: discrete</code><br />
+                <span style="font-size: 0.85em; color: #888"
+                  >same scatter positioning, outer structure unchanged</span
+                >
+              </div>
+              <div class="grammar-term">value</div>
+              <div class="grammar-def">
+                <code>total catch → balloon scale (area)</code><br />
+                <span style="font-size: 0.85em; color: #888"
+                  >magnitude encoded as 2D area</span
+                >
+              </div>
+              <div class="grammar-term">channel</div>
+              <div class="grammar-def">
+                <code>dominant species → color</code><br />
+                <span style="font-size: 0.85em; color: #888"
+                  >only the top species survives, per-species breakdown is
+                  gone</span
+                >
+              </div>
+            </div>
+            <aside class="notes">
+              The inner glyph now encodes only two things: total magnitude and
+              dominant species. All per-species breakdown information is
+              discarded. This is a radical simplification compared to the pie or
+              flower.
+            </aside>
+          </section> -->
+
+          <!-- ─── YOU HAVE CHOICE ───────────────────────────────── -->
+
+          <!-- ─── REAL-WORLD EXAMPLE ────────────────────────────── -->
+
+          <!-- <section>
+            <h2>the framework generalizes beyond the tool</h2>
+            <div class="two-col" style="align-items: start">
+              <div>
+                <img
+                  src="motivational-images/nyt.png"
+                  style="width: 100%; border-radius: 4px"
+                  alt="NYT complex visualization"
+                />
+              </div>
+              <div style="font-size: 0.78em; line-height: 1.85">
+                <p class="fragment">
+                  <strong>Outer structure</strong><br />
+                  <span style="color: #555"
+                    >small multiples: one panel per time period → enables
+                    change-over-time comparison</span
+                  >
+                </p>
+                <p class="fragment" style="margin-top: 0.7rem">
+                  <strong>Inner glyph</strong><br />
+                  <span style="color: #555"
+                    >connected scatter: position encodes two quantitative
+                    variables simultaneously</span
+                  >
+                </p>
+                <p class="fragment" style="margin-top: 0.7rem">
+                  <strong>Afforded queries</strong><br />
+                  <span style="color: #555"
+                    >trajectory shape (trend), outlier years, correlation
+                    between axes</span
+                  >
+                </p>
+                <p class="fragment" style="margin-top: 0.7rem; color: #888">
+                  <strong>Hard</strong><br />
+                  precise year-over-year value comparison across panels
+                </p>
+              </div>
+            </div>
+            <aside class="notes">
+              You don't need GoFish to apply this framework. Any complex graphic
+              can be analyzed as: outer structure (what's the primary grouping?)
+              + inner glyph (what does each unit show?) + afforded queries
+              (what's easy/hard to read?). The tool makes this precise. The
+              framework works even without the tool. ~25 min mark.
+            </aside>
+          </section> -->
+
+          <!-- <section>
+            <h2>You have choice, and now you know how to make it</h2>
+            <div
+              style="margin-top: 1.2rem; font-size: 0.88em; line-height: 1.9"
+            >
+              <p class="fragment">
+                Three visualizations a typology would treat as
+                <strong>unrelated chart types</strong>.
+              </p>
+              <p class="fragment">
+                But they share the same outer structure and differ only in the
+                inner glyph.
+              </p>
+              <p class="fragment">
+                Once you see it structurally, the choice becomes deliberate:
+                <em>which inner query do you want to afford?</em>
+              </p>
+              <p class="fragment">
+                There are real tradeoffs, familiarity, legibility, precision.
+                But the <strong>query-affordance frame</strong>
+                tells you how to reason about them.
+              </p>
+            </div>
+            <div
+              class="callout fragment"
+              style="font-size: 0.8em; margin-top: 0.8rem"
+            >
+              And as AI generation gets cheaper, the cost of exploring
+              structural variations is dropping fast.
+            </div>
+            <aside class="notes">
+              ~25 min mark. The audience should feel that they now have a handle
+              on something they didn't before, a way to think about charts that
+              isn't "pick the right chart type."
+            </aside>
+          </section> -->
+        </section>
+        <!-- /COLUMN 3 -->
+
+        <!-- COLUMN 4 retrospective (back to the beginning + charts A–C) omitted -->
