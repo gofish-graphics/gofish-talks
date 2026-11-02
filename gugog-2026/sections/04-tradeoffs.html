@@ -7,7 +7,7 @@
              shared structure", gugog-2026-position-paper-v3/main.typ); its
              code and render are the final paper's Figure 5
              (gugog-2026-camera-ready-v3) and the gofish-gotree source.
-             The second tradeoff keeps the outline's CanSum framing (the type
+             The second tradeoff keeps the outline's CanAdd framing (the type
              system), not v3's, which predates the type system. Its code is
              from the current GoFish source, where the class is named CanAdd.
              Styles for the code slides: ../gofish-compare.css. -->
@@ -199,16 +199,11 @@ const celsius = await errorOf(() =&gt;
             <p><strong>Target:</strong> 0:55. <strong>Running total:</strong>
               6:20 of 7:00 (budget; the deck now runs 8:35).</p>
             <ul>
-              <li>Expressive vs. structured: the <code>CanSum</code> example
+              <li>Expressive vs. structured: the <code>CanAdd</code> example
                 keeps both.</li>
             </ul>
             <p><strong>Hand off:</strong> "Cynthia and Matt are about to argue
               this carefully. Here's a mechanism to push on."</p>
-            <p><strong>Name:</strong> the outline calls this
-              <code>CanSum</code>. In the current GoFish source it is
-              <code>CanAdd</code> (renamed in PR #1197, "Units as a domain plus
-              traits, with CanAdd", #1200); older branches' design doc still
-              says <code>CanSum</code>. The slide uses the current name.</p>
             <p><strong>Say:</strong> The same <code>stack</code> verb works on
               anything, which is the expressive part. The structure comes from
               the data's type: a unit declares what it can do, and
