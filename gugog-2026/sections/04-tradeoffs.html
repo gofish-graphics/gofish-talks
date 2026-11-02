@@ -11,6 +11,46 @@
              system), not v3's, which predates the type system. Its code is
              from the current GoFish source, where the class is named CanAdd.
              Styles for the code slides: ../gofish-compare.css. -->
+        <!-- The position the GoTree slide answers: McNutt, "No Grammar to
+             Rule Them All", IEEE VIS 2022 (arXiv:2207.07998), quoted
+             verbatim except for its reference markers. -->
+        <section class="quote-slide">
+          <p class="part">4 · Two tradeoffs verbs dissolve</p>
+          <blockquote class="long-quote">
+            <p>Park et al. argue that efforts should be made to “find a
+              definitive grammar that can unify many of these existing
+              grammars”. However, Greenspun’s tenth rule quips that any
+              sufficiently complicated program contains an ad hoc, informally
+              specified, bug-ridden, slow implementation of half of Lisp. Less
+              satirically Fowler notes that one of the biggest dangers in DSL
+              design is “Sliding into generality.” While tools like Vega-Lite
+              are probably not in danger of becoming Lisp, we suggest that
+              consideration of small modular language components may be
+              helpful in the continuation and extension of this ecosystem.
+              There are many tasks, and no one DSL will be able to capture all
+              of them without compromising essential parts of its domain
+              design. <span class="nowrap">That is, <strong>there is no grammar
+              to rule them all.</strong></span></p>
+          </blockquote>
+          <p class="long-quote-cite">Andrew McNutt, <em>No Grammar to Rule Them All</em>, IEEE VIS 2022</p>
+          <aside class="notes">
+            <p><strong>Target:</strong> 0:15 (shown, not recited; read the
+              last sentence aloud). <strong>Running total:</strong> 4:40 of
+              7:00 (budget; the deck now runs 8:50).</p>
+            <p><strong>Say:</strong> "Here's the strongest version of the
+              case against a universal grammar. Andrew McNutt surveyed the
+              JSON visualization grammars and concluded: there is no grammar
+              to rule them all." Then go to the next slide: this is the claim
+              the GoTree slide answers. A domain grammar like GoTree can keep
+              its own design and still sit on a shared core, so you get both.</p>
+            <p>The quote is verbatim from Andrew McNutt, "No Grammar to Rule
+              Them All: A Survey of JSON-style DSLs for Visualization", IEEE
+              VIS 2022 (arXiv:2207.07998), except that its reference markers
+              ([82] after "Park et al.", [29] after "tenth rule", [24] after
+              "Fowler") were removed. The bold on the last sentence is ours.</p>
+          </aside>
+        </section>
+
         <section class="code-slide">
           <p class="part">4 · Two tradeoffs verbs dissolve</p>
           <h2>universal vs. domain-specific</h2>
@@ -55,9 +95,9 @@
             </div>
           </div>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:35 (1:00 for this tradeoff, over two
-              slides; 2:00 for section 4). <strong>Running total:</strong> 5:00
-              of 7:00 (budget; the deck now runs 8:35).</p>
+            <p><strong>Target:</strong> 0:35 (1:15 for this tradeoff, over three
+              slides with the quote; 2:15 for section 4). <strong>Running total:</strong> 5:15
+              of 7:00 (budget; the deck now runs 8:50).</p>
             <ul>
               <li>Universal vs. domain-specific: respond to Jason. Domain
                 grammars can be layered on a shared core instead of being
@@ -130,7 +170,7 @@
           </p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:25. <strong>Running total:</strong>
-              5:25 of 7:00 (budget; the deck now runs 8:35).</p>
+              5:40 of 7:00 (budget; the deck now runs 8:50).</p>
             <p><strong>Say:</strong> And here's how it's layered. The
               <code>combine</code> that the tree spec called turns each axis
               into an ordinary GoFish constraint, <code>Constraint.align</code>
@@ -197,7 +237,7 @@ const celsius = await errorOf(() =&gt;
           </div>
           <aside class="notes">
             <p><strong>Target:</strong> 0:55. <strong>Running total:</strong>
-              6:20 of 7:00 (budget; the deck now runs 8:35).</p>
+              6:35 of 7:00 (budget; the deck now runs 8:50).</p>
             <ul>
               <li>Expressive vs. structured: the <code>CanAdd</code> example
                 keeps both.</li>

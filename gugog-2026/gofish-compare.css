@@ -147,3 +147,63 @@
   font-size: 0.6em !important;
   line-height: 1.35 !important;
 }
+
+/* The GoFish crash course (03b): two columns, core on the left and chart
+   level on the right, each a live render above its code. Both slides use
+   the same boxes. The code is a little smaller here so the longest line
+   (the stack line) fits its half of the slide. */
+.crash-pair {
+  align-items: start;
+  display: grid;
+  gap: 0 1.4rem;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 0.3rem;
+}
+
+.crash-col {
+  min-width: 0;
+}
+
+.crash-render {
+  display: flex;
+  justify-content: center;
+  margin: 0.2rem 0 0.4rem;
+}
+
+.reveal .code-slide .crash-pair pre {
+  font-size: 0.57em;
+}
+
+/* The McNutt quote that opens section 4 (04-tradeoffs.html). Long, so it is
+   set near body size, left-aligned, with an accent rule. The last
+   sentence is the claim, so it is bold in the accent color. */
+.reveal .quote-slide blockquote.long-quote {
+  border-left: 6px solid var(--accent);
+  box-shadow: none;
+  font-size: 1.04em;
+  font-style: normal;
+  line-height: 1.36;
+  margin: 1.6rem auto 0;
+  padding: 0.1em 0 0.1em 0.9em;
+  text-align: left;
+  width: 94%;
+}
+
+.reveal .quote-slide blockquote.long-quote p {
+  margin: 0;
+}
+
+.reveal .quote-slide blockquote.long-quote strong {
+  color: var(--accent);
+}
+
+.reveal .quote-slide .long-quote-cite {
+  color: var(--muted);
+  font-size: 0.55em;
+  margin: 0.8rem 4% 0 0;
+  text-align: right;
+}
+
+.reveal .quote-slide .nowrap {
+  white-space: nowrap;
+}

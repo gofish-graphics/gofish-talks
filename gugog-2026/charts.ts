@@ -1,9 +1,13 @@
-// Live GoFish charts for section 5 ("big vs. small"). A slide asks for one
-// with an empty element, e.g. <div data-chart="usage-curve"></div>, and
-// renderCharts() draws it there. data-w and data-h set its size in pixels.
+// Live GoFish charts. A slide asks for one with an empty element, e.g.
+// <div data-chart="usage-curve"></div>, and renderCharts() draws it there.
+// data-w and data-h set its size in pixels.
 //
-// Both charts are schematic. The numbers below only give the shapes; no axis
-// shows them, and none of them was measured.
+// Section 5 ("big vs. small"): the usage curve and the compression bars.
+// Both are schematic. The numbers below only give the shapes; no axis shows
+// them, and none of them was measured.
+//
+// Section 3b (the GoFish crash course): the planets and the seafood charts.
+// Their code is the code printed on the slides, unchanged.
 import {
   chart,
   layer,
@@ -16,7 +20,11 @@ import {
   rect,
   text,
   Color,
+  map,
+  ellipse,
+  field,
 } from "gofish-graphics";
+import seafood from "./data/seafood.json";
 
 // The deck's look (talk-template/src/style.css).
 const FONT = '"Shantell Sans Local", "Shantell Sans", sans-serif';
@@ -142,9 +150,85 @@ function compression(fontSize: number) {
   ]);
 }
 
-const charts: Record<string, (fontSize: number) => ReturnType<typeof spread>> = {
+// ─── Section 3b: the GoFish crash course ──────────────────────────────────
+// The core level: the inner planets, from the GoFish repo's
+// packages/gofish-graphics/stories/bluefish/Planets.stories.tsx
+// (PlanetsOnly, then PlanetsWithLabelAbove without its two comment lines).
+const planets = [
+  { name: "Mercury", radius: 15, color: "#EBE3CF" },
+  { name: "Venus", radius: 36, color: "#DC933C" },
+  { name: "Earth", radius: 38, color: "#179DD7" },
+  { name: "Mars", radius: 21, color: "#F1CF8E" },
+];
+
+const planetsRow = () =>
+  spread(
+    { dir: "x", spacing: 50, alignment: "middle" },
+    map(planets, (planet) =>
+      ellipse({
+        w: planet.radius * 2,
+        h: planet.radius * 2,
+        fill: planet.color,
+        stroke: "#333",
+        strokeWidth: 3,
+      })
+    )
+  );
+
+const planetsLabeled = () =>
+  layer([
+    spread(
+      { dir: "x", spacing: 50, alignment: "middle" },
+      map(planets, (planet) =>
+        ellipse({
+          w: planet.radius * 2,
+          h: planet.radius * 2,
+          fill: planet.color,
+          stroke: "#333",
+          strokeWidth: 3,
+        }).name(planet.name)
+      )
+    ),
+  ]).relate(({ Mercury }) => [
+    spread({ dir: "y", spacing: 60, alignment: "middle" }, [
+      text({ text: "Mercury" }),
+      Mercury,
+    ]),
+  ]);
+
+// The chart level: the thesis deck's seafood walkthrough. The stacked bars
+// are its "Spread the Lakes Apart" slide; the ribbon chart adds the
+// .layer(ribbon(...)) step of its stage 3b figure (the GUGOG paper's
+// Figure 2). data/seafood.json is the GoFish repo's seafood fixture with the
+// thesis deck's lake names.
+const seafoodStacked = () =>
+  chart(seafood)
+    .flow(
+      spread({ by: "lake", dir: "x", spacing: 64 }),
+      stack({ by: field("species").sort("count"), dir: "y" }),
+    )
+    .mark(rect({ h: "count", fill: "species" }));
+
+const seafoodRibbon = () =>
+  chart(seafood)
+    .flow(
+      spread({ by: "lake", dir: "x", spacing: 64 }),
+      stack({ by: field("species").sort("count"), dir: "y" }),
+    )
+    .mark(rect({ h: "count", fill: "species" }))
+    .layer(ribbon({ by: "species", opacity: 0.8 }));
+
+type Renderable = {
+  render: (el: HTMLElement, options: Record<string, unknown>) => unknown;
+};
+
+const charts: Record<string, (fontSize: number) => Renderable> = {
   "usage-curve": usageCurve,
   compression,
+  planets: planetsRow,
+  "planets-label": planetsLabeled,
+  "seafood-stacked": seafoodStacked,
+  "seafood-ribbon": seafoodRibbon,
 };
 
 export function renderCharts(root: ParentNode = document) {

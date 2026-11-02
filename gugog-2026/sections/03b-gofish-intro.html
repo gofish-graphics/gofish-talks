@@ -2,119 +2,160 @@
              04. Linked here so the deck loads it without touching main.ts. -->
         <link rel="stylesheet" href="./gofish-compare.css" />
 
-        <!-- ═══ SECTION 3b: GOFISH, BRIEFLY, ~0:30 ═══════════════════════
+        <!-- ═══ SECTION 3b: A GOFISH CRASH COURSE, ~0:30 ═════════════════
+             Two slides, each with the core level on the left and the chart
+             level on the right. The second slide adds one step to each.
              Leads from "nouns but no verbs" (section 3) into the code
-             comparisons (03c). Wording from the SciPy deck's GoFish slide
-             (scipy-2026/sections/01-opening.html, "graphics are visual data
-             structures") and the thesis deck's "What Is GoFish?" slide
-             (phd-thesis-20260618/presentation/sections/03-gofish.html).
-             Figure and code: Figure 2 of the GUGOG camera-ready paper
-             (phd-thesis-20260618/gugog-2026-camera-ready-v3, main.typ,
-             figures/ribbon-chart.svg), copied exactly. -->
+             comparisons (03c).
+             Every render is live: renderCharts() in ../charts.ts draws it from
+             the same code that is printed beside it (gofish-graphics nightly).
+             Planets code: the GoFish repo's
+             packages/gofish-graphics/stories/bluefish/Planets.stories.tsx
+             (PlanetsOnly, PlanetsWithLabelAbove), without .render() and the
+             story's two comment lines.
+             Seafood code: the thesis deck's ribbon walkthrough
+             (phd-thesis-20260618/presentation/sections/03-gofish.html,
+             "Spread the Lakes Apart", and the .layer(ribbon) step of its
+             stage 3b figure), which is the GUGOG paper's Figure 2. -->
         <section class="code-slide">
           <div class="gofish-intro-head">
             <img src="./images/gofish-intro/gofish-logo.png" alt="GoFish logo" />
             <div>
-              <h2>GoFish adds the verbs</h2>
+              <h2>GoFish composes marks with verbs</h2>
               <p class="gofish-intro-tag">a compositional language for visual structure · open source · gofish.graphics</p>
             </div>
           </div>
-          <div class="gofish-intro-body">
-            <img class="gofish-intro-fig" src="./images/gofish-intro/ribbon-chart.svg" alt="A GoFish ribbon chart: stacked bars of species counts for each lake, with ribbons connecting each species across lakes" />
-            <div class="gofish-intro-chart">
-              <p class="code-pair-label">chart level <span class="code-pair-sub">· big: short specs</span></p>
-              <pre><code class="language-ts" data-line-numbers data-char-marks="3:5-10, 7:5-9, 16:10-15">chart(seafood, { axes: true })
-  .flow(
-    spread({
-      by: "lake", dir: "x",
-      spacing: 64
-    }),
-    stack({
-      by: field("species")
-        .sort("count"),
-      dir: "y"
+          <div class="crash-pair">
+            <div class="crash-col">
+              <p class="code-pair-label">core <span class="code-pair-sub">· small: marks and relations</span></p>
+              <div class="crash-render" data-chart="planets" data-w="560" data-h="150"></div>
+              <pre><code class="language-ts" data-line-numbers>spread(
+  { dir: "x", spacing: 50, alignment: "middle" },
+  map(planets, (planet) =&gt;
+    ellipse({
+      w: planet.radius * 2,
+      h: planet.radius * 2,
+      fill: planet.color,
+      stroke: "#333",
+      strokeWidth: 3,
     })
   )
-  .mark(rect({
-    h: "count", fill: "species"
-  }))
-  .layer(ribbon({
-    by: "species", opacity: 0.8
-  }));</code></pre>
+)</code></pre>
             </div>
-            <div class="gofish-intro-core">
-              <p class="code-pair-label">core <span class="code-pair-sub">· small: marks and relations</span></p>
-              <pre><code class="language-ts" data-line-numbers data-char-marks="3:5-25, 4:5-10">layer([rect(...).name("A"), circle(...).name("B")])
-  .relate(({ A, B }) =&gt; [
-    Constraint.distribute({dir: "x", spacing: 20}, [A, B]),
-    ribbon({dir: "x"}, [A, B]),
-  ])</code></pre>
+            <div class="crash-col">
+              <p class="code-pair-label">chart level <span class="code-pair-sub">· big: short specs</span></p>
+              <div class="crash-render" data-chart="seafood-stacked" data-w="560" data-h="250"></div>
+              <pre><code class="language-ts" data-line-numbers>chart(seafood)
+  .flow(
+    spread({ by: "lake", dir: "x", spacing: 64 }),
+    stack({ by: field("species").sort("count"), dir: "y" }),
+  )
+  .mark(rect({ h: "count", fill: "species" }))</code></pre>
             </div>
           </div>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:30. <strong>Running total:</strong>
-              3:30 of 7:00 (budget; the deck now runs 8:35, see the panel
+            <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
+              3:15 of 7:00 (budget; the deck now runs 8:50, see the panel
               slide).</p>
             <p><strong>Say:</strong> GoFish is my attempt at those verbs. It's
-              a compositional language for visual structure, open source, in
-              TypeScript and Python. Here's a ribbon chart. <code>rect</code>
-              is the noun, the mark the grammar of graphics already has. The
-              highlighted words are the verbs: <code>spread</code> lays the
-              lakes out side by side, <code>stack</code> piles the species
-              inside each lake, and <code>ribbon</code> is a relation that
-              connects marks that are already placed. Verbs take graphics and
-              compose them into bigger graphics.</p>
+              a compositional language for visual structure, open source. Two
+              quick examples. On the left, four planets: <code>ellipse</code>
+              is the noun, and <code>spread</code> is a verb that lays them out
+              in a row. On the right, a stacked bar chart: the same
+              <code>spread</code> lays out the lakes, and <code>stack</code>
+              piles the species inside each one.</p>
             <p><strong>Two levels (plant big vs. small here, one sentence):</strong>
               "GoFish has two levels. The chart level is a big language: short
               specs for common charts. Underneath is a small core, marks and
-              relations like <code>distribute</code> and <code>ribbon</code>,
-              and the chart level is built out of it. So GoFish already has
-              both a big language and a small one, layered. I'll come back to
-              that tradeoff at the end." Section 5 ("the open one: big vs.
-              small") calls back to this slide.</p>
-            <p>The core listing is the paper's section 2.1 example (a
-              <code>distribute</code> constraint and a <code>ribbon</code>
-              relational mark in a <code>layer</code> + <code>.relate()</code>),
-              copied exactly, <code>(...)</code> included. It is not the literal
-              elaboration of the ribbon chart beside it; it shows the same
-              verbs at the core level. The paper's wording: composite relations
-              like <code>spread</code> "can be called outside of a
-              <code>.relate()</code> method ... These direct calls allow users
-              to construct hierarchical specifications without the verbose, but
-              more expressive, <code>layer</code> + <code>.relate()</code>
-              syntax." The thesis deck makes the same point with its "elaborates
-              to" fragment on "Step 1: Spread Into Bars".</p>
+              relations, and the chart level is built out of it. So GoFish
+              already has both a big language and a small one, layered. I'll
+              come back to that tradeoff at the end." Section 5 ("the open
+              one: big vs. small") calls back to this slide.</p>
+            <p><strong>Sources:</strong></p>
+            <ul>
+              <li>Tagline: the SciPy deck's GoFish card
+                (<code>scipy-2026/sections/01-opening.html</code>).</li>
+              <li>Planets: the GoFish repo's <code>PlanetsOnly</code> story
+                (<code>packages/gofish-graphics/stories/bluefish/Planets.stories.tsx</code>),
+                the same planets as the thesis deck's Bluefish walkthrough.
+                Rendered live.</li>
+              <li>Stacked bars: the thesis deck's "Spread the Lakes Apart" slide
+                (<code>presentation/sections/03-gofish.html</code>), with the
+                GoFish repo's seafood data and the thesis deck's lake names.
+                Rendered live.</li>
+            </ul>
+          </aside>
+        </section>
+
+        <section class="code-slide">
+          <h2>Add one thing, get a new graphic</h2>
+          <div class="crash-pair">
+            <div class="crash-col">
+              <p class="code-pair-label">core <span class="code-pair-sub">· + a text mark and a relation</span></p>
+              <div class="crash-render" data-chart="planets-label" data-w="560" data-h="150"></div>
+              <pre><code class="language-ts" data-line-numbers data-char-marks="1:1-7, 11:9-26, 14:1-28, 15:3-58, 16:5-30, 17:5-12, 18:3-5, 19:1-2">layer([
+  spread(
+    { dir: "x", spacing: 50, alignment: "middle" },
+    map(planets, (planet) =&gt;
+      ellipse({
+        w: planet.radius * 2,
+        h: planet.radius * 2,
+        fill: planet.color,
+        stroke: "#333",
+        strokeWidth: 3,
+      }).name(planet.name)
+    )
+  ),
+]).relate(({ Mercury }) =&gt; [
+  spread({ dir: "y", spacing: 60, alignment: "middle" }, [
+    text({ text: "Mercury" }),
+    Mercury,
+  ]),
+])</code></pre>
+            </div>
+            <div class="crash-col">
+              <p class="code-pair-label">chart level <span class="code-pair-sub">· + a ribbon</span></p>
+              <div class="crash-render" data-chart="seafood-ribbon" data-w="560" data-h="250"></div>
+              <pre><code class="language-ts" data-line-numbers data-char-marks="7:3-49">chart(seafood)
+  .flow(
+    spread({ by: "lake", dir: "x", spacing: 64 }),
+    stack({ by: field("species").sort("count"), dir: "y" }),
+  )
+  .mark(rect({ h: "count", fill: "species" }))
+  .layer(ribbon({ by: "species", opacity: 0.8 }))</code></pre>
+            </div>
+          </div>
+          <aside class="notes">
+            <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
+              3:30 of 7:00 (budget; the deck now runs 8:50, see the panel
+              slide).</p>
+            <p><strong>Say:</strong> Now add one thing to each. On the left, a
+              label: we name the planets, put them in a <code>layer</code>,
+              and <code>.relate()</code> says the text sits above Mercury.
+              That's a new mark and a new relation. On the right, one line,
+              <code>ribbon</code>, connects each species across the lakes, and
+              the stacked bars become a ribbon chart. Verbs take graphics and
+              compose them into bigger graphics.</p>
+            <p>The highlights mark only what changed from the previous slide.
+              On the left, the rest of the code moved one indent level when it
+              went inside the <code>layer</code>; that is not highlighted.</p>
             <p><strong>Lead into the next beat:</strong> once we have verbs, we
               can write other grammars' ideas with them, and then compare
               them.</p>
             <p><strong>Sources:</strong></p>
             <ul>
-              <li>Tagline "a compositional language for visual structure" and
-                "open source, TypeScript with Python bindings": the SciPy deck's
-                GoFish card on the "graphics are visual data structures" slide
-                (<code>scipy-2026/sections/01-opening.html</code>).</li>
-              <li>"Verbs, not just marks" framing: the thesis deck's "What Is
-                GoFish?" slide (<code>presentation/sections/03-gofish.html</code>),
-                whose note says "the grammar of graphics gives you marks and
-                channels but very few verbs ... GoFish makes the verbs first
-                class instead." Its slide text ("an expressive visualization
-                library built on Bluefish that integrates our formalism of
-                Gestalt relationships with the Grammar of Graphics") is too
-                long for a 30-second beat, so it lives here instead.</li>
-              <li>"Two levels": the SciPy and thesis decks both show the chart
-                API first and the lower level second; the labels "big" and
-                "small" are new here, to set up section 5.</li>
-              <li>Chart and code: Figure 2 of the GUGOG camera-ready paper
-                ("A GoFish ribbon chart: operators arrange the rectangles, and a
-                relational mark connects them"), copied exactly. It is also the
-                end point of the thesis deck's ribbon walkthrough (Steps 1 to
-                3d), and it uses the same seafood data as the "Data" cell on the
-                section 3 slide.</li>
+              <li>Labeled planets: the GoFish repo's
+                <code>PlanetsWithLabelAbove</code> story (same file as above),
+                without <code>.render()</code> and its two comment lines.
+                Rendered live.</li>
+              <li>Ribbon chart: the thesis deck's stage 3b figure
+                (<code>.layer(ribbon({ by: "species", opacity: 0.8 }))</code>,
+                <code>scripts/generate-gofish-stage-assets.mjs</code>). It is
+                the GUGOG paper's Figure 2 ("A GoFish ribbon chart: operators
+                arrange the rectangles, and a relational mark connects them").
+                The paper's listing is the same spec, wrapped for a narrow
+                column and with <code>{ axes: true }</code>.
+                Rendered live.</li>
             </ul>
-            <p>Paper wording you can borrow: "GoFish extends the GoG with
-              relations and operators for composing marks together." Operators
-              (<code>spread</code>, <code>stack</code>) arrange arrays of
-              data-driven marks; relational marks (<code>ribbon</code>) draw
-              themselves relative to marks that are already placed.</p>
           </aside>
         </section>
