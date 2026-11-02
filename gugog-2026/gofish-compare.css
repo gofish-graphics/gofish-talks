@@ -279,3 +279,11 @@
   font-size: 0.45em;
   margin: 0.45rem 0 0;
 }
+
+.reveal .code-slide .canadd-tagline {
+  color: var(--muted);
+  font-size: 0.55em;
+  font-style: italic;
+  margin: -0.3rem 0 0.1rem;
+  text-align: center;
+}

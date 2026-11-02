@@ -223,41 +223,48 @@
           </aside>
         </section>
 
-        <!-- The challenge the CanAdd slide answers: Huang and Kay,
-             "Semantic Validity vs. Graphical Arrangement in Visualization
-             Grammars", GUGOG @ IEEE VIS 2026
-             (gugog-vis.github.io/2026/papers/pdf/huang-kay.pdf). An excerpt,
-             verbatim, with ellipses where text is skipped and the reference
-             marker removed. -->
+        <!-- The open question the CanAdd slide gives one data point on:
+             Huang and Kay, "Semantic Validity vs. Graphical Arrangement in
+             Visualization Grammars", GUGOG @ IEEE VIS 2026
+             (gugog-vis.github.io/2026/papers/pdf/huang-kay.pdf), section 6.4
+             "Future Directions: Best of Both?", verbatim. Cynthia and Matt
+             will be in the room: present their question fairly. -->
         <section class="quote-slide">
           <p class="part">4 · Two tradeoffs verbs dissolve</p>
           <blockquote class="long-quote quote-short">
-            <p>Bartonicek et al. … argue that only statistics with monoidal
-              structure (e.g. counts, sums, products) should be displayed as
-              stacked bars … Bartonicek et al. explicitly caution against
-              treating stacking as a purely graphical operation – a view that
-              appears to <strong>directly challenge the validity and
-              usefulness of the stacking operator in GoFish.</strong></p>
+            <p>Can semantic and graphical expressivity be combined within a
+              single system, or are users better served by clearly distinct
+              tools? Systems that validate every operation necessarily
+              constrain the arrangement space, and systems that maximize
+              arrangement coverage necessarily leave validity to the user.
+              Characterizing <strong>which of these trade-offs are principled
+              and which are merely incidental</strong> to current
+              implementations is an important open research problem.</p>
           </blockquote>
           <p class="long-quote-cite">Cynthia Huang &amp; Matthew Kay, <em>Semantic Validity vs. Graphical Arrangement in Visualization Grammars</em>, GUGOG 2026</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:15 (shown, not recited; read the
               accent phrase aloud). <strong>Running total:</strong> 5:55 of
               7:00 (budget; the deck now runs 9:05).</p>
-            <p><strong>Say:</strong> "The second tradeoff comes from Cynthia
-              and Matt, who are on the panel. They point out that Bartonicek
-              et al. say stacking only makes sense for statistics that add up,
-              which directly challenges GoFish's stacking operator." Then go
-              to the next slide: this is the challenge the CanAdd slide
-              answers. Keep the hand-off line there.</p>
-            <p>The excerpt is verbatim, with ellipses where text is skipped
-              and the reference marker [2] removed. The first ellipsis
-              skips "[2] examine ... They then proceed to", so the opening
-              reads "Bartonicek et al. ... argue" without inserting any
-              words. The second skips from "with linked highlighting" through
-              "In fact,". The accent color is ours.</p>
-            <p>Full original paragraph (section 1 of the paper), for
-              reference:</p>
+            <p><strong>Say:</strong> "Cynthia and Matt, who are on the
+              panel, frame this as a tradeoff: validate every operation and
+              you constrain what you can draw; maximize what you can draw and
+              validity is left to the user. And they ask which of these
+              tradeoffs are principled and which are incidental to current
+              systems. Here's one data point." Then go to the next slide.</p>
+            <p>The quote is verbatim from section 6.4, "Future Directions:
+              Best of Both?" (the PDF's line-break hyphens, as in
+              "max-imize", are not part of the words). The accent color is
+              ours. Their paper calls its contribution and GoFish's
+              "distinct and complementary" (section 5.1).</p>
+            <p><strong>Background</strong> (the excerpt this slide used to
+              show, from section 1): "Bartonicek et al. ... argue that only
+              statistics with monoidal structure (e.g. counts, sums, products)
+              should be displayed as stacked bars ... Bartonicek et al.
+              explicitly caution against treating stacking as a purely
+              graphical operation – a view that appears to directly challenge
+              the validity and usefulness of the stacking operator in
+              GoFish." Full original paragraph, for reference:</p>
             <blockquote>Bartonicek et al. [2] examine the widespread usage of
               stacked bar charts over dodged bar charts in interactive
               graphics, and offer an explanation for this preference based in
@@ -281,6 +288,7 @@
         <section class="code-slide">
           <p class="part">4 · Two tradeoffs verbs dissolve</p>
           <h2>expressive vs. structured</h2>
+          <p class="canadd-tagline">constrains specs, not pictures</p>
           <div class="canadd-pair">
             <div>
               <p class="code-pair-label">USD <span class="code-pair-sub">· declared summable: it stacks</span></p>
@@ -330,8 +338,8 @@ chart(temps, {
             <p><strong>Target:</strong> 0:55 (after the 0:15 quote). <strong>Running total:</strong>
               6:50 of 7:00 (budget; the deck now runs 9:05).</p>
             <ul>
-              <li>Expressive vs. structured: the <code>CanAdd</code> example
-                keeps both.</li>
+              <li>Expressive vs. structured: one data point on Cynthia and
+                Matt's open question.</li>
             </ul>
             <p><strong>Hand off:</strong> "Cynthia and Matt are about to argue
               this carefully. Here's a mechanism to push on."</p>
@@ -342,7 +350,33 @@ chart(temps, {
               <code>Trait.summable()</code> stacks. Degrees Celsius doesn't
               have <code>CanAdd</code>, so the same chart is a loud error that
               names the missing capability and says what to do instead, not a
-              wrong picture.</p>
+              wrong picture. "This is one case where the tradeoff looks
+              incidental. CanAdd constrains specs, not pictures: every
+              arrangement is still reachable. To stack °C you either declare
+              the unit summable, which is a deliberate claim about your data,
+              or you stack the means, which is the fix the error itself
+              suggests. The only thing it takes away is stacking numbers whose
+              sums mean nothing."</p>
+            <p><strong>Fair framing:</strong></p>
+            <ul>
+              <li>This is the idea Cynthia and Matt call Error Friction (their
+                section 4 design principles and section 6.3): invalid
+                specifications are made costly to reach, while valid ones stay
+                fluid.</li>
+              <li>It blocks the hazard they name in section 2 ("Motivating
+                Contributions"): if linked selection were added without
+                validity checks, "the grammar would silently permit
+                combinations, such as stacking of group means". A
+                <code>.mean()</code> result is not summable, so
+                <code>stack</code> refuses it.</li>
+              <li>Limits, said plainly: this is one operator and one property.
+                Bartonicek et al.'s actual setting, linked highlighting in
+                interactive graphics, is not addressed here. "I haven't found
+                a principled tradeoff yet" is not "there isn't one."</li>
+              <li>Their paper calls the two kinds of contribution "distinct
+                and complementary" (section 5.1). Present CanAdd in that
+                spirit: a mechanism for them to push on, not a rebuttal.</li>
+            </ul>
             <p>The error on the right is not typed in: the slide runs the °C
               spec live and prints the message GoFish throws. It is
               <code>checkSummable</code>'s error in
