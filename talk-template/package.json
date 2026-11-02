@@ -1,0 +1,17 @@
+{
+  "name": "@gofish-talks/template",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Shared Reveal setup, theme, and Vite plugin for GoFish talks",
+  "exports": {
+    ".": "./src/deck.ts",
+    "./vite": "./src/vite.ts"
+  },
+  "dependencies": {
+    "reveal.js": "^5.1.0"
+  },
+  "peerDependencies": {
+    "vite": "^6.0.0"
+  }
+}

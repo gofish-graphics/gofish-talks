@@ -1,0 +1,402 @@
+/* GoFish talk theme. The rules here are the talk-independent part of
+   scipy-2026/style.css: the base slide type, code blocks, chart frames,
+   callouts, placeholders, and the hand-drawn "thesis-talk" skin. Rules for a
+   single talk's slides stay in that talk's own CSS. */
+
+/* ─── Slide theme overrides ─────────────────────────────────────────── */
+.reveal {
+  font-family: "Source Sans 3", "Helvetica Neue", sans-serif;
+  font-size: 28px;
+}
+
+.reveal h1 {
+  font-size: 2.2em;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 0.15em;
+}
+
+.reveal h2 {
+  font-family: "Shantell Sans", "Source Sans 3", "Helvetica Neue", sans-serif;
+  font-size: 1.4em;
+  font-weight: 600;
+  color: #16213e;
+  text-transform: lowercase;
+}
+
+.reveal h3 {
+  font-size: 1.15em;
+  font-weight: 600;
+  color: #0f3460;
+  text-transform: none;
+  margin-bottom: 0.4em;
+}
+
+.reveal p {
+  margin: 0.4em 0;
+  line-height: 1.5;
+}
+
+.reveal ul {
+  list-style: none;
+  padding: 0;
+}
+
+.reveal ul li {
+  margin: 0.3em 0;
+  padding-left: 1.4em;
+  position: relative;
+}
+
+.reveal ul li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: #e94560;
+}
+
+/* ─── Two-column layout ─────────────────────────────────────────────── */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+/* ─── Code blocks ───────────────────────────────────────────────────── */
+.reveal pre {
+  font-size: 0.58em;
+  border-radius: 6px;
+  box-shadow: none;
+  border: 1px solid #ddd;
+  margin: 0;
+  width: 100%;
+}
+
+.reveal pre code {
+  padding: 0.8em 1em;
+  font-family: "Fira Code", "Consolas", monospace;
+  line-height: 1.6;
+  max-height: 380px;
+  overflow: auto;
+}
+
+/* Line highlights: full opacity on all lines; emphasize highlights with a band (reveal.js default dims non-highlighted lines) */
+.reveal .hljs.has-highlights tr:not(.highlight-line) {
+  opacity: 1;
+}
+
+.reveal .hljs.has-highlights tr.highlight-line td {
+  background: rgba(255, 235, 150, 0.55);
+}
+
+.reveal .hljs.has-highlights tr.highlight-line .hljs-ln-numbers {
+  opacity: 1;
+}
+
+/* ─── Chart containers ──────────────────────────────────────────────── */
+.chart-container {
+  width: 100%;
+  min-height: 0;
+  height: 372px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  overflow: hidden;
+  background: #fffdf8;
+  border: 2px solid #27231f;
+  border-radius: 6px 9px 5px 8px;
+  box-shadow: 4px 5px 0 rgba(30, 30, 30, 0.11);
+}
+
+.chart-container svg {
+  display: block;
+  margin-top: -20px;
+}
+
+/* ─── Tag / badge ───────────────────────────────────────────────────── */
+.tag {
+  display: inline-block;
+  background: #e94560;
+  color: white;
+  padding: 0.15em 0.6em;
+  border-radius: 4px;
+  font-size: 0.7em;
+  font-weight: 600;
+  vertical-align: middle;
+  margin-left: 0.4em;
+}
+
+/* ─── Highlight ─────────────────────────────────────────────────────── */
+.highlight {
+  color: #e94560;
+  font-weight: 600;
+}
+
+/* ─── Callout box ───────────────────────────────────────────────────── */
+.callout {
+  background: #fff8e1;
+  border-left: 4px solid #f9a825;
+  padding: 0.6em 1em;
+  border-radius: 0 4px 4px 0;
+  font-size: 0.88em;
+  margin-top: 0.8em;
+  text-align: left;
+}
+
+/* ─── Placeholders ──────────────────────────────────────────────────── */
+/* A dashed box that stands in for a figure, code sample, or image that has
+   not been made yet. Put a .placeholder-label first so nobody mistakes the
+   box for the finished visual. */
+.placeholder-box {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 240px;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  padding: 2em 3em;
+  color: #999;
+  font-style: italic;
+  font-size: 0.85em;
+  text-align: center;
+  min-width: 60%;
+  line-height: 1.8;
+}
+
+.placeholder-box .placeholder-label {
+  color: var(--accent);
+  font-size: 0.7em;
+  font-style: normal;
+  font-weight: 760;
+  letter-spacing: 0.08em;
+  margin: 0 0 0.4em;
+  text-transform: uppercase;
+}
+
+.placeholder-box p {
+  margin: 0;
+}
+
+/* ─── Thesis-talk skin ──────────────────────────────────────────────── */
+:root {
+  --ink: #1e1e1e;
+  --muted: #66615b;
+  --paper: #faf8f2;
+  --water: #d9eef7;
+  --accent: #b24a3b;
+}
+
+@font-face {
+  font-family: "Shantell Sans Local";
+  src: url("./fonts/ShantellSans-Regular.ttf") format("truetype");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Shantell Sans Local";
+  src: url("./fonts/ShantellSans-Bold.ttf") format("truetype");
+  font-weight: 760;
+}
+
+@font-face {
+  font-family: "Shantell Sans Local";
+  src: url("./fonts/ShantellSans-SemiBold.ttf") format("truetype");
+  font-weight: 650;
+}
+
+.reveal {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Shantell Sans Local", "Shantell Sans", "Source Sans 3", sans-serif;
+}
+
+.reveal h1,
+.reveal h2,
+.reveal h3 {
+  color: var(--ink);
+  font-family: "Shantell Sans Local", "Shantell Sans", "Source Sans 3", sans-serif;
+  font-weight: 760;
+  letter-spacing: 0;
+  line-height: 1.04;
+  text-transform: none;
+}
+
+.reveal h2 {
+  display: inline-block;
+  position: relative;
+}
+
+.reveal h2::after {
+  background: var(--accent);
+  border-radius: 999px;
+  bottom: -0.12em;
+  content: "";
+  height: 0.08em;
+  left: 0.03em;
+  opacity: 0.8;
+  position: absolute;
+  transform: rotate(-0.7deg);
+  width: 94%;
+}
+
+/* ─── Title slide ───────────────────────────────────────────────────── */
+.title-slide {
+  text-align: center;
+}
+
+.title-slide h1,
+.title-slide .subtitle,
+.title-slide .meta {
+  max-width: 980px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.title-slide h1 {
+  font-size: 3.1em;
+  line-height: 1.05;
+  margin: 0.2em auto 0.15em;
+}
+
+.title-slide .title-product,
+.title-slide .title-claim {
+  display: block;
+}
+
+.title-slide .title-claim {
+  font-size: 0.58em;
+  margin-top: 0.22em;
+}
+
+.title-slide .subtitle {
+  color: #3e3a35;
+  font-size: 0.82em;
+}
+
+.eyebrow,
+.part {
+  color: var(--accent);
+  font-size: 0.48em !important;
+  font-weight: 760;
+  letter-spacing: 0.08em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.meta {
+  color: var(--muted);
+  font-size: 0.52em !important;
+  margin-top: 2.4em;
+}
+
+.split {
+  align-items: start;
+  display: grid;
+  gap: 1.1em;
+  grid-template-columns: 1fr 1fr;
+}
+
+.reveal .slides section.present.split {
+  display: grid !important;
+}
+
+/* ─── Title positioning contract (center: false) ─────────────────────
+   Every slide's <h2> is the first child of its <section> (after an optional
+   .part eyebrow). A modest, consistent padding-top on every section is where
+   that title sits, so titled and untitled slides alike land at the same
+   spot. h2's own top margin is already 0 (theme's --r-heading-margin), so
+   this padding is the only offset. */
+.reveal .slides section {
+  padding-top: 0.6em;
+}
+
+/* .split sections are CSS grid: the title would otherwise auto-place into
+   column 1 only. Span it across both columns, and keep it shrink-wrapped
+   so its underline accent still hugs the title text. */
+.reveal .slides section.split > h2,
+.reveal .slides section.split > .part {
+  grid-column: 1 / -1;
+  justify-self: start;
+}
+
+/* Title and statement slides are designed centered, not top-anchored. */
+.reveal .slides section.title-slide,
+.reveal .slides section.statement {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.statement h2 {
+  font-size: 2.8em;
+  margin: 0.08em 0 0.35em;
+}
+
+.statement h2::after {
+  content: none;
+}
+
+.statement p:not(.part) {
+  max-width: 950px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.big-claim {
+  font-size: 1.08em !important;
+  line-height: 1.2 !important;
+}
+
+.tight-copy {
+  font-size: 0.58em !important;
+}
+
+.source-line {
+  color: var(--muted);
+  font-size: 0.42em !important;
+  margin-top: 1.5em !important;
+}
+
+.note-card {
+  background: #fffdf8;
+  border: 3px solid #24211f;
+  border-radius: 8px 5px 9px 6px;
+  box-shadow: 5px 6px 0 rgba(30, 30, 30, 0.12);
+  padding: 0.75em;
+  transform: rotate(0.4deg);
+}
+
+.reveal pre.spec-mini {
+  align-self: start;
+  border: 2px solid #27231f;
+  border-radius: 6px 9px 5px 8px;
+  box-shadow: 4px 5px 0 rgba(30, 30, 30, 0.11);
+  font-size: 0.48em;
+  margin-top: 0.2rem;
+}
+
+.reveal pre.spec-mini code {
+  max-height: none;
+}
+
+.reveal img {
+  border-radius: 6px;
+}
+
+.todo-note {
+  border-left: 5px solid var(--accent);
+  color: #5d554d;
+  font-size: 0.48em;
+  line-height: 1.35;
+  margin-top: 0.65rem;
+  padding-left: 0.65rem;
+}
+
+.todo-note code {
+  font-size: 0.9em;
+}
