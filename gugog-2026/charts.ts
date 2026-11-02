@@ -7,7 +7,7 @@
 // them, and none of them was measured.
 //
 // Section 3b (the GoFish crash course): the planets and the seafood charts.
-// Their code is the code printed on the slides, unchanged.
+// These are the full specs; the slides print them with styling elided.
 import {
   chart,
   layer,
@@ -20,9 +20,12 @@ import {
   rect,
   text,
   Color,
-  map,
-  ellipse,
   field,
+  enclose,
+  circle,
+  arrow,
+  Constraint,
+  Shape,
 } from "gofish-graphics";
 import seafood from "./data/seafood.json";
 
@@ -151,50 +154,66 @@ function compression(fontSize: number) {
 }
 
 // ─── Section 3b: the GoFish crash course ──────────────────────────────────
-// The core level: the inner planets, from the GoFish repo's
-// packages/gofish-graphics/stories/bluefish/Planets.stories.tsx
-// (PlanetsOnly, then PlanetsWithLabelAbove without its two comment lines).
-const planets = [
-  { name: "Mercury", radius: 15, color: "#EBE3CF" },
-  { name: "Venus", radius: 36, color: "#DC933C" },
-  { name: "Earth", radius: 38, color: "#179DD7" },
-  { name: "Mars", radius: 21, color: "#F1CF8E" },
+// The core level: the four inner planets on a dark background, from the
+// GoFish repo's tutorial stories (origin/main 7b902ed38), copied exactly
+// without the .render() call:
+// packages/gofish-graphics/stories/tutorials/Basics.stories.tsx (no label)
+// and Diagrams.stories.tsx (label and arrow). The slides show these with the
+// styling parameters elided as "...".
+const data = [
+  { name: "mercury", r: 15, fill: "#F5E3C8", stroke: "#EFC9A2" },
+  { name: "venus", r: 36, fill: "#D2913C", stroke: "#A96F26" },
+  { name: "earth", r: 38, fill: "#3E8CCC", stroke: "#2F6FA6" },
+  { name: "mars", r: 21, fill: "#F4BC80", stroke: "#E0954C" },
 ];
 
 const planetsRow = () =>
-  spread(
-    { dir: "x", spacing: 50, alignment: "middle" },
-    map(planets, (planet) =>
-      ellipse({
-        w: planet.radius * 2,
-        h: planet.radius * 2,
-        fill: planet.color,
-        stroke: "#333",
-        strokeWidth: 3,
-      })
-    )
-  );
+  enclose(
+    {
+      padding: 20,
+      fill: "#252150",
+      stroke: "none",
+      shape: Shape.box({ rx: 16 }),
+    },
+    [
+    spread(
+      { dir: "x", spacing: 50, alignment: "middle" },
+      data.map((d) =>
+        circle({ r: d.r, fill: d.fill, stroke: d.stroke, strokeWidth: 3 })
+      )
+    ),
+  ]);
 
 const planetsLabeled = () =>
   layer([
-    spread(
-      { dir: "x", spacing: 50, alignment: "middle" },
-      map(planets, (planet) =>
-        ellipse({
-          w: planet.radius * 2,
-          h: planet.radius * 2,
-          fill: planet.color,
-          stroke: "#333",
-          strokeWidth: 3,
-        }).name(planet.name)
-      )
-    ),
-  ]).relate(({ Mercury }) => [
-    spread({ dir: "y", spacing: 60, alignment: "middle" }, [
-      text({ text: "Mercury" }),
-      Mercury,
-    ]),
-  ]);
+    enclose(
+      {
+        padding: 20,
+        fill: "#252150",
+        stroke: "none",
+        shape: Shape.box({ rx: 16 }),
+      },
+      [
+        spread(
+          { dir: "x", spacing: 50, alignment: "middle" },
+          data.map((d) =>
+            circle({
+              r: d.r,
+              fill: d.fill,
+              stroke: d.stroke,
+              strokeWidth: 3,
+            }).name(d.name)
+          )
+        ),
+      ]
+    ).name("planets"),
+    text({ text: "Mercury", fill: "#E94560", fontSize: 14 }).name("label"),
+  ])
+    .relate(({ mercury, planets, label }) => [
+      Constraint.align({ x: "middle" }, [mercury, label]),
+      Constraint.distribute({ dir: "y", spacing: 20 }, [planets, label]),
+      arrow({ stroke: "#E94560" }, [label, mercury]),
+    ]);
 
 // The chart level: the thesis deck's seafood walkthrough. The stacked bars
 // are its "Spread the Lakes Apart" slide; the ribbon chart adds the
@@ -217,6 +236,7 @@ const seafoodRibbon = () =>
     )
     .mark(rect({ h: "count", fill: "species" }))
     .layer(ribbon({ by: "species", opacity: 0.8 }));
+// (The slides show both seafood specs with spacing and opacity elided.)
 
 type Renderable = {
   render: (el: HTMLElement, options: Record<string, unknown>) => unknown;

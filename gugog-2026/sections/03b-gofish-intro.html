@@ -3,65 +3,73 @@
         <link rel="stylesheet" href="./gofish-compare.css" />
 
         <!-- ═══ SECTION 3b: A GOFISH CRASH COURSE, ~0:30 ═════════════════
-             Two slides, each with the core level on the left and the chart
-             level on the right. The second slide adds one step to each.
-             Leads from "nouns but no verbs" (section 3) into the code
-             comparisons (03c).
-             Every render is live: renderCharts() in ../charts.ts draws it from
-             the same code that is printed beside it (gofish-graphics nightly).
-             Planets code: the GoFish repo's
-             packages/gofish-graphics/stories/bluefish/Planets.stories.tsx
-             (PlanetsOnly, PlanetsWithLabelAbove), without .render() and the
-             story's two comment lines.
+             Three auto-animated states of one picture. Left: the core level
+             (planets render and code). Right: the chart level (seafood
+             render and code).
+               1. planets on a background, stacked bars
+               2. + a label and an arrow on the planets
+               3. + a ribbon on the bars, which makes the ribbon chart
+             Shown code elides styling with "..." (the thesis deck's style);
+             charts.ts holds the full specs the renders run.
+             Reveal's auto-animate keeps unchanged code lines in place and
+             slides in the new ones; the renders crossfade. Every render is
+             live: renderCharts() in ../charts.ts draws it from the full version
+             of the code printed beside it (gofish-graphics nightly).
+             Planets code: the GoFish repo's tutorial stories (origin/main
+             7b902ed38), packages/gofish-graphics/stories/tutorials/
+             Basics.stories.tsx and Diagrams.stories.tsx, shown with styling
+             elided; charts.ts runs the stories' code unchanged.
              Seafood code: the thesis deck's ribbon walkthrough
              (phd-thesis-20260618/presentation/sections/03-gofish.html,
              "Spread the Lakes Apart", and the .layer(ribbon) step of its
              stage 3b figure), which is the GUGOG paper's Figure 2. -->
-        <section class="code-slide">
-          <div class="gofish-intro-head">
+        <section class="code-slide crash-slide" data-auto-animate data-auto-animate-id="crash-course">
+          <div class="gofish-intro-head" data-id="crash-head">
             <img src="./images/gofish-intro/gofish-logo.png" alt="GoFish logo" />
             <div>
               <h2>GoFish composes marks with verbs</h2>
-              <p class="gofish-intro-tag">a compositional language for visual structure · open source · gofish.graphics</p>
             </div>
           </div>
-          <div class="crash-pair">
+          <div class="crash-grid">
             <div class="crash-col">
-              <p class="code-pair-label">core <span class="code-pair-sub">· small: marks and relations</span></p>
-              <div class="crash-render" data-chart="planets" data-w="560" data-h="150"></div>
-              <pre><code class="language-ts" data-line-numbers>spread(
-  { dir: "x", spacing: 50, alignment: "middle" },
-  map(planets, (planet) =&gt;
-    ellipse({
-      w: planet.radius * 2,
-      h: planet.radius * 2,
-      fill: planet.color,
-      stroke: "#333",
-      strokeWidth: 3,
-    })
-  )
-)</code></pre>
+              <p class="code-pair-label" data-id="crash-core-label">core <span class="code-pair-sub">· small: marks and relations</span></p>
+              <div class="crash-planets-box" data-id="crash-planets-box">
+                <div class="crash-render" data-id="crash-planets" data-chart="planets" data-w="440" data-h="160"></div>
+              </div>
+              <pre data-id="crash-core-code"><code class="language-ts" data-line-numbers>enclose({ ... }, [
+  spread(
+    { dir: "x", alignment: "middle", ... },
+    data.map((d) =&gt; circle({ r: d.r, ... }))
+  ),
+])</code></pre>
             </div>
             <div class="crash-col">
-              <p class="code-pair-label">chart level <span class="code-pair-sub">· big: short specs</span></p>
-              <div class="crash-render" data-chart="seafood-stacked" data-w="560" data-h="250"></div>
-              <pre><code class="language-ts" data-line-numbers>chart(seafood)
+              <p class="code-pair-label" data-id="crash-chart-label">chart level <span class="code-pair-sub">· big: short specs</span></p>
+              <div class="crash-chart-box" data-id="crash-chart-box">
+                <div class="crash-render" data-id="crash-stacked" data-chart="seafood-stacked" data-w="540" data-h="230"></div>
+              </div>
+              <pre data-id="crash-chart-code"><code class="language-ts" data-line-numbers>chart(seafood)
   .flow(
-    spread({ by: "lake", dir: "x", spacing: 64 }),
+    spread({ by: "lake", dir: "x", ... }),
     stack({ by: field("species").sort("count"), dir: "y" }),
   )
   .mark(rect({ h: "count", fill: "species" }))</code></pre>
             </div>
           </div>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
-              3:15 of 7:00 (budget; the deck now runs 9:05, see the panel
-              slide).</p>
+            <p><strong>Target:</strong> 0:10 (0:30 for the three crash-course
+              states). <strong>Running total:</strong> 3:10 of 7:00 (budget;
+              the deck now runs 9:05, see the panel slide).</p>
+            <p>The code shown leaves out styling parameters (padding, fill,
+              stroke, opacity, colors, font size, spacing) and marks each with
+              <code>...</code>, in the thesis deck's style. The live render
+              uses the full spec in <code>../charts.ts</code>.</p>
             <p><strong>Say:</strong> GoFish is my attempt at those verbs. It's
               a compositional language for visual structure, open source. Two
-              quick examples. On the left, four planets: <code>ellipse</code>
-              is the noun, and <code>spread</code> is a verb that lays them out
-              in a row. On the right, a stacked bar chart: the same
+              quick examples. On the left, the core: four planets as
+              <code>circle</code> marks, <code>spread</code> lays them out in
+              a row, and <code>enclose</code> draws the background around
+              them. On the right, a stacked bar chart: the same
               <code>spread</code> lays out the lakes, and <code>stack</code>
               piles the species inside each one.</p>
             <p><strong>Two levels (plant big vs. small here, one sentence):</strong>
@@ -73,12 +81,17 @@
               one: big vs. small") calls back to this slide.</p>
             <p><strong>Sources:</strong></p>
             <ul>
-              <li>Tagline: the SciPy deck's GoFish card
-                (<code>scipy-2026/sections/01-opening.html</code>).</li>
-              <li>Planets: the GoFish repo's <code>PlanetsOnly</code> story
-                (<code>packages/gofish-graphics/stories/bluefish/Planets.stories.tsx</code>),
-                the same planets as the thesis deck's Bluefish walkthrough.
-                Rendered live.</li>
+              <li>Spoken tagline ("a compositional language for visual
+                structure, open source"): the SciPy deck's GoFish card
+                (<code>scipy-2026/sections/01-opening.html</code>). It is not
+                on the slide, to leave room for the code.</li>
+              <li>Planets: the GoFish repo's Basics tutorial story
+                (<code>packages/gofish-graphics/stories/tutorials/Basics.stories.tsx</code>
+                on origin/main), styled after the thesis deck's Bluefish
+                planets. The story writes <code>circle(...)</code> on one
+                line; here it is shown here with its styling
+                elided. It already uses <code>circle({ r })</code>, not
+                <code>ellipse</code>. Rendered live.</li>
               <li>Stacked bars: the thesis deck's "Spread the Lakes Apart" slide
                 (<code>presentation/sections/03-gofish.html</code>), with the
                 GoFish repo's seafood data and the thesis deck's lake names.
@@ -87,75 +100,138 @@
           </aside>
         </section>
 
-        <section class="code-slide">
-          <h2>Add one thing, get a new graphic</h2>
-          <div class="crash-pair">
+        <section class="code-slide crash-slide" data-auto-animate data-auto-animate-id="crash-course">
+          <div class="gofish-intro-head" data-id="crash-head">
+            <img src="./images/gofish-intro/gofish-logo.png" alt="GoFish logo" />
+            <div>
+              <h2>Add one thing, get a new graphic</h2>
+            </div>
+          </div>
+          <div class="crash-grid">
             <div class="crash-col">
-              <p class="code-pair-label">core <span class="code-pair-sub">· + a text mark and a relation</span></p>
-              <div class="crash-render" data-chart="planets-label" data-w="560" data-h="150"></div>
-              <pre><code class="language-ts" data-line-numbers data-char-marks="1:1-7, 11:9-26, 14:1-28, 15:3-58, 16:5-30, 17:5-12, 18:3-5, 19:1-2">layer([
-  spread(
-    { dir: "x", spacing: 50, alignment: "middle" },
-    map(planets, (planet) =&gt;
-      ellipse({
-        w: planet.radius * 2,
-        h: planet.radius * 2,
-        fill: planet.color,
-        stroke: "#333",
-        strokeWidth: 3,
-      }).name(planet.name)
-    )
-  ),
-]).relate(({ Mercury }) =&gt; [
-  spread({ dir: "y", spacing: 60, alignment: "middle" }, [
-    text({ text: "Mercury" }),
-    Mercury,
-  ]),
-])</code></pre>
+              <p class="code-pair-label" data-id="crash-core-label">core <span class="code-pair-sub">· + a label, two relations, an arrow</span></p>
+              <div class="crash-planets-box" data-id="crash-planets-box">
+                <div class="crash-render" data-id="crash-planets-label" data-chart="planets-label" data-w="440" data-h="160"></div>
+              </div>
+              <pre data-id="crash-core-code"><code class="language-ts" data-line-numbers data-char-marks="1:1-7, 5:46-58, 7:5-20, 8:3-47, 9:1-2, 10:3-44, 11:5-56, 12:5-63, 13:5-37, 14:3-4">layer([
+  enclose({ ... }, [
+    spread(
+      { dir: "x", alignment: "middle", ... },
+      data.map((d) =&gt; circle({ r: d.r, ... }).name(d.name))
+    ),
+  ]).name("planets"),
+  text({ text: "Mercury", ... }).name("label"),
+])
+  .relate(({ mercury, planets, label }) =&gt; [
+    Constraint.align({ x: "middle" }, [mercury, label]),
+    Constraint.distribute({ dir: "y", ... }, [planets, label]),
+    arrow({ ... }, [label, mercury]),
+  ])</code></pre>
             </div>
             <div class="crash-col">
-              <p class="code-pair-label">chart level <span class="code-pair-sub">· + a ribbon</span></p>
-              <div class="crash-render" data-chart="seafood-ribbon" data-w="560" data-h="250"></div>
-              <pre><code class="language-ts" data-line-numbers data-char-marks="7:3-49">chart(seafood)
+              <p class="code-pair-label" data-id="crash-chart-label">chart level <span class="code-pair-sub">· big: short specs</span></p>
+              <div class="crash-chart-box" data-id="crash-chart-box">
+                <div class="crash-render" data-id="crash-stacked" data-chart="seafood-stacked" data-w="540" data-h="230"></div>
+              </div>
+              <pre data-id="crash-chart-code"><code class="language-ts" data-line-numbers>chart(seafood)
   .flow(
-    spread({ by: "lake", dir: "x", spacing: 64 }),
+    spread({ by: "lake", dir: "x", ... }),
     stack({ by: field("species").sort("count"), dir: "y" }),
   )
-  .mark(rect({ h: "count", fill: "species" }))
-  .layer(ribbon({ by: "species", opacity: 0.8 }))</code></pre>
+  .mark(rect({ h: "count", fill: "species" }))</code></pre>
             </div>
           </div>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
+            <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
+              3:20 of 7:00 (budget; the deck now runs 9:05, see the panel
+              slide).</p>
+            <p>The code shown leaves out styling parameters (padding, fill,
+              stroke, opacity, colors, font size, spacing) and marks each with
+              <code>...</code>, in the thesis deck's style. The live render
+              uses the full spec in <code>../charts.ts</code>.</p>
+            <p><strong>Say:</strong> Now add one thing to each. On the left, a
+              label with an arrow: we name the planets and the background, put
+              them in a <code>layer</code> with the text, and
+              <code>.relate()</code> says the label lines up with Mercury and
+              sits below the background, and an arrow runs from the label to
+              Mercury. A new mark and new relations.</p>
+            <p>The highlights mark only what changed from the previous state.
+              The rest of the code moved one indent level when it went inside
+              the <code>layer</code>; that is not highlighted.</p>
+            <p><strong>Sources:</strong> the GoFish repo's Diagrams tutorial
+              story (<code>packages/gofish-graphics/stories/tutorials/Diagrams.stories.tsx</code>
+              on origin/main), the Basics picture plus the label, the
+              <code>Constraint.align</code> and
+              <code>Constraint.distribute</code> relations, and the
+              <code>arrow</code>. The arrow code is the story's own. Shown with styling elided; the render runs the
+              story's full code, <code>circle({ r })</code> included. Rendered live.</p>
+          </aside>
+        </section>
+
+        <section class="code-slide crash-slide" data-auto-animate data-auto-animate-id="crash-course">
+          <div class="gofish-intro-head" data-id="crash-head">
+            <img src="./images/gofish-intro/gofish-logo.png" alt="GoFish logo" />
+            <div>
+              <h2>Add one thing, get a new graphic</h2>
+            </div>
+          </div>
+          <div class="crash-grid">
+            <div class="crash-col">
+              <p class="code-pair-label" data-id="crash-core-label">core <span class="code-pair-sub">· + a label, two relations, an arrow</span></p>
+              <div class="crash-planets-box" data-id="crash-planets-box">
+                <div class="crash-render" data-id="crash-planets-label" data-chart="planets-label" data-w="440" data-h="160"></div>
+              </div>
+              <pre data-id="crash-core-code"><code class="language-ts" data-line-numbers data-char-marks="1:1-7, 5:46-58, 7:5-20, 8:3-47, 9:1-2, 10:3-44, 11:5-56, 12:5-63, 13:5-37, 14:3-4">layer([
+  enclose({ ... }, [
+    spread(
+      { dir: "x", alignment: "middle", ... },
+      data.map((d) =&gt; circle({ r: d.r, ... }).name(d.name))
+    ),
+  ]).name("planets"),
+  text({ text: "Mercury", ... }).name("label"),
+])
+  .relate(({ mercury, planets, label }) =&gt; [
+    Constraint.align({ x: "middle" }, [mercury, label]),
+    Constraint.distribute({ dir: "y", ... }, [planets, label]),
+    arrow({ ... }, [label, mercury]),
+  ])</code></pre>
+            </div>
+            <div class="crash-col">
+              <p class="code-pair-label" data-id="crash-chart-label">chart level <span class="code-pair-sub">· + a ribbon</span></p>
+              <div class="crash-chart-box" data-id="crash-chart-box">
+                <div class="crash-render" data-id="crash-ribbon" data-chart="seafood-ribbon" data-w="540" data-h="230"></div>
+              </div>
+              <pre data-id="crash-chart-code"><code class="language-ts" data-line-numbers data-char-marks="7:3-40">chart(seafood)
+  .flow(
+    spread({ by: "lake", dir: "x", ... }),
+    stack({ by: field("species").sort("count"), dir: "y" }),
+  )
+  .mark(rect({ h: "count", fill: "species" }))
+  .layer(ribbon({ by: "species", ... }))</code></pre>
+            </div>
+          </div>
+          <aside class="notes">
+            <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
               3:30 of 7:00 (budget; the deck now runs 9:05, see the panel
               slide).</p>
-            <p><strong>Say:</strong> Now add one thing to each. On the left, a
-              label: we name the planets, put them in a <code>layer</code>,
-              and <code>.relate()</code> says the text sits above Mercury.
-              That's a new mark and a new relation. On the right, one line,
+            <p>The code shown leaves out styling parameters (padding, fill,
+              stroke, opacity, colors, font size, spacing) and marks each with
+              <code>...</code>, in the thesis deck's style. The live render
+              uses the full spec in <code>../charts.ts</code>.</p>
+            <p><strong>Say:</strong> On the right, one line,
               <code>ribbon</code>, connects each species across the lakes, and
               the stacked bars become a ribbon chart. Verbs take graphics and
               compose them into bigger graphics.</p>
-            <p>The highlights mark only what changed from the previous slide.
-              On the left, the rest of the code moved one indent level when it
-              went inside the <code>layer</code>; that is not highlighted.</p>
             <p><strong>Lead into the next beat:</strong> once we have verbs, we
               can write other grammars' ideas with them, and then compare
               them.</p>
-            <p><strong>Sources:</strong></p>
-            <ul>
-              <li>Labeled planets: the GoFish repo's
-                <code>PlanetsWithLabelAbove</code> story (same file as above),
-                without <code>.render()</code> and its two comment lines.
-                Rendered live.</li>
-              <li>Ribbon chart: the thesis deck's stage 3b figure
-                (<code>.layer(ribbon({ by: "species", opacity: 0.8 }))</code>,
-                <code>scripts/generate-gofish-stage-assets.mjs</code>). It is
-                the GUGOG paper's Figure 2 ("A GoFish ribbon chart: operators
-                arrange the rectangles, and a relational mark connects them").
-                The paper's listing is the same spec, wrapped for a narrow
-                column and with <code>{ axes: true }</code>.
-                Rendered live.</li>
-            </ul>
+            <p><strong>Sources:</strong> the thesis deck's stage 3b figure
+              (<code>.layer(ribbon({ by: "species", opacity: 0.8 }))</code>,
+              <code>scripts/generate-gofish-stage-assets.mjs</code>). It is the
+              GUGOG paper's Figure 2 ("A GoFish ribbon chart: operators arrange
+              the rectangles, and a relational mark connects them"); the
+              paper's listing is the same spec, wrapped for a narrow column and
+              with <code>{ axes: true }</code>. Rendered live. The bars become
+              the ribbon chart by a crossfade, not a GoFish animation.</p>
           </aside>
         </section>

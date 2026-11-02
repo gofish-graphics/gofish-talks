@@ -148,30 +148,52 @@
   line-height: 1.35 !important;
 }
 
-/* The GoFish crash course (03b): two columns, core on the left and chart
-   level on the right, each a live render above its code. Both slides use
-   the same boxes. The code is a little smaller here so the longest line
-   (the stack line) fits its half of the slide. */
-.crash-pair {
+/* The GoFish crash course (03b): three auto-animated states of one layout.
+   Left: the core level (planets render, then code). Right: the chart level
+   (seafood render, then code). Every state uses the same boxes, so only
+   what was added moves. The columns are fixed so nothing shifts when the
+   code grows. The code is 15.4px: the two longest lines (63 and 60
+   characters) have to sit side by side, which 17px does not allow. */
+.crash-grid {
   align-items: start;
   display: grid;
-  gap: 0 1.4rem;
-  grid-template-columns: 1fr 1fr;
-  margin-top: 0.3rem;
+  gap: 0 1rem;
+  grid-template-columns: 604px 1fr;
+  margin-top: 0.2rem;
 }
 
 .crash-col {
   min-width: 0;
 }
 
-.crash-render {
-  display: flex;
-  justify-content: center;
-  margin: 0.2rem 0 0.4rem;
+.reveal .code-slide.crash-slide .gofish-intro-head h2 {
+  font-size: 1.35em;
 }
 
-.reveal .code-slide .crash-pair pre {
-  font-size: 0.57em;
+.reveal .code-slide .crash-grid pre {
+  font-size: 0.55em;
+  margin: 0;
+}
+
+.reveal .code-slide .crash-grid pre code {
+  line-height: 1.25;
+  max-height: none;
+}
+
+.reveal .code-slide .crash-grid .code-pair-label {
+  margin: 0.15rem 0;
+}
+
+.crash-planets-box,
+.crash-chart-box {
+  display: flex;
+  height: 230px;
+  justify-content: center;
+  margin-bottom: 0.3rem;
+}
+
+.crash-planets-box {
+  align-items: center;
 }
 
 /* The McNutt quote that opens section 4 (04-tradeoffs.html). Long, so it is
