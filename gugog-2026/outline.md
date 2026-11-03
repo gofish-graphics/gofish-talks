@@ -37,7 +37,7 @@ Times are targets. "Existing" means the slide is already in the deck. "New" mean
    - The grammar of graphics covers the common charts on the left. The long tail on the right is where people have built new grammars.
    - Name the two ends. Chart typologies like seaborn are on one end, and low-level toolkits like d3 are on the other.
 4. **The grammars picture.** New, picture only. 0:15.
-   - A hand drawing with GoG in a big circle in the middle and newer grammars around it: Atom, PiCCL, AnnoGram, Mascot, Gosling, Neo, GenomeSpy, GoTree, and Canis.
+   - A hand drawing with GoG in a big circle in the middle and newer grammars around it: Atom, PiCCL, AnnoGram, Gemini, Mascot, Gosling, Neo, GenomeSpy, GoTree, and Canis.
    - Said with confidence: the grammar of graphics put many chart types in one shared language, and that let us ask questions about the structure of charts, such as marks and channels, and not only about chart types. Draco and CompassQL are one example, because they reason about Vega-Lite specs in terms of marks and encodings.
    - For the long tail, we built many new grammars instead, and each one is its own language.
 5. **The tangle.** New, picture only. 0:15.

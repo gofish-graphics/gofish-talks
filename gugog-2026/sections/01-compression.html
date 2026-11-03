@@ -91,17 +91,12 @@
           </aside>
         </section>
 
-        <!-- The two grammars pictures: the user's hand drawings, copied into
-             images/opening/. The two exports were offset from each other by
-             1px across and 2px down, so both copies are padded onto the same
-             1418x1271 transparent canvas with the circles lined up. Nothing
-             else in the drawings changed. The first has the grammar of
-             graphics in the middle and newer grammars around it. The second
-             is the same drawing with arrows between almost every pair. The
-             two slides are a Reveal auto-animate pair. The base drawing is
-             the same element on both slides, so it stays in place, and the
-             arrows drawing (transparent PNG, same canvas) is unmatched on
-             the second slide, so Reveal fades it in on top. -->
+        <!-- The two grammars pictures are the user's tldraw drawing (exported
+             as SVG, 2026-11-03). grammars.svg has only the labeled circles and
+             grammars-arrows.svg has only the arrows. Both were split out of
+             one export, so they share a viewBox and line up exactly. To edit,
+             change the circles or arrows in each file, or re-export from
+             tldraw and split again. -->
         <section class="grammars-slide" data-auto-animate data-auto-animate-id="grammars">
           <style>
             .reveal .slides section.grammars-slide {
@@ -126,8 +121,8 @@
             }
           </style>
           <div class="grammars-stack" data-id="grammars-stack">
-            <img data-id="grammars-base" src="./images/opening/grammars.png"
-              alt="Hand drawing: a big circle labeled GoG in the middle, with smaller circles around it for Atom, PiCCL, AnnoGram, Mascot, Gosling, Neo, GenomeSpy, GoTree, and Canis" />
+            <img data-id="grammars-base" src="./images/opening/grammars.svg"
+              alt="Hand drawing: a big circle labeled GoG in the middle, with smaller circles around it for Atom, PiCCL, AnnoGram, Gemini, Mascot, Gosling, Neo, GenomeSpy, GoTree, and Canis" />
           </div>
           <aside class="notes">
             <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
@@ -153,8 +148,8 @@
 
         <section class="grammars-slide" data-auto-animate data-auto-animate-id="grammars">
           <div class="grammars-stack" data-id="grammars-stack">
-            <img data-id="grammars-base" src="./images/opening/grammars.png" alt="" />
-            <img src="./images/opening/grammars-tangle.png"
+            <img data-id="grammars-base" src="./images/opening/grammars.svg" alt="" />
+            <img src="./images/opening/grammars-arrows.svg"
               alt="The same drawing with double-headed arrows between almost every pair of grammars, a tangle" />
           </div>
           <aside class="notes">
