@@ -47,8 +47,9 @@ Times are targets. "Existing" means the slide is already in the deck. "New" mean
    - "Some of us doubt that a shared kernel exists. I think one does, but it may not look quite like the grammar of graphics we are used to." This leads into the compression bars, and later the flat layer slide and the tree slide.
    - The kernel doubt is not attributed to anyone. McNutt's survey argues that no single DSL should cover every task, which is a different claim.
 6. **A good grammar is a good compression.** Moved from section 5. 0:25.
-   - One function per chart type gives a big language. Low-level primitives give long specs.
-   - A good grammar keeps both small. Total cost is the size of the language plus the size of every spec written in it, weighted by how often each chart is made.
+   - A schematic line chart in two panels, "size of the language" and "length of each spec". Both share the usage curve's x axis, from simple common charts on the left to complex tail charts on the right.
+   - A chart typology like seaborn, with one function per chart type, keeps specs short, but its language climbs with every tail chart. A low-level toolkit like d3 has a tiny, flat language, but its specs are long even for the common charts and climb fast.
+   - After a click, a good grammar is added. Its language stops growing after a small core, and its specs stay short for common charts and grow slowly in the tail. Total cost is the size of the language plus the size of every spec written in it, weighted by how often each chart is made.
    - The slide ends with the question for the talk, shown as a line after a click: "What are the obstacles to doing this compression?"
 
 Leads into part 2 with: "Let's start with the usual answer for the middle, the grammar of graphics."

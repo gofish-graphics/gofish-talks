@@ -1,8 +1,8 @@
         <!-- ═══ OPENING, PART 1 CONTINUED: COMPRESSION IS THE YARDSTICK ═══
              The opening runs ~1:30 in all: the title (00-title.html), the
              splash wall (00b-splash.html), then the usage curve, the two
-             grammars pictures, and the compression bars here. The
-             compression bars end the opening with the question for the talk.
+             grammars pictures, and the compression chart here. The
+             compression chart ends the opening with the question for the talk.
              The two charts are drawn live by ../charts.ts. -->
 
         <!-- Hidden: the two grammars pictures below carry this slide's
@@ -169,7 +169,7 @@
                 in. I think one does, but it may not look quite like the
                 grammar of graphics we are used to.</li>
             </ul>
-            <p><strong>Lead into the compression bars:</strong> "To look for
+            <p><strong>Lead into the compression chart:</strong> "To look for
               that kernel, I need a way to judge a language."</p>
           </aside>
         </section>
@@ -177,27 +177,43 @@
         <section>
           <p class="part">1 · Compression is the yardstick</p>
           <h2>a good grammar is a good compression</h2>
-          <!-- A live GoFish chart, drawn by renderCharts() in ../charts.ts. -->
-          <div data-chart="compression" data-w="1000" data-h="420" data-font-size="28"
-            style="display: flex; justify-content: center; margin-top: 0.4em"></div>
-          <p style="color: var(--muted); font-size: 0.6em; margin-top: 0.6em">
-            Bar length: the size of the language, plus every spec written in
-            it, weighted by how often each chart is made.</p>
-          <p class="big-claim fragment" style="margin-top: 0.5em">What are the obstacles to doing this compression?</p>
+          <!-- Live GoFish charts, drawn by renderCharts() in ../charts.ts.
+               The two charts are stacked. The first has the two naive
+               designs. The second adds the good grammar and fades in on top
+               as a fragment; its other lines land on the first chart's. -->
+          <div class="r-stack" style="margin-top: 0.3em">
+            <div data-chart="compression-naive" data-w="1100" data-h="460" data-font-size="26"
+              style="display: flex; justify-content: center"></div>
+            <div class="fragment" data-chart="compression" data-w="1100" data-h="460" data-font-size="26"
+              style="display: flex; justify-content: center; background: var(--paper)"></div>
+          </div>
+          <p class="big-claim fragment" style="margin-top: 0.3em">What are the obstacles to doing this compression?</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:25. <strong>Running total:</strong>
               1:30 of 7:50.</p>
             <ul>
-              <li>One function per chart type gives a big language. Specs
-                stay short, but the language grows with every chart in the
-                tail.</li>
-              <li>Low-level primitives give a tiny language and long specs,
-                even for the common charts.</li>
-              <li>A good grammar keeps both small. The total cost is the size
-                of the language plus the size of every spec written in it,
-                weighted by how often each chart is made. That is the
-                yardstick for the rest of the talk.</li>
-              <li>The bar sizes are schematic, not measured.</li>
+              <li>Both panels use the same x axis as the usage curve: simple,
+                common charts on the left and complex tail charts on the
+                right. The left panel is how big the language has to be to
+                reach those charts. The right panel is how long the spec for
+                one of those charts is.</li>
+              <li>The blue line is a chart typology like seaborn, with one
+                function per chart type. Its specs stay short, so it is flat
+                in the right panel. But it needs a new function for every chart in
+                the tail, so it climbs steeply in the left panel.</li>
+              <li>The grey line is a low-level toolkit like d3. Its language
+                is tiny and stays flat. But its specs are long even for a bar
+                chart, and they get longer fast as charts get more
+                complex.</li>
+              <li>(Click.) The red line is a good grammar. It has a small core
+                language, and the core stops growing, because tail charts are
+                built from the same parts. Its specs are short for the common
+                charts and grow slowly in the tail.</li>
+              <li>So a good grammar is a good compression. The total cost is
+                the size of the language plus the length of every spec
+                written in it, weighted by how often each chart is made. That
+                is the yardstick for the rest of the talk.</li>
+              <li>The curves are schematic, not measured.</li>
             </ul>
             <p><strong>The question for the talk</strong> (click for the
               line): "What are the obstacles to doing this compression?" The

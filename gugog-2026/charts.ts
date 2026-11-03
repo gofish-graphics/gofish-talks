@@ -3,7 +3,7 @@
 // data-w and data-h set its size in pixels.
 //
 // Part 1 ("compression is the yardstick"): the usage curve and the
-// compression bars.
+// compression lines.
 // Both are schematic. The numbers below only give the shapes; no axis shows
 // them, and none of them was measured.
 //
@@ -38,7 +38,7 @@ const INK = "#1e1e1e";
 const MUTED = "#66615b";
 const ACCENT = "#b24a3b";
 const TAIL = "#ddd3c4";
-const SPECS = "#5b8fa8";
+const BLUE = "#5b8fa8";
 
 const words = (s: string, fontSize: number, more: Record<string, unknown> = {}) =>
   text({ text: s, fontSize, fontFamily: FONT, fill: INK, ...more });
@@ -113,48 +113,97 @@ function usageCurve(fontSize: number) {
 }
 
 // ─── A good grammar is a good compression ─────────────────────────────────
-// What each design costs in total: the size of the language, plus the length
-// of all the specs people write in it (each chart's spec, weighted by how
-// often that chart is made). Schematic sizes, so only the comparison reads.
-const costs = [
-  { design: "one function per chart type", part: "language", size: 8 },
-  { design: "one function per chart type", part: "specs", size: 1.5 },
-  { design: "low-level primitives", part: "language", size: 1.4 },
-  { design: "low-level primitives", part: "specs", size: 8.2 },
-  { design: "a good grammar", part: "language", size: 1.8 },
-  { design: "a good grammar", part: "specs", size: 2.1 },
-];
+// Two panels that share the usage curve's x axis, how complex the chart is.
+// The left panel is the size of the language you need to reach charts up to
+// that complexity. The right panel is the length of the spec for one chart
+// of that complexity. Each panel has a line for each of three designs:
+//   - a chart typology (seaborn): the language grows with every tail chart,
+//     but each spec stays short;
+//   - a low-level toolkit (d3): a tiny language, but specs are long even for
+//     the common charts and grow fast;
+//   - a good grammar: a small core that soon stops growing, and specs that
+//     grow slowly.
+// The slide draws the chart twice, stacked: first without the good grammar,
+// then with it as a fragment on top. Both use the same fixed axes, so the
+// shared lines land in the same place.
+const TYPOLOGY = BLUE;
+const TOOLKIT = MUTED;
+const GRAMMAR = ACCENT;
 
-function compression(fontSize: number) {
-  const bars = chart(costs, {
-    axes: false,
-    color: Color.palette({ language: ACCENT, specs: SPECS }),
-  })
-    .flow(
-      spread({ by: "design", dir: "y", spacing: fontSize * 2.6 }).label(
-        "design",
-        { position: "outset-top-start", fontFamily: FONT, fontSize, color: INK }
-      ),
-      stack({ by: "part", dir: "x" })
-    )
-    .mark(
-      rect({ w: "size", h: fontSize * 2, fill: "part" }).label("part", {
-        position: "center",
-        fontFamily: FONT,
-        fontSize: fontSize * 0.9,
-        color: "white",
-      })
-    );
+type Design = "typology" | "toolkit" | "grammar";
+const designColor = { typology: TYPOLOGY, toolkit: TOOLKIT, grammar: GRAMMAR };
 
-  return spread({ dir: "y", spacing: 14, alignment: "end" }, [
-    bars,
-    words("schematic, not measured", Math.max(16, fontSize * 0.7), {
-      fill: MUTED,
-        fontStyle: "italic",
-      
-    }),
+// Each design's two curves, for x in [0, 1].
+const costCurves: Record<Design, { language: (x: number) => number; spec: (x: number) => number }> = {
+  typology: { language: (x) => 0.2 + 0.78 * x ** 1.3, spec: () => 0.2 },
+  toolkit: { language: () => 0.2, spec: (x) => 0.5 + 0.48 * x },
+  grammar: {
+    language: (x) => 0.22 + 0.2 * (1 - Math.exp(-7 * x)),
+    spec: (x) => 0.24 + 0.28 * x ** 1.2,
+  },
+};
+
+const COST_SAMPLES = 40;
+const costLine = (design: Design, panel: "language" | "spec") =>
+  Array.from({ length: COST_SAMPLES + 1 }, (_, i) => ({
+    design,
+    i,
+    x: i / COST_SAMPLES,
+    y: costCurves[design][panel](i / COST_SAMPLES),
+  }));
+
+// Direct labels, in each panel's own coordinates (scatter centers them).
+// A flat line's label sits under it, between the line and the x axis.
+const costNotes: Record<"language" | "spec", { design: Design; note: string; x: number; y: number }[]> = {
+  language: [
+    { design: "typology", note: "chart typology (seaborn)", x: 0.4, y: 0.8 },
+    { design: "toolkit", note: "low-level toolkit (d3)", x: 0.7, y: 0.09 },
+    { design: "grammar", note: "a good grammar", x: 0.76, y: 0.52 },
+  ],
+  spec: [
+    { design: "typology", note: "chart typology (seaborn)", x: 0.66, y: 0.09 },
+    { design: "toolkit", note: "low-level toolkit (d3)", x: 0.36, y: 0.9 },
+    { design: "grammar", note: "a good grammar", x: 0.72, y: 0.58 },
+  ],
+};
+
+function costPanel(
+  panel: "language" | "spec",
+  title: string,
+  designs: Design[],
+  fontSize: number
+) {
+  const lines = designs.flatMap((d) => costLine(d, panel));
+  const notes = costNotes[panel].filter((n) => designs.includes(n.design));
+  const plot = layer([
+    chart(axisLines, { axes: false })
+      .flow(group({ by: "axis" }), scatter({ by: "end", x: "x", y: "y" }))
+      .mark(line({ stroke: INK, strokeWidth: 2.5 })),
+    chart(lines, { axes: false, color: Color.palette(designColor) })
+      .flow(group({ by: "design" }), scatter({ by: "i", x: "x", y: "y" }))
+      .mark(line({ stroke: "design", strokeWidth: 5 })),
+    chart(notes, { axes: false, color: Color.palette(designColor) })
+      .flow(scatter({ by: "design", x: "x", y: "y" }))
+      .mark(text({ text: "note", fill: "design", fontSize: fontSize * 0.8, fontFamily: FONT })),
+  ]);
+  return spread({ dir: "y", spacing: 10, alignment: "middle" }, [
+    words(title, fontSize),
+    plot,
   ]);
 }
+
+const compressionChart = (designs: Design[]) => (fontSize: number) =>
+  spread({ dir: "y", spacing: 10, alignment: "middle" }, [
+    spread({ dir: "x", spacing: fontSize * 2.5, alignment: "end" }, [
+      costPanel("language", "size of the language", designs, fontSize),
+      costPanel("spec", "length of each spec", designs, fontSize),
+    ]),
+    words("how complex the chart is", fontSize * 0.9),
+    words("schematic, not measured", Math.max(16, fontSize * 0.7), {
+      fill: MUTED,
+      fontStyle: "italic",
+    }),
+  ]);
 
 // ─── Part 3: the GoFish crash course ──────────────────────────────────────
 // The core level: the four inner planets on a dark background, from the
@@ -291,7 +340,8 @@ type Renderable = {
 
 const charts: Record<string, (fontSize: number) => Renderable> = {
   "usage-curve": usageCurve,
-  compression,
+  "compression-naive": compressionChart(["typology", "toolkit"]),
+  compression: compressionChart(["typology", "toolkit", "grammar"]),
   planets: planetsRow,
   "planets-label": planetsLabeled,
   "seafood-stacked": seafoodStacked,
