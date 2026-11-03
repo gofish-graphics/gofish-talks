@@ -466,15 +466,35 @@
 
 /* Character-level code marks (data-char-marks, wrapped by slide-layout.js):
    the same amber family as a highlighted line, but with an underline and a
-   box so it still reads as its own thing inside a highlighted line. */
+   box so it still reads as its own thing inside a highlighted line.
+   A mark that crosses syntax colors (or magic-move tokens) is several
+   spans. Each draws only the top and bottom of the box's 1px outline, and
+   the first and last also draw its ends and round its corners, so the mark
+   reads as one box with no seams where the spans meet. */
 .reveal pre code .char-mark {
+  --char-mark-edge: rgba(232, 151, 31, 0.55);
   background: rgba(255, 179, 71, 0.65);
-  border-radius: 2px;
-  box-shadow: 0 0 0 1px rgba(232, 151, 31, 0.55);
+  box-shadow: 0 -1px 0 0 var(--char-mark-edge), 0 1px 0 0 var(--char-mark-edge);
   text-decoration: underline;
   text-decoration-color: #e8971f;
   text-decoration-thickness: 2px;
   text-underline-offset: 2px;
+}
+
+.reveal pre code .char-mark-first {
+  border-bottom-left-radius: 2px;
+  border-top-left-radius: 2px;
+  box-shadow: 0 -1px 0 0 var(--char-mark-edge), 0 1px 0 0 var(--char-mark-edge), -1px 0 0 0 var(--char-mark-edge);
+}
+
+.reveal pre code .char-mark-last {
+  border-bottom-right-radius: 2px;
+  border-top-right-radius: 2px;
+  box-shadow: 0 -1px 0 0 var(--char-mark-edge), 0 1px 0 0 var(--char-mark-edge), 1px 0 0 0 var(--char-mark-edge);
+}
+
+.reveal pre code .char-mark-first.char-mark-last {
+  box-shadow: 0 0 0 1px var(--char-mark-edge);
 }
 
 /* Code regions (data-code-regions, wrapped by slide-layout.js): matching
@@ -532,3 +552,39 @@
 .code-region-badge[data-role="E"] { --region-ink: #9c3d59; --region-tint: #f8f1f3; }
 .code-region[data-role="F"],
 .code-region-badge[data-role="F"] { --region-ink: #625900; --region-tint: #f4f3ed; }
+
+/* Magic move (<pre data-magic-move>, see magic-move.js): each token is a
+   span.mm-token with a data-id, which Reveal's auto-animate moves from its
+   place on the previous slide. Transforms do not apply to inline boxes, so
+   a token is an inline-block (which lays out the same here, since code does
+   not wrap). It is also positioned, so that its offsetParent, which Reveal
+   measures from, is the <pre> and not its line's table cell; otherwise a
+   token that moves to another line would not move up or down.
+   Reveal also pairs up the lines of a matched <pre> by their text and moves
+   them. In a magic-move block the tokens move instead, and a line moving
+   too would move its tokens twice, so the line cells' transforms are
+   turned off. These !important rules win over Reveal's because they are
+   more specific. */
+.reveal pre[data-magic-move] .mm-token {
+  display: inline-block;
+  position: relative;
+}
+
+.reveal pre[data-magic-move] td[data-auto-animate-target] {
+  transform: none !important;
+}
+
+/* A ghost (data-magic-ghosts) stands in for a token the previous or next
+   state has and this one does not, so Reveal can fade that token out. It
+   is placed by its margins, from the start of the first line, and draws its
+   text from data-text, so it adds no text to the code. */
+.reveal pre[data-magic-move] .mm-ghost {
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  user-select: none;
+}
+
+.reveal pre[data-magic-move] .mm-ghost::before {
+  content: attr(data-text);
+}

@@ -50,7 +50,13 @@
 // per-line <tr>/<td> structure to anchor a column offset to, so alt+drag
 // is a no-op there, matching gutter-toggle's own "no gutter, nothing to
 // click" scope limit.
-import { applyCharMarksAll, collectTextNodes, parseCharMarks } from "../slide-layout.js";
+import {
+  addMagicMoveGhosts,
+  applyCharMarksAll,
+  collectTextNodes,
+  parseCharMarks,
+  wrapMagicMoveTokens,
+} from "../slide-layout.js";
 
 // `deck` is the Reveal instance startDeck() creates. This must be called
 // before deck.initialize(), so the pristine state below is captured before
@@ -299,6 +305,12 @@ export function installHighlightEdit(deck) {
     else original.removeAttribute("data-char-marks");
 
     plugin.highlightBlock(original);
+    // A data-magic-move block's token spans and ghosts were thrown away
+    // with the old markup; add them again before the char marks, as on load.
+    Array.prototype.forEach.call(pre.querySelectorAll("code[data-magic-ids]"), function (code) {
+      wrapMagicMoveTokens(code);
+      addMagicMoveGhosts(code);
+    });
     applyCharMarksAll(pre, state.currentCharMarks);
 
     // Reassign fragment indices for the slide (the plugin's fresh clones

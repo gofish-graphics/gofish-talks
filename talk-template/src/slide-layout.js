@@ -17,6 +17,12 @@
 // This code is taken unchanged from the thesis defense deck's edit-mode.js
 // and highlight-edit.js, where it ran as part of the editor scripts. It is
 // split out here because the editor itself only loads during `pnpm dev`.
+//
+// It also wraps the tokens of <pre data-magic-move> code blocks in spans
+// with stable data-ids, so Reveal's auto-animate moves them word by word
+// (see ./magic-move.js).
+
+import { tokenize } from "./magic-move.js";
 
 export var MOVABLE_SELECTOR = ".slide-annotation, .slide-image";
 
@@ -228,13 +234,19 @@ function wrapTextRange(td, charStart, charEnd, makeSpan) {
 }
 
 // charStart/charEnd are 0-based, half-open [charStart, charEnd).
+// A mark that crosses syntax colors or magic-move tokens is several spans;
+// the first and last get classes so style.css draws them as one box.
 function wrapCharRange(td, charStart, charEnd, markKey) {
-  wrapTextRange(td, charStart, charEnd, function () {
+  var spans = wrapTextRange(td, charStart, charEnd, function () {
     var span = document.createElement("span");
     span.className = "char-mark";
     span.setAttribute("data-mark-key", markKey);
     return span;
   });
+  if (spans.length) {
+    spans[0].classList.add("char-mark-first");
+    spans[spans.length - 1].classList.add("char-mark-last");
+  }
 }
 
 function stripCharMarks(codeEl) {
@@ -400,5 +412,93 @@ export function renderCodeRegionsWhenReady(deck, root) {
     blocks.forEach(function (b) {
       applyCodeRegionsToElement(b.code, b.regions);
     });
+  });
+}
+
+// ---------------------------------------------------------------------
+// data-magic-ids: one id per token of a <pre data-magic-move> block, put
+// there at build time by ./magic-move.js. Each token's text is wrapped in a
+// span.mm-token carrying its id as data-id, so Reveal's auto-animate pairs
+// the tokens up across slides and moves them (style.css makes them
+// inline-block, since transforms do not apply to inline boxes).
+//
+// This runs after reveal's highlight plugin, which rebuilds the block from
+// its plain text, and before data-char-marks and data-code-regions, so
+// those wrap text inside the token spans and move with them. Tokens are
+// counted over each line's plain textContent with the same tokenize() the
+// build used, so the n-th token gets the n-th id.
+// ---------------------------------------------------------------------
+
+export function wrapMagicMoveTokens(codeEl) {
+  var ids = (codeEl.getAttribute("data-magic-ids") || "").split(" ").filter(Boolean);
+  if (!ids.length || codeEl.querySelector(".mm-token")) return;
+  var cells = codeEl.querySelectorAll("td.hljs-ln-code");
+  var lines = cells.length ? Array.prototype.slice.call(cells) : [codeEl];
+  var perLine = lines.map(function (line) {
+    return tokenize(line.textContent);
+  });
+  var count = perLine.reduce(function (n, t) {
+    return n + t.length;
+  }, 0);
+  if (count !== ids.length) {
+    console.warn("[magic-move] " + count + " tokens but " + ids.length + " ids; not animating this block by token", codeEl);
+    return;
+  }
+  var next = 0;
+  lines.forEach(function (line, i) {
+    perLine[i].forEach(function (token) {
+      var id = ids[next++];
+      wrapTextRange(line, token.start, token.end, function () {
+        var span = document.createElement("span");
+        span.className = "mm-token";
+        span.setAttribute("data-id", id);
+        return span;
+      });
+    });
+  });
+}
+
+// data-magic-ghosts: [id, line, column, text] for each token of the
+// previous or next state that this state does not have (./magic-move.js).
+// Each becomes an empty span.mm-ghost with that id at the start of the
+// first line, moved to the token's old line and column with margins in lh
+// and ch. style.css takes it out of the flow, makes it invisible, and draws
+// data-text with ::before. When Reveal arrives here from the state that
+// had the token, it pairs the token with its ghost and fades it out in
+// place. The ghost takes the token's color from the token itself, found
+// by its id (all blocks' tokens are wrapped before any ghosts are added).
+export function addMagicMoveGhosts(codeEl) {
+  var ghosts;
+  try {
+    ghosts = JSON.parse(codeEl.getAttribute("data-magic-ghosts") || "[]");
+  } catch (e) {
+    return;
+  }
+  var anchor = codeEl.querySelector("td.hljs-ln-code") || codeEl;
+  var old = codeEl.querySelectorAll(".mm-ghost");
+  for (var i = 0; i < old.length; i++) old[i].remove();
+  ghosts.forEach(function (g) {
+    var span = document.createElement("span");
+    span.className = "mm-ghost";
+    span.setAttribute("data-id", g[0]);
+    span.setAttribute("data-text", g[3]);
+    span.setAttribute("aria-hidden", "true");
+    span.style.marginTop = g[1] + "lh";
+    span.style.marginLeft = g[2] + "ch";
+    var token = document.querySelector('.mm-token[data-id="' + g[0] + '"]');
+    if (token) span.style.color = getComputedStyle(token).color;
+    anchor.insertBefore(span, anchor.firstChild);
+  });
+}
+
+// Wraps every block's tokens, then adds the ghosts, once reveal is ready.
+// Called once by startDeck(), before Reveal starts, and before the char
+// marks and regions are set up, so that their ready handlers run after
+// this one.
+export function renderMagicMoveWhenReady(deck, root) {
+  deck.on("ready", function () {
+    var codes = root.querySelectorAll("pre[data-magic-move] code[data-magic-ids]");
+    Array.prototype.forEach.call(codes, wrapMagicMoveTokens);
+    Array.prototype.forEach.call(codes, addMagicMoveGhosts);
   });
 }

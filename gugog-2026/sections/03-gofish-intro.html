@@ -11,8 +11,8 @@
                3. + a ribbon on the bars, which makes the ribbon chart
              Shown code elides styling with "..." (the thesis deck's style);
              charts.ts holds the full specs the renders run.
-             Reveal's auto-animate keeps unchanged code lines in place and
-             slides in the new ones; the renders crossfade. Every render is
+             The code blocks have data-magic-move, so Reveal's auto-animate
+             moves the code word by word and fades in the new words; the renders crossfade. Every render is
              live: renderCharts() in ../charts.ts draws it from the full version
              of the code printed beside it (gofish-graphics nightly).
              Planets code: the GoFish repo's tutorial stories (origin/main
@@ -37,7 +37,7 @@
               <div class="crash-planets-box" data-id="crash-planets-box">
                 <div class="crash-render" data-id="crash-planets" data-chart="planets" data-w="440" data-h="160"></div>
               </div>
-              <pre data-id="crash-core-code"><code class="language-ts" data-line-numbers>const planets = enclose({ ... }, [
+              <pre data-id="crash-core-code" data-magic-move><code class="language-ts" data-line-numbers>const planets = enclose({ ... }, [
   spread(
     { dir: "x", alignment: "middle", ... },
     data.map((d) =&gt; circle({ r: d.r, ... }).name(d.name))
@@ -49,7 +49,7 @@
               <div class="crash-chart-box" data-id="crash-chart-box">
                 <div class="crash-render" data-id="crash-stacked" data-chart="seafood-stacked" data-w="540" data-h="230"></div>
               </div>
-              <pre data-id="crash-chart-code"><code class="language-ts" data-line-numbers>chart(seafood)
+              <pre data-id="crash-chart-code" data-magic-move><code class="language-ts" data-line-numbers>chart(seafood)
   .flow(
     spread({ by: "lake", dir: "x", ... }),
     stack({ by: field("species").sort("count"), dir: "y" }),
@@ -115,7 +115,7 @@
               <div class="crash-planets-box" data-id="crash-planets-box">
                 <div class="crash-render" data-id="crash-planets-label" data-chart="planets-label" data-w="440" data-h="160"></div>
               </div>
-              <pre data-id="crash-core-code"><code class="language-ts" data-line-numbers data-char-marks="8:1-59, 10:1-23, 11:3-44, 12:5-56, 13:5-63, 14:5-37, 15:3-4">const planets = enclose({ ... }, [
+              <pre data-id="crash-core-code" data-magic-move><code class="language-ts" data-line-numbers data-char-marks="8:1-59, 10:1-23, 11:3-44, 12:5-56, 13:5-63, 14:5-37, 15:3-4">const planets = enclose({ ... }, [
   spread(
     { dir: "x", alignment: "middle", ... },
     data.map((d) =&gt; circle({ r: d.r, ... }).name(d.name))
@@ -136,7 +136,7 @@ layer([planets, label])
               <div class="crash-chart-box" data-id="crash-chart-box">
                 <div class="crash-render" data-id="crash-stacked" data-chart="seafood-stacked" data-w="540" data-h="230"></div>
               </div>
-              <pre data-id="crash-chart-code"><code class="language-ts" data-line-numbers>chart(seafood)
+              <pre data-id="crash-chart-code" data-magic-move><code class="language-ts" data-line-numbers>chart(seafood)
   .flow(
     spread({ by: "lake", dir: "x", ... }),
     stack({ by: field("species").sort("count"), dir: "y" }),
@@ -190,7 +190,7 @@ layer([planets, label])
               <div class="crash-planets-box" data-id="crash-planets-box">
                 <div class="crash-render" data-id="crash-planets-label" data-chart="planets-label" data-w="440" data-h="160"></div>
               </div>
-              <pre data-id="crash-core-code"><code class="language-ts" data-line-numbers data-char-marks="8:1-59, 10:1-23, 11:3-44, 12:5-56, 13:5-63, 14:5-37, 15:3-4">const planets = enclose({ ... }, [
+              <pre data-id="crash-core-code" data-magic-move><code class="language-ts" data-line-numbers data-char-marks="8:1-59, 10:1-23, 11:3-44, 12:5-56, 13:5-63, 14:5-37, 15:3-4">const planets = enclose({ ... }, [
   spread(
     { dir: "x", alignment: "middle", ... },
     data.map((d) =&gt; circle({ r: d.r, ... }).name(d.name))
@@ -211,7 +211,7 @@ layer([planets, label])
               <div class="crash-chart-box" data-id="crash-chart-box">
                 <div class="crash-render" data-id="crash-ribbon" data-chart="seafood-ribbon" data-w="540" data-h="230"></div>
               </div>
-              <pre data-id="crash-chart-code"><code class="language-ts" data-line-numbers data-char-marks="7:3-40">chart(seafood)
+              <pre data-id="crash-chart-code" data-magic-move><code class="language-ts" data-line-numbers data-char-marks="7:3-40">chart(seafood)
   .flow(
     spread({ by: "lake", dir: "x", ... }),
     stack({ by: field("species").sort("count"), dir: "y" }),

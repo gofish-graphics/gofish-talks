@@ -100,6 +100,70 @@ a light fill in its role's color behind the code, and its letter shows in the
 gutter on the line where the role begins. Roles `A` to `F` have colors in
 `src/style.css`. The editor does not edit regions; change them in the HTML.
 
+### Moving code word by word (`data-magic-move`)
+
+By default, Reveal's auto-animate moves a code block's lines: a line whose
+text is the same on both slides slides to its new place, and any other line
+just appears. Add `data-magic-move` to a `<pre>` to move the code word by
+word instead, as Keynote's "magic move" does:
+
+```html
+<section data-auto-animate data-auto-animate-id="demo">
+  <pre data-id="demo-code" data-magic-move><code class="language-ts" data-line-numbers>chart(data)
+  .mark(rect({ h: "temp" }))</code></pre>
+</section>
+<section data-auto-animate data-auto-animate-id="demo">
+  <pre data-id="demo-code" data-magic-move><code class="language-ts" data-line-numbers>chart(data, { schema })
+  .mark(rect({ h: "usd" }))</code></pre>
+</section>
+```
+
+Each word, string, number and punctuation mark that is in both states moves
+to its new place, including to another line. A new one fades in where it
+ends up, and one that is gone fades out where it was. This works in both
+directions. Spaces are not animated: a change of indentation shows as the
+words after it moving.
+
+How it works (`src/magic-move.js`):
+
+- When the plugin inlines the sections (in dev and in builds alike), it
+  splits each `data-magic-move` block into tokens and compares it with the
+  same block on the previous slide, if Reveal would auto-animate between
+  the two slides. The same block is the `<pre>` with the same `data-id`, or
+  for blocks with no `data-id`, the one in the same place in the slide. The
+  comparison is a longest common subsequence of the tokens' text. Tokens it
+  pairs up keep their id, and other tokens get a new one. The ids go on the
+  `<code>` as `data-magic-ids`, and the tokens that the previous and next
+  states have and this one does not go in `data-magic-ghosts`.
+- On load, after Reveal's highlight plugin has colored the code,
+  `src/slide-layout.js` wraps each token in a `span.mm-token` with its id as
+  `data-id`, which is what Reveal pairs up. Then it adds an empty, invisible
+  `span.mm-ghost` for each ghost, at the gone token's old place, so that
+  Reveal fades the token out instead of hiding it at once. Then it draws the
+  char marks and regions, which work as before.
+
+Limits:
+
+- The block needs a monospace font, since ghosts are placed with `ch` and
+  `lh` units.
+- Only blocks that both have `data-magic-move` are compared. A block with
+  build steps (`data-line-numbers="1|2-3"`) has not been tried.
+- A string, comment or other token cannot span lines.
+- The comparison only knows the tokens' text. When a token appears more than
+  once, it prefers the pairing that keeps the most tokens next to each
+  other, which is usually the one a reader expects, but not always.
+- A ghost shows its token's text and color but not a char mark the token
+  had.
+- The editor's Option-drag and Option-click on char marks work on these
+  blocks. Option-clicking a line number rebuilds the block and wraps its
+  tokens again, but no slide that uses `data-magic-move` shows line numbers
+  yet, so that path has not been tried in a deck.
+- The dev server reads `src/vite.ts` once. After you change the plugin or
+  `src/magic-move.js`, restart `pnpm dev`.
+
+Character marks are drawn as one box even where they are split across
+several spans (syntax colors or tokens).
+
 ### How saving works
 
 - In dev only, the plugin adds `data-src-file` and `data-src-index` to each

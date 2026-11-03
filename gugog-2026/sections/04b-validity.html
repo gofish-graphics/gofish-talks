@@ -78,9 +78,9 @@
              a schema (°C has no CanAdd, so GoFish refuses), and "usd" in
              place of "temp" (USD is summable, so it stacks). Each chart is
              rendered live from ../charts.ts; the error on step 2 is the
-             message GoFish throws (data-expect-error). Code lines that do
-             not change are kept identical, so the code animates line by
-             line; the encodings sit on their own lines, so step 3 changes
+             message GoFish throws (data-expect-error). The code blocks have
+             data-magic-move, so the code animates word by word (see
+             talk-template's README); the encodings sit on their own lines, so step 3 changes
              only the h: line.
              The transitions take 0.6s: the code moves in the first 0.3s
              (data-auto-animate-duration), then the output changes in the
@@ -97,7 +97,7 @@
           <p class="part" data-id="canadd-part">4b · Validity against freedom of arrangement</p>
           <h2 data-id="canadd-title"><code>stack</code> needs <code>CanAdd</code></h2>
           <div class="canadd-grid">
-            <pre data-id="canadd-code"><code class="language-ts" data-line-numbers>const data = [
+            <pre data-id="canadd-code" data-magic-move><code class="language-ts" data-line-numbers>const data = [
   { month: "Jun", city: "Boston", temp: 21, usd: 120 },
   { month: "Jun", city: "Chicago", temp: 22, usd: 95 },
   { month: "Jul", city: "Boston", temp: 24, usd: 135 },
@@ -165,7 +165,7 @@ chart(data)
           <p class="part" data-id="canadd-part">4b · Validity against freedom of arrangement</p>
           <h2 data-id="canadd-title"><code>stack</code> needs <code>CanAdd</code></h2>
           <div class="canadd-grid">
-            <pre data-id="canadd-code"><code class="language-ts" data-line-numbers data-char-marks="8:11-13, 9:3-11, 10:5-21, 11:5-53, 12:3-4, 13:1-2">const data = [
+            <pre data-id="canadd-code" data-magic-move><code class="language-ts" data-line-numbers data-char-marks="8:11-13, 9:3-11, 10:5-21, 11:5-53, 12:3-4, 13:1-2">const data = [
   { month: "Jun", city: "Boston", temp: 21, usd: 120 },
   { month: "Jun", city: "Chicago", temp: 22, usd: 95 },
   { month: "Jul", city: "Boston", temp: 24, usd: 135 },
@@ -248,7 +248,7 @@ chart(data, {
           <p class="part" data-id="canadd-part">4b · Validity against freedom of arrangement</p>
           <h2 data-id="canadd-title"><code>stack</code> needs <code>CanAdd</code></h2>
           <div class="canadd-grid">
-            <pre data-id="canadd-code"><code class="language-ts" data-line-numbers data-char-marks="19:8-12">const data = [
+            <pre data-id="canadd-code" data-magic-move><code class="language-ts" data-line-numbers data-char-marks="19:8-12">const data = [
   { month: "Jun", city: "Boston", temp: 21, usd: 120 },
   { month: "Jun", city: "Chicago", temp: 22, usd: 95 },
   { month: "Jul", city: "Boston", temp: 24, usd: 135 },

@@ -13,6 +13,7 @@ import {
   layoutSlides,
   renderCharMarksWhenReady,
   renderCodeRegionsWhenReady,
+  renderMagicMoveWhenReady,
 } from "./slide-layout.js";
 
 // The same settings scipy-2026 uses: a fixed 1280x720 canvas, no transitions,
@@ -43,10 +44,13 @@ export async function startDeck(): Promise<Reveal> {
 
   // Positions the annotations and images the editor places, and the code
   // character marks it draws, and colors code regions (data-code-regions).
-  // The published slides need these too.
+  // It also wraps the tokens of data-magic-move code blocks, before the
+  // marks and regions, which then wrap text inside the tokens. The
+  // published slides need these too.
   const slides = document.querySelector<HTMLElement>(".reveal .slides");
   if (slides) {
     layoutSlides(slides);
+    renderMagicMoveWhenReady(deck, slides);
     renderCharMarksWhenReady(deck, slides);
     renderCodeRegionsWhenReady(deck, slides);
   }

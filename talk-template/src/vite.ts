@@ -6,6 +6,8 @@
 // reference are bundled and rewritten like any other asset in index.html.
 // It also adds the web fonts the theme uses and lets the dev server read the
 // template's own files (fonts, CSS), which live outside the talk's folder.
+// It then gives the tokens of <pre data-magic-move> code blocks the ids that
+// let Reveal's auto-animate move them word by word (./magic-move.js).
 //
 // Under `pnpm dev` it also runs the in-browser slide editor's save endpoints
 // (./editor/server.js) and stamps every top-level slide <section> with
@@ -17,6 +19,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { searchForWorkspaceRoot, type Plugin } from "vite";
 import { createEditServer, stampSourceAttributes } from "./editor/server.js";
+import { annotateMagicMove } from "./magic-move.js";
 
 const templateDir = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -79,19 +82,24 @@ export function gofishTalk({ sectionsDir, sections }: GofishTalkOptions): Plugin
     },
     transformIndexHtml: {
       order: "pre",
+      // After the sections are inlined, code blocks marked
+      // data-magic-move get their token ids (./magic-move.js). This needs
+      // the whole page, since the ids carry over from one slide to the next.
       handler: (html) =>
-        html
-          .replace("</head>", `${FONT_LINKS}\n  </head>`)
-          .replace(
-            "<!-- sections -->",
-            sections
-              .map((file) => {
-                const abs = path.join(sectionsDir, file);
-                const text = fs.readFileSync(abs, "utf8");
-                return dev ? stampSourceAttributes(text, relToRoot(abs)) : text;
-              })
-              .join("\n")
-          ),
+        annotateMagicMove(
+          html
+            .replace("</head>", `${FONT_LINKS}\n  </head>`)
+            .replace(
+              "<!-- sections -->",
+              sections
+                .map((file) => {
+                  const abs = path.join(sectionsDir, file);
+                  const text = fs.readFileSync(abs, "utf8");
+                  return dev ? stampSourceAttributes(text, relToRoot(abs)) : text;
+                })
+                .join("\n")
+            )
+        ),
     },
     // Section files are not modules, so reload the page when one changes.
     // Two kinds of change are skipped, as the thesis deck's edit server
