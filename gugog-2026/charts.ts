@@ -82,8 +82,9 @@ const axisLines = [
 // The plot alone: the filled curve, its axes, and the labels. The usage
 // curve slide draws it large with both labels. The compression slide draws
 // it small as its left panel, with only the head's label, since the tail's
-// label is too wide for that panel.
-function usagePlot(notes: typeof curveNotes, fontSize: number) {
+// label is too wide for that panel. `extra` adds more marks in the plot's
+// coordinates (the compression slide's expressivity cliff).
+function usagePlot(notes: typeof curveNotes, fontSize: number, extra: any[] = []) {
   return layer([
     chart(curveParts, {
       axes: false,
@@ -100,6 +101,7 @@ function usagePlot(notes: typeof curveNotes, fontSize: number) {
     chart(notes, { axes: false })
       .flow(scatter({ by: "note", x: "x", y: "y" }))
       .mark(text({ text: "note", fill: "color", fontSize, fontFamily: FONT })),
+    ...extra,
   ]);
 }
 
@@ -120,40 +122,63 @@ function usageCurve(fontSize: number) {
   ]);
 }
 
-// ─── A good grammar is a good compression ─────────────────────────────────
+// ─── A grammar is a compression ───────────────────────────────────────────
 // Three panels that share the usage curve's x axis, how complex the chart is.
 // The left panel is the usage curve itself, small: how often each chart is
 // made. The middle panel is the size of the language you need to reach
 // charts up to that complexity. The right panel is the length of the spec
 // for one chart of that complexity. The middle and right panels have a line
-// for each of three designs:
+// for each of four designs:
 //   - a chart typology (seaborn): the language grows with every tail chart,
 //     but each spec stays short;
 //   - a low-level toolkit (d3): a tiny language, but specs are long even for
 //     the common charts and grow fast;
-//   - a good grammar: a small core that soon stops growing, and specs that
-//     grow slowly.
-// The slide draws the chart twice, stacked: first without the good grammar,
-// then with it as a fragment on top. Both use the same fixed axes, so the
-// shared lines, and the whole usage panel, land in the same place.
+//   - the grammar of graphics: low in both panels for the common charts.
+//     Past the expressivity cliff it drifts toward one extreme or the other:
+//     ggplot2 tends to add chart types (the language grows toward seaborn's),
+//     and Vega-Lite tends to compute layout with explicit transforms (specs
+//     grow toward d3's). The drift is gradual, and the line is dashed there;
+//   - the sweet spot: low in both panels across the whole range.
+// The slide builds the chart in five stacked copies, one design more each
+// time (see compressionSteps). All use the same fixed axes, so the shared
+// lines, and the whole usage panel, land in the same place.
 const TYPOLOGY = BLUE;
 const TOOLKIT = MUTED;
-const GRAMMAR = ACCENT;
+const GOG = "#7e68a6";
+const GOAL = ACCENT;
 
-type Design = "typology" | "toolkit" | "grammar";
-const designColor = { typology: TYPOLOGY, toolkit: TOOLKIT, grammar: GRAMMAR };
+type Design = "typology" | "toolkit" | "gog" | "goal";
+const designColor = { typology: TYPOLOGY, toolkit: TOOLKIT, gog: GOG, goal: GOAL };
+
+// Where the grammar of graphics starts to drift: past the head of the usage
+// curve (x <= 0.15), out in the tail.
+const CLIFF = 0.3;
+// A smooth bend: zero with zero slope at the cliff, then close to a straight
+// climb.
+const bend = (x: number) => {
+  const t = Math.max(0, x - CLIFF);
+  return (t * t) / (t + 0.18);
+};
+const core = (x: number) => 1 - Math.exp(-6 * x);
 
 // Each design's two curves, for x in [0, 1].
 const costCurves: Record<Design, { language: (x: number) => number; spec: (x: number) => number }> = {
-  typology: { language: (x) => 0.2 + 0.78 * x ** 1.3, spec: () => 0.2 },
-  toolkit: { language: () => 0.2, spec: (x) => 0.5 + 0.48 * x },
-  grammar: {
-    language: (x) => 0.22 + 0.2 * (1 - Math.exp(-7 * x)),
-    spec: (x) => 0.24 + 0.28 * x ** 1.2,
+  typology: { language: (x) => 0.12 + 0.86 * x, spec: () => 0.12 },
+  toolkit: { language: () => 0.12, spec: (x) => 0.5 + 0.48 * x },
+  gog: {
+    language: (x) => 0.26 + 0.08 * core(x) + 0.78 * bend(x),
+    spec: (x) => 0.26 + 0.06 * x + 0.85 * bend(x),
+  },
+  goal: {
+    language: (x) => 0.2 + 0.08 * core(x),
+    spec: (x) => 0.2 + 0.06 * x,
   },
 };
 
+// The grammar of graphics is drawn solid up to the cliff and dashed past it.
+// The sample at the cliff belongs to both parts, so they meet.
 const COST_SAMPLES = 40;
+const CLIFF_SAMPLE = Math.round(CLIFF * COST_SAMPLES);
 const costLine = (design: Design, panel: "language" | "spec") =>
   Array.from({ length: COST_SAMPLES + 1 }, (_, i) => ({
     design,
@@ -162,29 +187,59 @@ const costLine = (design: Design, panel: "language" | "spec") =>
     y: costCurves[design][panel](i / COST_SAMPLES),
   }));
 
+// The expressivity cliff: a light dotted line in every panel, labeled once,
+// in the usage panel, where the audience can see it falls past the head.
+const cliffLine = [
+  { end: 0, x: CLIFF, y: 0 },
+  { end: 1, x: CLIFF, y: 0.5 },
+];
+const cliffNote = [{ note: "expressivity cliff", x: CLIFF, y: 0.56 }];
+
+function cliffMarks(fontSize: number, labeled: boolean) {
+  const marks = [
+    chart(cliffLine, { axes: false })
+      .flow(scatter({ by: "end", x: "x", y: "y" }))
+      .mark(line({ stroke: MUTED, strokeWidth: 2, strokeDasharray: "2 6", opacity: 0.8 })),
+  ];
+  if (labeled)
+    marks.push(
+      chart(cliffNote, { axes: false })
+        .flow(scatter({ by: "note", x: "x", y: "y" }))
+        .mark(text({ text: "note", fill: MUTED, fontSize, fontFamily: FONT, fontStyle: "italic" }))
+    );
+  return marks;
+}
+
 // Direct labels, in each panel's own coordinates (scatter centers them).
-// A flat line's label sits under it, between the line and the x axis.
-const costNotes: Record<"language" | "spec", { design: Design; note: string; x: number; y: number }[]> = {
+// A two-line label is two entries, one per line.
+type Note = { design: Design; key: string; note: string; x: number; y: number };
+const costNotes: Record<"language" | "spec", Note[]> = {
   language: [
-    { design: "typology", note: "chart typology (seaborn)", x: 0.4, y: 0.8 },
-    { design: "toolkit", note: "low-level toolkit (d3)", x: 0.7, y: 0.09 },
-    { design: "grammar", note: "a good grammar", x: 0.76, y: 0.52 },
+    { design: "typology", key: "t", note: "chart typology (seaborn)", x: 0.36, y: 0.9 },
+    { design: "toolkit", key: "k", note: "low-level toolkit (d3)", x: 0.7, y: 0.055 },
+    { design: "gog", key: "g1", note: "ggplot2:", x: 0.78, y: 0.41 },
+    { design: "gog", key: "g2", note: "new chart types", x: 0.78, y: 0.345 },
+    { design: "goal", key: "s", note: "the sweet spot", x: 0.78, y: 0.2 },
   ],
   spec: [
-    { design: "typology", note: "chart typology (seaborn)", x: 0.66, y: 0.09 },
-    { design: "toolkit", note: "low-level toolkit (d3)", x: 0.36, y: 0.9 },
-    { design: "grammar", note: "a good grammar", x: 0.72, y: 0.58 },
+    { design: "typology", key: "t", note: "chart typology (seaborn)", x: 0.66, y: 0.055 },
+    { design: "toolkit", key: "k", note: "low-level toolkit (d3)", x: 0.36, y: 0.9 },
+    { design: "gog", key: "g1", note: "Vega-Lite:", x: 0.76, y: 0.385 },
+    { design: "gog", key: "g2", note: "explicit calculations", x: 0.76, y: 0.32 },
+    { design: "goal", key: "s", note: "the sweet spot", x: 0.78, y: 0.178 },
   ],
 };
 
 // The usage panel's one label, moved right of where the big slide puts it
-// so it stays inside the narrower panel.
-const usagePanelNotes = [{ ...curveNotes[0], x: 0.36 }];
+// so it stays inside the narrower panel, and up, so it clears the cliff's
+// label.
+const usagePanelNotes = [{ ...curveNotes[0], x: 0.36, y: 0.78 }];
 
-function usagePanel(fontSize: number) {
+function usagePanel(fontSize: number, cliff: boolean) {
+  const extra = cliff ? cliffMarks(fontSize * 0.7, true) : [];
   return spread({ dir: "y", spacing: 10, alignment: "middle" }, [
     words("how often it gets made", fontSize),
-    usagePlot(usagePanelNotes, fontSize * 0.8),
+    usagePlot(usagePanelNotes, fontSize * 0.8, extra),
   ]);
 }
 
@@ -195,17 +250,36 @@ function costPanel(
   fontSize: number
 ) {
   const lines = designs.flatMap((d) => costLine(d, panel));
+  const solid = lines.filter((p) => p.design !== "gog" || p.i <= CLIFF_SAMPLE);
+  const drift = lines.filter((p) => p.design === "gog" && p.i >= CLIFF_SAMPLE);
   const notes = costNotes[panel].filter((n) => designs.includes(n.design));
+  const cliff = designs.includes("gog");
   const plot = layer([
     chart(axisLines, { axes: false })
       .flow(group({ by: "axis" }), scatter({ by: "end", x: "x", y: "y" }))
       .mark(line({ stroke: INK, strokeWidth: 2.5 })),
-    chart(lines, { axes: false, color: Color.palette(designColor) })
-      .flow(group({ by: "design" }), scatter({ by: "i", x: "x", y: "y" }))
-      .mark(line({ stroke: "design", strokeWidth: 5 })),
-    chart(notes, { axes: false, color: Color.palette(designColor) })
-      .flow(scatter({ by: "design", x: "x", y: "y" }))
-      .mark(text({ text: "note", fill: "design", fontSize: fontSize * 0.8, fontFamily: FONT })),
+    ...(cliff ? cliffMarks(fontSize * 0.7, false) : []),
+    ...(drift.length
+      ? [
+          chart(drift, { axes: false, color: Color.palette(designColor) })
+            .flow(group({ by: "design" }), scatter({ by: "i", x: "x", y: "y" }))
+            .mark(line({ stroke: "design", strokeWidth: 5, strokeDasharray: "12 8" })),
+        ]
+      : []),
+    ...(solid.length
+      ? [
+          chart(solid, { axes: false, color: Color.palette(designColor) })
+            .flow(group({ by: "design" }), scatter({ by: "i", x: "x", y: "y" }))
+            .mark(line({ stroke: "design", strokeWidth: 5 })),
+        ]
+      : []),
+    ...(notes.length
+      ? [
+          chart(notes, { axes: false, color: Color.palette(designColor) })
+            .flow(scatter({ by: "key", x: "x", y: "y" }))
+            .mark(text({ text: "note", fill: "design", fontSize: fontSize * 0.75, fontFamily: FONT })),
+        ]
+      : []),
   ]);
   return spread({ dir: "y", spacing: 10, alignment: "middle" }, [
     words(title, fontSize),
@@ -216,7 +290,7 @@ function costPanel(
 const compressionChart = (designs: Design[]) => (fontSize: number) =>
   spread({ dir: "y", spacing: 10, alignment: "middle" }, [
     spread({ dir: "x", spacing: fontSize * 2.5, alignment: "end" }, [
-      usagePanel(fontSize),
+      usagePanel(fontSize, designs.includes("gog")),
       costPanel("language", "size of the language", designs, fontSize),
       costPanel("spec", "length of each spec", designs, fontSize),
     ]),
@@ -226,6 +300,15 @@ const compressionChart = (designs: Design[]) => (fontSize: number) =>
       fontStyle: "italic",
     }),
   ]);
+
+// The slide's five steps, one stacked chart each.
+const compressionSteps = {
+  "compression-usage": compressionChart([]),
+  "compression-typology": compressionChart(["typology"]),
+  "compression-toolkit": compressionChart(["typology", "toolkit"]),
+  "compression-gog": compressionChart(["typology", "toolkit", "gog"]),
+  "compression-goal": compressionChart(["typology", "toolkit", "gog", "goal"]),
+};
 
 // ─── Part 3: the GoFish crash course ──────────────────────────────────────
 // The core level: the four inner planets on a dark background, from the
@@ -344,8 +427,7 @@ type Renderable = {
 
 const charts: Record<string, (fontSize: number) => Renderable> = {
   "usage-curve": usageCurve,
-  "compression-naive": compressionChart(["typology", "toolkit"]),
-  compression: compressionChart(["typology", "toolkit", "grammar"]),
+  ...compressionSteps,
   planets: planetsRow,
   "planets-label": planetsLabeled,
   "seafood-stacked": seafoodStacked,

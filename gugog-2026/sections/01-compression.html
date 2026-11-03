@@ -176,47 +176,75 @@
 
         <section>
           <p class="part">1 · Compression is the yardstick</p>
-          <h2>a good grammar is a good compression</h2>
+          <h2>a grammar is a compression</h2>
           <!-- Live GoFish charts, drawn by renderCharts() in ../charts.ts.
-               The two charts are stacked. Each has three panels: the usage
-               curve, the size of the language, and the length of each spec.
-               The first has the two naive designs. The second adds the good
-               grammar and fades in on top as a fragment; its usage panel and
-               other lines land on the first chart's. -->
+               Five stacked copies of one chart, each with three panels: the
+               usage curve, the size of the language, and the length of each
+               spec. The first has only the usage curve and empty axes. Each
+               later copy adds one design (seaborn, d3, the grammar of
+               graphics with the expressivity cliff, the sweet spot) and fades
+               in on top as a fragment; its usage panel and other lines land
+               on the previous copy's. -->
           <div class="r-stack" style="margin-top: 0.3em">
-            <div data-chart="compression-naive" data-w="1180" data-h="440" data-font-size="24"
+            <div data-chart="compression-usage" data-w="1180" data-h="500" data-font-size="24"
               style="display: flex; justify-content: center"></div>
-            <div class="fragment" data-chart="compression" data-w="1180" data-h="440" data-font-size="24"
+            <div class="fragment" data-chart="compression-typology" data-w="1180" data-h="500" data-font-size="24"
+              style="display: flex; justify-content: center; background: var(--paper)"></div>
+            <div class="fragment" data-chart="compression-toolkit" data-w="1180" data-h="500" data-font-size="24"
+              style="display: flex; justify-content: center; background: var(--paper)"></div>
+            <div class="fragment" data-chart="compression-gog" data-w="1180" data-h="500" data-font-size="24"
+              style="display: flex; justify-content: center; background: var(--paper)"></div>
+            <div class="fragment" data-chart="compression-goal" data-w="1180" data-h="500" data-font-size="24"
               style="display: flex; justify-content: center; background: var(--paper)"></div>
           </div>
           <p class="big-claim fragment" style="margin-top: 0.3em">What are the obstacles to doing this compression?</p>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:25. <strong>Running total:</strong>
-              1:30 of 7:50.</p>
+            <p><strong>Target:</strong> 0:35. <strong>Running total:</strong>
+              1:40 of 7:45.</p>
             <ul>
               <li>All three panels share one x axis: simple, common charts
                 on the left and complex tail charts on the right. The left
-                panel is the usage curve again. Most charts made are the
-                simple ones on the left, so the cost on the left counts
-                most. The middle panel is how big the language has to be to
-                reach those charts. The right panel is how long the spec for
-                one of those charts is.</li>
-              <li>The blue line is a chart typology like seaborn, with one
-                function per chart type. Its specs stay short, so it is flat
-                in the right panel. But it needs a new function for every chart in
-                the tail, so it climbs steeply in the middle panel.</li>
-              <li>The grey line is a low-level toolkit like d3. Its language
-                is tiny and stays flat. But its specs are long even for a bar
-                chart, and they get longer fast as charts get more
+                panel is the usage curve again. Most of the charts people
+                make are the simple ones on the left, so the cost on the left
+                counts most. The middle panel is how big the language has to
+                be to reach those charts. The right panel is how long the
+                spec for one of those charts is.</li>
+              <li>(Click.) The blue line is a chart typology like seaborn,
+                with one function per chart type. Its specs stay short, so it
+                is flat in the right panel. But it needs a new function for
+                every chart in the tail, so it climbs steeply in the middle
+                panel.</li>
+              <li>(Click.) The grey line is a low-level toolkit like d3. Its
+                language is small and stays flat. But its specs are long even
+                for a bar chart, and they get longer as the charts get more
                 complex.</li>
-              <li>(Click.) The red line is a good grammar. It has a small core
-                language, and the core stops growing, because tail charts are
-                built from the same parts. Its specs are short for the common
-                charts and grow slowly in the tail.</li>
-              <li>So a good grammar is a good compression. The total cost is
-                the size of the language plus the length of every spec
-                written in it, weighted by how often each chart is made. That
-                is the yardstick for the rest of the talk.</li>
+              <li>(Click.) The purple line is the grammar of graphics. It is
+                excellent for the common charts, and those are most of what
+                people make (point at the usage panel). Its language is small
+                and its parts combine well, so its specs are short. Here it
+                sits right next to the sweet spot.</li>
+              <li>Further out in the tail, for charts like ribbon, waffle, and
+                mosaic charts, the usual way to write them tends to move
+                toward one end or the other. The GoFish paper calls this an
+                expressivity cliff. It says the grammar of graphics "presents
+                some sharp expressivity cliffs." In practice the change is
+                gradual, so I draw a bend and not a drop, and the line never
+                reaches either end.</li>
+              <li>In ggplot2 the usual move is a new chart type. Extensions
+                such as ggalluvial, ggmosaic, and ggwaffle each add one. So the
+                size of the language bends up toward seaborn.</li>
+              <li>In Vega-Lite the usual move is to compute the layout with
+                explicit transforms. You can see the start of this in
+                Vega-Lite's own example gallery, in the wheat and wages chart
+                and the waterfall chart. So the length of each spec bends up
+                toward d3. Sometimes it goes the other way: the boxplot mark
+                is closer to a chart type than to a primitive.</li>
+              <li>(Click.) The red line is the sweet spot. Its language is
+                small and stops growing, and its specs stay short across the
+                whole range. Every one of these designs is aiming for it. The
+                total cost is the size of the language plus the length of
+                every spec written in it, weighted by how often each chart is
+                made. That is the yardstick for the rest of the talk.</li>
               <li>The curves are schematic, not measured.</li>
             </ul>
             <p><strong>The question for the talk</strong> (click for the
