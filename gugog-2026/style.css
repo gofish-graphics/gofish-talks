@@ -1,6 +1,6 @@
 /* Styles for this talk only. The shared theme is in ../talk-template/src/style.css. */
 
-/* Section 3 (sections/03-verbs.html): the "Data, Marks, Channels, Coordinates"
+/* Part 2 (sections/02-tree.html): the "Data, Marks, Channels, Coordinates"
    slide, copied for now from the thesis defense deck
    (phd-thesis-20260618/presentation/styles.css, the .gog-concepts rules). */
 .gog-concepts-grid {
@@ -82,9 +82,8 @@
   text-align: center;
 }
 
-/* This slide's big-claim is the conclusion of the three-concept build-up
-   (marks, channels, coordinates), not its premise -- it now sits below the
-   grid as the fourth, final fragment. Tightened margin and size keep it
+/* This slide's big-claim is the conclusion of the four columns, not its
+   premise. It sits below the grid as the slide's only fragment. Tightened margin and size keep it
    clear of the grid's images at the deck's real 1280x720 slide size. Scoped
    to .gog-concepts-slide so it cannot affect any other big-claim slide. */
 .gog-concepts-slide .big-claim {

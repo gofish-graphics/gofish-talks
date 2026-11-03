@@ -1,0 +1,215 @@
+        <!-- ═══ PART 4b: VALIDITY AGAINST FREEDOM OF ARRANGEMENT, ~0:55 ═══
+             The Huang and Kay quote, then CanAdd. This tension is disputed
+             with one piece of evidence, and its limits are stated.
+             CanAdd follows the type system framing, not the v3 draft's,
+             which predates the type system. Its code is from the current
+             GoFish source, where the class is named CanAdd.
+             Styles for the code slides: ../gofish-compare.css. -->
+        <!-- The open question the CanAdd slide gives one data point on:
+             Huang and Kay, "Semantic Validity vs. Graphical Arrangement in
+             Visualization Grammars", GUGOG @ IEEE VIS 2026
+             (gugog-vis.github.io/2026/papers/pdf/huang-kay.pdf), section 6.4
+             "Future Directions: Best of Both?", verbatim. The slide presents
+             their question in their own words and credits them for it. -->
+        <section class="quote-slide">
+          <p class="part">4b · Validity against freedom of arrangement</p>
+          <blockquote class="long-quote quote-short">
+            <p>Can semantic and graphical expressivity be combined within a
+              single system, or are users better served by clearly distinct
+              tools? Systems that validate every operation necessarily
+              constrain the arrangement space, and systems that maximize
+              arrangement coverage necessarily leave validity to the user.
+              Characterizing <strong>which of these trade-offs are principled
+              and which are merely incidental</strong> to current
+              implementations is an important open research problem.</p>
+          </blockquote>
+          <p class="long-quote-cite">Cynthia Huang &amp; Matthew Kay, <em>Semantic Validity vs. Graphical Arrangement in Visualization Grammars</em>, GUGOG 2026</p>
+          <aside class="notes">
+            <p><strong>Target:</strong> 0:15 (shown, not recited; read the
+              accent phrase aloud). <strong>Running total:</strong> 5:35 of
+              7:50.</p>
+            <p><strong>The tension, in its strongest form:</strong> systems
+              that validate every operation constrain what you can draw, and
+              systems that let you draw anything leave validity to the
+              user.</p>
+            <p><strong>Say:</strong> "Cynthia and Matt, who are on the
+              panel, frame this as a tradeoff: validate every operation and
+              you constrain what you can draw; maximize what you can draw and
+              validity is left to the user. They ask which of these
+              tradeoffs are principled and which are incidental to current
+              systems. Their work showed me that validity is important, and
+              here's one data point on their question." Then go to the next
+              slide.</p>
+            <p>The quote is verbatim from section 6.4, "Future Directions:
+              Best of Both?" (the PDF's line-break hyphens, as in
+              "max-imize", are not part of the words). The accent color is
+              ours. Their paper calls its contribution and GoFish's
+              "distinct and complementary" (section 5.1).</p>
+            <p><strong>Background</strong> (the excerpt this slide used to
+              show, from section 1): "Bartonicek et al. ... argue that only
+              statistics with monoidal structure (e.g. counts, sums, products)
+              should be displayed as stacked bars ... Bartonicek et al.
+              explicitly caution against treating stacking as a purely
+              graphical operation – a view that appears to directly challenge
+              the validity and usefulness of the stacking operator in
+              GoFish." Full original paragraph, for reference:</p>
+            <blockquote>Bartonicek et al. [2] examine the widespread usage of
+              stacked bar charts over dodged bar charts in interactive
+              graphics, and offer an explanation for this preference based in
+              Gestalt principles. They then proceed to argue that only
+              statistics with monoidal structure (e.g. counts, sums, products)
+              should be displayed as stacked bars with linked highlighting of
+              single group subsets (parts of whole), based on the algebraic
+              properties of summary functions. The authors offer this result,
+              and a similar one for multi-group selection, as a preliminary
+              contribution towards complete algebraic foundations for
+              ‘coherent and well-behaved’ interactive graphics. They invoke a
+              more constrained notion of expressivity that is conditional on
+              statistical and mathematical validity. In fact, Bartonicek et
+              al. [2] explicitly caution against treating stacking as a purely
+              graphical operation – a view that appears to directly challenge
+              the validity and usefulness of the stacking operator in
+              GoFish.</blockquote>
+          </aside>
+        </section>
+
+        <section class="code-slide">
+          <p class="part">4b · Validity against freedom of arrangement</p>
+          <h2><code>stack</code> needs <code>CanAdd</code></h2>
+          <p class="canadd-tagline">constrains specs, not pictures</p>
+          <div class="canadd-pair">
+            <div>
+              <p class="code-pair-label">USD <span class="code-pair-sub">· declared summable: it stacks</span></p>
+              <div class="canadd-out" data-chart="sales-stacked" data-w="520" data-h="190" data-font-size="16"></div>
+              <pre><code class="language-ts" data-line-numbers data-char-marks="9:12-54">const sales = [
+  { month: "Jan", city: "Boston", value: 120 },
+  { month: "Jan", city: "Chicago", value: 95 },
+  ...
+];
+
+chart(sales, {
+  schema: {
+    value: Unit("USD", { traits: [Trait.summable()] }),
+  },
+})
+  .flow(
+    spread({ by: "month", dir: "x" }),
+    stack({ by: "city", dir: "y" }),
+  )
+  .mark(rect({ h: "value", fill: "city" }))</code></pre>
+            </div>
+            <div>
+              <p class="code-pair-label">°C <span class="code-pair-sub">· no CanAdd: GoFish refuses</span></p>
+              <!-- Runs tempsStacked() from ../charts.ts and shows the error
+                   GoFish throws (data-expect-error), not a chart. -->
+              <div class="canadd-out canadd-error-box" data-chart="temps-stacked" data-expect-error data-w="520" data-h="190"></div>
+              <pre><code class="language-ts" data-line-numbers data-char-marks="9:12-21">const temps = [
+  { month: "Jan", city: "Boston", value: -1 },
+  { month: "Jan", city: "Chicago", value: -4 },
+  ...
+];
+
+chart(temps, {
+  schema: {
+    value: Unit("°C"),
+  },
+})
+  .flow(
+    spread({ by: "month", dir: "x" }),
+    stack({ by: "city", dir: "y" }),
+  )
+  .mark(rect({ h: "value", fill: "city" }))</code></pre>
+            </div>
+          </div>
+          <p class="canadd-footnote">Inspired by Bartonicek, Urbanek &amp; Murrell (JCGS 2025), Flint (Wang et al., VIS 2026), and Huang &amp; Kay (GUGOG 2026).</p>
+          <aside class="notes">
+            <p><strong>Target:</strong> 0:40 (trimmed from 0:55). <strong>Running total:</strong>
+              6:15 of 7:50.</p>
+            <ul>
+              <li>Validity against freedom of arrangement: one data point on
+                Cynthia and Matt's open question.</li>
+            </ul>
+            <p><strong>Say</strong> (about 0:40): "<code>stack</code> needs
+              values that add up. USD is declared summable, so it stacks.
+              Degrees Celsius has no <code>CanAdd</code>, so the same chart
+              gives an error that suggests the fix: average them instead.
+              This constrains specs, not pictures. Every picture is still
+              reachable. My view is that this tension is incidental, and the
+              type system that catches this error is small. The limits: this
+              is one operator and one property, and interactivity is not
+              covered."</p>
+            <p>If there is spare time: to stack °C you either declare the unit
+              summable, which is a deliberate claim about your data, or you
+              stack the means. The only thing it takes away is stacking
+              numbers whose sums mean nothing.</p>
+            <p><strong>For Q&amp;A or the panel, not the slides:</strong> the
+              same type information covers the unit aspect ratio case in
+              Jason Brunson's GUGOG paper, where biplots and point clouds need
+              one unit on x to equal one unit on y. GoFish tracks at the type level whether two axes have the
+              same type, and if they do, it uses the same scale for both by
+              default.</p>
+            <p><strong>Lead into 4c:</strong> "The third tension is about how
+              big the language should be, and it is the one I have only partly
+              solved."</p>
+            <p><strong>Fair framing:</strong></p>
+            <ul>
+              <li>This is the idea Cynthia and Matt call Error Friction (their
+                section 4 design principles and section 6.3): invalid
+                specifications are made costly to reach, while valid ones stay
+                fluid.</li>
+              <li>It blocks the hazard they name in section 2 ("Motivating
+                Contributions"): if linked selection were added without
+                validity checks, "the grammar would silently permit
+                combinations, such as stacking of group means". A
+                <code>.mean()</code> result is not summable, so
+                <code>stack</code> refuses it.</li>
+              <li>Limits, said plainly: this is one operator and one property.
+                Bartonicek et al.'s actual setting, linked highlighting in
+                interactive graphics, is not addressed here. "I haven't found
+                a principled tradeoff yet" is not "there isn't one."</li>
+              <li>Their paper calls the two kinds of contribution "distinct
+                and complementary" (section 5.1). CanAdd is offered in that
+                spirit, as one mechanism that bears on their question.</li>
+            </ul>
+            <p>The error on the right is not typed in: the slide runs the °C
+              spec live and prints the message GoFish throws. It is
+              <code>checkSummable</code>'s error in
+              <code>src/ast/measure.ts</code> (origin/main, lines 155 to 161):
+              "... which cannot be summed: it has no CanAdd. If its amounts add
+              up (money, counts, lengths), declare it with Unit(...,
+              { traits: [Trait.summable()] }). If they do not (temperatures,
+              prices, rates), average them instead ...".</p>
+            <p><strong>Source:</strong> written for this slide, after the
+              GoFish repo's CanAdd test
+              (<code>packages/gofish-graphics/src/tests/measure.test.ts</code>,
+              "CanAdd: only amounts that add up are summed"), which stacks a
+              <code>Unit("USD", { traits: [Trait.summable()] })</code> column
+              and a <code>Unit("°C")</code> column the same way. The two specs
+              here are ordinary programs and differ only in the unit line
+              (highlighted) and their data. The data is illustrative: made-up
+              monthly sales and average temperatures for two cities. The data
+              rows after the first two are elided as <code>...</code>; the
+              live render uses all six rows (<code>../charts.ts</code>). The
+              type itself is <code>export type CanAdd = Record&lt;string,
+              never&gt;;</code> in <code>src/ast/schema.ts</code>: "The class
+              of a unit whose amounts can be added".</p>
+            <p><strong>Footnote citations:</strong></p>
+            <ul>
+              <li>A. Bartonicek, S. Urbanek, and P. Murrell, "No More, No Less
+                than Sum of Its Parts: Groups, Monoids, and the Algebra of
+                Graphics, Statistics, and Interaction," <em>Journal of
+                Computational and Graphical Statistics</em> 34(3), 2025.</li>
+              <li>Yunhai Wang, Kecheng Lu, Junhao Chen, Alper Sarikaya, and
+                Chenglong Wang, "Flint: A Semantics-Driven Data Visualization
+                Intermediate Language," IEEE VIS 2026 (arXiv:2607.20775)
+                (microsoft.github.io/flint-chart). The VIS program spells the
+                title "Semantic-driven"; this follows arXiv. Its semantic types and
+                traits (<code>aggRole</code> decides sum vs. mean) are what
+                <code>CanAdd</code> draws on; see the GoFish repo's
+                <code>apps/docs/docs/internals/design/flint-chart-notes.md</code>.</li>
+              <li>C. A. Huang and M. Kay, "Semantic Validity vs. Graphical
+                Arrangement in Visualization Grammars," GUGOG @ IEEE VIS
+                2026.</li>
+            </ul>
+          </aside>
+        </section>

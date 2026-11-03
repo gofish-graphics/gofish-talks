@@ -1,4 +1,4 @@
-        <!-- ═══ SECTION 3c: GRAMMARS IN ONE LANGUAGE, ~0:55 ══════════════
+        <!-- ═══ PART 3: GRAMMARS IN ONE LANGUAGE, ~0:45 ════════════════
              Code comparisons from the GUGOG camera-ready paper, section 3
              "Specialized Grammars in a Shared Vocabulary"
              (phd-thesis-20260618/gugog-2026-camera-ready-v3). The code is
@@ -9,7 +9,7 @@
              GoTree (paper Figure 5) is used in section 4 instead, not here.
              Styles: ../gofish-compare.css. -->
         <section class="code-slide">
-          <p class="part">Grammars in one language look alike</p>
+          <p class="part">3 · The tree in practice</p>
           <h2>Atom's <code>gridxy</code> is GoFish's <code>spread</code></h2>
           <div class="code-pair">
             <div>
@@ -52,8 +52,8 @@
             </div>
           </div>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:25. <strong>Running total:</strong>
-              3:55 of 7:00 (budget; the deck now runs 9:20).</p>
+            <p><strong>Target:</strong> 0:20. <strong>Running total:</strong>
+              3:05 of 7:50.</p>
             <p><strong>The beat (this slide and the next):</strong> 1. A shared
               language makes it possible to compare grammars: once each
               grammar's idea is written in GoFish, you can put them side by side
@@ -93,7 +93,7 @@
         <section class="code-slide">
           <div class="compare-head">
             <div>
-              <p class="part">Grammars in one language look alike</p>
+              <p class="part">3 · The tree in practice</p>
               <h2>PiCCL lines up with GoFish</h2>
             </div>
             <img src="./images/comparisons/gofish-bottle-annotated.png" alt="GoFish bottle chart: four bottles filled green to 30, 60, 75, and 100 percent, each with a line and a percentage label" />
@@ -150,8 +150,8 @@ const collection = chart(data, { axes: false })
             </div>
           </div>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:30. <strong>Running total:</strong>
-              4:25 of 7:00 (budget; the deck now runs 9:20).</p>
+            <p><strong>Target:</strong> 0:25. <strong>Running total:</strong>
+              3:30 of 7:50.</p>
             <p><strong>Say:</strong> PiCCL comes from graphics editors, GoFish
               from the grammar of graphics. Both build this bottle chart the
               same way: an image composited with a data-sized rectangle, a line
@@ -166,9 +166,13 @@ const collection = chart(data, { axes: false })
               GoFish's <code>spread</code> operator, which also groups the data
               by a key. That's it. Two independently designed grammars
               converged on the same abstractions.</p>
-            <p><strong>Lead into section 4:</strong> "Once grammars are written
-              in one language, a lot of the tradeoffs we argue about stop
-              looking forced. Two of them in particular."</p>
+            <p><strong>The point of the two comparisons:</strong> Atom and
+              PiCCL fit into the same tree. Written in one language, they
+              share most of their structure, and the differences are small
+              parts you can point to.</p>
+            <p><strong>Lead into part 4:</strong> "So unifying grammars
+              compresses them. A unified grammar still faces three tensions,
+              and I want to take them one at a time."</p>
             <p><strong>Source:</strong> GUGOG camera-ready paper, Figure 4
               (section 3.2 "PiCCL and Mascot"); code from
               <code>examples/piccl-bottle.ts</code> and

@@ -1,8 +1,8 @@
-        <!-- Styles for the code slides in 03b, 03c, and the GoTree slides in
-             04. Linked here so the deck loads it without touching main.ts. -->
+        <!-- Styles for the code slides in 03 and 03b, and the GoTree slides
+             in 04. Linked here so the deck loads it without touching main.ts. -->
         <link rel="stylesheet" href="./gofish-compare.css" />
 
-        <!-- ═══ SECTION 3b: A GOFISH CRASH COURSE, ~0:30 ═════════════════
+        <!-- ═══ PART 3: THE TREE IN PRACTICE. A GOFISH CRASH COURSE, ~0:30 ═
              Three auto-animated states of one picture. Left: the core level
              (planets render and code). Right: the chart level (seafood
              render and code).
@@ -59,27 +59,25 @@
           </div>
           <aside class="notes">
             <p><strong>Target:</strong> 0:10 (0:30 for the three crash-course
-              states). <strong>Running total:</strong> 3:10 of 7:00 (budget;
-              the deck now runs 9:20, see the panel slide).</p>
+              states). <strong>Running total:</strong> 2:25 of 7:50.</p>
             <p>The code shown leaves out styling parameters (padding, fill,
               stroke, opacity, colors, font size, spacing) and marks each with
               <code>...</code>, in the thesis deck's style. The live render
               uses the full spec in <code>../charts.ts</code>.</p>
             <p><strong>Say:</strong> GoFish is my attempt at those verbs. It's
-              a compositional language for visual structure, open source. Two
-              quick examples. On the left, the core: four planets as
+              a compositional language for visual structure, open source. Here
+              are two of its API surfaces side by side. On the left, the core: four planets as
               <code>circle</code> marks, <code>spread</code> lays them out in
               a row, and <code>enclose</code> draws the background around
               them. On the right, a stacked bar chart: the same
               <code>spread</code> lays out the lakes, and <code>stack</code>
               piles the species inside each one.</p>
-            <p><strong>Two levels (plant big vs. small here, one sentence):</strong>
-              "GoFish has two levels. The chart level is a big language: short
-              specs for common charts. Underneath is a small core, marks and
-              relations, and the chart level is built out of it. So GoFish
-              already has both a big language and a small one, layered. I'll
-              come back to that tradeoff at the end." Section 5 ("the open
-              one: big vs. small") calls back to this slide.</p>
+            <p><strong>Two surfaces on one core (one sentence):</strong> "These
+              are two surfaces on one core. The chart level gives short specs
+              for common charts, and it is built out of the low-level core of
+              marks and relations." This is the tree from part 2 in practice.
+              Tension 4c, a small language against a big one, comes back to
+              this split.</p>
             <p><strong>Sources:</strong></p>
             <ul>
               <li>Spoken tagline ("a compositional language for visual
@@ -146,8 +144,7 @@ layer([planets, label])
           </div>
           <aside class="notes">
             <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
-              3:20 of 7:00 (budget; the deck now runs 9:20, see the panel
-              slide).</p>
+              2:35 of 7:50.</p>
             <p>The code shown leaves out styling parameters (padding, fill,
               stroke, opacity, colors, font size, spacing) and marks each with
               <code>...</code>, in the thesis deck's style. The live render
@@ -223,8 +220,7 @@ layer([planets, label])
           </div>
           <aside class="notes">
             <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
-              3:30 of 7:00 (budget; the deck now runs 9:20, see the panel
-              slide).</p>
+              2:45 of 7:50.</p>
             <p>The code shown leaves out styling parameters (padding, fill,
               stroke, opacity, colors, font size, spacing) and marks each with
               <code>...</code>, in the thesis deck's style. The live render
@@ -235,7 +231,7 @@ layer([planets, label])
               compose them into bigger graphics.</p>
             <p><strong>Lead into the next beat:</strong> once we have verbs, we
               can write other grammars' ideas with them, and then compare
-              them.</p>
+              them. They become more nodes in the same tree.</p>
             <p><strong>Sources:</strong> the thesis deck's stage 3b figure
               (<code>.layer(ribbon({ by: "species", opacity: 0.8 }))</code>,
               <code>scripts/generate-gofish-stage-assets.mjs</code>). It is the

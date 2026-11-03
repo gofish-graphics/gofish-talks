@@ -1,7 +1,8 @@
 /* Styles for the slides that show code side by side:
-   sections/03b-gofish-intro.html, sections/03c-code-comparisons.html, and
-   the GoTree slides at the top of sections/04-tradeoffs.html.
-   Linked from sections/03b-gofish-intro.html, so it loads with the deck. */
+   sections/03-gofish-intro.html, sections/03b-code-comparisons.html, the
+   GoTree slides in sections/04-surfaces.html, and the CanAdd slide in
+   sections/04b-validity.html.
+   Linked from sections/03-gofish-intro.html, so it loads with the deck. */
 
 /* Code on these slides is sized for the back of the room: 17px at the
    1280x720 canvas (the theme's base is 28px), with tighter line spacing than
@@ -143,7 +144,7 @@
   margin-top: 0.4em !important;
 }
 
-/* The GoFish crash course (03b): three auto-animated states of one layout.
+/* The GoFish crash course (03): three auto-animated states of one layout.
    Left: the core level (planets render, then code). Right: the chart level
    (seafood render, then code). Every state uses the same boxes, so only
    what was added moves. The columns are fixed so nothing shifts when the
@@ -191,7 +192,7 @@
   align-items: center;
 }
 
-/* The McNutt quote that opens section 4 (04-tradeoffs.html). Long, so it is
+/* The McNutt quote that opens tension 4a (04-surfaces.html). Long, so it is
    set near body size, left-aligned, with an accent rule. The last
    sentence is the claim, so it is bold in the accent color. */
 .reveal .quote-slide blockquote.long-quote {
@@ -232,7 +233,7 @@
   margin-top: 3.2rem;
 }
 
-/* expressive vs. structured (04): two standalone specs, each under what it
+/* The CanAdd slide (04b): two standalone specs, each under what it
    produces. USD renders a chart; °C shows the error GoFish throws, in the
    same box, where the chart would be. */
 .canadd-pair {

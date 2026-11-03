@@ -1,0 +1,120 @@
+        <!-- ═══ PART 4c: A SMALL LANGUAGE AGAINST A BIG ONE, ~0:55 ══════
+             The third tension, admitted as open. A small core and an
+             extensible core are not in tension: an extensible core can be
+             small, as long as people extend it from within the language. The
+             tension is between a small language and a big one, and growing
+             from within is the answer. GoFish has part of that answer.
+             The usage curve and the compression bars that used to open this
+             section are now in part 1 (01-compression.html). -->
+
+        <!-- Steele, "Growing a Language", OOPSLA 1998 keynote, published in
+             Higher-Order and Symbolic Computation 12(3), 1999. The two
+             sentences are verbatim from the paper's text: "I stand on this
+             claim: I should not design a small language, and I should not
+             design a large one. I need to design a language that can grow."
+             The accent color is ours. -->
+        <section class="quote-slide statement">
+          <p class="part">4c · A small language against a big one</p>
+          <blockquote class="long-quote quote-short">
+            <p style="max-width: none">I should not design a small language, and I should not design
+              a large one. I need to design <strong>a language that can
+              grow</strong>.</p>
+          </blockquote>
+          <p class="long-quote-cite" style="max-width: none">Guy L. Steele Jr., <em>Growing a Language</em>, OOPSLA 1998</p>
+          <aside class="notes">
+            <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
+              6:30 of 7:50.</p>
+            <ul>
+              <li>Tie it to part 1. A small core keeps the language small, and
+                growing from within gives the big vocabulary that short specs
+                need.</li>
+              <li>A small core and an extensible core are not in tension. An
+                extensible core can be small, as long as people extend it from
+                within the language. Growing from within is Steele's answer to
+                the choice between small and big.</li>
+            </ul>
+            <p><strong>Source:</strong> Guy L. Steele Jr., "Growing a
+              Language", keynote at OOPSLA 1998, published in
+              <em>Higher-Order and Symbolic Computation</em> 12(3), 1999. The
+              quote is verbatim, checked against the paper's text; in the paper
+              it follows "I stand on this claim:". It matches the wording in
+              the v3 draft, main.typ line 166.</p>
+            <p>If short on time, this quote can go at the top of the next
+              slide as a header instead, which saves about 0:10.</p>
+          </aside>
+        </section>
+
+        <!-- "Where we are now" and "evidence so far", merged. Left: what
+             already grows from within or is already small. Right: what does
+             not yet. -->
+        <section>
+          <p class="part">4c · A small language against a big one</p>
+          <h2>where we are now</h2>
+          <div class="two-col" style="margin-top: 1em">
+            <div>
+              <p><strong>so far</strong></p>
+              <ul>
+                <li>Charts grow from within.</li>
+                <li>Marks reduce to simple primitives.</li>
+                <li>Interfaces reduce to bounding boxes and boundary curves.</li>
+              </ul>
+            </div>
+            <div>
+              <p><strong>not yet</strong></p>
+              <ul>
+                <li>Layouts are opaque plug-ins.</li>
+                <li>The verbs are a fixed set.</li>
+              </ul>
+            </div>
+          </div>
+          <aside class="notes">
+            <p><strong>Target:</strong> 0:20. <strong>Running total:</strong>
+              6:50 of 7:50.</p>
+            <ul>
+              <li>GoFish can grow from within at the chart level. GoTree and
+                the chart templates are defined with the same verbs people use
+                to build graphics.</li>
+              <li>Marks reduce to simple primitives, and interfaces reduce to
+                bounding boxes and boundary curves. So the core can be
+                small.</li>
+              <li>Layouts cannot grow from within yet. They are opaque plug-ins
+                written outside the language. The v3 draft points out the same
+                problem for ggplot2, where extending it with ggproto means
+                leaving the plot language for a package implementation
+                interface.</li>
+              <li>The verbs are still a fixed set.</li>
+            </ul>
+            <p>Merged from the old "where we are now" and "evidence so far"
+              slides. Points from those slides that are left out, for Q&amp;A:
+              traits keep the types smaller than they look, and the type
+              system also runs out at extensible traits and at how
+              distribution and temporal types interact with operators.</p>
+          </aside>
+        </section>
+
+        <section class="statement" data-background-color="#f7f2e8">
+          <p class="part">4c · A small language against a big one</p>
+          <h2>what's the lambda calculus of layout?</h2>
+          <p class="big-claim">
+            A small core where a new layout is defined <em>in</em> the
+            language.
+          </p>
+          <aside class="notes">
+            <p><strong>Target:</strong> 0:20. <strong>Running total:</strong>
+              7:10 of 7:50.</p>
+            <ul>
+              <li>The question: what's the lambda calculus of layout? That is,
+                what is a small core where a new layout can be defined
+                <em>in</em> the language?</li>
+              <li>Say plainly that this is hard and that we are working on
+                it.</li>
+            </ul>
+            <p><strong>Optional callback</strong> (use it only if it feels
+              right): in the lambda calculus, much of the complexity moved
+              into the type system. In vis, it may move into checking which
+              compositions are meaningful, which is <code>CanAdd</code>
+              again.</p>
+            <p><strong>Lead into part 5:</strong> "That is the question I
+              would most like help with."</p>
+          </aside>
+        </section>

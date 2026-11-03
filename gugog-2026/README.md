@@ -26,5 +26,5 @@ The dev server is at `http://localhost:4003/`. `pnpm build` writes `dist/`.
   bullets, the target time, and the running total. Press `S` to open them.
 - Every figure is a labeled placeholder box. Replace each one with the real
   visual.
-- The one-slide version of section 5, for running long, is a hidden slide at
-  the end of `sections/05-big-vs-small.html`.
+- The slide order and target times follow `outline.md`. The panel slide's
+  notes list what to cut first to reach 7:00.

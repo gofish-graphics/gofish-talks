@@ -1,24 +1,57 @@
-        <!-- ═══ SECTION 4: TWO TRADEOFFS VERBS DISSOLVE, ~2:00 ═════════
-             Keep this section intact even when running long: it connects
-             to the talks on either side.
-             The first tradeoff opens with Andrew McNutt's call for small
-             modular language components and is built around one example of
-             it, GoTree rebuilt as a GoFish library (two slides). Its framing follows the
-             v3 draft of the GUGOG paper ("False tradeoff 1. Domain needs and
-             shared structure", gugog-2026-position-paper-v3/main.typ); its
-             code and render are the final paper's Figure 5
-             (gugog-2026-camera-ready-v3) and the gofish-gotree source.
-             The second tradeoff keeps the outline's CanAdd framing (the type
-             system), not v3's, which predates the type system. Its code is
-             from the current GoFish source, where the class is named CanAdd.
+        <!-- ═══ PART 4: THREE TENSIONS, ~3:40 ═══════════════════════════
+             This file has the optional overview slide and tension 4a, many
+             surfaces against one language (~1:35). Tension 4b is in
+             04b-validity.html and 4c in 04c-small-vs-big.html.
+             Each tension is presented in its strongest form, with credit,
+             before the evidence. 4a and 4b are disputed with evidence; 4c is
+             admitted as open.
+             4a opens with Andrew McNutt's call for small modular language
+             components and is built around one example of it, GoTree rebuilt
+             as a GoFish library. Its framing follows the v3 draft of the
+             GUGOG paper ("False tradeoff 1. Domain needs and shared
+             structure", gugog-2026-position-paper-v3/main.typ); its code and
+             render are the final paper's Figure 5
+             (gugog-2026-camera-ready-v3) and the gofish-gotree source. It
+             ends with the paper's Figure 6, which uses all three surfaces in
+             one graphic.
              Styles for the code slides: ../gofish-compare.css. -->
+
+        <!-- Optional overview of part 4. Skip it if time is short: the
+             section labels on the slides that follow carry the same
+             structure. -->
+        <section>
+          <p class="part">4 · Three tensions</p>
+          <h2>three tensions</h2>
+          <div>
+            <ol>
+              <li>Many surfaces against one language</li>
+              <li>Validity against freedom of arrangement</li>
+              <li>A small language against a big one</li>
+            </ol>
+          </div>
+          <aside class="notes">
+            <p><strong>Optional. Skip this slide if time is short.</strong>
+              The section labels on the slides that follow (4a, 4b, 4c) carry
+              the same structure.</p>
+            <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
+              3:40 of 7:50 (3:30 at the next slide if skipped).</p>
+            <ul>
+              <li>Three tensions a unified grammar faces. I'll present each in
+                its strongest form, with credit, and then the evidence.</li>
+              <li>The first two I think are incidental, and I'll show why. The
+                third I have only partly solved.</li>
+            </ul>
+          </aside>
+        </section>
+
+
         <!-- The idea the GoTree slides build on: McNutt, "No Grammar to
              Rule Them All", IEEE VIS 2022 (arXiv:2207.07998). The end of the
              passage, in the paper's order, opening with an ellipsis; the full
-             passage is in the notes. McNutt will be in the room: present
-             his position as something GoFish builds on. -->
+             passage is in the notes. GoFish takes the direction this passage
+             suggests, so the slide presents it as the idea 4a builds on. -->
         <section class="quote-slide">
-          <p class="part">4 · Two tradeoffs verbs dissolve</p>
+          <p class="part">4a · Many surfaces against one language</p>
           <blockquote class="long-quote quote-short">
             <p>… we suggest that consideration of <strong>small modular
               language components</strong> may be helpful in the continuation
@@ -31,17 +64,21 @@
           <aside class="notes">
             <p><strong>Full passage</strong> (reference markers removed): Park et al. argue that efforts should be made to “find a definitive grammar that can unify many of these existing grammars”. However, Greenspun’s tenth rule quips that any sufficiently complicated program contains an ad hoc, informally specified, bug-ridden, slow implementation of half of Lisp. Less satirically Fowler notes that one of the biggest dangers in DSL design is “Sliding into generality.” While tools like Vega-Lite are probably not in danger of becoming Lisp, we suggest that consideration of small modular language components may be helpful in the continuation and extension of this ecosystem. There are many tasks, and no one DSL will be able to capture all of them without compromising essential parts of its domain design. That is, there is no grammar to rule them all.</p>
             <p><strong>Target:</strong> 0:15 (shown, not recited; read the
-              accent phrase and the last sentence aloud). <strong>Running total:</strong> 4:40 of
-              7:00 (budget; the deck now runs 9:20).</p>
+              accent phrase and the last sentence aloud). <strong>Running total:</strong> 3:55 of
+              7:50.</p>
+            <p><strong>The tension, in its strongest form:</strong> a field
+              has many tasks, so it needs many API surfaces, and one language
+              that tries to cover them all compromises each domain's design.
+              A second angle is that, even with many surfaces, it is not
+              clear they can be tied together in one language.</p>
             <p><strong>Say:</strong> "Andrew's survey concluded there's no
-              grammar to rule them all, and I agree. One language that does
-              everything slides into generality. What he suggested instead was
-              small modular components, and languages that build on each
-              other. GoTree is an example of that: it keeps its own domain
-              design and compiles to a shared core." Then go to the next
-              slide.</p>
-            <p>Andrew is in the room. This is his idea, credited, not a
-              position to argue against. The same paper argues for "compile
+              grammar to rule them all, and I agree that no single surface
+              should do everything. His suggestion is small modular language
+              components, and that is the direction GoFish takes. GoTree is
+              an example: it keeps its own domain design and compiles to a
+              shared core." Then go to the next slide.</p>
+            <p>This is his idea, credited, and the next slides build on it.
+              The same paper argues for "compile
               towers": "Compilations may be chained together in a compile
               tower in a manner supported by targeted languages that do one
               thing well (akin to the Unix credo)", and "As the ecosystem of
@@ -64,8 +101,8 @@
         <!-- GoTree, step 1: the data and the picture, no specs. The
              fragment is step 2: this data is a tree, not a table. -->
         <section class="code-slide" data-auto-animate data-auto-animate-id="gotree">
-          <p class="part" data-id="gotree-part">4 · Two tradeoffs verbs dissolve</p>
-          <h2 data-id="gotree-title">universal vs. domain-specific</h2>
+          <p class="part" data-id="gotree-part">4a · Many surfaces against one language</p>
+          <h2 data-id="gotree-title">GoTree, a grammar for trees</h2>
           <div class="gotree-data">
             <div>
               <p class="code-pair-label">the data <span class="code-pair-sub">· a nested tree</span></p>
@@ -89,10 +126,12 @@
             </div>
           </div>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:15 (the GoTree beat stays 1:00
-              over three slides: 0:15 here, 0:20 for the specs, 0:25 for
-              <code>combine</code>). <strong>Running total:</strong> 4:55 of
-              7:00 (budget; the deck now runs 9:20).</p>
+            <p><strong>Target:</strong> 0:15 (the GoTree beat is 0:55 over
+              three slides: 0:15 here, 0:20 for the specs, 0:20 for
+              <code>combine</code>). <strong>Running total:</strong> 4:10 of
+              7:50.</p>
+            <p>Nested data, so it is not obvious where
+              <code>chart(data).flow(...)</code> goes.</p>
             <p><strong>Say:</strong> "Here's a domain grammar of the kind
               Andrew describes: GoTree, a grammar for tree layouts. Its input
               is a tree, a root with children with children, and this is the
@@ -122,8 +161,8 @@
         </section>
 
         <section class="code-slide" data-auto-animate data-auto-animate-id="gotree">
-          <p class="part" data-id="gotree-part">4 · Two tradeoffs verbs dissolve</p>
-          <h2 data-id="gotree-title">universal vs. domain-specific</h2>
+          <p class="part" data-id="gotree-part">4a · Many surfaces against one language</p>
+          <h2 data-id="gotree-title">GoTree, a grammar for trees</h2>
           <div class="code-pair">
             <div>
               <p class="code-pair-label">GoTree <span class="code-pair-sub">· its own language</span></p>
@@ -164,20 +203,17 @@
             </div>
           </div>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:20 (was 0:35; the data slide before
-              it took 0:15. 1:15 for this tradeoff, over four slides with the
-              quote; 2:45 for section 4, with both quotes and the recap). <strong>Running total:</strong> 5:15
-              of 7:00 (budget; the deck now runs 9:20).</p>
+            <p><strong>Target:</strong> 0:20. <strong>Running total:</strong>
+              4:30 of 7:50.</p>
             <ul>
-              <li>Universal vs. domain-specific: respond to Jason. Domain
-                grammars can be layered on a shared core instead of being
-                separate languages.</li>
+              <li>Many surfaces against one language. Domain grammars can be
+                layered on a shared core instead of being separate
+                languages.</li>
             </ul>
-            <p>Keep section 4 intact even if running long: it connects to the
-              talks on either side.</p>
-            <p><strong>The tradeoff:</strong> you have to choose between a
-              universal grammar and a domain-specific one. Andrew McNutt's
-              survey (the previous slide) already points the way out: small
+            <p><strong>The tension:</strong> it can look like you have to
+              choose between one universal grammar and many domain-specific
+              ones. Andrew McNutt's
+              survey (the quote two slides back) already points the way out: small
               modular language components, and domain languages that compile
               to ones that do one thing well. This slide is one instance of
               that idea, credited to him, not an argument with him.</p>
@@ -222,7 +258,7 @@
         </section>
 
         <section class="code-slide">
-          <p class="part">4 · Two tradeoffs verbs dissolve</p>
+          <p class="part">4a · Many surfaces against one language</p>
           <h2><code>combine</code> compiles to GoFish constraints</h2>
           <pre><code class="language-ts" data-line-numbers data-char-marks="7:13-28, 11:13-33">export const combine = (opts: CombineOptions): Combiner =&gt; {
   …
@@ -249,8 +285,9 @@
             Domain grammars keep their own design and share a core.
           </p>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:25. <strong>Running total:</strong>
-              5:40 of 7:00 (budget; the deck now runs 9:20).</p>
+            <p><strong>Target:</strong> 0:20 (trimmed from 0:25: say the first
+              three sentences and skip the paper quote if short on time).
+              <strong>Running total:</strong> 4:50 of 7:50.</p>
             <p><strong>Say:</strong> And here's how it's layered. The
               <code>combine</code> that the tree spec called turns each axis
               into an ordinary GoFish constraint, <code>Constraint.align</code>
@@ -291,7 +328,7 @@
              on. Renders: the same charts.ts functions as the crash course
              (planets-label, seafood-ribbon) and the paper's Figure 5 SVG. -->
         <section class="code-slide recap-slide">
-          <p class="part">4 · Two tradeoffs verbs dissolve</p>
+          <p class="part">4a · Many surfaces against one language</p>
           <h2>same core, three shapes of data</h2>
           <div class="recap-grid">
             <div>
@@ -332,13 +369,14 @@ layer([planets, label])
           <p class="recap-core">one core underneath: the same verbs and constraints</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
-              5:55 of 7:00 (budget; the deck now runs 9:20).</p>
+              5:05 of 7:50.</p>
             <p><strong>Say:</strong> "Back to our two examples, plus the tree.
               What differs isn't the core, it's the shape of the data:
-              low-level marks, tabular rows, a hierarchy. Each level adds what
-              its data needs, and they all share the same verbs and
-              constraints. That's the modular, layered ecosystem Andrew
-              described, with GoFish as the shared floor."</p>
+              low-level marks, tabular rows, a hierarchy. These are three
+              surfaces on one core, and they share the same verbs and
+              constraints. GoTree keeps its own design and is one more level
+              of the tree. That's Andrew's compile tower, with GoFish as one
+              floor of it."</p>
             <p>The specs are cut down to their essential lines with
               <code>...</code>, more than on the earlier slides, to fit three
               columns. Low-level: the crash course's final planets spec with
@@ -360,199 +398,55 @@ layer([planets, label])
           </aside>
         </section>
 
-        <!-- The open question the CanAdd slide gives one data point on:
-             Huang and Kay, "Semantic Validity vs. Graphical Arrangement in
-             Visualization Grammars", GUGOG @ IEEE VIS 2026
-             (gugog-vis.github.io/2026/papers/pdf/huang-kay.pdf), section 6.4
-             "Future Directions: Best of Both?", verbatim. Cynthia and Matt
-             will be in the room: present their question fairly. -->
-        <section class="quote-slide">
-          <p class="part">4 · Two tradeoffs verbs dissolve</p>
-          <blockquote class="long-quote quote-short">
-            <p>Can semantic and graphical expressivity be combined within a
-              single system, or are users better served by clearly distinct
-              tools? Systems that validate every operation necessarily
-              constrain the arrangement space, and systems that maximize
-              arrangement coverage necessarily leave validity to the user.
-              Characterizing <strong>which of these trade-offs are principled
-              and which are merely incidental</strong> to current
-              implementations is an important open research problem.</p>
-          </blockquote>
-          <p class="long-quote-cite">Cynthia Huang &amp; Matthew Kay, <em>Semantic Validity vs. Graphical Arrangement in Visualization Grammars</em>, GUGOG 2026</p>
+
+        <!-- Picture only: the GUGOG camera-ready paper's Figure 6
+             (gugog-2026-camera-ready-v3/figures/gofish-tree-waffle.png),
+             copied exactly. A gofish-gotree tree whose leaves are chart-level
+             waffles of low-level bottle glyphs: all three surfaces in one
+             graphic. -->
+        <section class="figure-slide">
+          <style>
+            .reveal .figure-slide .tree-waffle {
+              display: block;
+              margin: 0.3em auto 0;
+              max-height: 480px;
+            }
+          </style>
+          <p class="part">4a · Many surfaces against one language</p>
+          <h2>the surfaces work together</h2>
+          <img class="tree-waffle" src="./images/tradeoffs/gofish-tree-waffle.png" alt="A GoFish tree whose four leaves are waffles of bottle glyphs, each bottle filled with green to a data value" />
+          <p class="source-line" style="text-align: center">GUGOG paper, Figure 6</p>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:15 (shown, not recited; read the
-              accent phrase aloud). <strong>Running total:</strong> 6:10 of
-              7:00 (budget; the deck now runs 9:20).</p>
-            <p><strong>Say:</strong> "Cynthia and Matt, who are on the
-              panel, frame this as a tradeoff: validate every operation and
-              you constrain what you can draw; maximize what you can draw and
-              validity is left to the user. And they ask which of these
-              tradeoffs are principled and which are incidental to current
-              systems. Here's one data point." Then go to the next slide.</p>
-            <p>The quote is verbatim from section 6.4, "Future Directions:
-              Best of Both?" (the PDF's line-break hyphens, as in
-              "max-imize", are not part of the words). The accent color is
-              ours. Their paper calls its contribution and GoFish's
-              "distinct and complementary" (section 5.1).</p>
-            <p><strong>Background</strong> (the excerpt this slide used to
-              show, from section 1): "Bartonicek et al. ... argue that only
-              statistics with monoidal structure (e.g. counts, sums, products)
-              should be displayed as stacked bars ... Bartonicek et al.
-              explicitly caution against treating stacking as a purely
-              graphical operation – a view that appears to directly challenge
-              the validity and usefulness of the stacking operator in
-              GoFish." Full original paragraph, for reference:</p>
-            <blockquote>Bartonicek et al. [2] examine the widespread usage of
-              stacked bar charts over dodged bar charts in interactive
-              graphics, and offer an explanation for this preference based in
-              Gestalt principles. They then proceed to argue that only
-              statistics with monoidal structure (e.g. counts, sums, products)
-              should be displayed as stacked bars with linked highlighting of
-              single group subsets (parts of whole), based on the algebraic
-              properties of summary functions. The authors offer this result,
-              and a similar one for multi-group selection, as a preliminary
-              contribution towards complete algebraic foundations for
-              ‘coherent and well-behaved’ interactive graphics. They invoke a
-              more constrained notion of expressivity that is conditional on
-              statistical and mathematical validity. In fact, Bartonicek et
-              al. [2] explicitly caution against treating stacking as a purely
-              graphical operation – a view that appears to directly challenge
-              the validity and usefulness of the stacking operator in
-              GoFish.</blockquote>
-          </aside>
-        </section>
-
-        <section class="code-slide">
-          <p class="part">4 · Two tradeoffs verbs dissolve</p>
-          <h2>expressive vs. structured</h2>
-          <p class="canadd-tagline">constrains specs, not pictures</p>
-          <div class="canadd-pair">
-            <div>
-              <p class="code-pair-label">USD <span class="code-pair-sub">· declared summable: it stacks</span></p>
-              <div class="canadd-out" data-chart="sales-stacked" data-w="520" data-h="190" data-font-size="16"></div>
-              <pre><code class="language-ts" data-line-numbers data-char-marks="9:12-54">const sales = [
-  { month: "Jan", city: "Boston", value: 120 },
-  { month: "Jan", city: "Chicago", value: 95 },
-  ...
-];
-
-chart(sales, {
-  schema: {
-    value: Unit("USD", { traits: [Trait.summable()] }),
-  },
-})
-  .flow(
-    spread({ by: "month", dir: "x" }),
-    stack({ by: "city", dir: "y" }),
-  )
-  .mark(rect({ h: "value", fill: "city" }))</code></pre>
-            </div>
-            <div>
-              <p class="code-pair-label">°C <span class="code-pair-sub">· no CanAdd: GoFish refuses</span></p>
-              <!-- Runs tempsStacked() from ../charts.ts and shows the error
-                   GoFish throws (data-expect-error), not a chart. -->
-              <div class="canadd-out canadd-error-box" data-chart="temps-stacked" data-expect-error data-w="520" data-h="190"></div>
-              <pre><code class="language-ts" data-line-numbers data-char-marks="9:12-21">const temps = [
-  { month: "Jan", city: "Boston", value: -1 },
-  { month: "Jan", city: "Chicago", value: -4 },
-  ...
-];
-
-chart(temps, {
-  schema: {
-    value: Unit("°C"),
-  },
-})
-  .flow(
-    spread({ by: "month", dir: "x" }),
-    stack({ by: "city", dir: "y" }),
-  )
-  .mark(rect({ h: "value", fill: "city" }))</code></pre>
-            </div>
-          </div>
-          <p class="canadd-footnote">Inspired by Bartonicek, Urbanek &amp; Murrell (JCGS 2025), Flint (Wang et al., VIS 2026), and Huang &amp; Kay (GUGOG 2026).</p>
-          <aside class="notes">
-            <p><strong>Target:</strong> 0:55 (after the 0:15 quote). <strong>Running total:</strong>
-              7:05 of 7:00 (budget; the deck now runs 9:20).</p>
+            <p><strong>Target:</strong> 0:10, plus about 0:05 for the bridge
+              line to 4b. <strong>Running total:</strong> 5:20 of 7:50.</p>
             <ul>
-              <li>Expressive vs. structured: one data point on Cynthia and
-                Matt's open question.</li>
+              <li>One graphic that uses all three surfaces. The tree is laid
+                out by the hierarchical surface (gofish-gotree). Each leaf is
+                a waffle written at the chart level. Each unit of a waffle is
+                a bottle glyph built from low-level marks: an image and a
+                data-sized fill rectangle.</li>
+              <li>This answers the second angle of the tension, that the
+                surfaces cannot be tied together in one language.</li>
             </ul>
-            <p><strong>Hand off:</strong> "Cynthia and Matt are about to argue
-              this carefully. Here's a mechanism to push on."</p>
-            <p><strong>Say:</strong> The same <code>stack</code> verb works on
-              anything, which is the expressive part. The structure comes from
-              the data's type: a unit declares what it can do, and
-              <code>stack</code> needs values that add up. USD declared
-              <code>Trait.summable()</code> stacks. Degrees Celsius doesn't
-              have <code>CanAdd</code>, so the same chart is a loud error that
-              names the missing capability and says what to do instead, not a
-              wrong picture. "This is one case where the tradeoff looks
-              incidental. CanAdd constrains specs, not pictures: every
-              arrangement is still reachable. To stack °C you either declare
-              the unit summable, which is a deliberate claim about your data,
-              or you stack the means, which is the fix the error itself
-              suggests. The only thing it takes away is stacking numbers whose
-              sums mean nothing."</p>
-            <p><strong>Fair framing:</strong></p>
-            <ul>
-              <li>This is the idea Cynthia and Matt call Error Friction (their
-                section 4 design principles and section 6.3): invalid
-                specifications are made costly to reach, while valid ones stay
-                fluid.</li>
-              <li>It blocks the hazard they name in section 2 ("Motivating
-                Contributions"): if linked selection were added without
-                validity checks, "the grammar would silently permit
-                combinations, such as stacking of group means". A
-                <code>.mean()</code> result is not summable, so
-                <code>stack</code> refuses it.</li>
-              <li>Limits, said plainly: this is one operator and one property.
-                Bartonicek et al.'s actual setting, linked highlighting in
-                interactive graphics, is not addressed here. "I haven't found
-                a principled tradeoff yet" is not "there isn't one."</li>
-              <li>Their paper calls the two kinds of contribution "distinct
-                and complementary" (section 5.1). Present CanAdd in that
-                spirit: a mechanism for them to push on, not a rebuttal.</li>
-            </ul>
-            <p>The error on the right is not typed in: the slide runs the °C
-              spec live and prints the message GoFish throws. It is
-              <code>checkSummable</code>'s error in
-              <code>src/ast/measure.ts</code> (origin/main, lines 155 to 161):
-              "... which cannot be summed: it has no CanAdd. If its amounts add
-              up (money, counts, lengths), declare it with Unit(...,
-              { traits: [Trait.summable()] }). If they do not (temperatures,
-              prices, rates), average them instead ...".</p>
-            <p><strong>Source:</strong> written for this slide, after the
-              GoFish repo's CanAdd test
-              (<code>packages/gofish-graphics/src/tests/measure.test.ts</code>,
-              "CanAdd: only amounts that add up are summed"), which stacks a
-              <code>Unit("USD", { traits: [Trait.summable()] })</code> column
-              and a <code>Unit("°C")</code> column the same way. The two specs
-              here are ordinary programs and differ only in the unit line
-              (highlighted) and their data. The data is illustrative: made-up
-              monthly sales and average temperatures for two cities. The data
-              rows after the first two are elided as <code>...</code>; the
-              live render uses all six rows (<code>../charts.ts</code>). The
-              type itself is <code>export type CanAdd = Record&lt;string,
-              never&gt;;</code> in <code>src/ast/schema.ts</code>: "The class
-              of a unit whose amounts can be added".</p>
-            <p><strong>Footnote citations:</strong></p>
-            <ul>
-              <li>A. Bartonicek, S. Urbanek, and P. Murrell, "No More, No Less
-                than Sum of Its Parts: Groups, Monoids, and the Algebra of
-                Graphics, Statistics, and Interaction," <em>Journal of
-                Computational and Graphical Statistics</em> 34(3), 2025.</li>
-              <li>Yunhai Wang, Kecheng Lu, Junhao Chen, Alper Sarikaya, and
-                Chenglong Wang, "Flint: A Semantics-Driven Data Visualization
-                Intermediate Language," IEEE VIS 2026 (arXiv:2607.20775)
-                (microsoft.github.io/flint-chart). The VIS program spells the
-                title "Semantic-driven"; this follows arXiv. Its semantic types and
-                traits (<code>aggRole</code> decides sum vs. mean) are what
-                <code>CanAdd</code> draws on; see the GoFish repo's
-                <code>apps/docs/docs/internals/design/flint-chart-notes.md</code>.</li>
-              <li>C. A. Huang and M. Kay, "Semantic Validity vs. Graphical
-                Arrangement in Visualization Grammars," GUGOG @ IEEE VIS
-                2026.</li>
-            </ul>
+            <p><strong>Bridge to 4b</strong> (no slide; credit Jason
+              Brunson's GUGOG paper, "Balancing constriction and expansion for
+              domain-specific grammars"): "Jason's paper puts these two
+              tensions together. He argues that each domain needs a dialect,
+              with its own objects and its own constraints on how they
+              combine. GoTree is a dialect. The next question is about the
+              constraints."</p>
+            <p>His words, for reference: "From each specialty should be
+              derived a graphical dialect, constituting both permitted objects
+              and constraints on their combination." He proposes this as a
+              middle ground between extensions that allow misleading graphics
+              and a separate re-implementation for each domain. Keep the
+              reference at this level in the talk; his geometric data
+              analysis case study is not needed here.</p>
+            <p><strong>Source:</strong> GUGOG camera-ready paper, Figure 6,
+              "A GoFish graphic combining a tree, waffles, and images." The
+              code is <code>examples/gofish-tree-waffle.ts</code> in the
+              paper's folder. The tree places the four waffles itself, so
+              there is no outer <code>spread</code>. The internal nodes are
+              small circles.</p>
           </aside>
         </section>

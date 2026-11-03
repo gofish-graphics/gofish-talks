@@ -2,11 +2,12 @@
 // <div data-chart="usage-curve"></div>, and renderCharts() draws it there.
 // data-w and data-h set its size in pixels.
 //
-// Section 5 ("big vs. small"): the usage curve and the compression bars.
+// Part 1 ("compression is the yardstick"): the usage curve and the
+// compression bars.
 // Both are schematic. The numbers below only give the shapes; no axis shows
 // them, and none of them was measured.
 //
-// Section 3b (the GoFish crash course): the planets and the seafood charts.
+// Part 3 (the GoFish crash course): the planets and the seafood charts.
 // These are the full specs; the slides print them with styling elided.
 import {
   chart,
@@ -155,7 +156,7 @@ function compression(fontSize: number) {
   ]);
 }
 
-// ─── Section 3b: the GoFish crash course ──────────────────────────────────
+// ─── Part 3: the GoFish crash course ──────────────────────────────────────
 // The core level: the four inner planets on a dark background, from the
 // GoFish repo's tutorial stories (origin/main 7b902ed38):
 // packages/gofish-graphics/stories/tutorials/Basics.stories.tsx (no label)
@@ -237,7 +238,7 @@ const seafoodRibbon = () =>
     .layer(ribbon({ by: "species", opacity: 0.8 }));
 // (The slides show both seafood specs with spacing and opacity elided.)
 
-// ─── Section 4: expressive vs. structured (CanAdd) ────────────────────────
+// ─── Part 4b: validity against freedom of arrangement (CanAdd) ────────────
 // Two ordinary programs that differ only in the unit of "value". USD
 // declares Trait.summable(), so stack can add the amounts. °C does not, so
 // GoFish refuses to stack it; the slide shows the error it throws (see
