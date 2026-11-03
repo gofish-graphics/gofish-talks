@@ -1,10 +1,10 @@
 # The Grammar of Graphics Needs Verbs: Towards a GUGOG
 
-Revised outline, 2026-11-02, third version. Short talk, 7:00 budget, at the GUGOG workshop at IEEE VIS 2026.
+Revised outline, 2026-11-03, fourth version. Short talk, 7:00 budget, at the GUGOG workshop at IEEE VIS 2026.
 
 ## The story in one paragraph
 
-The talk opens on a wall of GoFish charts, so the audience has something concrete to hold on to. A visualization language is a compression of the charts people want to make. Chart typologies like seaborn give short specs for common charts but need a new function for every unusual chart. Low-level toolkits like d3 have a small vocabulary but long specs for every chart. The question for the talk is what stands in the way of doing this compression well. The grammar of graphics sits in the middle as one flat layer of fixed nouns. A fixed set of nouns gives a finite number of combinations, so the only way to grow the language is to add a new primitive, and the core keeps growing. In a language with verbs, you can build new structures from old ones instead. GoFish adds verbs, and with them it can write other grammars' ideas in one language. A unified grammar like this still seems to face three obstacles. The first is that a field needs many API surfaces, and it is not clear that they can be tied together in one language. The second is that a language seems to have to choose between checking validity and allowing any arrangement. The third is the choice between a small language and a big one. For the first two, GoTree and CanAdd are evidence that the obstacle is incidental. For the third, Steele's answer is a language that can grow. With verbs, the language grows as a tree, with a small core and new levels built from old ones, and the middle level stays open. GoFish can grow charts from within, but its layouts are still plug-ins written outside the language, which is the same move as adding a new primitive. Growing layouts from within is the hard part, and I do not have an answer yet. That is the open question for the panel.
+The talk opens on a wall of GoFish charts, so the audience has something concrete to hold on to. Charts follow a long tail. The grammar of graphics covers the common charts, and one of its big ideas was to write many chart types in one shared language. That shared language let us ask questions about the structure of charts, such as questions about marks and channels, and not only about chart types. For the long tail, we built many new grammars instead. Each one is its own language, so they are hard to compare, and comparing them means translating between every pair. I suspect this makes it harder to ask new research questions about the long tail, but I am not sure that it is the cause. Some of us doubt that a shared kernel exists under these languages. I think one does, but it may not look quite like the grammar of graphics we are used to. A visualization language is a compression of the charts people want to make. Chart typologies like seaborn give short specs for common charts but need a new function for every unusual chart. Low-level toolkits like d3 have a small vocabulary but long specs for every chart. The question for the talk is what stands in the way of doing this compression well. The grammar of graphics sits in the middle as one flat layer of fixed nouns. A fixed set of nouns gives a finite number of combinations, so the only way to grow the language is to add a new primitive, and the core keeps growing. In a language with verbs, you can build new structures from old ones instead. GoFish adds verbs, and with them it can write other grammars' ideas in one language. A unified grammar like this still seems to face three obstacles. The first is that a field needs many API surfaces, and it is not clear that they can be tied together in one language. The second is that a language seems to have to choose between checking validity and allowing any arrangement. The third is the choice between a small language and a big one. For the first two, GoTree and CanAdd are evidence that the obstacle is incidental. For the third, Steele's answer is a language that can grow. With verbs, the language grows as a tree, with a small core and new levels built from old ones, and the middle level stays open. GoFish can grow charts from within, but its layouts are still plug-ins written outside the language, which is the same move as adding a new primitive. Growing layouts from within is the hard part, and I do not have an answer yet. That is the open question for the panel.
 
 ## The thesis
 
@@ -12,8 +12,8 @@ In the traditional grammar of graphics, the only way to grow the language is to 
 
 ## How the parts connect
 
-- Part 1 opens on concrete charts and then sets up compression as the yardstick for the whole talk. It ends with the question for the talk: "What are the obstacles to doing this compression?"
-- Part 2 names the first obstacle in the grammar of graphics. It has nouns but almost no verbs, so it is one flat layer, and the only way to grow it is to add a new primitive. The thesis is stated here briefly, in one or two sentences, and not argued.
+- Part 1 opens on concrete charts. The usage curve and the two grammars pictures then make the opening argument. The grammar of graphics gave the common charts one shared language, while the long tail has many grammars that are hard to compare. Part 1 ends by asking whether a shared kernel exists, and I say that I think one does, though it may not look like the grammar of graphics. It then sets up compression as the yardstick for the whole talk. It ends with the question for the talk: "What are the obstacles to doing this compression?"
+- Part 2 names the first obstacle in the grammar of graphics, and it begins the answer to how the kernel differs from the grammar of graphics we are used to. It has nouns but almost no verbs, so it is one flat layer, and the only way to grow it is to add a new primitive. The thesis is stated here briefly, in one or two sentences, and not argued.
 - Part 3 shows verbs working, first inside GoFish and then across other grammars.
 - Part 4 takes three more obstacles in turn. The first two are disputed with evidence. The third is answered by the tree slide, which comes back to the flat layer from part 2 and states the full thesis. What is still missing is admitted as open.
 - Part 5 hands the open questions to the panel.
@@ -32,13 +32,21 @@ Times are targets. "Existing" means the slide is already in the deck. "New" mean
 2. **Splash: these are all GoFish programs.** Existing, moved to the start. 0:15.
    - The talk opens on concrete charts, so the audience has something to hold on to before the abstract slides.
    - Some of these charts come back later as the leaves of the flat layer and tree pictures.
-3. **From "I" to "we".** Existing, trimmed. 0:30.
-   - Each vis grammar teaches me something, but the lessons stay stuck in separate systems.
-   - As a field, our grammars cannot build on each other.
-4. **The usage curve.** Moved from section 5. 0:20.
+3. **The usage curve.** Moved from section 5, and moved before the grammars pictures. 0:20.
    - How often a chart is made, against how complex it is. Bar, line, and scatter are on the left. One-lab infographics and diagrams are on the right.
+   - The grammar of graphics covers the common charts on the left. The long tail on the right is where people have built new grammars.
    - Name the two ends. Chart typologies like seaborn are on one end, and low-level toolkits like d3 are on the other.
-5. **A good grammar is a good compression.** Moved from section 5. 0:25.
+4. **The grammars picture.** New, picture only. 0:15.
+   - A hand drawing with GoG in a big circle in the middle and newer grammars around it: Atom, PiCCL, AnnoGram, Mascot, Gosling, Neo, GenomeSpy, GoTree, and Canis.
+   - Said with confidence: the grammar of graphics put many chart types in one shared language, and that let us ask questions about the structure of charts, such as marks and channels, and not only about chart types. Draco and CompassQL are one example, because they reason about Vega-Lite specs in terms of marks and encodings.
+   - For the long tail, we built many new grammars instead, and each one is its own language.
+5. **The tangle.** New, picture only. 0:15.
+   - The same drawing with double-headed arrows between almost every pair. It is a Reveal auto-animate pair with slide 4, so the circles stay still and only the arrows fade in.
+   - Said with confidence: comparing these grammars means translating between every pair of languages, and I have run into this a lot.
+   - Said as a suspicion: I suspect this makes it harder to ask new research questions about the long tail, and that we are treading water a bit, but I am not sure that is the cause.
+   - "Some of us doubt that a shared kernel exists. I think one does, but it may not look quite like the grammar of graphics we are used to." This leads into the compression bars, and later the flat layer slide and the tree slide.
+   - The kernel doubt is not attributed to anyone. McNutt's survey argues that no single DSL should cover every task, which is a different claim.
+6. **A good grammar is a good compression.** Moved from section 5. 0:25.
    - One function per chart type gives a big language. Low-level primitives give long specs.
    - A good grammar keeps both small. Total cost is the size of the language plus the size of every spec written in it, weighted by how often each chart is made.
    - The slide ends with the question for the talk, shown as a line after a click: "What are the obstacles to doing this compression?"
@@ -47,14 +55,16 @@ Leads into part 2 with: "Let's start with the usual answer for the middle, the g
 
 The Haskell aside is cut from this version. It can come back if there is time.
 
+The "from I to we" slide is hidden with `data-visibility="hidden"`, because the two grammars pictures carry its point. Its line "each vis grammar teaches me something, but the lessons stay stuck in separate systems" moved into the notes for the tangle.
+
 ### 2. The grammar of graphics needs verbs (about 0:35)
 
 The thesis is stated here briefly and is not argued. The full argument comes at the end, on the tree slide.
 
-6. **Data, marks, channels, coordinates.** Existing, from the thesis deck, shortened. 0:15.
+7. **Data, marks, channels, coordinates.** Existing, from the thesis deck, shortened. 0:15.
    - The grammar of graphics is the usual answer for the middle. It has a rich set of nouns but almost no verbs.
    - All four columns show at once. The closing line is the only click.
-7. **The grammar of graphics is one flat layer of nouns.** New. 0:20.
+8. **The grammar of graphics is one flat layer of nouns.** New. 0:20.
    - The same specific charts as the tree slide hang straight off one flat bar. The bar is split into a few of the grammar's categories: marks, encoding channels, coordinate transforms, and a faded slot for the rest.
    - Every chart is written directly against the same fixed nouns, and there is no way to define new words from old ones.
    - One click adds a chart outside the combinations, the croissant chart from the splash, and the bar grows by "+ new geom" and "+ new coordinate system". The line "A fixed set of nouns gives a finite number of combinations. Do we keep adding nouns forever?" appears.
@@ -64,13 +74,13 @@ Leads into part 3 with the crash course, which states the second half of the the
 
 ### 3. The tree in practice (about 1:15)
 
-8. **Crash course, three steps.** Existing. 0:30 in total.
+9. **Crash course, three steps.** Existing. 0:30 in total.
    - GoFish's verbs are introduced here. Say the second half of the thesis once, plainly: "In a language with verbs, you can build new structures from old ones, using a fairly stable set of composition mechanisms."
    - Two API surfaces of GoFish side by side. The planets use the low-level core of marks and relations. The stacked bars use the chart level with short specs.
    - Add a label and an arrow to the planets. Then add a ribbon to the bars.
    - Say that these are two surfaces on one core.
-9. **Atom's gridxy is GoFish's spread.** Existing. 0:20.
-10. **PiCCL lines up with GoFish.** Existing. 0:25.
+10. **Atom's gridxy is GoFish's spread.** Existing. 0:20.
+11. **PiCCL lines up with GoFish.** Existing. 0:25.
     - Atom and PiCCL fit into the same tree. Written in one language, they share most of their structure, and the differences are small parts you can point to.
 
 Leads into part 4 with: "So unifying grammars compresses them. But three things seem to stand in the way of that compression, and I want to take them one at a time."
@@ -79,7 +89,7 @@ Leads into part 4 with: "So unifying grammars compresses them. But three things 
 
 Each obstacle is something that seems to stand in the way of the compression from the opening. Each is presented in its strongest form, with credit, before the evidence. The first two are disputed. The third is answered by the tree slide, and what is still missing is admitted as open.
 
-11. **Three obstacles.** Optional. 0:10.
+12. **Three obstacles.** Optional. 0:10.
     - Many API surfaces against one language.
     - Validity against freedom of arrangement.
     - A small language against a big one.
@@ -89,16 +99,16 @@ Each obstacle is something that seems to stand in the way of the compression fro
 
 This obstacle combines the two angles from the false tradeoffs draft. One angle is that a field needs many API surfaces, so one language will not do. The other angle is that it is not possible to tie those surfaces together in one language. GoFish's answer to both is the same. It has several surfaces that work together and share a core.
 
-12. **McNutt quote.** Existing. 0:15.
+13. **McNutt quote.** Existing. 0:15.
     - "Small modular language components" is highlighted.
     - Say that I agree no single surface should do everything, and that his suggestion of small modular parts is the direction GoFish takes.
-13. **GoTree, the data and the picture.** Existing. 0:15.
+14. **GoTree, the data and the picture.** Existing. 0:15.
     - Nested data, so it is not obvious where chart(data).flow(...) goes.
-14. **GoTree and gofish-gotree specs.** Existing. 0:20.
-15. **combine compiles to GoFish constraints.** Existing. 0:20, trimmed from 0:25.
-16. **Same core, three shapes of data.** Existing. 0:15.
+15. **GoTree and gofish-gotree specs.** Existing. 0:20.
+16. **combine compiles to GoFish constraints.** Existing. 0:20, trimmed from 0:25.
+17. **Same core, three shapes of data.** Existing. 0:15.
     - Low-level, tabular, and hierarchical surfaces on one core. GoTree keeps its own design and is one more level of the tree, which is McNutt's compile tower.
-17. **The surfaces work together.** New, picture only. 0:10.
+18. **The surfaces work together.** New, picture only. 0:10.
     - Figure 6 from the paper, the tree of bottle waffles. It uses all three surfaces in one graphic.
     - This answers the second angle, that the surfaces cannot be tied together.
 
@@ -108,10 +118,10 @@ Keep the reference to Jason at this high level. The details of his geometric dat
 
 #### 4b. Validity against freedom of arrangement (about 0:55)
 
-18. **Huang and Kay quote.** Existing. 0:15.
+19. **Huang and Kay quote.** Existing. 0:15.
     - Their section 6.4 question, with "which of these trade-offs are principled and which are merely incidental" highlighted.
     - Credit them for showing me that validity is important.
-19. **CanAdd.** Existing. 0:40, trimmed from 0:55.
+20. **CanAdd.** Existing. 0:40, trimmed from 0:55.
     - USD stacks, and degrees Celsius gives an error that suggests the fix.
     - It constrains specs, not pictures. Every picture is still reachable.
     - State my view plainly. I think this obstacle is incidental, and the type system that catches this error is small.
@@ -124,10 +134,10 @@ Leads into 4c with: "The third obstacle is about how big the language should be.
 
 A small core and an extensible core do not conflict. An extensible core can be small, as long as people extend it from within the language. The obstacle is the choice between a small language and a big one. Steele's answer is a language that can grow, and the tree slide shows what that looks like. GoFish has part of that answer.
 
-20. **Steele quote.** New. 0:15.
+21. **Steele quote.** New. 0:15.
     - "I should not design a small language, and I should not design a large one. I need to design a language that can grow." Steele, Growing a Language, 1998. This is the wording in the v3 draft, main.typ line 166. It was checked against Steele's text and is verbatim.
     - Tie it to part 1. A small core keeps the language small, and growing from within gives the big vocabulary that short specs need.
-21. **A language that grows is a tree.** Moved from part 2. 0:10.
+22. **A language that grows is a tree.** Moved from part 2. 0:10.
     - Open with the callback: "Earlier I asked whether we keep adding nouns forever. Here is the answer."
     - The left side is the same flat layer picture from part 2, drawn identically. The right side puts the same charts on intermediate words (chart, tree, diagram) built from a small core of marks and verbs.
     - The leaves are specific charts the audience has already seen. The population pyramid, GoTree silhouette tree, Sankey tree, and point labels avoiding a trend line are on the splash. The ribbon chart is from the crash course.
@@ -135,12 +145,12 @@ A small core and an extensible core do not conflict. An extensible core can be s
     - The line under the picture is "Build new structures from old ones with a small, stable set of verbs."
     - State the full thesis as the payoff.
     - If asked about "optimal" compression, the honest claim is that nested rules compress better than one flat layer. Grammar-based compression algorithms such as Sequitur work by building nested rules.
-22. **Where we are now.** Existing slides "where we are now" and "evidence so far", merged. 0:20.
+23. **Where we are now.** Existing slides "where we are now" and "evidence so far", merged. 0:20.
     - GoFish can grow from within at the chart level. GoTree and the chart templates are defined with the same verbs people use to build graphics.
     - Tie the limit to the word "fairly" in the thesis. The verbs are mostly stable, but layouts cannot grow from within yet. They are opaque plug-ins written outside the language, and adding one is the same "add a new primitive" move as in the grammar of graphics. The v3 draft points out the same problem for ggplot2, where extending it with ggproto means leaving the plot language for a package implementation interface.
     - The verbs are still a fixed set.
     - Marks reduce to simple primitives, and interfaces reduce to bounding boxes and boundary curves.
-23. **What is the lambda calculus of layout?** Existing. 0:20.
+24. **What is the lambda calculus of layout?** Existing. 0:20.
     - What is a small core where a new layout can be defined inside the language? This question is about removing the last case where you have to add a new primitive.
     - Say plainly that this is hard and that we are working on it.
 
@@ -148,7 +158,7 @@ Leads into part 5 with: "That is the question I would most like help with."
 
 ### 5. Questions for the panel (about 0:40)
 
-24. **Questions for the panel.** Existing. 0:40.
+25. **Questions for the panel.** Existing. 0:40.
     - What should the core of a GUGOG be?
     - How do our grammars build on each other? Libraries on libraries are a form of compression.
     - Is there a concrete case where checking validity forces you to give up a picture you would want?
@@ -164,6 +174,8 @@ Leads into part 5 with: "That is the question I would most like help with."
 | 4. Three obstacles, including the optional overview slide | 3:50 |
 | 5. Questions for the panel | 0:40 |
 | Total | 7:50 |
+
+In part 1, the grammars picture and the tangle take the 0:30 that "from I to we" had, so the part 1 total and the running totals after it do not change. The running totals in the opening are now 0:15 after the splash, 0:35 after the usage curve, 0:50 after the grammars picture, 1:05 after the tangle, and 1:30 after the compression bars.
 
 Without the optional overview slide the total is 7:40. The deck used to run 9:20. Most of the savings come from these changes:
 
@@ -181,6 +193,7 @@ To reach 7:00, the first candidates are these:
 ## Changes to the deck
 
 - New slides:
+  - The grammars picture and the tangle, in part 1. They are an auto-animate pair, and they replace "from I to we" with the same 0:30.
   - "The grammar of graphics is one flat layer of nouns", in part 2.
   - "A language that grows is a tree", in 4c. Its left side is the same picture as the flat layer slide.
   - "Three obstacles", optional.
@@ -188,12 +201,14 @@ To reach 7:00, the first candidates are these:
   - The Steele quote.
 - Moved slides:
   - The splash moves to right after the title.
-  - The usage curve and the compression bars move to part 1.
+  - The usage curve and the compression bars move to part 1. The usage curve now comes before the grammars pictures.
   - The big vs. small slides become obstacle 4c.
 - Shortened slides:
   - The verbs slide, with all columns at once.
   - CanAdd, by trimming the spoken notes.
 - Merged slides: "where we are now" and "evidence so far".
+- Hidden slides:
+  - "From I to we". Its point is now made by the grammars pictures.
 - Removed slides:
   - The Haskell aside.
   - The hidden backup version of section 5, which this version no longer needs.

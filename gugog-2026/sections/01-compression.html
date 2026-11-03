@@ -1,10 +1,13 @@
         <!-- ═══ OPENING, PART 1 CONTINUED: COMPRESSION IS THE YARDSTICK ═══
              The opening runs ~1:30 in all: the title (00-title.html), the
-             splash wall (00b-splash.html), then "from I to we", the usage
-             curve, and the compression bars here. The compression bars end
-             the opening with the question for the talk. The two charts are
-             drawn live by ../charts.ts. -->
-        <section>
+             splash wall (00b-splash.html), then the usage curve, the two
+             grammars pictures, and the compression bars here. The
+             compression bars end the opening with the question for the talk.
+             The two charts are drawn live by ../charts.ts. -->
+
+        <!-- Hidden: the two grammars pictures below carry this slide's
+             point. Remove data-visibility="hidden" to bring it back. -->
+        <section data-visibility="hidden">
           <p class="part">1 · Compression is the yardstick</p>
           <h2>from "I" to "we"</h2>
           <div>
@@ -15,8 +18,11 @@
             </ul>
           </div>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:30. <strong>Running total:</strong>
-              0:45 of 7:50.</p>
+            <p><strong>Hidden.</strong> The two grammars pictures after the
+              usage curve carry this slide's point, and the first line below
+              moved into their notes. It is not counted in the running
+              totals. To show it, remove
+              <code>data-visibility="hidden"</code> from this slide.</p>
             <ul>
               <li>Each vis grammar teaches me something, but the lessons stay
                 stuck in separate systems, so you can't compare or combine
@@ -61,12 +67,16 @@
             style="display: flex; justify-content: center; margin-top: 0.6em"></div>
           <aside class="notes">
             <p><strong>Target:</strong> 0:20. <strong>Running total:</strong>
-              1:05 of 7:50.</p>
+              0:35 of 7:50.</p>
             <ul>
-              <li>The usage curve: how often a chart is made, against how
-                complex it is. It is a long tail. Bar, line, and scatter are
-                on the left. One-lab infographics and diagrams are on the
-                right.</li>
+              <li>This curve shows how often a chart is made, against how
+                complex it is. It has a long tail. Bar, line, and scatter
+                charts are on the left. One-lab infographics and diagrams are
+                on the right.</li>
+              <li>The grammar of graphics covers the common charts on the
+                left.</li>
+              <li>The long tail on the right is where people have built new
+                grammars, e.g., for genomics, trees, and animation.</li>
               <li>Name the two ends. Chart typologies like seaborn are on one
                 end: a short call for each common chart, and a new function
                 for every unusual one. Low-level toolkits like d3 are on the
@@ -74,8 +84,98 @@
                 chart.</li>
               <li>The curve is schematic, not measured.</li>
             </ul>
-            <p>Moved here from the old section 5. The questions slide at the
-              end asks whether this curve could become a benchmark.</p>
+            <p><strong>Lead into the grammars picture:</strong> "Here are
+              some of the grammars we have built for the tail."</p>
+            <p>The questions slide at the end asks whether this curve could
+              become a benchmark.</p>
+          </aside>
+        </section>
+
+        <!-- The two grammars pictures: the user's hand drawings, copied into
+             images/opening/. The two exports were offset from each other by
+             1px across and 2px down, so both copies are padded onto the same
+             1418x1271 transparent canvas with the circles lined up. Nothing
+             else in the drawings changed. The first has the grammar of
+             graphics in the middle and newer grammars around it. The second
+             is the same drawing with arrows between almost every pair. The
+             two slides are a Reveal auto-animate pair. The base drawing is
+             the same element on both slides, so it stays in place, and the
+             arrows drawing (transparent PNG, same canvas) is unmatched on
+             the second slide, so Reveal fades it in on top. -->
+        <section class="grammars-slide" data-auto-animate data-auto-animate-id="grammars">
+          <style>
+            .reveal .slides section.grammars-slide {
+              padding-top: 0;
+            }
+            .reveal .grammars-slide .grammars-stack {
+              aspect-ratio: 1418 / 1271;
+              height: 690px;
+              margin: 15px auto 0;
+              position: relative;
+            }
+            .reveal .grammars-slide .grammars-stack img {
+              border-radius: 0;
+              height: 100%;
+              left: 0;
+              margin: 0;
+              max-height: none;
+              max-width: none;
+              position: absolute;
+              top: 0;
+              width: 100%;
+            }
+          </style>
+          <div class="grammars-stack" data-id="grammars-stack">
+            <img data-id="grammars-base" src="./images/opening/grammars.png"
+              alt="Hand drawing: a big circle labeled GoG in the middle, with smaller circles around it for Atom, PiCCL, AnnoGram, Mascot, Gosling, Neo, GenomeSpy, GoTree, and Canis" />
+          </div>
+          <aside class="notes">
+            <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
+              0:50 of 7:50.</p>
+            <ul>
+              <li>One of the big ideas of the grammar of graphics was to
+                write many different chart types in one shared language.</li>
+              <li>Because the charts shared one language, we could ask
+                questions about the structure of charts, such as questions
+                about marks and channels, and not only questions about chart
+                types. For example, Draco and CompassQL both work on Vega-Lite
+                specs, so they reason about a chart in terms of its marks and
+                encodings.</li>
+              <li>For the long tail, we built many new grammars instead. Each
+                one is its own language.</li>
+              <li>I wonder whether we have lost sight of what the original
+                grammar of graphics gave us.</li>
+            </ul>
+            <p>Next slide: the arrows fade in on top of this same picture,
+              and the circles do not move.</p>
+          </aside>
+        </section>
+
+        <section class="grammars-slide" data-auto-animate data-auto-animate-id="grammars">
+          <div class="grammars-stack" data-id="grammars-stack">
+            <img data-id="grammars-base" src="./images/opening/grammars.png" alt="" />
+            <img src="./images/opening/grammars-tangle.png"
+              alt="The same drawing with double-headed arrows between almost every pair of grammars, a tangle" />
+          </div>
+          <aside class="notes">
+            <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
+              1:05 of 7:50.</p>
+            <ul>
+              <li>To compare these grammars, you have to translate between
+                every pair of languages. That is this tangle of arrows.</li>
+              <li>I have run into this a lot. Each grammar teaches me
+                something, but its lessons stay stuck inside that one
+                system.</li>
+              <li>I suspect this makes it harder to ask new research
+                questions about the long tail, and that we are treading water
+                a bit, but I am not sure that is the cause.</li>
+              <li>Some of us doubt that a shared kernel exists, meaning a
+                small common core that all of these languages could be written
+                in. I think one does, but it may not look quite like the
+                grammar of graphics we are used to.</li>
+            </ul>
+            <p><strong>Lead into the compression bars:</strong> "To look for
+              that kernel, I need a way to judge a language."</p>
           </aside>
         </section>
 
