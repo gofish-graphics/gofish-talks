@@ -150,7 +150,7 @@ A small core and an extensible core do not conflict. An extensible core can be s
     - Tie it to part 1. A small core keeps the language small, and growing from within gives the big vocabulary that short specs need.
 24. **A language that grows is a tree.** Moved from part 2. 0:10.
     - Open with the callback: "Earlier I asked whether we keep adding nouns forever. Here is the answer."
-    - The left side is the same flat layer picture from part 2, drawn identically. The right side puts the same charts on intermediate words (chart, tree, diagram) built from a small core of marks and verbs.
+    - The left side is the same flat layer picture from part 2, drawn identically. The right side puts the same charts on intermediate words (chart, tree, diagram) built from a small core of marks and verbs. Its caption is "a tree: many DSLs, one language". The middle nodes are domain languages, each with its own words, all written in one language on one core, so each subdomain can have a custom language and the whole is still one integrated language.
     - The leaves are specific charts the audience has already seen. The population pyramid, GoTree silhouette tree, Sankey tree, and Bluefish pulley diagram are on the splash. The ribbon chart is from the crash course.
     - A faded fourth middle node with "..." and faded "..." leaves show that the middle is not a closed set of three kinds. New levels and new grammars can keep being added.
     - The line under the picture is "Build new structures from old ones with a small, stable set of verbs."
