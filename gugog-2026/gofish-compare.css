@@ -269,6 +269,21 @@
   max-height: none;
 }
 
+/* The three results share one grid cell, and only the current step's is
+   shown; see the comment above the CanAdd slides. */
+.canadd-right {
+  display: grid;
+}
+
+.canadd-result {
+  grid-area: 1 / 1;
+  opacity: 0;
+}
+
+.canadd-result.is-current {
+  opacity: 1;
+}
+
 .canadd-out {
   align-items: center;
   display: flex;

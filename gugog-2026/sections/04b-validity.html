@@ -80,8 +80,20 @@
              rendered live from ../charts.ts; the error on step 2 is the
              message GoFish throws (data-expect-error). Code lines that do
              not change are kept identical, so the code animates line by
-             line. -->
-        <section class="code-slide" data-auto-animate data-auto-animate-id="canadd">
+             line; the encodings sit on their own lines, so step 3 changes
+             only the h: line.
+             The transitions take 0.6s: the code moves in the first 0.3s
+             (data-auto-animate-duration), then the output changes in the
+             next 0.3s (data-auto-animate-delay on each result). Reveal
+             hides the outgoing slide at once, so to keep the old output on
+             screen while the code moves, every step holds all three
+             results in the same place and shows one (.is-current). Each
+             result keeps its data-id across the steps, so Reveal matches
+             it and crossfades its opacity after the delay, both forwards
+             and backwards. The chart boxes inside carry data-ids too:
+             Reveal fades in any unmatched element from 0, which would
+             blank the old chart while the code moves. -->
+        <section class="code-slide" data-auto-animate data-auto-animate-id="canadd" data-auto-animate-duration="0.3">
           <p class="part" data-id="canadd-part">4b · Validity against freedom of arrangement</p>
           <h2 data-id="canadd-title"><code>stack</code> needs <code>CanAdd</code></h2>
           <div class="canadd-grid">
@@ -97,10 +109,26 @@ chart(data)
     spread({ by: "month", dir: "x" }),
     stack({ by: "city", dir: "y" }),
   )
-  .mark(rect({ h: "temp", fill: "city" }))</code></pre>
+  .mark(rect({
+    h: "temp",
+    fill: "city",
+  }))</code></pre>
             <div class="canadd-right">
-              <p class="code-pair-label" data-id="canadd-label">no schema <span class="code-pair-sub">· nothing is checked: it stacks</span></p>
-              <div class="canadd-out" data-chart="canadd-untyped" data-w="460" data-h="300" data-font-size="16"></div>
+              <div class="canadd-result is-current" data-id="canadd-result-untyped" data-auto-animate-delay="0.3">
+                <p class="code-pair-label">no schema <span class="code-pair-sub">· nothing is checked: it stacks</span></p>
+                <div class="canadd-out" data-id="canadd-out-untyped" data-chart="canadd-untyped" data-w="460" data-h="300" data-font-size="16"></div>
+              </div>
+              <div class="canadd-result" data-id="canadd-result-temp" data-auto-animate-delay="0.3">
+                <p class="code-pair-label">°C <span class="code-pair-sub">· no CanAdd: GoFish refuses</span></p>
+                <!-- Runs the spec on the left and shows the error GoFish
+                     throws (data-expect-error), not a chart. -->
+                <div class="canadd-out canadd-error-box" data-id="canadd-out-temp" data-chart="canadd-temp" data-expect-error data-w="460" data-h="300"></div>
+              </div>
+              <div class="canadd-result" data-id="canadd-result-usd" data-auto-animate-delay="0.3">
+                <p class="code-pair-label">USD <span class="code-pair-sub">· declared summable: it stacks</span></p>
+                <div class="canadd-out" data-id="canadd-out-usd" data-chart="canadd-usd" data-w="460" data-h="300" data-font-size="16"></div>
+                <p class="canadd-tagline">constrains specs, not pictures</p>
+              </div>
             </div>
           </div>
           <p class="canadd-footnote" data-id="canadd-footnote">Inspired by Bartonicek, Urbanek &amp; Murrell (JCGS 2025), Flint (Wang et al., VIS 2026), and Huang &amp; Kay (GUGOG 2026).</p>
@@ -133,7 +161,7 @@ chart(data)
           </aside>
         </section>
 
-        <section class="code-slide" data-auto-animate data-auto-animate-id="canadd">
+        <section class="code-slide" data-auto-animate data-auto-animate-id="canadd" data-auto-animate-duration="0.3">
           <p class="part" data-id="canadd-part">4b · Validity against freedom of arrangement</p>
           <h2 data-id="canadd-title"><code>stack</code> needs <code>CanAdd</code></h2>
           <div class="canadd-grid">
@@ -154,12 +182,26 @@ chart(data, {
     spread({ by: "month", dir: "x" }),
     stack({ by: "city", dir: "y" }),
   )
-  .mark(rect({ h: "temp", fill: "city" }))</code></pre>
+  .mark(rect({
+    h: "temp",
+    fill: "city",
+  }))</code></pre>
             <div class="canadd-right">
-              <p class="code-pair-label" data-id="canadd-label">°C <span class="code-pair-sub">· no CanAdd: GoFish refuses</span></p>
-              <!-- Runs the spec on the left and shows the error GoFish
-                   throws (data-expect-error), not a chart. -->
-              <div class="canadd-out canadd-error-box" data-chart="canadd-temp" data-expect-error data-w="460" data-h="300"></div>
+              <div class="canadd-result" data-id="canadd-result-untyped" data-auto-animate-delay="0.3">
+                <p class="code-pair-label">no schema <span class="code-pair-sub">· nothing is checked: it stacks</span></p>
+                <div class="canadd-out" data-id="canadd-out-untyped" data-chart="canadd-untyped" data-w="460" data-h="300" data-font-size="16"></div>
+              </div>
+              <div class="canadd-result is-current" data-id="canadd-result-temp" data-auto-animate-delay="0.3">
+                <p class="code-pair-label">°C <span class="code-pair-sub">· no CanAdd: GoFish refuses</span></p>
+                <!-- Runs the spec on the left and shows the error GoFish
+                     throws (data-expect-error), not a chart. -->
+                <div class="canadd-out canadd-error-box" data-id="canadd-out-temp" data-chart="canadd-temp" data-expect-error data-w="460" data-h="300"></div>
+              </div>
+              <div class="canadd-result" data-id="canadd-result-usd" data-auto-animate-delay="0.3">
+                <p class="code-pair-label">USD <span class="code-pair-sub">· declared summable: it stacks</span></p>
+                <div class="canadd-out" data-id="canadd-out-usd" data-chart="canadd-usd" data-w="460" data-h="300" data-font-size="16"></div>
+                <p class="canadd-tagline">constrains specs, not pictures</p>
+              </div>
             </div>
           </div>
           <p class="canadd-footnote" data-id="canadd-footnote">Inspired by Bartonicek, Urbanek &amp; Murrell (JCGS 2025), Flint (Wang et al., VIS 2026), and Huang &amp; Kay (GUGOG 2026).</p>
@@ -202,11 +244,11 @@ chart(data, {
           </aside>
         </section>
 
-        <section class="code-slide" data-auto-animate data-auto-animate-id="canadd">
+        <section class="code-slide" data-auto-animate data-auto-animate-id="canadd" data-auto-animate-duration="0.3">
           <p class="part" data-id="canadd-part">4b · Validity against freedom of arrangement</p>
           <h2 data-id="canadd-title"><code>stack</code> needs <code>CanAdd</code></h2>
           <div class="canadd-grid">
-            <pre data-id="canadd-code"><code class="language-ts" data-line-numbers data-char-marks="18:19-23">const data = [
+            <pre data-id="canadd-code"><code class="language-ts" data-line-numbers data-char-marks="19:8-12">const data = [
   { month: "Jun", city: "Boston", temp: 21, usd: 120 },
   { month: "Jun", city: "Chicago", temp: 22, usd: 95 },
   { month: "Jul", city: "Boston", temp: 24, usd: 135 },
@@ -223,11 +265,26 @@ chart(data, {
     spread({ by: "month", dir: "x" }),
     stack({ by: "city", dir: "y" }),
   )
-  .mark(rect({ h: "usd", fill: "city" }))</code></pre>
+  .mark(rect({
+    h: "usd",
+    fill: "city",
+  }))</code></pre>
             <div class="canadd-right">
-              <p class="code-pair-label" data-id="canadd-label">USD <span class="code-pair-sub">· declared summable: it stacks</span></p>
-              <div class="canadd-out" data-chart="canadd-usd" data-w="460" data-h="300" data-font-size="16"></div>
-              <p class="canadd-tagline">constrains specs, not pictures</p>
+              <div class="canadd-result" data-id="canadd-result-untyped" data-auto-animate-delay="0.3">
+                <p class="code-pair-label">no schema <span class="code-pair-sub">· nothing is checked: it stacks</span></p>
+                <div class="canadd-out" data-id="canadd-out-untyped" data-chart="canadd-untyped" data-w="460" data-h="300" data-font-size="16"></div>
+              </div>
+              <div class="canadd-result" data-id="canadd-result-temp" data-auto-animate-delay="0.3">
+                <p class="code-pair-label">°C <span class="code-pair-sub">· no CanAdd: GoFish refuses</span></p>
+                <!-- Runs the spec on the left and shows the error GoFish
+                     throws (data-expect-error), not a chart. -->
+                <div class="canadd-out canadd-error-box" data-id="canadd-out-temp" data-chart="canadd-temp" data-expect-error data-w="460" data-h="300"></div>
+              </div>
+              <div class="canadd-result is-current" data-id="canadd-result-usd" data-auto-animate-delay="0.3">
+                <p class="code-pair-label">USD <span class="code-pair-sub">· declared summable: it stacks</span></p>
+                <div class="canadd-out" data-id="canadd-out-usd" data-chart="canadd-usd" data-w="460" data-h="300" data-font-size="16"></div>
+                <p class="canadd-tagline">constrains specs, not pictures</p>
+              </div>
             </div>
           </div>
           <p class="canadd-footnote" data-id="canadd-footnote">Inspired by Bartonicek, Urbanek &amp; Murrell (JCGS 2025), Flint (Wang et al., VIS 2026), and Huang &amp; Kay (GUGOG 2026).</p>
