@@ -1,7 +1,10 @@
-        <!-- ═══ PART 3 CONTINUED: TWO ISLANDS IN VERBS, ~0:45 ══════════
-             Four slides: Atom intro, Atom vs GoFish, PiCCL intro, the PiCCL
-             bottle chart in GoFish. They are the evidence that the islands
-             from part 2 reduce to a shared set of operators.
+        <!-- ═══ PART 3 CONTINUED: TWO ISLANDS IN VERBS, ~0:25 ══════════
+             Two slides: Atom vs GoFish, and the PiCCL bottle chart in
+             GoFish. They are the evidence that the islands from part 2
+             reduce to one shared set of operators. The Atom and PiCCL intro
+             slides moved to the end of part 2 (01b-islands.html) on
+             2026-11-03, so the audience sees what each island added before
+             the verbs slide names the pattern.
              Code comparisons from the GUGOG camera-ready paper, section 3
              "Specialized Grammars in a Shared Vocabulary"
              (phd-thesis-20260618/gugog-2026-camera-ready-v3). The code is
@@ -13,58 +16,6 @@
              (see its own comment).
              GoTree (paper Figure 5) is used in section 4 instead, not here.
              Styles: ../gofish-compare.css. -->
-        <!-- Grammar intro slides (2026-11-03). Before each GoFish comparison,
-             one slide shows the other grammar's own figures: a few of its
-             charts and its key operators. Modeled on the thesis defense
-             deck's second intro slide for each grammar
-             (phd-thesis-20260618/presentation/sections/03b-evidence-waffle.html,
-             "ATOM: A Grammar for Unit Visualizations", and
-             sections/03d-evidence-bottle.html, "PiCCL: A Grammar for
-             Pictorial Charts"): the teaser figure beside the operator figure,
-             in white framed boxes, with the paper credited in a source line.
-             The images are copied from that deck (images/atom/atom-teaser.png,
-             new-grammars/atom-operators.png, images/piccl/piccl-teaser.png,
-             images/piccl/piccl-operator.png), which took them from the
-             papers. Atom's figures are both wide, so they stack; PiCCL's sit
-             side by side as in the thesis deck. -->
-        <section class="grammar-intro-slide grammar-intro-stack">
-          <p class="part">3 · The grammar of graphics needs verbs</p>
-          <h2>Atom: a grammar for unit visualizations</h2>
-          <div class="grammar-intro-figs">
-            <div>
-              <p class="code-pair-label">unit charts</p>
-              <img class="grammar-fig atom-teaser" src="./images/comparisons/atom-teaser.png" alt="Unit visualizations of Titanic passengers from the Atom paper: one circle per passenger, grouped by class, survival and sex, and age" />
-            </div>
-            <div>
-              <p class="code-pair-label">layout operators</p>
-              <img class="grammar-fig atom-ops" src="./images/comparisons/atom-operators.png" alt="Atom's layout operators, Map2D, FillX, FillY, MaxFill, and Pack, each shown under uniform sizing and under count and sum sizing" />
-            </div>
-          </div>
-          <p class="source-line">Atom: A Grammar for Unit Visualizations · Park, Drucker, Fernandez &amp; Elmqvist, IEEE TVCG 2018</p>
-          <aside class="notes">
-            <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
-              2:35 of 7:00.</p>
-            <p>This slide and the next three are evidence that the islands
-              reduce to a shared set of operators. The ideas are Atom's and
-              PiCCL's, and the credit goes to their authors.</p>
-            <p><strong>Say:</strong> Here's Atom, a grammar for unit
-              visualizations, where one mark stands for one thing, like one
-              passenger on the Titanic. Its key idea is a small set of layout
-              operators that split a space into cells, like FillX and
-              MaxFill, and you nest them to place every unit.</p>
-            <p><strong>Why this slide:</strong> The audience sees Atom's own
-              ideas first, as Atom's paper draws them. The next slide then
-              reads as "here are those same ideas in GoFish". The 0:10 for
-              this slide comes out of the next slide, which drops from 0:20 to
-              0:10 because it no longer has to introduce Atom.</p>
-            <p><strong>Source:</strong> Park, Drucker, Fernandez and Elmqvist,
-              "ATOM: A Grammar for Unit Visualizations", IEEE TVCG 2018. The
-              top figure is the paper's teaser and the bottom one is its
-              layout operator figure. Both are copied from the thesis defense
-              deck's Atom intro slide.</p>
-          </aside>
-        </section>
-
         <section class="code-slide">
           <p class="part">3 · The grammar of graphics needs verbs</p>
           <h2>Atom's <code>gridxy</code> is GoFish's <code>spread</code></h2>
@@ -109,9 +60,9 @@
             </div>
           </div>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:10 (was 0:20; the Atom intro slide
-              before it took 0:10). <strong>Running total:</strong>
-              2:45 of 7:00.</p>
+            <p><strong>Target:</strong> 0:10. Atom was already introduced
+              in part 2, so this slide does not have to introduce it.
+              <strong>Running total:</strong> 2:55 of 7:00.</p>
             <p><strong>The beat (this slide and the next):</strong> 1. A shared
               language makes it possible to compare grammars: once each
               grammar's idea is written in GoFish, you can put them side by side
@@ -119,12 +70,15 @@
               after all: they share most of their structure, and the
               differences come down to small, nameable pieces.</p>
             <p><strong>Say:</strong> Here's Atom's Titanic example, with the
-              layout operators from the last slide. On the right is the same
+              layout operators we saw before the verbs slide. On the right is the same
               construction in GoFish. Every part has a counterpart. Atom's first <code>gridxy</code> is
               GoFish's first <code>spread</code>, by class. The second
               <code>gridxy</code> is two more spreads, rows and columns. And
               Atom's circle mark is GoFish's circle mark. Same idea, different
               name.</p>
+            <p>Credit, if there is a moment: Atom's nested layout pipeline was
+              an inspiration for GoFish's operator syntax, as the paper
+              says.</p>
             <p><strong>Source:</strong> GUGOG camera-ready paper, Figure 3
               (section 3.1 "Atom"); code from
               <code>examples/atom-unit-columns.json</code> and
@@ -146,41 +100,6 @@
           </aside>
         </section>
 
-        <section class="grammar-intro-slide">
-          <p class="part">3 · The grammar of graphics needs verbs</p>
-          <h2>PiCCL: a grammar for pictorial charts</h2>
-          <div class="grammar-intro-figs grammar-intro-side">
-            <div>
-              <p class="code-pair-label">pictorial charts</p>
-              <img class="grammar-fig piccl-teaser" src="./images/comparisons/piccl-teaser.png" alt="Three real-world pictorial charts from the PiCCL paper: a dollar bill under a line chart, memory chips as bars, and glasses filled with colored liquid" />
-            </div>
-            <div>
-              <p class="code-pair-label">compositing operators</p>
-              <img class="grammar-fig piccl-ops" src="./images/comparisons/piccl-operators.png" alt="PiCCL's compositing operator table, with star and rectangle examples of over, in, out, atop, and xor" />
-            </div>
-          </div>
-          <p class="source-line">PiCCL: Data-Driven Composition of Bespoke Pictorial Charts · Shi et al., IEEE VIS 2025</p>
-          <aside class="notes">
-            <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
-              2:55 of 7:00.</p>
-            <p><strong>Say:</strong> And here's PiCCL, a grammar for
-              pictorial charts like these. Its key idea is that you build a
-              chart like this from parts, and you combine pictures and shapes
-              with compositing operators. For example, "A atop B" paints one
-              shape onto another and keeps only the part inside it.</p>
-            <p><strong>Why this slide:</strong> As with Atom, the audience
-              sees PiCCL's own ideas first, as PiCCL's paper draws them, and
-              the next slide shows those same ideas in GoFish. The 0:10 for
-              this slide comes out of the bottle slide, which drops from 0:25
-              to 0:15 because it no longer has to introduce PiCCL.</p>
-            <p><strong>Source:</strong> Shi et al., "PiCCL: Data-Driven
-              Composition of Bespoke Pictorial Charts", IEEE VIS 2025. The
-              left figure is the paper's teaser and the right one is its
-              compositing operator figure. Both are copied from the thesis
-              defense deck's PiCCL intro slide.</p>
-          </aside>
-        </section>
-
         <!-- The PiCCL bottle chart, GoFish spec only (2026-11-03). Layout
              follows the thesis defense deck's "Paint the Bars as Bottles"
              slide (phd-thesis-20260618/presentation/sections/
@@ -189,7 +108,8 @@
              the GoFish repo's bottle story (origin/main ff5827338,
              packages/gofish-graphics/stories/piccl/Bottle.stories.tsx) with
              styling (widths, colors, font size, spacing) elided as "...".
-             The PiCCL intro slide before it shows PiCCL's own figures.
+             The PiCCL intro slide at the end of part 2 (01b-islands.html)
+             shows PiCCL's own figures.
              The image is the paper's figures/gofish-bottle-annotated.png,
              which that same spec draws. The char marks point at the four
              operators the notes name. -->
@@ -219,12 +139,12 @@
           </div>
           <p class="source-line">Bottle chart from PiCCL · Shi et al., IEEE VIS 2025</p>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:15 (was 0:25; the PiCCL intro slide
-              before it took 0:10). <strong>Running total:</strong>
+            <p><strong>Target:</strong> 0:15. PiCCL was already introduced
+              in part 2, so this slide does not have to introduce it. <strong>Running total:</strong>
               3:10 of 7:00.</p>
             <p><strong>Say:</strong> This bottle chart comes from PiCCL, by
-              Shi and others at VIS 2025. It is built from the parts we just
-              saw. A picture of a bottle gets a green rectangle painted onto
+              Shi and others at VIS 2025. It is built from the PiCCL parts we
+              saw earlier. A picture of a bottle gets a green rectangle painted onto
               it, as tall as the number, and a line and a label mark the top
               of the green. In GoFish, those same parts are a few verbs and
               marks.
@@ -234,11 +154,13 @@
               <code>relate</code> lines them up with the top of the green. So
               PiCCL's idea fits into GoFish as a few verbs and marks, and you
               do not need a new language for it.</p>
-            <p><strong>The point of the two comparisons:</strong> Atom and
-              PiCCL can be written in one language. Written that way, they
-              share most of their structure, and the differences are small
-              parts you can point to. What the two islands share is
-              operators.</p>
+            <p><strong>The point of the two comparisons:</strong> these are
+              the same pictures from part 2, now written with one shared set
+              of verbs. The same <code>spread</code> does the work of Atom's
+              <code>gridxy</code> and of PiCCL's repeating. Written in one
+              language, the two islands share most of their structure, and
+              the differences are small parts you can point to. What the two
+              islands share is operators.</p>
             <p><strong>Lead into part 4a:</strong> "So these two islands
               reduce to a few shared verbs. That is why I say the grammar of
               graphics needs verbs. There are two fair concerns about this
