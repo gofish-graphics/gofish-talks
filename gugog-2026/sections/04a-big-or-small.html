@@ -1,52 +1,69 @@
-        <!-- ═══ PART 4: THREE OBSTACLES, ~3:50 ══════════════════════════
-             This file has the optional overview slide and obstacle 4a, many
-             surfaces against one language (~1:40). Obstacle 4b is in
-             04b-validity.html and 4c in 04c-small-vs-big.html.
-             Each obstacle is something that seems to stand in the way of the
-             compression from the opening. Each is presented in its strongest
-             form, with credit, before the evidence. 4a and 4b are disputed
-             with evidence. 4c is answered by the tree slide, and what is
-             still missing is admitted as open.
-             4a opens with Andrew McNutt's call for small modular language
-             components and is built around one example of it, GoTree rebuilt
-             as a GoFish library. Its framing follows the v3 draft of the
-             GUGOG paper ("False tradeoff 1. Domain needs and shared
-             structure", gugog-2026-position-paper-v3/main.typ); its code and
-             render are the final paper's Figure 5
-             (gugog-2026-camera-ready-v3) and the gofish-gotree source. It
-             ends with the paper's Figure 6, which uses all three surfaces in
-             one graphic.
+        <!-- ═══ PART 4: ONE TRADEOFF AND ONE OBJECTION ═══════════════════
+             4a, a big language or a small one (~2:05, including the bridge
+             line to 4b), is in this file. 4b, does growth cost safety, is in
+             04b-validity.html, and 4c, the next cliff, in
+             04c-next-cliff.html.
+             4a is the central tradeoff from the opening chart, said
+             directly: a big language that covers many charts (seaborn) or a
+             small language with long specs (d3). Steele's answer is a
+             language that can grow. The middle path is a hierarchy of
+             abstractions. McNutt's small modular language components are
+             its parts, and the tree slide shows how extensibility keeps
+             those parts one language instead of many separate ones. GoTree,
+             rebuilt as a GoFish library, is the evidence: one branch of the
+             tree. Its code and render are the final paper's Figure 5
+             (gugog-2026-camera-ready-v3) and the gofish-gotree source, and
+             the file ends with the paper's Figure 6, which uses all three
+             surfaces in one graphic.
              Styles for the code slides: ../gofish-compare.css. -->
 
-        <!-- Optional overview of part 4. Skip it if time is short: the
-             section labels on the slides that follow carry the same
-             structure. -->
-        <section>
-          <p class="part">4 · Three obstacles</p>
-          <h2>three obstacles</h2>
-          <div>
-            <ol>
-              <li>Many surfaces against one language</li>
-              <li>Validity against freedom of arrangement</li>
-              <li>A small language against a big one</li>
-            </ol>
-          </div>
+        <!-- Steele, "Growing a Language", OOPSLA 1998 keynote, published in
+             Higher-Order and Symbolic Computation 12(3), 1999. The two
+             sentences are verbatim from the paper's text: "I stand on this
+             claim: I should not design a small language, and I should not
+             design a large one. I need to design a language that can grow."
+             The accent color is ours. -->
+        <section class="quote-slide statement">
+          <p class="part">4a · A big language or a small one</p>
+          <blockquote class="long-quote quote-short">
+            <p style="max-width: none">I should not design a small language, and I should not design
+              a large one. I need to design <strong>a language that can
+              grow</strong>.</p>
+          </blockquote>
+          <p class="long-quote-cite" style="max-width: none">Guy L. Steele Jr., <em>Growing a Language</em>, OOPSLA 1998</p>
           <aside class="notes">
-            <p><strong>Optional. Skip this slide if time is short.</strong>
-              The section labels on the slides that follow (4a, 4b, 4c) carry
-              the same structure.</p>
-            <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
-              3:30 of 7:35 (3:20 at the next slide if skipped).</p>
+            <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
+              3:45 of 7:35.</p>
+            <p>This is the tradeoff from the opening chart, said directly.
+              It is the one central tradeoff of the talk.</p>
             <ul>
-              <li>Three things seem to stand in the way of the compression
-                from the opening. I'll present each in its strongest form,
-                with credit, and then the evidence.</li>
-              <li>The first two I think are incidental, and I'll show why. The
-                third I have only partly solved.</li>
+              <li>A big language, like seaborn, covers many charts with short
+                specs, but it needs a new function for every new chart.</li>
+              <li>A small language, like d3, stays small, but every spec is
+                long.</li>
+              <li>Steele says not to pick either one. The middle path is a
+                hierarchy of abstractions: a small core, and new levels built
+                from the ones below it. The small core keeps the language
+                small, and the levels give the big vocabulary that short
+                specs need.</li>
             </ul>
+            <p><strong>Say:</strong> "Back to the compression chart. It
+              looks like you have to choose. You can have a big language that
+              covers many charts with short specs, like seaborn, or a small
+              language with long specs, like d3. Guy Steele put it this way."
+              Read the quote. "The middle path is a hierarchy of
+              abstractions: a small core, with new levels built on top of
+              it."</p>
+            <p><strong>Source:</strong> Guy L. Steele Jr., "Growing a
+              Language", keynote at OOPSLA 1998, published in
+              <em>Higher-Order and Symbolic Computation</em> 12(3), 1999. The
+              quote is verbatim, checked against the paper's text; in the paper
+              it follows "I stand on this claim:". It matches the wording in
+              the v3 draft, main.typ line 166.</p>
+            <p><strong>Lead into the McNutt quote:</strong> "Andrew McNutt
+              has made the case for the parts of that hierarchy."</p>
           </aside>
         </section>
-
 
         <!-- The idea the GoTree slides build on: McNutt, "No Grammar to
              Rule Them All", IEEE VIS 2022 (arXiv:2207.07998). The end of the
@@ -54,7 +71,7 @@
              passage is in the notes. GoFish takes the direction this passage
              suggests, so the slide presents it as the idea 4a builds on. -->
         <section class="quote-slide">
-          <p class="part">4a · Many surfaces against one language</p>
+          <p class="part">4a · A big language or a small one</p>
           <blockquote class="long-quote quote-short">
             <p>… we suggest that consideration of <strong>small modular
               language components</strong> may be helpful in the continuation
@@ -67,20 +84,25 @@
           <aside class="notes">
             <p><strong>Full passage</strong> (reference markers removed): Park et al. argue that efforts should be made to “find a definitive grammar that can unify many of these existing grammars”. However, Greenspun’s tenth rule quips that any sufficiently complicated program contains an ad hoc, informally specified, bug-ridden, slow implementation of half of Lisp. Less satirically Fowler notes that one of the biggest dangers in DSL design is “Sliding into generality.” While tools like Vega-Lite are probably not in danger of becoming Lisp, we suggest that consideration of small modular language components may be helpful in the continuation and extension of this ecosystem. There are many tasks, and no one DSL will be able to capture all of them without compromising essential parts of its domain design. That is, there is no grammar to rule them all.</p>
             <p><strong>Target:</strong> 0:15 (shown, not recited; read the
-              accent phrase and the last sentence aloud). <strong>Running total:</strong> 3:45 of
+              accent phrase and the last sentence aloud). <strong>Running total:</strong> 4:00 of
               7:35.</p>
-            <p><strong>The obstacle, in its strongest form:</strong> a field
-              has many tasks, so it needs many API surfaces, and one language
-              that tries to cover them all compromises each domain's design.
-              A second angle is that, even with many surfaces, it is not
-              clear they can be tied together in one language.</p>
+            <p><strong>His point, in its strongest form:</strong> a field
+              has many tasks, and one DSL that tries to cover them all
+              compromises each domain's design. So no single language should
+              do everything.</p>
             <p><strong>Say:</strong> "Andrew's survey concluded there's no
               grammar to rule them all, and I agree that no single surface
               should do everything. His suggestion is small modular language
-              components, and that is the direction GoFish takes. GoTree is
-              an example: it keeps its own domain design and compiles to a
-              shared core." Then go to the next slide.</p>
+              components, and that is the direction GoFish takes. I think of
+              those components as the parts of that hierarchy. The risk with
+              many small languages is that they drift apart into separate
+              languages, which is the tangle from the opening. Andrew's paper
+              sees this too: it suggests designs that re-use as much of the
+              earlier DSLs as possible." Then go to the next slide.</p>
             <p>This is his idea, credited, and the next slides build on it.
+              The risk of drifting apart is my concern about many small
+              languages in general, not a flaw I am pointing out in his
+              argument; his compile towers below are his own answer to it.
               The same paper argues for "compile
               towers": "Compilations may be chained together in a compile
               tower in a manner supported by targeted languages that do one
@@ -101,10 +123,136 @@
           </aside>
         </section>
 
+        <!-- The tree slide, the middle path between a big language and a
+             small one. Left: the same flat layer as the part 2 slide
+             (02-verbs.html), drawn identically. Right: the same five charts
+             as leaves of a tree, where each level is built from the one
+             below and the root is GoFish's core. The faded fourth middle
+             node and faded leaves show that the middle is not a closed set
+             of three kinds: new levels can keep being added. The left half is a
+             copy of the flat layer SVG, so edit the two together. -->
+        <section class="tree-slide">
+          <style>
+            .reveal svg.flat-vs-tree {
+              display: block;
+              margin: 0.5em auto 0;
+              max-height: 430px;
+              width: 100%;
+            }
+            .reveal .flat-vs-tree-line {
+              font-size: 0.8em;
+              margin-top: 0.4em;
+              text-align: center;
+            }
+          </style>
+          <p class="part">4a · A big language or a small one</p>
+          <h2>a language that grows is a tree</h2>
+          <svg class="flat-vs-tree" viewBox="-2 0 1144 400" role="img" aria-label="Left: the same five charts as the part 2 slide (a population pyramid, a ribbon chart, a GoTree silhouette tree, a Sankey tree, and a Bluefish pulley diagram), each hanging straight off one flat bar as a whole, split into marks, encoding channels, coordinate transforms, and more. Right: the same five charts as leaves of a tree, grouped under chart, tree, and diagram levels on a core of marks and verbs, with a faded fourth middle node and leaf showing that more levels and charts can be added.">
+            <line x1="49" y1="108" x2="49" y2="262" stroke="#66615b" stroke-width="2.5"/>
+            <line x1="151" y1="108" x2="151" y2="262" stroke="#66615b" stroke-width="2.5"/>
+            <line x1="253" y1="108" x2="253" y2="262" stroke="#66615b" stroke-width="2.5"/>
+            <line x1="355" y1="108" x2="355" y2="262" stroke="#66615b" stroke-width="2.5"/>
+            <line x1="457" y1="108" x2="457" y2="262" stroke="#66615b" stroke-width="2.5"/>
+            <line x1="525" y1="108" x2="525" y2="262" stroke="#66615b" stroke-width="2.5" stroke-dasharray="5 5" opacity="0.4"/>
+            <rect x="0" y="10" width="98" height="98" rx="7" fill="#fff" stroke="#27231f" stroke-width="2"/>
+            <image href="./images/splash/population-pyramid.png" x="4" y="14" width="90" height="90" preserveAspectRatio="xMidYMid slice"><title>population pyramid</title></image>
+            <rect x="102" y="10" width="98" height="98" rx="7" fill="#fff" stroke="#27231f" stroke-width="2"/>
+            <image href="./images/gofish-intro/ribbon-chart.svg" x="106" y="14" width="90" height="90" preserveAspectRatio="xMidYMid slice"><title>ribbon chart</title></image>
+            <rect x="204" y="10" width="98" height="98" rx="7" fill="#fff" stroke="#27231f" stroke-width="2"/>
+            <image href="./images/splash/gotree-multilevel-silhouette-tree.png" x="208" y="14" width="90" height="90" preserveAspectRatio="xMidYMid slice"><title>GoTree silhouette tree</title></image>
+            <rect x="306" y="10" width="98" height="98" rx="7" fill="#fff" stroke="#27231f" stroke-width="2"/>
+            <image href="./images/splash/sankey-tree.png" x="310" y="14" width="90" height="90" preserveAspectRatio="xMidYMid slice"><title>Sankey tree</title></image>
+            <rect x="408" y="10" width="98" height="98" rx="7" fill="#fff" stroke="#27231f" stroke-width="2"/>
+            <image href="./images/splash/bluefish-pulley.png" x="412" y="14" width="90" height="90" preserveAspectRatio="xMidYMin slice"><title>Bluefish pulley diagram</title></image>
+            <g opacity="0.4"><rect x="510" y="10" width="30" height="98" rx="7" fill="#fff" stroke="#27231f" stroke-width="2" stroke-dasharray="5 5"/><text x="525" y="59" text-anchor="middle" dominant-baseline="central" font-size="24" fill="#1e1e1e">…</text></g>
+            <rect x="0" y="262" width="540" height="6" rx="3" fill="#b24a3b"/>
+            <rect x="0" y="274" width="104" height="56" rx="7" fill="#b24a3b" stroke="#b24a3b" stroke-width="2"/><text x="52" y="302" text-anchor="middle" dominant-baseline="central" font-size="16" fill="#fff">marks</text>
+            <rect x="108" y="274" width="180" height="56" rx="7" fill="#b24a3b" stroke="#b24a3b" stroke-width="2"/><text x="198" y="302" text-anchor="middle" dominant-baseline="central" font-size="16" fill="#fff">encoding channels</text>
+            <rect x="292" y="274" width="210" height="56" rx="7" fill="#b24a3b" stroke="#b24a3b" stroke-width="2"/><text x="397" y="302" text-anchor="middle" dominant-baseline="central" font-size="16" fill="#fff">coordinate transforms</text>
+            <g opacity="0.4"><rect x="506" y="274" width="34" height="56" rx="7" fill="#b24a3b" stroke="#b24a3b" stroke-width="2"/><text x="523" y="302" text-anchor="middle" dominant-baseline="central" font-size="24" fill="#fff">…</text></g>
+            <text x="270" y="386" text-anchor="middle" font-size="26" fill="#1e1e1e">one flat layer of nouns</text>
+            <line x1="619" y1="108" x2="670" y2="168" stroke="#66615b" stroke-width="2.5"/>
+            <line x1="721" y1="108" x2="670" y2="168" stroke="#66615b" stroke-width="2.5"/>
+            <line x1="670" y1="212" x2="670" y2="274" stroke="#66615b" stroke-width="2.5"/>
+            <line x1="833" y1="108" x2="884" y2="168" stroke="#66615b" stroke-width="2.5"/>
+            <line x1="935" y1="108" x2="884" y2="168" stroke="#66615b" stroke-width="2.5"/>
+            <line x1="884" y1="212" x2="884" y2="274" stroke="#66615b" stroke-width="2.5"/>
+            <line x1="1047" y1="108" x2="1047" y2="168" stroke="#66615b" stroke-width="2.5"/>
+            <line x1="1047" y1="212" x2="1047" y2="274" stroke="#66615b" stroke-width="2.5"/>
+            <line x1="1123" y1="108" x2="1123" y2="168" stroke="#66615b" stroke-width="2.5" stroke-dasharray="5 5" opacity="0.4"/>
+            <line x1="1123" y1="212" x2="1123" y2="274" stroke="#66615b" stroke-width="2.5" stroke-dasharray="5 5" opacity="0.4"/>
+            <rect x="570" y="10" width="98" height="98" rx="7" fill="#fff" stroke="#27231f" stroke-width="2"/>
+            <image href="./images/splash/population-pyramid.png" x="574" y="14" width="90" height="90" preserveAspectRatio="xMidYMid slice"><title>population pyramid</title></image>
+            <rect x="672" y="10" width="98" height="98" rx="7" fill="#fff" stroke="#27231f" stroke-width="2"/>
+            <image href="./images/gofish-intro/ribbon-chart.svg" x="676" y="14" width="90" height="90" preserveAspectRatio="xMidYMid slice"><title>ribbon chart</title></image>
+            <rect x="784" y="10" width="98" height="98" rx="7" fill="#fff" stroke="#27231f" stroke-width="2"/>
+            <image href="./images/splash/gotree-multilevel-silhouette-tree.png" x="788" y="14" width="90" height="90" preserveAspectRatio="xMidYMid slice"><title>GoTree silhouette tree</title></image>
+            <rect x="886" y="10" width="98" height="98" rx="7" fill="#fff" stroke="#27231f" stroke-width="2"/>
+            <image href="./images/splash/sankey-tree.png" x="890" y="14" width="90" height="90" preserveAspectRatio="xMidYMid slice"><title>Sankey tree</title></image>
+            <rect x="998" y="10" width="98" height="98" rx="7" fill="#fff" stroke="#27231f" stroke-width="2"/>
+            <image href="./images/splash/bluefish-pulley.png" x="1002" y="14" width="90" height="90" preserveAspectRatio="xMidYMin slice"><title>Bluefish pulley diagram</title></image>
+            <g opacity="0.4"><rect x="1106" y="10" width="34" height="98" rx="7" fill="#fff" stroke="#27231f" stroke-width="2" stroke-dasharray="5 5"/><text x="1123" y="59" text-anchor="middle" dominant-baseline="central" font-size="24" fill="#1e1e1e">…</text></g>
+            <rect x="610" y="168" width="120" height="44" rx="7" fill="#5b8fa8" stroke="#5b8fa8" stroke-width="2"/><text x="670" y="190" text-anchor="middle" dominant-baseline="central" font-size="21" fill="#fff">chart</text>
+            <rect x="824" y="168" width="120" height="44" rx="7" fill="#5b8fa8" stroke="#5b8fa8" stroke-width="2"/><text x="884" y="190" text-anchor="middle" dominant-baseline="central" font-size="21" fill="#fff">tree</text>
+            <rect x="998" y="168" width="98" height="44" rx="7" fill="#5b8fa8" stroke="#5b8fa8" stroke-width="2"/><text x="1047" y="190" text-anchor="middle" dominant-baseline="central" font-size="21" fill="#fff">diagram</text>
+            <g opacity="0.4"><rect x="1106" y="168" width="34" height="44" rx="7" fill="#5b8fa8" stroke="#5b8fa8" stroke-width="2"/><text x="1123" y="190" text-anchor="middle" dominant-baseline="central" font-size="24" fill="#fff">…</text></g>
+            <rect x="570" y="274" width="570" height="56" rx="7" fill="#b24a3b" stroke="#b24a3b" stroke-width="2"/><text x="855" y="302" text-anchor="middle" dominant-baseline="central" font-size="21" fill="#fff">core: marks + verbs</text>
+            <text x="855" y="386" text-anchor="middle" font-size="26" fill="#1e1e1e">a tree: many DSLs, one language</text>
+          </svg>
+          <p class="flat-vs-tree-line">Build new structures from old ones with a small, stable set of verbs.</p>
+          <aside class="notes">
+            <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
+              4:10 of 7:35.</p>
+            <ul>
+              <li><strong>Open with the callback:</strong> "Earlier I asked
+                whether we keep adding nouns forever. Here is the answer."</li>
+              <li>This is what a language that can grow looks like. On the
+                left is the flat layer from part 2. On the right, the same
+                charts sit on intermediate words (chart, tree, diagram), and
+                those words are built from a small core of marks and verbs
+                like <code>spread</code>, <code>stack</code>, and
+                <code>relate</code>.</li>
+              <li>The middle nodes are domain languages, Andrew's small
+                modular components. Chart, tree, and diagram each have their
+                own words, fit to their own domain.</li>
+              <li><strong>Extensibility is what keeps the tree
+                together.</strong> Each new DSL is built from the same core
+                with the same verbs, from inside the language. So the DSLs do
+                not fall apart into separate languages, the way the grammars
+                in the opening tangle did. You get a custom language for each
+                subdomain and still have one language. GoTree, on the next
+                slides, is one of these branches.</li>
+              <li>This answers the question from the part 2 slide. We do not
+                have to keep adding nouns to the core. New words are built
+                from old ones, so the core stays small while the vocabulary
+                gets big. That is the compression picture from the
+                opening.</li>
+              <li><strong>Say the thesis:</strong> "In the traditional
+                grammar of graphics, the only way to grow the language is to
+                add a new primitive. In a language with verbs, you can build
+                new structures from old ones, using a fairly stable set of
+                composition mechanisms."</li>
+              <li>The faded node in the middle is the point: the middle is not
+                a closed set of three kinds. New levels, and other grammars
+                like GoTree, can keep being added.</li>
+            </ul>
+            <p><strong>The leaves</strong> are charts the audience has
+              already seen. The population pyramid, GoTree silhouette tree,
+              Sankey tree, and Bluefish pulley diagram are on the splash wall. The ribbon
+              chart is from the crash course.</p>
+            <p><strong>Lead into GoTree:</strong> "Here is one branch of
+              that tree, up close."</p>
+            <p><strong>If asked about "optimal" compression:</strong> the
+              honest claim is only that nested rules compress better than one
+              flat layer. Grammar-based compression algorithms such as
+              Sequitur work by building nested rules.</p>
+          </aside>
+        </section>
+
         <!-- GoTree, step 1: the data and the picture, no specs. The
              fragment is step 2: this data is a tree, not a table. -->
         <section class="code-slide" data-auto-animate data-auto-animate-id="gotree">
-          <p class="part" data-id="gotree-part">4a · Many surfaces against one language</p>
+          <p class="part" data-id="gotree-part">4a · A big language or a small one</p>
           <h2 data-id="gotree-title">GoTree, a grammar for trees</h2>
           <div class="gotree-data">
             <div>
@@ -131,9 +279,11 @@
           <aside class="notes">
             <p><strong>Target:</strong> 0:15 (the GoTree beat is 0:55 over
               three slides: 0:15 here, 0:20 for the specs, 0:20 for
-              <code>combine</code>). <strong>Running total:</strong> 4:00 of
+              <code>combine</code>). <strong>Running total:</strong> 4:25 of
               7:35.</p>
-            <p>Nested data, so it is not obvious where
+            <p>The GoTree slides are evidence for the tree: one branch,
+              shown from the data down to the core. This slide shows why the
+              branch is needed. The data is nested, so it is not obvious where
               <code>chart(data).flow(...)</code> goes.</p>
             <p><strong>Say:</strong> "Here's a domain grammar of the kind
               Andrew describes: GoTree, a grammar for tree layouts. Its input
@@ -164,7 +314,7 @@
         </section>
 
         <section class="code-slide" data-auto-animate data-auto-animate-id="gotree">
-          <p class="part" data-id="gotree-part">4a · Many surfaces against one language</p>
+          <p class="part" data-id="gotree-part">4a · A big language or a small one</p>
           <h2 data-id="gotree-title">GoTree, a grammar for trees</h2>
           <div class="code-pair">
             <div>
@@ -207,16 +357,10 @@
           </div>
           <aside class="notes">
             <p><strong>Target:</strong> 0:20. <strong>Running total:</strong>
-              4:20 of 7:35.</p>
-            <ul>
-              <li>Many surfaces against one language. Domain grammars can be
-                layered on a shared core instead of being separate
-                languages.</li>
-            </ul>
-            <p><strong>The obstacle:</strong> it can look like you have to
-              choose between one universal grammar and many domain-specific
-              ones. Andrew McNutt's
-              survey (the quote two slides back) already points the way out: small
+              4:45 of 7:35.</p>
+            <p>Evidence for the tree: the branch keeps its own words, and
+              they are built from the core's verbs. Andrew McNutt's survey
+              (the quote before the tree slide) already points the way: small
               modular language components, and domain languages that compile
               to ones that do one thing well. This slide is one instance of
               that idea, credited to him, not an argument with him.</p>
@@ -224,11 +368,8 @@
               Park et al. call for (the call McNutt pushes back on). It is a
               shared core that domain grammars can build on, which is
               consistent with McNutt's point.</p>
-            <p><strong>Say</strong> (v3 draft's framing): "Domain grammars need
-              words and syntax that fit their tasks. That rules out one surface
-              interface for all visualization work. It does not rule out one
-              language system." Here's an example of the modular approach
-              Andrew described. Same tree as the
+            <p><strong>Say:</strong> Here's an example of the modular
+              approach Andrew described. Same tree as the
               last slide; now here's how it's written. On the left is GoTree's
               own spec, in its own JSON language. On the right is GoTree
               rebuilt as a library on GoFish. It keeps GoTree's
@@ -261,7 +402,7 @@
         </section>
 
         <section class="code-slide">
-          <p class="part">4a · Many surfaces against one language</p>
+          <p class="part">4a · A big language or a small one</p>
           <h2><code>combine</code> compiles to GoFish constraints</h2>
           <pre><code class="language-ts" data-line-numbers data-char-marks="7:13-28, 11:13-33">export const combine = (opts: CombineOptions): Combiner =&gt; {
   …
@@ -290,7 +431,9 @@
           <aside class="notes">
             <p><strong>Target:</strong> 0:20 (trimmed from 0:25: say the first
               three sentences and skip the paper quote if short on time).
-              <strong>Running total:</strong> 4:40 of 7:35.</p>
+              <strong>Running total:</strong> 5:05 of 7:35.</p>
+            <p>Evidence for the tree: the branch reaches all the way down to
+              the core, so it is not a separate language.</p>
             <p><strong>Say:</strong> And here's how it's layered. The
               <code>combine</code> that the tree spec called turns each axis
               into an ordinary GoFish constraint, <code>Constraint.align</code>
@@ -303,12 +446,6 @@
               be layered on a shared core instead of being separate languages:
               Andrew's compile tower, with GoFish as one floor of it. They
               keep their own design and share the core.</p>
-            <p>v3 draft wording, if useful: "The compiler turns this program
-              into ordinary GoFish structure, so GoTree can use the GoFish
-              graphics pipeline and renderer. Its alignment and containment
-              relations also use the same constraints as other GoFish programs.
-              Researchers can therefore use these shared terms to state what
-              GoTree adds, even though GoTree keeps its own tree interface."</p>
             <p><strong>Source:</strong> <code>combine</code> in
               <code>packages/gofish-gotree/src/helpers.ts</code>, lines 144 to
               181, GoFish repo (<code>~/gofish-20250316</code>) at
@@ -331,7 +468,7 @@
              on. Renders: the same charts.ts functions as the crash course
              (planets-label, seafood-ribbon) and the paper's Figure 5 SVG. -->
         <section class="code-slide recap-slide">
-          <p class="part">4a · Many surfaces against one language</p>
+          <p class="part">4a · A big language or a small one</p>
           <h2>same core, three shapes of data</h2>
           <div class="recap-grid">
             <div>
@@ -372,7 +509,7 @@ layer([planets, label])
           <p class="recap-core">one core underneath: the same verbs and constraints</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
-              4:55 of 7:35.</p>
+              5:20 of 7:35.</p>
             <p><strong>Say:</strong> "Back to our two examples, plus the tree.
               What differs isn't the core, it's the shape of the data:
               low-level marks, tabular rows, a hierarchy. These are three
@@ -401,7 +538,6 @@ layer([planets, label])
           </aside>
         </section>
 
-
         <!-- Picture only: the GUGOG camera-ready paper's Figure 6
              (gugog-2026-camera-ready-v3/figures/gofish-tree-waffle.png),
              copied exactly. A gofish-gotree tree whose leaves are chart-level
@@ -415,29 +551,31 @@ layer([planets, label])
               max-height: 480px;
             }
           </style>
-          <p class="part">4a · Many surfaces against one language</p>
+          <p class="part">4a · A big language or a small one</p>
           <h2>the surfaces work together</h2>
           <img class="tree-waffle" src="./images/tradeoffs/gofish-tree-waffle.png" alt="A GoFish tree whose four leaves are waffles of bottle glyphs, each bottle filled with green to a data value" />
           <p class="source-line" style="text-align: center">GUGOG paper, Figure 6</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:10, plus about 0:05 for the bridge
-              line to 4b. <strong>Running total:</strong> 5:10 of 7:35.</p>
+              line to 4b. <strong>Running total:</strong> 5:35 of 7:35.</p>
             <ul>
               <li>One graphic that uses all three surfaces. The tree is laid
                 out by the hierarchical surface (gofish-gotree). Each leaf is
                 a waffle written at the chart level. Each unit of a waffle is
                 a bottle glyph built from low-level marks: an image and a
                 data-sized fill rectangle.</li>
-              <li>This answers the second angle of the obstacle, that the
-                surfaces cannot be tied together in one language.</li>
+              <li>This is the tree holding together: three branches mixed in
+                one graphic, because they are one language.</li>
             </ul>
-            <p><strong>Bridge to 4b</strong> (no slide; credit Jason
-              Brunson's GUGOG paper, "Balancing constriction and expansion for
-              domain-specific grammars"): "Jason's paper puts these two
-              obstacles together. He argues that each domain needs a dialect,
-              with its own objects and its own constraints on how they
-              combine. GoTree is a dialect. The next question is about the
-              constraints."</p>
+            <p><strong>Bridge to 4b</strong> (no slide; this ends 4a. Credit
+              Jason Brunson's GUGOG paper, "Balancing constriction and
+              expansion for domain-specific grammars"): "Jason's paper argues
+              that each domain needs a dialect, with its own objects and its
+              own constraints on how they combine. GoTree is a dialect in
+              that sense, with its own objects. His second half, the
+              constraints, is where the objection comes in. The more you let
+              people extend the language, the more it seems you give up
+              safety."</p>
             <p>His words, for reference: "From each specialty should be
               derived a graphical dialect, constituting both permitted objects
               and constraints on their combination." He proposes this as a

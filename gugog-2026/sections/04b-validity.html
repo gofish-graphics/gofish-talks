@@ -1,6 +1,9 @@
-        <!-- ═══ PART 4b: VALIDITY AGAINST FREEDOM OF ARRANGEMENT, ~0:55 ═══
-             The Huang and Kay quote, then CanAdd. This obstacle is disputed
-             with one piece of evidence, and its limits are stated.
+        <!-- ═══ PART 4b: DOES GROWTH COST SAFETY?, ~0:55 ═══════════════
+             The objection to 4a's answer: this much extensibility and
+             expressiveness seems to cost safety. The Huang and Kay quote
+             states the general tradeoff, then CanAdd shows a type system
+             bringing safety back. It is one piece of evidence, and its
+             limits are stated.
              CanAdd follows the type system framing, not the v3 draft's,
              which predates the type system. Its code is from the current
              GoFish source, where the class is named CanAdd.
@@ -12,7 +15,7 @@
              "Future Directions: Best of Both?", verbatim. The slide presents
              their question in their own words and credits them for it. -->
         <section class="quote-slide">
-          <p class="part">4b · Validity against freedom of arrangement</p>
+          <p class="part">4b · Does growth cost safety?</p>
           <blockquote class="long-quote quote-short">
             <p>Can semantic and graphical expressivity be combined within a
               single system, or are users better served by clearly distinct
@@ -26,14 +29,20 @@
           <p class="long-quote-cite">Cynthia Huang &amp; Matthew Kay, <em>Semantic Validity vs. Graphical Arrangement in Visualization Grammars</em>, GUGOG 2026</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:15 (shown, not recited; read the
-              accent phrase aloud). <strong>Running total:</strong> 5:25 of
-              7:50.</p>
-            <p><strong>The obstacle, in its strongest form:</strong> systems
-              that validate every operation constrain what you can draw, and
-              systems that let you draw anything leave validity to the
-              user.</p>
-            <p><strong>Say:</strong> "Cynthia and Matt, who are on the
-              panel, frame this as a tradeoff: validate every operation and
+              accent phrase aloud). <strong>Running total:</strong> 5:50 of
+              7:35.</p>
+            <p><strong>The objection, in its strongest form:</strong> the
+              tree lets anyone grow the language, and that much extensibility
+              and expressiveness seems to cost safety. If anyone can add new
+              structures, it seems the language can no longer check that a
+              picture means something. Cynthia and Matt state the general
+              version: systems that validate every operation constrain what
+              you can draw, and systems that let you draw anything leave
+              validity to the user.</p>
+            <p><strong>Say:</strong> "Here is the objection to all of this.
+              If anyone can grow the language, it seems the language can't
+              check what you draw. Cynthia and Matt, who are on the panel,
+              frame the general version as a tradeoff: validate every operation and
               you constrain what you can draw; maximize what you can draw and
               validity is left to the user. They ask which of these
               tradeoffs are principled and which are incidental to current
@@ -103,7 +112,7 @@
              from the slide's corner on the other, and it flies in from the
              top left. -->
         <section class="code-slide" data-auto-animate data-auto-animate-id="canadd" data-auto-animate-duration="0.3">
-          <p class="part" data-id="canadd-part">4b · Validity against freedom of arrangement</p>
+          <p class="part" data-id="canadd-part">4b · Does growth cost safety?</p>
           <h2 data-id="canadd-title"><code>stack</code> needs <code>CanAdd</code></h2>
           <div class="canadd-grid">
             <pre data-id="canadd-code" data-magic-move><code class="language-ts" data-line-numbers>const data = [
@@ -143,10 +152,10 @@ chart(data)
           <p class="canadd-footnote" data-id="canadd-footnote">Inspired by Bartonicek, Urbanek &amp; Murrell (JCGS 2025), Flint (Wang et al., VIS 2026), and Huang &amp; Kay (GUGOG 2026).</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:10 (of the slide's 0:40).
-              <strong>Running total:</strong> 5:35 of 7:50.</p>
+              <strong>Running total:</strong> 6:00 of 7:35.</p>
             <ul>
-              <li>Validity against freedom of arrangement: one data point on
-                Cynthia and Matt's open question.</li>
+              <li>Does growth cost safety? One data point on Cynthia and
+                Matt's open question.</li>
             </ul>
             <p><strong>Say:</strong> "Here is one dataset with a temperature
               and a dollar amount for each city and month. This spec stacks
@@ -171,7 +180,7 @@ chart(data)
         </section>
 
         <section class="code-slide" data-auto-animate data-auto-animate-id="canadd" data-auto-animate-duration="0.3">
-          <p class="part" data-id="canadd-part">4b · Validity against freedom of arrangement</p>
+          <p class="part" data-id="canadd-part">4b · Does growth cost safety?</p>
           <h2 data-id="canadd-title"><code>stack</code> needs <code>CanAdd</code></h2>
           <div class="canadd-grid">
             <pre data-id="canadd-code" data-magic-move><code class="language-ts" data-line-numbers data-char-marks="8:11-13, 9:3-11, 10:5-21, 11:5-53, 12:3-4, 13:1-2">const data = [
@@ -216,7 +225,7 @@ chart(data, {
           <p class="canadd-footnote" data-id="canadd-footnote">Inspired by Bartonicek, Urbanek &amp; Murrell (JCGS 2025), Flint (Wang et al., VIS 2026), and Huang &amp; Kay (GUGOG 2026).</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:15 (of the slide's 0:40).
-              <strong>Running total:</strong> 5:50 of 7:50.</p>
+              <strong>Running total:</strong> 6:15 of 7:35.</p>
             <p><strong>Say:</strong> "Now add a schema. Degrees Celsius is a
               plain unit, and US dollars are declared summable. The same
               stack now gives an error, because degrees Celsius has no
@@ -254,7 +263,7 @@ chart(data, {
         </section>
 
         <section class="code-slide" data-auto-animate data-auto-animate-id="canadd" data-auto-animate-duration="0.3">
-          <p class="part" data-id="canadd-part">4b · Validity against freedom of arrangement</p>
+          <p class="part" data-id="canadd-part">4b · Does growth cost safety?</p>
           <h2 data-id="canadd-title"><code>stack</code> needs <code>CanAdd</code></h2>
           <div class="canadd-grid">
             <pre data-id="canadd-code" data-magic-move><code class="language-ts" data-line-numbers data-char-marks="19:8-12">const data = [
@@ -299,12 +308,12 @@ chart(data, {
           <p class="canadd-footnote" data-id="canadd-footnote">Inspired by Bartonicek, Urbanek &amp; Murrell (JCGS 2025), Flint (Wang et al., VIS 2026), and Huang &amp; Kay (GUGOG 2026).</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:15 (of the slide's 0:40).
-              <strong>Running total:</strong> 6:05 of 7:50.</p>
+              <strong>Running total:</strong> 6:30 of 7:35.</p>
             <p><strong>Say:</strong> "Stack the dollars instead, and it
               works. This constrains specs, not pictures. Every picture is
-              still reachable. My view is that this obstacle is incidental,
-              and the type system that catches this error is small. The
-              limits: this is one operator and one property, and
+              still reachable. My view is that growth does not have to cost
+              safety: a type system brings it back, and the one that catches
+              this error is small. The limits: this is one operator and one property, and
               interactivity is not covered."</p>
             <p>The highlight marks what changed: <code>"temp"</code> became
               <code>"usd"</code>.</p>
@@ -324,10 +333,9 @@ chart(data, {
               one unit on x to equal one unit on y. GoFish tracks at the type level whether two axes have the
               same type, and if they do, it uses the same scale for both by
               default.</p>
-            <p><strong>Lead into 4c:</strong> "The third obstacle is about how
-              big the language should be. It seems that a language has to be
-              either small, with long specs, or big, with a short spec for
-              every chart. It is the one I have only partly solved."</p>
+            <p><strong>Lead into 4c:</strong> "So growth does not have to
+              cost safety. But the growth itself has a limit, and that is
+              where I want to end."</p>
             <p><strong>Source:</strong> written for this slide, after the
               GoFish repo's CanAdd test
               (<code>packages/gofish-graphics/src/tests/measure.test.ts</code>,

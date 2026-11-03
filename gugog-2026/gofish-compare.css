@@ -206,7 +206,7 @@
   align-items: center;
 }
 
-/* The McNutt quote that opens tension 4a (04-surfaces.html). Long, so it is
+/* The McNutt quote that in 4a (04a-big-or-small.html). Long, so it is
    set near body size, left-aligned, with an accent rule. The last
    sentence is the claim, so it is bold in the accent color. */
 .reveal .quote-slide blockquote.long-quote {
