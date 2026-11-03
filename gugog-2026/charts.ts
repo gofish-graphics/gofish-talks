@@ -155,14 +155,16 @@ const designColor = { typology: TYPOLOGY, toolkit: TOOLKIT, gog: GOG, goal: GOAL
 const CLIFF = 0.3;
 // A smooth bend: zero with zero slope at the cliff, then close to a straight
 // climb.
+// CLIFF_SOFT is how soft the bend is (the rates variant uses it too).
+const CLIFF_SOFT = 0.18;
 const bend = (x: number) => {
   const t = Math.max(0, x - CLIFF);
-  return (t * t) / (t + 0.18);
+  return (t * t) / (t + CLIFF_SOFT);
 };
 const core = (x: number) => 1 - Math.exp(-6 * x);
 
 // Each design's two curves, for x in [0, 1].
-const costCurves: Record<Design, { language: (x: number) => number; spec: (x: number) => number }> = {
+const costCurves: Curves = {
   typology: { language: (x) => 0.12 + 0.86 * x, spec: () => 0.12 },
   toolkit: { language: () => 0.12, spec: (x) => 0.5 + 0.48 * x },
   gog: {
@@ -179,12 +181,14 @@ const costCurves: Record<Design, { language: (x: number) => number; spec: (x: nu
 // The sample at the cliff belongs to both parts, so they meet.
 const COST_SAMPLES = 40;
 const CLIFF_SAMPLE = Math.round(CLIFF * COST_SAMPLES);
-const costLine = (design: Design, panel: "language" | "spec") =>
+type Panel = "language" | "spec";
+type Curves = Record<Design, Record<Panel, (x: number) => number>>;
+const costLine = (curves: Curves, design: Design, panel: Panel) =>
   Array.from({ length: COST_SAMPLES + 1 }, (_, i) => ({
     design,
     i,
     x: i / COST_SAMPLES,
-    y: costCurves[design][panel](i / COST_SAMPLES),
+    y: curves[design][panel](i / COST_SAMPLES),
   }));
 
 // The expressivity cliff: a light dotted line in every panel, labeled once,
@@ -213,7 +217,7 @@ function cliffMarks(fontSize: number, labeled: boolean) {
 // Direct labels, in each panel's own coordinates (scatter centers them).
 // A two-line label is two entries, one per line.
 type Note = { design: Design; key: string; note: string; x: number; y: number };
-const costNotes: Record<"language" | "spec", Note[]> = {
+const costNotes: Record<Panel, Note[]> = {
   language: [
     { design: "typology", key: "t", note: "chart typology (seaborn)", x: 0.36, y: 0.9 },
     { design: "toolkit", key: "k", note: "low-level toolkit (d3)", x: 0.7, y: 0.055 },
@@ -243,16 +247,21 @@ function usagePanel(fontSize: number, cliff: boolean) {
   ]);
 }
 
-function costPanel(
-  panel: "language" | "spec",
-  title: string,
-  designs: Design[],
-  fontSize: number
-) {
-  const lines = designs.flatMap((d) => costLine(d, panel));
+// What the two cost panels plot: their curves, labels, and titles. The
+// compression slide plots each cost itself (cumulativeModel); its variant
+// plots how fast each cost grows (rateModel, below).
+type CostModel = { curves: Curves; notes: Record<Panel, Note[]>; titles: Record<Panel, string> };
+const cumulativeModel: CostModel = {
+  curves: costCurves,
+  notes: costNotes,
+  titles: { language: "size of the language", spec: "length of each spec" },
+};
+
+function costPanel(model: CostModel, panel: Panel, designs: Design[], fontSize: number) {
+  const lines = designs.flatMap((d) => costLine(model.curves, d, panel));
   const solid = lines.filter((p) => p.design !== "gog" || p.i <= CLIFF_SAMPLE);
   const drift = lines.filter((p) => p.design === "gog" && p.i >= CLIFF_SAMPLE);
-  const notes = costNotes[panel].filter((n) => designs.includes(n.design));
+  const notes = model.notes[panel].filter((n) => designs.includes(n.design));
   const cliff = designs.includes("gog");
   const plot = layer([
     chart(axisLines, { axes: false })
@@ -282,17 +291,19 @@ function costPanel(
       : []),
   ]);
   return spread({ dir: "y", spacing: 10, alignment: "middle" }, [
-    words(title, fontSize),
+    words(model.titles[panel], fontSize),
     plot,
   ]);
 }
 
-const compressionChart = (designs: Design[]) => (fontSize: number) =>
+const compressionChart =
+  (designs: Design[], model: CostModel = cumulativeModel) =>
+  (fontSize: number) =>
   spread({ dir: "y", spacing: 10, alignment: "middle" }, [
     spread({ dir: "x", spacing: fontSize * 2.5, alignment: "end" }, [
       usagePanel(fontSize, designs.includes("gog")),
-      costPanel("language", "size of the language", designs, fontSize),
-      costPanel("spec", "length of each spec", designs, fontSize),
+      costPanel(model, "language", designs, fontSize),
+      costPanel(model, "spec", designs, fontSize),
     ]),
     words("how complex the chart is", fontSize * 0.9),
     words("schematic, not measured", Math.max(16, fontSize * 0.7), {
@@ -308,6 +319,99 @@ const compressionSteps = {
   "compression-toolkit": compressionChart(["typology", "toolkit"]),
   "compression-gog": compressionChart(["typology", "toolkit", "gog"]),
   "compression-goal": compressionChart(["typology", "toolkit", "gog", "goal"]),
+};
+
+// ─── A grammar is a compression, as rates ─────────────────────────────────
+// A variant of the compression slide, for comparison. The usage panel is the
+// same. The two cost panels plot the slope of the compression slide's
+// curves: how much each cost grows for each step of complexity. A design
+// that keeps paying shows as a high flat line, and one that stops paying
+// sits at zero. The grammar of graphics' bend becomes a ramp that rises at
+// the cliff, so the cliff is a shape you can see.
+//
+// The language panel is the exact slope of costCurves. The spec panel is
+// not, in one place. Past the cliff, the grammar of graphics' spec curve on
+// the compression slide climbs faster than d3's (it bends up to catch d3
+// from below), so its exact slope would end well above d3's: it would say
+// Vega-Lite's tail specs grow faster than d3's. Here its ramp rises toward
+// d3's rate and stays under it (0.36 of the bend where costCurves has 0.85).
+//
+// Two drawing choices, not part of the model:
+//   - the spec panel is stretched by SPEC_SCALE, so d3's rate is as tall as
+//     seaborn's is in the language panel. The axes have no numbers, so each
+//     panel's height is its own;
+//   - each line is lifted a little (RATE_LIFT), so lines whose rates are
+//     equal stay visible: a zero rate sits just above the axis, and the
+//     grammar of graphics runs just above the sweet spot, whose rates it
+//     shares up to the cliff.
+const SPEC_SCALE = 1.8;
+const RATE_LIFT: Record<Design, number> = { typology: 0.015, toolkit: 0.015, goal: 0.05, gog: 0.085 };
+// The slopes of core and bend. `soft` is bend's softness: CLIFF_SOFT gives
+// the slope of the compression slide's own bend; a small one makes the
+// ramp a near-vertical step.
+const coreRate = (x: number) => 6 * Math.exp(-6 * x);
+const bendRate = (soft: number) => (x: number) => {
+  const t = Math.max(0, x - CLIFF);
+  return (t * t + 2 * soft * t) / (t + soft) ** 2;
+};
+
+const rateCurves = (soft: number): Curves => {
+  // Scaled so every ramp ends at the height the compression slide's own
+  // ramp reaches at the right edge; a near-vertical step then jumps straight
+  // to that height and no higher.
+  const scale = bendRate(CLIFF_SOFT)(1) / bendRate(soft)(1);
+  const ramp = (x: number) => scale * bendRate(soft)(x);
+  const rates: Curves = {
+    typology: { language: () => 0.86, spec: () => 0 },
+    toolkit: { language: () => 0, spec: () => SPEC_SCALE * 0.48 },
+    gog: {
+      language: (x) => 0.08 * coreRate(x) + 0.78 * ramp(x),
+      spec: (x) => SPEC_SCALE * (0.06 + 0.36 * ramp(x)),
+    },
+    goal: { language: (x) => 0.08 * coreRate(x), spec: () => SPEC_SCALE * 0.06 },
+  };
+  const lifted = (d: Design, p: Panel) => (x: number) => rates[d][p](x) + RATE_LIFT[d];
+  return Object.fromEntries(
+    (Object.keys(rates) as Design[]).map((d) => [d, { language: lifted(d, "language"), spec: lifted(d, "spec") }])
+  ) as Curves;
+};
+
+const rateNotes: Record<Panel, Note[]> = {
+  language: [
+    { design: "typology", key: "t", note: "chart typology (seaborn)", x: 0.4, y: 0.95 },
+    { design: "toolkit", key: "k", note: "low-level toolkit (d3)", x: 0.7, y: 0.16 },
+    { design: "gog", key: "g1", note: "ggplot2:", x: 0.76, y: 0.5 },
+    { design: "gog", key: "g2", note: "new chart types", x: 0.76, y: 0.435 },
+    { design: "goal", key: "s", note: "the sweet spot", x: 0.2, y: 0.66 },
+  ],
+  spec: [
+    { design: "typology", key: "t", note: "chart typology (seaborn)", x: 0.66, y: 0.085 },
+    { design: "toolkit", key: "k", note: "low-level toolkit (d3)", x: 0.36, y: 0.95 },
+    { design: "gog", key: "g1", note: "Vega-Lite:", x: 0.74, y: 0.5 },
+    { design: "gog", key: "g2", note: "explicit calculations", x: 0.74, y: 0.435 },
+    { design: "goal", key: "s", note: "the sweet spot", x: 0.76, y: 0.23 },
+  ],
+};
+
+const rateModel = (soft: number): CostModel => ({
+  curves: rateCurves(soft),
+  notes: rateNotes,
+  titles: { language: "new words for each new chart", spec: "extra spec for each step" },
+});
+
+// The slide's steps, as on the compression slide. "rates" uses the
+// compression slide's own bend; "rates-step" makes the rise near vertical,
+// to compare (it overstates the jump).
+const rateSteps = (prefix: string, model: CostModel) => ({
+  [`${prefix}-usage`]: compressionChart([], model),
+  [`${prefix}-typology`]: compressionChart(["typology"], model),
+  [`${prefix}-toolkit`]: compressionChart(["typology", "toolkit"], model),
+  [`${prefix}-gog`]: compressionChart(["typology", "toolkit", "gog"], model),
+  [`${prefix}-goal`]: compressionChart(["typology", "toolkit", "gog", "goal"], model),
+});
+const compressionRateSteps = {
+  ...rateSteps("compression-rates", rateModel(CLIFF_SOFT)),
+  ...rateSteps("compression-rates-step", rateModel(0.012)),
 };
 
 // ─── Part 3: the GoFish crash course ──────────────────────────────────────
@@ -428,6 +532,7 @@ type Renderable = {
 const charts: Record<string, (fontSize: number) => Renderable> = {
   "usage-curve": usageCurve,
   ...compressionSteps,
+  ...compressionRateSteps,
   planets: planetsRow,
   "planets-label": planetsLabeled,
   "seafood-stacked": seafoodStacked,

@@ -258,3 +258,114 @@
           </aside>
         </section>
 
+        <section>
+          <p class="part">1 · Compression is the yardstick</p>
+          <h2>a grammar is a compression, as rates</h2>
+          <!-- A variant of the slide before, for comparison. Same steps and
+               layout, drawn by renderCharts() in ../charts.ts. The two cost
+               panels show the slope of the slide before's curves. -->
+          <div class="r-stack" style="margin-top: 0.3em">
+            <div data-chart="compression-rates-usage" data-w="1180" data-h="500" data-font-size="24"
+              style="display: flex; justify-content: center"></div>
+            <div class="fragment" data-chart="compression-rates-typology" data-w="1180" data-h="500" data-font-size="24"
+              style="display: flex; justify-content: center; background: var(--paper)"></div>
+            <div class="fragment" data-chart="compression-rates-toolkit" data-w="1180" data-h="500" data-font-size="24"
+              style="display: flex; justify-content: center; background: var(--paper)"></div>
+            <div class="fragment" data-chart="compression-rates-gog" data-w="1180" data-h="500" data-font-size="24"
+              style="display: flex; justify-content: center; background: var(--paper)"></div>
+            <div class="fragment" data-chart="compression-rates-goal" data-w="1180" data-h="500" data-font-size="24"
+              style="display: flex; justify-content: center; background: var(--paper)"></div>
+          </div>
+          <p class="big-claim fragment" style="margin-top: 0.3em">What are the obstacles to doing this compression?</p>
+          <aside class="notes">
+            <p><strong>Target:</strong> 0:00. This is a comparison variant
+              of the slide before. It is not yet in the talk's timing, so the
+              running totals do not count it.</p>
+            <p>The climb past the cliff is drawn as a steep but smooth
+              ramp, since the change is gradual. It is the slope of the bend
+              on the slide before.</p>
+            <ul>
+              <li>The left panel is the same usage curve. The other two
+                panels show roughly the slope of the slide before's curves: how much
+                each cost grows for each step to the right.</li>
+              <li>The middle panel is how many new words the language needs
+                for each new chart. The right panel is how much longer the
+                spec gets for each step of complexity.</li>
+              <li>(Click.) Seaborn needs a new function for every new chart,
+                so it is high and flat in the middle. Its specs stay short, so
+                it sits at zero on the right.</li>
+              <li>(Click.) d3 adds no new words, so it sits at zero in the
+                middle. Its specs keep getting longer, so it is high on the
+                right.</li>
+              <li>(Click.) The grammar of graphics pays a little at the start
+                for its core, and then almost nothing for the common charts.
+                At the expressivity cliff its cost starts to climb. In ggplot2
+                each tail chart needs a new chart type, so the middle panel
+                climbs toward seaborn. In Vega-Lite each tail chart needs
+                explicit calculations, so the right panel climbs toward d3.
+                That climb is the cliff.</li>
+              <li>(Click.) The sweet spot pays for its core at the start, and
+                then almost nothing in either panel.</li>
+              <li>The curves are schematic, not measured.</li>
+            </ul>
+            <p><strong>The question for the talk</strong> (click for the
+              line): "What are the obstacles to doing this compression?"</p>
+          </aside>
+        </section>
+
+        <section>
+          <p class="part">1 · Compression is the yardstick</p>
+          <h2>a grammar is a compression, as rates</h2>
+          <!-- A variant of the slide before, for comparison. Same steps and
+               layout, drawn by renderCharts() in ../charts.ts. The two cost
+               panels show the slope of the slide before's curves. -->
+          <div class="r-stack" style="margin-top: 0.3em">
+            <div data-chart="compression-rates-step-usage" data-w="1180" data-h="500" data-font-size="24"
+              style="display: flex; justify-content: center"></div>
+            <div class="fragment" data-chart="compression-rates-step-typology" data-w="1180" data-h="500" data-font-size="24"
+              style="display: flex; justify-content: center; background: var(--paper)"></div>
+            <div class="fragment" data-chart="compression-rates-step-toolkit" data-w="1180" data-h="500" data-font-size="24"
+              style="display: flex; justify-content: center; background: var(--paper)"></div>
+            <div class="fragment" data-chart="compression-rates-step-gog" data-w="1180" data-h="500" data-font-size="24"
+              style="display: flex; justify-content: center; background: var(--paper)"></div>
+            <div class="fragment" data-chart="compression-rates-step-goal" data-w="1180" data-h="500" data-font-size="24"
+              style="display: flex; justify-content: center; background: var(--paper)"></div>
+          </div>
+          <p class="big-claim fragment" style="margin-top: 0.3em">What are the obstacles to doing this compression?</p>
+          <aside class="notes">
+            <p><strong>Target:</strong> 0:00. This is a comparison variant
+              of the slide before. It is not yet in the talk's timing, so the
+              running totals do not count it.</p>
+            <p>This version draws the climb past the cliff as a near
+              vertical step. It overstates the jump: the change is gradual,
+              as the slide before and the ramp version show. It is here only
+              to compare how it reads.</p>
+            <ul>
+              <li>The left panel is the same usage curve. The other two
+                panels show roughly the slope of the slide before's curves: how much
+                each cost grows for each step to the right.</li>
+              <li>The middle panel is how many new words the language needs
+                for each new chart. The right panel is how much longer the
+                spec gets for each step of complexity.</li>
+              <li>(Click.) Seaborn needs a new function for every new chart,
+                so it is high and flat in the middle. Its specs stay short, so
+                it sits at zero on the right.</li>
+              <li>(Click.) d3 adds no new words, so it sits at zero in the
+                middle. Its specs keep getting longer, so it is high on the
+                right.</li>
+              <li>(Click.) The grammar of graphics pays a little at the start
+                for its core, and then almost nothing for the common charts.
+                At the expressivity cliff its cost starts to climb. In ggplot2
+                each tail chart needs a new chart type, so the middle panel
+                climbs toward seaborn. In Vega-Lite each tail chart needs
+                explicit calculations, so the right panel climbs toward d3.
+                That climb is the cliff.</li>
+              <li>(Click.) The sweet spot pays for its core at the start, and
+                then almost nothing in either panel.</li>
+              <li>The curves are schematic, not measured.</li>
+            </ul>
+            <p><strong>The question for the talk</strong> (click for the
+              line): "What are the obstacles to doing this compression?"</p>
+          </aside>
+        </section>
+
