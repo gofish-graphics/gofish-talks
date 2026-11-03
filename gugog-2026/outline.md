@@ -80,8 +80,15 @@ Leads into part 3 with the crash course, which states the second half of the the
    - Two API surfaces of GoFish side by side. The planets use the low-level core of marks and relations. The stacked bars use the chart level with short specs.
    - Add a label and an arrow to the planets. Then add a ribbon to the bars.
    - Say that these are two surfaces on one core.
-10. **Atom's gridxy is GoFish's spread.** Existing. 0:20.
-11. **PiCCL lines up with GoFish.** Existing. 0:25.
+10. **Atom: a grammar for unit visualizations.** New, pictures only. 0:10.
+    - Two figures from the Atom paper with short labels: its Titanic unit charts and its layout operators (Map2D, FillX, FillY, MaxFill, Pack). This is Atom's own idea, shown before the GoFish version. The layout is the thesis deck's Atom intro slide.
+11. **Atom's gridxy is GoFish's spread.** Existing. 0:10, trimmed from 0:20 because the slide before it now introduces Atom.
+    - The notes point back to the Atom slide, so the GoFish code reads as the same ideas in GoFish.
+12. **PiCCL: a grammar for pictorial charts.** New, pictures only. 0:10.
+    - Two figures from the PiCCL paper with short labels: its pictorial chart examples and its compositing operators. The layout is the thesis deck's PiCCL intro slide.
+13. **The PiCCL bottle chart in GoFish.** Changed. 0:15, trimmed from 0:25 because the slide before it now introduces PiCCL.
+    - The PiCCL bottle chart beside one idiomatic GoFish spec, with styling left out as `...`. The PiCCL spec is gone, because there is no time to explain two specs. The layout is the one from the thesis deck's bottle slide, with the code on the left and the chart on the right.
+    - PiCCL's idea, shown on the slide before, is that the bottle chart is built from parts. In GoFish the same parts are a few verbs and marks: `spread`, `paint`, `layer`, and `relate`.
     - Atom and PiCCL can be written in one language. Written that way, they share most of their structure, and the differences are small parts you can point to.
 
 Leads into part 4 with: "So unifying grammars compresses them. But three things seem to stand in the way of that compression, and I want to take them one at a time."
@@ -90,7 +97,7 @@ Leads into part 4 with: "So unifying grammars compresses them. But three things 
 
 Each obstacle is something that seems to stand in the way of the compression from the opening. Each is presented in its strongest form, with credit, before the evidence. The first two are disputed. The third is answered by the tree slide, and what is still missing is admitted as open.
 
-12. **Three obstacles.** Optional. 0:10.
+14. **Three obstacles.** Optional. 0:10.
     - Many API surfaces against one language.
     - Validity against freedom of arrangement.
     - A small language against a big one.
@@ -100,16 +107,16 @@ Each obstacle is something that seems to stand in the way of the compression fro
 
 This obstacle combines the two angles from the false tradeoffs draft. One angle is that a field needs many API surfaces, so one language will not do. The other angle is that it is not possible to tie those surfaces together in one language. GoFish's answer to both is the same. It has several surfaces that work together and share a core.
 
-13. **McNutt quote.** Existing. 0:15.
+15. **McNutt quote.** Existing. 0:15.
     - "Small modular language components" is highlighted.
     - Say that I agree no single surface should do everything, and that his suggestion of small modular parts is the direction GoFish takes.
-14. **GoTree, the data and the picture.** Existing. 0:15.
+16. **GoTree, the data and the picture.** Existing. 0:15.
     - Nested data, so it is not obvious where chart(data).flow(...) goes.
-15. **GoTree and gofish-gotree specs.** Existing. 0:20.
-16. **combine compiles to GoFish constraints.** Existing. 0:20, trimmed from 0:25.
-17. **Same core, three shapes of data.** Existing. 0:15.
+17. **GoTree and gofish-gotree specs.** Existing. 0:20.
+18. **combine compiles to GoFish constraints.** Existing. 0:20, trimmed from 0:25.
+19. **Same core, three shapes of data.** Existing. 0:15.
     - Low-level, tabular, and hierarchical surfaces on one core. GoTree keeps its own design and is one more level of the tree, which is McNutt's compile tower.
-18. **The surfaces work together.** New, picture only. 0:10.
+20. **The surfaces work together.** New, picture only. 0:10.
     - Figure 6 from the paper, the tree of bottle waffles. It uses all three surfaces in one graphic.
     - This answers the second angle, that the surfaces cannot be tied together.
 
@@ -119,10 +126,10 @@ Keep the reference to Jason at this high level. The details of his geometric dat
 
 #### 4b. Validity against freedom of arrangement (about 0:55)
 
-19. **Huang and Kay quote.** Existing. 0:15.
+21. **Huang and Kay quote.** Existing. 0:15.
     - Their section 6.4 question, with "which of these trade-offs are principled and which are merely incidental" highlighted.
     - Credit them for showing me that validity is important.
-20. **CanAdd.** Existing. 0:40, trimmed from 0:55.
+22. **CanAdd.** Existing. 0:40, trimmed from 0:55.
     - USD stacks, and degrees Celsius gives an error that suggests the fix.
     - It constrains specs, not pictures. Every picture is still reachable.
     - State my view plainly. I think this obstacle is incidental, and the type system that catches this error is small.
@@ -135,10 +142,10 @@ Leads into 4c with: "The third obstacle is about how big the language should be.
 
 A small core and an extensible core do not conflict. An extensible core can be small, as long as people extend it from within the language. The obstacle is the choice between a small language and a big one. Steele's answer is a language that can grow, and the tree slide shows what that looks like. GoFish has part of that answer.
 
-21. **Steele quote.** New. 0:15.
+23. **Steele quote.** New. 0:15.
     - "I should not design a small language, and I should not design a large one. I need to design a language that can grow." Steele, Growing a Language, 1998. This is the wording in the v3 draft, main.typ line 166. It was checked against Steele's text and is verbatim.
     - Tie it to part 1. A small core keeps the language small, and growing from within gives the big vocabulary that short specs need.
-22. **A language that grows is a tree.** Moved from part 2. 0:10.
+24. **A language that grows is a tree.** Moved from part 2. 0:10.
     - Open with the callback: "Earlier I asked whether we keep adding nouns forever. Here is the answer."
     - The left side is the same flat layer picture from part 2, drawn identically. The right side puts the same charts on intermediate words (chart, tree, diagram) built from a small core of marks and verbs.
     - The leaves are specific charts the audience has already seen. The population pyramid, GoTree silhouette tree, Sankey tree, and Bluefish pulley diagram are on the splash. The ribbon chart is from the crash course.
@@ -146,12 +153,12 @@ A small core and an extensible core do not conflict. An extensible core can be s
     - The line under the picture is "Build new structures from old ones with a small, stable set of verbs."
     - State the full thesis as the payoff.
     - If asked about "optimal" compression, the honest claim is that nested rules compress better than one flat layer. Grammar-based compression algorithms such as Sequitur work by building nested rules.
-23. **Where we are now.** Existing slides "where we are now" and "evidence so far", merged. 0:20.
+25. **Where we are now.** Existing slides "where we are now" and "evidence so far", merged. 0:20.
     - GoFish can grow from within at the chart level. GoTree and the chart templates are defined with the same verbs people use to build graphics.
     - Tie the limit to the word "fairly" in the thesis. The verbs are mostly stable, but layouts cannot grow from within yet. They are opaque plug-ins written outside the language, and adding one is the same "add a new primitive" move as in the grammar of graphics. The v3 draft points out the same problem for ggplot2, where extending it with ggproto means leaving the plot language for a package implementation interface.
     - The verbs are still a fixed set.
     - Marks reduce to simple primitives, and interfaces reduce to bounding boxes and boundary curves.
-24. **What is the lambda calculus of layout?** Existing. 0:20.
+26. **What is the lambda calculus of layout?** Existing. 0:20.
     - What is a small core where a new layout can be defined inside the language? This question is about removing the last case where you have to add a new primitive.
     - Say plainly that this is hard and that we are working on it.
 
@@ -159,7 +166,7 @@ Leads into part 5 with: "That is the question I would most like help with."
 
 ### 5. Questions for the panel (about 0:40)
 
-25. **Questions for the panel.** Existing. 0:40.
+27. **Questions for the panel.** Existing. 0:40.
     - What should the core of a GUGOG be?
     - How do our grammars build on each other? Libraries on libraries are a form of compression.
     - Is there a concrete case where checking validity forces you to give up a picture you would want?

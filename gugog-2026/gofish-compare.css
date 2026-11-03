@@ -112,17 +112,31 @@
   grid-area: core;
 }
 
-/* PiCCL bottles sit beside the title to leave room for two long specs. */
-.compare-head {
+/* The PiCCL bottle chart (03b): GoFish code on the left, the chart on the
+   right, as on the thesis deck's bottle slide. The code is 18.5px, larger
+   than the other code slides because it is the only spec here; the code
+   column takes the width its 60-character lines need. */
+.reveal .code-slide .bottle-split {
   align-items: center;
-  display: flex;
-  gap: 1rem;
-  justify-content: space-between;
+  gap: 1.2rem;
+  grid-template-columns: auto 1fr;
+  margin-top: 1.6rem;
 }
 
-.reveal .code-slide .compare-head img {
-  height: 92px;
+.reveal .code-slide .bottle-split pre {
+  font-size: 0.66em;
   margin: 0;
+  width: 100%;
+}
+
+.reveal .code-slide img.bottle-fig {
+  display: block;
+  margin: 0;
+  max-width: 100%;
+}
+
+.reveal .code-slide.bottle-slide .source-line {
+  margin-top: 1.4rem;
 }
 
 /* The punchline under the GoTree layering code. */
@@ -370,4 +384,65 @@
 
 .recap-planets > div {
   flex: none;
+}
+
+/* Grammar intro slides (03b): before each GoFish comparison, the other
+   grammar's own figures, as on the thesis deck's Atom and PiCCL intro
+   slides. White framed boxes, like the thesis deck's .piccl-figure. Atom's
+   two figures are wide, so they stack; PiCCL's sit side by side with the
+   teaser smaller, as in the thesis deck. */
+.grammar-intro-figs {
+  display: grid;
+  gap: 0.5rem;
+  justify-items: center;
+  margin-top: 0.4rem;
+}
+
+.grammar-intro-figs.grammar-intro-side {
+  align-items: center;
+  gap: 1.4rem;
+  grid-template-columns: 0.8fr 1.2fr;
+  margin-top: 1.2rem;
+}
+
+.grammar-intro-figs > div {
+  min-width: 0;
+}
+
+.reveal .grammar-intro-slide .code-pair-label {
+  text-align: center;
+}
+
+.reveal .grammar-intro-slide img.grammar-fig {
+  background: white;
+  border: 2px solid #27231f;
+  border-radius: 7px 10px 6px 9px;
+  box-shadow: 5px 6px 0 rgba(30, 30, 30, 0.11);
+  box-sizing: border-box;
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  object-fit: contain;
+  padding: 8px;
+}
+
+.reveal .grammar-intro-slide img.atom-teaser {
+  height: 210px;
+}
+
+.reveal .grammar-intro-slide img.atom-ops {
+  height: 250px;
+}
+
+.reveal .grammar-intro-slide img.piccl-teaser {
+  height: auto;
+  width: 100%;
+}
+
+.reveal .grammar-intro-slide img.piccl-ops {
+  height: 390px;
+}
+
+.reveal .grammar-intro-slide .source-line {
+  margin-top: 1em !important;
 }
