@@ -310,51 +310,33 @@ const seafoodRibbon = () =>
 // (The slides show both seafood specs with spacing and opacity elided.)
 
 // ─── Part 4b: validity against freedom of arrangement (CanAdd) ────────────
-// Two ordinary programs that differ only in the unit of "value". USD
-// declares Trait.summable(), so stack can add the amounts. °C does not, so
-// GoFish refuses to stack it; the slide shows the error it throws (see
-// data-expect-error in renderCharts). The numbers are illustrative.
-const sales = [
-  { month: "Jan", city: "Boston", value: 120 },
-  { month: "Jan", city: "Chicago", value: 95 },
-  { month: "Feb", city: "Boston", value: 135 },
-  { month: "Feb", city: "Chicago", value: 110 },
-  { month: "Mar", city: "Boston", value: 150 },
-  { month: "Mar", city: "Chicago", value: 128 },
+// One dataset with a temperature column and a USD column, and three steps of
+// one spec. With no schema, GoFish checks nothing and stacks the
+// temperatures. With a schema, °C has no CanAdd, so GoFish refuses to stack
+// "temp"; the slide shows the error it throws (see data-expect-error in
+// renderCharts). USD declares Trait.summable(), so stacking "usd" passes.
+// The numbers are illustrative.
+const cities = [
+  { month: "Jun", city: "Boston", temp: 21, usd: 120 },
+  { month: "Jun", city: "Chicago", temp: 22, usd: 95 },
+  { month: "Jul", city: "Boston", temp: 24, usd: 135 },
+  { month: "Jul", city: "Chicago", temp: 25, usd: 110 },
+  { month: "Aug", city: "Boston", temp: 23, usd: 150 },
+  { month: "Aug", city: "Chicago", temp: 24, usd: 128 },
 ];
 
-const temps = [
-  { month: "Jan", city: "Boston", value: -1 },
-  { month: "Jan", city: "Chicago", value: -4 },
-  { month: "Feb", city: "Boston", value: 0 },
-  { month: "Feb", city: "Chicago", value: -2 },
-  { month: "Mar", city: "Boston", value: 4 },
-  { month: "Mar", city: "Chicago", value: 4 },
-];
+const citiesSchema = {
+  temp: Unit("°C"),
+  usd: Unit("USD", { traits: [Trait.summable()] }),
+};
 
-const salesStacked = () =>
-  chart(sales, {
-    schema: {
-      value: Unit("USD", { traits: [Trait.summable()] }),
-    },
-  })
+const citiesStacked = (h: "temp" | "usd", schema?: typeof citiesSchema) => () =>
+  chart(cities, schema === undefined ? undefined : { schema })
     .flow(
       spread({ by: "month", dir: "x" }),
       stack({ by: "city", dir: "y" }),
     )
-    .mark(rect({ h: "value", fill: "city" }));
-
-const tempsStacked = () =>
-  chart(temps, {
-    schema: {
-      value: Unit("°C"),
-    },
-  })
-    .flow(
-      spread({ by: "month", dir: "x" }),
-      stack({ by: "city", dir: "y" }),
-    )
-    .mark(rect({ h: "value", fill: "city" }));
+    .mark(rect({ h, fill: "city" }));
 
 type Renderable = {
   render: (el: HTMLElement, options: Record<string, unknown>) => unknown;
@@ -368,8 +350,9 @@ const charts: Record<string, (fontSize: number) => Renderable> = {
   "planets-label": planetsLabeled,
   "seafood-stacked": seafoodStacked,
   "seafood-ribbon": seafoodRibbon,
-  "sales-stacked": salesStacked,
-  "temps-stacked": tempsStacked,
+  "canadd-untyped": citiesStacked("temp"),
+  "canadd-temp": citiesStacked("temp", citiesSchema),
+  "canadd-usd": citiesStacked("usd", citiesSchema),
 };
 
 export function renderCharts(root: ParentNode = document) {

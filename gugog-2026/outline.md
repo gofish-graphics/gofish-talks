@@ -129,8 +129,11 @@ Keep the reference to Jason at this high level. The details of his geometric dat
 21. **Huang and Kay quote.** Existing. 0:15.
     - Their section 6.4 question, with "which of these trade-offs are principled and which are merely incidental" highlighted.
     - Credit them for showing me that validity is important.
-22. **CanAdd.** Existing. 0:40, trimmed from 0:55.
-    - USD stacks, and degrees Celsius gives an error that suggests the fix.
+22. **CanAdd.** Existing, now three auto-animate steps of one spec. 0:40 in all, trimmed from 0:55 (0:10, 0:15, 0:15).
+    - One dataset has a temperature column and a USD column, and a few of its rows show on every step.
+    - Step 1 has no schema and stacks the temperatures. GoFish draws it, because without a schema it does not check anything. You can start untyped and add types later.
+    - Step 2 adds a schema with °C and summable USD. The same stack now gives GoFish's live error, which suggests the fix.
+    - Step 3 stacks USD in place of temperature, and it passes.
     - It constrains specs, not pictures. Every picture is still reachable.
     - State my view plainly. I think this obstacle is incidental, and the type system that catches this error is small.
     - State the limits. It is one operator and one property, and interactivity is not covered.

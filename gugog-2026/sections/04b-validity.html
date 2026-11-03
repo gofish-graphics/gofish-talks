@@ -73,85 +73,119 @@
           </aside>
         </section>
 
-        <section class="code-slide">
-          <p class="part">4b · Validity against freedom of arrangement</p>
-          <h2><code>stack</code> needs <code>CanAdd</code></h2>
-          <p class="canadd-tagline">constrains specs, not pictures</p>
-          <div class="canadd-pair">
-            <div>
-              <p class="code-pair-label">USD <span class="code-pair-sub">· declared summable: it stacks</span></p>
-              <div class="canadd-out" data-chart="sales-stacked" data-w="520" data-h="190" data-font-size="16"></div>
-              <pre><code class="language-ts" data-line-numbers data-char-marks="9:12-54">const sales = [
-  { month: "Jan", city: "Boston", value: 120 },
-  { month: "Jan", city: "Chicago", value: 95 },
+        <!-- CanAdd, in three auto-animate steps of one spec on one dataset:
+             no schema (GoFish checks nothing and stacks the temperatures),
+             a schema (°C has no CanAdd, so GoFish refuses), and "usd" in
+             place of "temp" (USD is summable, so it stacks). Each chart is
+             rendered live from ../charts.ts; the error on step 2 is the
+             message GoFish throws (data-expect-error). Code lines that do
+             not change are kept identical, so the code animates line by
+             line. -->
+        <section class="code-slide" data-auto-animate data-auto-animate-id="canadd">
+          <p class="part" data-id="canadd-part">4b · Validity against freedom of arrangement</p>
+          <h2 data-id="canadd-title"><code>stack</code> needs <code>CanAdd</code></h2>
+          <div class="canadd-grid">
+            <pre data-id="canadd-code"><code class="language-ts" data-line-numbers>const data = [
+  { month: "Jun", city: "Boston", temp: 21, usd: 120 },
+  { month: "Jun", city: "Chicago", temp: 22, usd: 95 },
+  { month: "Jul", city: "Boston", temp: 24, usd: 135 },
   ...
 ];
 
-chart(sales, {
-  schema: {
-    value: Unit("USD", { traits: [Trait.summable()] }),
-  },
-})
+chart(data)
   .flow(
     spread({ by: "month", dir: "x" }),
     stack({ by: "city", dir: "y" }),
   )
-  .mark(rect({ h: "value", fill: "city" }))</code></pre>
-            </div>
-            <div>
-              <p class="code-pair-label">°C <span class="code-pair-sub">· no CanAdd: GoFish refuses</span></p>
-              <!-- Runs tempsStacked() from ../charts.ts and shows the error
-                   GoFish throws (data-expect-error), not a chart. -->
-              <div class="canadd-out canadd-error-box" data-chart="temps-stacked" data-expect-error data-w="520" data-h="190"></div>
-              <pre><code class="language-ts" data-line-numbers data-char-marks="9:12-21">const temps = [
-  { month: "Jan", city: "Boston", value: -1 },
-  { month: "Jan", city: "Chicago", value: -4 },
-  ...
-];
-
-chart(temps, {
-  schema: {
-    value: Unit("°C"),
-  },
-})
-  .flow(
-    spread({ by: "month", dir: "x" }),
-    stack({ by: "city", dir: "y" }),
-  )
-  .mark(rect({ h: "value", fill: "city" }))</code></pre>
+  .mark(rect({ h: "temp", fill: "city" }))</code></pre>
+            <div class="canadd-right">
+              <p class="code-pair-label" data-id="canadd-label">no schema <span class="code-pair-sub">· nothing is checked: it stacks</span></p>
+              <div class="canadd-out" data-chart="canadd-untyped" data-w="460" data-h="300" data-font-size="16"></div>
             </div>
           </div>
-          <p class="canadd-footnote">Inspired by Bartonicek, Urbanek &amp; Murrell (JCGS 2025), Flint (Wang et al., VIS 2026), and Huang &amp; Kay (GUGOG 2026).</p>
+          <p class="canadd-footnote" data-id="canadd-footnote">Inspired by Bartonicek, Urbanek &amp; Murrell (JCGS 2025), Flint (Wang et al., VIS 2026), and Huang &amp; Kay (GUGOG 2026).</p>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:40 (trimmed from 0:55). <strong>Running total:</strong>
-              6:05 of 7:50.</p>
+            <p><strong>Target:</strong> 0:10 (of the slide's 0:40).
+              <strong>Running total:</strong> 5:35 of 7:50.</p>
             <ul>
               <li>Validity against freedom of arrangement: one data point on
                 Cynthia and Matt's open question.</li>
             </ul>
-            <p><strong>Say</strong> (about 0:40): "<code>stack</code> needs
-              values that add up. USD is declared summable, so it stacks.
-              Degrees Celsius has no <code>CanAdd</code>, so the same chart
-              gives an error that suggests the fix: average them instead.
-              This constrains specs, not pictures. Every picture is still
-              reachable. My view is that this obstacle is incidental, and the
-              type system that catches this error is small. The limits: this
-              is one operator and one property, and interactivity is not
-              covered."</p>
+            <p><strong>Say:</strong> "Here is one dataset with a temperature
+              and a dollar amount for each city and month. This spec stacks
+              the temperatures. GoFish draws it, but the picture means
+              nothing, because temperatures do not add up. There is no schema
+              here, so GoFish does not check anything. You can start untyped
+              and add types later."</p>
+            <p>The chart is live. Without a schema, a column has no declared
+              unit, and GoFish lets it pass. In the GoFish source this is
+              <code>addsUp</code> in <code>src/ast/measure.ts</code>
+              (origin/main), whose comment calls it gradual typing: a
+              quantity with no declared unit adds up, because what its unit
+              can do is unknown. It was checked live on the deck's nightly
+              (0.1.0-nightly.20261031), and the newest nightly
+              (20261103) has the same check.</p>
+            <p>The data is illustrative: made-up summer temperatures and
+              monthly sales for two cities. The temperatures are all above
+              zero, so the stacked picture looks ordinary. The rows after the
+              first three are elided as <code>...</code>; the live render
+              uses all six rows (<code>../charts.ts</code>).</p>
+          </aside>
+        </section>
+
+        <section class="code-slide" data-auto-animate data-auto-animate-id="canadd">
+          <p class="part" data-id="canadd-part">4b · Validity against freedom of arrangement</p>
+          <h2 data-id="canadd-title"><code>stack</code> needs <code>CanAdd</code></h2>
+          <div class="canadd-grid">
+            <pre data-id="canadd-code"><code class="language-ts" data-line-numbers data-char-marks="8:11-13, 9:3-11, 10:5-21, 11:5-53, 12:3-4, 13:1-2">const data = [
+  { month: "Jun", city: "Boston", temp: 21, usd: 120 },
+  { month: "Jun", city: "Chicago", temp: 22, usd: 95 },
+  { month: "Jul", city: "Boston", temp: 24, usd: 135 },
+  ...
+];
+
+chart(data, {
+  schema: {
+    temp: Unit("°C"),
+    usd: Unit("USD", { traits: [Trait.summable()] }),
+  },
+})
+  .flow(
+    spread({ by: "month", dir: "x" }),
+    stack({ by: "city", dir: "y" }),
+  )
+  .mark(rect({ h: "temp", fill: "city" }))</code></pre>
+            <div class="canadd-right">
+              <p class="code-pair-label" data-id="canadd-label">°C <span class="code-pair-sub">· no CanAdd: GoFish refuses</span></p>
+              <!-- Runs the spec on the left and shows the error GoFish
+                   throws (data-expect-error), not a chart. -->
+              <div class="canadd-out canadd-error-box" data-chart="canadd-temp" data-expect-error data-w="460" data-h="300"></div>
+            </div>
+          </div>
+          <p class="canadd-footnote" data-id="canadd-footnote">Inspired by Bartonicek, Urbanek &amp; Murrell (JCGS 2025), Flint (Wang et al., VIS 2026), and Huang &amp; Kay (GUGOG 2026).</p>
+          <aside class="notes">
+            <p><strong>Target:</strong> 0:15 (of the slide's 0:40).
+              <strong>Running total:</strong> 5:50 of 7:50.</p>
+            <p><strong>Say:</strong> "Now add a schema. Degrees Celsius is a
+              plain unit, and US dollars are declared summable. The same
+              stack now gives an error, because degrees Celsius has no
+              <code>CanAdd</code>. The error suggests the fix: average them
+              instead."</p>
             <p>If there is spare time: to stack °C you either declare the unit
               summable, which is a deliberate claim about your data, or you
               stack the means. The only thing it takes away is stacking
               numbers whose sums mean nothing.</p>
-            <p><strong>For Q&amp;A or the panel, not the slides:</strong> the
-              same type information covers the unit aspect ratio case in
-              Jason Brunson's GUGOG paper, where biplots and point clouds need
-              one unit on x to equal one unit on y. GoFish tracks at the type level whether two axes have the
-              same type, and if they do, it uses the same scale for both by
-              default.</p>
-            <p><strong>Lead into 4c:</strong> "The third obstacle is about how
-              big the language should be. It seems that a language has to be
-              either small, with long specs, or big, with a short spec for
-              every chart. It is the one I have only partly solved."</p>
+            <p>The highlights mark what changed: the schema is new, and
+              nothing else in the spec moved.</p>
+            <p>The error is not typed in: the slide runs this spec live and
+              prints the message GoFish throws. It is
+              <code>checkSummable</code>'s error in
+              <code>src/ast/measure.ts</code> (origin/main): "A size channel
+              sums the column "temp", in the unit "°C", which cannot be
+              summed: it has no CanAdd. If its amounts add up (money, counts,
+              lengths), declare it with Unit("°C", { traits:
+              [Trait.summable()] }). If they do not (temperatures, prices,
+              rates), average them instead, e.g. field("temp").mean()."</p>
             <p><strong>Fair framing:</strong></p>
             <ul>
               <li>This is the idea Cynthia and Matt call Error Friction (their
@@ -164,6 +198,52 @@ chart(temps, {
                 combinations, such as stacking of group means". A
                 <code>.mean()</code> result is not summable, so
                 <code>stack</code> refuses it.</li>
+            </ul>
+          </aside>
+        </section>
+
+        <section class="code-slide" data-auto-animate data-auto-animate-id="canadd">
+          <p class="part" data-id="canadd-part">4b · Validity against freedom of arrangement</p>
+          <h2 data-id="canadd-title"><code>stack</code> needs <code>CanAdd</code></h2>
+          <div class="canadd-grid">
+            <pre data-id="canadd-code"><code class="language-ts" data-line-numbers data-char-marks="18:19-23">const data = [
+  { month: "Jun", city: "Boston", temp: 21, usd: 120 },
+  { month: "Jun", city: "Chicago", temp: 22, usd: 95 },
+  { month: "Jul", city: "Boston", temp: 24, usd: 135 },
+  ...
+];
+
+chart(data, {
+  schema: {
+    temp: Unit("°C"),
+    usd: Unit("USD", { traits: [Trait.summable()] }),
+  },
+})
+  .flow(
+    spread({ by: "month", dir: "x" }),
+    stack({ by: "city", dir: "y" }),
+  )
+  .mark(rect({ h: "usd", fill: "city" }))</code></pre>
+            <div class="canadd-right">
+              <p class="code-pair-label" data-id="canadd-label">USD <span class="code-pair-sub">· declared summable: it stacks</span></p>
+              <div class="canadd-out" data-chart="canadd-usd" data-w="460" data-h="300" data-font-size="16"></div>
+              <p class="canadd-tagline">constrains specs, not pictures</p>
+            </div>
+          </div>
+          <p class="canadd-footnote" data-id="canadd-footnote">Inspired by Bartonicek, Urbanek &amp; Murrell (JCGS 2025), Flint (Wang et al., VIS 2026), and Huang &amp; Kay (GUGOG 2026).</p>
+          <aside class="notes">
+            <p><strong>Target:</strong> 0:15 (of the slide's 0:40).
+              <strong>Running total:</strong> 6:05 of 7:50.</p>
+            <p><strong>Say:</strong> "Stack the dollars instead, and it
+              works. This constrains specs, not pictures. Every picture is
+              still reachable. My view is that this obstacle is incidental,
+              and the type system that catches this error is small. The
+              limits: this is one operator and one property, and
+              interactivity is not covered."</p>
+            <p>The highlight marks what changed: <code>"temp"</code> became
+              <code>"usd"</code>.</p>
+            <p><strong>Fair framing:</strong></p>
+            <ul>
               <li>Limits, said plainly: this is one operator and one property.
                 Bartonicek et al.'s actual setting, linked highlighting in
                 interactive graphics, is not addressed here. "I haven't found
@@ -172,26 +252,25 @@ chart(temps, {
                 and complementary" (section 5.1). CanAdd is offered in that
                 spirit, as one mechanism that bears on their question.</li>
             </ul>
-            <p>The error on the right is not typed in: the slide runs the °C
-              spec live and prints the message GoFish throws. It is
-              <code>checkSummable</code>'s error in
-              <code>src/ast/measure.ts</code> (origin/main, lines 155 to 161):
-              "... which cannot be summed: it has no CanAdd. If its amounts add
-              up (money, counts, lengths), declare it with Unit(...,
-              { traits: [Trait.summable()] }). If they do not (temperatures,
-              prices, rates), average them instead ...".</p>
+            <p><strong>For Q&amp;A or the panel, not the slides:</strong> the
+              same type information covers the unit aspect ratio case in
+              Jason Brunson's GUGOG paper, where biplots and point clouds need
+              one unit on x to equal one unit on y. GoFish tracks at the type level whether two axes have the
+              same type, and if they do, it uses the same scale for both by
+              default.</p>
+            <p><strong>Lead into 4c:</strong> "The third obstacle is about how
+              big the language should be. It seems that a language has to be
+              either small, with long specs, or big, with a short spec for
+              every chart. It is the one I have only partly solved."</p>
             <p><strong>Source:</strong> written for this slide, after the
               GoFish repo's CanAdd test
               (<code>packages/gofish-graphics/src/tests/measure.test.ts</code>,
               "CanAdd: only amounts that add up are summed"), which stacks a
               <code>Unit("USD", { traits: [Trait.summable()] })</code> column
-              and a <code>Unit("°C")</code> column the same way. The two specs
-              here are ordinary programs and differ only in the unit line
-              (highlighted) and their data. The data is illustrative: made-up
-              monthly sales and average temperatures for two cities. The data
-              rows after the first two are elided as <code>...</code>; the
-              live render uses all six rows (<code>../charts.ts</code>). The
-              type itself is <code>export type CanAdd = Record&lt;string,
+              and a <code>Unit("°C")</code> column the same way. The three
+              steps are one ordinary program. Step 2 adds the schema, and
+              step 3 changes only the stacked column. The type itself is
+              <code>export type CanAdd = Record&lt;string,
               never&gt;;</code> in <code>src/ast/schema.ts</code>: "The class
               of a unit whose amounts can be added".</p>
             <p><strong>Footnote citations:</strong></p>

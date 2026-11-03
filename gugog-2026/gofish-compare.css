@@ -247,22 +247,24 @@
   margin-top: 3.2rem;
 }
 
-/* The CanAdd slide (04b): two standalone specs, each under what it
-   produces. USD renders a chart; °C shows the error GoFish throws, in the
-   same box, where the chart would be. */
-.canadd-pair {
+/* The CanAdd slides (04b): one spec on the left, in three auto-animate
+   steps, and on the right what it produces. A chart renders, or, on the
+   °C step, the error GoFish throws, in the same box. */
+.canadd-grid {
+  align-items: start;
   display: grid;
-  gap: 0 1.1rem;
-  grid-template-columns: 1fr 1fr;
-  margin-top: 0.2rem;
+  gap: 0 1.4rem;
+  grid-template-columns: auto 1fr;
+  margin-top: 0.4rem;
+  min-height: 470px;
 }
 
-.reveal .code-slide .canadd-pair pre {
-  font-size: 0.57em;
+.reveal .code-slide .canadd-grid pre {
+  font-size: 0.7em;
   margin: 0;
 }
 
-.reveal .code-slide .canadd-pair pre code {
+.reveal .code-slide .canadd-grid pre code {
   line-height: 1.2;
   max-height: none;
 }
@@ -270,7 +272,7 @@
 .canadd-out {
   align-items: center;
   display: flex;
-  height: 190px;
+  height: 300px;
   justify-content: center;
   margin-bottom: 0.35rem;
 }
@@ -299,7 +301,7 @@
   color: var(--muted);
   font-size: 0.55em;
   font-style: italic;
-  margin: -0.3rem 0 0.1rem;
+  margin: 0.3rem 0 0;
   text-align: center;
 }
 
