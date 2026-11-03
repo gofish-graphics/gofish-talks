@@ -188,39 +188,25 @@
             <div>
               <p><strong>not yet</strong></p>
               <ul>
-                <li>Layouts are added from outside the language.</li>
-                <li>The verbs are a fixed set.</li>
+                <li>Our verbs are a typology of operators.</li>
               </ul>
             </div>
           </div>
-          <p style="margin-top: 1em"><strong>Open question:</strong> what
-            composition mechanisms belong at the core of a truly universal,
-            extensible grammar of graphics?</p>
+          <p style="margin-top: 1em"><strong>The next cliff:</strong> a
+            layout language more expressive than a fixed set of
+            operators.</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:25. <strong>Running total:</strong>
               6:55 of 7:35.</p>
-            <ul>
-              <li><strong>So far:</strong> GoFish can grow from within at the
-                chart level. GoTree and the chart templates are defined with
-                the same verbs people use to build graphics. Marks reduce to
-                simple primitives, and interfaces reduce to bounding boxes and
-                boundary curves. So the core can be small.</li>
-              <li><strong>Not yet:</strong> layouts are still added from
-                outside the language. Adding one is the same "add a new
-                primitive" move from part 2. The v3 draft points out the same
-                problem for ggplot2, where extending it with ggproto means
-                leaving the plot language for a package implementation
-                interface.</li>
-              <li>The verbs are mostly stable, which is why the thesis says
-                "fairly stable", but they are still a fixed set.</li>
-              <li><strong>The open question:</strong> both gaps are part of a
-                bigger question. I want a truly universal, extensible grammar
-                of graphics whose essence is its composition mechanisms. Which
-                mechanisms belong at its core? Defining new layouts from within
-                the language is one part of that question.</li>
-            </ul>
-            <p><strong>Lead into part 5:</strong> "That is the question I
-              would most like help with."</p>
+            <p>"We replaced a typology of charts with a grammar. But our verbs,
+              like spread, stack, and relate, are themselves a typology, a
+              typology of operators. When you need a layout that is not in the
+              set, you hit the next cliff. Today you add it from outside the
+              language, which is the same add-a-new-primitive move from part
+              2."</p>
+            <p>"I think the way past it is a layout or constraint language
+              that is more expressive than what we have now. That is the
+              question I would most like help with."</p>
             <p>Merged from the old "where we are now" and "evidence so far"
               slides. Points from those slides that are left out, for Q&amp;A:
               traits keep the types smaller than they look, and the type
