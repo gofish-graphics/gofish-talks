@@ -178,13 +178,15 @@
           <p class="part">1 · Compression is the yardstick</p>
           <h2>a good grammar is a good compression</h2>
           <!-- Live GoFish charts, drawn by renderCharts() in ../charts.ts.
-               The two charts are stacked. The first has the two naive
-               designs. The second adds the good grammar and fades in on top
-               as a fragment; its other lines land on the first chart's. -->
+               The two charts are stacked. Each has three panels: the usage
+               curve, the size of the language, and the length of each spec.
+               The first has the two naive designs. The second adds the good
+               grammar and fades in on top as a fragment; its usage panel and
+               other lines land on the first chart's. -->
           <div class="r-stack" style="margin-top: 0.3em">
-            <div data-chart="compression-naive" data-w="1100" data-h="460" data-font-size="26"
+            <div data-chart="compression-naive" data-w="1180" data-h="440" data-font-size="24"
               style="display: flex; justify-content: center"></div>
-            <div class="fragment" data-chart="compression" data-w="1100" data-h="460" data-font-size="26"
+            <div class="fragment" data-chart="compression" data-w="1180" data-h="440" data-font-size="24"
               style="display: flex; justify-content: center; background: var(--paper)"></div>
           </div>
           <p class="big-claim fragment" style="margin-top: 0.3em">What are the obstacles to doing this compression?</p>
@@ -192,15 +194,17 @@
             <p><strong>Target:</strong> 0:25. <strong>Running total:</strong>
               1:30 of 7:50.</p>
             <ul>
-              <li>Both panels use the same x axis as the usage curve: simple,
-                common charts on the left and complex tail charts on the
-                right. The left panel is how big the language has to be to
+              <li>All three panels share one x axis: simple, common charts
+                on the left and complex tail charts on the right. The left
+                panel is the usage curve again. Most charts made are the
+                simple ones on the left, so the cost on the left counts
+                most. The middle panel is how big the language has to be to
                 reach those charts. The right panel is how long the spec for
                 one of those charts is.</li>
               <li>The blue line is a chart typology like seaborn, with one
                 function per chart type. Its specs stay short, so it is flat
                 in the right panel. But it needs a new function for every chart in
-                the tail, so it climbs steeply in the left panel.</li>
+                the tail, so it climbs steeply in the middle panel.</li>
               <li>The grey line is a low-level toolkit like d3. Its language
                 is tiny and stays flat. But its specs are long even for a bar
                 chart, and they get longer fast as charts get more

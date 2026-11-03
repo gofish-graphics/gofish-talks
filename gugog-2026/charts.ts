@@ -79,8 +79,12 @@ const axisLines = [
   { axis: "y", end: 1, x: 0, y: 1.08 },
 ];
 
-function usageCurve(fontSize: number) {
-  const plot = layer([
+// The plot alone: the filled curve, its axes, and the labels. The usage
+// curve slide draws it large with both labels. The compression slide draws
+// it small as its left panel, with only the head's label, since the tail's
+// label is too wide for that panel.
+function usagePlot(notes: typeof curveNotes, fontSize: number) {
+  return layer([
     chart(curveParts, {
       axes: false,
       color: Color.palette({ head: ACCENT, tail: TAIL }),
@@ -93,10 +97,14 @@ function usageCurve(fontSize: number) {
     chart(axisLines, { axes: false })
       .flow(group({ by: "axis" }), scatter({ by: "end", x: "x", y: "y" }))
       .mark(line({ stroke: INK, strokeWidth: 2.5 })),
-    chart(curveNotes, { axes: false })
+    chart(notes, { axes: false })
       .flow(scatter({ by: "note", x: "x", y: "y" }))
       .mark(text({ text: "note", fill: "color", fontSize, fontFamily: FONT })),
   ]);
+}
+
+function usageCurve(fontSize: number) {
+  const plot = usagePlot(curveNotes, fontSize);
 
   // Axis titles in words. The axes have no numbers on purpose.
   return spread({ dir: "x", spacing: 12, alignment: "middle" }, [
@@ -113,10 +121,12 @@ function usageCurve(fontSize: number) {
 }
 
 // ─── A good grammar is a good compression ─────────────────────────────────
-// Two panels that share the usage curve's x axis, how complex the chart is.
-// The left panel is the size of the language you need to reach charts up to
-// that complexity. The right panel is the length of the spec for one chart
-// of that complexity. Each panel has a line for each of three designs:
+// Three panels that share the usage curve's x axis, how complex the chart is.
+// The left panel is the usage curve itself, small: how often each chart is
+// made. The middle panel is the size of the language you need to reach
+// charts up to that complexity. The right panel is the length of the spec
+// for one chart of that complexity. The middle and right panels have a line
+// for each of three designs:
 //   - a chart typology (seaborn): the language grows with every tail chart,
 //     but each spec stays short;
 //   - a low-level toolkit (d3): a tiny language, but specs are long even for
@@ -125,7 +135,7 @@ function usageCurve(fontSize: number) {
 //     grow slowly.
 // The slide draws the chart twice, stacked: first without the good grammar,
 // then with it as a fragment on top. Both use the same fixed axes, so the
-// shared lines land in the same place.
+// shared lines, and the whole usage panel, land in the same place.
 const TYPOLOGY = BLUE;
 const TOOLKIT = MUTED;
 const GRAMMAR = ACCENT;
@@ -167,6 +177,17 @@ const costNotes: Record<"language" | "spec", { design: Design; note: string; x: 
   ],
 };
 
+// The usage panel's one label, moved right of where the big slide puts it
+// so it stays inside the narrower panel.
+const usagePanelNotes = [{ ...curveNotes[0], x: 0.36 }];
+
+function usagePanel(fontSize: number) {
+  return spread({ dir: "y", spacing: 10, alignment: "middle" }, [
+    words("how often it gets made", fontSize),
+    usagePlot(usagePanelNotes, fontSize * 0.8),
+  ]);
+}
+
 function costPanel(
   panel: "language" | "spec",
   title: string,
@@ -195,6 +216,7 @@ function costPanel(
 const compressionChart = (designs: Design[]) => (fontSize: number) =>
   spread({ dir: "y", spacing: 10, alignment: "middle" }, [
     spread({ dir: "x", spacing: fontSize * 2.5, alignment: "end" }, [
+      usagePanel(fontSize),
       costPanel("language", "size of the language", designs, fontSize),
       costPanel("spec", "length of each spec", designs, fontSize),
     ]),
