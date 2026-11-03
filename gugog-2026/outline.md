@@ -119,7 +119,7 @@ Leads into 4c with: "The third tension is about how big the language should be, 
 A small core and an extensible core are not in tension. An extensible core can be small, as long as people extend it from within the language. The tension is between a small language and a big one, and growing from within is the answer to it. GoFish has part of that answer.
 
 20. **Steele quote.** New. 0:15.
-    - "I should not design a small language, and I should not design a large one. I need to design a language that can grow." Steele, Growing a Language, 1998. This is the wording in the v3 draft, main.typ line 166. Check it against Steele's text before the talk.
+    - "I should not design a small language, and I should not design a large one. I need to design a language that can grow." Steele, Growing a Language, 1998. This is the wording in the v3 draft, main.typ line 166. It was checked against Steele's text and is verbatim.
     - Tie it to part 1. A small core keeps the language small, and growing from within gives the big vocabulary that short specs need.
 21. **Where we are now.** Existing slides "where we are now" and "evidence so far", merged. 0:20.
     - GoFish can grow from within at the chart level. GoTree and the chart templates are defined with the same verbs people use to build graphics.
