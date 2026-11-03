@@ -14,7 +14,7 @@ In the traditional grammar of graphics, the only way to grow the language is to 
 
 - Part 1 opens on concrete charts. The usage curve and the two grammars pictures then make the opening argument. The grammar of graphics gave the common charts one shared language, while the long tail has many grammars that are hard to compare. Part 1 ends by asking whether a shared kernel exists, and I say that I think one does, though it may not look like the grammar of graphics. It then sets up compression as the yardstick for the whole talk. It ends with the question for the talk: "What are the obstacles to doing this compression?"
 - Part 2 names the first obstacle in the grammar of graphics, and it begins the answer to how the kernel differs from the grammar of graphics we are used to. It has nouns but almost no verbs, so it is one flat layer, and the only way to grow it is to add a new primitive. The thesis is stated here briefly, in one or two sentences, and not argued.
-- Part 3 shows verbs working, first inside GoFish and then across other grammars.
+- Part 3, "Grammars in one language", shows verbs working, first inside GoFish and then across other grammars written in GoFish. It does not mention the tree, which is first shown in 4c.
 - Part 4 takes three more obstacles in turn. The first two are disputed with evidence. The third is answered by the tree slide, which comes back to the flat layer from part 2 and states the full thesis. What is still missing is admitted as open.
 - Part 5 hands the open questions to the panel.
 
@@ -72,7 +72,7 @@ The thesis is stated here briefly and is not argued. The full argument comes at 
 
 Leads into part 3 with the crash course, which states the second half of the thesis when GoFish's verbs are introduced.
 
-### 3. The tree in practice (about 1:15)
+### 3. Grammars in one language (about 1:15)
 
 9. **Crash course, three steps.** Existing. 0:30 in total.
    - GoFish's verbs are introduced here. Say the second half of the thesis once, plainly: "In a language with verbs, you can build new structures from old ones, using a fairly stable set of composition mechanisms."
@@ -81,7 +81,7 @@ Leads into part 3 with the crash course, which states the second half of the the
    - Say that these are two surfaces on one core.
 10. **Atom's gridxy is GoFish's spread.** Existing. 0:20.
 11. **PiCCL lines up with GoFish.** Existing. 0:25.
-    - Atom and PiCCL fit into the same tree. Written in one language, they share most of their structure, and the differences are small parts you can point to.
+    - Atom and PiCCL can be written in one language. Written that way, they share most of their structure, and the differences are small parts you can point to.
 
 Leads into part 4 with: "So unifying grammars compresses them. But three things seem to stand in the way of that compression, and I want to take them one at a time."
 
@@ -140,7 +140,7 @@ A small core and an extensible core do not conflict. An extensible core can be s
 22. **A language that grows is a tree.** Moved from part 2. 0:10.
     - Open with the callback: "Earlier I asked whether we keep adding nouns forever. Here is the answer."
     - The left side is the same flat layer picture from part 2, drawn identically. The right side puts the same charts on intermediate words (chart, tree, diagram) built from a small core of marks and verbs.
-    - The leaves are specific charts the audience has already seen. The population pyramid, GoTree silhouette tree, Sankey tree, and point labels avoiding a trend line are on the splash. The ribbon chart is from the crash course.
+    - The leaves are specific charts the audience has already seen. The population pyramid, GoTree silhouette tree, Sankey tree, and Bluefish pulley diagram are on the splash. The ribbon chart is from the crash course.
     - A faded fourth middle node with "..." and faded "..." leaves show that the middle is not a closed set of three kinds. New levels and new grammars can keep being added.
     - The line under the picture is "Build new structures from old ones with a small, stable set of verbs."
     - State the full thesis as the payoff.
@@ -170,7 +170,7 @@ Leads into part 5 with: "That is the question I would most like help with."
 | --- | --- |
 | 1. Opening: compression is the yardstick | 1:30 |
 | 2. The grammar of graphics needs verbs | 0:35 |
-| 3. The tree in practice | 1:15 |
+| 3. Grammars in one language | 1:15 |
 | 4. Three obstacles, including the optional overview slide | 3:50 |
 | 5. Questions for the panel | 0:40 |
 | Total | 7:50 |
@@ -215,7 +215,7 @@ To reach 7:00, the first candidates are these:
 - New section titles:
   - "Compression is the yardstick"
   - "The grammar of graphics needs verbs"
-  - "The tree in practice"
+  - "Grammars in one language"
   - "Three obstacles"
   - "Many surfaces against one language"
   - "Validity against freedom of arrangement"
