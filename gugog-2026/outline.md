@@ -145,11 +145,12 @@ The objection to 4a's answer: this much extensibility and expressiveness seems t
     - Their section 6.4 question, with "which of these trade-offs are principled and which are merely incidental" highlighted.
     - Lead in with the objection: if anyone can grow the language, it seems the language can no longer check that a picture means something. Cynthia and Matt state the general version of this tradeoff.
     - Credit them for showing me that validity is important.
-23. **CanAdd.** Existing, three auto-animate steps of one spec. 0:40 in all (0:10, 0:15, 0:15).
+23. **CanAdd.** Existing, four auto-animate steps of one spec, with one change per click. 0:40 in all (0:10, 0:10, 0:05, 0:15).
     - One dataset has a temperature column and a USD column, and a few of its rows show on every step.
     - Step 1 has no schema and stacks the temperatures. GoFish draws it, because without a schema it does not check anything. You can start untyped and add types later.
-    - Step 2 adds a schema with °C and summable USD. The same stack now gives GoFish's live error, which suggests the fix.
-    - Step 3 stacks USD in place of temperature, and it passes.
+    - Step 2 adds a schema with °C and summable USD. Only the code changes, and the untyped chart stays, because nothing has been run again yet.
+    - Step 3 has the same code. Only the output changes: the same stack now gives GoFish's live error, which suggests the fix.
+    - Step 4 stacks USD in place of temperature, and it passes. The code changes first, and then the output.
     - It constrains specs, not pictures. Every picture is still reachable.
     - State my view plainly. I think growth does not have to cost safety: a type system brings it back, and the one that catches this error is small.
     - State the limits. It is one operator and one property, and interactivity is not covered.
@@ -194,7 +195,7 @@ Leads into part 5 with: "That is the question I would most like help with."
 
 In part 1, the grammars picture and the tangle take the 0:30 that "from I to we" had. The compression bars grew from 0:25 to 0:35, so part 1 is now 1:40. The running totals in the opening are 0:15 after the splash, 0:35 after the usage curve, 0:50 after the grammars picture, 1:05 after the tangle, and 1:40 after the compression bars.
 
-Part 4 lost its old overview slide, which saves 0:10. Merging the old 4a and 4c moves slides but changes no slide's target. The running totals in every section file now agree, and all of them end at 7:35. Part 4 starts at 3:30, and its running totals are 3:45 after Steele, 4:00 after McNutt, 4:10 after the tree, 4:25, 4:45, 5:05, and 5:20 after the four GoTree slides, 5:35 after Figure 6 and the bridge line, 5:50 after Huang and Kay, 6:00, 6:15, and 6:30 after the three CanAdd steps, and 6:55 after "where we are now". The panel ends at 7:35.
+Part 4 lost its old overview slide, which saves 0:10. Merging the old 4a and 4c moves slides but changes no slide's target. The running totals in every section file now agree, and all of them end at 7:35. Part 4 starts at 3:30, and its running totals are 3:45 after Steele, 4:00 after McNutt, 4:10 after the tree, 4:25, 4:45, 5:05, and 5:20 after the four GoTree slides, 5:35 after Figure 6 and the bridge line, 5:50 after Huang and Kay, 6:00, 6:10, 6:15, and 6:30 after the four CanAdd steps, and 6:55 after "where we are now". The panel ends at 7:35.
 
 The deck used to run 9:20. Most of the savings come from these changes:
 
