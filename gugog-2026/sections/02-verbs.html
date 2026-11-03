@@ -1,13 +1,18 @@
-        <!-- ═══ PART 2: THE GRAMMAR OF GRAPHICS NEEDS VERBS, ~0:35 ══════
-             The "Data, Marks, Channels, Coordinates" slide from the thesis
+        <!-- ═══ PART 3: THE GRAMMAR OF GRAPHICS NEEDS VERBS, ~1:15 ══════
+             Part 3 runs over three files: this one (the verbs slide), the
+             crash course (03-gofish-intro.html), and Atom and PiCCL
+             (03b-code-comparisons.html). The islands from part 2 share
+             operators, not more nouns, so the grammar of graphics needs
+             verbs. This is where the title lands.
+             The "Data, Marks, Channels, Coordinates" slide is from the thesis
              defense deck
              (phd-thesis-20260618/presentation/sections/03-gofish.html),
-             shortened to 0:15: all four columns show at once, and the closing
-             line is the only build step. Its CSS is in ../style.css. Then
-             the flat layer slide. The hierarchy slide that used to follow is
-             now in 4a (04a-big-or-small.html). -->
+             shortened: all four columns show at once, and the closing line
+             is the only build step. Its CSS is in ../style.css. The flat
+             layer slide after it is hidden. The hierarchy slide is in 4a
+             (04a-domain-design.html). -->
 <section class="gog-concepts-slide">
-          <p class="part">2 · The grammar of graphics needs verbs</p>
+          <p class="part">3 · The grammar of graphics needs verbs</p>
           <h2>Data, Marks, Channels, Coordinates</h2>
           <div class="gog-concepts-grid">
             <div>
@@ -64,33 +69,44 @@
           </div>
           <p class="big-claim fragment">A rich set of nouns, but almost no verbs.</p>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
-              1:55 of 7:35.</p>
+            <p><strong>Target:</strong> 0:20 (was 0:15; it now states the
+              first half of the thesis). <strong>Running total:</strong>
+              1:55 of 7:00.</p>
             <p>All four columns appear at once. The closing line is the one
               click on this slide.</p>
             <ul>
-              <li>The grammar of graphics is the usual answer for the middle
-                of the usage curve. Its vocabulary is data, marks, channels,
-                and coordinates: a rich set of nouns.</li>
-              <li>It has almost no verbs. Verbs are composition operators,
-                and with them you can build new structures from old ones. The
-                next slide shows what happens to the compression without
-                them.</li>
+              <li>If we compress the islands, what do they share? Not more
+                nouns. What they share is operators: ways to arrange and
+                combine marks, like Atom's layouts and PiCCL's compositing,
+                which we will see in a minute.</li>
+              <li>The grammar of graphics has a rich set of nouns: data,
+                marks, channels, and coordinates.</li>
               <li>Click for the line: "A rich set of nouns, but almost no
-                verbs."</li>
+                verbs." Verbs are composition operators. With them you can
+                build new structures from old ones.</li>
+              <li><strong>Say the first half of the thesis:</strong> "In the
+                traditional grammar of graphics, the only way to grow the
+                language is to add a new primitive. That is what happens past
+                the cliff. So the grammar of graphics needs verbs."</li>
             </ul>
+            <p><strong>Lead into the crash course:</strong> "Here is what
+              verbs look like."</p>
             <p>The data table is the seafood catch table that the crash
-              course in part 3 draws from, one row per lake and species with
-              a count. There is no time to say so; it is there so the table
-              looks familiar later.</p>
+              course draws from, one row per lake and species with a count.
+              There is no time to say so; it is there so the table looks
+              familiar later.</p>
             <p>Shortened from the thesis deck's 1:30 version, which built up
               the columns one at a time and talked through Munzner's channel
               ranking and Thompson's transformation.</p>
           </aside>
         </section>
 
-        <!-- The grammar of graphics as one flat layer of nouns. This is the
-             left half of the hierarchy slide in 4a (04a-big-or-small.html),
+        <!-- Hidden: the compression chart's grammar of graphics line and its
+             cliff now make this slide's point, and the verbs slide before it
+             states the first half of the thesis. Remove
+             data-visibility="hidden" to bring it back.
+             The grammar of graphics as one flat layer of nouns. This is the
+             left half of the hierarchy slide in 4a (04a-domain-design.html),
              drawn identically so the audience recognizes it there. It is an
              icicle of two rows: specific charts on top, and one flat row of
              nouns under all of them. The charts are the population pyramid,
@@ -106,7 +122,7 @@
              croissant, by exactly the croissant's width. The left half of the
              hierarchy slide is a copy of this SVG apart from the build step,
              so edit the two together. -->
-        <section class="flat-slide">
+        <section class="flat-slide" data-visibility="hidden">
           <style>
             .reveal svg.flat-vs-hierarchy {
               display: block;
@@ -120,7 +136,7 @@
               text-align: center;
             }
           </style>
-          <p class="part">2 · The grammar of graphics needs verbs</p>
+          <p class="part">3 · The grammar of graphics needs verbs</p>
           <h2>the grammar of graphics is one flat layer of nouns</h2>
           <svg class="flat-vs-hierarchy" viewBox="-2 56 894 220" role="img" aria-label="Five specific charts, a population pyramid, a ribbon chart, a GoTree silhouette tree, a Sankey tree, and a Bluefish pulley diagram, sit side by side directly on one flat row of nouns. The row holds marks, encoding channels, coordinate transforms, and a faded slot for more. In the build step, a croissant chart joins the charts, and the row grows under it by a new geom and a new coordinate system.">
             <rect x="0" y="66" width="98" height="98" rx="7" fill="#fff" stroke="#27231f" stroke-width="2"/>
@@ -154,8 +170,12 @@
           </svg>
           <p class="flat-vs-hierarchy-line fragment" data-fragment-index="1">A fixed set of nouns gives a finite number of combinations. Do we keep adding nouns forever?</p>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:20. <strong>Running total:</strong>
-              2:15 of 7:35.</p>
+            <p><strong>Hidden.</strong> The compression chart's grammar of
+              graphics line and its cliff now make this slide's point, and the
+              verbs slide states the first half of the thesis. It is not
+              counted in the running totals. To show it, remove
+              <code>data-visibility="hidden"</code> from this slide.</p>
+            <p><strong>Target:</strong> 0:20 if shown.</p>
             <ul>
               <li>This is the usual answer for the middle of the compression
                 picture from the opening. Every chart is written directly

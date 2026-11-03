@@ -1,20 +1,17 @@
-        <!-- ═══ PART 4: ONE TRADEOFF AND ONE OBJECTION ═══════════════════
-             4a, a big language or a small one (~2:05, including the bridge
-             line to 4b), is in this file. 4b, does growth cost safety, is in
-             04b-validity.html, and 4c, the next cliff, in
-             04c-next-cliff.html.
-             4a is the central tradeoff from the opening chart, said
-             directly: a big language that covers many charts (seaborn) or a
-             small language with long specs (d3). Steele's answer is a
-             language that can grow. The middle path is a hierarchy of
-             abstractions. McNutt's small modular language components are
-             its parts, and the hierarchy slide shows how extensibility keeps
-             those parts one language instead of many separate ones. GoTree,
-             rebuilt as a GoFish library, is the evidence: one part of the
-             hierarchy. Its code and render are the final paper's Figure 5
+        <!-- ═══ PART 4a: DOES ONE LANGUAGE COST DOMAIN DESIGN?, ~1:50 ═══
+             The first objection, McNutt's: no single DSL can capture every
+             task without compromising its domain design. The answer: with
+             verbs, a new word is a function that composes existing verbs and
+             marks, so a DSL is a library of words built inside the language.
+             Each domain keeps its own design, and it is still one language.
+             The McNutt quote states the objection, the hierarchy slide
+             answers it, and GoTree, rebuilt as a GoFish library, is the
+             evidence. Its code and render are the final paper's Figure 5
              (gugog-2026-camera-ready-v3) and the gofish-gotree source, and
              the file ends with the paper's Figure 6, which uses all three
-             surfaces in one graphic.
+             surfaces in one graphic, and the spoken bridge crediting Jason
+             Brunson that leads into 4b (04b-validity.html).
+             The Steele quote that used to open this part is hidden.
              Styles for the code slides: ../gofish-compare.css. -->
 
         <!-- Steele, "Growing a Language", OOPSLA 1998 keynote, published in
@@ -22,9 +19,12 @@
              sentences are verbatim from the paper's text: "I stand on this
              claim: I should not design a small language, and I should not
              design a large one. I need to design a language that can grow."
-             The accent color is ours. -->
-        <section class="quote-slide statement">
-          <p class="part">4a · A big language or a small one</p>
+             The accent color is ours.
+             Hidden: the talk no longer frames part 4 as a big language
+             against a small one, so the quote has no place in the spine.
+             Remove data-visibility="hidden" to bring it back. -->
+        <section class="quote-slide statement" data-visibility="hidden">
+          <p class="part">4a · Does one language cost domain design?</p>
           <blockquote class="long-quote quote-short">
             <p style="max-width: none">I should not design a small language, and I should not design
               a large one. I need to design <strong>a language that can
@@ -32,8 +32,12 @@
           </blockquote>
           <p class="long-quote-cite" style="max-width: none">Guy L. Steele Jr., <em>Growing a Language</em>, OOPSLA 1998</p>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
-              3:45 of 7:35.</p>
+            <p><strong>Hidden.</strong> Part 4 is now two objections, not a
+              big language against a small one, so this quote is out of the
+              spine. It is not counted in the running totals. To show it,
+              remove <code>data-visibility="hidden"</code> from this
+              slide.</p>
+            <p><strong>Target:</strong> 0:15 if shown.</p>
             <p>This is the tradeoff from the opening chart, said directly.
               It is the one central tradeoff of the talk.</p>
             <ul>
@@ -68,10 +72,12 @@
         <!-- The idea the GoTree slides build on: McNutt, "No Grammar to
              Rule Them All", IEEE VIS 2022 (arXiv:2207.07998). The end of the
              passage, in the paper's order, opening with an ellipsis; the full
-             passage is in the notes. GoFish takes the direction this passage
-             suggests, so the slide presents it as the idea 4a builds on. -->
+             passage is in the notes. It states the first objection, credited
+             and in its strongest form. GoFish takes the direction this
+             passage suggests, small modular language components, so the
+             answer builds on it. -->
         <section class="quote-slide">
-          <p class="part">4a · A big language or a small one</p>
+          <p class="part">4a · Does one language cost domain design?</p>
           <blockquote class="long-quote quote-short">
             <p>… we suggest that consideration of <strong>small modular
               language components</strong> may be helpful in the continuation
@@ -84,21 +90,28 @@
           <aside class="notes">
             <p><strong>Full passage</strong> (reference markers removed): Park et al. argue that efforts should be made to “find a definitive grammar that can unify many of these existing grammars”. However, Greenspun’s tenth rule quips that any sufficiently complicated program contains an ad hoc, informally specified, bug-ridden, slow implementation of half of Lisp. Less satirically Fowler notes that one of the biggest dangers in DSL design is “Sliding into generality.” While tools like Vega-Lite are probably not in danger of becoming Lisp, we suggest that consideration of small modular language components may be helpful in the continuation and extension of this ecosystem. There are many tasks, and no one DSL will be able to capture all of them without compromising essential parts of its domain design. That is, there is no grammar to rule them all.</p>
             <p><strong>Target:</strong> 0:15 (shown, not recited; read the
-              accent phrase and the last sentence aloud). <strong>Running total:</strong> 4:00 of
-              7:35.</p>
-            <p><strong>His point, in its strongest form:</strong> a field
-              has many tasks, and one DSL that tries to cover them all
-              compromises each domain's design. So no single language should
-              do everything.</p>
-            <p><strong>Say:</strong> "Andrew's survey concluded there's no
-              grammar to rule them all, and I agree that no single surface
-              should do everything. His suggestion is small modular language
-              components, and that is the direction GoFish takes. I think of
-              those components as the parts of that hierarchy. The risk with
-              many small languages is that they drift apart into separate
-              languages, which is the tangle from the opening. Andrew's paper
-              sees this too: it suggests designs that re-use as much of the
-              earlier DSLs as possible." Then go to the next slide.</p>
+              accent phrase and the last sentence aloud). <strong>Running
+              total:</strong> 3:25 of 7:00.</p>
+            <p><strong>The first objection, in its strongest form:</strong>
+              a field has many tasks, and no single DSL can capture all of
+              them without compromising essential parts of its domain design.
+              So no single language should do everything. This is a fair
+              concern, and it is Andrew's.</p>
+            <p><strong>Say:</strong> "The first concern is Andrew McNutt's.
+              His survey concluded there's no grammar to rule them all: no
+              single DSL can capture every task without compromising its
+              domain design. I agree that no single surface should do
+              everything. His suggestion is small modular language
+              components, and that is the direction GoFish takes. With verbs,
+              a new word is a function that composes existing verbs, so a DSL
+              is a library built inside the language. Each domain keeps its
+              own design, and it is still one language." Then go to the next
+              slide.</p>
+            <p><strong>If there is time:</strong> "The risk with many small
+              languages is that they drift apart into separate languages,
+              which is the tangle from earlier. Andrew's paper sees this too:
+              it suggests designs that re-use as much of the earlier DSLs as
+              possible."</p>
             <p>This is his idea, credited, and the next slides build on it.
               The risk of drifting apart is my concern about many small
               languages in general, not a flaw I am pointing out in his
@@ -123,10 +136,10 @@
           </aside>
         </section>
 
-        <!-- The hierarchy slide, the middle path between a big language and
-             a small one. Both halves are icicles: stacked rows of blocks,
+        <!-- The hierarchy slide, the answer to the first objection. Both
+             halves are icicles: stacked rows of blocks,
              where each block spans exactly the blocks it supports. Left: the
-             same flat layer as the part 2 slide (02-verbs.html), drawn
+             same flat layer as the hidden flat layer slide (02-verbs.html), drawn
              identically, two rows with every chart sitting directly on one
              flat row of nouns. Right: the same five charts on three rows,
              where each row is built from the one below and the bottom row is
@@ -151,9 +164,9 @@
               text-align: center;
             }
           </style>
-          <p class="part">4a · A big language or a small one</p>
+          <p class="part">4a · Does one language cost domain design?</p>
           <h2>a language that grows is a hierarchy</h2>
-          <svg class="flat-vs-hierarchy" viewBox="-2 0 1144 276" role="img" aria-label="Left: the same five charts as the part 2 slide (a population pyramid, a ribbon chart, a GoTree silhouette tree, a Sankey tree, and a Bluefish pulley diagram) as an icicle of two rows. All five charts sit directly on one flat row of nouns that holds marks, encoding channels, coordinate transforms, and more. Right: the same five charts as an icicle of three rows. The charts sit on a middle row of domain languages (chart, tree layout, and diagram, plus a faded block for more), and the middle row sits on a bottom row, a core of marks and verbs.">
+          <svg class="flat-vs-hierarchy" viewBox="-2 0 1144 276" role="img" aria-label="Left: five charts (a population pyramid, a ribbon chart, a GoTree silhouette tree, a Sankey tree, and a Bluefish pulley diagram) as an icicle of two rows. All five charts sit directly on one flat row of nouns that holds marks, encoding channels, coordinate transforms, and more. Right: the same five charts as an icicle of three rows. The charts sit on a middle row of domain languages (chart, tree layout, and diagram, plus a faded block for more), and the middle row sits on a bottom row, a core of marks and verbs.">
             <rect x="0" y="66" width="98" height="98" rx="7" fill="#fff" stroke="#27231f" stroke-width="2"/>
             <image href="./images/splash/population-pyramid.png" x="4" y="70" width="90" height="90" preserveAspectRatio="xMidYMid slice"><title>population pyramid</title></image>
             <rect x="102" y="66" width="98" height="98" rx="7" fill="#fff" stroke="#27231f" stroke-width="2"/>
@@ -195,35 +208,34 @@
           <p class="flat-vs-hierarchy-line">Build new structures from old ones with a small, stable set of verbs.</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
-              4:10 of 7:35.</p>
+              3:35 of 7:00.</p>
+            <p>This slide is the answer to the first objection.</p>
             <ul>
-              <li><strong>Open with the callback:</strong> "Earlier I asked
-                whether we keep adding nouns forever. Here is the answer."</li>
-              <li>This is what a language that can grow looks like. On the
-                left is the flat layer from part 2. On the right, the same
-                charts sit on intermediate words (chart, tree layout,
-                diagram), and those words are built from a small core of marks and verbs
-                like <code>spread</code>, <code>stack</code>, and
-                <code>relate</code>.</li>
+              <li><strong>Open with the callback:</strong> "Remember the
+                cliff on the compression chart. The grammar of graphics is
+                excellent until the cliff, and past it the only move is to
+                add a new noun. That is the left half: one flat layer of
+                nouns, with every chart written directly against it."</li>
+              <li>On the right, the same charts sit on intermediate words
+                (chart, tree layout, diagram), and those words are built from
+                a small core of marks and verbs like <code>spread</code>,
+                <code>stack</code>, and <code>relate</code>.</li>
               <li>The middle blocks are domain languages, Andrew's small
                 modular components. Chart, tree layout, and diagram each have
                 their own words, fit to their own domain.</li>
               <li><strong>Extensibility is what keeps the hierarchy
                 together.</strong> Each new DSL is built from the same core
                 with the same verbs, from inside the language. So the DSLs do
-                not fall apart into separate languages, the way the grammars
-                in the opening tangle did. You get a custom language for each
-                subdomain and still have one language.</li>
-              <li>This answers the question from the part 2 slide. We do not
-                have to keep adding nouns to the core. New words are built
-                from old ones, so the core stays small while the vocabulary
-                gets big. That is the compression picture from the
-                opening.</li>
-              <li><strong>Say the thesis:</strong> "In the traditional
+                not fall apart into separate islands, the way the grammars in
+                the tangle did. Each domain gets its own language, with its
+                own design, and the whole is still one language.</li>
+              <li><strong>Say the full thesis:</strong> "In the traditional
                 grammar of graphics, the only way to grow the language is to
                 add a new primitive. In a language with verbs, you can build
                 new structures from old ones, using a fairly stable set of
                 composition mechanisms."</li>
+              <li>The core stays small while the vocabulary gets big. That is
+                the sweet spot on the compression chart.</li>
               <li>The faded block in the middle is the point: the middle level
                 is open, not a closed set of three kinds. New DSLs can keep
                 being added to it.</li>
@@ -247,7 +259,7 @@
         <!-- GoTree, step 1: the data and the picture, no specs. The
              fragment is step 2: this data is a tree, not a table. -->
         <section class="code-slide" data-auto-animate data-auto-animate-id="gotree">
-          <p class="part" data-id="gotree-part">4a · A big language or a small one</p>
+          <p class="part" data-id="gotree-part">4a · Does one language cost domain design?</p>
           <h2 data-id="gotree-title">GoTree, a grammar for trees</h2>
           <div class="gotree-data">
             <div>
@@ -274,10 +286,11 @@
           <aside class="notes">
             <p><strong>Target:</strong> 0:15 (the GoTree beat is 0:55 over
               three slides: 0:15 here, 0:20 for the specs, 0:20 for
-              <code>combine</code>). <strong>Running total:</strong> 4:25 of
-              7:35.</p>
-            <p>The GoTree slides are evidence for the hierarchy: one DSL,
-              shown from the data down to the core. This slide shows why a
+              <code>combine</code>). <strong>Running total:</strong> 3:50 of
+              7:00.</p>
+            <p>The GoTree slides are evidence for the answer to the first
+              objection: one DSL that keeps its own design, shown from the
+              data down to the core. This slide shows why a
               DSL for tree data is needed. The data is nested, so it is not obvious where
               <code>chart(data).flow(...)</code> goes.</p>
             <p><strong>Say:</strong> "Here's a domain grammar of the kind
@@ -309,7 +322,7 @@
         </section>
 
         <section class="code-slide" data-auto-animate data-auto-animate-id="gotree">
-          <p class="part" data-id="gotree-part">4a · A big language or a small one</p>
+          <p class="part" data-id="gotree-part">4a · Does one language cost domain design?</p>
           <h2 data-id="gotree-title">GoTree, a grammar for trees</h2>
           <div class="code-pair">
             <div>
@@ -352,8 +365,8 @@
           </div>
           <aside class="notes">
             <p><strong>Target:</strong> 0:20. <strong>Running total:</strong>
-              4:45 of 7:35.</p>
-            <p>Evidence for the hierarchy: this DSL keeps its own words, and
+              4:10 of 7:00.</p>
+            <p>Evidence for the answer to the first objection: this DSL keeps its own words, and
               they are built from the core's verbs. Andrew McNutt's survey
               (the quote before the hierarchy slide) already points the way: small
               modular language components, and domain languages that compile
@@ -397,7 +410,7 @@
         </section>
 
         <section class="code-slide">
-          <p class="part">4a · A big language or a small one</p>
+          <p class="part">4a · Does one language cost domain design?</p>
           <h2><code>combine</code> compiles to GoFish constraints</h2>
           <pre><code class="language-ts" data-line-numbers data-char-marks="7:13-28, 11:13-33">export const combine = (opts: CombineOptions): Combiner =&gt; {
   …
@@ -426,8 +439,8 @@
           <aside class="notes">
             <p><strong>Target:</strong> 0:20 (trimmed from 0:25: say the first
               three sentences and skip the paper quote if short on time).
-              <strong>Running total:</strong> 5:05 of 7:35.</p>
-            <p>Evidence for the hierarchy: this DSL reaches all the way down
+              <strong>Running total:</strong> 4:30 of 7:00.</p>
+            <p>Evidence for the answer to the first objection: this DSL reaches all the way down
               to the core, so it is not a separate language.</p>
             <p><strong>Say:</strong> And here's how it's layered. The
               <code>combine</code> that the tree spec called turns each axis
@@ -463,7 +476,7 @@
              on. Renders: the same charts.ts functions as the crash course
              (planets-label, seafood-ribbon) and the paper's Figure 5 SVG. -->
         <section class="code-slide recap-slide">
-          <p class="part">4a · A big language or a small one</p>
+          <p class="part">4a · Does one language cost domain design?</p>
           <h2>same core, three shapes of data</h2>
           <div class="recap-grid">
             <div>
@@ -504,7 +517,7 @@ layer([planets, label])
           <p class="recap-core">one core underneath: the same verbs and constraints</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
-              5:20 of 7:35.</p>
+              4:45 of 7:00.</p>
             <p><strong>Say:</strong> "Back to our two examples, plus the tree.
               What differs isn't the core, it's the shape of the data:
               low-level marks, tabular rows, a hierarchy. These are three
@@ -546,13 +559,13 @@ layer([planets, label])
               max-height: 480px;
             }
           </style>
-          <p class="part">4a · A big language or a small one</p>
+          <p class="part">4a · Does one language cost domain design?</p>
           <h2>the surfaces work together</h2>
           <img class="tree-waffle" src="./images/tradeoffs/gofish-tree-waffle.png" alt="A GoFish tree whose four leaves are waffles of bottle glyphs, each bottle filled with green to a data value" />
           <p class="source-line" style="text-align: center">GUGOG paper, Figure 6</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:10, plus about 0:05 for the bridge
-              line to 4b. <strong>Running total:</strong> 5:35 of 7:35.</p>
+              line to 4b. <strong>Running total:</strong> 5:00 of 7:00.</p>
             <ul>
               <li>One graphic that uses all three surfaces. The tree is laid
                 out by the hierarchical surface (gofish-gotree). Each leaf is
@@ -560,9 +573,12 @@ layer([planets, label])
                 a bottle glyph built from low-level marks: an image and a
                 data-sized fill rectangle.</li>
               <li>This is the hierarchy holding together: three of its parts
-                mixed in one graphic, because they are one language.</li>
+                mixed in one graphic, because they are one language. Each
+                domain kept its own design, and nothing had to be translated
+                between them.</li>
             </ul>
-            <p><strong>Bridge to 4b</strong> (no slide; this ends 4a. Credit
+            <p><strong>Bridge to 4b, the second objection</strong> (no slide;
+              this ends 4a. Credit
               Jason Brunson's GUGOG paper, "Balancing constriction and
               expansion for domain-specific grammars"): "Jason's paper argues
               that each domain needs a dialect, with its own objects and its

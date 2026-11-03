@@ -11,30 +11,28 @@
           <p class="meta">Josh Pollock</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:00 (counts toward part 1).
-              <strong>Running total:</strong> 0:00 of 7:35.</p>
+              <strong>Running total:</strong> 0:00 of 7:00.</p>
             <p>7-minute talk at the GUGOG workshop, IEEE VIS 2026, Nov 9. It
-              sets up the panel. The deck runs 7:35 at its targets against a
-              7:00 budget; the panel slide lists what to cut first.</p>
+              sets up the panel. The deck runs 7:00 at its targets; the panel
+              slide lists what to cut first if it runs long.</p>
             <p><strong>The story:</strong> the talk opens on a wall of GoFish
-              charts. The grammar of graphics wrote the common charts in one
-              shared language. For the long tail of charts, we built many new
-              grammars instead, and they are hard to compare because each one
-              is its own language. I suspect, but am not sure, that this
-              makes new research questions harder to ask. I think a shared
-              core exists, but it may not look quite like the grammar of
-              graphics. A visualization language is a compression of the charts
-              people want to make, and the question for the talk is what
-              stands in the way of doing that compression well. The grammar
-              of graphics has a rich set of nouns but almost no verbs. GoFish
-              adds verbs, and with them it can write other grammars' ideas in
-              one language. Part 4 takes on the central tradeoff from the
-              compression chart: a big language that covers many charts, or a
-              small one with long specs. Steele's answer is a language that
-              can grow, and with verbs it grows as a hierarchy, with a small
-              core and new levels built from old ones. Extensibility keeps the
-              levels one language. The objection is that this much growth
-              costs safety, and a small type system brings safety back.
-              GoFish can grow charts this way but not yet layouts, and that is
-              the open question for the panel.</p>
+              charts. Why unify at all? The old reasons, easier to write and
+              easier to read, matter less now that AI writes a lot of code.
+              The reason that still holds is that compressing forces you to
+              find structure. The grammar of graphics compressed many chart
+              types into one shared language, and that revealed marks,
+              channels, scales, and coordinate systems. The compression chart
+              shows how well today's designs compress, up to the
+              expressivity cliff. Past the cliff, we built islands:
+              specialized grammars that cannot reach each other. What the
+              islands share is operators, so the grammar of graphics needs
+              verbs. GoFish adds them, and Atom and PiCCL reduce to them. Two
+              fair objections follow. Andrew McNutt's is that one language
+              cannot serve every domain's design; with verbs, a DSL is a
+              library built inside the language, as GoTree shows. Cynthia
+              Huang and Matthew Kay's is that growth costs safety; a small
+              type system brings it back, as CanAdd shows. Our verbs are
+              themselves a typology of operators, and that is the next cliff
+              and the first question for the panel.</p>
           </aside>
         </section>

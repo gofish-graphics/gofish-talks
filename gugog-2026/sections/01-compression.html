@@ -1,14 +1,19 @@
-        <!-- ═══ OPENING, PART 1 CONTINUED: COMPRESSION IS THE YARDSTICK ═══
-             The opening runs ~1:30 in all: the title (00-title.html), the
-             splash wall (00b-splash.html), then the usage curve, the two
-             grammars pictures, and the compression chart here. The
-             compression chart ends the opening with the question for the talk.
-             The two charts are drawn live by ../charts.ts. -->
+        <!-- ═══ PART 1: WHY COMPRESS, ~1:05 ═════════════════════════════
+             Part 1 is the title (00-title.html), the splash wall
+             (00b-splash.html), and the compression chart here. Its notes
+             open with why we unify at all (compression forces you to find
+             structure), then walk the chart up to the expressivity cliff,
+             which leads into the islands in part 2 (01b-islands.html).
+             The two comparison variants right after the compression chart
+             have Target 0:00 and are outside the timing. The usage curve
+             slide is hidden, because the compression chart's left panel
+             covers it. The charts are drawn live by ../charts.ts. -->
 
-        <!-- Hidden: the two grammars pictures below carry this slide's
-             point. Remove data-visibility="hidden" to bring it back. -->
+        <!-- Hidden: the islands pictures (01b-islands.html) carry this
+             slide's point. Remove data-visibility="hidden" to bring it
+             back. -->
         <section data-visibility="hidden">
-          <p class="part">1 · Compression is the yardstick</p>
+          <p class="part">1 · Why compress</p>
           <h2>from "I" to "we"</h2>
           <div>
             <ul>
@@ -59,15 +64,21 @@
           </aside>
         </section>
 
-        <section>
-          <p class="part">1 · Compression is the yardstick</p>
+        <!-- Hidden: the compression chart's left panel is the same usage
+             curve, so this slide repeats it. Remove data-visibility="hidden"
+             to bring it back. -->
+        <section data-visibility="hidden">
+          <p class="part">1 · Why compress</p>
           <h2>the usage curve</h2>
           <!-- A live GoFish chart, drawn by renderCharts() in ../charts.ts. -->
           <div data-chart="usage-curve" data-w="1100" data-h="510"
             style="display: flex; justify-content: center; margin-top: 0.6em"></div>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:20. <strong>Running total:</strong>
-              0:35 of 7:35.</p>
+            <p><strong>Hidden.</strong> The compression chart's left panel is
+              this same curve, and its notes now say what this slide said. It
+              is not counted in the running totals. To show it, remove
+              <code>data-visibility="hidden"</code> from this slide.</p>
+            <p><strong>Target:</strong> 0:20 if shown.</p>
             <ul>
               <li>This curve shows how often a chart is made, against how
                 complex it is. It has a long tail. Bar, line, and scatter
@@ -91,91 +102,8 @@
           </aside>
         </section>
 
-        <!-- The two grammars pictures are the user's tldraw drawing (exported
-             as SVG, 2026-11-03). grammars.svg has only the labeled circles and
-             grammars-arrows.svg has only the arrows. Both were split out of
-             one export, so they share a viewBox and line up exactly. To edit,
-             change the circles or arrows in each file, or re-export from
-             tldraw and split again. -->
-        <section class="grammars-slide" data-auto-animate data-auto-animate-id="grammars">
-          <style>
-            .reveal .slides section.grammars-slide {
-              padding-top: 0;
-            }
-            .reveal .grammars-slide .grammars-stack {
-              aspect-ratio: 1418 / 1271;
-              height: 690px;
-              margin: 15px auto 0;
-              position: relative;
-            }
-            .reveal .grammars-slide .grammars-stack img {
-              border-radius: 0;
-              height: 100%;
-              left: 0;
-              margin: 0;
-              max-height: none;
-              max-width: none;
-              position: absolute;
-              top: 0;
-              width: 100%;
-            }
-          </style>
-          <div class="grammars-stack" data-id="grammars-stack">
-            <img data-id="grammars-base" src="./images/opening/grammars.svg"
-              alt="Hand drawing: a big circle labeled GoG in the middle, with smaller circles around it for Atom, PiCCL, AnnoGram, Gemini, Mascot, Gosling, Neo, GenomeSpy, GoTree, and Canis" />
-          </div>
-          <aside class="notes">
-            <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
-              0:50 of 7:35.</p>
-            <ul>
-              <li>One of the big ideas of the grammar of graphics was to
-                write many different chart types in one shared language.</li>
-              <li>Because the charts shared one language, we could ask
-                questions about the structure of charts, such as questions
-                about marks and channels, and not only questions about chart
-                types. For example, Draco and CompassQL both work on Vega-Lite
-                specs, so they reason about a chart in terms of its marks and
-                encodings.</li>
-              <li>For the long tail, we built many new grammars instead. Each
-                one is its own language.</li>
-              <li>I wonder whether we have lost sight of what the original
-                grammar of graphics gave us.</li>
-            </ul>
-            <p>Next slide: the arrows fade in on top of this same picture,
-              and the circles do not move.</p>
-          </aside>
-        </section>
-
-        <section class="grammars-slide" data-auto-animate data-auto-animate-id="grammars">
-          <div class="grammars-stack" data-id="grammars-stack">
-            <img data-id="grammars-base" src="./images/opening/grammars.svg" alt="" />
-            <img src="./images/opening/grammars-arrows.svg"
-              alt="The same drawing with double-headed arrows between almost every pair of grammars, a tangle" />
-          </div>
-          <aside class="notes">
-            <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
-              1:05 of 7:35.</p>
-            <ul>
-              <li>To compare these grammars, you have to translate between
-                every pair of languages. That is this tangle of arrows.</li>
-              <li>I have run into this a lot. Each grammar teaches me
-                something, but its lessons stay stuck inside that one
-                system.</li>
-              <li>I suspect this makes it harder to ask new research
-                questions about the long tail, and that we are treading water
-                a bit, but I am not sure that is the cause.</li>
-              <li>Some of us doubt that a shared kernel exists, meaning a
-                small common core that all of these languages could be written
-                in. I think one does, but it may not look quite like the
-                grammar of graphics we are used to.</li>
-            </ul>
-            <p><strong>Lead into the compression chart:</strong> "To look for
-              that kernel, I need a way to judge a language."</p>
-          </aside>
-        </section>
-
         <section>
-          <p class="part">1 · Compression is the yardstick</p>
+          <p class="part">1 · Why compress</p>
           <h2>a grammar is a compression</h2>
           <!-- Live GoFish charts, drawn by renderCharts() in ../charts.ts.
                Five stacked copies of one chart, each with three panels: the
@@ -199,21 +127,46 @@
           </div>
           <p class="big-claim fragment" style="margin-top: 0.3em">What are the obstacles to doing this compression?</p>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:35. <strong>Running total:</strong>
-              1:40 of 7:35.</p>
+            <p><strong>Target:</strong> 0:50 (was 0:35; the opening on why
+              we compress takes about 0:15). <strong>Running total:</strong>
+              1:05 of 7:00.</p>
+            <p><strong>Why compress</strong> (before the first click, over
+              the empty axes):</p>
+            <ul>
+              <li>Why unify charts into one language at all? The old reasons
+                were that one language is easier to write and easier to read.
+                Those matter less now that AI writes a lot of our code.</li>
+              <li>The reason that still holds is compression. Compressing
+                forces you to find structure.</li>
+              <li>The grammar of graphics did exactly this. It compressed
+                many chart types into one shared language, and that revealed
+                structure like marks, channels, scales, and coordinate
+                systems.</li>
+              <li>That structure is worth having for its own sake, the way
+                structure in mathematics is. It also shaped the tools we use:
+                ggplot2, Vega-Lite and Altair, and Tableau.</li>
+              <li>So how well do today's approaches compress?</li>
+            </ul>
+            <p>If asked for an example of what the structure gives us: Draco
+              and CompassQL work on Vega-Lite specs, so they reason about a
+              chart in terms of its marks and encodings, not its chart
+              type.</p>
+            <p><strong>The chart:</strong></p>
             <ul>
               <li>All three panels share one x axis: simple, common charts
                 on the left and complex tail charts on the right. The left
-                panel is the usage curve again. Most of the charts people
-                make are the simple ones on the left, so the cost on the left
-                counts most. The middle panel is how big the language has to
-                be to reach those charts. The right panel is how long the
-                spec for one of those charts is.</li>
+                panel is how often each chart gets made. It has a long tail:
+                bar, line, and scatter charts are on the left, and one-lab
+                infographics and diagrams are on the right. Most of the
+                charts people make are the simple ones, so the cost on the
+                left counts most. The middle panel is how big the language
+                has to be to reach those charts. The right panel is how long
+                the spec for one of those charts is.</li>
               <li>(Click.) The blue line is a chart typology like seaborn,
                 with one function per chart type. Its specs stay short, so it
                 is flat in the right panel. But it needs a new function for
                 every chart in the tail, so it climbs steeply in the middle
-                panel.</li>
+                panel. Its language is huge.</li>
               <li>(Click.) The grey line is a low-level toolkit like d3. Its
                 language is small and stays flat. But its specs are long even
                 for a bar chart, and they get longer as the charts get more
@@ -245,21 +198,20 @@
                 total cost is the size of the language plus the length of
                 every spec written in it, weighted by how often each chart is
                 made. That is the yardstick for the rest of the talk.</li>
-              <li>The curves are schematic, not measured.</li>
+              <li>The curves are schematic, not measured. The questions slide
+                at the end asks whether the usage curve could become a
+                benchmark.</li>
             </ul>
             <p><strong>The question for the talk</strong> (click for the
               line): "What are the obstacles to doing this compression?" The
-              rest of the talk looks for them. Part 2 names the first one in
-              the grammar of graphics. Part 4 takes the central one head on,
-              the choice between a big language and a small one that this
-              chart shows, and then one objection to the answer.</p>
-            <p><strong>Lead into part 2:</strong> "Let's start with the
-              usual answer for the middle, the grammar of graphics."</p>
+              first one is the cliff itself.</p>
+            <p><strong>Lead into part 2:</strong> "Past the cliff, we built
+              islands."</p>
           </aside>
         </section>
 
         <section>
-          <p class="part">1 · Compression is the yardstick</p>
+          <p class="part">1 · Why compress</p>
           <h2>a grammar is a compression, as rates</h2>
           <!-- A variant of the slide before, for comparison. Same steps and
                layout, drawn by renderCharts() in ../charts.ts. The two cost
@@ -314,7 +266,7 @@
         </section>
 
         <section>
-          <p class="part">1 · Compression is the yardstick</p>
+          <p class="part">1 · Why compress</p>
           <h2>a grammar is a compression, as rates</h2>
           <!-- A variant of the slide before, for comparison. Same steps and
                layout, drawn by renderCharts() in ../charts.ts. The two cost

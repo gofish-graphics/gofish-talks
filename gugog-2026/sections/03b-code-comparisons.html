@@ -1,6 +1,7 @@
-        <!-- ═══ PART 3: GRAMMARS IN ONE LANGUAGE, ~0:45 ════════════════
+        <!-- ═══ PART 3 CONTINUED: TWO ISLANDS IN VERBS, ~0:45 ══════════
              Four slides: Atom intro, Atom vs GoFish, PiCCL intro, the PiCCL
-             bottle chart in GoFish.
+             bottle chart in GoFish. They are the evidence that the islands
+             from part 2 reduce to a shared set of operators.
              Code comparisons from the GUGOG camera-ready paper, section 3
              "Specialized Grammars in a Shared Vocabulary"
              (phd-thesis-20260618/gugog-2026-camera-ready-v3). The code is
@@ -27,7 +28,7 @@
              papers. Atom's figures are both wide, so they stack; PiCCL's sit
              side by side as in the thesis deck. -->
         <section class="grammar-intro-slide grammar-intro-stack">
-          <p class="part">3 · Grammars in one language</p>
+          <p class="part">3 · The grammar of graphics needs verbs</p>
           <h2>Atom: a grammar for unit visualizations</h2>
           <div class="grammar-intro-figs">
             <div>
@@ -42,7 +43,10 @@
           <p class="source-line">Atom: A Grammar for Unit Visualizations · Park, Drucker, Fernandez &amp; Elmqvist, IEEE TVCG 2018</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
-              2:55 of 7:35.</p>
+              2:35 of 7:00.</p>
+            <p>This slide and the next three are evidence that the islands
+              reduce to a shared set of operators. The ideas are Atom's and
+              PiCCL's, and the credit goes to their authors.</p>
             <p><strong>Say:</strong> Here's Atom, a grammar for unit
               visualizations, where one mark stands for one thing, like one
               passenger on the Titanic. Its key idea is a small set of layout
@@ -62,7 +66,7 @@
         </section>
 
         <section class="code-slide">
-          <p class="part">3 · Grammars in one language</p>
+          <p class="part">3 · The grammar of graphics needs verbs</p>
           <h2>Atom's <code>gridxy</code> is GoFish's <code>spread</code></h2>
           <div class="code-pair">
             <div>
@@ -107,11 +111,11 @@
           <aside class="notes">
             <p><strong>Target:</strong> 0:10 (was 0:20; the Atom intro slide
               before it took 0:10). <strong>Running total:</strong>
-              3:05 of 7:35.</p>
+              2:45 of 7:00.</p>
             <p><strong>The beat (this slide and the next):</strong> 1. A shared
               language makes it possible to compare grammars: once each
               grammar's idea is written in GoFish, you can put them side by side
-              and see exactly what differs. 2. The grammars are not so different
+              and see exactly what differs. The islands can reach each other. 2. The grammars are not so different
               after all: they share most of their structure, and the
               differences come down to small, nameable pieces.</p>
             <p><strong>Say:</strong> Here's Atom's Titanic example, with the
@@ -143,7 +147,7 @@
         </section>
 
         <section class="grammar-intro-slide">
-          <p class="part">3 · Grammars in one language</p>
+          <p class="part">3 · The grammar of graphics needs verbs</p>
           <h2>PiCCL: a grammar for pictorial charts</h2>
           <div class="grammar-intro-figs grammar-intro-side">
             <div>
@@ -158,7 +162,7 @@
           <p class="source-line">PiCCL: Data-Driven Composition of Bespoke Pictorial Charts · Shi et al., IEEE VIS 2025</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
-              3:15 of 7:35.</p>
+              2:55 of 7:00.</p>
             <p><strong>Say:</strong> And here's PiCCL, a grammar for
               pictorial charts like these. Its key idea is that you build a
               chart like this from parts, and you combine pictures and shapes
@@ -190,7 +194,7 @@
              which that same spec draws. The char marks point at the four
              operators the notes name. -->
         <section class="code-slide bottle-slide">
-          <p class="part">3 · Grammars in one language</p>
+          <p class="part">3 · The grammar of graphics needs verbs</p>
           <h2>The PiCCL bottle chart in GoFish</h2>
           <div class="split bottle-split">
             <div>
@@ -217,7 +221,7 @@
           <aside class="notes">
             <p><strong>Target:</strong> 0:15 (was 0:25; the PiCCL intro slide
               before it took 0:10). <strong>Running total:</strong>
-              3:30 of 7:35.</p>
+              3:10 of 7:00.</p>
             <p><strong>Say:</strong> This bottle chart comes from PiCCL, by
               Shi and others at VIS 2025. It is built from the parts we just
               saw. A picture of a bottle gets a green rectangle painted onto
@@ -233,11 +237,13 @@
             <p><strong>The point of the two comparisons:</strong> Atom and
               PiCCL can be written in one language. Written that way, they
               share most of their structure, and the differences are small
-              parts you can point to.</p>
-            <p><strong>Lead into part 4:</strong> "So unifying grammars
-              compresses them. But one tradeoff seems to stand in the way, and
-              it is the one from the opening chart: a big language or a small
-              one."</p>
+              parts you can point to. What the two islands share is
+              operators.</p>
+            <p><strong>Lead into part 4a:</strong> "So these two islands
+              reduce to a few shared verbs. That is why I say the grammar of
+              graphics needs verbs. There are two fair concerns about this
+              idea, and I want to take both of them seriously. The first one
+              is Andrew McNutt's."</p>
             <p><strong>Source:</strong> The spec is the GoFish repo's bottle
               story, <code>packages/gofish-graphics/stories/piccl/Bottle.stories.tsx</code>
               on main. The slide leaves out the styling (widths, colors, font
