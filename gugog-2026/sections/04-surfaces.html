@@ -1,10 +1,12 @@
-        <!-- ═══ PART 4: THREE TENSIONS, ~3:40 ═══════════════════════════
-             This file has the optional overview slide and tension 4a, many
-             surfaces against one language (~1:35). Tension 4b is in
+        <!-- ═══ PART 4: THREE OBSTACLES, ~3:50 ══════════════════════════
+             This file has the optional overview slide and obstacle 4a, many
+             surfaces against one language (~1:40). Obstacle 4b is in
              04b-validity.html and 4c in 04c-small-vs-big.html.
-             Each tension is presented in its strongest form, with credit,
-             before the evidence. 4a and 4b are disputed with evidence; 4c is
-             admitted as open.
+             Each obstacle is something that seems to stand in the way of the
+             compression from the opening. Each is presented in its strongest
+             form, with credit, before the evidence. 4a and 4b are disputed
+             with evidence. 4c is answered by the tree slide, and what is
+             still missing is admitted as open.
              4a opens with Andrew McNutt's call for small modular language
              components and is built around one example of it, GoTree rebuilt
              as a GoFish library. Its framing follows the v3 draft of the
@@ -20,8 +22,8 @@
              section labels on the slides that follow carry the same
              structure. -->
         <section>
-          <p class="part">4 · Three tensions</p>
-          <h2>three tensions</h2>
+          <p class="part">4 · Three obstacles</p>
+          <h2>three obstacles</h2>
           <div>
             <ol>
               <li>Many surfaces against one language</li>
@@ -34,10 +36,11 @@
               The section labels on the slides that follow (4a, 4b, 4c) carry
               the same structure.</p>
             <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
-              3:40 of 7:50 (3:30 at the next slide if skipped).</p>
+              3:30 of 7:50 (3:20 at the next slide if skipped).</p>
             <ul>
-              <li>Three tensions a unified grammar faces. I'll present each in
-                its strongest form, with credit, and then the evidence.</li>
+              <li>Three things seem to stand in the way of the compression
+                from the opening. I'll present each in its strongest form,
+                with credit, and then the evidence.</li>
               <li>The first two I think are incidental, and I'll show why. The
                 third I have only partly solved.</li>
             </ul>
@@ -64,9 +67,9 @@
           <aside class="notes">
             <p><strong>Full passage</strong> (reference markers removed): Park et al. argue that efforts should be made to “find a definitive grammar that can unify many of these existing grammars”. However, Greenspun’s tenth rule quips that any sufficiently complicated program contains an ad hoc, informally specified, bug-ridden, slow implementation of half of Lisp. Less satirically Fowler notes that one of the biggest dangers in DSL design is “Sliding into generality.” While tools like Vega-Lite are probably not in danger of becoming Lisp, we suggest that consideration of small modular language components may be helpful in the continuation and extension of this ecosystem. There are many tasks, and no one DSL will be able to capture all of them without compromising essential parts of its domain design. That is, there is no grammar to rule them all.</p>
             <p><strong>Target:</strong> 0:15 (shown, not recited; read the
-              accent phrase and the last sentence aloud). <strong>Running total:</strong> 3:55 of
+              accent phrase and the last sentence aloud). <strong>Running total:</strong> 3:45 of
               7:50.</p>
-            <p><strong>The tension, in its strongest form:</strong> a field
+            <p><strong>The obstacle, in its strongest form:</strong> a field
               has many tasks, so it needs many API surfaces, and one language
               that tries to cover them all compromises each domain's design.
               A second angle is that, even with many surfaces, it is not
@@ -128,7 +131,7 @@
           <aside class="notes">
             <p><strong>Target:</strong> 0:15 (the GoTree beat is 0:55 over
               three slides: 0:15 here, 0:20 for the specs, 0:20 for
-              <code>combine</code>). <strong>Running total:</strong> 4:10 of
+              <code>combine</code>). <strong>Running total:</strong> 4:00 of
               7:50.</p>
             <p>Nested data, so it is not obvious where
               <code>chart(data).flow(...)</code> goes.</p>
@@ -204,13 +207,13 @@
           </div>
           <aside class="notes">
             <p><strong>Target:</strong> 0:20. <strong>Running total:</strong>
-              4:30 of 7:50.</p>
+              4:20 of 7:50.</p>
             <ul>
               <li>Many surfaces against one language. Domain grammars can be
                 layered on a shared core instead of being separate
                 languages.</li>
             </ul>
-            <p><strong>The tension:</strong> it can look like you have to
+            <p><strong>The obstacle:</strong> it can look like you have to
               choose between one universal grammar and many domain-specific
               ones. Andrew McNutt's
               survey (the quote two slides back) already points the way out: small
@@ -287,7 +290,7 @@
           <aside class="notes">
             <p><strong>Target:</strong> 0:20 (trimmed from 0:25: say the first
               three sentences and skip the paper quote if short on time).
-              <strong>Running total:</strong> 4:50 of 7:50.</p>
+              <strong>Running total:</strong> 4:40 of 7:50.</p>
             <p><strong>Say:</strong> And here's how it's layered. The
               <code>combine</code> that the tree spec called turns each axis
               into an ordinary GoFish constraint, <code>Constraint.align</code>
@@ -369,7 +372,7 @@ layer([planets, label])
           <p class="recap-core">one core underneath: the same verbs and constraints</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
-              5:05 of 7:50.</p>
+              4:55 of 7:50.</p>
             <p><strong>Say:</strong> "Back to our two examples, plus the tree.
               What differs isn't the core, it's the shape of the data:
               low-level marks, tabular rows, a hierarchy. These are three
@@ -418,20 +421,20 @@ layer([planets, label])
           <p class="source-line" style="text-align: center">GUGOG paper, Figure 6</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:10, plus about 0:05 for the bridge
-              line to 4b. <strong>Running total:</strong> 5:20 of 7:50.</p>
+              line to 4b. <strong>Running total:</strong> 5:10 of 7:50.</p>
             <ul>
               <li>One graphic that uses all three surfaces. The tree is laid
                 out by the hierarchical surface (gofish-gotree). Each leaf is
                 a waffle written at the chart level. Each unit of a waffle is
                 a bottle glyph built from low-level marks: an image and a
                 data-sized fill rectangle.</li>
-              <li>This answers the second angle of the tension, that the
+              <li>This answers the second angle of the obstacle, that the
                 surfaces cannot be tied together in one language.</li>
             </ul>
             <p><strong>Bridge to 4b</strong> (no slide; credit Jason
               Brunson's GUGOG paper, "Balancing constriction and expansion for
               domain-specific grammars"): "Jason's paper puts these two
-              tensions together. He argues that each domain needs a dialect,
+              obstacles together. He argues that each domain needs a dialect,
               with its own objects and its own constraints on how they
               combine. GoTree is a dialect. The next question is about the
               constraints."</p>

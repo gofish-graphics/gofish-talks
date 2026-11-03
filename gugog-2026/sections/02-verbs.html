@@ -1,0 +1,179 @@
+        <!-- ═══ PART 2: THE GRAMMAR OF GRAPHICS NEEDS VERBS, ~0:35 ══════
+             The "Data, Marks, Channels, Coordinates" slide from the thesis
+             defense deck
+             (phd-thesis-20260618/presentation/sections/03-gofish.html),
+             shortened to 0:15: all four columns show at once, and the closing
+             line is the only build step. Its CSS is in ../style.css. Then
+             the flat layer slide. The tree slide that used to follow is now
+             in 4c (04c-small-vs-big.html). -->
+<section class="gog-concepts-slide">
+          <p class="part">2 · The grammar of graphics needs verbs</p>
+          <h2>Data, Marks, Channels, Coordinates</h2>
+          <div class="gog-concepts-grid">
+            <div>
+              <h3>Data <span class="h3-sub">records</span></h3>
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>lake</th>
+                    <th>species</th>
+                    <th>count</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Primrose</td>
+                    <td>Bass</td>
+                    <td>23</td>
+                  </tr>
+                  <tr>
+                    <td>Primrose</td>
+                    <td>Trout</td>
+                    <td>31</td>
+                  </tr>
+                  <tr>
+                    <td>Primrose</td>
+                    <td>Catfish</td>
+                    <td>29</td>
+                  </tr>
+                  <tr class="ellipsis-row">
+                    <td>&#8942;</td>
+                    <td>&#8942;</td>
+                    <td>&#8942;</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div>
+              <h3>Marks <span class="h3-sub">shapes</span></h3>
+              <img src="./images/verbs/gog-marks.png" alt="Gallery of Observable Plot mark types" />
+              <p class="source-line">Observable Plot</p>
+            </div>
+            <div>
+              <h3>Channels <span class="h3-sub">shape attributes</span></h3>
+              <img src="./images/verbs/gog-channels.png" alt="Munzner's ranking of visual channels by accuracy" />
+              <p class="source-line">Munzner, <em>Visualization Analysis and Design</em> (2014)</p>
+            </div>
+            <div>
+              <h3>Coordinates <span class="h3-sub">space transformations</span></h3>
+              <div class="gog-coordinate-image-frame">
+                <img src="./images/verbs/gog-coordinates-thompson.png" alt="Thompson's growth transformation: a fish and its coordinate grid progressively warped into two curved forms" />
+              </div>
+              <p class="source-line">Thompson's growth transformation &middot; via Wilkinson, <em>The Grammar of Graphics</em></p>
+            </div>
+          </div>
+          <p class="big-claim fragment">A rich set of nouns, but almost no verbs.</p>
+          <aside class="notes">
+            <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
+              1:45 of 7:50.</p>
+            <p>All four columns appear at once. The closing line is the one
+              click on this slide.</p>
+            <ul>
+              <li>The grammar of graphics is the usual answer for the middle
+                of the usage curve. Its vocabulary is data, marks, channels,
+                and coordinates: a rich set of nouns.</li>
+              <li>It has almost no verbs. Verbs are composition operators,
+                and with them you can build new structures from old ones. The
+                next slide shows what happens to the compression without
+                them.</li>
+              <li>Click for the line: "A rich set of nouns, but almost no
+                verbs."</li>
+            </ul>
+            <p>The data table is the seafood catch table that the crash
+              course in part 3 draws from, one row per lake and species with
+              a count. There is no time to say so; it is there so the table
+              looks familiar later.</p>
+            <p>Shortened from the thesis deck's 1:30 version, which built up
+              the columns one at a time and talked through Munzner's channel
+              ranking and Thompson's transformation.</p>
+          </aside>
+        </section>
+
+        <!-- The grammar of graphics as one flat layer of nouns. This is the
+             left half of the tree slide in 4c (04c-small-vs-big.html),
+             drawn identically so the audience recognizes it there. The
+             leaves are specific GoFish charts: the population pyramid,
+             Sankey tree, point labels, and GoTree silhouette tree from the
+             splash wall, and the ribbon chart from the crash course. The
+             bar is split into three of the grammar of graphics' categories
+             plus a faded "..." for the rest. The build step adds a chart
+             outside the combinations (the croissant chart, also on the
+             splash) and the new nouns it needs. The left half of the tree slide
+             is a copy of this SVG, so edit the two together. -->
+        <section class="flat-slide">
+          <style>
+            .reveal svg.flat-vs-tree {
+              display: block;
+              margin: 0.5em auto 0;
+              max-height: 430px;
+              width: 100%;
+            }
+            .reveal .flat-vs-tree-line {
+              font-size: 0.8em;
+              margin-top: 0.4em;
+              text-align: center;
+            }
+          </style>
+          <p class="part">2 · The grammar of graphics needs verbs</p>
+          <h2>the grammar of graphics is one flat layer of nouns</h2>
+          <svg class="flat-vs-tree" viewBox="-2 0 897 400" role="img" aria-label="Five specific GoFish charts, a population pyramid, a ribbon chart, a GoTree silhouette tree, a Sankey tree, and a scatterplot with point labels, each hanging straight off one flat bar split into marks, encoding channels, coordinate transforms, and a faded slot for more. In the build step, a croissant chart is added, and the bar grows by a new geom and a new coordinate system.">
+            <line x1="49" y1="108" x2="49" y2="274" stroke="#66615b" stroke-width="2.5"/>
+            <line x1="151" y1="108" x2="151" y2="274" stroke="#66615b" stroke-width="2.5"/>
+            <line x1="253" y1="108" x2="253" y2="274" stroke="#66615b" stroke-width="2.5"/>
+            <line x1="355" y1="108" x2="355" y2="274" stroke="#66615b" stroke-width="2.5"/>
+            <line x1="457" y1="108" x2="457" y2="274" stroke="#66615b" stroke-width="2.5"/>
+            <line x1="525" y1="108" x2="525" y2="274" stroke="#66615b" stroke-width="2.5" stroke-dasharray="5 5" opacity="0.4"/>
+            <rect x="0" y="10" width="98" height="98" rx="7" fill="#fff" stroke="#27231f" stroke-width="2"/>
+            <image href="./images/splash/population-pyramid.png" x="4" y="14" width="90" height="90" preserveAspectRatio="xMidYMid slice"><title>population pyramid</title></image>
+            <rect x="102" y="10" width="98" height="98" rx="7" fill="#fff" stroke="#27231f" stroke-width="2"/>
+            <image href="./images/gofish-intro/ribbon-chart.svg" x="106" y="14" width="90" height="90" preserveAspectRatio="xMidYMid slice"><title>ribbon chart</title></image>
+            <rect x="204" y="10" width="98" height="98" rx="7" fill="#fff" stroke="#27231f" stroke-width="2"/>
+            <image href="./images/splash/gotree-multilevel-silhouette-tree.png" x="208" y="14" width="90" height="90" preserveAspectRatio="xMidYMid slice"><title>GoTree silhouette tree</title></image>
+            <rect x="306" y="10" width="98" height="98" rx="7" fill="#fff" stroke="#27231f" stroke-width="2"/>
+            <image href="./images/splash/sankey-tree.png" x="310" y="14" width="90" height="90" preserveAspectRatio="xMidYMid slice"><title>Sankey tree</title></image>
+            <rect x="408" y="10" width="98" height="98" rx="7" fill="#fff" stroke="#27231f" stroke-width="2"/>
+            <image href="./images/splash/point-labels-avoiding-trend-line.png" x="412" y="14" width="90" height="90" preserveAspectRatio="xMidYMid slice"><title>point labels avoiding a trend line</title></image>
+            <g opacity="0.4"><rect x="510" y="10" width="30" height="98" rx="7" fill="#fff" stroke="#27231f" stroke-width="2" stroke-dasharray="5 5"/><text x="525" y="59" text-anchor="middle" dominant-baseline="central" font-size="24" fill="#1e1e1e">…</text></g>
+            <rect x="0" y="274" width="104" height="56" rx="7" fill="#b24a3b" stroke="#b24a3b" stroke-width="2"/><text x="52" y="302" text-anchor="middle" dominant-baseline="central" font-size="16" fill="#fff">marks</text>
+            <rect x="108" y="274" width="180" height="56" rx="7" fill="#b24a3b" stroke="#b24a3b" stroke-width="2"/><text x="198" y="302" text-anchor="middle" dominant-baseline="central" font-size="16" fill="#fff">encoding channels</text>
+            <rect x="292" y="274" width="210" height="56" rx="7" fill="#b24a3b" stroke="#b24a3b" stroke-width="2"/><text x="397" y="302" text-anchor="middle" dominant-baseline="central" font-size="16" fill="#fff">coordinate transforms</text>
+            <g opacity="0.4"><rect x="506" y="274" width="34" height="56" rx="7" fill="#b24a3b" stroke="#b24a3b" stroke-width="2"/><text x="523" y="302" text-anchor="middle" dominant-baseline="central" font-size="24" fill="#fff">…</text></g>
+            <text x="270" y="386" text-anchor="middle" font-size="26" fill="#1e1e1e">one flat layer of nouns</text>
+            <g class="fragment" data-fragment-index="1">
+              <line x1="609" y1="108" x2="609" y2="274" stroke="#66615b" stroke-width="2.5"/>
+              <rect x="560" y="10" width="98" height="98" rx="7" fill="#fff" stroke="#27231f" stroke-width="2"/>
+              <image href="./images/splash/croissant-recolored.png" x="564" y="14" width="90" height="90" preserveAspectRatio="xMidYMid slice"><title>croissant chart</title></image>
+              <rect x="544" y="274" width="120" height="56" rx="7" fill="#f7e3df" stroke="#b24a3b" stroke-width="2" stroke-dasharray="6 4"/><text x="604" y="302" text-anchor="middle" dominant-baseline="central" font-size="16" fill="#b24a3b">+ new geom</text>
+              <rect x="668" y="274" width="225" height="56" rx="7" fill="#f7e3df" stroke="#b24a3b" stroke-width="2" stroke-dasharray="6 4"/><text x="780.5" y="302" text-anchor="middle" dominant-baseline="central" font-size="16" fill="#b24a3b">+ new coordinate system</text>
+            </g>
+          </svg>
+          <p class="flat-vs-tree-line fragment" data-fragment-index="1">A fixed set of nouns gives a finite number of combinations. Do we keep adding nouns forever?</p>
+          <aside class="notes">
+            <p><strong>Target:</strong> 0:20. <strong>Running total:</strong>
+              2:05 of 7:50.</p>
+            <ul>
+              <li>This is the usual answer for the middle of the compression
+                picture from the opening. Every chart is written directly
+                against the same fixed nouns: marks, encoding channels,
+                coordinate transforms, and the rest of the grammar's
+                categories.</li>
+              <li>There is no way to define new words from old ones. The
+                charts here are ones from the splash wall, and each one goes
+                straight down to the same layer.</li>
+              <li>Click. A fixed set of nouns gives a finite number of
+                combinations. To reach a chart outside them, like this
+                croissant chart, you have to add a new noun to the core, such
+                as a new geom or a new coordinate system. So the core keeps
+                growing. That is the opposite of the compression from the
+                opening.</li>
+              <li><strong>Say:</strong> "In the traditional grammar of
+                graphics, the only way to grow the language is to add a new
+                primitive. What if we could build new structures from the
+                ones we already have?"</li>
+              <li>Verbs are what make that possible. The tree slide near the
+                end answers the question on this slide.</li>
+            </ul>
+            <p>The left half of the tree slide in 4c is this same picture,
+              without the build step.</p>
+          </aside>
+        </section>

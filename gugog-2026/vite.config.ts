@@ -12,9 +12,10 @@ export default defineConfig({
       sectionsDir: path.resolve(__dirname, "sections"),
       // Slide order.
       sections: [
+        "00-title.html",
+        "00b-splash.html",
         "01-compression.html",
-        "02-tree.html",
-        "02b-splash.html",
+        "02-verbs.html",
         "03-gofish-intro.html",
         "03b-code-comparisons.html",
         "04-surfaces.html",
