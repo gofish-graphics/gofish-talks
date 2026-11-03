@@ -32,7 +32,7 @@
               accent phrase aloud). <strong>Running total:</strong> 5:50 of
               7:35.</p>
             <p><strong>The objection, in its strongest form:</strong> the
-              tree lets anyone grow the language, and that much extensibility
+              hierarchy lets anyone grow the language, and that much extensibility
               and expressiveness seems to cost safety. If anyone can add new
               structures, it seems the language can no longer check that a
               picture means something. Cynthia and Matt state the general
@@ -82,24 +82,34 @@
           </aside>
         </section>
 
-        <!-- CanAdd, in three auto-animate steps of one spec on one dataset:
-             no schema (GoFish checks nothing and stacks the temperatures),
-             a schema (°C has no CanAdd, so GoFish refuses), and "usd" in
-             place of "temp" (USD is summable, so it stacks). Each chart is
-             rendered live from ../charts.ts; the error on step 2 is the
-             message GoFish throws (data-expect-error). The code blocks have
+        <!-- CanAdd, in four auto-animate steps of one spec on one dataset,
+             one change per click: no schema (GoFish checks nothing and
+             stacks the temperatures), the schema added to the code (the
+             output is still the untyped chart), the same code run (°C has
+             no CanAdd, so GoFish refuses), and "usd" in place of "temp"
+             (USD is summable, so it stacks). Each chart is rendered live
+             from ../charts.ts; the error on step 3 is the message GoFish
+             throws (data-expect-error). The code blocks have
              data-magic-move, so the code animates word by word (see
-             talk-template's README); the encodings sit on their own lines, so step 3 changes
-             only the h: line.
-             The transitions take 0.6s: the code moves in the first 0.3s
-             (data-auto-animate-duration), then the output changes in the
-             next 0.3s (data-auto-animate-delay on each result). Reveal
-             hides the outgoing slide at once, so to keep the old output on
-             screen while the code moves, every step holds all three
-             results in the same place and shows one (.is-current). Each
-             result keeps its data-id across the steps, so Reveal matches
-             it and crossfades its opacity after the delay, both forwards
-             and backwards. Nothing inside a result may be matched on its
+             talk-template's README); the encodings sit on their own lines,
+             so step 4 changes only the h: line. Steps 2 and 3 have the same
+             code and the same char marks, so on that transition the code
+             does not move at all.
+             Each transition takes 0.3s (data-auto-animate-duration). Step 1
+             to 2 changes only the code, and step 2 to 3 only the output, so
+             both run at once with no delay. Step 3 to 4 changes both, so
+             step 4's results carry data-auto-animate-delay="0.3": the code
+             moves in the first 0.3s, then the output changes in the next
+             0.3s. Reveal takes the delay from the slide it is going to,
+             not from the pair of slides, so it cannot tell 2 to 3 (no
+             delay wanted) from 4 back to 3. Step 3 has no delay, so going
+             back from 4 to 3 changes the code and the output together.
+             Reveal hides the outgoing slide at once, so to keep the old
+             output on screen while the code moves, every step holds all
+             three results in the same place and shows one (.is-current).
+             Each result keeps its data-id across the steps, so Reveal
+             matches it and crossfades its opacity, both forwards and
+             backwards. Nothing inside a result may be matched on its
              own: no data-id, and the label and tagline are divs, not p,
              because Reveal also pairs up p elements by their text. A result
              with no matched element inside moves and fades as one piece.
@@ -132,17 +142,17 @@ chart(data)
     fill: "city",
   }))</code></pre>
             <div class="canadd-right">
-              <div class="canadd-result is-current" data-id="canadd-result-untyped" data-auto-animate-delay="0.3">
+              <div class="canadd-result is-current" data-id="canadd-result-untyped">
                 <div class="code-pair-label">no schema <span class="code-pair-sub">· nothing is checked: it stacks</span></div>
                 <div class="canadd-out" data-chart="canadd-untyped" data-w="460" data-h="300" data-font-size="16"></div>
               </div>
-              <div class="canadd-result" data-id="canadd-result-temp" data-auto-animate-delay="0.3">
+              <div class="canadd-result" data-id="canadd-result-temp">
                 <div class="code-pair-label">°C <span class="code-pair-sub">· no CanAdd: GoFish refuses</span></div>
                 <!-- Runs the spec on the left and shows the error GoFish
                      throws (data-expect-error), not a chart. -->
                 <div class="canadd-out canadd-error-box" data-chart="canadd-temp" data-expect-error data-w="460" data-h="300"></div>
               </div>
-              <div class="canadd-result" data-id="canadd-result-usd" data-auto-animate-delay="0.3">
+              <div class="canadd-result" data-id="canadd-result-usd">
                 <div class="code-pair-label">USD <span class="code-pair-sub">· declared summable: it stacks</span></div>
                 <div class="canadd-out" data-chart="canadd-usd" data-w="460" data-h="300" data-font-size="16"></div>
                 <div class="canadd-tagline">constrains specs, not pictures</div>
@@ -205,17 +215,17 @@ chart(data, {
     fill: "city",
   }))</code></pre>
             <div class="canadd-right">
-              <div class="canadd-result" data-id="canadd-result-untyped" data-auto-animate-delay="0.3">
+              <div class="canadd-result is-current" data-id="canadd-result-untyped">
                 <div class="code-pair-label">no schema <span class="code-pair-sub">· nothing is checked: it stacks</span></div>
                 <div class="canadd-out" data-chart="canadd-untyped" data-w="460" data-h="300" data-font-size="16"></div>
               </div>
-              <div class="canadd-result is-current" data-id="canadd-result-temp" data-auto-animate-delay="0.3">
+              <div class="canadd-result" data-id="canadd-result-temp">
                 <div class="code-pair-label">°C <span class="code-pair-sub">· no CanAdd: GoFish refuses</span></div>
                 <!-- Runs the spec on the left and shows the error GoFish
                      throws (data-expect-error), not a chart. -->
                 <div class="canadd-out canadd-error-box" data-chart="canadd-temp" data-expect-error data-w="460" data-h="300"></div>
               </div>
-              <div class="canadd-result" data-id="canadd-result-usd" data-auto-animate-delay="0.3">
+              <div class="canadd-result" data-id="canadd-result-usd">
                 <div class="code-pair-label">USD <span class="code-pair-sub">· declared summable: it stacks</span></div>
                 <div class="canadd-out" data-chart="canadd-usd" data-w="460" data-h="300" data-font-size="16"></div>
                 <div class="canadd-tagline">constrains specs, not pictures</div>
@@ -224,19 +234,75 @@ chart(data, {
           </div>
           <p class="canadd-footnote" data-id="canadd-footnote">Inspired by Bartonicek, Urbanek &amp; Murrell (JCGS 2025), Flint (Wang et al., VIS 2026), and Huang &amp; Kay (GUGOG 2026).</p>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:15 (of the slide's 0:40).
-              <strong>Running total:</strong> 6:15 of 7:35.</p>
+            <p><strong>Target:</strong> 0:10 (of the slide's 0:40).
+              <strong>Running total:</strong> 6:10 of 7:35.</p>
             <p><strong>Say:</strong> "Now add a schema. Degrees Celsius is a
-              plain unit, and US dollars are declared summable. The same
-              stack now gives an error, because degrees Celsius has no
-              <code>CanAdd</code>. The error suggests the fix: average them
-              instead."</p>
+              plain unit, and US dollars are declared summable. I have not
+              run it again yet, so the chart on the right is still the old
+              one."</p>
+            <p>The highlights mark what changed: the schema is new, and
+              nothing else in the spec moved. This click changes only the
+              code. The next click runs it and changes only the output.</p>
+          </aside>
+        </section>
+
+
+        <section class="code-slide" data-auto-animate data-auto-animate-id="canadd" data-auto-animate-duration="0.3">
+          <p class="part" data-id="canadd-part">4b · Does growth cost safety?</p>
+          <h2 data-id="canadd-title"><code>stack</code> needs <code>CanAdd</code></h2>
+          <div class="canadd-grid">
+            <pre data-id="canadd-code" data-magic-move><code class="language-ts" data-line-numbers data-char-marks="8:11-13, 9:3-11, 10:5-21, 11:5-53, 12:3-4, 13:1-2">const data = [
+  { month: "Jun", city: "Boston", temp: 21, usd: 120 },
+  { month: "Jun", city: "Chicago", temp: 22, usd: 95 },
+  { month: "Jul", city: "Boston", temp: 24, usd: 135 },
+  ...
+];
+
+chart(data, {
+  schema: {
+    temp: Unit("°C"),
+    usd: Unit("USD", { traits: [Trait.summable()] }),
+  },
+})
+  .flow(
+    spread({ by: "month", dir: "x" }),
+    stack({ by: "city", dir: "y" }),
+  )
+  .mark(rect({
+    h: "temp",
+    fill: "city",
+  }))</code></pre>
+            <div class="canadd-right">
+              <div class="canadd-result" data-id="canadd-result-untyped">
+                <div class="code-pair-label">no schema <span class="code-pair-sub">· nothing is checked: it stacks</span></div>
+                <div class="canadd-out" data-chart="canadd-untyped" data-w="460" data-h="300" data-font-size="16"></div>
+              </div>
+              <div class="canadd-result is-current" data-id="canadd-result-temp">
+                <div class="code-pair-label">°C <span class="code-pair-sub">· no CanAdd: GoFish refuses</span></div>
+                <!-- Runs the spec on the left and shows the error GoFish
+                     throws (data-expect-error), not a chart. -->
+                <div class="canadd-out canadd-error-box" data-chart="canadd-temp" data-expect-error data-w="460" data-h="300"></div>
+              </div>
+              <div class="canadd-result" data-id="canadd-result-usd">
+                <div class="code-pair-label">USD <span class="code-pair-sub">· declared summable: it stacks</span></div>
+                <div class="canadd-out" data-chart="canadd-usd" data-w="460" data-h="300" data-font-size="16"></div>
+                <div class="canadd-tagline">constrains specs, not pictures</div>
+              </div>
+            </div>
+          </div>
+          <p class="canadd-footnote" data-id="canadd-footnote">Inspired by Bartonicek, Urbanek &amp; Murrell (JCGS 2025), Flint (Wang et al., VIS 2026), and Huang &amp; Kay (GUGOG 2026).</p>
+          <aside class="notes">
+            <p><strong>Target:</strong> 0:05 (of the slide's 0:40).
+              <strong>Running total:</strong> 6:15 of 7:35.</p>
+            <p><strong>Say:</strong> "Run it, and the same stack now gives an
+              error, because degrees Celsius has no <code>CanAdd</code>. The
+              error suggests the fix: average them instead."</p>
             <p>If there is spare time: to stack °C you either declare the unit
               summable, which is a deliberate claim about your data, or you
               stack the means. The only thing it takes away is stacking
               numbers whose sums mean nothing.</p>
-            <p>The highlights mark what changed: the schema is new, and
-              nothing else in the spec moved.</p>
+            <p>The code is the same as on the step before. Only the output
+              changed.</p>
             <p>The error is not typed in: the slide runs this spec live and
               prints the message GoFish throws. It is
               <code>checkSummable</code>'s error in
@@ -341,9 +407,9 @@ chart(data, {
               (<code>packages/gofish-graphics/src/tests/measure.test.ts</code>,
               "CanAdd: only amounts that add up are summed"), which stacks a
               <code>Unit("USD", { traits: [Trait.summable()] })</code> column
-              and a <code>Unit("°C")</code> column the same way. The three
-              steps are one ordinary program. Step 2 adds the schema, and
-              step 3 changes only the stacked column. The type itself is
+              and a <code>Unit("°C")</code> column the same way. The four
+              steps are one ordinary program. Step 2 adds the schema, step 3
+              runs it, and step 4 changes only the stacked column. The type itself is
               <code>export type CanAdd = Record&lt;string,
               never&gt;;</code> in <code>src/ast/schema.ts</code>: "The class
               of a unit whose amounts can be added".</p>
