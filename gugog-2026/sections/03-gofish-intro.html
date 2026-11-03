@@ -12,7 +12,12 @@
              Shown code elides styling with "..." (the thesis deck's style);
              charts.ts holds the full specs the renders run.
              The code blocks have data-magic-move, so Reveal's auto-animate
-             moves the code word by word and fades in the new words; the renders crossfade. Every render is
+             moves the code word by word and fades in the new words. Each
+             render's box has a data-id and moves; the render inside has
+             none, so it moves with its box, and a new render replaces the
+             old one in place. A data-id on the render too would break
+             when you navigate before an animation ends: see the CanAdd
+             slides in 04b-validity.html. Every render is
              live: renderCharts() in ../charts.ts draws it from the full version
              of the code printed beside it (gofish-graphics nightly).
              Planets code: the GoFish repo's tutorial stories (origin/main
@@ -35,7 +40,7 @@
             <div class="crash-col">
               <p class="code-pair-label" data-id="crash-core-label">core <span class="code-pair-sub">· small: marks and relations</span></p>
               <div class="crash-planets-box" data-id="crash-planets-box">
-                <div class="crash-render" data-id="crash-planets" data-chart="planets" data-w="440" data-h="160"></div>
+                <div class="crash-render" data-chart="planets" data-w="440" data-h="160"></div>
               </div>
               <pre data-id="crash-core-code" data-magic-move><code class="language-ts" data-line-numbers>const planets = enclose({ ... }, [
   spread(
@@ -47,7 +52,7 @@
             <div class="crash-col">
               <p class="code-pair-label" data-id="crash-chart-label">chart level <span class="code-pair-sub">· big: short specs</span></p>
               <div class="crash-chart-box" data-id="crash-chart-box">
-                <div class="crash-render" data-id="crash-stacked" data-chart="seafood-stacked" data-w="540" data-h="230"></div>
+                <div class="crash-render" data-chart="seafood-stacked" data-w="540" data-h="230"></div>
               </div>
               <pre data-id="crash-chart-code" data-magic-move><code class="language-ts" data-line-numbers>chart(seafood)
   .flow(
@@ -113,7 +118,7 @@
             <div class="crash-col">
               <p class="code-pair-label" data-id="crash-core-label">core <span class="code-pair-sub">· + a label, two relations, an arrow</span></p>
               <div class="crash-planets-box" data-id="crash-planets-box">
-                <div class="crash-render" data-id="crash-planets-label" data-chart="planets-label" data-w="440" data-h="160"></div>
+                <div class="crash-render" data-chart="planets-label" data-w="440" data-h="160"></div>
               </div>
               <pre data-id="crash-core-code" data-magic-move><code class="language-ts" data-line-numbers data-char-marks="8:1-59, 10:1-23, 11:3-44, 12:5-56, 13:5-63, 14:5-37, 15:3-4">const planets = enclose({ ... }, [
   spread(
@@ -134,7 +139,7 @@ layer([planets, label])
             <div class="crash-col">
               <p class="code-pair-label" data-id="crash-chart-label">chart level <span class="code-pair-sub">· big: short specs</span></p>
               <div class="crash-chart-box" data-id="crash-chart-box">
-                <div class="crash-render" data-id="crash-stacked" data-chart="seafood-stacked" data-w="540" data-h="230"></div>
+                <div class="crash-render" data-chart="seafood-stacked" data-w="540" data-h="230"></div>
               </div>
               <pre data-id="crash-chart-code" data-magic-move><code class="language-ts" data-line-numbers>chart(seafood)
   .flow(
@@ -188,7 +193,7 @@ layer([planets, label])
             <div class="crash-col">
               <p class="code-pair-label" data-id="crash-core-label">core <span class="code-pair-sub">· + a label, two relations, an arrow</span></p>
               <div class="crash-planets-box" data-id="crash-planets-box">
-                <div class="crash-render" data-id="crash-planets-label" data-chart="planets-label" data-w="440" data-h="160"></div>
+                <div class="crash-render" data-chart="planets-label" data-w="440" data-h="160"></div>
               </div>
               <pre data-id="crash-core-code" data-magic-move><code class="language-ts" data-line-numbers data-char-marks="8:1-59, 10:1-23, 11:3-44, 12:5-56, 13:5-63, 14:5-37, 15:3-4">const planets = enclose({ ... }, [
   spread(
@@ -209,7 +214,7 @@ layer([planets, label])
             <div class="crash-col">
               <p class="code-pair-label" data-id="crash-chart-label">chart level <span class="code-pair-sub">· + a ribbon</span></p>
               <div class="crash-chart-box" data-id="crash-chart-box">
-                <div class="crash-render" data-id="crash-ribbon" data-chart="seafood-ribbon" data-w="540" data-h="230"></div>
+                <div class="crash-render" data-chart="seafood-ribbon" data-w="540" data-h="230"></div>
               </div>
               <pre data-id="crash-chart-code" data-magic-move><code class="language-ts" data-line-numbers data-char-marks="7:3-40">chart(seafood)
   .flow(

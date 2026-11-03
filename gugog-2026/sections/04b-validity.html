@@ -90,9 +90,18 @@
              results in the same place and shows one (.is-current). Each
              result keeps its data-id across the steps, so Reveal matches
              it and crossfades its opacity after the delay, both forwards
-             and backwards. The chart boxes inside carry data-ids too:
-             Reveal fades in any unmatched element from 0, which would
-             blank the old chart while the code moves. -->
+             and backwards. Nothing inside a result may be matched on its
+             own: no data-id, and the label and tagline are divs, not p,
+             because Reveal also pairs up p elements by their text. A result
+             with no matched element inside moves and fades as one piece.
+             With one inside, Reveal fades that element's unmatched siblings
+             in from 0 (blanking the old chart while the code moves), and
+             measures the inner element by offsetLeft and offsetTop. If the
+             step before is still animating, the result's running transform
+             makes it the inner element's offsetParent, so the inner
+             element is measured from the result's corner on one slide and
+             from the slide's corner on the other, and it flies in from the
+             top left. -->
         <section class="code-slide" data-auto-animate data-auto-animate-id="canadd" data-auto-animate-duration="0.3">
           <p class="part" data-id="canadd-part">4b · Validity against freedom of arrangement</p>
           <h2 data-id="canadd-title"><code>stack</code> needs <code>CanAdd</code></h2>
@@ -115,19 +124,19 @@ chart(data)
   }))</code></pre>
             <div class="canadd-right">
               <div class="canadd-result is-current" data-id="canadd-result-untyped" data-auto-animate-delay="0.3">
-                <p class="code-pair-label">no schema <span class="code-pair-sub">· nothing is checked: it stacks</span></p>
-                <div class="canadd-out" data-id="canadd-out-untyped" data-chart="canadd-untyped" data-w="460" data-h="300" data-font-size="16"></div>
+                <div class="code-pair-label">no schema <span class="code-pair-sub">· nothing is checked: it stacks</span></div>
+                <div class="canadd-out" data-chart="canadd-untyped" data-w="460" data-h="300" data-font-size="16"></div>
               </div>
               <div class="canadd-result" data-id="canadd-result-temp" data-auto-animate-delay="0.3">
-                <p class="code-pair-label">°C <span class="code-pair-sub">· no CanAdd: GoFish refuses</span></p>
+                <div class="code-pair-label">°C <span class="code-pair-sub">· no CanAdd: GoFish refuses</span></div>
                 <!-- Runs the spec on the left and shows the error GoFish
                      throws (data-expect-error), not a chart. -->
-                <div class="canadd-out canadd-error-box" data-id="canadd-out-temp" data-chart="canadd-temp" data-expect-error data-w="460" data-h="300"></div>
+                <div class="canadd-out canadd-error-box" data-chart="canadd-temp" data-expect-error data-w="460" data-h="300"></div>
               </div>
               <div class="canadd-result" data-id="canadd-result-usd" data-auto-animate-delay="0.3">
-                <p class="code-pair-label">USD <span class="code-pair-sub">· declared summable: it stacks</span></p>
-                <div class="canadd-out" data-id="canadd-out-usd" data-chart="canadd-usd" data-w="460" data-h="300" data-font-size="16"></div>
-                <p class="canadd-tagline">constrains specs, not pictures</p>
+                <div class="code-pair-label">USD <span class="code-pair-sub">· declared summable: it stacks</span></div>
+                <div class="canadd-out" data-chart="canadd-usd" data-w="460" data-h="300" data-font-size="16"></div>
+                <div class="canadd-tagline">constrains specs, not pictures</div>
               </div>
             </div>
           </div>
@@ -188,19 +197,19 @@ chart(data, {
   }))</code></pre>
             <div class="canadd-right">
               <div class="canadd-result" data-id="canadd-result-untyped" data-auto-animate-delay="0.3">
-                <p class="code-pair-label">no schema <span class="code-pair-sub">· nothing is checked: it stacks</span></p>
-                <div class="canadd-out" data-id="canadd-out-untyped" data-chart="canadd-untyped" data-w="460" data-h="300" data-font-size="16"></div>
+                <div class="code-pair-label">no schema <span class="code-pair-sub">· nothing is checked: it stacks</span></div>
+                <div class="canadd-out" data-chart="canadd-untyped" data-w="460" data-h="300" data-font-size="16"></div>
               </div>
               <div class="canadd-result is-current" data-id="canadd-result-temp" data-auto-animate-delay="0.3">
-                <p class="code-pair-label">°C <span class="code-pair-sub">· no CanAdd: GoFish refuses</span></p>
+                <div class="code-pair-label">°C <span class="code-pair-sub">· no CanAdd: GoFish refuses</span></div>
                 <!-- Runs the spec on the left and shows the error GoFish
                      throws (data-expect-error), not a chart. -->
-                <div class="canadd-out canadd-error-box" data-id="canadd-out-temp" data-chart="canadd-temp" data-expect-error data-w="460" data-h="300"></div>
+                <div class="canadd-out canadd-error-box" data-chart="canadd-temp" data-expect-error data-w="460" data-h="300"></div>
               </div>
               <div class="canadd-result" data-id="canadd-result-usd" data-auto-animate-delay="0.3">
-                <p class="code-pair-label">USD <span class="code-pair-sub">· declared summable: it stacks</span></p>
-                <div class="canadd-out" data-id="canadd-out-usd" data-chart="canadd-usd" data-w="460" data-h="300" data-font-size="16"></div>
-                <p class="canadd-tagline">constrains specs, not pictures</p>
+                <div class="code-pair-label">USD <span class="code-pair-sub">· declared summable: it stacks</span></div>
+                <div class="canadd-out" data-chart="canadd-usd" data-w="460" data-h="300" data-font-size="16"></div>
+                <div class="canadd-tagline">constrains specs, not pictures</div>
               </div>
             </div>
           </div>
@@ -271,19 +280,19 @@ chart(data, {
   }))</code></pre>
             <div class="canadd-right">
               <div class="canadd-result" data-id="canadd-result-untyped" data-auto-animate-delay="0.3">
-                <p class="code-pair-label">no schema <span class="code-pair-sub">· nothing is checked: it stacks</span></p>
-                <div class="canadd-out" data-id="canadd-out-untyped" data-chart="canadd-untyped" data-w="460" data-h="300" data-font-size="16"></div>
+                <div class="code-pair-label">no schema <span class="code-pair-sub">· nothing is checked: it stacks</span></div>
+                <div class="canadd-out" data-chart="canadd-untyped" data-w="460" data-h="300" data-font-size="16"></div>
               </div>
               <div class="canadd-result" data-id="canadd-result-temp" data-auto-animate-delay="0.3">
-                <p class="code-pair-label">°C <span class="code-pair-sub">· no CanAdd: GoFish refuses</span></p>
+                <div class="code-pair-label">°C <span class="code-pair-sub">· no CanAdd: GoFish refuses</span></div>
                 <!-- Runs the spec on the left and shows the error GoFish
                      throws (data-expect-error), not a chart. -->
-                <div class="canadd-out canadd-error-box" data-id="canadd-out-temp" data-chart="canadd-temp" data-expect-error data-w="460" data-h="300"></div>
+                <div class="canadd-out canadd-error-box" data-chart="canadd-temp" data-expect-error data-w="460" data-h="300"></div>
               </div>
               <div class="canadd-result is-current" data-id="canadd-result-usd" data-auto-animate-delay="0.3">
-                <p class="code-pair-label">USD <span class="code-pair-sub">· declared summable: it stacks</span></p>
-                <div class="canadd-out" data-id="canadd-out-usd" data-chart="canadd-usd" data-w="460" data-h="300" data-font-size="16"></div>
-                <p class="canadd-tagline">constrains specs, not pictures</p>
+                <div class="code-pair-label">USD <span class="code-pair-sub">· declared summable: it stacks</span></div>
+                <div class="canadd-out" data-chart="canadd-usd" data-w="460" data-h="300" data-font-size="16"></div>
+                <div class="canadd-tagline">constrains specs, not pictures</div>
               </div>
             </div>
           </div>

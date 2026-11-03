@@ -270,13 +270,15 @@
 }
 
 /* The three results share one grid cell, and only the current step's is
-   shown; see the comment above the CanAdd slides. */
+   shown; see the comment above the CanAdd slides. Their label and tagline
+   are divs, so they get the line height the template gives a p. */
 .canadd-right {
   display: grid;
 }
 
 .canadd-result {
   grid-area: 1 / 1;
+  line-height: 1.5;
   opacity: 0;
 }
 
