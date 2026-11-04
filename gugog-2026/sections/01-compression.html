@@ -105,6 +105,7 @@
         <section>
           <p class="part">1 · Why compress</p>
           <h2>a grammar is a compression</h2>
+          <p class="compression-subtitle">To make a description shorter, you have to find the structure. <span class="source-line">Simon, 1962</span></p>
           <!-- Live GoFish charts, drawn by renderCharts() in ../charts.ts.
                Five stacked copies of one chart, each with three panels: the
                usage curve, the size of the language, and the length of each
@@ -129,28 +130,87 @@
           <aside class="notes">
             <p><strong>Target:</strong> 0:50 (was 0:35; the opening on why
               we compress takes about 0:15). <strong>Running total:</strong>
-              1:05 of 7:00.</p>
+              1:05 of 7:00. The Simon lines added on 2026-11-04 make the
+              opening about 0:15 longer when spoken, and part 1 has no slack
+              to give. Rehearse it; if it runs long, the Target needs to grow
+              and the running totals need to be recomputed.</p>
             <p><strong>Why compress</strong> (before the first click, over
-              the empty axes):</p>
+              the empty axes; the line under the title is on screen from the
+              start):</p>
             <ul>
               <li>Why unify charts into one language at all? The old reasons
                 were that one language is easier to write and easier to read.
                 Those matter less now that AI writes a lot of our code.</li>
-              <li>The reason that still holds is compression. Compressing
-                forces you to find structure.</li>
-              <li>The grammar of graphics did exactly this. It compressed
-                many chart types into one shared language, and that revealed
-                structure like marks, channels, scales, and coordinate
-                systems.</li>
-              <li>That structure is worth having for its own sake, the way
-                structure in mathematics is. It also shaped the tools we use:
-                ggplot2, Vega-Lite and Altair, and Tableau.</li>
+              <li>The reason that still holds is that compression forces us
+                to find structure. To make a description shorter, you have to
+                find the structure in what you describe.</li>
+              <li>The grammar of graphics is an example. It compressed many
+                chart types into marks, channels, scales, and coordinates.
+                That structure is worth finding for its own sake, and it
+                shaped the tools we use: ggplot2, Vega-Lite and Altair, and
+                Tableau.</li>
+              <li>Herbert Simon made this point in 1962. Most complex things
+                are full of repetition, and we can use that to describe them
+                simply. But he adds a condition: we have to find the right
+                representation.</li>
+              <li>That condition matters for this talk. Which structure you
+                find depends on the language you describe charts in. A
+                language with only nouns finds nouns.</li>
               <li>So how well do today's approaches compress?</li>
             </ul>
             <p>If asked for an example of what the structure gives us: Draco
               and CompassQL work on Vega-Lite specs, so they reason about a
               chart in terms of its marks and encodings, not its chart
               type.</p>
+            <p><strong>If asked</strong> where "compression begets structure"
+              comes from:</p>
+            <ul>
+              <li>Simon's own words, from the summary of "The Architecture of
+                Complexity" (Proceedings of the American Philosophical Society
+                106(6), 1962, p. 481): "How complex or simple a structure is
+                depends critically upon the way in which we describe it. Most
+                of the complex structures found in the world are enormously
+                redundant, and we can use this redundancy to simplify their
+                description. But to use it, to achieve the simplification, we
+                must find the right representation."</li>
+              <li>The formal version is the minimum description length
+                principle: compressing is learning the regularities. Peter
+                Gr&uuml;nwald's tutorial (2004, arXiv math/0406077, section
+                1.1): "any regularity in the data can be used to compress the
+                data, i.e. to describe it using fewer symbols than the number
+                of symbols needed to describe the data literally. The more
+                regularities there are, the more the data can be compressed.
+                Equating 'learning' with 'finding regularity', we can
+                therefore say that the more we are able to compress the data,
+                the more we have learned about the data."</li>
+              <li>Simon also says that hierarchy is what makes complex things
+                describable in few words (p. 478): "The hierarchic structures
+                we have been discussing have a high degree of redundancy,
+                hence can often be described in economical terms." The first
+                kind of redundancy he names is that "Hierarchic systems are
+                usually composed of only a few different kinds of subsystems,
+                in various combinations and arrangements." And he warns
+                (p. 477): "If there are important systems in the world that
+                are complex without being hierarchic, they may to a
+                considerable extent escape our observation and our
+                understanding." This is the same idea as the hierarchy slide
+                in 4a.</li>
+              <li>An honest caveat: compression does not always give
+                structure that people can read. The shortest description of
+                something can be opaque. Simon's point is that nesting a few
+                kinds of reusable parts is what makes a short description
+                readable, and that is the thesis of this talk.</li>
+              <li>Gregory Chaitin says it in one line (2002, arXiv
+                math/0210035): "comprehension is compression, i.e.,
+                explaining many facts using few theoretical
+                assumptions".</li>
+              <li>An example from machine learning, grokking (not checked
+                against the papers; verify before saying it): small networks
+                trained with weight decay on modular addition first memorize
+                the training data, and later switch to a compact algorithm
+                with clear structure (Power et al. 2022; Nanda et al.
+                2023).</li>
+            </ul>
             <p><strong>The chart:</strong></p>
             <ul>
               <li>All three panels share one x axis: simple, common charts
@@ -213,6 +273,7 @@
         <section>
           <p class="part">1 · Why compress</p>
           <h2>a grammar is a compression, as rates</h2>
+          <p class="compression-subtitle">To make a description shorter, you have to find the structure. <span class="source-line">Simon, 1962</span></p>
           <!-- A variant of the slide before, for comparison. Same steps and
                layout, drawn by renderCharts() in ../charts.ts. The two cost
                panels show the slope of the slide before's curves. -->
@@ -268,6 +329,7 @@
         <section>
           <p class="part">1 · Why compress</p>
           <h2>a grammar is a compression, as rates</h2>
+          <p class="compression-subtitle">To make a description shorter, you have to find the structure. <span class="source-line">Simon, 1962</span></p>
           <!-- A variant of the slide before, for comparison. Same steps and
                layout, drawn by renderCharts() in ../charts.ts. The two cost
                panels show the slope of the slide before's curves. -->
