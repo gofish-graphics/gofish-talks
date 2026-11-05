@@ -1,58 +1,104 @@
         <!-- The styles for these slides (../gofish-compare.css) are linked
              at the top of 01c-compress-islands.html. -->
 
-        <!-- ═══ PART 3 CONTINUED: A GOFISH CRASH COURSE, ~0:30 ══════════════
-             Three auto-animated states of one picture. Left: the core level
-             (planets render and code). Right: the chart level (seafood
-             render and code).
-               1. planets on a background, stacked bars
-               2. + a label and an arrow on the planets
-               3. + a ribbon on the bars, which makes the ribbon chart
+        <!-- ═══ PART 3 CONTINUED: WHAT IS GOFISH, ~0:10 ═════════════════
+             Added 2026-11-05. One short beat after the verbs slide, modeled
+             on the thesis defense deck's "What Is GoFish?" slide
+             (phd-thesis-20260618/presentation/sections/03-gofish.html):
+             name the system in one sentence before any code. The defense
+             deck's sentence is about Bluefish and Gestalt relations; this
+             talk's is the one the verbs slide sets up, that GoFish extends
+             the grammar of graphics with verbs. The second line is the
+             defense deck's own, shown at once (no fragment) to keep the beat
+             short. It is its own slide, not a second click on the verbs
+             slide, because the verbs slide's grid leaves no room for a
+             second line at 1280x720. -->
+        <section class="gofish-what-slide">
+          <style>
+            .reveal .gofish-what-slide .gofish-what-logo {
+              display: block;
+              height: 150px;
+              margin: 2.6em auto 0.6em;
+            }
+            .reveal .gofish-what-slide .big-claim {
+              margin: 0.4em auto 0;
+              text-align: center;
+            }
+            .reveal .gofish-what-slide .gofish-what-sub {
+              color: var(--muted);
+              font-size: 0.7em;
+              margin-top: 1.4em;
+              text-align: center;
+            }
+          </style>
+          <p class="part">3 · The grammar of graphics needs verbs</p>
+          <h2>What is GoFish?</h2>
+          <img class="gofish-what-logo" src="./images/gofish-intro/gofish-logo.png" alt="GoFish logo" />
+          <p class="big-claim">GoFish extends the grammar of graphics with verbs.</p>
+          <p class="gofish-what-sub">MIT-licensed and open source, for JavaScript and Python, at <strong>gofish.graphics</strong></p>
+          <aside class="notes">
+            <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
+              2:55 of 7:00.</p>
+            <p><strong>Say:</strong> "That is what GoFish does. GoFish
+              extends the grammar of graphics with verbs. It is open source,
+              and you can use it today from JavaScript and Python."</p>
+            <p>The verbs slide said the grammar of graphics needs verbs. This
+              slide names the thing that adds them, before any code. It keeps
+              the grammar of graphics' nouns: marks, channels, scales, and
+              coordinates are all still there. What it adds is the verbs.</p>
+            <p><strong>Lead into the crash course:</strong> "Here is what
+              that looks like."</p>
+            <p><strong>Source:</strong> the thesis defense deck's "What Is
+              GoFish?" slide. Its first line there is "GoFish is an expressive
+              visualization library built on Bluefish that integrates our
+              formalism of Gestalt relationships with the Grammar of
+              Graphics." This talk does not introduce Bluefish, so the line is
+              the verbs version. The second line is the defense deck's own,
+              with the link shown as plain bold text.</p>
+          </aside>
+        </section>
+
+        <!-- ═══ PART 3 CONTINUED: A GOFISH CRASH COURSE, ~0:20 ══════════════
+             Two auto-animated states of one picture, the chart API only
+             (since 2026-11-05):
+               1. stacked bars
+               2. + a ribbon, which makes the ribbon chart
+             Until 2026-11-05 the crash course had three states and two
+             columns, with the core level (the planets diagram and its code)
+             on the left. The user cut the planets column because it was too
+             much at once. The planets now have their own slide right after
+             this one, the core slide. Without the planets column the old
+             second state was the same as the first on the chart side, so it
+             was dropped.
+             Layout: the code on the left, the render on the right, both
+             large. The code is 18.5px, like the bottle slide's.
              Shown code elides styling with "..." (the thesis deck's style);
              charts.ts holds the full specs the renders run.
-             The code blocks have data-magic-move, so Reveal's auto-animate
-             moves the code word by word and fades in the new words. Each
+             The code block has data-magic-move, so Reveal's auto-animate
+             moves the code word by word and fades in the new words. The
              render's box has a data-id and moves; the render inside has
-             none, so it moves with its box, and a new render replaces the
-             old one in place. A data-id on the render too would break
-             when you navigate before an animation ends: see the CanAdd
-             slides in 04b-validity.html. Every render is
-             live: renderCharts() in ../charts.ts draws it from the full version
-             of the code printed beside it (gofish-graphics nightly).
-             Planets code: the GoFish repo's tutorial stories (origin/main
-             7b902ed38), packages/gofish-graphics/stories/tutorials/
-             Basics.stories.tsx and Diagrams.stories.tsx, restructured into
-             consts so the second state only adds lines (see charts.ts), and
-             shown with styling elided.
+             none, so it moves with its box, and the new render replaces the
+             old one in place. A data-id on the render too would break when
+             you navigate before an animation ends: see the CanAdd slides in
+             04b-validity.html. For the same reason the header row has no
+             data-id: the logo inside it is matched by its src, so the row
+             must not be matched as well. Every render is live:
+             renderCharts() in ../charts.ts draws it from the full version of
+             the code printed beside it (gofish-graphics nightly).
              Seafood code: the thesis deck's ribbon walkthrough
              (phd-thesis-20260618/presentation/sections/03-gofish.html,
              "Spread the Lakes Apart", and the .layer(ribbon) step of its
              stage 3b figure), which is the GUGOG paper's Figure 2. -->
         <section class="code-slide crash-slide" data-auto-animate data-auto-animate-id="crash-course">
-          <div class="gofish-intro-head" data-id="crash-head">
+          <div class="gofish-intro-head">
             <img src="./images/gofish-intro/gofish-logo.png" alt="GoFish logo" />
             <div>
               <h2>GoFish composes marks with verbs</h2>
             </div>
           </div>
-          <div class="crash-grid">
-            <div class="crash-col">
-              <p class="code-pair-label" data-id="crash-core-label">core <span class="code-pair-sub">· small: marks and relations</span></p>
-              <div class="crash-planets-box" data-id="crash-planets-box">
-                <div class="crash-render" data-chart="planets" data-w="440" data-h="160"></div>
-              </div>
-              <pre data-id="crash-core-code" data-magic-move><code class="language-ts" data-line-numbers>const planets = enclose({ ... }, [
-  spread(
-    { dir: "x", alignment: "middle", ... },
-    data.map((d) =&gt; circle({ r: d.r, ... }).name(d.name))
-  ),
-]).name("planets");</code></pre>
-            </div>
-            <div class="crash-col">
-              <p class="code-pair-label" data-id="crash-chart-label">chart level <span class="code-pair-sub">· big: short specs</span></p>
-              <div class="crash-chart-box" data-id="crash-chart-box">
-                <div class="crash-render" data-chart="seafood-stacked" data-w="540" data-h="230"></div>
-              </div>
+          <div class="crash-solo">
+            <div>
+              <p class="code-pair-label" data-id="crash-chart-label">chart API <span class="code-pair-sub">· short specs</span></p>
               <pre data-id="crash-chart-code" data-magic-move><code class="language-ts" data-line-numbers>chart(seafood)
   .flow(
     spread({ by: "lake", dir: "x", ... }),
@@ -60,161 +106,46 @@
   )
   .mark(rect({ h: "count", fill: "species" }))</code></pre>
             </div>
+            <div class="crash-chart-box" data-id="crash-chart-box">
+              <div class="crash-render" data-chart="seafood-stacked" data-w="520" data-h="420"></div>
+            </div>
           </div>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:10 (0:30 for the three crash-course
-              states). <strong>Running total:</strong> 2:25 of 7:00.</p>
-            <p>The code shown leaves out styling parameters (padding, fill,
-              stroke, opacity, colors, font size, spacing) and marks each with
-              <code>...</code>, in the thesis deck's style. The live render
-              uses the full spec in <code>../charts.ts</code>.</p>
-            <p><strong>Say:</strong> GoFish is my attempt at those verbs. In a
-              language with verbs, you can build new structures from old ones,
-              using a fairly stable set of composition mechanisms. It's
-              a compositional language for visual structure, open source. Here
-              are two of its API surfaces side by side. On the left, the core: four planets as
-              <code>circle</code> marks, <code>spread</code> lays them out in
-              a row, and <code>enclose</code> draws the background around
-              them. On the right, a stacked bar chart: the same
-              <code>spread</code> lays out the lakes, and <code>stack</code>
-              piles the species inside each one.</p>
-            <p><strong>Two surfaces on one core (one sentence):</strong> "These
-              are two surfaces on one core. The chart level gives short specs
-              for common charts, and it is built out of the low-level core of
-              marks and relations." These are the verbs that the verbs slide
-              asks for, at work. The hierarchy slide in part 4a comes back to
-              this split.</p>
-            <p><strong>Sources:</strong></p>
-            <ul>
-              <li>Spoken tagline ("a compositional language for visual
-                structure, open source"): the SciPy deck's GoFish card
-                (<code>scipy-2026/sections/01-opening.html</code>). It is not
-                on the slide, to leave room for the code.</li>
-              <li>Planets: the GoFish repo's Basics tutorial story
-                (<code>packages/gofish-graphics/stories/tutorials/Basics.stories.tsx</code>
-                on origin/main), styled after the thesis deck's Bluefish
-                planets. Restructured from the story: the
-                <code>enclose</code> is bound to <code>const planets</code>,
-                and the circles and the group are named from the start, ready
-                for the next state. Shown with its styling elided. It already uses <code>circle({ r })</code>, not
-                <code>ellipse</code>. Rendered live.</li>
-              <li>Stacked bars: the thesis deck's "Spread the Lakes Apart" slide
-                (<code>presentation/sections/03-gofish.html</code>), with the
-                GoFish repo's seafood data and the thesis deck's lake names.
-                Rendered live.</li>
-            </ul>
+            <p><strong>Target:</strong> 0:10 (0:20 for the two crash-course
+              states). <strong>Running total:</strong> 3:05 of 7:00.</p>
+            <p>The code shown leaves out styling parameters (spacing and
+              opacity) and marks each with <code>...</code>, in the thesis
+              deck's style. The live render uses the full spec in
+              <code>../charts.ts</code>.</p>
+            <p><strong>Say:</strong> "Here's a stacked bar chart in GoFish.
+              <code>spread</code> lays out the lakes side by side, and
+              <code>stack</code> piles the species inside each one. Those are
+              verbs. In a language with verbs, you can build new structures
+              from old ones, using a fairly stable set of composition
+              mechanisms."</p>
+            <p>This says the second half of the thesis once. The full thesis
+              comes on the hierarchy slide in part 4a.</p>
+            <p><strong>Sources:</strong> the stacked bars are the thesis
+              deck's "Spread the Lakes Apart" slide
+              (<code>presentation/sections/03-gofish.html</code>), with the
+              GoFish repo's seafood data and the thesis deck's lake names.
+              Rendered live. The spoken tagline from the old version of this
+              slide ("a compositional language for visual structure, open
+              source", from the SciPy deck's GoFish card) moved to the "What
+              is GoFish?" slide before this one, in a shorter form.</p>
           </aside>
         </section>
 
         <section class="code-slide crash-slide" data-auto-animate data-auto-animate-id="crash-course">
-          <div class="gofish-intro-head" data-id="crash-head">
+          <div class="gofish-intro-head">
             <img src="./images/gofish-intro/gofish-logo.png" alt="GoFish logo" />
             <div>
               <h2>Add one thing, get a new graphic</h2>
             </div>
           </div>
-          <div class="crash-grid">
-            <div class="crash-col">
-              <p class="code-pair-label" data-id="crash-core-label">core <span class="code-pair-sub">· + a label, two relations, an arrow</span></p>
-              <div class="crash-planets-box" data-id="crash-planets-box">
-                <div class="crash-render" data-chart="planets-label" data-w="440" data-h="160"></div>
-              </div>
-              <pre data-id="crash-core-code" data-magic-move><code class="language-ts" data-line-numbers data-char-marks="8:1-59, 10:1-23, 11:3-44, 12:5-56, 13:5-63, 14:5-37, 15:3-4">const planets = enclose({ ... }, [
-  spread(
-    { dir: "x", alignment: "middle", ... },
-    data.map((d) =&gt; circle({ r: d.r, ... }).name(d.name))
-  ),
-]).name("planets");
-
-const label = text({ text: "Mercury", ... }).name("label");
-
-layer([planets, label])
-  .relate(({ mercury, planets, label }) =&gt; [
-    Constraint.align({ x: "middle" }, [mercury, label]),
-    Constraint.distribute({ dir: "y", ... }, [planets, label]),
-    arrow({ ... }, [label, mercury]),
-  ])</code></pre>
-            </div>
-            <div class="crash-col">
-              <p class="code-pair-label" data-id="crash-chart-label">chart level <span class="code-pair-sub">· big: short specs</span></p>
-              <div class="crash-chart-box" data-id="crash-chart-box">
-                <div class="crash-render" data-chart="seafood-stacked" data-w="540" data-h="230"></div>
-              </div>
-              <pre data-id="crash-chart-code" data-magic-move><code class="language-ts" data-line-numbers>chart(seafood)
-  .flow(
-    spread({ by: "lake", dir: "x", ... }),
-    stack({ by: field("species").sort("count"), dir: "y" }),
-  )
-  .mark(rect({ h: "count", fill: "species" }))</code></pre>
-            </div>
-          </div>
-          <aside class="notes">
-            <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
-              2:35 of 7:00.</p>
-            <p>The code shown leaves out styling parameters (padding, fill,
-              stroke, opacity, colors, font size, spacing) and marks each with
-              <code>...</code>, in the thesis deck's style. The live render
-              uses the full spec in <code>../charts.ts</code>.</p>
-            <p><strong>Say:</strong> Now add one thing to each. On the left, a
-              label with an arrow: we name the planets and the background, put
-              them in a <code>layer</code> with the text, and
-              <code>.relate()</code> says the label lines up with Mercury and
-              sits below the background, and an arrow runs from the label to
-              Mercury. A new mark and new relations.</p>
-            <p>The highlights mark only what changed from the previous state:
-              the label and the <code>layer</code> with its relations are new
-              lines after the unchanged ones.</p>
-            <p><strong>Sources:</strong> the GoFish repo's Diagrams tutorial
-              story (<code>packages/gofish-graphics/stories/tutorials/Diagrams.stories.tsx</code>
-              on origin/main), the Basics picture plus the label, the
-              <code>Constraint.align</code> and
-              <code>Constraint.distribute</code> relations, and the
-              <code>arrow</code>. The arrow code is the story's own. The code is restructured from the story: the
-              background group and the label are bound to consts
-              (<code>const planets</code>, <code>const label</code>), and the
-              names the relations need (<code>.name(d.name)</code>,
-              <code>.name("planets")</code>) are there from the first state.
-              So this state only adds lines after the first one, and the
-              transition keeps the old lines in place. The marks, options and
-              relations are the story's own. Shown with styling elided; the
-              render runs the full code. Rendered live.</p>
-          </aside>
-        </section>
-
-        <section class="code-slide crash-slide" data-auto-animate data-auto-animate-id="crash-course">
-          <div class="gofish-intro-head" data-id="crash-head">
-            <img src="./images/gofish-intro/gofish-logo.png" alt="GoFish logo" />
+          <div class="crash-solo">
             <div>
-              <h2>Add one thing, get a new graphic</h2>
-            </div>
-          </div>
-          <div class="crash-grid">
-            <div class="crash-col">
-              <p class="code-pair-label" data-id="crash-core-label">core <span class="code-pair-sub">· + a label, two relations, an arrow</span></p>
-              <div class="crash-planets-box" data-id="crash-planets-box">
-                <div class="crash-render" data-chart="planets-label" data-w="440" data-h="160"></div>
-              </div>
-              <pre data-id="crash-core-code" data-magic-move><code class="language-ts" data-line-numbers data-char-marks="8:1-59, 10:1-23, 11:3-44, 12:5-56, 13:5-63, 14:5-37, 15:3-4">const planets = enclose({ ... }, [
-  spread(
-    { dir: "x", alignment: "middle", ... },
-    data.map((d) =&gt; circle({ r: d.r, ... }).name(d.name))
-  ),
-]).name("planets");
-
-const label = text({ text: "Mercury", ... }).name("label");
-
-layer([planets, label])
-  .relate(({ mercury, planets, label }) =&gt; [
-    Constraint.align({ x: "middle" }, [mercury, label]),
-    Constraint.distribute({ dir: "y", ... }, [planets, label]),
-    arrow({ ... }, [label, mercury]),
-  ])</code></pre>
-            </div>
-            <div class="crash-col">
-              <p class="code-pair-label" data-id="crash-chart-label">chart level <span class="code-pair-sub">· + a ribbon</span></p>
-              <div class="crash-chart-box" data-id="crash-chart-box">
-                <div class="crash-render" data-chart="seafood-ribbon" data-w="540" data-h="230"></div>
-              </div>
+              <p class="code-pair-label" data-id="crash-chart-label">chart API <span class="code-pair-sub">· + a ribbon</span></p>
               <pre data-id="crash-chart-code" data-magic-move><code class="language-ts" data-line-numbers data-char-marks="7:3-40">chart(seafood)
   .flow(
     spread({ by: "lake", dir: "x", ... }),
@@ -223,23 +154,24 @@ layer([planets, label])
   .mark(rect({ h: "count", fill: "species" }))
   .layer(ribbon({ by: "species", ... }))</code></pre>
             </div>
+            <div class="crash-chart-box" data-id="crash-chart-box">
+              <div class="crash-render" data-chart="seafood-ribbon" data-w="520" data-h="420"></div>
+            </div>
           </div>
           <aside class="notes">
             <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
-              2:45 of 7:00.</p>
-            <p>The code shown leaves out styling parameters (padding, fill,
-              stroke, opacity, colors, font size, spacing) and marks each with
-              <code>...</code>, in the thesis deck's style. The live render
-              uses the full spec in <code>../charts.ts</code>.</p>
-            <p><strong>Say:</strong> On the right, one line,
-              <code>ribbon</code>, connects each species across the lakes, and
-              the stacked bars become a ribbon chart. Verbs take graphics and
-              compose them into bigger graphics.</p>
-            <p><strong>Lead into the Atom comparison:</strong> "Now let's go
-              back to the two islands from before, Atom and PiCCL, and write
-              them with these verbs." Once we have verbs, we can write other grammars'
-              ideas with them, and then compare them, because they are all
-              written in the same language.</p>
+              3:15 of 7:00.</p>
+            <p>The code shown leaves out styling parameters (spacing and
+              opacity) and marks each with <code>...</code>, in the thesis
+              deck's style. The live render uses the full spec in
+              <code>../charts.ts</code>.</p>
+            <p><strong>Say:</strong> "Add one line, <code>ribbon</code>,
+              which connects each species across the lakes, and the stacked
+              bars become a ribbon chart. Verbs take graphics and compose them
+              into bigger graphics."</p>
+            <p><strong>Lead into the core slide:</strong> "These verbs are
+              not magic. Underneath them is something smaller and more
+              direct."</p>
             <p><strong>Sources:</strong> the thesis deck's stage 3b figure
               (<code>.layer(ribbon({ by: "species", opacity: 0.8 }))</code>,
               <code>scripts/generate-gofish-stage-assets.mjs</code>). It is the
@@ -248,5 +180,88 @@ layer([planets, label])
               paper's listing is the same spec, wrapped for a narrow column and
               with <code>{ axes: true }</code>. Rendered live. The bars become
               the ribbon chart by a crossfade, not a GoFish animation.</p>
+          </aside>
+        </section>
+
+        <!-- ═══ PART 3 CONTINUED: THE CORE, ~0:20 ═══════════════════════════
+             Added 2026-11-05. One slide, no animation. The chart API from
+             the crash course is built on a lower-level core, where marks are
+             placed by explicit relations such as align and distribute. The
+             planets diagram that used to be the crash course's left column
+             is shown here, in its labeled state. The PiCCL bottle slide in
+             03b-code-comparisons.html points back here with a callout on its
+             own low-level lines, and the hierarchy slide in 4a calls this
+             the bottom row, "core: marks + verbs".
+             Planets code: the GoFish repo's tutorial stories (origin/main
+             7b902ed38), packages/gofish-graphics/stories/tutorials/
+             Basics.stories.tsx and Diagrams.stories.tsx, restructured into
+             consts (see charts.ts), shown with styling elided. The render is
+             the "planets-label" chart in ../charts.ts. The char marks point at
+             the core's composition words: layer, relate, align, distribute. -->
+        <section class="code-slide core-slide">
+          <p class="part">3 · The grammar of graphics needs verbs</p>
+          <h2>under the chart API is a smaller, more direct core</h2>
+          <div class="core-split">
+            <div>
+              <p class="code-pair-label">core <span class="code-pair-sub">· marks placed by explicit relations</span></p>
+              <pre><code class="language-ts" data-line-numbers data-char-marks="10:1-5, 11:4-9, 12:5-20, 13:5-25">const planets = enclose({ ... }, [
+  spread(
+    { dir: "x", alignment: "middle", ... },
+    data.map((d) =&gt; circle({ r: d.r, ... }).name(d.name))
+  ),
+]).name("planets");
+
+const label = text({ text: "Mercury", ... }).name("label");
+
+layer([planets, label])
+  .relate(({ mercury, planets, label }) =&gt; [
+    Constraint.align({ x: "middle" }, [mercury, label]),
+    Constraint.distribute({ dir: "y", ... }, [planets, label]),
+    arrow({ ... }, [label, mercury]),
+  ])</code></pre>
+            </div>
+            <div class="core-render-box">
+              <div class="core-render" data-chart="planets-label" data-w="440" data-h="160"></div>
+            </div>
+          </div>
+          <aside class="notes">
+            <p><strong>Target:</strong> 0:20. <strong>Running total:</strong>
+              3:35 of 7:00.</p>
+            <p>The code shown leaves out styling parameters (padding, fill,
+              stroke, colors, font size, spacing) and marks each with
+              <code>...</code>, in the thesis deck's style. The live render
+              uses the full spec in <code>../charts.ts</code>.</p>
+            <p><strong>Say:</strong> "The chart API, with
+              <code>spread</code>, <code>stack</code>, and the rest, is built
+              on a smaller, more direct core. Here there is no data table. The
+              planets are four <code>circle</code> marks. <code>spread</code>
+              puts them in a row, and <code>enclose</code> draws the
+              background around them. Then we <code>layer</code> a label on
+              top and <code>relate</code> the marks directly: the label
+              lines up with Mercury, it sits below the background, and an
+              arrow runs from the label to Mercury. In the core, marks are
+              placed by explicit relations like align and distribute. The
+              chart API is built out of these."</p>
+            <p>Why this slide is here: it gives the audience the core before
+              the comparisons. The bottle slide two slides later mixes the
+              chart API with these same core lines, and the hierarchy slide
+              in part 4a can then say "the bottom row is the core you saw"
+              instead of explaining it from scratch.</p>
+            <p><strong>Lead into the Atom comparison:</strong> "Now let's go
+              back to the islands from before and write them with these
+              verbs. First Atom."</p>
+            <p><strong>Sources:</strong> the GoFish repo's Basics and
+              Diagrams tutorial stories
+              (<code>packages/gofish-graphics/stories/tutorials/Basics.stories.tsx</code>
+              and <code>Diagrams.stories.tsx</code> on origin/main), styled
+              after the thesis deck's Bluefish planets. The code is
+              restructured from the stories: the background group and the
+              label are bound to consts (<code>const planets</code>,
+              <code>const label</code>), and the circles and the group are
+              named so the relations can refer to them. The marks, options,
+              and relations are the stories' own, and the arrow code is the
+              Diagrams story's own. Shown with styling elided; the render runs
+              the full code. Rendered live. Until 2026-11-05 this code was the
+              left column of the crash course, built up over two states.</p>
           </aside>
         </section>

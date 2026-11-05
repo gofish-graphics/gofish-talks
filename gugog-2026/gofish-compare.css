@@ -139,6 +139,37 @@
   margin-top: 1.4rem;
 }
 
+/* The bottle slide's callout (2026-11-05): a "core" code region tints the
+   spec's low-level lines, darker than the template's role tints so it shows
+   on a projector, and a matching tag under the code names it. */
+.reveal .bottle-slide .code-region[data-role="core"],
+.reveal .bottle-slide .code-region-badge[data-role="core"] {
+  --region-ink: #165d83;
+  --region-tint: #d6e8f2;
+}
+
+.reveal .bottle-slide pre code.has-code-regions td.hljs-ln-numbers {
+  font-size: 0.75em;
+  opacity: 1;
+  width: 2.6em;
+}
+
+.reveal .code-slide .core-callout {
+  color: #165d83;
+  font-size: 0.55em;
+  margin: 0.5rem 0 0;
+}
+
+.reveal .code-slide .core-callout-tag {
+  background: #d6e8f2;
+  border: 2px solid #165d83;
+  border-radius: 4px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  margin-right: 0.3em;
+  padding: 0 0.35em;
+}
+
 /* The punchline under the GoTree layering code. */
 .reveal .code-slide .big-claim {
   margin-top: 0.5em;
@@ -158,52 +189,93 @@
   margin-top: 0.4em !important;
 }
 
-/* The GoFish crash course (03): three auto-animated states of one layout.
-   Left: the core level (planets render, then code). Right: the chart level
-   (seafood render, then code). Every state uses the same boxes, so only
-   what was added moves. The columns are fixed so nothing shifts when the
-   code grows. The code is 15.4px: the two longest lines (63 and 60
-   characters) have to sit side by side, which 17px does not allow. */
-.crash-grid {
+/* The GoFish crash course (03): two auto-animated states of one layout,
+   the chart API only (since 2026-11-05). The code is on the left at 18.5px,
+   like the bottle slide's, and the render is on the right. The code column
+   is as wide as its longest line (60 characters) and the render box has a
+   fixed size, so nothing shifts when the code grows by a line. */
+.crash-solo {
   align-items: start;
   display: grid;
-  gap: 0 1rem;
-  grid-template-columns: 604px 1fr;
-  margin-top: 0.2rem;
+  gap: 0 1.4rem;
+  grid-template-columns: auto 1fr;
+  margin-top: 2.6rem;
 }
 
-.crash-col {
+.crash-solo > div {
   min-width: 0;
+}
+
+/* The code column is pinned at the top, not centered, so it does not move
+   when the second state adds a line. The padding puts it near the middle of
+   the render box. */
+.crash-solo > div:first-child {
+  padding-top: 110px;
 }
 
 .reveal .code-slide.crash-slide .gofish-intro-head h2 {
   font-size: 1.35em;
 }
 
-.reveal .code-slide .crash-grid pre {
-  font-size: 0.55em;
+.reveal .code-slide .crash-solo pre {
+  font-size: 0.66em;
   margin: 0;
+  width: 100%;
 }
 
-.reveal .code-slide .crash-grid pre code {
-  line-height: 1.25;
+.reveal .code-slide .crash-solo pre code {
+  line-height: 1.3;
   max-height: none;
 }
 
-.reveal .code-slide .crash-grid .code-pair-label {
-  margin: 0.15rem 0;
+.reveal .code-slide .crash-solo .code-pair-label {
+  margin: 0 0 0.3rem;
 }
 
-.crash-planets-box,
 .crash-chart-box {
+  align-items: center;
   display: flex;
-  height: 230px;
+  height: 440px;
   justify-content: center;
-  margin-bottom: 0.3rem;
 }
 
-.crash-planets-box {
+/* The core slide (03), after the crash course: the planets code on the
+   left, the render on the right, scaled up from its 440x160 size. */
+.core-split {
   align-items: center;
+  display: grid;
+  gap: 0 1.4rem;
+  grid-template-columns: auto 1fr;
+  margin-top: 2.2rem;
+}
+
+.core-split > div {
+  min-width: 0;
+}
+
+.reveal .code-slide .core-split pre {
+  font-size: 0.64em;
+  margin: 0;
+  width: 100%;
+}
+
+.reveal .code-slide .core-split pre code {
+  line-height: 1.28;
+  max-height: none;
+}
+
+.reveal .code-slide .core-split .code-pair-label {
+  margin: 0 0 0.3rem;
+}
+
+.core-render-box {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.core-render {
+  transform: scale(1.12);
 }
 
 /* The McNutt quote that in 4a (04a-domain-design.html). Long, so it is

@@ -15,6 +15,8 @@
              data-code-regions. The PiCCL bottle slide shows only GoFish code
              (see its own comment).
              GoTree (paper Figure 5) is used in section 4 instead, not here.
+             Since 2026-11-05 the core slide (end of 03-gofish-intro.html)
+             comes right before these two.
              Styles: ../gofish-compare.css. -->
         <section class="code-slide">
           <p class="part">3 · The grammar of graphics needs verbs</p>
@@ -62,13 +64,16 @@
           <aside class="notes">
             <p><strong>Target:</strong> 0:10. Atom was already introduced
               in part 2, so this slide does not have to introduce it.
-              <strong>Running total:</strong> 2:55 of 7:00.</p>
+              <strong>Running total:</strong> 3:45 of 7:00.</p>
             <p><strong>The beat (this slide and the next):</strong> 1. A shared
               language makes it possible to compare grammars: once each
               grammar's idea is written in GoFish, you can put them side by side
               and see exactly what differs. The islands can reach each other. 2. The grammars are not so different
               after all: they share most of their structure, and the
               differences come down to small, nameable pieces.</p>
+            <p>The lead into this slide is the end of the core slide: "Now
+              let's go back to the islands from before and write them with
+              these verbs. First Atom."</p>
             <p><strong>Say:</strong> Here's Atom's Titanic example, with the
               layout operators we saw before the verbs slide. On the right is the same
               construction in GoFish. Every part has a counterpart. Atom's first <code>gridxy</code> is
@@ -112,13 +117,19 @@
              shows PiCCL's own figures.
              The image is the paper's figures/gofish-bottle-annotated.png,
              which that same spec draws. The char marks point at the four
-             operators the notes name. -->
+             operators the notes name.
+             The callout (2026-11-05): a code region with the role "core"
+             (talk-template's data-code-regions; its color is in
+             ../gofish-compare.css) tints the low-level lines, layer and the
+             .relate(...) block, and puts "core" in the gutter where each part
+             starts. The tag under the code says where the audience saw them,
+             the core slide in 03-gofish-intro.html, two slides back. -->
         <section class="code-slide bottle-slide">
           <p class="part">3 · The grammar of graphics needs verbs</p>
           <h2>The PiCCL bottle chart in GoFish</h2>
           <div class="split bottle-split">
             <div>
-              <pre><code class="language-ts" data-line-numbers data-char-marks="2:9-14, 3:9-13, 4:5-9, 10:6-11">chart(bottleData, { axes: false })
+              <pre><code class="language-ts" data-line-numbers data-char-marks="2:9-14, 3:9-13, 4:5-9, 10:6-11" data-code-regions="core 3:9-3:15, core 10:5-14:3">chart(bottleData, { axes: false })
   .flow(spread({ by: "category", dir: "x", ... }))
   .mark(layer([
     paint({ blendMode: "color" }, [
@@ -132,6 +143,7 @@
     Constraint.distribute({ dir: "y", ... }, [line, label]),
     Constraint.align({ x: "end" }, [label, line]),
   ]))</code></pre>
+              <p class="core-callout"><span class="core-callout-tag">core</span> the core from two slides ago</p>
             </div>
             <div>
               <img class="bottle-fig" src="./images/comparisons/gofish-bottle-annotated.png" alt="GoFish bottle chart: four bottles filled green to 30, 60, 75, and 100 percent, each with a line and a percentage label" />
@@ -141,7 +153,18 @@
           <aside class="notes">
             <p><strong>Target:</strong> 0:15. PiCCL was already introduced
               in part 2, so this slide does not have to introduce it. <strong>Running total:</strong>
-              3:10 of 7:00.</p>
+              4:00 of 7:00.</p>
+            <p><strong>The callout</strong> (since 2026-11-05): the blue
+              tinted lines, tagged "core" in the gutter and under the code, are
+              the low-level core from the core slide two slides back:
+              <code>layer</code>, and <code>.relate(...)</code> with
+              <code>Constraint.align</code> and
+              <code>Constraint.distribute</code>. The rest of the spec is the
+              chart API from the crash course. Say: "And look at the tinted
+              lines. That's the core from two slides ago, the same
+              <code>layer</code> and <code>relate</code>, inside a chart. The
+              chart API and the core mix in one spec, because they are one
+              language."</p>
             <p><strong>Say:</strong> This bottle chart comes from PiCCL, by
               Shi and others at VIS 2025. It is built from the PiCCL parts we
               saw earlier. A picture of a bottle gets a green rectangle painted onto
