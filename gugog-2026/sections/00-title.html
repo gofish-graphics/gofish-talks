@@ -24,11 +24,15 @@
               it. The grammar of graphics compresses the common charts very
               well, then hits the expressivity cliff, and each island is
               someone getting past the cliff on their own. So what if we
-              compress the islands? To make a description shorter, you have
-              to find the structure (Simon, 1962), and a language with only
-              nouns finds nouns. Atom and PiCCL each added operators, so the
-              grammar of graphics needs verbs. GoFish adds them, and Atom and
-              PiCCL reduce to them. Two fair objections follow. Andrew
+              compress the islands into one language? A bundle of separate
+              grammars would hold them all but would not let you mix them, so
+              we need what they have in common. To make a description shorter,
+              you have to find the structure (Simon, 1962), and a language
+              with only nouns finds nouns. Atom, PiCCL, and GoTree each added
+              operators, so the grammar of graphics needs verbs. GoFish
+              extends the grammar of graphics with verbs. Its chart API is
+              built on a smaller core of marks placed by explicit relations,
+              and Atom and PiCCL reduce to these verbs. Two fair objections follow. Andrew
               McNutt's is that one language cannot serve every domain's
               design; with verbs, a DSL is a library built inside the
               language, as GoTree shows. Cynthia Huang and Matthew Kay's is

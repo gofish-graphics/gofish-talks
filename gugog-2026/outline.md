@@ -8,26 +8,28 @@ Note, 2026-11-04: the compression chart now carries a cited claim. A small line 
 
 Note, 2026-11-04, later the same day: the talk has a new hook, and the opening is in a new order. After the splash, the islands drawing carries the hook, in the user's own words: "I love visualization grammars, and I'm sad, because I can't use them together." The tangle shows that they do not work with each other and asks "Why are there so many islands?" The compression chart now comes after the islands and answers that question. The grammar of graphics compresses the common charts very well, then hits the expressivity cliff, and each island is someone getting past the cliff on their own. Its closing line is now "What if we compress the islands?" Simon's point, that you have to find the structure to make a description shorter, now explains how to fix the problem, not why to care. The reason for the change is that a personal, concrete problem is easier to care about at the start than an abstract argument, and compression then becomes both the explanation and the fix. The "why unify at all" opening and the AI line are dropped. Parts 1 and 2 are renamed, and the section files are renamed so the file order matches the talk order. The total stays 7:00. See "Changes to the deck" and "Time".
 
+Note, 2026-11-05: part 2 and part 3 are restructured, following the user's notes. A new circle slide, "one language that holds all of them", now opens part 2. It is a placeholder for the user's own drawing of one circle around all the islands. Its notes are the bridge: you could hold every grammar without unifying anything, by bundling each one as a separate component, but then you could not mix them, and mixing needs something the islands have in common. A new GoTree intro, "GoTree adds operators for laying out trees", joins the Atom and PiCCL intros. A short "What is GoFish?" slide after the verbs slide says that GoFish extends the grammar of graphics with verbs, like the thesis defense deck's slide of that name. The crash course is now the chart API only, two steps, stacked bars to the ribbon chart. The planets diagram moves to a new slide after it, "under the chart API is a smaller, more direct core", and the PiCCL bottle slide gets a callout that points at the same core lines in its spec. The three GoTree code slides in 4a are hidden, and GoTree in GoFish is shown only on "same core, three shapes of data". The total stays 7:00. See "Changes to the deck" and "Time".
+
 ## The story in one paragraph
 
-The talk opens on a wall of GoFish charts, so the audience has something concrete to hold on to. Then comes the hook, over the islands drawing. I love visualization grammars, and every time I see one presented I'm in the audience like the sunglasses emoji. But I'm sad, because I can't use them together. They are all different systems, and they don't work with each other. The ggplot2 ecosystem does not help me, because I mostly work in JavaScript and Python, and many grammars don't fit the grammar of graphics anyway. There is also a practical problem: a lot of cool work, including mine, has no clear path into practice. That is why I want to build a GUGOG. It would let me play with all these grammars, and maybe let end users make charts they have never seen. The tangle shows that the islands don't work with each other, and asks why there are so many islands. The compression chart answers. It measures how well today's approaches compress, by the size of the language and the length of each spec, weighted by how often each chart is made. d3 has a small language but long specs. seaborn has short specs but a huge language. The grammar of graphics compressed many chart types into one shared language, and that revealed structure like marks, channels, scales, and coordinate systems. It sits near the sweet spot for the common charts, until the expressivity cliff. Past the cliff, it drifts toward chart types (ggplot2 extensions) or toward explicit calculations (Vega-Lite), and each island is someone getting past the cliff on their own. Together the islands make a very large language. So what if we compress the islands? To make a description shorter, you have to find the structure (Simon, 1962), and the structure you find depends on the language you use. A language with only nouns finds nouns. So let's do to the islands what the grammar of graphics did to chart types, and compress them, starting with what each island added. Atom added operators for splitting and arranging units. PiCCL added operators for repeating and combining pictures. Neither mainly added a new kind of mark or channel. So what the islands share is operators, not more nouns, and the grammar of graphics has almost none. The grammar of graphics needs verbs. GoFish adds verbs, and Atom and PiCCL reduce to them. Two fair objections follow. Andrew McNutt's is that one language cannot serve every domain's design. With verbs, a new word is a function that composes existing verbs and marks, so a DSL is a library built inside the language, and GoTree is the evidence. Cynthia Huang and Matthew Kay's is that growth costs safety. A small type system brings it back, and CanAdd is the evidence. Finally, our verbs are themselves a typology of operators, and that is the next cliff. We have to compress again, and that is the first question for the panel.
+The talk opens on a wall of GoFish charts, so the audience has something concrete to hold on to. Then comes the hook, over the islands drawing. I love visualization grammars, and every time I see one presented I'm in the audience like the sunglasses emoji. But I'm sad, because I can't use them together. They are all different systems, and they don't work with each other. The ggplot2 ecosystem does not help me, because I mostly work in JavaScript and Python, and many grammars don't fit the grammar of graphics anyway. There is also a practical problem: a lot of cool work, including mine, has no clear path into practice. That is why I want to build a GUGOG. It would let me play with all these grammars, and maybe let end users make charts they have never seen. The tangle shows that the islands don't work with each other, and asks why there are so many islands. The compression chart answers. It measures how well today's approaches compress, by the size of the language and the length of each spec, weighted by how often each chart is made. d3 has a small language but long specs. seaborn has short specs but a huge language. The grammar of graphics compressed many chart types into one shared language, and that revealed structure like marks, channels, scales, and coordinate systems. It sits near the sweet spot for the common charts, until the expressivity cliff. Past the cliff, it drifts toward chart types (ggplot2 extensions) or toward explicit calculations (Vega-Lite), and each island is someone getting past the cliff on their own. Together the islands make a very large language. So what if we compress the islands into one language? You could hold them all without unifying anything, with one package that bundles every grammar as a separate component. That would fix installing them, but it would not let you mix them, because each island's ideas would still only work inside that island. Mixing needs something the islands have in common. To make a description shorter, you have to find the structure (Simon, 1962), and the structure you find depends on the language you use. A language with only nouns finds nouns. So look at what each island added. Atom added operators for splitting and arranging units. PiCCL added operators for repeating and combining pictures. GoTree added operators for laying out trees. None of them mainly added a new kind of mark or channel. So what the islands share is operators, not more nouns, and the grammar of graphics has almost none. The grammar of graphics needs verbs. GoFish extends the grammar of graphics with verbs. Its chart API is short for common charts, and it is built on a smaller, more direct core, where marks are placed by explicit relations like align and distribute. Atom and PiCCL reduce to these verbs, and the PiCCL bottle mixes the chart API and the core in one spec. Two fair objections follow. Andrew McNutt's is that one language cannot serve every domain's design. With verbs, a new word is a function that composes existing verbs and marks, so a DSL is a library built inside the language. The core is the bottom of that hierarchy, the chart API is one surface on it, and GoTree is another. Cynthia Huang and Matthew Kay's is that growth costs safety. A small type system brings it back, and CanAdd is the evidence. Finally, our verbs are themselves a typology of operators, and that is the next cliff. We have to compress again, and that is the first question for the panel.
 
 ## The thesis
 
 In the traditional grammar of graphics, the only way to grow the language is to add a new primitive. In a language with verbs, you can build new structures from old ones, using a fairly stable set of composition mechanisms.
 
-The first half is said on the verbs slide in part 3. The full thesis is said on the hierarchy slide in part 4a, as the answer to the first objection. The crash course also says the second half once, when GoFish's verbs are introduced.
+The first half is said on the verbs slide in part 3. The full thesis is said on the hierarchy slide in part 4a, as the answer to the first objection. The first crash course step also says the second half once, when GoFish's verbs are introduced.
 
 ## How the parts connect
 
 - Part 1, "Why there are islands", opens on concrete charts and then the hook, spoken over the islands drawing: I love visualization grammars, and I'm sad, because I can't use them together. The tangle shows that they don't work with each other and asks "Why are there so many islands?" The compression chart answers it. The grammar of graphics compresses the common charts very well, then hits the expressivity cliff, and each island is someone getting past the cliff on their own. It ends with the line "What if we compress the islands?"
-- Part 2, "Compress the islands", says how to fix it. Simon's point, said at the end of the compression chart, is that to find what the islands share you have to find the structure, and that a language with only nouns finds nouns. Then it asks what each island added, with two of them up close. Atom added operators for splitting and arranging units, and PiCCL added operators for repeating and combining pictures. It ends with "So neither island mainly added a new kind of mark or channel. Each one added new ways to arrange and combine things."
-- Part 3, "The grammar of graphics needs verbs", is the main point and where the title lands. The verbs slide names what part 2 showed: the islands all added verbs, and the grammar of graphics has a rich set of nouns and almost no verbs. It says the first half of the thesis. The crash course shows GoFish's verbs. The Atom and PiCCL comparisons are the evidence that the same pictures reduce to one shared set of verbs. It ends with "There are two fair concerns about this idea. The first one is Andrew McNutt's."
-- Part 4a, "Does one language cost domain design?", is the first objection, McNutt's, in its strongest form and credited. The answer is that with verbs a DSL is a library built inside the language. The hierarchy slide states the full thesis, and GoTree and Figure 6 are the evidence. The spoken bridge crediting Jason Brunson ends 4a and raises the second objection.
+- Part 2, "Compress the islands", says how to fix it. It opens on the circle slide, one language that holds all the islands (a placeholder for the user's drawing). Its notes are the bridge: a bundle of separate grammars would hold them all but would not let you mix them, so mixing needs something the islands have in common. Then it asks what each island added, with three of them up close. Atom added operators for splitting and arranging units, PiCCL added operators for repeating and combining pictures, and GoTree added operators for laying out trees. It ends with "So none of these three islands mainly added a new kind of mark or channel. Each one added new ways to arrange and combine things."
+- Part 3, "The grammar of graphics needs verbs", is the main point and where the title lands. The verbs slide names what part 2 showed: the islands all added verbs, and the grammar of graphics has a rich set of nouns and almost no verbs. It says the first half of the thesis. "What is GoFish?" says that GoFish extends the grammar of graphics with verbs. The crash course shows GoFish's verbs on the chart API, and the core slide shows the smaller, more direct core under it. The Atom and PiCCL comparisons are the evidence that the same pictures reduce to one shared set of verbs, and the bottle's callout shows the chart API and the core mixing in one spec. It ends with "There are two fair concerns about this idea. The first one is Andrew McNutt's."
+- Part 4a, "Does one language cost domain design?", is the first objection, McNutt's, in its strongest form and credited. The answer is that with verbs a DSL is a library built inside the language. The hierarchy slide states the full thesis, and its bottom row is the core the audience already saw. "Same core, three shapes of data" and Figure 6 are the evidence, with GoTree as the third surface. The spoken bridge crediting Jason Brunson ends 4a and raises the second objection.
 - Part 4b, "Does growth cost safety?", is the second objection, Huang and Kay's, in their own words and credited. The answer is a small type system, shown by the four CanAdd steps. It ends with "So growth does not have to cost safety. But the growth itself has a limit, and that is where I want to end."
 - Part 5, "The next cliff", admits what is still missing. Our verbs are themselves a typology of operators, so we have to compress again. The panel slide follows.
 
-Both objections are presented as fair concerns, in their strongest form, with credit, before the evidence. McNutt, Cynthia Huang, Matthew Kay, Jason Brunson, Atom's and PiCCL's authors, and Vega-Lite's authors are expected in the room. The hook is said as love for their work and as a problem we all share.
+Both objections are presented as fair concerns, in their strongest form, with credit, before the evidence. McNutt, Cynthia Huang, Matthew Kay, Jason Brunson, Atom's, PiCCL's, and GoTree's authors, and Vega-Lite's authors are expected in the room. The hook is said as love for their work and as a problem we all share, and the circle slide's bridge says plainly that building a separate grammar was the right move for each team at the time.
 
 ## Slides
 
@@ -57,64 +59,81 @@ The slides are in `00-title.html`, `00b-splash.html`, `01-islands.html`, and `01
    - This Target is tight. Before 2026-11-04 the chart walk alone took about 0:35, and the Simon lines now share that time, so each click has to be said in its short form. Rehearse it.
    - Two comparison variants ("as rates", a ramp and a step) come right after this slide. They have Target 0:00 and are outside the timing. They carry the same line under the title and the same closing line.
 
-Leads into part 2 with: "So let's do to the islands what the grammar of graphics did to chart types, and compress them. Start by asking what each island added."
+Leads into part 2 with: "So let's do to the islands what the grammar of graphics did to chart types, and compress them into one language."
 
-### 2. Compress the islands (about 0:25)
+### 2. Compress the islands (about 0:55)
 
-The slides are in `01c-compress-islands.html`. Both carry "2 · Compress the islands".
+The slides are in `01c-compress-islands.html`. All four carry "2 · Compress the islands".
 
-6. **Atom adds operators for arranging units.** 0:15. Running total 1:50.
+6. **One language that holds all of them (the circle).** 0:20. Running total 1:55. New on 2026-11-05.
+   - A placeholder for the user's drawing: the islands drawing inside a large dashed circle, with a small tag that says "placeholder: your drawing goes here". To drop in the drawing, export it to `images/opening/grammars-circle.svg` and follow the comment above the slide.
+   - The bridge, in the notes: "What if one language held all of these? You could do this without unifying anything: one package that bundles every grammar as a separate component. That would fix installing them. It would not let you mix them. Each island's ideas would still only work inside that island, so you could not use Atom's unit layout inside a PiCCL picture, or put a GoTree layout inside a chart. Mixing needs something the islands have in common. So is there anything in common? Look at what each island added."
+   - The notes also say that building a separate grammar was the right move for each team, so the bridge does not blame anyone.
+7. **Atom adds operators for arranging units.** 0:15. Running total 2:10.
    - Atom's marks are plain circles and rectangles. What it added is a small set of layout operators, like FillX and MaxFill, that split a space into cells and arrange the units inside them.
-7. **PiCCL adds operators for combining pictures.** 0:10. Running total 2:00.
+8. **PiCCL adds operators for combining pictures.** 0:10. Running total 2:20.
    - PiCCL's marks are ordinary pictures and shapes. What it added is a set of operators for repeating pictures and combining them, e.g., "A atop B".
-   - Atom and PiCCL are the evidence for the verbs slide. All credit for their ideas goes to their authors.
+   - Lead into GoTree: "And one more, for a different shape of data."
+9. **GoTree adds operators for laying out trees.** 0:10. Running total 2:30. New on 2026-11-05.
+   - The defense deck's GoTree figures: the paper's gallery of tree layouts and its layout operator figure. GoTree's marks are plain nodes and links. What it added is a set of layout operators: on each axis a parent and its children are placed by include, juxtapose, or within, and siblings are aligned or flattened.
+   - Source line: "GoTree: A Grammar of Tree Visualizations · Li, Tian, Xu, McGuffin & Yuan, ACM CHI 2020", as in the GUGOG paper's bibliography.
+   - Atom, PiCCL, and GoTree are the evidence for the verbs slide. All credit for their ideas goes to their authors.
 
-Leads into part 3 with: "So neither island mainly added a new kind of mark or channel. Each one added new ways to arrange and combine things. I think most of the other islands are like this too. They add ways to arrange, combine, repeat, or connect marks."
+Leads into part 3 with: "So none of these three islands mainly added a new kind of mark or channel. Each one added new ways to arrange and combine things. I think most of the other islands are like this too. They add ways to arrange, combine, repeat, or connect marks."
 
-### 3. The grammar of graphics needs verbs (about 1:10)
+### 3. The grammar of graphics needs verbs (about 1:30)
 
 The slides are in `02-verbs.html`, `03-gofish-intro.html`, and `03b-code-comparisons.html`.
 
-8. **Data, marks, channels, coordinates.** 0:15, down from 0:20, because Atom and PiCCL now show what the islands share before it. Running total 2:15.
-   - Say: "They all added verbs. A verb takes graphics and composes them into bigger graphics. The grammar of graphics has a rich set of nouns: data, marks, channels, and coordinates." Then the click: "A rich set of nouns, but almost no verbs."
-   - Say: "In the traditional grammar of graphics, the only way to grow the language is to add a new primitive. That is what happens past the cliff. So the grammar of graphics needs verbs."
-   - Backup for questions: past the cliff, most ggplot2 extensions add new arrangements, and Vega-Lite's explicit calculations mostly compute positions, so what breaks at the cliff is arrangement. Both systems chose a small, fixed set of nouns on purpose, and that is why the common charts are so short.
-   - One optional sentence: "I come from programming languages, and the first thing I look for in a language is its verbs."
-9. **Crash course, three steps.** 0:30 in all (0:10 each). Running totals 2:25, 2:35, 2:45.
-   - GoFish's verbs, on two surfaces of one core. It says the second half of the thesis once. Its structure, data-ids, and auto-animate are unchanged.
-   - Lead into the Atom comparison: "Now let's go back to the two islands from before, Atom and PiCCL, and write them with these verbs."
-10. **Atom's gridxy is GoFish's spread.** 0:10. Running total 2:55.
-11. **The PiCCL bottle chart in GoFish.** 0:15. Running total 3:10.
+10. **Data, marks, channels, coordinates.** 0:15. Running total 2:45.
+    - Say: "They all added verbs. A verb takes graphics and composes them into bigger graphics. The grammar of graphics has a rich set of nouns: data, marks, channels, and coordinates." Then the click: "A rich set of nouns, but almost no verbs."
+    - Say: "In the traditional grammar of graphics, the only way to grow the language is to add a new primitive. That is what happens past the cliff. So the grammar of graphics needs verbs."
+    - Backup for questions: past the cliff, most ggplot2 extensions add new arrangements, and Vega-Lite's explicit calculations mostly compute positions, so what breaks at the cliff is arrangement. Both systems chose a small, fixed set of nouns on purpose, and that is why the common charts are so short.
+    - One optional sentence: "I come from programming languages, and the first thing I look for in a language is its verbs."
+    - Lead: "That is what GoFish does."
+11. **What is GoFish?** 0:10. Running total 2:55. New on 2026-11-05.
+    - Modeled on the defense deck's "What Is GoFish?" slide. The line on the slide is "GoFish extends the grammar of graphics with verbs." Under it is the defense deck's own line: "MIT-licensed and open source, for JavaScript and Python, at gofish.graphics".
+    - It is its own slide, not a second click on the verbs slide, because the verbs slide's grid leaves no room for a second line at 1280x720.
+12. **Crash course, two steps, chart API only.** 0:20 in all (0:10 each). Running totals 3:05, 3:15.
+    - Stacked bars, then one added line, `ribbon`, makes the ribbon chart. The code is on the left and the live render on the right, with `data-magic-move` on the code. The first step says the second half of the thesis once.
+    - Until 2026-11-05 it had three steps, with the planets diagram as a left column. Without that column, the old second step was the same as the first on the chart side, so it was dropped.
+    - Lead: "These verbs are not magic. Underneath them is something smaller and more direct."
+13. **Under the chart API is a smaller, more direct core.** 0:20. Running total 3:35. New on 2026-11-05.
+    - The planets diagram and its code: `enclose`, `spread`, `layer`, `.relate` with `Constraint.align` and `Constraint.distribute`, and an `arrow`. The chart API is built on this core, where marks are placed by explicit relations like align and distribute. One slide, no animation.
+    - Lead into the Atom comparison: "Now let's go back to the islands from before and write them with these verbs. First Atom."
+14. **Atom's gridxy is GoFish's spread.** 0:10. Running total 3:45.
+15. **The PiCCL bottle chart in GoFish.** 0:15. Running total 4:00.
     - These are the same pictures from part 2, written with one shared set of verbs. The same `spread` does the work of Atom's `gridxy` and of PiCCL's repeating.
+    - New on 2026-11-05: a callout. The spec's low-level lines, `layer` and the `.relate(...)` block with `Constraint.align` and `Constraint.distribute`, are tinted blue and tagged "core" in the gutter, and a tag under the code says "the core from two slides ago". Say: "The chart API and the core mix in one spec, because they are one language."
 
 Leads into part 4a with: "So these two islands reduce to a few shared verbs. That is why I say the grammar of graphics needs verbs. There are two fair concerns about this idea, and I want to take both of them seriously. The first one is Andrew McNutt's."
 
-### 4a. Does one language cost domain design? (about 1:50, including the bridge line)
+### 4a. Does one language cost domain design? (about 1:00, including the bridge line)
 
-The slides are in `04a-domain-design.html` (renamed from `04a-big-or-small.html`).
+The slides are in `04a-domain-design.html`.
 
-12. **McNutt quote.** 0:15. Running total 3:25.
+16. **McNutt quote.** 0:15. Running total 4:15.
     - The first objection, in its strongest form and credited: no single DSL can capture every task without compromising its domain design.
     - Say: "With verbs, a new word is a function that composes existing verbs, so a DSL is a library built inside the language. Each domain keeps its own design, and it is still one language." His suggestion of small modular language components is the direction GoFish takes, and his compile towers are his own answer to drift.
-13. **A language that grows is a hierarchy.** 0:10. Running total 3:35.
+17. **A language that grows is a hierarchy.** 0:10. Running total 4:25.
     - The answer to the first objection. Its left half, one flat layer of nouns, calls back to the compression chart's grammar of graphics line and its cliff.
+    - The bottom row, "core: marks + verbs", is the core the audience saw on the core slide and in the bottle spec. The chart API is one surface on it, and DSLs like GoTree are others.
     - State the full thesis.
-    - The next slides show one of those DSLs, GoTree, which happens to be for tree data.
-14. **GoTree, the data and the picture.** 0:15. Running total 3:50.
-15. **GoTree and gofish-gotree specs.** 0:20. Running total 4:10.
-16. **combine compiles to GoFish constraints.** 0:20. Running total 4:30.
-17. **Same core, three shapes of data.** 0:15. Running total 4:45.
-18. **The surfaces work together (Figure 6).** 0:10, plus about 0:05 for the bridge line. Running total 5:00.
-    - Slides 14 to 18 are evidence for the answer to the first objection.
+18. **Same core, three shapes of data.** 0:20 (was 0:15). Running total 4:45.
+    - Its notes now introduce GoTree in GoFish on their own, because the GoTree code slides are hidden: GoTree's input is a tree, not a table, so it was rebuilt as a small library on GoFish that keeps GoTree's own words, and its rules turn into the same align and distribute relations as the core. They point back to the GoTree intro in part 2. The left column's label is now "core", not "low-level".
+19. **The surfaces work together (Figure 6).** 0:10, plus about 0:05 for the bridge line. Running total 5:00.
+    - Slides 18 and 19 are evidence for the answer to the first objection.
     - The bridge, crediting Jason Brunson's GUGOG paper, "Balancing constriction and expansion for domain-specific grammars": "Jason's paper argues that each domain needs a dialect, with its own objects and its own constraints on how they combine. GoTree is a dialect in that sense, with its own objects. His second half, the constraints, is where the objection comes in. The more you let people extend the language, the more it seems you give up safety."
+
+Hidden since 2026-11-05: "GoTree, a grammar for trees" (the data and the picture, 0:15 if shown), the GoTree and gofish-gotree specs (0:20), and "`combine` compiles to GoFish constraints" (0:20). The user cut them for now. To restore them, remove `data-visibility="hidden"` from all three and add their 0:55 back into the running totals.
 
 ### 4b. Does growth cost safety? (about 0:55)
 
 The slides are in `04b-validity.html`. Only their notes changed. The structure, data-ids, auto-animate attributes, delays, and `data-magic-move` of the CanAdd steps are unchanged.
 
-19. **Huang and Kay quote.** 0:15. Running total 5:15.
+20. **Huang and Kay quote.** 0:15. Running total 5:15.
     - The second objection, in their own words, credited. Their work showed me that validity is important.
-20. **CanAdd, four steps.** 0:40 in all (0:10, 0:10, 0:05, 0:15). Running totals 5:25, 5:35, 5:40, 5:55.
+21. **CanAdd, four steps.** 0:40 in all (0:10, 0:10, 0:05, 0:15). Running totals 5:25, 5:35, 5:40, 5:55.
     - No schema, then the schema is added, then the error, then USD stacks. It constrains specs, not pictures. The limits: one operator and one property, and interactivity is not covered.
 
 Leads into part 5 with: "So growth does not have to cost safety. But the growth itself has a limit, and that is where I want to end."
@@ -123,41 +142,48 @@ Leads into part 5 with: "So growth does not have to cost safety. But the growth 
 
 The slides are in `04c-next-cliff.html` and `05-panel.html`. Both carry the label "5 · The next cliff".
 
-21. **Where we are now.** 0:25. Running total 6:20.
+22. **Where we are now.** 0:25. Running total 6:20.
     - "We replaced a typology of charts with a grammar. But our verbs are themselves a typology of operators, and that is the next cliff." Then the existing script: when you need a layout that is not in the set, today you add it from outside the language, which is the same add-a-new-primitive move the grammar of graphics makes past its cliff. So we have to compress again. "I think the way past it is a layout or constraint language that is more expressive than what we have now. That is the question I would most like help with."
-22. **Questions for the panel.** 0:40. Running total 7:00.
+23. **Questions for the panel.** 0:40. Running total 7:00.
 
 ## Time
 
 | Part | Target |
 | --- | --- |
 | 1. Why there are islands | 1:35 |
-| 2. Compress the islands | 0:25 |
-| 3. The grammar of graphics needs verbs | 1:10 |
-| 4a. Does one language cost domain design? (with the bridge line) | 1:50 |
+| 2. Compress the islands | 0:55 |
+| 3. The grammar of graphics needs verbs | 1:30 |
+| 4a. Does one language cost domain design? (with the bridge line) | 1:00 |
 | 4b. Does growth cost safety? | 0:55 |
 | 5. The next cliff (with the panel) | 1:05 |
 | Total | 7:00 |
 
 The fifth version ran 7:35. Hiding the usage curve (0:20), the flat layer slide (0:20), and the Steele quote (0:15) saves 0:55. The compression chart grew by 0:15 and the verbs slide by 0:05, so the deck now runs 7:00, on budget. Moving the Atom and PiCCL intros into part 2 is time neutral, because the Atom intro grew by 0:05 and the verbs slide shrank by 0:05.
 
-The new hook on 2026-11-04 is also time neutral. The islands slide grew by 0:20 for the hook. The splash shrank by 0:05 and the compression chart by 0:15, because it no longer opens with why we unify at all. The running totals from the PiCCL intro on are unchanged. Parts 1 and 2 still add up to 2:00, but the line between them moved, so part 1 is now 1:35 and part 2 is 0:25.
+The new hook on 2026-11-04 is also time neutral. The islands slide grew by 0:20 for the hook. The splash shrank by 0:05 and the compression chart by 0:15, because it no longer opens with why we unify at all.
+
+The restructure on 2026-11-05 is also time neutral. Added: the circle slide (0:20), the GoTree intro (0:10), "What is GoFish?" (0:10), the core slide (0:20), and 0:05 on "same core, three shapes of data", which now introduces GoTree on its own, for 1:05 in all. Saved: the three hidden GoTree code slides (0:55) and one crash course step (0:10), for 1:05 in all. The running totals from the Huang and Kay quote on are unchanged.
 
 If it runs long, cut these first:
 
-- Show the GoTree data and specs on one slide, which saves about 0:15.
-- Skip the "same core, three shapes of data" recap, because Figure 6 makes the same point, which saves 0:15.
+- Cut the "What is GoFish?" slide and say its line on the verbs slide, which saves about 0:10.
+- Say the circle slide's bridge in its short form ("One package that bundles them all would not let you mix them. Mixing needs something in common."), which saves about 0:10.
 - Trim the spoken notes on the McNutt quote to the accent phrase and the last sentence, which saves about 0:05.
 
 ## Changes to the deck
 
-- New order (since 2026-11-04): title, splash, islands, tangle, compression chart (and its two variants), Atom intro, PiCCL intro, verbs slide, crash course, Atom comparison, bottle, McNutt, hierarchy, the four GoTree slides, Figure 6, Huang and Kay, CanAdd 1 to 4, where we are now, panel.
+- New order (since 2026-11-05): title, splash, islands, tangle, compression chart (and its two variants), the circle, Atom intro, PiCCL intro, GoTree intro, verbs slide, What is GoFish?, crash course (two steps), the core slide, Atom comparison, bottle, McNutt, hierarchy, same core three shapes of data, Figure 6, Huang and Kay, CanAdd 1 to 4, where we are now, panel. The three GoTree code slides are hidden.
+- 2026-11-05: new slides. The circle slide (a placeholder) and the GoTree intro are in `01c-compress-islands.html`. "What is GoFish?" and the core slide are in `03-gofish-intro.html`, around the crash course. The GoTree figures were copied from the defense deck into `images/comparisons/gotree-examples.png` and `images/comparisons/gotree-operators.png`.
+- 2026-11-05: the crash course is the chart API only, two steps. Its code is on the left and the render on the right, both larger. The header row lost its data-id, because the logo inside it is matched by its src, and nothing inside a matched element may be matched on its own. The code column is pinned to the top so it does not move when the second step adds a line.
+- 2026-11-05: the bottle slide's callout is a code region with the role "core" (talk-template's `data-code-regions`, colored in `gofish-compare.css`) and a tag under the code.
+- Order before 2026-11-05 (since 2026-11-04): title, splash, islands, tangle, compression chart (and its two variants), Atom intro, PiCCL intro, verbs slide, crash course, Atom comparison, bottle, McNutt, hierarchy, the four GoTree slides, Figure 6, Huang and Kay, CanAdd 1 to 4, where we are now, panel.
 - Moved slides:
   - The islands and tangle move from before the compression chart to after it, into their own file, `01b-islands.html`.
   - McNutt now opens part 4a, as the first objection.
   - 2026-11-04: the islands and tangle move back to before the compression chart, so the hook comes first and the chart explains it. The Atom and PiCCL intros stay after the chart, so they move out of the islands file into their own file, `01c-compress-islands.html`, with the link to `gofish-compare.css` at its top.
   - 2026-11-03, later the same day: the Atom and PiCCL intros move from `03b-code-comparisons.html` to the end of `01b-islands.html`, before the verbs slide, under "2 · Past the cliff". Their titles now say what each grammar added: "Atom adds operators for arranging units" and "PiCCL adds operators for combining pictures". They are short so each fits on one line, and the notes say the longer versions. The source lines keep the papers' full titles and authors. The link to `gofish-compare.css` moves to the top of `01b-islands.html`, before the first slide that uses it. The thesis defense deck put the nouns slide before its islands, as their cause, and its hidden "Limitations of Marks/Channels Lead to New Grammars with New Compositional Rules" slide showed Atom's operator figure. This talk uses the same figures and the GUGOG paper's wording ("verbs for arranging, compositing, repeating, or otherwise relating marks"), but shows the operators first and names the pattern after.
 - Hidden slides, each with `data-visibility="hidden"` and a comment saying why:
+  - 2026-11-05: the three GoTree code slides in 4a (the data and the picture, the specs, and "`combine` compiles to GoFish constraints"). The user cut them for now.
   - The usage curve. The compression chart's left panel covers it.
   - "The grammar of graphics is one flat layer of nouns". The compression chart's grammar of graphics line and its cliff make its point, and the verbs slide states the first half of the thesis.
   - The Steele quote. Part 4 is now two objections, not a big language against a small one.
@@ -170,6 +196,9 @@ If it runs long, cut these first:
 ## Open choices
 
 - Resolved on 2026-11-04: the compression chart's on-slide line is now "What if we compress the islands?"
+- The circle slide comes right after the compression chart, not right after the tangle as the user first said, because the chart's closing line, "What if we compress the islands?", is the question the circle answers, and the tangle's lead, "Why are there so many islands?", still works into the chart. Putting it right after the tangle is a one-slide move from `01c-compress-islands.html` to the end of `01-islands.html`; its lead line would then need to change.
+- The circle slide is a placeholder. It shows the islands drawing in a dashed circle with a "placeholder" tag until the user's drawing is exported to `images/opening/grammars-circle.svg`.
+- "What is GoFish?" is its own short slide. If time is short it can go, and its line can be said over the verbs slide.
 - The hook has no text on the islands slide. A small line such as "I love visualization grammars. I can't use them together." could go on it, but the drawing would have to shrink on both slides of the auto-animate pair.
 - The panel slide carries "5 · The next cliff", because its first question is the next cliff. It could instead go back to its own label, such as "6 · Questions for the panel".
 - "1 · Why there are islands" shows on the compression chart but not on the islands drawing. A small label could go on the drawing if the audience needs it.
@@ -186,3 +215,4 @@ Added 2026-11-04 for the claim that compression begets structure, on the compres
 - Peter Grünwald, "A Tutorial Introduction to the Minimum Description Length Principle," 2004, arXiv math/0406077, section 1.1: "any regularity in the data can be used to compress the data, i.e. to describe it using fewer symbols than the number of symbols needed to describe the data literally. The more regularities there are, the more the data can be compressed. Equating 'learning' with 'finding regularity', we can therefore say that the more we are able to compress the data, the more we have learned about the data." Backup only.
 - Gregory Chaitin, "On the intelligibility of the universe and the notions of simplicity, complexity and irreducibility," 2002, arXiv math/0210035, abstract: "comprehension is compression, i.e., explaining many facts using few theoretical assumptions". Backup only, as a short line.
 - Grokking (Power et al. 2022; Nanda et al. 2023) is in the backup notes as an example, but it is not yet checked against the papers. Verify it before saying it.
+- GoTree, added 2026-11-05 for the GoTree intro: Guozheng Li, Min Tian, Qinmei Xu, Michael J. McGuffin, and Xiaoru Yuan, "GoTree: A Grammar of Tree Visualizations," Proc. CHI 2020, doi 10.1145/3313831.3376297. The title and authors are from the GUGOG paper's bibliography (`gugog-2026-camera-ready-v3/refs.bib`, key `gotree`). The figures are the paper's, by way of the thesis defense deck.
