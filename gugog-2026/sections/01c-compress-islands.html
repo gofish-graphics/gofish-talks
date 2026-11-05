@@ -4,9 +4,14 @@
              loads it without touching main.ts. -->
         <link rel="stylesheet" href="./gofish-compare.css" />
 
-        <!-- ═══ PART 2: COMPRESS THE ISLANDS, ~0:25 ═════════════════════
-             Two islands up close, Atom and PiCCL, to ask what each one
-             added. The compression chart (01b-compression.html) ends on
+        <!-- ═══ PART 2: COMPRESS THE ISLANDS, ~0:55 ═════════════════════
+             Since 2026-11-05 the part opens with the circle slide: one
+             language that holds all the islands. Its notes are the bridge.
+             You could hold them all without unifying anything, by bundling
+             each grammar as a separate component, but then you could not mix
+             them, so mixing needs something the islands have in common. Then
+             three islands up close, Atom, PiCCL, and GoTree, to ask what each
+             one added. The compression chart (01b-compression.html) ends on
              "What if we compress the islands?" and the Simon line, and its
              lead is "So let's do to the islands what the grammar of graphics
              did to chart types, and compress them. Start by asking what each
@@ -22,6 +27,106 @@
              otherwise relating marks to each other". These two slides were
              at the end of the islands file until 2026-11-04, when the
              compression chart moved between the islands and them. -->
+
+        <!-- The circle slide (2026-11-05). PLACEHOLDER: the user is drawing
+             this picture, one circle that holds every island. Until then it
+             shows the islands drawing (images/opening/grammars.svg) inside a
+             large dashed circle, with a small "placeholder" tag.
+             To drop in the drawing: export it from tldraw as SVG to
+             images/opening/grammars-circle.svg, replace the
+             <div class="circle-stack"> below with
+               <img class="circle-drawing" src="./images/opening/grammars-circle.svg" alt="..." />
+             and delete the .circle-ring and .circle-tag rules and elements.
+             If the drawing should line up with the islands slides, export it
+             with the same frame as grammars.svg.
+             It comes right after the compression chart, not right after the
+             tangle, because the chart's closing line, "What if we compress
+             the islands?", is the question this picture answers. Moving it
+             to right after the tangle is a one-slide move (see the outline's
+             open choices). -->
+        <section class="circle-slide">
+          <style>
+            .reveal .circle-slide .circle-stack {
+              height: 540px;
+              margin: 0.2em auto 0;
+              position: relative;
+              width: 640px;
+            }
+            .reveal .circle-slide .circle-stack img {
+              border-radius: 0;
+              height: 400px;
+              left: 50%;
+              margin: 0;
+              max-height: none;
+              max-width: none;
+              position: absolute;
+              top: 50%;
+              transform: translate(-50%, -50%);
+            }
+            .reveal .circle-slide .circle-ring {
+              border: 5px dashed var(--accent);
+              border-radius: 50%;
+              box-sizing: border-box;
+              height: 540px;
+              left: 50%;
+              position: absolute;
+              top: 0;
+              transform: translateX(-50%);
+              width: 540px;
+            }
+            .reveal .circle-slide .circle-tag {
+              background: #fff8e1;
+              border: 2px dashed #f9a825;
+              border-radius: 6px;
+              color: #8d5a00;
+              font-size: 0.42em;
+              padding: 0.2em 0.6em;
+              position: absolute;
+              right: 0;
+              top: 0;
+            }
+          </style>
+          <p class="part">2 · Compress the islands</p>
+          <h2>one language that holds all of them</h2>
+          <div class="circle-stack">
+            <div class="circle-ring"></div>
+            <img src="./images/opening/grammars.svg"
+              alt="The islands drawing, the grammar of graphics in the middle and the specialized grammars around it, inside one large dashed circle" />
+            <div class="circle-tag">placeholder: your drawing goes here</div>
+          </div>
+          <aside class="notes">
+            <p><strong>Target:</strong> 0:20. <strong>Running total:</strong>
+              1:55 of 7:00.</p>
+            <p><strong>Placeholder.</strong> The picture is a stand-in for
+              your drawing of one circle around all the islands. See the
+              comment above this slide for where to put it.</p>
+            <p>The lead into this slide is the last line on the compression
+              chart, "What if we compress the islands?", and the Simon line
+              under its title.</p>
+            <p><strong>Say (the bridge):</strong> "What if one language held
+              all of these? You could do this without unifying anything: one
+              package that bundles every grammar as a separate component.
+              That would fix installing them. It would not let you mix them.
+              Each island's ideas would still only work inside that island,
+              so you could not use Atom's unit layout inside a PiCCL picture,
+              or put a GoTree layout inside a chart. Mixing needs something
+              the islands have in common. So is there anything in common?
+              Look at what each island added."</p>
+            <p>Why this beat is here: the user's worry was that the circle on
+              its own does not justify unifying anything, because a bundle of
+              unrelated modular components would also put everything in one
+              place. The bridge grants that, and says what a bundle cannot
+              do, which is mixing. Mixing is the reason to look for shared
+              structure, and the next three slides look for it.</p>
+            <p>Fairness: building a separate grammar was the right move for
+              each of these teams. Each one was getting past the cliff with
+              the tools that existed. Nothing here says they should have done
+              it differently. The point is only that today their ideas cannot
+              be mixed, and that is a problem we all share.</p>
+            <p><strong>Lead into Atom:</strong> "Look at what each island
+              added. Here's Atom."</p>
+          </aside>
+        </section>
 
         <!-- Grammar intro slides (2026-11-03, moved from
              03b-code-comparisons.html the same day, and into this file on
@@ -41,8 +146,9 @@
              images/piccl/piccl-operator.png), which took them from the
              papers. Atom's figures are both wide, so they stack; PiCCL's sit
              side by side as in the thesis deck. Styles: ../gofish-compare.css.
-             The GoFish versions of these two grammars come after the crash
-             course, in 03b-code-comparisons.html. -->
+             The GoFish versions of Atom and PiCCL come after the crash
+             course, in 03b-code-comparisons.html. GoTree's is on the "same
+             core, three shapes of data" slide in 04a-domain-design.html. -->
         <section class="grammar-intro-slide grammar-intro-stack">
           <p class="part">2 · Compress the islands</p>
           <h2>Atom adds operators for arranging units</h2>
@@ -59,14 +165,14 @@
           <p class="source-line">Atom: A Grammar for Unit Visualizations · Park, Drucker, Fernandez &amp; Elmqvist, IEEE TVCG 2018</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
-              1:50 of 7:00.</p>
-            <p>The lead into this slide is the last line on the compression
-              chart: "So let's do to the islands what the grammar of graphics
-              did to chart types, and compress them. Start by asking what each
+              2:10 of 7:00.</p>
+            <p>The lead into this slide is the end of the circle slide's
+              bridge: "So is there anything in common? Look at what each
               island added."</p>
-            <p>This slide and the next show the evidence before the verbs
-              slide names the pattern. The ideas are Atom's and PiCCL's, and
-              the credit goes to their authors.</p>
+            <p>This slide and the next two (PiCCL and GoTree) show the
+              evidence before the verbs slide names the pattern. The ideas
+              are Atom's, PiCCL's, and GoTree's, and the credit goes to their
+              authors.</p>
             <p><strong>Say:</strong> Here's Atom, by Park, Drucker,
               Fernandez, and Elmqvist. It is a grammar for unit
               visualizations, where one mark stands for one thing, like one
@@ -100,27 +206,97 @@
           <p class="source-line">PiCCL: Data-Driven Composition of Bespoke Pictorial Charts · Shi et al., IEEE VIS 2025</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
-              2:00 of 7:00.</p>
+              2:20 of 7:00.</p>
             <p><strong>Say:</strong> And here's PiCCL, by Shi and others at
               VIS 2025, a grammar for pictorial charts like these. Its marks
               are ordinary pictures and shapes. What PiCCL added is a set of
               operators for repeating pictures and combining them, e.g., "A
               atop B" paints one shape onto another and keeps only the part
               inside it.</p>
-            <p><strong>Lead into the verbs slide:</strong> "So neither island
-              mainly added a new kind of mark or channel. Each one added new
-              ways to arrange and combine things. I think most of the other
-              islands are like this too. They add ways to arrange, combine,
-              repeat, or connect marks."</p>
+            <p><strong>Lead into GoTree:</strong> "And one more, for a
+              different shape of data."</p>
             <p><strong>Source:</strong> Shi et al., "PiCCL: Data-Driven
               Composition of Bespoke Pictorial Charts", IEEE VIS 2025. The
               left figure is the paper's teaser and the right one is its
               compositing operator figure. Both are copied from the thesis
               defense deck's PiCCL intro slide, whose notes say the same
               thing, that the core idea of the paper is this set of compositing
-              operators. The lead line follows the GUGOG paper's abstract,
+              operators. The lead into the verbs slide, now on the GoTree slide
+              after this one, follows the GUGOG paper's abstract,
               which reads recent grammars as extensions of the grammar of
               graphics "with verbs for arranging, compositing, repeating, or
               otherwise relating marks to each other".</p>
+          </aside>
+        </section>
+
+        <!-- GoTree intro (2026-11-05), in the same style as the Atom and
+             PiCCL intros. The figures are the thesis defense deck's
+             (phd-thesis-20260618/presentation/new-grammars/
+             gotree-examples.png and gotree-operators.png, used on its hidden
+             "Limitations of Marks/Channels Lead to New Grammars with New
+             Compositional Rules" slide for GoTree [Li et al. 2020]), which
+             took them from the GoTree paper. The title and authors in the
+             source line are from the GUGOG paper's bibliography
+             (gugog-2026-camera-ready-v3/refs.bib, key gotree). The GoTree
+             code slides in 4a are hidden for now, so the "same core, three
+             shapes of data" slide is where GoTree comes back. -->
+        <section class="grammar-intro-slide">
+          <style>
+            .reveal .grammar-intro-slide .grammar-intro-figs.gotree-figs {
+              grid-template-columns: 1.15fr 0.85fr;
+            }
+            .reveal .grammar-intro-slide img.gotree-examples {
+              height: auto;
+              width: 100%;
+            }
+            .reveal .grammar-intro-slide img.gotree-ops {
+              height: auto;
+              width: 100%;
+            }
+          </style>
+          <p class="part">2 · Compress the islands</p>
+          <h2>GoTree adds operators for laying out trees</h2>
+          <div class="grammar-intro-figs grammar-intro-side gotree-figs">
+            <div>
+              <p class="code-pair-label">tree visualizations</p>
+              <img class="grammar-fig gotree-examples" src="./images/comparisons/gotree-examples.png" alt="A gallery of tree visualizations from the GoTree paper: indented outline, pixel tree, 1D treemap, BarcodeTree, garden layout, thread arc, treemap with oval, cascaded treemap, dendrogram, DeepTree, outside-in tree, spiral tree, and nested pie tree" />
+            </div>
+            <div>
+              <p class="code-pair-label">layout operators</p>
+              <img class="grammar-fig gotree-ops" src="./images/comparisons/gotree-operators.png" alt="GoTree's layout operators: a parent and its children can be placed by include, juxtapose, or within on each axis, and siblings by align or flatten" />
+            </div>
+          </div>
+          <p class="source-line">GoTree: A Grammar of Tree Visualizations · Li, Tian, Xu, McGuffin &amp; Yuan, ACM CHI 2020</p>
+          <aside class="notes">
+            <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
+              2:30 of 7:00.</p>
+            <p><strong>Say:</strong> And here's GoTree, by Guozheng Li, Min
+              Tian, Qinmei Xu, Michael McGuffin, and Xiaoru Yuan, at CHI 2020.
+              It is a grammar for tree visualizations, like all of these. Its
+              marks are plain nodes and links. What GoTree added is a small set
+              of layout operators. On each axis, a parent and its children can
+              be placed by include, juxtapose, or within, and siblings can be
+              aligned or flattened. Mix those per axis and you get all of
+              these layouts.</p>
+            <p><strong>Lead into the verbs slide:</strong> "So none of these
+              three islands mainly added a new kind of mark or channel. Each
+              one added new ways to arrange and combine things. I think most
+              of the other islands are like this too. They add ways to
+              arrange, combine, repeat, or connect marks."</p>
+            <p>GoTree is also the island whose data is not a table. It comes
+              back on the "same core, three shapes of data" slide in part 4a,
+              rebuilt as a library on GoFish. The GoTree code slides in 4a are
+              hidden for now, so that slide is the only place its GoFish
+              version appears.</p>
+            <p><strong>Source:</strong> Guozheng Li, Min Tian, Qinmei Xu,
+              Michael J. McGuffin, and Xiaoru Yuan, "GoTree: A Grammar of Tree
+              Visualizations", Proc. CHI 2020, doi 10.1145/3313831.3376297, as
+              in the GUGOG paper's bibliography. The left figure is the paper's
+              gallery of tree layouts and the right one is its layout operator
+              figure: (a) how a parent and its subtrees are placed on each
+              axis, and (b) how sibling subtrees are placed. Both are copied
+              from the thesis defense deck's hidden GoTree slide, whose notes
+              say "GoTree is a grammar for tree visualizations. The marks here
+              are similarly individual nodes and links."</p>
           </aside>
         </section>
