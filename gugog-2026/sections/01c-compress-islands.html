@@ -28,7 +28,8 @@
              at the end of the islands file until 2026-11-04, when the
              compression chart moved between the islands and them. -->
 
-        <!-- The circle slide (2026-11-05). PLACEHOLDER: the user is drawing
+        <!-- The circle slide (2026-11-05). The user's drawing is now in
+             images/opening/grammars-circle.svg. Older note: the user was drawing
              this picture, one circle that holds every island. Until then it
              shows the islands drawing (images/opening/grammars.svg) inside a
              large dashed circle, with a small "placeholder" tag.
@@ -46,60 +47,24 @@
              open choices). -->
         <section class="circle-slide">
           <style>
-            .reveal .circle-slide .circle-stack {
+            .reveal .circle-slide .circle-drawing {
+              border-radius: 0;
+              display: block;
               height: 540px;
               margin: 0.2em auto 0;
-              position: relative;
-              width: 640px;
-            }
-            .reveal .circle-slide .circle-stack img {
-              border-radius: 0;
-              height: 400px;
-              left: 50%;
-              margin: 0;
               max-height: none;
               max-width: none;
-              position: absolute;
-              top: 50%;
-              transform: translate(-50%, -50%);
-            }
-            .reveal .circle-slide .circle-ring {
-              border: 5px dashed var(--accent);
-              border-radius: 50%;
-              box-sizing: border-box;
-              height: 540px;
-              left: 50%;
-              position: absolute;
-              top: 0;
-              transform: translateX(-50%);
-              width: 540px;
-            }
-            .reveal .circle-slide .circle-tag {
-              background: #fff8e1;
-              border: 2px dashed #f9a825;
-              border-radius: 6px;
-              color: #8d5a00;
-              font-size: 0.42em;
-              padding: 0.2em 0.6em;
-              position: absolute;
-              right: 0;
-              top: 0;
             }
           </style>
           <p class="part">2 · Compress the islands</p>
           <h2>one language that holds all of them</h2>
-          <div class="circle-stack">
-            <div class="circle-ring"></div>
-            <img src="./images/opening/grammars.svg"
-              alt="The islands drawing, the grammar of graphics in the middle and the specialized grammars around it, inside one large dashed circle" />
-            <div class="circle-tag">placeholder: your drawing goes here</div>
-          </div>
+          <img class="circle-drawing" src="./images/opening/grammars-circle.svg"
+            alt="One large circle labeled GUGOG that holds every grammar: the grammar of graphics in the middle and Atom, PiCCL, AnnoGram, Gemini, Neo, Canis, GoTree, GenomeSpy, Gosling, and Mascot around it" />
           <aside class="notes">
             <p><strong>Target:</strong> 0:20. <strong>Running total:</strong>
               1:55 of 7:00.</p>
-            <p><strong>Placeholder.</strong> The picture is a stand-in for
-              your drawing of one circle around all the islands. See the
-              comment above this slide for where to put it.</p>
+            <p>The picture is the islands drawing again, with one circle
+              labeled GUGOG around all of them.</p>
             <p>The lead into this slide is the last line on the compression
               chart, "What if we compress the islands?", and the Simon line
               under its title.</p>
