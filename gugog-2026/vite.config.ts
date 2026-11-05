@@ -14,8 +14,9 @@ export default defineConfig({
       sections: [
         "00-title.html",
         "00b-splash.html",
-        "01-compression.html",
-        "01b-islands.html",
+        "01-islands.html",
+        "01b-compression.html",
+        "01c-compress-islands.html",
         "02-verbs.html",
         "03-gofish-intro.html",
         "03b-code-comparisons.html",

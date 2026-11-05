@@ -1,28 +1,15 @@
-        <!-- Styles for the grammar intro slides at the end of this file,
-             the code slides in 03 and 03b, and the GoTree slides in 04.
-             Linked here, before the first slide that uses them, so the deck
-             loads it without touching main.ts. -->
-        <link rel="stylesheet" href="./gofish-compare.css" />
-
-        <!-- ═══ PART 2: PAST THE CLIFF, ~0:55 ═══════════════════════════
-             Four slides. First an auto-animate pair. Past the expressivity
-             cliff on the compression chart (01-compression.html), we built
-             specialized grammars. Seen from above, the grammar of graphics
-             is the main island and the specialized grammars are smaller
-             islands around it. The tangle shows that the islands cannot
-             reach each other. Neither of these two has a part label,
-             because the drawing fills the slide.
-             Then two islands up close, Atom and PiCCL, to ask what each one
-             added (2026-11-03). Each added operators, not new marks or
-             channels, so the verbs slide in part 3 (02-verbs.html) names a
-             pattern the audience has already seen. This follows the thesis
-             defense deck, where "Limitations of Marks/Channels Lead to New
-             Grammars with New Compositional Rules" showed Atom's operator
-             figure (phd-thesis-20260618/presentation/sections/
-             03-gofish.html, hidden there), and the GUGOG paper's abstract,
-             which reads recent grammars as "specialized extensions of the
-             GoG with verbs for arranging, compositing, repeating, or
-             otherwise relating marks to each other". -->
+        <!-- ═══ PART 1: WHY THERE ARE ISLANDS, ISLANDS AND TANGLE, ~0:50 ═
+             An auto-animate pair. Since 2026-11-04 the talk's hook is
+             spoken over the first slide: "I love visualization grammars,
+             and I'm sad, because I can't use them together." Seen from
+             above, the grammar of graphics is the main island and the
+             specialized grammars are smaller islands around it. The tangle
+             shows that the islands do not work with each other, and leads
+             into the compression chart (01b-compression.html) with "Why are
+             there so many islands?" Neither of these two has a part label
+             or any other text, because the drawing fills the slide. The
+             Atom and PiCCL intros that used to end this file are now in
+             01c-compress-islands.html, after the compression chart. -->
 
         <!-- The two grammars pictures are the user's tldraw drawing (exported
              as SVG, 2026-11-03). grammars.svg has only the labeled circles and
@@ -58,24 +45,37 @@
               alt="Hand drawing: a big circle labeled GoG in the middle, with smaller circles around it for Atom, PiCCL, AnnoGram, Gemini, Mascot, Gosling, Neo, GenomeSpy, GoTree, and Canis" />
           </div>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
-              1:20 of 7:00.</p>
+            <p><strong>Target:</strong> 0:35 (was 0:15; it now carries the
+              hook). <strong>Running total:</strong> 0:45 of 7:00.</p>
+            <p><strong>The hook.</strong> This is close to how you said it
+              in the run-through. Say it in your own words. There is no text
+              on the slide, because the drawing fills it.</p>
             <ul>
-              <li>Past the cliff, we built islands. For the long tail of
-                charts, we built specialized grammars, one for each patch of
-                charts.</li>
-              <li>Seen from above, the grammar of graphics is the main island
-                in the middle. The specialized grammars are smaller islands
-                around it: Atom for unit charts, PiCCL for pictorial charts,
-                GoTree for trees, Gosling and GenomeSpy for genomics, Canis
-                for animation, and more.</li>
-              <li>Each island covers its own patch of charts, and each one has
-                slightly different concepts. They do not fit together, so
-                together they make a very large language.</li>
-              <li>I wonder whether we have lost sight of what the original
-                grammar of graphics gave us: one shared language, and the
-                structure that came with it.</li>
+              <li>"I'm sad. I'm sad because I love visualization grammars.
+                Every time I see one presented, I'm in the audience like the
+                sunglasses emoji. But when I go to use them, I can't figure
+                out how to fit them into my workflow."</li>
+              <li>"Here they are, drawn as islands. The grammar of graphics is
+                the big island in the middle. The specialized grammars are the
+                smaller islands around it: Atom, PiCCL, GoTree, Gosling,
+                Canis, and more."</li>
+              <li>"They are all different systems. Some of them you can
+                download, but they don't work with each other. We have the
+                ggplot2 ecosystem, but I mostly work in JavaScript and Python,
+                so it doesn't help me. And many grammars don't fit the grammar
+                of graphics anyway."</li>
+              <li>"There's also a practical problem. A lot of cool work,
+                including mine, has no clear path into practice."</li>
+              <li>"That's why I want to build a GUGOG. It would let me play
+                with all these grammars. And maybe it would let end users make
+                charts they have never seen before."</li>
             </ul>
+            <p>Many of the people who made these grammars are in the room.
+              Say the hook as love for their work and as a problem we all
+              share. The ggplot2 line is about my own languages, not a
+              complaint about R, and the next sentence says the bigger reason,
+              which is that many grammars do not fit the grammar of graphics
+              anyway.</p>
             <p>Next slide: the arrows fade in on top of this same picture,
               and the circles do not move.</p>
           </aside>
@@ -89,128 +89,29 @@
           </div>
           <aside class="notes">
             <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
-              1:35 of 7:00.</p>
+              1:00 of 7:00.</p>
             <ul>
-              <li>The islands cannot reach each other. To compare two of these
-                grammars, you have to translate from one language to the
-                other. To compare all of them, you have to translate between
-                every pair. That is this tangle of arrows.</li>
-              <li>I have run into this a lot. Each grammar teaches me
-                something, but its lessons stay stuck inside that one
-                system.</li>
-              <li>I suspect this makes it harder to ask new research
-                questions about the long tail, and that we are treading water
-                a bit, but I am not sure that is the cause.</li>
-              <li>Some of us doubt that a shared kernel exists, meaning a
-                small common core that all of these languages could be written
-                in. I think one does, but it may not look quite like the
-                grammar of graphics we are used to.</li>
+              <li>"This is what it looks like when they don't work with each
+                other. To use two of these grammars together, or even to
+                compare them, you have to translate from one to the other. To
+                do that for all of them, you have to translate between every
+                pair. That is this tangle of arrows."</li>
+              <li>"I'm confident about this part, because I have run into it a
+                lot. I'm less sure about what follows from it. I suspect it
+                makes it harder to ask new research questions about the long
+                tail, and that we are treading water a bit, but I am not sure
+                that is the cause."</li>
+              <li>Only if there is time: "Some of us doubt that a shared
+                kernel exists, meaning a small common core that all of these
+                languages could be written in. I think one does, but it may
+                not look quite like the grammar of graphics we are used
+                to."</li>
             </ul>
-            <p>Said with confidence: the grammars are hard to compare.
-              Said as a suspicion: that the field is stuck, and that this is
-              the cause.</p>
-            <p><strong>Lead into Atom:</strong> "So let's do to these
-              grammars what the grammar of graphics did to chart types, and
-              compress them. Each of these islands exists because the grammar
-              of graphics could not make some kind of chart. So start by
-              asking what each island added to get there."</p>
+            <p>Said with confidence: the grammars are hard to use together
+              and hard to compare. Said as a suspicion: that the field is
+              stuck, and that this is the cause.</p>
+            <p><strong>Lead into the compression chart:</strong> "Why are
+              there so many islands?"</p>
           </aside>
         </section>
 
-        <!-- Grammar intro slides (2026-11-03, moved here from
-             03b-code-comparisons.html the same day). Each slide shows the
-             other grammar's own figures: a few of its charts and the
-             operators it added. Modeled on the thesis defense deck's second
-             intro slide for each grammar
-             (phd-thesis-20260618/presentation/sections/03b-evidence-waffle.html,
-             "ATOM: A Grammar for Unit Visualizations", and
-             sections/03d-evidence-bottle.html, "PiCCL: A Grammar for
-             Pictorial Charts"): the teaser figure beside the operator figure,
-             in white framed boxes, with the paper credited in a source line.
-             The titles say what each grammar added; the source lines keep the
-             papers' full titles and authors.
-             The images are copied from that deck (images/atom/atom-teaser.png,
-             new-grammars/atom-operators.png, images/piccl/piccl-teaser.png,
-             images/piccl/piccl-operator.png), which took them from the
-             papers. Atom's figures are both wide, so they stack; PiCCL's sit
-             side by side as in the thesis deck. Styles: ../gofish-compare.css.
-             The GoFish versions of these two grammars come after the crash
-             course, in 03b-code-comparisons.html. -->
-        <section class="grammar-intro-slide grammar-intro-stack">
-          <p class="part">2 · Past the cliff</p>
-          <h2>Atom adds operators for arranging units</h2>
-          <div class="grammar-intro-figs">
-            <div>
-              <p class="code-pair-label">unit charts</p>
-              <img class="grammar-fig atom-teaser" src="./images/comparisons/atom-teaser.png" alt="Unit visualizations of Titanic passengers from the Atom paper: one circle per passenger, grouped by class, survival and sex, and age" />
-            </div>
-            <div>
-              <p class="code-pair-label">layout operators</p>
-              <img class="grammar-fig atom-ops" src="./images/comparisons/atom-operators.png" alt="Atom's layout operators, Map2D, FillX, FillY, MaxFill, and Pack, each shown under uniform sizing and under count and sum sizing" />
-            </div>
-          </div>
-          <p class="source-line">Atom: A Grammar for Unit Visualizations · Park, Drucker, Fernandez &amp; Elmqvist, IEEE TVCG 2018</p>
-          <aside class="notes">
-            <p><strong>Target:</strong> 0:15 (was 0:10; it now also asks
-              what each island added). <strong>Running total:</strong>
-              1:50 of 7:00.</p>
-            <p>This slide and the next show the evidence before the verbs
-              slide names the pattern. The ideas are Atom's and PiCCL's, and
-              the credit goes to their authors.</p>
-            <p><strong>Say:</strong> Here's Atom, by Park, Drucker,
-              Fernandez, and Elmqvist. It is a grammar for unit
-              visualizations, where one mark stands for one thing, like one
-              passenger on the Titanic. Its marks are plain circles and
-              rectangles. What Atom added is a small set of layout operators,
-              like FillX and MaxFill. They split a space into cells and
-              arrange the units inside them, and you nest them to place every
-              unit.</p>
-            <p><strong>Source:</strong> Park, Drucker, Fernandez and Elmqvist,
-              "ATOM: A Grammar for Unit Visualizations", IEEE TVCG 2018. The
-              top figure is the paper's teaser and the bottom one is its
-              layout operator figure. Both are copied from the thesis defense
-              deck's Atom intro slide, which used the operator figure the same
-              way, as the thing Atom added.</p>
-          </aside>
-        </section>
-
-        <section class="grammar-intro-slide">
-          <p class="part">2 · Past the cliff</p>
-          <h2>PiCCL adds operators for combining pictures</h2>
-          <div class="grammar-intro-figs grammar-intro-side">
-            <div>
-              <p class="code-pair-label">pictorial charts</p>
-              <img class="grammar-fig piccl-teaser" src="./images/comparisons/piccl-teaser.png" alt="Three real-world pictorial charts from the PiCCL paper: a dollar bill under a line chart, memory chips as bars, and glasses filled with colored liquid" />
-            </div>
-            <div>
-              <p class="code-pair-label">compositing operators</p>
-              <img class="grammar-fig piccl-ops" src="./images/comparisons/piccl-operators.png" alt="PiCCL's compositing operator table, with star and rectangle examples of over, in, out, atop, and xor" />
-            </div>
-          </div>
-          <p class="source-line">PiCCL: Data-Driven Composition of Bespoke Pictorial Charts · Shi et al., IEEE VIS 2025</p>
-          <aside class="notes">
-            <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
-              2:00 of 7:00.</p>
-            <p><strong>Say:</strong> And here's PiCCL, by Shi and others at
-              VIS 2025, a grammar for pictorial charts like these. Its marks
-              are ordinary pictures and shapes. What PiCCL added is a set of
-              operators for repeating pictures and combining them, e.g., "A
-              atop B" paints one shape onto another and keeps only the part
-              inside it.</p>
-            <p><strong>Lead into the verbs slide:</strong> "So neither island
-              mainly added a new kind of mark or channel. Each one added new
-              ways to arrange and combine things. I think most of the other
-              islands are like this too. They add ways to arrange, combine,
-              repeat, or connect marks."</p>
-            <p><strong>Source:</strong> Shi et al., "PiCCL: Data-Driven
-              Composition of Bespoke Pictorial Charts", IEEE VIS 2025. The
-              left figure is the paper's teaser and the right one is its
-              compositing operator figure. Both are copied from the thesis
-              defense deck's PiCCL intro slide, whose notes say the same
-              thing, that the core idea of the paper is this set of compositing
-              operators. The lead line follows the GUGOG paper's abstract,
-              which reads recent grammars as extensions of the grammar of
-              graphics "with verbs for arranging, compositing, repeating, or
-              otherwise relating marks to each other".</p>
-          </aside>
-        </section>

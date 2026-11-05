@@ -1,19 +1,24 @@
-        <!-- ═══ PART 1: WHY COMPRESS, ~1:05 ═════════════════════════════
-             Part 1 is the title (00-title.html), the splash wall
-             (00b-splash.html), and the compression chart here. Its notes
-             open with why we unify at all (compression forces you to find
-             structure), then walk the chart up to the expressivity cliff,
-             which leads into the islands in part 2 (01b-islands.html).
+        <!-- ═══ PART 1 CONTINUED: WHY THERE ARE ISLANDS, ~0:35 ═════════
+             Part 1 is the islands drawing and the tangle (01-islands.html),
+             then the compression chart here. The tangle ends on "Why are
+             there so many islands?" The chart answers it. The grammar of
+             graphics compresses the common charts very well, then hits the
+             expressivity cliff, and each island is someone getting past the
+             cliff on their own. Its closing line, "What if we compress the
+             islands?", and the Simon line under its title lead into part 2
+             (01c-compress-islands.html). Since 2026-11-04 the chart comes
+             after the islands, not before them, and its notes no longer
+             open with why we unify at all.
              The two comparison variants right after the compression chart
              have Target 0:00 and are outside the timing. The usage curve
              slide is hidden, because the compression chart's left panel
              covers it. The charts are drawn live by ../charts.ts. -->
 
-        <!-- Hidden: the islands pictures (01b-islands.html) carry this
+        <!-- Hidden: the islands pictures (01-islands.html) carry this
              slide's point. Remove data-visibility="hidden" to bring it
              back. -->
         <section data-visibility="hidden">
-          <p class="part">1 · Why compress</p>
+          <p class="part">1 · Why there are islands</p>
           <h2>from "I" to "we"</h2>
           <div>
             <ul>
@@ -68,7 +73,7 @@
              curve, so this slide repeats it. Remove data-visibility="hidden"
              to bring it back. -->
         <section data-visibility="hidden">
-          <p class="part">1 · Why compress</p>
+          <p class="part">1 · Why there are islands</p>
           <h2>the usage curve</h2>
           <!-- A live GoFish chart, drawn by renderCharts() in ../charts.ts. -->
           <div data-chart="usage-curve" data-w="1100" data-h="510"
@@ -103,7 +108,7 @@
         </section>
 
         <section>
-          <p class="part">1 · Why compress</p>
+          <p class="part">1 · Why there are islands</p>
           <h2>a grammar is a compression</h2>
           <p class="compression-subtitle">To make a description shorter, you have to find the structure. <span class="source-line">Simon, 1962</span></p>
           <!-- Live GoFish charts, drawn by renderCharts() in ../charts.ts.
@@ -126,29 +131,92 @@
             <div class="fragment" data-chart="compression-goal" data-w="1180" data-h="500" data-font-size="24"
               style="display: flex; justify-content: center; background: var(--paper)"></div>
           </div>
-          <p class="big-claim fragment" style="margin-top: 0.3em">What are the obstacles to doing this compression?</p>
+          <p class="big-claim fragment" style="margin-top: 0.3em">What if we compress the islands?</p>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:50 (was 0:35; the opening on why
-              we compress takes about 0:15). <strong>Running total:</strong>
-              1:05 of 7:00. The Simon lines added on 2026-11-04 make the
-              opening about 0:15 longer when spoken, and part 1 has no slack
-              to give. Rehearse it; if it runs long, the Target needs to grow
-              and the running totals need to be recomputed.</p>
-            <p><strong>Why compress</strong> (before the first click, over
-              the empty axes; the line under the title is on screen from the
+            <p><strong>Target:</strong> 0:35 (was 0:50; it no longer opens
+              with why we unify at all, and the Simon lines now close it).
+              <strong>Running total:</strong> 1:35 of 7:00. This is tight.
+              Before 2026-11-04 the chart walk alone took about 0:35, so say
+              each click in its short form. Rehearse it; if it runs long, the
+              Target needs to grow and the running totals need to be
+              recomputed.</p>
+            <p><strong>Open</strong> (before the first click, over the empty
+              axes; the line under the title is on screen from the
               start):</p>
             <ul>
-              <li>Why unify charts into one language at all? The old reasons
-                were that one language is easier to write and easier to read.
-                Those matter less now that AI writes a lot of our code.</li>
-              <li>The reason that still holds is that compression forces us
-                to find structure. To make a description shorter, you have to
-                find the structure in what you describe.</li>
-              <li>The grammar of graphics is an example. It compressed many
-                chart types into marks, channels, scales, and coordinates.
-                That structure is worth finding for its own sake, and it
-                shaped the tools we use: ggplot2, Vega-Lite and Altair, and
-                Tableau.</li>
+              <li>"Here is why. The grammar of graphics is a compression. It
+                compressed many chart types into marks, channels, scales, and
+                coordinates. That structure shaped the tools we use: ggplot2,
+                Vega-Lite and Altair, and Tableau."</li>
+              <li>"So how well do today's approaches compress?"</li>
+            </ul>
+            <p>If asked for an example of what the structure gives us: Draco
+              and CompassQL work on Vega-Lite specs, so they reason about a
+              chart in terms of its marks and encodings, not its chart
+              type.</p>
+            <p><strong>The chart:</strong></p>
+            <ul>
+              <li>All three panels share one x axis: simple, common charts
+                on the left and complex tail charts on the right. The left
+                panel is how often each chart gets made. It has a long tail:
+                bar, line, and scatter charts are on the left, and one-lab
+                infographics and diagrams are on the right. Most of the
+                charts people make are the simple ones, so the cost on the
+                left counts most. The middle panel is how big the language
+                has to be to reach those charts. The right panel is how long
+                the spec for one of those charts is.</li>
+              <li>(Click.) The blue line is a chart typology like seaborn,
+                with one function per chart type. Its specs stay short, so it
+                is flat in the right panel. But it needs a new function for
+                every chart in the tail, so it climbs steeply in the middle
+                panel. Its language is huge.</li>
+              <li>(Click.) The grey line is a low-level toolkit like d3. Its
+                language is small and stays flat. But its specs are long even
+                for a bar chart, and they get longer as the charts get more
+                complex.</li>
+              <li>(Click.) The purple line is the grammar of graphics. It is
+                excellent for the common charts, and those are most of what
+                people make (point at the usage panel). Its language is small
+                and its parts combine well, so its specs are short. Here it
+                sits right next to the sweet spot.</li>
+              <li>Further out in the tail, for charts like ribbon, waffle, and
+                mosaic charts, the usual way to write them tends to move
+                toward one end or the other. The GoFish paper calls this an
+                expressivity cliff. It says the grammar of graphics "presents
+                some sharp expressivity cliffs." In practice the change is
+                gradual, so I draw a bend and not a drop, and the line never
+                reaches either end.</li>
+              <li>In ggplot2 the usual move is a new chart type. Extensions
+                such as ggalluvial, ggmosaic, and ggwaffle each add one. So the
+                size of the language bends up toward seaborn.</li>
+              <li>In Vega-Lite the usual move is to compute the layout with
+                explicit transforms. You can see the start of this in
+                Vega-Lite's own example gallery, in the wheat and wages chart
+                and the waterfall chart. So the length of each spec bends up
+                toward d3. Sometimes it goes the other way: the boxplot mark
+                is closer to a chart type than to a primitive.</li>
+              <li>Say: "Past the cliff, each island is someone getting past it
+                on their own. Each island covers its own patch of charts, with
+                slightly different concepts, so together they make a very
+                large language."</li>
+              <li>(Click.) The red line is the sweet spot. Its language is
+                small and stops growing, and its specs stay short across the
+                whole range. Every one of these designs is aiming for it. The
+                total cost is the size of the language plus the length of
+                every spec written in it, weighted by how often each chart is
+                made. That is the yardstick for the rest of the talk.</li>
+              <li>The curves are schematic, not measured. The questions slide
+                at the end asks whether the usage curve could become a
+                benchmark.</li>
+            </ul>
+            <p><strong>The closing question</strong> (click for the line):
+              "What if we compress the islands?"</p>
+            <p><strong>How to compress them, with Simon</strong> (the line
+              under the title):</p>
+            <ul>
+              <li>To make a description shorter, you have to find the
+                structure in what you describe. So to compress the islands, we
+                have to find what they share.</li>
               <li>Herbert Simon made this point in 1962. Most complex things
                 are full of repetition, and we can use that to describe them
                 simply. But he adds a condition: we have to find the right
@@ -156,12 +224,10 @@
               <li>That condition matters for this talk. Which structure you
                 find depends on the language you describe charts in. A
                 language with only nouns finds nouns.</li>
-              <li>So how well do today's approaches compress?</li>
             </ul>
-            <p>If asked for an example of what the structure gives us: Draco
-              and CompassQL work on Vega-Lite specs, so they reason about a
-              chart in terms of its marks and encodings, not its chart
-              type.</p>
+            <p><strong>Lead into part 2:</strong> "So let's do to the islands
+              what the grammar of graphics did to chart types, and compress
+              them. Start by asking what each island added."</p>
             <p><strong>If asked</strong> where "compression begets structure"
               comes from:</p>
             <ul>
@@ -211,67 +277,11 @@
                 with clear structure (Power et al. 2022; Nanda et al.
                 2023).</li>
             </ul>
-            <p><strong>The chart:</strong></p>
-            <ul>
-              <li>All three panels share one x axis: simple, common charts
-                on the left and complex tail charts on the right. The left
-                panel is how often each chart gets made. It has a long tail:
-                bar, line, and scatter charts are on the left, and one-lab
-                infographics and diagrams are on the right. Most of the
-                charts people make are the simple ones, so the cost on the
-                left counts most. The middle panel is how big the language
-                has to be to reach those charts. The right panel is how long
-                the spec for one of those charts is.</li>
-              <li>(Click.) The blue line is a chart typology like seaborn,
-                with one function per chart type. Its specs stay short, so it
-                is flat in the right panel. But it needs a new function for
-                every chart in the tail, so it climbs steeply in the middle
-                panel. Its language is huge.</li>
-              <li>(Click.) The grey line is a low-level toolkit like d3. Its
-                language is small and stays flat. But its specs are long even
-                for a bar chart, and they get longer as the charts get more
-                complex.</li>
-              <li>(Click.) The purple line is the grammar of graphics. It is
-                excellent for the common charts, and those are most of what
-                people make (point at the usage panel). Its language is small
-                and its parts combine well, so its specs are short. Here it
-                sits right next to the sweet spot.</li>
-              <li>Further out in the tail, for charts like ribbon, waffle, and
-                mosaic charts, the usual way to write them tends to move
-                toward one end or the other. The GoFish paper calls this an
-                expressivity cliff. It says the grammar of graphics "presents
-                some sharp expressivity cliffs." In practice the change is
-                gradual, so I draw a bend and not a drop, and the line never
-                reaches either end.</li>
-              <li>In ggplot2 the usual move is a new chart type. Extensions
-                such as ggalluvial, ggmosaic, and ggwaffle each add one. So the
-                size of the language bends up toward seaborn.</li>
-              <li>In Vega-Lite the usual move is to compute the layout with
-                explicit transforms. You can see the start of this in
-                Vega-Lite's own example gallery, in the wheat and wages chart
-                and the waterfall chart. So the length of each spec bends up
-                toward d3. Sometimes it goes the other way: the boxplot mark
-                is closer to a chart type than to a primitive.</li>
-              <li>(Click.) The red line is the sweet spot. Its language is
-                small and stops growing, and its specs stay short across the
-                whole range. Every one of these designs is aiming for it. The
-                total cost is the size of the language plus the length of
-                every spec written in it, weighted by how often each chart is
-                made. That is the yardstick for the rest of the talk.</li>
-              <li>The curves are schematic, not measured. The questions slide
-                at the end asks whether the usage curve could become a
-                benchmark.</li>
-            </ul>
-            <p><strong>The question for the talk</strong> (click for the
-              line): "What are the obstacles to doing this compression?" The
-              first one is the cliff itself.</p>
-            <p><strong>Lead into part 2:</strong> "Past the cliff, we built
-              islands."</p>
           </aside>
         </section>
 
         <section>
-          <p class="part">1 · Why compress</p>
+          <p class="part">1 · Why there are islands</p>
           <h2>a grammar is a compression, as rates</h2>
           <p class="compression-subtitle">To make a description shorter, you have to find the structure. <span class="source-line">Simon, 1962</span></p>
           <!-- A variant of the slide before, for comparison. Same steps and
@@ -289,7 +299,7 @@
             <div class="fragment" data-chart="compression-rates-goal" data-w="1180" data-h="500" data-font-size="24"
               style="display: flex; justify-content: center; background: var(--paper)"></div>
           </div>
-          <p class="big-claim fragment" style="margin-top: 0.3em">What are the obstacles to doing this compression?</p>
+          <p class="big-claim fragment" style="margin-top: 0.3em">What if we compress the islands?</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:00. This is a comparison variant
               of the slide before. It is not yet in the talk's timing, so the
@@ -321,13 +331,13 @@
                 then almost nothing in either panel.</li>
               <li>The curves are schematic, not measured.</li>
             </ul>
-            <p><strong>The question for the talk</strong> (click for the
-              line): "What are the obstacles to doing this compression?"</p>
+            <p><strong>The closing question</strong> (click for the line):
+              "What if we compress the islands?"</p>
           </aside>
         </section>
 
         <section>
-          <p class="part">1 · Why compress</p>
+          <p class="part">1 · Why there are islands</p>
           <h2>a grammar is a compression, as rates</h2>
           <p class="compression-subtitle">To make a description shorter, you have to find the structure. <span class="source-line">Simon, 1962</span></p>
           <!-- A variant of the slide before, for comparison. Same steps and
@@ -345,7 +355,7 @@
             <div class="fragment" data-chart="compression-rates-step-goal" data-w="1180" data-h="500" data-font-size="24"
               style="display: flex; justify-content: center; background: var(--paper)"></div>
           </div>
-          <p class="big-claim fragment" style="margin-top: 0.3em">What are the obstacles to doing this compression?</p>
+          <p class="big-claim fragment" style="margin-top: 0.3em">What if we compress the islands?</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:00. This is a comparison variant
               of the slide before. It is not yet in the talk's timing, so the
@@ -378,8 +388,8 @@
                 then almost nothing in either panel.</li>
               <li>The curves are schematic, not measured.</li>
             </ul>
-            <p><strong>The question for the talk</strong> (click for the
-              line): "What are the obstacles to doing this compression?"</p>
+            <p><strong>The closing question</strong> (click for the line):
+              "What if we compress the islands?"</p>
           </aside>
         </section>
 

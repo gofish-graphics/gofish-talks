@@ -1,7 +1,7 @@
         <!-- ═══ OPENING, PART 1 ═════════════════════════════════════════
              The title slide. The splash wall comes right after it
              (00b-splash.html), so the talk opens on concrete charts before
-             the abstract slides in 01-compression.html. -->
+             the islands in 01-islands.html. -->
         <section class="title-slide" data-background-color="#f7f2e8">
           <p class="eyebrow">GUGOG @ IEEE VIS 2026</p>
           <h1>
@@ -10,29 +10,31 @@
           </h1>
           <p class="meta">Josh Pollock</p>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:00 (counts toward part 1).
+            <p><strong>Target:</strong> 0:00.
               <strong>Running total:</strong> 0:00 of 7:00.</p>
             <p>7-minute talk at the GUGOG workshop, IEEE VIS 2026, Nov 9. It
               sets up the panel. The deck runs 7:00 at its targets; the panel
               slide lists what to cut first if it runs long.</p>
             <p><strong>The story:</strong> the talk opens on a wall of GoFish
-              charts. Why unify at all? The old reasons, easier to write and
-              easier to read, matter less now that AI writes a lot of code.
-              The reason that still holds is that compressing forces you to
-              find structure. The grammar of graphics compressed many chart
-              types into one shared language, and that revealed marks,
-              channels, scales, and coordinate systems. The compression chart
-              shows how well today's designs compress, up to the
-              expressivity cliff. Past the cliff, we built islands:
-              specialized grammars that cannot reach each other. What the
-              islands share is operators, so the grammar of graphics needs
-              verbs. GoFish adds them, and Atom and PiCCL reduce to them. Two
-              fair objections follow. Andrew McNutt's is that one language
-              cannot serve every domain's design; with verbs, a DSL is a
-              library built inside the language, as GoTree shows. Cynthia
-              Huang and Matthew Kay's is that growth costs safety; a small
-              type system brings it back, as CanAdd shows. Our verbs are
-              themselves a typology of operators, and that is the next cliff
-              and the first question for the panel.</p>
+              charts. Then the hook, over the islands drawing: I love
+              visualization grammars, and I'm sad, because I can't use them
+              together. They are different systems that don't work with each
+              other, and a lot of good work has no clear path into practice.
+              Why are there so many islands? The compression chart answers
+              it. The grammar of graphics compresses the common charts very
+              well, then hits the expressivity cliff, and each island is
+              someone getting past the cliff on their own. So what if we
+              compress the islands? To make a description shorter, you have
+              to find the structure (Simon, 1962), and a language with only
+              nouns finds nouns. Atom and PiCCL each added operators, so the
+              grammar of graphics needs verbs. GoFish adds them, and Atom and
+              PiCCL reduce to them. Two fair objections follow. Andrew
+              McNutt's is that one language cannot serve every domain's
+              design; with verbs, a DSL is a library built inside the
+              language, as GoTree shows. Cynthia Huang and Matthew Kay's is
+              that growth costs safety; a small type system brings it back,
+              as CanAdd shows. Our verbs are themselves a typology of
+              operators, and that is the next cliff and the first question
+              for the panel.</p>
           </aside>
         </section>
