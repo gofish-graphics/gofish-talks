@@ -1,4 +1,10 @@
-        <!-- ═══ PART 4a: DOES ONE LANGUAGE COST DOMAIN DESIGN?, ~1:50 ═══
+        <!-- ═══ ANSWER CONTINUED, ~0:45 ═════════════════════════════════
+             Since 2026-11-06 the visible slides here are "same core, three
+             shapes of data", then the hierarchy slide (the takeaway: one
+             grammar can keep each domain's structure), then Figure 6. The
+             McNutt quote is hidden. The older description of this part
+             follows.
+             PART 4a: DOES ONE LANGUAGE COST DOMAIN DESIGN?
              The first objection, McNutt's: no single DSL can capture every
              task without compromising its domain design. The answer: with
              verbs, a new word is a function that composes existing verbs and
@@ -78,7 +84,10 @@
              and in its strongest form. GoFish takes the direction this
              passage suggests, small modular language components, so the
              answer builds on it. -->
-        <section class="quote-slide">
+        <!-- Hidden 2026-11-06: not in the new story. The hierarchy slide's
+             notes keep a backup line about it. Remove
+             data-visibility="hidden" to bring it back. -->
+        <section class="quote-slide" data-visibility="hidden">
           <p class="part">4a · Does one language cost domain design?</p>
           <blockquote class="long-quote quote-short">
             <p>… we suggest that consideration of <strong>small modular
@@ -91,9 +100,10 @@
           <p class="long-quote-cite">Andrew McNutt, <em>No Grammar to Rule Them All</em>, IEEE VIS 2022</p>
           <aside class="notes">
             <p><strong>Full passage</strong> (reference markers removed): Park et al. argue that efforts should be made to “find a definitive grammar that can unify many of these existing grammars”. However, Greenspun’s tenth rule quips that any sufficiently complicated program contains an ad hoc, informally specified, bug-ridden, slow implementation of half of Lisp. Less satirically Fowler notes that one of the biggest dangers in DSL design is “Sliding into generality.” While tools like Vega-Lite are probably not in danger of becoming Lisp, we suggest that consideration of small modular language components may be helpful in the continuation and extension of this ecosystem. There are many tasks, and no one DSL will be able to capture all of them without compromising essential parts of its domain design. That is, there is no grammar to rule them all.</p>
-            <p><strong>Target:</strong> 0:15 (shown, not recited; read the
-              accent phrase and the last sentence aloud). <strong>Running
-              total:</strong> 4:15 of 7:00.</p>
+            <p><strong>Hidden since 2026-11-06.</strong> Not counted in the
+              running totals.</p>
+            <p><strong>Target:</strong> 0:15 if shown (shown, not recited;
+              read the accent phrase and the last sentence aloud).</p>
             <p><strong>The first objection, in its strongest form:</strong>
               a field has many tasks, and no single DSL can capture all of
               them without compromising essential parts of its domain design.
@@ -138,6 +148,104 @@
           </aside>
         </section>
 
+        <!-- Three surfaces side by side: the core slide's planets, the crash
+             course's ribbon chart, and the GoTree tree, each labeled by the
+             shape of data it works on. Renders: the same charts.ts functions
+             as the core slide and the crash course (planets-label,
+             seafood-ribbon) and the paper's Figure 5 SVG. Since 2026-11-05
+             the GoTree code slides before it are hidden, so this slide is
+             where the audience first sees GoTree written in GoFish. -->
+        <section class="code-slide recap-slide">
+          <p class="part">Answer</p>
+          <h2>same core, three shapes of data</h2>
+          <div class="recap-grid">
+            <div>
+              <p class="code-pair-label">core <span class="code-pair-sub">· marks and relations</span></p>
+              <div class="recap-render recap-planets"><div data-chart="planets-label" data-w="440" data-h="160"></div></div>
+              <pre><code class="language-ts" data-line-numbers>const planets = enclose({ ... }, [ ... ]);
+const label = text({ ... }).name("label");
+
+layer([planets, label])
+  .relate(({ mercury, planets, label }) =&gt; [
+    Constraint.align({ x: "middle" }, ...),
+    Constraint.distribute({ dir: "y", ... }, ...),
+    arrow({ ... }, [label, mercury]),
+  ])</code></pre>
+            </div>
+            <div>
+              <p class="code-pair-label">tabular <span class="code-pair-sub">· rows</span></p>
+              <div class="recap-render recap-ribbon"><div data-chart="seafood-ribbon" data-w="540" data-h="230"></div></div>
+              <pre><code class="language-ts" data-line-numbers>chart(seafood)
+  .flow(
+    spread({ by: "lake", dir: "x", ... }),
+    stack({ by: field("species")..., ... }),
+  )
+  .mark(rect({ h: "count", fill: "species" }))
+  .layer(ribbon({ by: "species", ... }))</code></pre>
+            </div>
+            <div>
+              <p class="code-pair-label">hierarchical <span class="code-pair-sub">· a nested tree</span></p>
+              <div class="recap-render"><img src="./images/tradeoffs/gofish-gotree-node-link.svg" alt="The GoTree node-link tree rendered by gofish-gotree" /></div>
+              <pre><code class="language-ts" data-line-numbers>tree({
+  node: () =&gt; circle({ r: 9 }),
+  link: { kind: "line", ... },
+  parentChild: combine({ x: ..., y: ... }),
+  sibling: combine({ x: ..., y: ... }),
+}, hierarchy)</code></pre>
+            </div>
+          </div>
+          <p class="recap-core">one core underneath: the same verbs and constraints</p>
+          <aside class="notes">
+            <p><strong>Target:</strong> 0:20. <strong>Running total:</strong>
+              3:35 of 7:00. Since 2026-11-06 it comes right after the bottle
+              and before the hierarchy slide.</p>
+            <p><strong>Say:</strong> "In the middle is the chart API from the
+              crash course. On the left is GoFish's core, where you place marks
+              by writing relations directly, like the tinted lines in the
+              bottle. And on the right is GoTree. Its input is a tree, not a
+              table of rows, so it does not fit the chart API. So we rebuilt
+              GoTree as a small library on GoFish. It keeps GoTree's own words: a
+              node, a link, a rule for parents and children, and a rule for
+              siblings. Underneath, each of those rules turns into the same
+              align and distribute relations you saw in the core. What
+              differs isn't the core, it's the shape of the data: low-level
+              marks, tabular rows, a hierarchy. Three surfaces on one
+              core."</p>
+            <p><strong>Lead into the hierarchy slide:</strong> "So what does
+              this give us?"</p>
+            <p>GoTree was introduced earlier (its intro slide, "GoTree adds
+              operators for laying out trees"). Its relations map onto the
+              core: GoTree's <code>within</code> and <code>align</code> become
+              <code>align</code>, and <code>juxtapose</code> and
+              <code>flatten</code> become <code>distribute</code>. The
+              <code>combine</code> in the spec is where that happens; its code
+              is on the hidden "<code>combine</code> compiles to GoFish
+              constraints" slide, and the whole library is about 550
+              lines.</p>
+            <p>The specs are cut down to their essential lines with
+              <code>...</code>, more than on the earlier slides, to fit three
+              columns. Core: the core slide's planets spec with
+              the <code>enclose</code> body and the label's options elided,
+              and the align and distribute operands elided (they are
+              <code>[mercury, label]</code> and <code>[planets, label]</code>).
+              Tabular: the crash course's ribbon spec, with
+              <code>field("species").sort("count")</code> shortened to
+              <code>field("species")...</code>. Hierarchical: the paper's
+              Figure 5 gofish-gotree spec with the <code>combine</code>
+              options elided (shown in full on the hidden GoTree specs
+              slide).</p>
+            <p><strong>Sources:</strong> the planets and ribbon renders are
+              drawn live by the same <code>charts.ts</code> functions as the
+              core slide and the crash course (<code>planetsLabeled</code>,
+              <code>seafoodRibbon</code>), scaled down to fit their columns.
+              The tree is the paper's Figure 5 render. No "zoom out" animation
+              from the crash course: it is too far back in the deck for
+              auto-animate to connect.</p>
+            <p>If asked about the paper: this is Andrew McNutt's compile tower,
+              with GoFish as one floor of it.</p>
+          </aside>
+        </section>
+
         <!-- The hierarchy slide, the answer to the first objection. Both
              halves are icicles: stacked rows of blocks,
              where each block spans exactly the blocks it supports. Left: the
@@ -167,8 +275,8 @@
               text-align: center;
             }
           </style>
-          <p class="part">4a · Does one language cost domain design?</p>
-          <h2>a language that grows is a hierarchy</h2>
+          <p class="part">Answer</p>
+          <h2>Unify the domains and keep their structure</h2>
           <svg class="flat-vs-hierarchy" viewBox="-2 0 1144 276" role="img" aria-label="Left: five charts (a population pyramid, a ribbon chart, a GoTree silhouette tree, a Sankey tree, and a Bluefish pulley diagram) as an icicle of two rows. All five charts sit directly on one flat row of nouns that holds marks, encoding channels, coordinate transforms, and more. Right: the same five charts as an icicle of three rows. The charts sit on a middle row of domain languages (chart, tree layout, and diagram, plus a faded block for more), and the middle row sits on a bottom row, a core of marks and verbs.">
             <rect x="0" y="66" width="98" height="98" rx="7" fill="#fff" stroke="#27231f" stroke-width="2"/>
             <image href="./images/splash/population-pyramid.png" x="4" y="70" width="90" height="90" preserveAspectRatio="xMidYMid slice"><title>population pyramid</title></image>
@@ -189,7 +297,7 @@
             <text x="390" y="198" text-anchor="middle" dominant-baseline="central" font-size="16" fill="#fff">coordinate transforms</text>
             <line x1="492" y1="182" x2="492" y2="214" stroke="#fff" stroke-opacity="0.45" stroke-width="1.5"/>
             <text x="516" y="198" text-anchor="middle" dominant-baseline="central" font-size="24" fill="#fff" opacity="0.5">…</text>
-            <text x="270" y="262" text-anchor="middle" font-size="26" fill="#1e1e1e">one flat layer of nouns</text>
+            <text x="270" y="262" text-anchor="middle" font-size="26" fill="#1e1e1e">one flat layer of concepts</text>
             <rect x="570" y="10" width="98" height="98" rx="7" fill="#fff" stroke="#27231f" stroke-width="2"/>
             <image href="./images/splash/population-pyramid.png" x="574" y="14" width="90" height="90" preserveAspectRatio="xMidYMid slice"><title>population pyramid</title></image>
             <rect x="672" y="10" width="98" height="98" rx="7" fill="#fff" stroke="#27231f" stroke-width="2"/>
@@ -205,64 +313,49 @@
             <rect x="782" y="114" width="200" height="50" rx="7" fill="#5b8fa8" stroke="#5b8fa8" stroke-width="2"/><text x="882" y="139" text-anchor="middle" dominant-baseline="central" font-size="21" fill="#fff">tree layout</text>
             <rect x="994" y="114" width="98" height="50" rx="7" fill="#5b8fa8" stroke="#5b8fa8" stroke-width="2"/><text x="1043" y="139" text-anchor="middle" dominant-baseline="central" font-size="21" fill="#fff">diagram</text>
             <g opacity="0.4"><rect x="1104" y="114" width="34" height="50" rx="7" fill="#5b8fa8" stroke="#5b8fa8" stroke-width="2"/><text x="1121" y="139" text-anchor="middle" dominant-baseline="central" font-size="24" fill="#fff">…</text></g>
-            <rect x="570" y="170" width="568" height="56" rx="7" fill="#b24a3b" stroke="#b24a3b" stroke-width="2"/><text x="854" y="198" text-anchor="middle" dominant-baseline="central" font-size="21" fill="#fff">core: marks + verbs</text>
-            <text x="854" y="262" text-anchor="middle" font-size="26" fill="#1e1e1e">a hierarchy: many DSLs, one language</text>
+            <rect x="570" y="170" width="568" height="56" rx="7" fill="#b24a3b" stroke="#b24a3b" stroke-width="2"/><text x="854" y="198" text-anchor="middle" dominant-baseline="central" font-size="21" fill="#fff">core: marks and relations</text>
+            <text x="854" y="262" text-anchor="middle" font-size="26" fill="#1e1e1e">a hierarchy: many domains, one grammar</text>
           </svg>
-          <p class="flat-vs-hierarchy-line">Build new structures from old ones with a small, stable set of verbs.</p>
+          <p class="flat-vs-hierarchy-line">Each domain keeps its own structure, and all of them share the parts underneath.</p>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
-              4:25 of 7:00.</p>
-            <p>This slide is the answer to the first objection.</p>
+            <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
+              3:50 of 7:00.</p>
+            <p>Since 2026-11-06 this slide is the takeaway of the answer. It
+              comes after "same core, three shapes of data" and before Figure
+              6.</p>
             <ul>
-              <li><strong>Open with the callback:</strong> "Remember the
-                cliff on the compression chart. The grammar of graphics is
-                excellent until the cliff, and past it the only move is to
-                add a new noun. That is the left half: one flat layer of
-                nouns, with every chart written directly against it."</li>
-              <li><strong>Point at the bottom row:</strong> "The bottom row is
-                the core you saw, the planets: marks placed by explicit
-                relations like align and distribute, composed with verbs." The
-                audience saw it on the core slide in part 3 and again in the
-                bottle spec, so it needs no new explanation here.</li>
-              <li>On the right, the same charts sit on intermediate words
-                (chart, tree layout, diagram), and those words are built from
-                that core. "The chart API from the crash course is one surface
-                on the core. Domain languages like GoTree are others."</li>
-              <li>The middle blocks are domain languages, Andrew's small
-                modular components. Chart, tree layout, and diagram each have
-                their own words, fit to their own domain.</li>
-              <li><strong>Extensibility is what keeps the hierarchy
-                together.</strong> Each new DSL is built from the same core
-                with the same verbs, from inside the language. So the DSLs do
-                not fall apart into separate islands, the way the grammars in
-                the tangle did. Each domain gets its own language, with its
-                own design, and the whole is still one language.</li>
-              <li><strong>Say the full thesis:</strong> "In the traditional
-                grammar of graphics, the only way to grow the language is to
-                add a new primitive. In a language with verbs, you can build
-                new structures from old ones, using a fairly stable set of
-                composition mechanisms."</li>
-              <li>The core stays small while the vocabulary gets big. That is
-                the sweet spot on the compression chart.</li>
-              <li>The faded block in the middle is the point: the middle level
-                is open, not a closed set of three kinds. New DSLs can keep
-                being added to it.</li>
-              <li>The next slide shows one of those DSLs, GoTree, next to the
-                chart API and the core.</li>
+              <li><strong>Left:</strong> "In the grammar of graphics, every
+                chart sits directly on one flat layer of concepts. To reach a
+                chart those concepts cannot make, you have to add a new
+                one."</li>
+              <li><strong>Right:</strong> "With operators and relations, the
+                same charts sit on domain languages: charts, tree layouts,
+                diagrams. Those are built from one shared core of marks and
+                relations, the bottom row."</li>
+              <li><strong>The takeaway:</strong> "So the domains keep their
+                own character, and they are still unified. A universal grammar
+                can keep each domain's own structure, in a hierarchy, with
+                shared parts underneath. GoFish is one concrete, precise
+                example of that. I find a working example more convincing than
+                a general argument that such a grammar might exist."</li>
+              <li>The faded blocks show that the middle row is open. New
+                domain languages can keep being added to it.</li>
             </ul>
+            <p><strong>Lead into Figure 6:</strong> "And because they share
+              that core, the domains can be mixed in one graphic."</p>
+            <p><strong>If asked</strong> whether one language must give up
+              each domain's design (Andrew McNutt's "No Grammar to Rule Them
+              All", IEEE VIS 2022, whose quote slide is hidden): this is the
+              answer. Each domain gets its own language, with its own words,
+              built inside one grammar. That is close to his suggestion of
+              small modular language components.</p>
             <p><strong>The leaves</strong> are charts the audience has
               already seen. The population pyramid, GoTree silhouette tree,
               Sankey tree, and Bluefish pulley diagram are on the splash wall. The ribbon
               chart is from the crash course.</p>
-            <p><strong>Lead into the next slide:</strong> "Here are three
-              parts of that hierarchy side by side."</p>
-            <p><strong>If asked about "optimal" compression:</strong> the
-              honest claim is only that nested rules compress better than one
-              flat layer. Grammar-based compression algorithms such as
-              Sequitur work by building nested rules.</p>
             <p><strong>If asked where the idea comes from:</strong> this is
-              Herbert Simon's point from the compression slide's backup notes
-              ("The Architecture of Complexity," 1962, p. 478): hierarchic
+              Herbert Simon's point ("The Architecture of Complexity," 1962,
+              p. 478): hierarchic
               systems are "usually composed of only a few different kinds of
               subsystems, in various combinations and arrangements."</p>
           </aside>
@@ -496,99 +589,6 @@
           </aside>
         </section>
 
-        <!-- Three surfaces side by side: the core slide's planets, the crash
-             course's ribbon chart, and the GoTree tree, each labeled by the
-             shape of data it works on. Renders: the same charts.ts functions
-             as the core slide and the crash course (planets-label,
-             seafood-ribbon) and the paper's Figure 5 SVG. Since 2026-11-05
-             the GoTree code slides before it are hidden, so this slide is
-             where the audience first sees GoTree written in GoFish. -->
-        <section class="code-slide recap-slide">
-          <p class="part">4a · Does one language cost domain design?</p>
-          <h2>same core, three shapes of data</h2>
-          <div class="recap-grid">
-            <div>
-              <p class="code-pair-label">core <span class="code-pair-sub">· marks and relations</span></p>
-              <div class="recap-render recap-planets"><div data-chart="planets-label" data-w="440" data-h="160"></div></div>
-              <pre><code class="language-ts" data-line-numbers>const planets = enclose({ ... }, [ ... ]);
-const label = text({ ... }).name("label");
-
-layer([planets, label])
-  .relate(({ mercury, planets, label }) =&gt; [
-    Constraint.align({ x: "middle" }, ...),
-    Constraint.distribute({ dir: "y", ... }, ...),
-    arrow({ ... }, [label, mercury]),
-  ])</code></pre>
-            </div>
-            <div>
-              <p class="code-pair-label">tabular <span class="code-pair-sub">· rows</span></p>
-              <div class="recap-render recap-ribbon"><div data-chart="seafood-ribbon" data-w="540" data-h="230"></div></div>
-              <pre><code class="language-ts" data-line-numbers>chart(seafood)
-  .flow(
-    spread({ by: "lake", dir: "x", ... }),
-    stack({ by: field("species")..., ... }),
-  )
-  .mark(rect({ h: "count", fill: "species" }))
-  .layer(ribbon({ by: "species", ... }))</code></pre>
-            </div>
-            <div>
-              <p class="code-pair-label">hierarchical <span class="code-pair-sub">· a nested tree</span></p>
-              <div class="recap-render"><img src="./images/tradeoffs/gofish-gotree-node-link.svg" alt="The GoTree node-link tree rendered by gofish-gotree" /></div>
-              <pre><code class="language-ts" data-line-numbers>tree({
-  node: () =&gt; circle({ r: 9 }),
-  link: { kind: "line", ... },
-  parentChild: combine({ x: ..., y: ... }),
-  sibling: combine({ x: ..., y: ... }),
-}, hierarchy)</code></pre>
-            </div>
-          </div>
-          <p class="recap-core">one core underneath: the same verbs and constraints</p>
-          <aside class="notes">
-            <p><strong>Target:</strong> 0:20 (was 0:15; it now introduces
-              GoTree in GoFish on its own, because the GoTree code slides are
-              hidden). <strong>Running total:</strong> 4:45 of 7:00.</p>
-            <p><strong>Say:</strong> "Here are the core and the chart API from
-              before, and a third surface. Remember GoTree, the grammar for
-              tree layouts. Its input is a tree, not a table of rows, so it
-              does not fit the chart API. So we rebuilt GoTree as a small
-              library on GoFish, on the right. It keeps GoTree's own words: a
-              node, a link, a rule for parents and children, and a rule for
-              siblings. Underneath, each of those rules turns into the same
-              align and distribute relations you saw in the core. What
-              differs isn't the core, it's the shape of the data: low-level
-              marks, tabular rows, a hierarchy. Three surfaces on one core.
-              That's Andrew's compile tower, with GoFish as one floor of
-              it."</p>
-            <p>GoTree was introduced in part 2 (its intro slide, "GoTree adds
-              operators for laying out trees"). Its relations map onto the
-              core: GoTree's <code>within</code> and <code>align</code> become
-              <code>align</code>, and <code>juxtapose</code> and
-              <code>flatten</code> become <code>distribute</code>. The
-              <code>combine</code> in the spec is where that happens; its code
-              is on the hidden "<code>combine</code> compiles to GoFish
-              constraints" slide, and the whole library is about 550
-              lines.</p>
-            <p>The specs are cut down to their essential lines with
-              <code>...</code>, more than on the earlier slides, to fit three
-              columns. Core: the core slide's planets spec with
-              the <code>enclose</code> body and the label's options elided,
-              and the align and distribute operands elided (they are
-              <code>[mercury, label]</code> and <code>[planets, label]</code>).
-              Tabular: the crash course's ribbon spec, with
-              <code>field("species").sort("count")</code> shortened to
-              <code>field("species")...</code>. Hierarchical: the paper's
-              Figure 5 gofish-gotree spec with the <code>combine</code>
-              options elided (shown in full on the hidden GoTree specs
-              slide).</p>
-            <p><strong>Sources:</strong> the planets and ribbon renders are
-              drawn live by the same <code>charts.ts</code> functions as the
-              core slide and the crash course (<code>planetsLabeled</code>,
-              <code>seafoodRibbon</code>), scaled down to fit their columns.
-              The tree is the paper's Figure 5 render. No "zoom out" animation
-              from the crash course: it is too far back in the deck for
-              auto-animate to connect.</p>
-          </aside>
-        </section>
 
         <!-- Picture only: the GUGOG camera-ready paper's Figure 6
              (gugog-2026-camera-ready-v3/figures/gofish-tree-waffle.png),
@@ -603,13 +603,13 @@ layer([planets, label])
               max-height: 480px;
             }
           </style>
-          <p class="part">4a · Does one language cost domain design?</p>
+          <p class="part">Answer</p>
           <h2>the surfaces work together</h2>
           <img class="tree-waffle" src="./images/tradeoffs/gofish-tree-waffle.png" alt="A GoFish tree whose four leaves are waffles of bottle glyphs, each bottle filled with green to a data value" />
           <p class="source-line" style="text-align: center">GUGOG paper, Figure 6</p>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:10, plus about 0:05 for the bridge
-              line to 4b. <strong>Running total:</strong> 5:00 of 7:00.</p>
+            <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
+              4:00 of 7:00. This ends the answer.</p>
             <ul>
               <li>One graphic that uses all three surfaces. The tree is laid
                 out by the hierarchical surface (gofish-gotree). Each leaf is
@@ -621,8 +621,10 @@ layer([planets, label])
                 domain kept its own design, and nothing had to be translated
                 between them.</li>
             </ul>
-            <p><strong>Bridge to 4b, the second objection</strong> (no slide;
-              this ends 4a. Credit
+            <p><strong>Lead into semantic validity:</strong> "So one grammar
+              can draw many more charts. That has a cost."</p>
+            <p><strong>Only if there is time</strong> (until 2026-11-06 this
+              was the bridge to the validity part; credit
               Jason Brunson's GUGOG paper, "Balancing constriction and
               expansion for domain-specific grammars"): "Jason's paper argues
               that each domain needs a dialect, with its own objects and its

@@ -537,3 +537,11 @@
 .reveal .grammar-intro-slide .source-line {
   margin-top: 1em !important;
 }
+
+/* The bottle slide's live chart (2026-11-06), in place of the paper's
+   image. GoFish lays the four bottles out at their own size (175 wide rects
+   and spacing 20 from the story), which needs about 800px, so the chart is
+   rendered at 800 wide and zoomed down to fit its column. */
+.reveal .code-slide .bottle-render {
+  zoom: 0.64;
+}

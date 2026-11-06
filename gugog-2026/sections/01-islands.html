@@ -1,15 +1,13 @@
-        <!-- ═══ PART 1: WHY THERE ARE ISLANDS, ISLANDS AND TANGLE, ~0:50 ═
-             An auto-animate pair. Since 2026-11-04 the talk's hook is
-             spoken over the first slide: "I love visualization grammars,
-             and I'm sad, because I can't use them together." Seen from
-             above, the grammar of graphics is the main island and the
-             specialized grammars are smaller islands around it. The tangle
-             shows that the islands do not work with each other, and leads
-             into the compression chart (01b-compression.html) with "Why are
-             there so many islands?" Neither of these two has a part label
-             or any other text, because the drawing fills the slide. The
-             Atom and PiCCL intros that used to end this file are now in
-             01c-compress-islands.html, after the compression chart. -->
+        <!-- ═══ PROBLEM: ISLANDS AND TANGLE, ~0:50 ═════════════════════
+             An auto-animate pair. Since 2026-11-06 the notes follow the
+             paper's opening: the grammar of graphics is great but does not
+             cover everything, so researchers built domain-specific grammars,
+             the islands. The tangle shows that they are hard to compare,
+             combine, and carry into practice. It leads into the circle slide
+             (01c-compress-islands.html); the compression chart that used to
+             come between them (01b-compression.html) is hidden. Neither of
+             these two has a part label or any other text, because the
+             drawing fills the slide. -->
 
         <!-- The two grammars pictures are the user's tldraw drawing (exported
              as SVG, 2026-11-03). grammars.svg has only the labeled circles and
@@ -45,37 +43,36 @@
               alt="Hand drawing: a big circle labeled GoG in the middle, with smaller circles around it for Atom, PiCCL, AnnoGram, Gemini, Mascot, Gosling, Neo, GenomeSpy, GoTree, and Canis" />
           </div>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:35 (was 0:15; it now carries the
-              hook). <strong>Running total:</strong> 0:45 of 7:00.</p>
-            <p><strong>The hook.</strong> This is close to how you said it
-              in the run-through. Say it in your own words. There is no text
-              on the slide, because the drawing fills it.</p>
+            <p><strong>Target:</strong> 0:35. <strong>Running total:</strong>
+              0:45 of 7:00.</p>
+            <p>Since 2026-11-06 this slide follows the paper's opening. There
+              is no text on the slide, because the drawing fills it.</p>
             <ul>
-              <li>"I'm sad. I'm sad because I love visualization grammars.
-                Every time I see one presented, I'm in the audience like the
-                sunglasses emoji. But when I go to use them, I can't figure
-                out how to fit them into my workflow."</li>
+              <li>"The grammar of graphics replaced a messy collection of
+                chart types with a consistent set of seven concepts that you
+                can combine with each other. It is very expressive. It can
+                make most common charts, and it supports a big ecosystem of
+                custom marks in ggplot2. It also gave us a simpler and clearer
+                model of how charts encode information."</li>
+              <li>"But the grammar of graphics does not cover every
+                visualization. So researchers keep making new grammars for
+                trees, networks, maps, animation, interaction, scientific
+                figures, and other domains."</li>
               <li>"Here they are, drawn as islands. The grammar of graphics is
-                the big island in the middle. The specialized grammars are the
-                smaller islands around it: Atom, PiCCL, GoTree, Gosling,
-                Canis, and more."</li>
-              <li>"They are all different systems. Some of them you can
-                download, but they don't work with each other. We have the
-                ggplot2 ecosystem, but I mostly work in JavaScript and Python,
-                so it doesn't help me. And many grammars don't fit the grammar
-                of graphics anyway."</li>
-              <li>"There's also a practical problem. A lot of cool work,
-                including mine, has no clear path into practice."</li>
-              <li>"That's why I want to build a GUGOG. It would let me play
-                with all these grammars. And maybe it would let end users make
-                charts they have never seen before."</li>
+                the big island in the middle. The domain-specific grammars are
+                the smaller islands around it: Atom, PiCCL, GoTree, Gosling,
+                Canis, and more. We now live in a world not of chart types,
+                but of grammar types."</li>
             </ul>
+            <p>Only if there is time, the old hook: "I love visualization
+              grammars. Every time I see one presented, I'm in the audience
+              like the sunglasses emoji. But when I go to use them, I can't
+              figure out how to fit them into my workflow."</p>
             <p>Many of the people who made these grammars are in the room.
-              Say the hook as love for their work and as a problem we all
-              share. The ggplot2 line is about my own languages, not a
-              complaint about R, and the next sentence says the bigger reason,
-              which is that many grammars do not fit the grammar of graphics
-              anyway.</p>
+              Say this as love for their work and as a problem we all
+              share.</p>
+            <p><strong>Source:</strong> the first two paragraphs of the
+              paper's introduction.</p>
             <p>Next slide: the arrows fade in on top of this same picture,
               and the circles do not move.</p>
           </aside>
@@ -91,27 +88,24 @@
             <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
               1:00 of 7:00.</p>
             <ul>
-              <li>"This is what it looks like when they don't work with each
-                other. To use two of these grammars together, or even to
-                compare them, you have to translate from one to the other. To
-                do that for all of them, you have to translate between every
-                pair. That is this tangle of arrows."</li>
-              <li>"I'm confident about this part, because I have run into it a
-                lot. I'm less sure about what follows from it. I suspect it
-                makes it harder to ask new research questions about the long
-                tail, and that we are treading water a bit, but I am not sure
-                that is the cause."</li>
-              <li>Only if there is time: "Some of us doubt that a shared
-                kernel exists, meaning a small common core that all of these
-                languages could be written in. I think one does, but it may
-                not look quite like the grammar of graphics we are used
-                to."</li>
+              <li>"Each of these grammars is built as its own system, from the
+                spec down to layout and rendering. Many are built on
+                foundations that only roughly match the grammar of graphics.
+                So their ideas are hard to compare, combine, and carry into
+                practice."</li>
+              <li>"To use two of them together, or even to compare them, you
+                have to translate from one to the other. To do that for all of
+                them, you have to translate between every pair. That is this
+                tangle of arrows."</li>
+              <li>"And because they do not build on the grammar of graphics,
+                it is hard to bring their ideas into tools like Matplotlib or
+                ggplot2."</li>
             </ul>
-            <p>Said with confidence: the grammars are hard to use together
-              and hard to compare. Said as a suspicion: that the field is
-              stuck, and that this is the cause.</p>
-            <p><strong>Lead into the compression chart:</strong> "Why are
-              there so many islands?"</p>
+            <p><strong>Source:</strong> the paper's abstract ("difficult to
+              compare, combine, and carry into practice") and the second
+              paragraph of its introduction.</p>
+            <p><strong>Lead into the circle slide:</strong> "We would love one
+              grammar that holds all of them."</p>
           </aside>
         </section>
 

@@ -29,7 +29,12 @@ import {
   Shape,
   Unit,
   Trait,
+  image,
+  atop,
+  Filter,
+  v,
 } from "gofish-graphics";
+import bottlePng from "./images/comparisons/wilsonblanco.png";
 import seafood from "./data/seafood.json";
 
 // The deck's look (talk-template/src/style.css).
@@ -529,7 +534,39 @@ type Renderable = {
   render: (el: HTMLElement, options: Record<string, unknown>) => unknown;
 };
 
+// The PiCCL bottle chart, for the bottle slide (03b-code-comparisons.html).
+// This is the GoFish repo's bottle story as of gofish-graphics nightly
+// 20261106 (packages/gofish-graphics/stories/piccl/Bottle.stories.tsx, last
+// changed in df2fd1de, "paint is now atop"), with the same data, options and
+// image (stories/assets/wilsonblanco.png). The slide prints it with styling
+// elided.
+const bottleData = [
+  { category: "a", amount: 30 },
+  { category: "d", amount: 60 },
+  { category: "b", amount: 75 },
+  { category: "c", amount: 100 },
+];
+
+const pdBottle = () =>
+  chart(bottleData, { axes: false })
+    .flow(spread({ by: "category", dir: "x", spacing: 20, axes: { x: false } } as any))
+    .mark(
+      layer([
+        atop({ blendMode: "color" }, [
+          image({ href: bottlePng, h: v(100), filter: Filter.grayscale } as any),
+          rect({ h: "amount", w: 175, fill: "#00ff00" }),
+        ]).name("bottle"),
+        rect({ h: 1, fill: "#666", w: 175, y: "amount" } as any).name("line"),
+        text({ fontSize: 35, fill: "#666", text: (d: any) => `${d.amount}%` } as any).name("label"),
+      ]).relate(({ line, label, bottle }: any) => [
+        Constraint.align({ x: "start" }, [bottle, line]),
+        Constraint.distribute({ dir: "y", spacing: 0 }, [line, label]),
+        Constraint.align({ x: "end" }, [label, line]),
+      ])
+    );
+
 const charts: Record<string, (fontSize: number) => Renderable> = {
+  "piccl-bottle": pdBottle,
   "usage-curve": usageCurve,
   ...compressionSteps,
   ...compressionRateSteps,

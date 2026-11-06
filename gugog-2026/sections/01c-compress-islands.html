@@ -4,92 +4,59 @@
              loads it without touching main.ts. -->
         <link rel="stylesheet" href="./gofish-compare.css" />
 
-        <!-- ═══ PART 2: COMPRESS THE ISLANDS, ~0:55 ═════════════════════
-             Since 2026-11-05 the part opens with the circle slide: one
-             language that holds all the islands. Its notes are the bridge.
-             You could hold them all without unifying anything, by bundling
-             each grammar as a separate component, but then you could not mix
-             them, so mixing needs something the islands have in common. Then
-             three islands up close, Atom, PiCCL, and GoTree, to ask what each
-             one added. The compression chart (01b-compression.html) ends on
-             "What if we compress the islands?" and the Simon line, and its
-             lead is "So let's do to the islands what the grammar of graphics
-             did to chart types, and compress them. Start by asking what each
-             island added." Each island added operators, not new marks or
-             channels, so the verbs slide in part 3 (02-verbs.html) names a
-             pattern the audience has already seen. This follows the thesis
-             defense deck, where "Limitations of Marks/Channels Lead to New
-             Grammars with New Compositional Rules" showed Atom's operator
-             figure (phd-thesis-20260618/presentation/sections/
-             03-gofish.html, hidden there), and the GUGOG paper's abstract,
-             which reads recent grammars as "specialized extensions of the
-             GoG with verbs for arranging, compositing, repeating, or
-             otherwise relating marks to each other". These two slides were
-             at the end of the islands file until 2026-11-04, when the
-             compression chart moved between the islands and them. -->
+        <!-- ═══ PROBLEM, THEN QUESTION: THE CIRCLE AND THREE ISLANDS ════
+             Since 2026-11-06 the circle slide follows the tangle directly
+             and ends the problem: we would love a grand unified grammar of
+             graphics. Its one click asks the question that the rest of the
+             file looks at: why can't these grammars be unified with the
+             grammar of graphics? Then three islands up close, Atom, PiCCL,
+             and GoTree, each with the chart it makes and its key idea. The
+             slide after them (02-verbs.html) names what they added,
+             graphical operators and relations. The talk arrives at that from
+             the examples; it does not assert it first. -->
 
-        <!-- The circle slide (2026-11-05). The user's drawing is now in
-             images/opening/grammars-circle.svg. Older note: the user was drawing
-             this picture, one circle that holds every island. Until then it
-             shows the islands drawing (images/opening/grammars.svg) inside a
-             large dashed circle, with a small "placeholder" tag.
-             To drop in the drawing: export it from tldraw as SVG to
-             images/opening/grammars-circle.svg, replace the
-             <div class="circle-stack"> below with
-               <img class="circle-drawing" src="./images/opening/grammars-circle.svg" alt="..." />
-             and delete the .circle-ring and .circle-tag rules and elements.
-             If the drawing should line up with the islands slides, export it
-             with the same frame as grammars.svg.
-             It comes right after the compression chart, not right after the
-             tangle, because the chart's closing line, "What if we compress
-             the islands?", is the question this picture answers. Moving it
-             to right after the tangle is a one-slide move (see the outline's
-             open choices). -->
+        <!-- The circle slide (2026-11-05). The user's drawing is
+             images/opening/grammars-circle.svg. -->
         <section class="circle-slide">
           <style>
             .reveal .circle-slide .circle-drawing {
               border-radius: 0;
               display: block;
-              height: 540px;
+              height: 480px;
               margin: 0.2em auto 0;
               max-height: none;
               max-width: none;
             }
+            .reveal .circle-slide .circle-question {
+              margin-top: 0.3em;
+              text-align: center;
+            }
           </style>
-          <p class="part">2 · Compress the islands</p>
-          <h2>one language that holds all of them</h2>
+          <p class="part">Problem</p>
+          <h2>We want a grand unified grammar of graphics</h2>
           <img class="circle-drawing" src="./images/opening/grammars-circle.svg"
             alt="One large circle labeled GUGOG that holds every grammar: the grammar of graphics in the middle and Atom, PiCCL, AnnoGram, Gemini, Neo, Canis, GoTree, GenomeSpy, Gosling, and Mascot around it" />
+          <p class="big-claim fragment circle-question">Why can't these grammars be unified with the grammar of graphics?</p>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:20. <strong>Running total:</strong>
-              1:55 of 7:00.</p>
+            <p><strong>Target:</strong> 0:20, with the question.
+              <strong>Running total:</strong> 1:20 of 7:00. This ends the
+              problem.</p>
             <p>The picture is the islands drawing again, with one circle
               labeled GUGOG around all of them.</p>
-            <p>The lead into this slide is the last line on the compression
-              chart, "What if we compress the islands?", and the Simon line
-              under its title.</p>
-            <p><strong>Say (the bridge):</strong> "What if one language held
-              all of these? You could do this without unifying anything: one
-              package that bundles every grammar as a separate component.
-              That would fix installing them. It would not let you mix them.
-              Each island's ideas would still only work inside that island,
-              so you could not use Atom's unit layout inside a PiCCL picture,
-              or put a GoTree layout inside a chart. Mixing needs something
-              the islands have in common. So is there anything in common?
-              Look at what each island added."</p>
-            <p>Why this beat is here: the user's worry was that the circle on
-              its own does not justify unifying anything, because a bundle of
-              unrelated modular components would also put everything in one
-              place. The bridge grants that, and says what a bundle cannot
-              do, which is mixing. Mixing is the reason to look for shared
-              structure, and the next three slides look for it.</p>
+            <p><strong>Say:</strong> "We would love one grammar that holds
+              all of these: a grand unified grammar of graphics, or
+              GUGOG."</p>
+            <p>(Click for the question.) "So a natural question is this: why
+              can't these grammars be unified with the grammar of graphics?
+              Let's look at three of them."</p>
+            <p>Do not answer the question here. The next three slides look at
+              the evidence, and the slide after them says what the grammars
+              have in common.</p>
             <p>Fairness: building a separate grammar was the right move for
-              each of these teams. Each one was getting past the cliff with
-              the tools that existed. Nothing here says they should have done
-              it differently. The point is only that today their ideas cannot
-              be mixed, and that is a problem we all share.</p>
-            <p><strong>Lead into Atom:</strong> "Look at what each island
-              added. Here's Atom."</p>
+              each of these teams. Each one needed something the grammar of
+              graphics did not have, and built it with the tools that existed.
+              The point is only that today their ideas are hard to put
+              together, and that is a problem we all share.</p>
           </aside>
         </section>
 
@@ -115,7 +82,7 @@
              course, in 03b-code-comparisons.html. GoTree's is on the "same
              core, three shapes of data" slide in 04a-domain-design.html. -->
         <section class="grammar-intro-slide grammar-intro-stack">
-          <p class="part">2 · Compress the islands</p>
+          <p class="part">Question</p>
           <h2>Atom adds operators for arranging units</h2>
           <div class="grammar-intro-figs">
             <div>
@@ -130,12 +97,12 @@
           <p class="source-line">Atom: A Grammar for Unit Visualizations · Park, Drucker, Fernandez &amp; Elmqvist, IEEE TVCG 2018</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
-              2:10 of 7:00.</p>
-            <p>The lead into this slide is the end of the circle slide's
-              bridge: "So is there anything in common? Look at what each
-              island added."</p>
+              1:35 of 7:00.</p>
+            <p>The lead into this slide is the question on the circle slide:
+              "Why can't these grammars be unified with the grammar of
+              graphics? Let's look at three of them."</p>
             <p>This slide and the next two (PiCCL and GoTree) show the
-              evidence before the verbs slide names the pattern. The ideas
+              evidence before the next slide names what they added. The ideas
               are Atom's, PiCCL's, and GoTree's, and the credit goes to their
               authors.</p>
             <p><strong>Say:</strong> Here's Atom, by Park, Drucker,
@@ -156,7 +123,7 @@
         </section>
 
         <section class="grammar-intro-slide">
-          <p class="part">2 · Compress the islands</p>
+          <p class="part">Question</p>
           <h2>PiCCL adds operators for combining pictures</h2>
           <div class="grammar-intro-figs grammar-intro-side">
             <div>
@@ -171,7 +138,7 @@
           <p class="source-line">PiCCL: Data-Driven Composition of Bespoke Pictorial Charts · Shi et al., IEEE VIS 2025</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
-              2:20 of 7:00.</p>
+              1:45 of 7:00.</p>
             <p><strong>Say:</strong> And here's PiCCL, by Shi and others at
               VIS 2025, a grammar for pictorial charts like these. Its marks
               are ordinary pictures and shapes. What PiCCL added is a set of
@@ -186,11 +153,7 @@
               compositing operator figure. Both are copied from the thesis
               defense deck's PiCCL intro slide, whose notes say the same
               thing, that the core idea of the paper is this set of compositing
-              operators. The lead into the verbs slide, now on the GoTree slide
-              after this one, follows the GUGOG paper's abstract,
-              which reads recent grammars as extensions of the grammar of
-              graphics "with verbs for arranging, compositing, repeating, or
-              otherwise relating marks to each other".</p>
+              operators.</p>
           </aside>
         </section>
 
@@ -219,7 +182,7 @@
               width: 100%;
             }
           </style>
-          <p class="part">2 · Compress the islands</p>
+          <p class="part">Question</p>
           <h2>GoTree adds operators for laying out trees</h2>
           <div class="grammar-intro-figs grammar-intro-side gotree-figs">
             <div>
@@ -234,7 +197,7 @@
           <p class="source-line">GoTree: A Grammar of Tree Visualizations · Li, Tian, Xu, McGuffin &amp; Yuan, ACM CHI 2020</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
-              2:30 of 7:00.</p>
+              1:55 of 7:00.</p>
             <p><strong>Say:</strong> And here's GoTree, by Guozheng Li, Min
               Tian, Qinmei Xu, Michael McGuffin, and Xiaoru Yuan, at CHI 2020.
               It is a grammar for tree visualizations, like all of these. Its
@@ -243,16 +206,14 @@
               be placed by include, juxtapose, or within, and siblings can be
               aligned or flattened. Mix those per axis and you get all of
               these layouts.</p>
-            <p><strong>Lead into the verbs slide:</strong> "So none of these
-              three islands mainly added a new kind of mark or channel. Each
-              one added new ways to arrange and combine things. I think most
-              of the other islands are like this too. They add ways to
-              arrange, combine, repeat, or connect marks."</p>
+            <p><strong>Lead into the next slide:</strong> "So what did these
+              three grammars add? None of them mainly added a new kind of mark
+              or channel."</p>
             <p>GoTree is also the island whose data is not a table. It comes
-              back on the "same core, three shapes of data" slide in part 4a,
-              rebuilt as a library on GoFish. The GoTree code slides in 4a are
-              hidden for now, so that slide is the only place its GoFish
-              version appears.</p>
+              back on the "same core, three shapes of data" slide in the
+              answer, rebuilt as a library on GoFish. The GoTree code slides
+              are hidden, so that slide is the only place its GoFish version
+              appears.</p>
             <p><strong>Source:</strong> Guozheng Li, Min Tian, Qinmei Xu,
               Michael J. McGuffin, and Xiaoru Yuan, "GoTree: A Grammar of Tree
               Visualizations", Proc. CHI 2020, doi 10.1145/3313831.3376297, as

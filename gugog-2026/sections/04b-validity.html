@@ -9,6 +9,47 @@
              which predates the type system. Its code is from the current
              GoFish source, where the trait is named CanSum.
              Styles for the code slides: ../gofish-compare.css. -->
+        <!-- ═══ SEMANTIC VALIDITY, ~1:00 ═══════════════════════════════
+             Since 2026-11-06 this part opens with the connection to the
+             answer: a unified grammar is more expressive, so it can make more
+             incorrect charts, but its structure helps, because validity
+             rules belong to a few operators rather than to many chart types.
+             Then the Huang and Kay quote, the four CanSum steps (the first
+             one shows the incorrect stacked chart), and the open question
+             slide at the end of this file. -->
+        <section class="validity-open-slide">
+          <style>
+            .reveal .validity-open-slide .validity-lines {
+              margin: 1.6em auto 0;
+              max-width: 1160px;
+            }
+            .reveal .validity-open-slide .validity-lines p {
+              font-size: 0.95em;
+              line-height: 1.3;
+              margin: 0 0 0.9em;
+            }
+          </style>
+          <p class="part">Semantic validity</p>
+          <h2>Validity rules belong to operators</h2>
+          <div class="validity-lines">
+            <p>A unified grammar is more expressive, so it can also make more incorrect charts.</p>
+            <p>But its structure helps. Validity rules belong to a few operators, not to many chart types.</p>
+            <p>For example, <code>stack</code> sums its values, so <code>stack</code> needs values that can be summed.</p>
+          </div>
+          <aside class="notes">
+            <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
+              4:10 of 7:00.</p>
+            <p><strong>Say:</strong> "A unified grammar is more expressive,
+              so it can also make more incorrect charts. But the same
+              structure helps. The rules for what is valid belong to a few
+              operators, not to many chart types. For example,
+              <code>stack</code> sums its values, so <code>stack</code> needs
+              values that can be summed."</p>
+            <p><strong>Lead into the quote:</strong> "Semantic validity is a
+              big theme at this workshop."</p>
+          </aside>
+        </section>
+
         <!-- The open question the CanSum slide gives one data point on:
              Huang and Kay, "Semantic Validity vs. Graphical Arrangement in
              Visualization Grammars", GUGOG @ IEEE VIS 2026
@@ -16,7 +57,7 @@
              "Future Directions: Best of Both?", verbatim. The slide presents
              their question in their own words and credits them for it. -->
         <section class="quote-slide">
-          <p class="part">4b · Does growth cost safety?</p>
+          <p class="part">Semantic validity</p>
           <blockquote class="long-quote quote-short">
             <p>Can semantic and graphical expressivity be combined within a
               single system, or are users better served by clearly distinct
@@ -29,27 +70,17 @@
           </blockquote>
           <p class="long-quote-cite">Cynthia Huang &amp; Matthew Kay, <em>Semantic Validity vs. Graphical Arrangement in Visualization Grammars</em>, GUGOG 2026</p>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:15 (shown, not recited; read the
-              accent phrase aloud). <strong>Running total:</strong> 5:15 of
+            <p><strong>Target:</strong> 0:10 (shown, not recited; read the
+              accent phrase aloud). <strong>Running total:</strong> 4:20 of
               7:00.</p>
-            <p><strong>The second objection, in its strongest form:</strong>
-              the hierarchy lets anyone grow the language, and that much extensibility
-              and expressiveness seems to cost safety. If anyone can add new
-              structures, it seems the language can no longer check that a
-              picture means something. Cynthia and Matt state the general
-              version: systems that validate every operation constrain what
-              you can draw, and systems that let you draw anything leave
-              validity to the user.</p>
-            <p><strong>Say:</strong> "Here is the second concern, and it is
-              also a fair one. If anyone can grow the language, it seems the language can't
-              check what you draw. Cynthia and Matt, who are on the panel,
-              frame the general version as a tradeoff: validate every operation and
-              you constrain what you can draw; maximize what you can draw and
-              validity is left to the user. They ask which of these
-              tradeoffs are principled and which are incidental to current
-              systems. Their work showed me that validity is important, and
-              here's one data point on their question." Then go to the next
-              slide.</p>
+            <p><strong>Say:</strong> "Semantic validity is a big theme at
+              this workshop. Cynthia and Matt, who are on the panel, frame it
+              as a tradeoff. If you check every operation, you limit what
+              people can draw. If you let people draw anything, checking is
+              left to them. They ask which of these tradeoffs are principled
+              and which come only from how current systems are built. Here is
+              one very early data point on their question." Then go to the
+              next slide.</p>
             <p>The quote is verbatim from section 6.4, "Future Directions:
               Best of Both?" (the PDF's line-break hyphens, as in
               "max-imize", are not part of the words). The accent color is
@@ -123,7 +154,7 @@
              from the slide's corner on the other, and it flies in from the
              top left. -->
         <section class="code-slide" data-auto-animate data-auto-animate-id="canadd" data-auto-animate-duration="0.3">
-          <p class="part" data-id="canadd-part">4b · Does growth cost safety?</p>
+          <p class="part" data-id="canadd-part">Semantic validity</p>
           <h2 data-id="canadd-title"><code>stack</code> needs <code>CanSum</code></h2>
           <div class="canadd-grid">
             <pre data-id="canadd-code" data-magic-move><code class="language-ts" data-line-numbers>const data = [
@@ -162,18 +193,17 @@ chart(data)
           </div>
           <p class="canadd-footnote" data-id="canadd-footnote">Inspired by Bartonicek, Urbanek &amp; Murrell (JCGS 2025), Flint (Wang et al., VIS 2026), and Huang &amp; Kay (GUGOG 2026).</p>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:10 (of the slide's 0:40).
-              <strong>Running total:</strong> 5:25 of 7:00.</p>
-            <ul>
-              <li>Does growth cost safety? One data point on Cynthia and
-                Matt's open question.</li>
-            </ul>
+            <p><strong>Target:</strong> 0:10 (of the four steps' 0:30).
+              <strong>Running total:</strong> 4:30 of 7:00.</p>
             <p><strong>Say:</strong> "Here is one dataset with a temperature
               and a dollar amount for each city and month. This spec stacks
-              the temperatures. GoFish draws it, but the picture means
-              nothing, because temperatures do not add up. There is no schema
-              here, so GoFish does not check anything. You can start untyped
-              and add types later."</p>
+              the temperatures. GoFish draws it, but the chart is incorrect,
+              because temperatures do not add up. There is no schema here, so
+              GoFish does not check anything."</p>
+            <p>"This work is very early. It was inspired by papers and
+              systems in this area: Bartonicek, Urbanek, and Murrell's algebra
+              of graphics, the Flint system, and Cynthia and Matt's paper."
+              Point at the line at the bottom of the slide.</p>
             <p>The chart is live. Without a schema, a column has no declared
               unit, and GoFish lets it pass. In the GoFish source this is
               <code>addsUp</code> in <code>src/ast/measure.ts</code>
@@ -191,7 +221,7 @@ chart(data)
         </section>
 
         <section class="code-slide" data-auto-animate data-auto-animate-id="canadd" data-auto-animate-duration="0.3">
-          <p class="part" data-id="canadd-part">4b · Does growth cost safety?</p>
+          <p class="part" data-id="canadd-part">Semantic validity</p>
           <h2 data-id="canadd-title"><code>stack</code> needs <code>CanSum</code></h2>
           <div class="canadd-grid">
             <pre data-id="canadd-code" data-magic-move><code class="language-ts" data-line-numbers data-char-marks="8:11-13, 9:3-11, 10:5-21, 11:5-53, 12:3-4, 13:1-2">const data = [
@@ -235,12 +265,10 @@ chart(data, {
           </div>
           <p class="canadd-footnote" data-id="canadd-footnote">Inspired by Bartonicek, Urbanek &amp; Murrell (JCGS 2025), Flint (Wang et al., VIS 2026), and Huang &amp; Kay (GUGOG 2026).</p>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:10 (of the slide's 0:40).
-              <strong>Running total:</strong> 5:35 of 7:00.</p>
+            <p><strong>Target:</strong> 0:05 (of the four steps' 0:30).
+              <strong>Running total:</strong> 4:35 of 7:00.</p>
             <p><strong>Say:</strong> "Now add a schema. Degrees Celsius is a
-              plain unit, and US dollars are declared summable. I have not
-              run it again yet, so the chart on the right is still the old
-              one."</p>
+              plain unit, and US dollars are declared summable."</p>
             <p>The highlights mark what changed: the schema is new, and
               nothing else in the spec moved. This click changes only the
               code. The next click runs it and changes only the output.</p>
@@ -249,7 +277,7 @@ chart(data, {
 
 
         <section class="code-slide" data-auto-animate data-auto-animate-id="canadd" data-auto-animate-duration="0.3">
-          <p class="part" data-id="canadd-part">4b · Does growth cost safety?</p>
+          <p class="part" data-id="canadd-part">Semantic validity</p>
           <h2 data-id="canadd-title"><code>stack</code> needs <code>CanSum</code></h2>
           <div class="canadd-grid">
             <pre data-id="canadd-code" data-magic-move><code class="language-ts" data-line-numbers data-char-marks="8:11-13, 9:3-11, 10:5-21, 11:5-53, 12:3-4, 13:1-2">const data = [
@@ -293,8 +321,8 @@ chart(data, {
           </div>
           <p class="canadd-footnote" data-id="canadd-footnote">Inspired by Bartonicek, Urbanek &amp; Murrell (JCGS 2025), Flint (Wang et al., VIS 2026), and Huang &amp; Kay (GUGOG 2026).</p>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:05 (of the slide's 0:40).
-              <strong>Running total:</strong> 5:40 of 7:00.</p>
+            <p><strong>Target:</strong> 0:05 (of the four steps' 0:30).
+              <strong>Running total:</strong> 4:40 of 7:00.</p>
             <p><strong>Say:</strong> "Run it, and the same stack now gives an
               error, because degrees Celsius has no <code>CanSum</code>. The
               error suggests the fix: average them instead."</p>
@@ -330,7 +358,7 @@ chart(data, {
         </section>
 
         <section class="code-slide" data-auto-animate data-auto-animate-id="canadd" data-auto-animate-duration="0.3">
-          <p class="part" data-id="canadd-part">4b · Does growth cost safety?</p>
+          <p class="part" data-id="canadd-part">Semantic validity</p>
           <h2 data-id="canadd-title"><code>stack</code> needs <code>CanSum</code></h2>
           <div class="canadd-grid">
             <pre data-id="canadd-code" data-magic-move><code class="language-ts" data-line-numbers data-char-marks="19:8-12">const data = [
@@ -374,14 +402,14 @@ chart(data, {
           </div>
           <p class="canadd-footnote" data-id="canadd-footnote">Inspired by Bartonicek, Urbanek &amp; Murrell (JCGS 2025), Flint (Wang et al., VIS 2026), and Huang &amp; Kay (GUGOG 2026).</p>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:15 (of the slide's 0:40).
-              <strong>Running total:</strong> 5:55 of 7:00.</p>
+            <p><strong>Target:</strong> 0:10 (of the four steps' 0:30).
+              <strong>Running total:</strong> 4:50 of 7:00.</p>
             <p><strong>Say:</strong> "Stack the dollars instead, and it
-              works. This constrains specs, not pictures. Every picture is
-              still reachable. My view is that growth does not have to cost
-              safety: a type system brings it back, and the one that catches
-              this error is small. The limits: this is one operator and one property, and
-              interactivity is not covered."</p>
+              works. This checks specs, not pictures, so every picture can
+              still be drawn. The rule lives on one operator,
+              <code>stack</code>, and it covers every chart that uses
+              <code>stack</code>. So far this is one operator and one
+              property, and it does not cover interaction."</p>
             <p>The highlight marks what changed: <code>"temp"</code> became
               <code>"usd"</code>.</p>
             <p><strong>Fair framing:</strong></p>
@@ -400,9 +428,8 @@ chart(data, {
               one unit on x to equal one unit on y. GoFish tracks at the type level whether two axes have the
               same type, and if they do, it uses the same scale for both by
               default.</p>
-            <p><strong>Lead into part 5:</strong> "So growth does not have to
-              cost safety. But the growth itself has a limit, and that is
-              where I want to end."</p>
+            <p><strong>Lead into the open question:</strong> "This raises a
+              bigger question."</p>
             <p><strong>Source:</strong> written for this slide, after the
               GoFish repo's CanSum test
               (<code>packages/gofish-graphics/src/tests/measure.test.ts</code>,
@@ -432,5 +459,26 @@ chart(data, {
                 Arrangement in Visualization Grammars," GUGOG @ IEEE VIS
                 2026.</li>
             </ul>
+          </aside>
+        </section>
+
+        <!-- The open question (2026-11-06). It ends the semantic validity
+             part. It has no data-auto-animate, so the CanSum step before it
+             does not pair with it. -->
+        <section class="statement open-question-slide">
+          <p class="part">Semantic validity</p>
+          <h2>Open question</h2>
+          <p class="big-claim">Can we check whether a chart is valid by following the structure of its specification?</p>
+          <aside class="notes">
+            <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
+              5:00 of 7:00. This ends semantic validity.</p>
+            <p><strong>Say:</strong> "So here is an open question. Can we
+              check whether a chart is valid by following the structure of
+              its specification? This is like syntax-directed type checking,
+              where the checker follows the structure of the program. Not
+              every type system works that way. And reasonable people
+              disagree that the structure of a specification is the right
+              place to check validity. I believe it is well suited to it, and
+              showing that is future work."</p>
           </aside>
         </section>

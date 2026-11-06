@@ -13,6 +13,9 @@
              short. It is its own slide, not a second click on the verbs
              slide, because the verbs slide's grid leaves no room for a
              second line at 1280x720. -->
+        <!-- Since 2026-11-06 its line is the one the operators and
+             relations slide (02-verbs.html) sets up: GoFish adds graphical
+             operators and relations to the grammar of graphics. -->
         <section class="gofish-what-slide">
           <style>
             .reveal .gofish-what-slide .gofish-what-logo {
@@ -31,21 +34,24 @@
               text-align: center;
             }
           </style>
-          <p class="part">3 · The grammar of graphics needs verbs</p>
+          <p class="part">Question</p>
           <h2>What is GoFish?</h2>
           <img class="gofish-what-logo" src="./images/gofish-intro/gofish-logo.png" alt="GoFish logo" />
-          <p class="big-claim">GoFish extends the grammar of graphics with verbs.</p>
+          <p class="big-claim">GoFish adds graphical operators and relations to the grammar of graphics.</p>
           <p class="gofish-what-sub">MIT-licensed and open source, for JavaScript and Python, at <strong>gofish.graphics</strong></p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
-              2:55 of 7:00.</p>
-            <p><strong>Say:</strong> "That is what GoFish does. GoFish
-              extends the grammar of graphics with verbs. It is open source,
-              and you can use it today from JavaScript and Python."</p>
-            <p>The verbs slide said the grammar of graphics needs verbs. This
-              slide names the thing that adds them, before any code. It keeps
-              the grammar of graphics' nouns: marks, channels, scales, and
-              coordinates are all still there. What it adds is the verbs.</p>
+              2:30 of 7:00. This slide and the crash course are the GoFish
+              intro, 0:30 in all.</p>
+            <p><strong>Say:</strong> "If the grammar of graphics had
+              operators and relations, you would get GoFish. GoFish adds them
+              to the grammar of graphics. It keeps the marks, channels,
+              scales, and coordinates, and it adds operators and relations
+              for putting marks together. It is open source, and you can use
+              it today from JavaScript and Python."</p>
+            <p>The paper's own sentence: "GoFish extends the Grammar of
+              Graphics with relations and operators for composing marks
+              together."</p>
             <p><strong>Lead into the crash course:</strong> "Here is what
               that looks like."</p>
             <p><strong>Source:</strong> the thesis defense deck's "What Is
@@ -93,7 +99,7 @@
           <div class="gofish-intro-head">
             <img src="./images/gofish-intro/gofish-logo.png" alt="GoFish logo" />
             <div>
-              <h2>GoFish composes marks with verbs</h2>
+              <h2>GoFish composes marks with operators</h2>
             </div>
           </div>
           <div class="crash-solo">
@@ -112,7 +118,7 @@
           </div>
           <aside class="notes">
             <p><strong>Target:</strong> 0:10 (0:20 for the two crash-course
-              states). <strong>Running total:</strong> 3:05 of 7:00.</p>
+              states). <strong>Running total:</strong> 2:40 of 7:00.</p>
             <p>The code shown leaves out styling parameters (spacing and
               opacity) and marks each with <code>...</code>, in the thesis
               deck's style. The live render uses the full spec in
@@ -120,11 +126,8 @@
             <p><strong>Say:</strong> "Here's a stacked bar chart in GoFish.
               <code>spread</code> lays out the lakes side by side, and
               <code>stack</code> piles the species inside each one. Those are
-              verbs. In a language with verbs, you can build new structures
-              from old ones, using a fairly stable set of composition
-              mechanisms."</p>
-            <p>This says the second half of the thesis once. The full thesis
-              comes on the hierarchy slide in part 4a.</p>
+              operators. Each one takes a set of marks and makes a new
+              mark."</p>
             <p><strong>Sources:</strong> the stacked bars are the thesis
               deck's "Spread the Lakes Apart" slide
               (<code>presentation/sections/03-gofish.html</code>), with the
@@ -160,18 +163,19 @@
           </div>
           <aside class="notes">
             <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
-              3:15 of 7:00.</p>
+              2:50 of 7:00.</p>
             <p>The code shown leaves out styling parameters (spacing and
               opacity) and marks each with <code>...</code>, in the thesis
               deck's style. The live render uses the full spec in
               <code>../charts.ts</code>.</p>
             <p><strong>Say:</strong> "Add one line, <code>ribbon</code>,
               which connects each species across the lakes, and the stacked
-              bars become a ribbon chart. Verbs take graphics and compose them
-              into bigger graphics."</p>
-            <p><strong>Lead into the core slide:</strong> "These verbs are
-              not magic. Underneath them is something smaller and more
-              direct."</p>
+              bars become a ribbon chart. A ribbon is a relation that also
+              draws: it connects marks that are already placed."</p>
+            <p>The paper's caption for this chart: "operators arrange the
+              rectangles, and a relational mark connects them."</p>
+            <p><strong>Lead into the answer:</strong> "Now let's write the
+              three grammars from before in GoFish. First Atom."</p>
             <p><strong>Sources:</strong> the thesis deck's stage 3b figure
               (<code>.layer(ribbon({ by: "species", opacity: 0.8 }))</code>,
               <code>scripts/generate-gofish-stage-assets.mjs</code>). It is the
@@ -198,7 +202,11 @@
              consts (see charts.ts), shown with styling elided. The render is
              the "planets-label" chart in ../charts.ts. The char marks point at
              the core's composition words: layer, relate, align, distribute. -->
-        <section class="code-slide core-slide">
+        <!-- Hidden 2026-11-06: not in the new story. The "same core, three
+             shapes of data" slide (04a-domain-design.html) still shows the
+             planets as the core. Remove data-visibility="hidden" to bring it
+             back. -->
+        <section class="code-slide core-slide" data-visibility="hidden">
           <p class="part">3 · The grammar of graphics needs verbs</p>
           <h2>under the chart API is a smaller, more direct core</h2>
           <div class="core-split">
@@ -225,8 +233,9 @@ layer([planets, label])
             </div>
           </div>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:20. <strong>Running total:</strong>
-              3:35 of 7:00.</p>
+            <p><strong>Hidden since 2026-11-06.</strong> Not counted in the
+              running totals.</p>
+            <p><strong>Target:</strong> 0:20 if shown.</p>
             <p>The code shown leaves out styling parameters (padding, fill,
               stroke, colors, font size, spacing) and marks each with
               <code>...</code>, in the thesis deck's style. The live render

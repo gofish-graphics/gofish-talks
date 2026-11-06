@@ -1,4 +1,6 @@
-        <!-- ═══ PART 3 CONTINUED: TWO ISLANDS IN VERBS, ~0:25 ══════════
+        <!-- ═══ ANSWER: THE ISLANDS IN GOFISH, ~0:25 ══════════════════════
+             Since 2026-11-06 these two open the answer, right after the
+             crash course; the core slide that came before them is hidden.
              Two slides: Atom vs GoFish, and the PiCCL bottle chart in
              GoFish. They are the evidence that the islands from part 2
              reduce to one shared set of operators. The Atom and PiCCL intro
@@ -19,7 +21,7 @@
              comes right before these two.
              Styles: ../gofish-compare.css. -->
         <section class="code-slide">
-          <p class="part">3 · The grammar of graphics needs verbs</p>
+          <p class="part">Answer</p>
           <h2>Atom's <code>gridxy</code> is GoFish's <code>spread</code></h2>
           <div class="code-pair">
             <div>
@@ -62,20 +64,21 @@
             </div>
           </div>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:10. Atom was already introduced
-              in part 2, so this slide does not have to introduce it.
-              <strong>Running total:</strong> 3:45 of 7:00.</p>
+            <p><strong>Target:</strong> 0:10. Atom was already introduced,
+              so this slide does not have to introduce it.
+              <strong>Running total:</strong> 3:00 of 7:00. The answer starts
+              here.</p>
             <p><strong>The beat (this slide and the next):</strong> 1. A shared
               language makes it possible to compare grammars: once each
               grammar's idea is written in GoFish, you can put them side by side
               and see exactly what differs. The islands can reach each other. 2. The grammars are not so different
               after all: they share most of their structure, and the
               differences come down to small, nameable pieces.</p>
-            <p>The lead into this slide is the end of the core slide: "Now
-              let's go back to the islands from before and write them with
-              these verbs. First Atom."</p>
+            <p>The lead into this slide is the end of the crash course: "Now
+              let's write the three grammars from before in GoFish. First
+              Atom."</p>
             <p><strong>Say:</strong> Here's Atom's Titanic example, with the
-              layout operators we saw before the verbs slide. On the right is the same
+              layout operators we saw earlier. On the right is the same
               construction in GoFish. Every part has a counterpart. Atom's first <code>gridxy</code> is
               GoFish's first <code>spread</code>, by class. The second
               <code>gridxy</code> is two more spreads, rows and columns. And
@@ -110,30 +113,33 @@
              slide (phd-thesis-20260618/presentation/sections/
              03d-evidence-bottle.html): one split, code on the left, the
              chart on the right, a PiCCL credit line under them. The spec is
-             the GoFish repo's bottle story (origin/main ff5827338,
-             packages/gofish-graphics/stories/piccl/Bottle.stories.tsx) with
-             styling (widths, colors, font size, spacing) elided as "...".
+             the GoFish repo's bottle story as of gofish-graphics nightly
+             20261106 (packages/gofish-graphics/stories/piccl/
+             Bottle.stories.tsx, last changed in df2fd1de) with styling
+             (widths, colors, font size, spacing, the image's grayscale
+             filter) elided as "...". Since 2026-11-06 it uses atop, which
+             replaced paint in that commit, and the chart is drawn live from
+             the full spec ("piccl-bottle" in ../charts.ts) instead of shown
+             as the paper's image.
              The PiCCL intro slide in part 2 (01c-compress-islands.html)
              shows PiCCL's own figures.
-             The image is the paper's figures/gofish-bottle-annotated.png,
-             which that same spec draws. The char marks point at the four
-             operators the notes name.
+             The char marks point at the four operators the notes name.
              The callout (2026-11-05): a code region with the role "core"
              (talk-template's data-code-regions; its color is in
              ../gofish-compare.css) tints the low-level lines, layer and the
              .relate(...) block, and puts "core" in the gutter where each part
-             starts. The tag under the code says where the audience saw them,
-             the core slide in 03-gofish-intro.html, two slides back. -->
+             starts. The tag under the code says what they are: relations,
+             written directly. -->
         <section class="code-slide bottle-slide">
-          <p class="part">3 · The grammar of graphics needs verbs</p>
+          <p class="part">Answer</p>
           <h2>The PiCCL bottle chart in GoFish</h2>
           <div class="split bottle-split">
             <div>
-              <pre><code class="language-ts" data-line-numbers data-char-marks="2:9-14, 3:9-13, 4:5-9, 10:6-11" data-code-regions="core 3:9-3:15, core 10:5-14:3">chart(bottleData, { axes: false })
+              <pre><code class="language-ts" data-line-numbers data-char-marks="2:9-14, 3:9-13, 4:5-8, 10:6-11" data-code-regions="core 3:9-3:15, core 10:5-14:3">chart(bottleData, { axes: false })
   .flow(spread({ by: "category", dir: "x", ... }))
   .mark(layer([
-    paint({ blendMode: "color" }, [
-      image({ href: bottlePng, h: v(100) }),
+    atop({ blendMode: "color" }, [
+      image({ href: bottlePng, h: v(100), ... }),
       rect({ h: "amount", ... }),
     ]).name("bottle"),
     rect({ h: 1, y: "amount", ... }).name("line"),
@@ -143,60 +149,67 @@
     Constraint.distribute({ dir: "y", ... }, [line, label]),
     Constraint.align({ x: "end" }, [label, line]),
   ]))</code></pre>
-              <p class="core-callout"><span class="core-callout-tag">core</span> the core from two slides ago</p>
+              <p class="core-callout"><span class="core-callout-tag">core</span> relations, written directly</p>
             </div>
             <div>
-              <img class="bottle-fig" src="./images/comparisons/gofish-bottle-annotated.png" alt="GoFish bottle chart: four bottles filled green to 30, 60, 75, and 100 percent, each with a line and a percentage label" />
+              <!-- Live: the "piccl-bottle" chart in ../charts.ts runs the
+                   full version of the spec on the left. -->
+              <div class="bottle-render" data-chart="piccl-bottle" data-w="800" data-h="330"></div>
             </div>
           </div>
           <p class="source-line">Bottle chart from PiCCL · Shi et al., IEEE VIS 2025</p>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:15. PiCCL was already introduced
-              in part 2, so this slide does not have to introduce it. <strong>Running total:</strong>
-              4:00 of 7:00.</p>
-            <p><strong>The callout</strong> (since 2026-11-05): the blue
-              tinted lines, tagged "core" in the gutter and under the code, are
-              the low-level core from the core slide two slides back:
+            <p><strong>Target:</strong> 0:15. PiCCL was already introduced,
+              so this slide does not have to introduce it. <strong>Running
+              total:</strong> 3:15 of 7:00.</p>
+            <p><strong>The callout</strong> (since 2026-11-05; reworded
+              2026-11-06, because the core slide it pointed back to is
+              hidden): the blue tinted lines, tagged "core", are GoFish's
+              lower level, where you write relations directly:
               <code>layer</code>, and <code>.relate(...)</code> with
               <code>Constraint.align</code> and
               <code>Constraint.distribute</code>. The rest of the spec is the
               chart API from the crash course. Say: "And look at the tinted
-              lines. That's the core from two slides ago, the same
-              <code>layer</code> and <code>relate</code>, inside a chart. The
-              chart API and the core mix in one spec, because they are one
-              language."</p>
+              lines. Here the relations are written directly: line up the
+              line with the bottle, and put the label above the line. The
+              operators and the relations mix in one spec, because they are
+              one language."</p>
             <p><strong>Say:</strong> This bottle chart comes from PiCCL, by
               Shi and others at VIS 2025. It is built from the PiCCL parts we
-              saw earlier. A picture of a bottle gets a green rectangle painted onto
-              it, as tall as the number, and a line and a label mark the top
-              of the green. In GoFish, those same parts are a few verbs and
+              saw earlier. A picture of a bottle gets a green rectangle drawn
+              on top of it, as tall as the number, and only the part inside
+              the bottle shows. A line and a label mark the top of the green.
+              In GoFish, those same parts are a few operators, relations, and
               marks.
               <code>spread</code> repeats the bottle for each category.
-              <code>paint</code> puts the green rectangle onto the bottle
-              picture. <code>layer</code> adds the line and the label, and
+              <code>atop</code> draws the green rectangle onto the bottle
+              picture and keeps only the part inside the bottle, like PiCCL's
+              own atop. <code>layer</code> adds the line and the label, and
               <code>relate</code> lines them up with the top of the green. So
-              PiCCL's idea fits into GoFish as a few verbs and marks, and you
+              PiCCL's idea fits into GoFish as a few operators and marks, and you
               do not need a new language for it.</p>
             <p><strong>The point of the two comparisons:</strong> these are
-              the same pictures from part 2, now written with one shared set
-              of verbs. The same <code>spread</code> does the work of Atom's
+              the same pictures from earlier, now written with one shared set
+              of operators and relations. The same <code>spread</code> does the work of Atom's
               <code>gridxy</code> and of PiCCL's repeating. Written in one
               language, the two islands share most of their structure, and
               the differences are small parts you can point to. What the two
-              islands share is operators.</p>
-            <p><strong>Lead into part 4a:</strong> "So these two islands
-              reduce to a few shared verbs. That is why I say the grammar of
-              graphics needs verbs. There are two fair concerns about this
-              idea, and I want to take both of them seriously. The first one
-              is Andrew McNutt's."</p>
+              islands share is operators and relations.</p>
+            <p><strong>Lead into the next slide:</strong> "And here is the
+              third one, GoTree, next to the other kinds of GoFish
+              code."</p>
             <p><strong>Source:</strong> The spec is the GoFish repo's bottle
-              story, <code>packages/gofish-graphics/stories/piccl/Bottle.stories.tsx</code>
-              on main. The slide leaves out the styling (widths, colors, font
-              size, spacing) and marks each place with <code>...</code>. The
-              image is the GUGOG paper's
-              <code>figures/gofish-bottle-annotated.png</code>, which this
-              spec draws. The layout follows the thesis deck's "Paint the Bars
-              as Bottles" slide. The highlights mark the four operators named
-              above.</p>
+              story, <code>packages/gofish-graphics/stories/piccl/Bottle.stories.tsx</code>,
+              as of gofish-graphics nightly 20261106. It last changed in
+              df2fd1de (2026-11-04), where <code>paint</code> became
+              <code>atop</code> and the image got
+              <code>filter: Filter.grayscale</code>. The slide leaves out the
+              styling (widths, colors, font size, spacing, the grayscale
+              filter) and marks each place with <code>...</code>. The chart is
+              drawn live from the full spec. The GUGOG paper's Figure 4 shows
+              the older <code>paint</code> version of this spec, so the slide
+              no longer matches the paper's listing word for word. The layout
+              follows the thesis deck's "Paint the Bars as Bottles" slide. The
+              highlights mark the four operators named above.</p>
           </aside>
         </section>

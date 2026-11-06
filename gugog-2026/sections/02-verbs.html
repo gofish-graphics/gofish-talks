@@ -1,128 +1,124 @@
-        <!-- ═══ PART 3: THE GRAMMAR OF GRAPHICS NEEDS VERBS, ~1:10 ══════
-             Part 3 runs over three files: this one (the verbs slide), the
-             GoFish slide, the crash course, and the core slide
-             (03-gofish-intro.html), and the Atom and PiCCL comparisons
-             (03b-code-comparisons.html). Part 2 ends on Atom, PiCCL, and
-             GoTree and what each one added, which is operators. This slide
-             names that pattern: the islands share operators, not more
-             nouns, so the grammar of graphics needs verbs. This is where the
-             title lands.
-             The "Data, Marks, Channels, Coordinates" slide is from the thesis
-             defense deck
-             (phd-thesis-20260618/presentation/sections/03-gofish.html),
-             shortened: all four columns show at once, and the closing line
-             is the only build step. Its CSS is in ../style.css. The flat
-             layer slide after it is hidden. The hierarchy slide is in 4a
-             (04a-domain-design.html). -->
-<section class="gog-concepts-slide">
-          <p class="part">3 · The grammar of graphics needs verbs</p>
-          <h2>Data, Marks, Channels, Coordinates</h2>
-          <div class="gog-concepts-grid">
-            <div>
-              <h3>Data <span class="h3-sub">records</span></h3>
-              <table class="data-table">
-                <thead>
-                  <tr>
-                    <th>lake</th>
-                    <th>species</th>
-                    <th>count</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Primrose</td>
-                    <td>Bass</td>
-                    <td>23</td>
-                  </tr>
-                  <tr>
-                    <td>Primrose</td>
-                    <td>Trout</td>
-                    <td>31</td>
-                  </tr>
-                  <tr>
-                    <td>Primrose</td>
-                    <td>Catfish</td>
-                    <td>29</td>
-                  </tr>
-                  <tr class="ellipsis-row">
-                    <td>&#8942;</td>
-                    <td>&#8942;</td>
-                    <td>&#8942;</td>
-                  </tr>
-                </tbody>
-              </table>
+        <!-- ═══ QUESTION: WHAT THE ISLANDS ADDED, ~0:25 ═════════════════
+             Reworked 2026-11-06. Until then this was the "verbs slide",
+             "Data, Marks, Channels, Coordinates" (from the thesis defense
+             deck), which said the grammar of graphics has a rich set of
+             nouns and almost no verbs. Now it names what Atom, PiCCL, and
+             GoTree added: graphical operators, which take a set of marks and
+             make a new mark, and relations, which take a set of marks and
+             produce a property. The wording follows the paper's section 2,
+             "Background: GoFish Composition". Its one click says that
+             neither fits the seven concepts of the grammar of graphics,
+             which leads into "What is GoFish?" (03-gofish-intro.html). -->
+        <section class="opsrel-slide">
+          <style>
+            .reveal .opsrel-slide .opsrel-grid {
+              display: grid;
+              gap: 1.2em;
+              grid-template-columns: 1fr 1fr;
+              margin-top: 1.3em;
+            }
+            .reveal .opsrel-slide .opsrel-card {
+              background: #fff;
+              border: 2px solid #27231f;
+              border-radius: 6px 9px 5px 8px;
+              box-shadow: 4px 5px 0 rgba(30, 30, 30, 0.11);
+              padding: 0.8em 0.9em 1em;
+            }
+            .reveal .opsrel-slide .opsrel-card h3 {
+              color: var(--accent);
+              font-size: 1.1em;
+              margin: 0 0 0.4em;
+            }
+            .reveal .opsrel-slide .opsrel-card p {
+              font-size: 0.95em;
+              line-height: 1.3;
+              margin: 0 0 0.7em;
+            }
+            .reveal .opsrel-slide .opsrel-card .opsrel-examples {
+              color: var(--muted);
+              font-size: 0.78em;
+              line-height: 1.45;
+              margin: 0;
+            }
+            .reveal .opsrel-slide .opsrel-link {
+              font-size: 0.8em;
+              margin-top: 1.4em;
+              text-align: center;
+            }
+            .reveal .opsrel-slide .big-claim {
+              margin-top: 1em;
+              text-align: center;
+            }
+          </style>
+          <p class="part">Question</p>
+          <h2>They add graphical operators and relations</h2>
+          <div class="opsrel-grid">
+            <div class="opsrel-card">
+              <h3>Graphical operators</h3>
+              <p>An operator takes a set of marks and makes a new mark.</p>
+              <p class="opsrel-examples">Atom's FillX and MaxFill arrange units into a block.<br />PiCCL's atop and replicate make a new picture from old ones.</p>
             </div>
-            <div>
-              <h3>Marks <span class="h3-sub">shapes</span></h3>
-              <img src="./images/verbs/gog-marks.png" alt="Gallery of Observable Plot mark types" />
-              <p class="source-line">Observable Plot</p>
-            </div>
-            <div>
-              <h3>Channels <span class="h3-sub">shape attributes</span></h3>
-              <img src="./images/verbs/gog-channels.png" alt="Munzner's ranking of visual channels by accuracy" />
-              <p class="source-line">Munzner, <em>Visualization Analysis and Design</em> (2014)</p>
-            </div>
-            <div>
-              <h3>Coordinates <span class="h3-sub">space transformations</span></h3>
-              <div class="gog-coordinate-image-frame">
-                <img src="./images/verbs/gog-coordinates-thompson.png" alt="Thompson's growth transformation: a fish and its coordinate grid progressively warped into two curved forms" />
-              </div>
-              <p class="source-line">Thompson's growth transformation &middot; via Wilkinson, <em>The Grammar of Graphics</em></p>
+            <div class="opsrel-card">
+              <h3>Relations</h3>
+              <p>A relation takes a set of marks and produces a property, such as a shared position.</p>
+              <p class="opsrel-examples">GoTree's align lines up sibling subtrees.<br />Its juxtapose places a parent beside its children.</p>
             </div>
           </div>
-          <p class="big-claim fragment">A rich set of nouns, but almost no verbs.</p>
+          <p class="opsrel-link">An operator places its marks completely. A relation sets only some properties. So operators can be built from relations.</p>
+          <p class="big-claim fragment">Neither one fits any of the seven concepts of the grammar of graphics.</p>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:15 (was 0:20; Atom, PiCCL, and
-              GoTree now show what the islands share before this slide, so it
-              only has to name it). <strong>Running total:</strong> 2:45 of
-              7:00.</p>
-            <p>All four columns appear at once. The closing line is the one
-              click on this slide.</p>
+            <p><strong>Target:</strong> 0:25. <strong>Running total:</strong>
+              2:20 of 7:00.</p>
+            <p><strong>Say:</strong></p>
             <ul>
-              <li><strong>Say:</strong> "They all added verbs. A verb takes
-                graphics and composes them into bigger graphics. The grammar
-                of graphics has a rich set of nouns: data, marks, channels,
-                and coordinates."</li>
-              <li>Click for the line: "A rich set of nouns, but almost no
-                verbs."</li>
-              <li><strong>Say the first half of the thesis:</strong> "In the
-                traditional grammar of graphics, the only way to grow the
-                language is to add a new primitive. That is what happens past
-                the cliff. So the grammar of graphics needs verbs."</li>
+              <li>"So what did these three grammars add? None of them mainly
+                added a new kind of mark or channel. They added two kinds of
+                things."</li>
+              <li>"The first is graphical operators. An operator takes a set
+                of marks and makes a new mark. Atom's FillX takes a group of
+                units and makes one block of them. PiCCL's atop takes two
+                pictures and makes one picture."</li>
+              <li>"The second is relations. A relation takes a set of marks
+                and produces a property, such as where they sit. GoTree's
+                align says that sibling subtrees line up at the top."</li>
+              <li>"The two are connected. An operator places its marks
+                completely. A relation sets only some properties, like their
+                positions along one axis. So you can build an operator out of
+                relations."</li>
+              <li>(Click.) "The grammar of graphics does not have these.
+                Neither one fits any of its seven concepts."</li>
             </ul>
-            <p><strong>Lead into the next slide:</strong> "That is what
-              GoFish does."</p>
-            <p><strong>One sentence, only if there is time:</strong> "I come
-              from programming languages, and the first thing I look for in a
-              language is its verbs."</p>
+            <p>This is what the title of the paper means by verbs. Operators
+              and relations are the verbs. Say "verbs" only if it helps; the
+              slides use the two names.</p>
+            <p><strong>Lead into the next slide:</strong> "So what if we add
+              them?"</p>
             <p><strong>If asked, or as backup:</strong></p>
             <ul>
-              <li>"Almost no verbs" is fair to the grammar of graphics. It
-                has a few, e.g., facets. Position adjustments like stack and
-                dodge, and coordinate transforms, also compose marks. They do
-                not cover what Atom, PiCCL, and GoTree needed.</li>
-              <li>The compression chart says the same thing. Past the cliff,
-                most ggplot2 extensions add new arrangements. Packages like
-                ggwaffle, ggmosaic, ggalluvial, and scatterpie each wrap a new
-                layout in a new geom. In Vega-Lite, the explicit calculations
-                past the cliff mostly compute positions, e.g., a waffle chart
-                computes each unit's row and column with window and calculate
-                transforms. So what breaks at the cliff is arrangement.</li>
-              <li>Both systems chose a small, fixed set of nouns on purpose,
-                and that choice is why the common charts are so short to
-                write. Vega-Lite's transforms are general on purpose too,
-                which is why these charts can be written in it at all.</li>
+              <li>Fair to the grammar of graphics: facets, coordinate
+                transformations, and position adjustments like stack and dodge
+                do combine marks. The paper's point is that they do not
+                express all the constructions that the domain-specific
+                grammars need.</li>
+              <li>The paper's own definitions (section 2): relations relate
+                two or more marks. They can be spatial constraints, like
+                alignment, or marks that connect other marks, like a ribbon.
+                Operators are a way to write relations over arrays of
+                data-driven marks, and an operator must lay out its children
+                fully. So <code>spread</code> can be an operator,
+                <code>ribbon</code> can be one because its children are
+                already placed, and <code>distribute</code> cannot, because it
+                only constrains one axis.</li>
+              <li>Relations come from the graphical perception literature:
+                Gestalt grouping (common region, connection, alignment,
+                proximity), Larkin and Simon on diagrams, and Pinker on how
+                readers describe a graph.</li>
             </ul>
-            <p>The data table is the seafood catch table that the crash
-              course draws from, one row per lake and species with a count.
-              There is no time to say so. It is there so the table looks
-              familiar later.</p>
-            <p>Shortened from the thesis deck's 1:30 version, which built up
-              the columns one at a time and talked through Munzner's channel
-              ranking and Thompson's transformation. The thesis deck put this
-              slide before its islands, as the cause of them. This talk puts
-              it after Atom, PiCCL, and GoTree, so the audience sees the
-              operators first and this slide names them.</p>
+            <p><strong>Source:</strong> the GUGOG paper, section 2,
+              "Background: GoFish Composition", and its introduction, which
+              says that the grammar of graphics "lacks verbs that take
+              graphical objects and compose them into new graphical
+              objects".</p>
           </aside>
         </section>
 

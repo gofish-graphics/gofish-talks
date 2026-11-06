@@ -10,7 +10,79 @@ Note, 2026-11-04, later the same day: the talk has a new hook, and the opening i
 
 Note, 2026-11-05 (later): the circle slide now uses the user's drawing, and the islands drawings are colored as islands, green land with yellow shores in blue water. On the circle slide, GUGOG itself is one light green island with a yellow shore, and the grammars inside it are darker green with no shore.
 
+Note, 2026-11-06: the talk is restructured around the user's new story. See "Restructure, 2026-11-06" below. It replaces the slide order, parts, and timing described in the older sections.
+
 Note, 2026-11-05: part 2 and part 3 are restructured, following the user's notes. A new circle slide, "one language that holds all of them", now opens part 2. It shows the user's drawing of one circle around all the islands. Its notes are the bridge: you could hold every grammar without unifying anything, by bundling each one as a separate component, but then you could not mix them, and mixing needs something the islands have in common. A new GoTree intro, "GoTree adds operators for laying out trees", joins the Atom and PiCCL intros. A short "What is GoFish?" slide after the verbs slide says that GoFish extends the grammar of graphics with verbs, like the thesis defense deck's slide of that name. The crash course is now the chart API only, two steps, stacked bars to the ribbon chart. The planets diagram moves to a new slide after it, "under the chart API is a smaller, more direct core", and the PiCCL bottle slide gets a callout that points at the same core lines in its spec. The three GoTree code slides in 4a are hidden, and GoTree in GoFish is shown only on "same core, three shapes of data". The total stays 7:00. See "Changes to the deck" and "Time".
+
+## Restructure, 2026-11-06
+
+This section replaces the structure below. The older sections stay as a record of earlier versions. The talk now follows the user's new story, in four parts plus a conclusion: problem, question, answer, and semantic validity. It borrows more of the paper's story and wording, especially in the opening and in how graphical operators and relations are described. The talk does not assert "verbs" up front. It arrives at operators and relations from the three examples, and the conclusion's title, "The grammar of graphics needs verbs", names them as the verbs of the paper's title.
+
+The part labels are now plain words, with no numbers: "Problem", "Question", "Answer", "Semantic validity", "Conclusion", and "Panel". The islands drawing and the tangle still have no label.
+
+### Slide order and timing
+
+Times are targets. Each slide's notes show its target and running total.
+
+Problem, 1:20.
+
+1. Title. 0:00. Running total 0:00.
+2. Splash, "these are all GoFish programs". 0:10. Running total 0:10.
+3. Islands. 0:35. Running total 0:45. The notes now follow the paper's opening. The grammar of graphics replaced a messy collection of chart types with seven concepts that combine. It is very expressive, but it does not cover every visualization, so researchers keep making new grammars for trees, networks, maps, animation, and other domains. We now live in a world not of chart types, but of grammar types. The old hook is kept as an optional line.
+4. Tangle. 0:15. Running total 1:00. Each grammar is its own system, so their ideas are hard to compare, combine, and carry into practice.
+5. The circle, "We want a grand unified grammar of graphics". 0:20, with the question. Running total 1:20. It now follows the tangle directly. Its one click shows the question "Why can't these grammars be unified with the grammar of graphics?" The old bridge about bundles and mixing is gone.
+
+Question, 1:00.
+
+6. Atom intro. 0:15. Running total 1:35.
+7. PiCCL intro. 0:10. Running total 1:45.
+8. GoTree intro. 0:10. Running total 1:55.
+9. "They add graphical operators and relations". 0:25. Running total 2:20. This reworks the old verbs slide ("Data, Marks, Channels, Coordinates"). An operator takes a set of marks and makes a new mark. A relation takes a set of marks and produces a property, such as a shared position. An operator places its marks completely, and a relation sets only some properties, so operators can be built from relations. Its one click says that neither fits any of the seven concepts of the grammar of graphics.
+
+GoFish intro, 0:30.
+
+10. "What is GoFish?" 0:10. Running total 2:30. Its line is now "GoFish adds graphical operators and relations to the grammar of graphics."
+11. Crash course, two steps. 0:10 each. Running totals 2:40 and 2:50. The first step's title is now "GoFish composes marks with operators".
+
+Answer, 1:10.
+
+12. Atom comparison. 0:10. Running total 3:00.
+13. The PiCCL bottle chart in GoFish. 0:15. Running total 3:15. Its callout tag now says "relations, written directly", because the core slide it pointed back to is hidden. Its code now uses `atop` in place of `paint` (see below).
+14. "Same core, three shapes of data". 0:20. Running total 3:35. It now comes before the hierarchy slide.
+15. The hierarchy slide, now titled "Unify the domains and keep their structure". 0:15. Running total 3:50. This is the takeaway. The domains keep their own character while being unified. A universal grammar can keep each domain's structure in a hierarchy with shared parts, and GoFish is one concrete, precise example of that, which persuades more than a general argument that such a grammar might exist. Its labels changed: the left row is "one flat layer of concepts", the bottom row is "core: marks and relations", the right caption is "a hierarchy: many domains, one grammar", and the line under it is "Each domain keeps its own structure, and all of them share the parts underneath."
+16. Figure 6, "the surfaces work together". 0:10. Running total 4:00.
+
+Semantic validity, 1:00.
+
+17. "Validity rules belong to operators". 0:10. Running total 4:10. New. A unified grammar is more expressive, so it can also make more incorrect charts. But its structure helps, because validity rules belong to a few operators, not to many chart types. For example, `stack` sums its values, so `stack` needs values that can be summed.
+18. Huang and Kay quote. 0:10. Running total 4:20. Moved here, and no longer framed as an objection. Semantic validity is a big theme at this workshop.
+19. CanSum, four steps. 0:10, 0:05, 0:05, 0:10. Running totals 4:30, 4:35, 4:40, 4:50. The first step is the incorrect stacked chart, and its notes say this work is very early and was inspired by Bartonicek, Urbanek, and Murrell, Flint, and Huang and Kay.
+20. "Open question". 0:10. Running total 5:00. New. "Can we check whether a chart is valid by following the structure of its specification?" The notes say this is like syntax-directed type checking, that not every type system works that way, that reasonable people disagree that a specification's structure is the right place to check validity, and that the user believes it is well suited, with the proof left to future work.
+
+Conclusion, 0:20.
+
+21. "The grammar of graphics needs verbs". 0:20. Running total 5:20. New. Three points: domain-specific grammars add graphical operators and relations, which the grammar of graphics doesn't have; with those added, one grammar can hold the domains and keep each one's structure; and the open question of whether validity rules attached to operators can cover every chart that uses them.
+
+Panel.
+
+22. Questions for the panel. 1:40. Running total 7:00. Unchanged apart from its label, now "Panel", and its timing notes.
+
+The main story runs 5:20 at its targets, which leaves 1:40 for the panel slide.
+
+### Hidden on 2026-11-06, and why
+
+Each hidden slide has `data-visibility="hidden"` and a comment that says why.
+
+- The compression chart and its two "as rates" variants, with the Simon framing. The user cut the compression section, so the circle follows the tangle directly.
+- "Under the chart API is a smaller, more direct core". It is not in the new story. "Same core, three shapes of data" still shows the planets as the core.
+- The McNutt quote. It is not in the new story. The hierarchy slide's notes keep a backup line that answers his concern.
+- "Where we are now" (the next cliff and the typology of operators). It is not in the new story. The conclusion slide now comes before the panel.
+
+The old verbs slide, "Data, Marks, Channels, Coordinates", was reworked in place into the operators and relations slide, not hidden. Its markup is in git history and in the thesis defense deck.
+
+### The bottle code on nightly 20261106
+
+The deck pins gofish-graphics 0.1.0-nightly.20261106. In GoFish commit df2fd1de (2026-11-04), `paint` became `atop`, `mask` was removed, and `union`, `intersect`, `subtract`, and `exclude` were added. The repo's bottle story (`packages/gofish-graphics/stories/piccl/Bottle.stories.tsx`) changed in the same commit: it uses `atop({ blendMode: "color" }, [...])`, and its image takes `filter: Filter.grayscale`. The bottle slide now shows that code, with styling elided, and draws the chart live from the full story ("piccl-bottle" in `charts.ts`, with the story's image copied to `images/comparisons/wilsonblanco.png`), in place of the paper's static image. The paper's Figure 4 still shows the older `paint` version.
 
 ## The story in one paragraph
 
