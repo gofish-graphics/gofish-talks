@@ -10,11 +10,78 @@ Note, 2026-11-04, later the same day: the talk has a new hook, and the opening i
 
 Note, 2026-11-05 (later): the circle slide now uses the user's drawing, and the islands drawings are colored as islands, green land with yellow shores in blue water. On the circle slide, GUGOG itself is one light green island with a yellow shore, and the grammars inside it are darker green with no shore.
 
+Note, 2026-11-06, evening: the ribbon buildup now explains the data and shows how the rows are grouped at each step, the way the SciPy 2026 deck does. A new first step, "Start with the data", shows the first rows of the seafood table. On the four steps after it, a small copy of the table sits in the top right corner, and a data pipeline under the code shows how each operator groups the rows. The planets code now writes out the four circles. Auto-animate steps now take 0.3 seconds, and the new chart and title appear at once while the code moves, as in the thesis defense deck. The talk now runs 6:45 before the panel. See "Changes, 2026-11-06, evening" below.
+
 Note, 2026-11-06, later the same day: the GoFish intro now builds the ribbon chart step by step, then shows operators used directly on marks and how `spread` is made of relations, and the GoTree specs slide is back in the answer. The talk now runs 6:25 before the panel. See "Changes, 2026-11-06, later" below.
 
 Note, 2026-11-06: the talk is restructured around the user's new story. See "Restructure, 2026-11-06" below. It replaces the slide order, parts, and timing described in the older sections.
 
 Note, 2026-11-05: part 2 and part 3 are restructured, following the user's notes. A new circle slide, "one language that holds all of them", now opens part 2. It shows the user's drawing of one circle around all the islands. Its notes are the bridge: you could hold every grammar without unifying anything, by bundling each one as a separate component, but then you could not mix them, and mixing needs something the islands have in common. A new GoTree intro, "GoTree adds operators for laying out trees", joins the Atom and PiCCL intros. A short "What is GoFish?" slide after the verbs slide says that GoFish extends the grammar of graphics with verbs, like the thesis defense deck's slide of that name. The crash course is now the chart API only, two steps, stacked bars to the ribbon chart. The planets diagram moves to a new slide after it, "under the chart API is a smaller, more direct core", and the PiCCL bottle slide gets a callout that points at the same core lines in its spec. The three GoTree code slides in 4a are hidden, and GoTree in GoFish is shown only on "same core, three shapes of data". The total stays 7:00. See "Changes to the deck" and "Time".
+
+## Changes, 2026-11-06, evening
+
+This section updates "Changes, 2026-11-06, later" below. Everything not named here stays as that section describes it.
+
+### What changed
+
+- The ribbon buildup has a new first step, "Start with the data". It shows `chart(seafood)` and, in place of the chart, the first three rows of the table, with its fields lake, species, and count. This is the thesis defense deck's "Start with the Data" slide, with the same rows and the same card style. The SciPy 2026 deck has the same slide for its barley data.
+- The four steps after it show the data at each step. Under the code, a data pipeline shows the 30 rows, how `spread` groups them by lake, how `stack` groups each lake by species, how sorting gives each lake its own order, and what each rectangle gets. On the last step it also shows how `ribbon` groups the rectangles again by species, one ribbon for each species. This is the SciPy 2026 deck's "data transformation pipeline", from its "add a second grouping" slide, with its markup, colors, and CSS. As in the SciPy deck, it shows the first two lakes or species, then "…", then the last one.
+- On those four steps, a small copy of the table sits in the top right corner, so the fields stay in view. The SciPy 2026 deck does the same on its walkthrough slides. Its header uses this deck's red, not SciPy's navy.
+- The pipeline's colored rectangles use the chart's own colors. GoFish gives the colors to the species in the order it meets them, so the colors change when the stacks are sorted. The thesis deck's charts do the same.
+- Auto-animate steps now take 0.3 seconds, not Reveal's default of 1 second. This is set for this deck only, in `main.ts`. The shared template keeps Reveal's default unless a deck asks.
+- In the ribbon buildup and the two planets slides, the new title, chart, and pipeline now appear at once, and the code then moves into place over 0.3 seconds. This is the order the thesis defense deck uses. The SciPy 2026 deck has no animation; its slides change all at once.
+- The planets code now writes the four circles out one by one, with no data array, and the same four lines are on both planets slides. Only the circles' outline and the box's styling are left out, as `...`. The live charts run the same code.
+
+Left out from the source decks, to keep the buildup short:
+
+- The SciPy deck builds its pipeline one row per click, in four clicks. Here each step's new rows come with the step, so the buildup has no extra clicks.
+- The thesis deck's "Place One Slot per Lake" step, with empty slots and no mark, and the SciPy deck's matching "place one slot per site".
+- The thesis deck's "elaborates to" code under step 1, which writes `spread` out as a `groupBy`. The pipeline shows the same grouping.
+- The thesis deck's preview of the ribbon chart before its ribbon steps, the sorted bars with an arrow to the ribbon chart.
+- The SciPy deck's color legend for operators, marks, and data work.
+
+### Slide order and timing
+
+Problem, 1:20, and Question, 1:00, are unchanged. They end at 2:20.
+
+GoFish intro, 1:40.
+
+10. "What is GoFish?" 0:10. Running total 2:30.
+11. "Start with the data". 0:10. Running total 2:40.
+12. "Spread into bars". 0:15. Running total 2:55.
+13. "Stack within each lake". 0:10. Running total 3:05.
+14. "Sort the stacks". 0:10. Running total 3:15.
+15. "Draw the ribbon". 0:15. Running total 3:30.
+16. "Operators also work directly on marks". 0:15. Running total 3:45.
+17. "`spread` is `align` plus `distribute`". 0:15. Running total 4:00.
+
+Answer, 1:25.
+
+18. Atom comparison. 0:10. Running total 4:10.
+19. The PiCCL bottle chart in GoFish. 0:15. Running total 4:25.
+20. "GoTree in GoFish keeps GoTree's own words". 0:15. Running total 4:40.
+21. "Same core, three shapes of data". 0:20. Running total 5:00.
+22. "Unify the domains and keep their structure". 0:15. Running total 5:15.
+23. Figure 6, "the surfaces work together". 0:10. Running total 5:25.
+
+Semantic validity, 1:00.
+
+24. "Validity rules belong to operators". 0:10. Running total 5:35.
+25. Huang and Kay quote. 0:10. Running total 5:45.
+26. CanSum, four steps. 0:10, 0:05, 0:05, 0:10. Running totals 5:55, 6:00, 6:05, 6:15.
+27. "Open question". 0:10. Running total 6:25.
+
+Conclusion, 0:20.
+
+28. "The grammar of graphics needs verbs". 0:20. Running total 6:45.
+
+Panel.
+
+29. Questions for the panel. 0:15. Running total 7:00.
+
+### Over 6:00
+
+The main story now runs 6:45 and leaves only 0:15 for the panel. Nothing was cut. The cuts suggested in "Changes, 2026-11-06, later" still apply and would bring it to 6:15. After them, the next cut I would suggest is "Operators also work directly on marks" (0:15), saying its point over the relations slide, which shows the same picture.
 
 ## Changes, 2026-11-06, later
 

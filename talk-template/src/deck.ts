@@ -18,7 +18,10 @@ import {
 
 // The same settings scipy-2026 uses: a fixed 1280x720 canvas, no transitions,
 // top-anchored slides, and the code-highlight and speaker-notes plugins.
-export async function startDeck(): Promise<Reveal> {
+// A talk can pass more Reveal options, which override these.
+export async function startDeck(
+  options: Record<string, unknown> = {}
+): Promise<Reveal> {
   const deck = new Reveal({
     hash: true,
     transition: "none",
@@ -32,6 +35,7 @@ export async function startDeck(): Promise<Reveal> {
     highlight: {
       highlightOnLoad: true,
     },
+    ...options,
   });
 
   // The in-browser slide editor (press "e"), only under `pnpm dev`. In a

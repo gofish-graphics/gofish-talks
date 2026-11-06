@@ -4,7 +4,9 @@ The shared parts of a GoFish talk deck, taken from `scipy-2026/`:
 
 - `src/deck.ts`: `startDeck()` sets up Reveal the way scipy-2026 does (a
   1280x720 canvas, no transitions, top-anchored slides, slide numbers, and
-  the highlight and speaker-notes plugins). It also loads the theme CSS.
+  the highlight and speaker-notes plugins). It also loads the theme CSS. A
+  talk can pass more Reveal options, such as `{ autoAnimateDuration: 0.3 }`,
+  which override these.
 - `src/style.css`, `src/fonts/`, `src/hljs-github-light.css`: the theme. This
   is the talk-independent part of scipy-2026's `style.css`, with the
   "thesis-talk" skin, the Shantell Sans fonts, and the GitHub light code

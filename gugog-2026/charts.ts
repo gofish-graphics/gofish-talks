@@ -423,49 +423,38 @@ const compressionRateSteps = {
 // The core level: the four inner planets on a dark background, from the
 // GoFish repo's tutorial stories (origin/main 7b902ed38):
 // packages/gofish-graphics/stories/tutorials/Basics.stories.tsx (no label)
-// and Diagrams.stories.tsx (label and arrow). The marks, operators, options
-// and relations are the stories' own. The code is restructured: the
-// background group and the label are bound to consts, and the names
-// Diagrams needs are there from the first state. That way the second state
-// only adds lines after the first, so Reveal keeps the first state's lines
-// in place. The slides show this with styling elided as "...".
-const data = [
-  { name: "mercury", r: 15, fill: "#F5E3C8", stroke: "#EFC9A2" },
-  { name: "venus", r: 36, fill: "#D2913C", stroke: "#A96F26" },
-  { name: "earth", r: 38, fill: "#3E8CCC", stroke: "#2F6FA6" },
-  { name: "mars", r: 21, fill: "#F4BC80", stroke: "#E0954C" },
-];
+// and Diagrams.stories.tsx (label and arrow). The marks, operators, options,
+// radii, colors and relations are the stories' own. Since 2026-11-06
+// (evening) the four circles are written out one by one, with no data array
+// and no map, exactly as the two planets slides show them; the slides elide
+// only the circles' stroke and the box's styling as "...".
 
-// A fresh copy per call: a slide may draw it more than once.
-const makePlanets = () => {
-  const planets = enclose(
+// The box around the planets. A fresh copy per call: a slide may draw it
+// more than once.
+const planetsBox = (children: any[]) =>
+  enclose(
     {
       padding: 20,
       fill: "#252150",
       stroke: "none",
       shape: Shape.box({ rx: 16 }),
     },
-    [
-      spread(
-        { dir: "x", spacing: 50, alignment: "middle" },
-        data.map((d) =>
-          circle({
-            r: d.r,
-            fill: d.fill,
-            stroke: d.stroke,
-            strokeWidth: 3,
-          }).name(d.name)
-        )
-      ),
-    ]
+    children
   ).name("planets");
-  return planets;
-};
 
-const planetsRow = () => makePlanets();
+// "Operators also work directly on marks": spread places the circles.
+const planetsRow = () =>
+  planetsBox([
+    spread({ dir: "x", alignment: "middle", spacing: 50 }, [
+      circle({ r: 15, fill: "#F5E3C8", stroke: "#EFC9A2", strokeWidth: 3 }).name("mercury"),
+      circle({ r: 36, fill: "#D2913C", stroke: "#A96F26", strokeWidth: 3 }).name("venus"),
+      circle({ r: 38, fill: "#3E8CCC", stroke: "#2F6FA6", strokeWidth: 3 }).name("earth"),
+      circle({ r: 21, fill: "#F4BC80", stroke: "#E0954C", strokeWidth: 3 }).name("mars"),
+    ]),
+  ]);
 
 const planetsLabeled = () => {
-  const planets = makePlanets();
+  const planets = planetsRow();
 
   const label = text({ text: "Mercury", fill: "#E94560", fontSize: 14 }).name(
     "label"
@@ -478,42 +467,25 @@ const planetsLabeled = () => {
   ]);
 };
 
-// The relations slide (since 2026-11-06, later): the same planets diagram,
-// with spread written as the align and distribute it elaborates to.
+// "spread is align plus distribute": the same four circles, with spread
+// written as the align and distribute it elaborates to.
 // gofish-graphics' Spread (src/ast/graphicalOperators/spread.tsx, the same
 // code in nightly 20261106) builds a layer over its children and relates
 // them with Constraint.align on the cross axis (its `alignment`) and
 // Constraint.distribute along `dir` (its `spacing`). This render must look
 // the same as "planets"; that is the slide's point.
 const planetsRelate = () =>
-  enclose(
-    {
-      padding: 20,
-      fill: "#252150",
-      stroke: "none",
-      shape: Shape.box({ rx: 16 }),
-    },
-    [
-      layer(
-        data.map((d) =>
-          circle({
-            r: d.r,
-            fill: d.fill,
-            stroke: d.stroke,
-            strokeWidth: 3,
-          }).name(d.name)
-        )
-      ).relate(({ mercury, venus, earth, mars }) => [
-        Constraint.align({ y: "middle" }, [mercury, venus, earth, mars]),
-        Constraint.distribute({ dir: "x", spacing: 50 }, [
-          mercury,
-          venus,
-          earth,
-          mars,
-        ]),
-      ]),
-    ]
-  ).name("planets");
+  planetsBox([
+    layer([
+      circle({ r: 15, fill: "#F5E3C8", stroke: "#EFC9A2", strokeWidth: 3 }).name("mercury"),
+      circle({ r: 36, fill: "#D2913C", stroke: "#A96F26", strokeWidth: 3 }).name("venus"),
+      circle({ r: 38, fill: "#3E8CCC", stroke: "#2F6FA6", strokeWidth: 3 }).name("earth"),
+      circle({ r: 21, fill: "#F4BC80", stroke: "#E0954C", strokeWidth: 3 }).name("mars"),
+    ]).relate(({ mercury, venus, earth, mars }) => [
+      Constraint.align({ y: "middle" }, [mercury, venus, earth, mars]),
+      Constraint.distribute({ dir: "x", spacing: 50 }, [mercury, venus, earth, mars]),
+    ]),
+  ]);
 
 // The chart level: the thesis deck's seafood walkthrough
 // (phd-thesis-20260618/presentation/sections/03-gofish.html), four of its

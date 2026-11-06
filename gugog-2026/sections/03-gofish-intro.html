@@ -42,7 +42,7 @@
           <aside class="notes">
             <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
               2:30 of 7:00. This slide, the ribbon buildup, and the two
-              planets slides are the GoFish intro, 1:20 in all.</p>
+              planets slides are the GoFish intro, 1:40 in all.</p>
             <p><strong>Say:</strong> "If the grammar of graphics had
               operators and relations, you would get GoFish. GoFish adds them
               to the grammar of graphics. It keeps the marks, channels,
@@ -64,13 +64,14 @@
           </aside>
         </section>
 
-        <!-- ═══ GOFISH INTRO CONTINUED: THE RIBBON BUILDUP, ~0:40 ══════════
-             Since 2026-11-06 (later), four auto-animated states of one
-             spec, which build the ribbon chart one step at a time, the way
-             the thesis defense deck does
+        <!-- ═══ GOFISH INTRO CONTINUED: THE RIBBON BUILDUP, ~1:00 ══════════
+             Since 2026-11-06 (later), auto-animated states of one spec,
+             which build the ribbon chart one step at a time, the way the
+             thesis defense deck does
              (phd-thesis-20260618/presentation/sections/03-gofish.html). The
-             four steps are four of that deck's slides, with their titles in
+             steps are five of that deck's slides, with their titles in
              sentence case:
+               0. "Start with the Data" (added 2026-11-06, evening)
                1. "Step 1: Spread Into Bars"
                2. "Step 2: Stack Within Each Lake"
                3. "Sort the Stacks"
@@ -78,33 +79,115 @@
                   .layer(ribbon(...)) form of the thesis deck's stage 3b
                   figure, which is the GUGOG paper's Figure 2.
              The thesis deck's other steps (empty slots, grouped bars and
-             heat map, spacing, and naming, selecting, and regrouping the
-             bars) are left out to keep this to four clicks. The thesis deck
-             adds spacing: 64 just before the ribbon; here it is in every
-             step's full spec and shown as "...", so the bars keep their
-             place from step to step.
-             This replaces the two-state crash course (stacked bars, then
-             the ribbon), which lived here from 2026-11-05 to 2026-11-06.
-             Layout: the code on the left, the render on the right, both
-             large. The code is 18.5px, like the bottle slide's.
+             heat map, spacing, the before and after preview of the ribbon
+             chart, and naming, selecting, and regrouping the bars) are left
+             out to keep this short. The thesis deck adds spacing: 64 just
+             before the ribbon; here it is in every step's full spec and
+             shown as "...", so the bars keep their place from step to step.
+             The data, since 2026-11-06 (evening), following the SciPy 2026
+             deck (scipy-2026/sections/02-walkthrough.html):
+               - Step 0 shows the first rows of the table, in place of the
+                 chart. The rows are the thesis deck's "Start with the Data"
+                 table, with its card style (.crash-data-table).
+               - Steps 1 to 4 pin a small copy of the table to the top right
+                 corner, as the SciPy deck does on its walkthrough slides
+                 (its MINI_TABLE_HTML in scipy-2026/main.ts).
+               - Steps 1 to 4 show how the rows are grouped under the code:
+                 the SciPy deck's "data transformation pipeline" from its
+                 "add a second grouping" slide, with its markup and CSS
+                 (.transform-*). Each step shows the pipeline of its own
+                 spec. Lakes and species show the first two, "…", and the
+                 last, as the SciPy deck shows its sites. The SciPy deck
+                 reveals its pipeline in four fragments on one slide; here
+                 each step's new rows come with the step, with no extra
+                 clicks.
+             The order of the animation follows the thesis deck, which runs
+             auto-animate with autoAnimateUnmatched: false and a 0.3s
+             duration. So, on each step, the new chart, title and pipeline
+             rows appear at once, and the code then moves word by word into
+             place. data-auto-animate-unmatched="false" on each step does
+             the same here. The SciPy deck has no auto-animate; its slides
+             change all at once.
+             Layout: the code and the pipeline on the left, the render on
+             the right. The code is 18.5px, like the bottle slide's. Its box
+             is as tall as the longest step's code, so the pipeline below
+             does not move when a line is added.
              Shown code elides styling with "..." (the thesis deck's style);
              charts.ts holds the full specs the renders run.
              The code block has data-magic-move, so Reveal's auto-animate
-             moves the code word by word and fades in the new words. The
-             render's box has a data-id and moves; the render inside has
-             none, so it moves with its box, and the new render replaces the
-             old one in place. A data-id on the render too would break when
-             you navigate before an animation ends: see the CanSum slides in
-             04b-validity.html. For the same reason the header row has no
-             data-id: the logo inside it is matched by its src, so the row
-             must not be matched as well. The char marks point at what each
-             step adds. -->
-        <section class="code-slide crash-slide" data-auto-animate data-auto-animate-id="crash-course">
+             moves the code word by word. The render's box has a data-id
+             and stays in place; the render inside has none, so the new
+             render replaces the old one in place. A data-id on the render
+             too would break when you navigate before an animation ends: see
+             the CanSum slides in 04b-validity.html. For the same reason the
+             header row has no data-id: the logo inside it is matched by its
+             src, so the row must not be matched as well. Each pipeline row
+             and the small table have their own data-id, and nothing inside
+             them is matched (no p, h, li, img or pre, and no data-id). A
+             row whose content changes from one step to the next gets a new
+             data-id, so it is replaced, not stretched. The char marks point
+             at what each step adds. -->
+        <section class="code-slide crash-slide crash-data-slide" data-auto-animate data-auto-animate-id="crash-course" data-auto-animate-unmatched="false">
+          <div class="gofish-intro-head">
+            <img src="./images/gofish-intro/gofish-logo.png" alt="GoFish logo" />
+            <div>
+              <h2>Start with the data</h2>
+            </div>
+          </div>
+          <div class="crash-solo">
+            <div>
+              <p class="code-pair-label" data-id="crash-chart-label">chart API</p>
+              <pre data-id="crash-chart-code" data-magic-move><code class="language-ts" data-line-numbers>chart(seafood)</code></pre>
+            </div>
+            <div class="crash-chart-box" data-id="crash-chart-box">
+              <table class="crash-data-table">
+                <thead>
+                  <tr><th>lake</th><th>species</th><th>count</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Primrose</td><td>Bass</td><td>23</td></tr>
+                  <tr><td>Primrose</td><td>Trout</td><td>31</td></tr>
+                  <tr><td>Primrose</td><td>Catfish</td><td>29</td></tr>
+                  <tr class="ellipsis-row"><td>&#8942;</td><td>&#8942;</td><td>&#8942;</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <aside class="notes">
+            <p><strong>Target:</strong> 0:10 (1:00 for the five steps).
+              <strong>Running total:</strong> 2:40 of 7:00.</p>
+            <p><strong>Say:</strong> "Let's build a chart. Here is a table of
+              fish caught in six lakes. Each row is one kind of fish in one
+              lake, and how many were caught. There are five kinds of fish,
+              so the table has thirty rows. So far the code only names the
+              data, and nothing is drawn."</p>
+            <p><strong>Source:</strong> the thesis deck's "Start with the
+              Data" slide, which shows the same first rows. The SciPy 2026
+              deck has the same slide for its barley data. The data is the
+              GoFish repo's seafood data with the thesis deck's lake
+              names (<code>../data/seafood.json</code>).</p>
+          </aside>
+        </section>
+
+        <section class="code-slide crash-slide" data-auto-animate data-auto-animate-id="crash-course" data-auto-animate-unmatched="false">
           <div class="gofish-intro-head">
             <img src="./images/gofish-intro/gofish-logo.png" alt="GoFish logo" />
             <div>
               <h2>Spread into bars</h2>
             </div>
+          </div>
+          <div class="mini-data-table" data-id="crash-mini-table">
+            <table>
+              <thead>
+                <tr><th>lake</th><th>species</th><th>count</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Primrose</td><td>Bass</td><td>23</td></tr>
+                <tr><td>Primrose</td><td>Trout</td><td>31</td></tr>
+                <tr><td>Primrose</td><td>Catfish</td><td>29</td></tr>
+                <tr><td>…</td><td>…</td><td>…</td></tr>
+              </tbody>
+            </table>
           </div>
           <div class="crash-solo">
             <div>
@@ -114,35 +197,83 @@
     spread({ by: "lake", dir: "x", ... }),
   )
   .mark(rect({ h: "count" }))</code></pre>
+              <h3 class="transform-heading">Data transformation pipeline</h3>
+              <div class="transform-build" aria-label="How the seafood rows are grouped at this step.">
+                <div class="transform-stage transform-data" data-id="crash-pipe-data">
+                  <span class="transform-stage-label">seafood</span>
+                  <span class="transform-stage-detail">30 rows</span>
+                  <span class="transform-fields">lake, species, count</span>
+                </div>
+                <div class="transform-step" data-id="crash-pipe-lake-step">
+                  <span class="transform-arrow">↓</span>
+                  <code>group_by("lake")</code>
+                </div>
+                <div class="transform-groups transform-lakes" data-id="crash-pipe-lakes">
+                  <div class="transform-group"><b>Primrose</b><span>5 rows</span></div>
+                  <div class="transform-group"><b>Concord</b><span>5 rows</span></div>
+                  <span class="transform-ellipsis">…</span>
+                  <div class="transform-group"><b>Vulcan</b><span>5 rows</span></div>
+                </div>
+                <div class="transform-step" data-id="crash-pipe-rect-step">
+                  <span class="transform-arrow">↓</span>
+                </div>
+                <div class="transform-groups transform-rects" data-id="crash-pipe-rects-1">
+                  <div class="transform-rects-one"><span class="transform-rect-cell"><i aria-hidden="true"></i><b>rect</b></span></div>
+                  <div class="transform-rects-one"><span class="transform-rect-cell"><i aria-hidden="true"></i><b>rect</b></span></div>
+                  <span class="transform-ellipsis">…</span>
+                  <div class="transform-rects-one"><span class="transform-rect-cell"><i aria-hidden="true"></i><b>rect</b></span></div>
+                </div>
+                <div class="transform-leaf-note" data-id="crash-pipe-leaf-1">
+                  <b>each <span class="viz-mark">rect</span></b>
+                  <code><i>h</i> = sum(count)</code>
+                </div>
+              </div>
             </div>
             <div class="crash-chart-box" data-id="crash-chart-box">
               <div class="crash-render" data-chart="seafood-bars" data-w="520" data-h="420"></div>
             </div>
           </div>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:10 (0:40 for the four steps).
-              <strong>Running total:</strong> 2:40 of 7:00.</p>
+            <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
+              2:55 of 7:00.</p>
             <p>The code shown leaves out styling (the spacing between the
               lakes, and later the ribbon's opacity) and marks each place with
               <code>...</code>, in the thesis deck's style. The live render
               uses the full spec in <code>../charts.ts</code>.</p>
-            <p><strong>Say:</strong> "Let's build a chart. Here is a table of
-              fish caught in six lakes. <code>spread</code> is an operator. It
-              splits the rows by lake and puts the lakes side by side, and the
-              mark is a rectangle as tall as the count. So we get one bar per
-              lake."</p>
-            <p><strong>Source:</strong> the thesis deck's "Step 1: Spread
-              Into Bars" slide, with the GoFish repo's seafood data and the
-              thesis deck's lake names. Rendered live.</p>
+            <p><strong>Say:</strong> "<code>spread</code> is an operator. It
+              splits the rows by lake, so we get six groups of five rows, and
+              it puts the lakes side by side. The mark is a rectangle. Each
+              group becomes one rectangle, as tall as the sum of its counts.
+              So we get one bar per lake."</p>
+            <p>The pipeline under the code shows how the rows are grouped.
+              The small table in the corner is there so you do not have to
+              remember the fields.</p>
+            <p><strong>Sources:</strong> the thesis deck's "Step 1: Spread
+              Into Bars" slide. The pipeline and the small table are the SciPy
+              2026 deck's, from its "add a second grouping" slide. Rendered
+              live.</p>
           </aside>
         </section>
 
-        <section class="code-slide crash-slide" data-auto-animate data-auto-animate-id="crash-course">
+        <section class="code-slide crash-slide" data-auto-animate data-auto-animate-id="crash-course" data-auto-animate-unmatched="false">
           <div class="gofish-intro-head">
             <img src="./images/gofish-intro/gofish-logo.png" alt="GoFish logo" />
             <div>
               <h2>Stack within each lake</h2>
             </div>
+          </div>
+          <div class="mini-data-table" data-id="crash-mini-table">
+            <table>
+              <thead>
+                <tr><th>lake</th><th>species</th><th>count</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Primrose</td><td>Bass</td><td>23</td></tr>
+                <tr><td>Primrose</td><td>Trout</td><td>31</td></tr>
+                <tr><td>Primrose</td><td>Catfish</td><td>29</td></tr>
+                <tr><td>…</td><td>…</td><td>…</td></tr>
+              </tbody>
+            </table>
           </div>
           <div class="crash-solo">
             <div>
@@ -153,6 +284,48 @@
     stack({ by: "species", dir: "y" }),
   )
   .mark(rect({ h: "count", fill: "species" }))</code></pre>
+              <h3 class="transform-heading">Data transformation pipeline</h3>
+              <div class="transform-build" aria-label="How the seafood rows are grouped at this step.">
+                <div class="transform-stage transform-data" data-id="crash-pipe-data">
+                  <span class="transform-stage-label">seafood</span>
+                  <span class="transform-stage-detail">30 rows</span>
+                  <span class="transform-fields">lake, species, count</span>
+                </div>
+                <div class="transform-step" data-id="crash-pipe-lake-step">
+                  <span class="transform-arrow">↓</span>
+                  <code>group_by("lake")</code>
+                </div>
+                <div class="transform-groups transform-lakes" data-id="crash-pipe-lakes">
+                  <div class="transform-group"><b>Primrose</b><span>5 rows</span></div>
+                  <div class="transform-group"><b>Concord</b><span>5 rows</span></div>
+                  <span class="transform-ellipsis">…</span>
+                  <div class="transform-group"><b>Vulcan</b><span>5 rows</span></div>
+                </div>
+                <div class="transform-step" data-id="crash-pipe-species-step-2">
+                  <span class="transform-arrow">↓</span>
+                  <code>group_by("species")</code>
+                </div>
+                <div class="transform-groups transform-species" data-id="crash-pipe-species-2">
+                  <div><span>Bass</span><span>Trout</span><span>…</span><span>Salmon</span></div>
+                  <div><span>Bass</span><span>Trout</span><span>…</span><span>Salmon</span></div>
+                  <span class="transform-ellipsis">…</span>
+                  <div><span>Bass</span><span>Trout</span><span>…</span><span>Salmon</span></div>
+                </div>
+                <div class="transform-step" data-id="crash-pipe-rect-step">
+                  <span class="transform-arrow">↓</span>
+                </div>
+                <div class="transform-groups transform-rects" data-id="crash-pipe-rects-2">
+                  <div><span class="transform-rect-cell"><i aria-hidden="true" style="background: #4190c5"></i></span><span class="transform-rect-cell"><i aria-hidden="true" style="background: #f2cf57"></i></span><span>…</span><span class="transform-rect-cell"><i aria-hidden="true" style="background: #43b780"></i></span></div>
+                  <div><span class="transform-rect-cell"><i aria-hidden="true" style="background: #4190c5"></i></span><span class="transform-rect-cell"><i aria-hidden="true" style="background: #f2cf57"></i></span><span>…</span><span class="transform-rect-cell"><i aria-hidden="true" style="background: #43b780"></i></span></div>
+                  <span class="transform-ellipsis">…</span>
+                  <div><span class="transform-rect-cell"><i aria-hidden="true" style="background: #4190c5"></i></span><span class="transform-rect-cell"><i aria-hidden="true" style="background: #f2cf57"></i></span><span>…</span><span class="transform-rect-cell"><i aria-hidden="true" style="background: #43b780"></i></span></div>
+                </div>
+                <div class="transform-leaf-note" data-id="crash-pipe-leaf-2">
+                  <b>each <span class="viz-mark">rect</span></b>
+                  <code><i>h</i> = sum(count)</code>
+                  <code><i>fill</i> = first(species)</code>
+                </div>
+              </div>
             </div>
             <div class="crash-chart-box" data-id="crash-chart-box">
               <div class="crash-render" data-chart="seafood-stacked-unsorted" data-w="520" data-h="420"></div>
@@ -160,11 +333,11 @@
           </div>
           <aside class="notes">
             <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
-              2:50 of 7:00.</p>
+              3:05 of 7:00.</p>
             <p><strong>Say:</strong> "Add a second operator,
               <code>stack</code>. Inside each lake it splits the rows again,
-              by species, and piles them up. Color the rectangles by species,
-              and we have stacked bars."</p>
+              by species, so each group is now one row. It piles them up.
+              Color the rectangles by species, and we have stacked bars."</p>
             <p>The species are stacked in the data's own row order, so the
               same species sits at a different height in different lakes. The
               next step fixes that.</p>
@@ -173,12 +346,25 @@
           </aside>
         </section>
 
-        <section class="code-slide crash-slide" data-auto-animate data-auto-animate-id="crash-course">
+        <section class="code-slide crash-slide" data-auto-animate data-auto-animate-id="crash-course" data-auto-animate-unmatched="false">
           <div class="gofish-intro-head">
             <img src="./images/gofish-intro/gofish-logo.png" alt="GoFish logo" />
             <div>
               <h2>Sort the stacks</h2>
             </div>
+          </div>
+          <div class="mini-data-table" data-id="crash-mini-table">
+            <table>
+              <thead>
+                <tr><th>lake</th><th>species</th><th>count</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Primrose</td><td>Bass</td><td>23</td></tr>
+                <tr><td>Primrose</td><td>Trout</td><td>31</td></tr>
+                <tr><td>Primrose</td><td>Catfish</td><td>29</td></tr>
+                <tr><td>…</td><td>…</td><td>…</td></tr>
+              </tbody>
+            </table>
           </div>
           <div class="crash-solo">
             <div>
@@ -189,6 +375,49 @@
     stack({ by: field("species").sort("count"), dir: "y" }),
   )
   .mark(rect({ h: "count", fill: "species" }))</code></pre>
+              <h3 class="transform-heading">Data transformation pipeline</h3>
+              <div class="transform-build" aria-label="How the seafood rows are grouped at this step.">
+                <div class="transform-stage transform-data" data-id="crash-pipe-data">
+                  <span class="transform-stage-label">seafood</span>
+                  <span class="transform-stage-detail">30 rows</span>
+                  <span class="transform-fields">lake, species, count</span>
+                </div>
+                <div class="transform-step" data-id="crash-pipe-lake-step">
+                  <span class="transform-arrow">↓</span>
+                  <code>group_by("lake")</code>
+                </div>
+                <div class="transform-groups transform-lakes" data-id="crash-pipe-lakes">
+                  <div class="transform-group"><b>Primrose</b><span>5 rows</span></div>
+                  <div class="transform-group"><b>Concord</b><span>5 rows</span></div>
+                  <span class="transform-ellipsis">…</span>
+                  <div class="transform-group"><b>Vulcan</b><span>5 rows</span></div>
+                </div>
+                <div class="transform-step" data-id="crash-pipe-species-step-3">
+                  <span class="transform-arrow">↓</span>
+                  <code>group_by("species")</code>
+                  <code>sort_by("count")</code>
+                </div>
+                <div class="transform-groups transform-species" data-id="crash-pipe-species-3">
+                  <div><span>Salmon</span><span>Perch</span><span>…</span><span>Trout</span></div>
+                  <div><span>Salmon</span><span>Perch</span><span>…</span><span>Catfish</span></div>
+                  <span class="transform-ellipsis">…</span>
+                  <div><span>Bass</span><span>Trout</span><span>…</span><span>Salmon</span></div>
+                </div>
+                <div class="transform-step" data-id="crash-pipe-rect-step">
+                  <span class="transform-arrow">↓</span>
+                </div>
+                <div class="transform-groups transform-rects" data-id="crash-pipe-rects-3">
+                  <div><span class="transform-rect-cell"><i aria-hidden="true" style="background: #4190c5"></i></span><span class="transform-rect-cell"><i aria-hidden="true" style="background: #f2cf57"></i></span><span>…</span><span class="transform-rect-cell"><i aria-hidden="true" style="background: #43b780"></i></span></div>
+                  <div><span class="transform-rect-cell"><i aria-hidden="true" style="background: #4190c5"></i></span><span class="transform-rect-cell"><i aria-hidden="true" style="background: #f2cf57"></i></span><span>…</span><span class="transform-rect-cell"><i aria-hidden="true" style="background: #ff9666"></i></span></div>
+                  <span class="transform-ellipsis">…</span>
+                  <div><span class="transform-rect-cell"><i aria-hidden="true" style="background: #a181c8"></i></span><span class="transform-rect-cell"><i aria-hidden="true" style="background: #43b780"></i></span><span>…</span><span class="transform-rect-cell"><i aria-hidden="true" style="background: #4190c5"></i></span></div>
+                </div>
+                <div class="transform-leaf-note" data-id="crash-pipe-leaf-2">
+                  <b>each <span class="viz-mark">rect</span></b>
+                  <code><i>h</i> = sum(count)</code>
+                  <code><i>fill</i> = first(species)</code>
+                </div>
+              </div>
             </div>
             <div class="crash-chart-box" data-id="crash-chart-box">
               <div class="crash-render" data-chart="seafood-stacked" data-w="520" data-h="420"></div>
@@ -196,21 +425,35 @@
           </div>
           <aside class="notes">
             <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
-              3:00 of 7:00.</p>
+              3:15 of 7:00.</p>
             <p><strong>Say:</strong> "Now sort each stack by count, so in
               every lake the biggest catch is on top. Only one part of one
-              line changed."</p>
+              line changed. In the pipeline, each lake now has its own
+              order."</p>
             <p><strong>Source:</strong> the thesis deck's "Sort the Stacks"
               slide. Rendered live.</p>
           </aside>
         </section>
 
-        <section class="code-slide crash-slide" data-auto-animate data-auto-animate-id="crash-course">
+        <section class="code-slide crash-slide" data-auto-animate data-auto-animate-id="crash-course" data-auto-animate-unmatched="false">
           <div class="gofish-intro-head">
             <img src="./images/gofish-intro/gofish-logo.png" alt="GoFish logo" />
             <div>
               <h2>Draw the ribbon</h2>
             </div>
+          </div>
+          <div class="mini-data-table" data-id="crash-mini-table">
+            <table>
+              <thead>
+                <tr><th>lake</th><th>species</th><th>count</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Primrose</td><td>Bass</td><td>23</td></tr>
+                <tr><td>Primrose</td><td>Trout</td><td>31</td></tr>
+                <tr><td>Primrose</td><td>Catfish</td><td>29</td></tr>
+                <tr><td>…</td><td>…</td><td>…</td></tr>
+              </tbody>
+            </table>
           </div>
           <div class="crash-solo">
             <div>
@@ -222,19 +465,77 @@
   )
   .mark(rect({ h: "count", fill: "species" }))
   .layer(ribbon({ by: "species", ... }))</code></pre>
+              <h3 class="transform-heading">Data transformation pipeline</h3>
+              <div class="transform-build" aria-label="How the seafood rows are grouped at this step.">
+                <div class="transform-stage transform-data" data-id="crash-pipe-data">
+                  <span class="transform-stage-label">seafood</span>
+                  <span class="transform-stage-detail">30 rows</span>
+                  <span class="transform-fields">lake, species, count</span>
+                </div>
+                <div class="transform-step" data-id="crash-pipe-lake-step">
+                  <span class="transform-arrow">↓</span>
+                  <code>group_by("lake")</code>
+                </div>
+                <div class="transform-groups transform-lakes" data-id="crash-pipe-lakes">
+                  <div class="transform-group"><b>Primrose</b><span>5 rows</span></div>
+                  <div class="transform-group"><b>Concord</b><span>5 rows</span></div>
+                  <span class="transform-ellipsis">…</span>
+                  <div class="transform-group"><b>Vulcan</b><span>5 rows</span></div>
+                </div>
+                <div class="transform-step" data-id="crash-pipe-species-step-3">
+                  <span class="transform-arrow">↓</span>
+                  <code>group_by("species")</code>
+                  <code>sort_by("count")</code>
+                </div>
+                <div class="transform-groups transform-species" data-id="crash-pipe-species-3">
+                  <div><span>Salmon</span><span>Perch</span><span>…</span><span>Trout</span></div>
+                  <div><span>Salmon</span><span>Perch</span><span>…</span><span>Catfish</span></div>
+                  <span class="transform-ellipsis">…</span>
+                  <div><span>Bass</span><span>Trout</span><span>…</span><span>Salmon</span></div>
+                </div>
+                <div class="transform-step" data-id="crash-pipe-rect-step">
+                  <span class="transform-arrow">↓</span>
+                </div>
+                <div class="transform-groups transform-rects" data-id="crash-pipe-rects-3">
+                  <div><span class="transform-rect-cell"><i aria-hidden="true" style="background: #4190c5"></i></span><span class="transform-rect-cell"><i aria-hidden="true" style="background: #f2cf57"></i></span><span>…</span><span class="transform-rect-cell"><i aria-hidden="true" style="background: #43b780"></i></span></div>
+                  <div><span class="transform-rect-cell"><i aria-hidden="true" style="background: #4190c5"></i></span><span class="transform-rect-cell"><i aria-hidden="true" style="background: #f2cf57"></i></span><span>…</span><span class="transform-rect-cell"><i aria-hidden="true" style="background: #ff9666"></i></span></div>
+                  <span class="transform-ellipsis">…</span>
+                  <div><span class="transform-rect-cell"><i aria-hidden="true" style="background: #a181c8"></i></span><span class="transform-rect-cell"><i aria-hidden="true" style="background: #43b780"></i></span><span>…</span><span class="transform-rect-cell"><i aria-hidden="true" style="background: #4190c5"></i></span></div>
+                </div>
+                <div class="transform-leaf-note" data-id="crash-pipe-leaf-2">
+                  <b>each <span class="viz-mark">rect</span></b>
+                  <code><i>h</i> = sum(count)</code>
+                  <code><i>fill</i> = first(species)</code>
+                </div>
+                <div class="transform-step" data-id="crash-pipe-ribbon-step">
+                  <span class="transform-arrow">↓</span>
+                  <code>group_by("species")</code>
+                </div>
+                <div class="transform-groups transform-ribbons" data-id="crash-pipe-ribbons">
+                  <div class="transform-group"><b><i aria-hidden="true" style="background: #a181c8"></i>Bass</b><span>6 rects</span></div>
+                  <div class="transform-group"><b><i aria-hidden="true" style="background: #43b780"></i>Trout</b><span>6 rects</span></div>
+                  <span class="transform-ellipsis">…</span>
+                  <div class="transform-group"><b><i aria-hidden="true" style="background: #4190c5"></i>Salmon</b><span>6 rects</span></div>
+                </div>
+                <div class="transform-leaf-note" data-id="crash-pipe-ribbon-note">
+                  <b>each <span class="viz-mark">ribbon</span></b>
+                  <span>connects its 6 rects</span>
+                </div>
+              </div>
             </div>
             <div class="crash-chart-box" data-id="crash-chart-box">
               <div class="crash-render" data-chart="seafood-ribbon" data-w="520" data-h="420"></div>
             </div>
           </div>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
-              3:10 of 7:00.</p>
+            <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
+              3:30 of 7:00.</p>
             <p><strong>Say:</strong> "Last, add one line,
-              <code>ribbon</code>. It connects each species across the lakes,
-              and the stacked bars become a ribbon chart. A ribbon is a
-              relation that also draws. It connects marks that are already
-              placed."</p>
+              <code>ribbon</code>. It takes the rectangles we drew and groups
+              them again, by species, across the lakes. Each ribbon connects
+              the six rectangles of one species, and the stacked bars become
+              a ribbon chart. A ribbon is a relation that also draws. It
+              connects marks that are already placed."</p>
             <p>The paper's caption for this chart: "operators arrange the
               rectangles, and a relational mark connects them."</p>
             <p><strong>Lead into the next slide:</strong> "Operators and
@@ -246,12 +547,13 @@
               <code>scripts/generate-gofish-stage-assets.mjs</code>). The
               thesis slide writes the same ribbon out in three steps: name
               the bars, select them in a second chart, and group them by
-              species. It is the GUGOG paper's Figure 2 ("A GoFish ribbon
-              chart: operators arrange the rectangles, and a relational mark
-              connects them"); the paper's listing is the same spec, wrapped
-              for a narrow column and with <code>{ axes: true }</code>.
-              Rendered live. The bars become the ribbon chart by a crossfade,
-              not a GoFish animation.</p>
+              species. The last pipeline step is that grouping. It is the
+              GUGOG paper's Figure 2 ("A GoFish ribbon chart: operators
+              arrange the rectangles, and a relational mark connects them");
+              the paper's listing is the same spec, wrapped for a narrow
+              column and with <code>{ axes: true }</code>. Rendered live.
+              The bars become the ribbon chart at once, not by a GoFish
+              animation.</p>
           </aside>
         </section>
 
@@ -265,9 +567,12 @@
                    as align plus distribute, and the same picture.
              (b) and (c) are two auto-animated states of one code block, so
              the one magic move the audience sees is the spread line turning
-             into the layer and its two relations. The circles are named in
-             (b) already, though nothing there uses the names, so that line
-             does not change.
+             into the layer and its two relations. Since 2026-11-06
+             (evening) the four circles are written out one by one, with no
+             data array and no map, and they are the same on both slides.
+             They are named in (b) already, though nothing there uses the
+             names, so those lines do not change. The shown code elides only
+             the circles' stroke and the box's styling.
              These two slides replace the hidden core slide ("under the
              chart API is a smaller, more direct core", 2026-11-05), which
              showed the same planets with a label and an arrow placed by
@@ -287,15 +592,17 @@
              glue: true.
              Planets code: the GoFish repo's Basics tutorial story
              (packages/gofish-graphics/stories/tutorials/Basics.stories.tsx),
-             with the circles bound to a const. Renders: "planets" and
+             with its radii and colors. Renders: "planets" and
              "planets-relate" in ../charts.ts, which run the code shown with
              the styling filled in.
              The animation follows the buildup's pattern: the code block has
              data-magic-move, the render box has a data-id, and the render
-             inside has none. Its auto-animate id differs from the
+             inside has none. As in the buildup and the thesis deck, the new
+             title and render appear at once and the code then moves
+             (data-auto-animate-unmatched="false"). Its auto-animate id differs from the
              buildup's, so the step from the ribbon chart to (b) is a plain
              slide change. -->
-        <section class="code-slide spread-relate-slide" data-auto-animate data-auto-animate-id="spread-relate">
+        <section class="code-slide spread-relate-slide" data-auto-animate data-auto-animate-id="spread-relate" data-auto-animate-unmatched="false">
           <div class="gofish-intro-head">
             <img src="./images/gofish-intro/gofish-logo.png" alt="GoFish logo" />
             <div>
@@ -303,10 +610,13 @@
             </div>
           </div>
           <div class="spread-relate-body">
-            <pre data-id="spread-relate-code" data-magic-move><code class="language-ts" data-line-numbers data-char-marks="3:1-7, 4:3-8">const planets = data.map((d) =&gt; circle({ r: d.r, ... }).name(d.name));
-
-enclose({ ... }, [
-  spread({ dir: "x", alignment: "middle", spacing: 50 }, planets),
+            <pre data-id="spread-relate-code" data-magic-move><code class="language-ts" data-line-numbers data-char-marks="1:1-7, 2:3-8">enclose({ ... }, [
+  spread({ dir: "x", alignment: "middle", spacing: 50 }, [
+    circle({ r: 15, fill: "#F5E3C8", ... }).name("mercury"),
+    circle({ r: 36, fill: "#D2913C", ... }).name("venus"),
+    circle({ r: 38, fill: "#3E8CCC", ... }).name("earth"),
+    circle({ r: 21, fill: "#F4BC80", ... }).name("mars"),
+  ]),
 ])</code></pre>
             <div class="spread-relate-box" data-id="spread-relate-box">
               <div class="spread-relate-render" data-chart="planets" data-w="440" data-h="160"></div>
@@ -314,7 +624,7 @@ enclose({ ... }, [
           </div>
           <aside class="notes">
             <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
-              3:25 of 7:00.</p>
+              3:45 of 7:00.</p>
             <p><strong>Say:</strong> "Operators are not only for charts. You
               can use them directly on marks, with no data table. Here are
               four circles for the inner planets. <code>spread</code> puts
@@ -322,7 +632,7 @@ enclose({ ... }, [
               and <code>enclose</code> draws the dark box around them.
               <code>spread</code> places its marks completely: every planet
               gets an x and a y."</p>
-            <p>The code shown leaves out the styling (the circles' colors and
+            <p>The code shown leaves out the styling (the circles'
               stroke, and the box's padding, color, and corners) and marks
               each place with <code>...</code>. The live render uses the full
               spec in <code>../charts.ts</code>.</p>
@@ -334,7 +644,7 @@ enclose({ ... }, [
           </aside>
         </section>
 
-        <section class="code-slide spread-relate-slide" data-auto-animate data-auto-animate-id="spread-relate">
+        <section class="code-slide spread-relate-slide" data-auto-animate data-auto-animate-id="spread-relate" data-auto-animate-unmatched="false">
           <div class="gofish-intro-head">
             <img src="./images/gofish-intro/gofish-logo.png" alt="GoFish logo" />
             <div>
@@ -342,10 +652,13 @@ enclose({ ... }, [
             </div>
           </div>
           <div class="spread-relate-body">
-            <pre data-id="spread-relate-code" data-magic-move><code class="language-ts" data-line-numbers data-char-marks="5:5-20, 6:5-25">const planets = data.map((d) =&gt; circle({ r: d.r, ... }).name(d.name));
-
-enclose({ ... }, [
-  layer(planets).relate(({ mercury, venus, earth, mars }) =&gt; [
+            <pre data-id="spread-relate-code" data-magic-move><code class="language-ts" data-line-numbers data-char-marks="8:5-20, 9:5-25">enclose({ ... }, [
+  layer([
+    circle({ r: 15, fill: "#F5E3C8", ... }).name("mercury"),
+    circle({ r: 36, fill: "#D2913C", ... }).name("venus"),
+    circle({ r: 38, fill: "#3E8CCC", ... }).name("earth"),
+    circle({ r: 21, fill: "#F4BC80", ... }).name("mars"),
+  ]).relate(({ mercury, venus, earth, mars }) =&gt; [
     Constraint.align({ y: "middle" }, [mercury, venus, earth, mars]),
     Constraint.distribute({ dir: "x", spacing: 50 }, [mercury, venus, earth, mars]),
   ]),
@@ -356,7 +669,7 @@ enclose({ ... }, [
           </div>
           <aside class="notes">
             <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
-              3:40 of 7:00. This ends the GoFish intro.</p>
+              4:00 of 7:00. This ends the GoFish intro.</p>
             <p><strong>Say:</strong> "And here is the same picture, with
               <code>spread</code> written as two relations. A relation sets
               only some properties of a set of marks. <code>align</code> gives

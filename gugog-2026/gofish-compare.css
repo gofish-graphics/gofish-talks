@@ -208,11 +208,12 @@
   min-width: 0;
 }
 
-/* The code column is pinned at the top, not centered, so it does not move
-   when the second state adds a line. The padding puts it near the middle of
-   the render box. */
-.crash-solo > div:first-child {
-  padding-top: 110px;
+/* The code column is pinned at the top, not centered. Since 2026-11-06
+   (evening) the data pipeline sits under the code, so the column has no top
+   padding, and the code box is as tall as the longest step's code (seven
+   lines), so the pipeline does not move when a line is added. */
+.reveal .code-slide .crash-solo pre code {
+  min-height: calc(7 * 1.3em);
 }
 
 .reveal .code-slide.crash-slide .gofish-intro-head h2 {
@@ -241,11 +242,306 @@
   justify-content: center;
 }
 
+/* Step 0 of the ribbon buildup, "Start with the data": the first rows of
+   the table in place of the chart, with the card style of the thesis
+   deck's "Start with the Data" table (.gofish-stage-slide .split
+   .data-table in phd-thesis-20260618/presentation/styles.css). */
+.crash-data-table {
+  background: white;
+  border: 2px solid #27231f;
+  border-collapse: collapse;
+  border-radius: 7px 10px 6px 9px;
+  box-shadow: 5px 6px 0 rgba(30, 30, 30, 0.11);
+  font-family: "Shantell Sans Local", ui-monospace, "SF Mono", monospace;
+  margin: 0;
+  width: 100%;
+}
+
+.crash-data-table th,
+.crash-data-table td {
+  border: 1px solid rgba(39, 35, 31, 0.2);
+  font-size: 0.85em;
+  padding: 0.5em 0.9em;
+  text-align: left;
+}
+
+.crash-data-table thead th {
+  color: var(--accent);
+  font-weight: 760;
+  text-transform: lowercase;
+}
+
+.crash-data-table tbody td {
+  color: var(--muted);
+}
+
+.crash-data-table .ellipsis-row td {
+  text-align: center;
+}
+
+/* On step 0 the code box fits its one line, as in the thesis deck, and
+   the table sits at the top, level with the code. */
+.reveal .code-slide.crash-data-slide .crash-solo pre code {
+  min-height: 0;
+}
+
+.crash-data-slide .crash-chart-box {
+  align-items: flex-start;
+}
+
+.crash-data-slide .crash-data-table {
+  margin-top: 1.75rem;
+}
+
+/* Steps 1 to 4: a small copy of the table, pinned to the top right corner,
+   from the SciPy 2026 deck's .mini-data-table (scipy-2026/style.css). Its
+   header uses this deck's accent color, like the big table above, in place
+   of SciPy's navy. */
+.crash-slide .mini-data-table {
+  position: absolute;
+  right: 0.5em;
+  top: 0.35em;
+  z-index: 2;
+}
+
+.crash-slide .mini-data-table table {
+  background: rgba(255, 253, 248, 0.88);
+  border: 1px solid rgba(36, 33, 31, 0.25);
+  border-collapse: collapse;
+  border-radius: 4px;
+  box-shadow: 2px 2px 0 rgba(30, 30, 30, 0.06);
+  font-size: 0.34em;
+  margin: 0;
+}
+
+.crash-slide .mini-data-table th {
+  color: var(--accent);
+  font-weight: 700;
+  padding: 0.15em 0.5em;
+  white-space: nowrap;
+}
+
+.crash-slide .mini-data-table td {
+  border: 1px solid rgba(221, 221, 221, 0.8);
+  color: #403c37;
+  padding: 0.12em 0.5em;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.crash-slide .mini-data-table tr:nth-child(even) {
+  background: rgba(245, 245, 245, 0.7);
+}
+
+/* Steps 1 to 4: the data transformation pipeline under the code, from the
+   SciPy 2026 deck's "add a second grouping" slide (.transform-* in
+   scipy-2026/style.css), with its colors: green for operators' groups,
+   yellow for marks, blue for the data work. The rows here are lakes,
+   species, rects, and, on the last step, the ribbons' groups. */
+.crash-slide {
+  --viz-op: #49a66a;
+  --viz-mark: #d6a62f;
+  --viz-transform: #4d90cf;
+}
+
+.crash-slide .viz-mark {
+  color: var(--viz-mark);
+  font-weight: 760;
+}
+
+.reveal .crash-slide .transform-heading {
+  color: #403c37;
+  font-family: "Shantell Sans Local", "Shantell Sans", "Source Sans 3", sans-serif;
+  font-size: 0.58em;
+  font-weight: 650;
+  margin: 0.6rem 0 0.2rem;
+  text-align: left;
+  text-transform: none;
+}
+
+.crash-slide .transform-build {
+  color: #403c37;
+  display: flex;
+  flex-direction: column;
+  font-size: 0.43em;
+  gap: 0.18rem;
+  text-align: center;
+}
+
+.crash-slide .transform-stage {
+  align-items: baseline;
+  background: #fffdf8;
+  border: 1.5px solid rgba(36, 33, 31, 0.65);
+  border-radius: 5px 8px 5px 7px;
+  display: flex;
+  gap: 0.55rem;
+  justify-content: center;
+  padding: 0.22rem 0.5rem;
+}
+
+.crash-slide .transform-stage-label,
+.crash-slide .transform-group b {
+  color: #24211f;
+  font-weight: 760;
+}
+
+.crash-slide .transform-stage-detail,
+.crash-slide .transform-group span {
+  color: #6b645c;
+}
+
+.crash-slide .transform-fields {
+  color: #6b645c;
+  font-family: "Fira Code", monospace;
+  font-size: 0.9em;
+}
+
+.crash-slide .transform-step {
+  align-items: center;
+  display: flex;
+  gap: 0.35rem;
+  justify-content: center;
+  line-height: 1;
+  min-height: 1rem;
+}
+
+.crash-slide .transform-step code,
+.crash-slide .transform-leaf-note code {
+  color: var(--viz-transform);
+  font-family: "Fira Code", monospace;
+  font-weight: 650;
+}
+
+.crash-slide .transform-arrow {
+  color: #777067;
+  font-size: 1.25em;
+  line-height: 0.8;
+}
+
+.crash-slide .transform-groups {
+  align-items: stretch;
+  display: grid;
+  gap: 0.28rem;
+  grid-template-columns: 1fr 1fr 0.16fr 1fr;
+}
+
+.crash-slide .transform-group {
+  background: rgba(73, 166, 106, 0.09);
+  border: 1.5px solid var(--viz-op);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 1.05;
+  min-height: 1.65rem;
+  padding: 0.15rem 0.22rem;
+}
+
+.crash-slide .transform-group b {
+  font-size: 0.9em;
+  white-space: nowrap;
+}
+
+.crash-slide .transform-group span {
+  font-size: 0.78em;
+}
+
+.crash-slide .transform-ellipsis {
+  align-self: center;
+  color: #777067;
+  font-size: 1.25em;
+}
+
+/* The species in each lake: SciPy's year chips (.transform-years), four
+   to a lake here (two species, "…", and the last). */
+.crash-slide .transform-species > div {
+  display: grid;
+  gap: 0.18rem;
+  grid-template-columns: 1fr 1fr 0.4fr 1fr;
+}
+
+.crash-slide .transform-species > div > span {
+  background: rgba(73, 166, 106, 0.055);
+  border: 1px solid rgba(73, 166, 106, 0.75);
+  border-radius: 999px;
+  padding: 0.11rem 0.18rem;
+}
+
+.crash-slide .transform-species > div > span:nth-child(3) {
+  background: none;
+  border: none;
+  color: #777067;
+}
+
+.crash-slide .transform-rects > div {
+  align-items: center;
+  display: grid;
+  gap: 0.18rem;
+  grid-template-columns: 1fr 1fr 0.4fr 1fr;
+}
+
+.crash-slide .transform-rects > div.transform-rects-one {
+  grid-template-columns: 1fr;
+}
+
+.crash-slide .transform-rect-cell {
+  align-items: center;
+  background: rgba(214, 166, 47, 0.08);
+  border: 1.5px solid rgba(214, 166, 47, 0.9);
+  border-radius: 4px 6px 4px 5px;
+  display: flex;
+  gap: 0.25rem;
+  justify-content: center;
+  min-height: 1.55rem;
+  padding: 0.12rem 0.18rem;
+}
+
+/* The little rectangle in each rect cell has the chart's own fill: the
+   bars' blue on step 1, and each species' color after that (set inline). */
+.crash-slide .transform-rect-cell i,
+.crash-slide .transform-ribbons b i {
+  background: #4190c5;
+  border: 1px solid #24211f;
+  display: inline-block;
+  height: 0.95rem;
+  width: 0.52rem;
+}
+
+.crash-slide .transform-ribbons b i {
+  height: 0.7rem;
+  margin-right: 0.3em;
+  vertical-align: -0.05em;
+}
+
+.crash-slide .transform-rect-cell b,
+.crash-slide .transform-leaf-note b {
+  color: #24211f;
+  font-weight: 760;
+}
+
+.crash-slide .transform-leaf-note {
+  align-items: center;
+  display: flex;
+  gap: 0.42rem;
+  justify-content: center;
+  padding-top: 0.08rem;
+}
+
+.crash-slide .transform-leaf-note code + code {
+  border-left: 1px solid rgba(36, 33, 31, 0.22);
+  padding-left: 0.42rem;
+}
+
+.crash-slide .transform-leaf-note code i {
+  color: #24211f;
+  font-style: normal;
+}
+
 /* Operators on marks, then relations (03, since 2026-11-06): the planets
    code on top, the render under it, scaled up from its 440x160 size. The
-   code block is always as wide as its longest line and as tall as eight
+   code block is always as wide as its longest line and as tall as eleven
    lines, so the picture under it does not move when the code grows from
-   five lines to eight. */
+   eight lines to eleven. */
 .spread-relate-body {
   margin-top: 2rem;
 }
@@ -259,7 +555,7 @@
 .reveal .code-slide .spread-relate-body pre code {
   line-height: 1.3;
   max-height: none;
-  min-height: 10.6em;
+  min-height: 14.5em;
 }
 
 .spread-relate-box {
