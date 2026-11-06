@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@gofish-talks/template": "workspace:*",
-    "gofish-graphics": "0.1.0-nightly.20261031"
+    "gofish-graphics": "0.1.0-nightly.20261106"
   },
   "devDependencies": {
     "vite": "^6.0.0"

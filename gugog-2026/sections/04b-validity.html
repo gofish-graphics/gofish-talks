@@ -2,14 +2,14 @@
              The second objection, Huang and Kay's: this much extensibility
              and expressiveness seems to cost safety. The answer: a small type
              system brings it back. The Huang and Kay quote
-             states the general tradeoff, then CanAdd shows a type system
+             states the general tradeoff, then CanSum shows a type system
              bringing safety back. It is one piece of evidence, and its
              limits are stated.
-             CanAdd follows the type system framing, not the v3 draft's,
+             CanSum follows the type system framing, not the v3 draft's,
              which predates the type system. Its code is from the current
-             GoFish source, where the class is named CanAdd.
+             GoFish source, where the trait is named CanSum.
              Styles for the code slides: ../gofish-compare.css. -->
-        <!-- The open question the CanAdd slide gives one data point on:
+        <!-- The open question the CanSum slide gives one data point on:
              Huang and Kay, "Semantic Validity vs. Graphical Arrangement in
              Visualization Grammars", GUGOG @ IEEE VIS 2026
              (gugog-vis.github.io/2026/papers/pdf/huang-kay.pdf), section 6.4
@@ -83,11 +83,11 @@
           </aside>
         </section>
 
-        <!-- CanAdd, in four auto-animate steps of one spec on one dataset,
+        <!-- CanSum, in four auto-animate steps of one spec on one dataset,
              one change per click: no schema (GoFish checks nothing and
              stacks the temperatures), the schema added to the code (the
              output is still the untyped chart), the same code run (°C has
-             no CanAdd, so GoFish refuses), and "usd" in place of "temp"
+             no CanSum, so GoFish refuses), and "usd" in place of "temp"
              (USD is summable, so it stacks). Each chart is rendered live
              from ../charts.ts; the error on step 3 is the message GoFish
              throws (data-expect-error). The code blocks have
@@ -124,7 +124,7 @@
              top left. -->
         <section class="code-slide" data-auto-animate data-auto-animate-id="canadd" data-auto-animate-duration="0.3">
           <p class="part" data-id="canadd-part">4b · Does growth cost safety?</p>
-          <h2 data-id="canadd-title"><code>stack</code> needs <code>CanAdd</code></h2>
+          <h2 data-id="canadd-title"><code>stack</code> needs <code>CanSum</code></h2>
           <div class="canadd-grid">
             <pre data-id="canadd-code" data-magic-move><code class="language-ts" data-line-numbers>const data = [
   { month: "Jun", city: "Boston", temp: 21, usd: 120 },
@@ -148,7 +148,7 @@ chart(data)
                 <div class="canadd-out" data-chart="canadd-untyped" data-w="460" data-h="300" data-font-size="16"></div>
               </div>
               <div class="canadd-result" data-id="canadd-result-temp">
-                <div class="code-pair-label">°C <span class="code-pair-sub">· no CanAdd: GoFish refuses</span></div>
+                <div class="code-pair-label">°C <span class="code-pair-sub">· no CanSum: GoFish refuses</span></div>
                 <!-- Runs the spec on the left and shows the error GoFish
                      throws (data-expect-error), not a chart. -->
                 <div class="canadd-out canadd-error-box" data-chart="canadd-temp" data-expect-error data-w="460" data-h="300"></div>
@@ -192,7 +192,7 @@ chart(data)
 
         <section class="code-slide" data-auto-animate data-auto-animate-id="canadd" data-auto-animate-duration="0.3">
           <p class="part" data-id="canadd-part">4b · Does growth cost safety?</p>
-          <h2 data-id="canadd-title"><code>stack</code> needs <code>CanAdd</code></h2>
+          <h2 data-id="canadd-title"><code>stack</code> needs <code>CanSum</code></h2>
           <div class="canadd-grid">
             <pre data-id="canadd-code" data-magic-move><code class="language-ts" data-line-numbers data-char-marks="8:11-13, 9:3-11, 10:5-21, 11:5-53, 12:3-4, 13:1-2">const data = [
   { month: "Jun", city: "Boston", temp: 21, usd: 120 },
@@ -221,7 +221,7 @@ chart(data, {
                 <div class="canadd-out" data-chart="canadd-untyped" data-w="460" data-h="300" data-font-size="16"></div>
               </div>
               <div class="canadd-result" data-id="canadd-result-temp">
-                <div class="code-pair-label">°C <span class="code-pair-sub">· no CanAdd: GoFish refuses</span></div>
+                <div class="code-pair-label">°C <span class="code-pair-sub">· no CanSum: GoFish refuses</span></div>
                 <!-- Runs the spec on the left and shows the error GoFish
                      throws (data-expect-error), not a chart. -->
                 <div class="canadd-out canadd-error-box" data-chart="canadd-temp" data-expect-error data-w="460" data-h="300"></div>
@@ -250,7 +250,7 @@ chart(data, {
 
         <section class="code-slide" data-auto-animate data-auto-animate-id="canadd" data-auto-animate-duration="0.3">
           <p class="part" data-id="canadd-part">4b · Does growth cost safety?</p>
-          <h2 data-id="canadd-title"><code>stack</code> needs <code>CanAdd</code></h2>
+          <h2 data-id="canadd-title"><code>stack</code> needs <code>CanSum</code></h2>
           <div class="canadd-grid">
             <pre data-id="canadd-code" data-magic-move><code class="language-ts" data-line-numbers data-char-marks="8:11-13, 9:3-11, 10:5-21, 11:5-53, 12:3-4, 13:1-2">const data = [
   { month: "Jun", city: "Boston", temp: 21, usd: 120 },
@@ -279,7 +279,7 @@ chart(data, {
                 <div class="canadd-out" data-chart="canadd-untyped" data-w="460" data-h="300" data-font-size="16"></div>
               </div>
               <div class="canadd-result is-current" data-id="canadd-result-temp">
-                <div class="code-pair-label">°C <span class="code-pair-sub">· no CanAdd: GoFish refuses</span></div>
+                <div class="code-pair-label">°C <span class="code-pair-sub">· no CanSum: GoFish refuses</span></div>
                 <!-- Runs the spec on the left and shows the error GoFish
                      throws (data-expect-error), not a chart. -->
                 <div class="canadd-out canadd-error-box" data-chart="canadd-temp" data-expect-error data-w="460" data-h="300"></div>
@@ -296,7 +296,7 @@ chart(data, {
             <p><strong>Target:</strong> 0:05 (of the slide's 0:40).
               <strong>Running total:</strong> 5:40 of 7:00.</p>
             <p><strong>Say:</strong> "Run it, and the same stack now gives an
-              error, because degrees Celsius has no <code>CanAdd</code>. The
+              error, because degrees Celsius has no <code>CanSum</code>. The
               error suggests the fix: average them instead."</p>
             <p>If there is spare time: to stack °C you either declare the unit
               summable, which is a deliberate claim about your data, or you
@@ -309,7 +309,7 @@ chart(data, {
               <code>checkSummable</code>'s error in
               <code>src/ast/measure.ts</code> (origin/main): "A size channel
               sums the column "temp", in the unit "°C", which cannot be
-              summed: it has no CanAdd. If its amounts add up (money, counts,
+              summed: it has no CanSum. If its amounts add up (money, counts,
               lengths), declare it with Unit("°C", { traits:
               [Trait.summable()] }). If they do not (temperatures, prices,
               rates), average them instead, e.g. field("temp").mean()."</p>
@@ -331,7 +331,7 @@ chart(data, {
 
         <section class="code-slide" data-auto-animate data-auto-animate-id="canadd" data-auto-animate-duration="0.3">
           <p class="part" data-id="canadd-part">4b · Does growth cost safety?</p>
-          <h2 data-id="canadd-title"><code>stack</code> needs <code>CanAdd</code></h2>
+          <h2 data-id="canadd-title"><code>stack</code> needs <code>CanSum</code></h2>
           <div class="canadd-grid">
             <pre data-id="canadd-code" data-magic-move><code class="language-ts" data-line-numbers data-char-marks="19:8-12">const data = [
   { month: "Jun", city: "Boston", temp: 21, usd: 120 },
@@ -360,7 +360,7 @@ chart(data, {
                 <div class="canadd-out" data-chart="canadd-untyped" data-w="460" data-h="300" data-font-size="16"></div>
               </div>
               <div class="canadd-result" data-id="canadd-result-temp" data-auto-animate-delay="0.3">
-                <div class="code-pair-label">°C <span class="code-pair-sub">· no CanAdd: GoFish refuses</span></div>
+                <div class="code-pair-label">°C <span class="code-pair-sub">· no CanSum: GoFish refuses</span></div>
                 <!-- Runs the spec on the left and shows the error GoFish
                      throws (data-expect-error), not a chart. -->
                 <div class="canadd-out canadd-error-box" data-chart="canadd-temp" data-expect-error data-w="460" data-h="300"></div>
@@ -391,7 +391,7 @@ chart(data, {
                 interactive graphics, is not addressed here. "I haven't found
                 a principled tradeoff yet" is not "there isn't one."</li>
               <li>Their paper calls the two kinds of contribution "distinct
-                and complementary" (section 5.1). CanAdd is offered in that
+                and complementary" (section 5.1). CanSum is offered in that
                 spirit, as one mechanism that bears on their question.</li>
             </ul>
             <p><strong>For Q&amp;A or the panel, not the slides:</strong> the
@@ -404,15 +404,15 @@ chart(data, {
               cost safety. But the growth itself has a limit, and that is
               where I want to end."</p>
             <p><strong>Source:</strong> written for this slide, after the
-              GoFish repo's CanAdd test
+              GoFish repo's CanSum test
               (<code>packages/gofish-graphics/src/tests/measure.test.ts</code>,
-              "CanAdd: only amounts that add up are summed"), which stacks a
+              "CanSum: only amounts that add up are summed"), which stacks a
               <code>Unit("USD", { traits: [Trait.summable()] })</code> column
               and a <code>Unit("°C")</code> column the same way. The four
               steps are one ordinary program. Step 2 adds the schema, step 3
               runs it, and step 4 changes only the stacked column. The type itself is
-              <code>export type CanAdd = Record&lt;string,
-              never&gt;;</code> in <code>src/ast/schema.ts</code>: "The class
+              <code>export type CanSum = Record&lt;string,
+              never&gt;;</code> in <code>src/ast/schema.ts</code>: "The trait
               of a unit whose amounts can be added".</p>
             <p><strong>Footnote citations:</strong></p>
             <ul>
@@ -426,7 +426,7 @@ chart(data, {
                 (microsoft.github.io/flint-chart). The VIS program spells the
                 title "Semantic-driven"; this follows arXiv. Its semantic types and
                 traits (<code>aggRole</code> decides sum vs. mean) are what
-                <code>CanAdd</code> draws on; see the GoFish repo's
+                <code>CanSum</code> draws on; see the GoFish repo's
                 <code>apps/docs/docs/internals/design/flint-chart-notes.md</code>.</li>
               <li>C. A. Huang and M. Kay, "Semantic Validity vs. Graphical
                 Arrangement in Visualization Grammars," GUGOG @ IEEE VIS

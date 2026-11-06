@@ -12,8 +12,8 @@ importers:
         specifier: workspace:*
         version: link:../talk-template
       gofish-graphics:
-        specifier: 0.1.0-nightly.20261031
-        version: 0.1.0-nightly.20261031(solid-js@1.9.18)
+        specifier: 0.1.0-nightly.20261106
+        version: 0.1.0-nightly.20261106(solid-js@1.9.18)
     devDependencies:
       vite:
         specifier: ^6.0.0
@@ -375,13 +375,13 @@ packages:
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
 
-  gofish-graphics@0.1.0-nightly.20261031:
-    resolution: {integrity: sha512-oaLjM4ODjysgT99io5Hjh6uXVJt29o4RTH0DCdFwtMT/0ex5eAoFKHFEsv7Pj/7CP+PaoXwRaAu123jokQkZcQ==}
+  gofish-graphics@0.1.0-nightly.20261106:
+    resolution: {integrity: sha512-fTXSENeieWROLhkka/q+S/aEJITN86Bhw8TwTANPIOj/op0SCUd7g4xfXFI5HzODrE81UTkJZHzaBRWppkNVUQ==}
     peerDependencies:
       solid-js: ^1.9.5
 
-  gofish-ir@0.1.0-nightly.20261031:
-    resolution: {integrity: sha512-i6YqMlkNBb1DejHOVvpmTA1FkbkjMSwoWCXbB7bEfYBQ4acdFx8IfAPEl1bomwtrSE6Y2DD4c0PO/Cnio0EA5A==}
+  gofish-ir@0.1.0-nightly.20261106:
+    resolution: {integrity: sha512-FM5WaIIuatJr4Vb80sMi/QTqc1gbQF0dd3R/pMVusPqMafaU8+7L6vcmBwJfmuiuf3JpxOvj5YdvG10CPWui+A==}
 
   internmap@2.0.3:
     resolution: {integrity: sha512-5Hh7Y1wQbvY5ooGgPbDaL5iYLAPzMTUrjMulskHLH6wnv/A+1q5rgEaiuqEjB+oxGXIVZs1FF+R/KPN3ZSQYYg==}
@@ -721,7 +721,7 @@ snapshots:
   fsevents@2.3.3:
     optional: true
 
-  gofish-graphics@0.1.0-nightly.20261031(solid-js@1.9.18):
+  gofish-graphics@0.1.0-nightly.20261106(solid-js@1.9.18):
     dependencies:
       '@types/d3-array': 3.2.2
       '@types/d3-delaunay': 6.0.4
@@ -730,7 +730,7 @@ snapshots:
       d3-array: 3.2.4
       d3-delaunay: 6.0.4
       d3-hierarchy: 3.1.2
-      gofish-ir: 0.1.0-nightly.20261031
+      gofish-ir: 0.1.0-nightly.20261106
       lodash: 4.18.1
       perfect-arrows: 0.3.7
       rybitten: 0.22.0
@@ -738,7 +738,7 @@ snapshots:
       spectral.js: 2.0.2
       temporal-polyfill: 1.0.6
 
-  gofish-ir@0.1.0-nightly.20261031: {}
+  gofish-ir@0.1.0-nightly.20261106: {}
 
   internmap@2.0.3: {}
 

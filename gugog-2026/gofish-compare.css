@@ -1,6 +1,6 @@
 /* Styles for the slides that show code side by side:
    sections/03-gofish-intro.html, sections/03b-code-comparisons.html, the
-   GoTree slides in sections/04-surfaces.html, and the CanAdd slide in
+   GoTree slides in sections/04-surfaces.html, and the CanSum slide in
    sections/04b-validity.html.
    Linked from sections/03-gofish-intro.html, so it loads with the deck. */
 
@@ -319,7 +319,7 @@
   margin-top: 3.2rem;
 }
 
-/* The CanAdd slides (04b): one spec on the left, in three auto-animate
+/* The CanSum slides (04b): one spec on the left, in three auto-animate
    steps, and on the right what it produces. A chart renders, or, on the
    °C step, the error GoFish throws, in the same box. */
 .canadd-grid {
@@ -342,7 +342,7 @@
 }
 
 /* The three results share one grid cell, and only the current step's is
-   shown; see the comment above the CanAdd slides. Their label and tagline
+   shown; see the comment above the CanSum slides. Their label and tagline
    are divs, so they get the line height the template gives a p. */
 .canadd-right {
   display: grid;

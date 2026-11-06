@@ -496,10 +496,10 @@ const seafoodRibbon = () =>
     .layer(ribbon({ by: "species", opacity: 0.8 }));
 // (The slides show both seafood specs with spacing and opacity elided.)
 
-// ─── Part 4b: validity against freedom of arrangement (CanAdd) ────────────
+// ─── Part 4b: validity against freedom of arrangement (CanSum) ────────────
 // One dataset with a temperature column and a USD column, and three steps of
 // one spec. With no schema, GoFish checks nothing and stacks the
-// temperatures. With a schema, °C has no CanAdd, so GoFish refuses to stack
+// temperatures. With a schema, °C has no CanSum, so GoFish refuses to stack
 // "temp"; the slide shows the error it throws (see data-expect-error in
 // renderCharts). USD declares Trait.summable(), so stacking "usd" passes.
 // The numbers are illustrative.
