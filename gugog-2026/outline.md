@@ -10,6 +10,8 @@ Note, 2026-11-04, later the same day: the talk has a new hook, and the opening i
 
 Note, 2026-11-05 (later): the circle slide now uses the user's drawing, and the islands drawings are colored as islands, green land with yellow shores in blue water. On the circle slide, GUGOG itself is one light green island with a yellow shore, and the grammars inside it are darker green with no shore.
 
+Note, 2026-11-06, late night, part B: the semantic validity part carries the user's new script, in the same slide order. The opener now says "Very expressive! Did we lose safety and correctness?" The notes of the CanSum steps now say why the stacked temperatures are wrong, where the idea of tracking units came from (Huang and Kay, Flint, and the units in matplotlib), and that other cases are not caught yet. The part grows from 1:00 to 1:20, so the talk runs 7:20 before the panel. See "Changes, 2026-11-06, late night, part B" below.
+
 Note, 2026-11-06, night: a new slide, "Add a label under a planet", sits between "Operators also work directly on marks" and "`spread` is `align` plus `distribute`". It is on trial and may be cut. It adds the label and arrow from "same core, three shapes of data" to the planets, placed by `align` and `distribute`, so the next slide can show that `spread` is made of the same two relations. The next slide now keeps the label, and the three planets slides share one fixed frame, so the planets do not move. With it, the talk runs 7:00 before the panel, and 7:15 with the panel. See "Changes, 2026-11-06, night" below.
 
 Note, 2026-11-06, evening: the ribbon buildup now explains the data and shows how the rows are grouped at each step, the way the SciPy 2026 deck does. A new first step, "Start with the data", shows the first rows of the seafood table. On the four steps after it, a small copy of the table sits in the top right corner, and a data pipeline under the code shows how each operator groups the rows. The planets code now writes out the four circles. Auto-animate steps now take 0.3 seconds, and the new chart and title appear at once while the code moves, as in the thesis defense deck. The talk now runs 6:45 before the panel. See "Changes, 2026-11-06, evening" below.
@@ -19,6 +21,44 @@ Note, 2026-11-06, later the same day: the GoFish intro now builds the ribbon cha
 Note, 2026-11-06: the talk is restructured around the user's new story. See "Restructure, 2026-11-06" below. It replaces the slide order, parts, and timing described in the older sections.
 
 Note, 2026-11-05: part 2 and part 3 are restructured, following the user's notes. A new circle slide, "one language that holds all of them", now opens part 2. It shows the user's drawing of one circle around all the islands. Its notes are the bridge: you could hold every grammar without unifying anything, by bundling each one as a separate component, but then you could not mix them, and mixing needs something the islands have in common. A new GoTree intro, "GoTree adds operators for laying out trees", joins the Atom and PiCCL intros. A short "What is GoFish?" slide after the verbs slide says that GoFish extends the grammar of graphics with verbs, like the thesis defense deck's slide of that name. The crash course is now the chart API only, two steps, stacked bars to the ribbon chart. The planets diagram moves to a new slide after it, "under the chart API is a smaller, more direct core", and the PiCCL bottle slide gets a callout that points at the same core lines in its spec. The three GoTree code slides in 4a are hidden, and GoTree in GoFish is shown only on "same core, three shapes of data". The total stays 7:00. See "Changes to the deck" and "Time".
+
+## Changes, 2026-11-06, late night, part B
+
+This section updates the semantic validity part of "Changes, 2026-11-06, night" below. Everything not named here stays as that section describes it.
+
+### What changed
+
+- The opener "Validity rules belong to operators" is replaced. The slide now says "Very expressive! Did we lose safety and correctness?" The notes add that there seem to be a lot more ways for a GoFish spec to go wrong.
+- The Huang and Kay quote stays where it was, right after the opener. Its notes end with "Let me show you one example."
+- CanSum step 1 shows the same incorrect chart. Its caption now says "it stacks, but temperatures do not add up". Its notes say that it is true that there are more ways to go wrong, and that nothing in the syntax stops you from writing this spec. Then they give the argument: `stack` places marks end to end, so the total length is the sum of their sizes. That only makes sense if the sizes are amounts that add up, so the rule follows from what `stack` means. Because GoFish uses the same `stack` operator for bars, areas, ribbons, waffles and nested layouts, one rule covers all of them. The notes also say, to be fair, that the stack transform in Vega-Lite and the position adjustment in ggplot2 are also one place where such a check could live.
+- CanSum step 2's notes now say where the idea came from: Cynthia and Matt's paper, Flint, and the units in matplotlib. The idea is to track the unit of measure of each column in the dataset. The notes quote the matplotlib docs for `matplotlib.units` (`ConversionInterface`, the units registry, and `AxisInfo`), and say that matplotlib uses units to convert values and label axes, not to decide which operations are valid.
+- CanSum step 3's notes say that `stack` requires the column it stacks to be summable, so GoFish can enforce correct stacking, and that there are other cases it does not catch yet.
+- CanSum step 4's notes now say "Now switch to a column that is summable, the US dollars, and we can stack safely." The old lines (it checks specs, not pictures, and its limits) stay as lines to say if there is time.
+- The captions of the three results no longer use middle dots or colons. The footnote on the CanSum steps now also names matplotlib's units.
+- The auto-animate chain, data-ids, delays and `data-magic-move` are unchanged.
+
+### Slide order and timing
+
+Everything up to Figure 6 is unchanged and ends at 5:40.
+
+Semantic validity, 1:20.
+
+25. "Very expressive! Did we lose safety and correctness?" 0:05. Running total 5:45.
+26. Huang and Kay quote. 0:10. Running total 5:55.
+27. CanSum, four steps. 0:30, 0:15, 0:05, 0:05. Running totals 6:25, 6:40, 6:45, 6:50.
+28. "Open question". 0:10. Running total 7:00.
+
+Conclusion, 0:20.
+
+29. "The grammar of graphics needs verbs". 0:20. Running total 7:20.
+
+Panel.
+
+30. Questions for the panel. 0:15. Running total 7:35.
+
+### Over 7:00
+
+The talk now runs 7:20 before the panel. Step 1 grew the most, because its notes now carry the argument about what `stack` means. Nothing is cut here. Cutting the label slide on trial saves 0:15, and the cuts in "Changes, 2026-11-06, evening" still apply.
 
 ## Changes, 2026-11-06, night
 

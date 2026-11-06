@@ -9,53 +9,37 @@
              which predates the type system. Its code is from the current
              GoFish source, where the trait is named CanSum.
              Styles for the code slides: ../gofish-compare.css. -->
-        <!-- ═══ SEMANTIC VALIDITY, ~1:00 ═══════════════════════════════
-             Since 2026-11-06 this part opens with the connection to the
-             answer: a unified grammar is more expressive, so it can make more
-             incorrect charts, but its structure helps, because validity
-             rules belong to a few operators rather than to many chart types.
-             Then the Huang and Kay quote, the four CanSum steps (the first
-             one shows the incorrect stacked chart), and the open question
-             slide at the end of this file. -->
-        <section class="validity-open-slide">
-          <style>
-            .reveal .validity-open-slide .validity-lines {
-              margin: 1.6em auto 0;
-              max-width: 1160px;
-            }
-            .reveal .validity-open-slide .validity-lines p {
-              font-size: 0.95em;
-              line-height: 1.3;
-              margin: 0 0 0.9em;
-            }
-          </style>
+        <!-- ═══ SEMANTIC VALIDITY, ~1:20 ═══════════════════════════════
+             Since 2026-11-06, late night (part B), this part carries the
+             user's new script in the same slide order as before. The
+             opener asks "Did we lose safety and correctness?" Then the
+             Huang and Kay quote, then the four CanSum steps: step 1 shows
+             the incorrect stacked chart and its notes say why it is
+             incorrect, step 2's notes say where the idea of tracking units
+             came from, step 3's notes give the rule and its limit, and
+             step 4 stacks a summable column. The open question slide is at
+             the end of this file. -->
+        <section class="statement validity-open-slide">
           <p class="part">Semantic validity</p>
-          <h2>Validity rules belong to operators</h2>
-          <div class="validity-lines">
-            <p>A unified grammar is more expressive, so it can also make more incorrect charts.</p>
-            <p>But its structure helps. Validity rules belong to a few operators, not to many chart types.</p>
-            <p>For example, <code>stack</code> sums its values, so <code>stack</code> needs values that can be summed.</p>
-          </div>
+          <p class="big-claim">Very expressive! Did we lose safety and correctness?</p>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
-              5:50 of 7:00.</p>
-            <p><strong>Say:</strong> "A unified grammar is more expressive,
-              so it can also make more incorrect charts. But the same
-              structure helps. The rules for what is valid belong to a few
-              operators, not to many chart types. For example,
-              <code>stack</code> sums its values, so <code>stack</code> needs
-              values that can be summed."</p>
+            <p><strong>Target:</strong> 0:05. <strong>Running total:</strong>
+              5:45 of 7:00.</p>
+            <p><strong>Say:</strong> "Very expressive! But did we lose safety
+              and correctness? It seems like there are a lot more ways for a
+              GoFish spec to go wrong."</p>
             <p><strong>Lead into the quote:</strong> "Semantic validity is a
               big theme at this workshop."</p>
           </aside>
         </section>
 
-        <!-- The open question the CanSum slide gives one data point on:
+        <!-- The open question the CanSum slides give one data point on:
              Huang and Kay, "Semantic Validity vs. Graphical Arrangement in
              Visualization Grammars", GUGOG @ IEEE VIS 2026
              (gugog-vis.github.io/2026/papers/pdf/huang-kay.pdf), section 6.4
              "Future Directions: Best of Both?", verbatim. The slide presents
-             their question in their own words and credits them for it. -->
+             their question in their own words and credits them for it.
+             -->
         <section class="quote-slide">
           <p class="part">Semantic validity</p>
           <blockquote class="long-quote quote-short">
@@ -71,16 +55,14 @@
           <p class="long-quote-cite">Cynthia Huang &amp; Matthew Kay, <em>Semantic Validity vs. Graphical Arrangement in Visualization Grammars</em>, GUGOG 2026</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:10 (shown, not recited; read the
-              accent phrase aloud). <strong>Running total:</strong> 6:00 of
+              accent phrase aloud). <strong>Running total:</strong> 5:55 of
               7:00.</p>
-            <p><strong>Say:</strong> "Semantic validity is a big theme at
-              this workshop. Cynthia and Matt, who are on the panel, frame it
+            <p><strong>Say:</strong> "Cynthia and Matt, who are on the panel, frame it
               as a tradeoff. If you check every operation, you limit what
               people can draw. If you let people draw anything, checking is
               left to them. They ask which of these tradeoffs are principled
-              and which come only from how current systems are built. Here is
-              one very early data point on their question." Then go to the
-              next slide.</p>
+              and which come only from how current systems are built. Let me
+              show you one example." Then go to the next slide.</p>
             <p>The quote is verbatim from section 6.4, "Future Directions:
               Best of Both?" (the PDF's line-break hyphens, as in
               "max-imize", are not part of the words). The accent color is
@@ -175,35 +157,47 @@ chart(data)
   }))</code></pre>
             <div class="canadd-right">
               <div class="canadd-result is-current" data-id="canadd-result-untyped">
-                <div class="code-pair-label">no schema <span class="code-pair-sub">· nothing is checked: it stacks</span></div>
+                <div class="code-pair-label">no schema <span class="code-pair-sub">it stacks, but temperatures do not add up</span></div>
                 <div class="canadd-out" data-chart="canadd-untyped" data-w="460" data-h="300" data-font-size="16"></div>
               </div>
               <div class="canadd-result" data-id="canadd-result-temp">
-                <div class="code-pair-label">°C <span class="code-pair-sub">· no CanSum: GoFish refuses</span></div>
+                <div class="code-pair-label">°C <span class="code-pair-sub">no CanSum, so GoFish refuses</span></div>
                 <!-- Runs the spec on the left and shows the error GoFish
                      throws (data-expect-error), not a chart. -->
                 <div class="canadd-out canadd-error-box" data-chart="canadd-temp" data-expect-error data-w="460" data-h="300"></div>
               </div>
               <div class="canadd-result" data-id="canadd-result-usd">
-                <div class="code-pair-label">USD <span class="code-pair-sub">· declared summable: it stacks</span></div>
+                <div class="code-pair-label">USD <span class="code-pair-sub">declared summable, so it stacks</span></div>
                 <div class="canadd-out" data-chart="canadd-usd" data-w="460" data-h="300" data-font-size="16"></div>
                 <div class="canadd-tagline">constrains specs, not pictures</div>
               </div>
             </div>
           </div>
-          <p class="canadd-footnote" data-id="canadd-footnote">Inspired by Bartonicek, Urbanek &amp; Murrell (JCGS 2025), Flint (Wang et al., VIS 2026), and Huang &amp; Kay (GUGOG 2026).</p>
+          <p class="canadd-footnote" data-id="canadd-footnote">Inspired by Bartonicek, Urbanek &amp; Murrell (JCGS 2025), Flint (Wang et al., VIS 2026), Huang &amp; Kay (GUGOG 2026), and matplotlib's units.</p>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:10 (of the four steps' 0:30).
-              <strong>Running total:</strong> 6:10 of 7:00.</p>
-            <p><strong>Say:</strong> "Here is one dataset with a temperature
-              and a dollar amount for each city and month. This spec stacks
-              the temperatures. GoFish draws it, but the chart is incorrect,
-              because temperatures do not add up. There is no schema here, so
-              GoFish does not check anything."</p>
-            <p>"This work is very early. It was inspired by papers and
-              systems in this area: Bartonicek, Urbanek, and Murrell's algebra
-              of graphics, the Flint system, and Cynthia and Matt's paper."
-              Point at the line at the bottom of the slide.</p>
+            <p><strong>Target:</strong> 0:30. <strong>Running total:</strong>
+              6:25 of 7:00.</p>
+            <p><strong>Say:</strong> "Back to my question. It's true that there
+              are more ways for a spec to go wrong! Here's the stacked bar
+              chart example we will see in the next talk. It stacks the
+              temperatures of two cities. It's not right! But from a
+              syntactic standpoint, there's nothing preventing you from
+              writing this spec down."</p>
+            <p>"On the other hand, GoFish's more granular representation lets
+              us reason about why this is incorrect. The stacking operator
+              needs the field it stacks to be summable, and temperatures are
+              not. This is a property of the operator and of how the operator
+              describes space. <code>stack</code> places marks end to end, so
+              the total length is the sum of their sizes. That only makes
+              sense if the sizes are amounts that add up. So the rule follows
+              from what <code>stack</code> means. And because GoFish uses the
+              same <code>stack</code> operator for bars, areas, ribbons,
+              waffles and nested layouts, one rule covers all of them."</p>
+            <p><strong>Fair framing:</strong> the stack transform in
+              Vega-Lite and the position adjustment in ggplot2 are also one
+              place where such a check could live. The point is what
+              <code>stack</code> means, not that other systems cannot check
+              it.</p>
             <p>The chart is live. Without a schema, a column has no declared
               unit, and GoFish lets it pass. In the GoFish source this is
               <code>addsUp</code> in <code>src/ast/measure.ts</code>
@@ -247,34 +241,55 @@ chart(data, {
   }))</code></pre>
             <div class="canadd-right">
               <div class="canadd-result is-current" data-id="canadd-result-untyped">
-                <div class="code-pair-label">no schema <span class="code-pair-sub">· nothing is checked: it stacks</span></div>
+                <div class="code-pair-label">no schema <span class="code-pair-sub">it stacks, but temperatures do not add up</span></div>
                 <div class="canadd-out" data-chart="canadd-untyped" data-w="460" data-h="300" data-font-size="16"></div>
               </div>
               <div class="canadd-result" data-id="canadd-result-temp">
-                <div class="code-pair-label">°C <span class="code-pair-sub">· no CanSum: GoFish refuses</span></div>
+                <div class="code-pair-label">°C <span class="code-pair-sub">no CanSum, so GoFish refuses</span></div>
                 <!-- Runs the spec on the left and shows the error GoFish
                      throws (data-expect-error), not a chart. -->
                 <div class="canadd-out canadd-error-box" data-chart="canadd-temp" data-expect-error data-w="460" data-h="300"></div>
               </div>
               <div class="canadd-result" data-id="canadd-result-usd">
-                <div class="code-pair-label">USD <span class="code-pair-sub">· declared summable: it stacks</span></div>
+                <div class="code-pair-label">USD <span class="code-pair-sub">declared summable, so it stacks</span></div>
                 <div class="canadd-out" data-chart="canadd-usd" data-w="460" data-h="300" data-font-size="16"></div>
                 <div class="canadd-tagline">constrains specs, not pictures</div>
               </div>
             </div>
           </div>
-          <p class="canadd-footnote" data-id="canadd-footnote">Inspired by Bartonicek, Urbanek &amp; Murrell (JCGS 2025), Flint (Wang et al., VIS 2026), and Huang &amp; Kay (GUGOG 2026).</p>
+          <p class="canadd-footnote" data-id="canadd-footnote">Inspired by Bartonicek, Urbanek &amp; Murrell (JCGS 2025), Flint (Wang et al., VIS 2026), Huang &amp; Kay (GUGOG 2026), and matplotlib's units.</p>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:05 (of the four steps' 0:30).
-              <strong>Running total:</strong> 6:15 of 7:00.</p>
-            <p><strong>Say:</strong> "Now add a schema. Degrees Celsius is a
-              plain unit, and US dollars are declared summable."</p>
+            <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
+              6:40 of 7:00.</p>
+            <p><strong>Say:</strong> "After reading Cynthia and Matt's paper,
+              looking at Flint, and learning about units of measure in
+              matplotlib, I had an idea. GoFish could catch this by tracking
+              the unit of measure of each column in the dataset. So add a
+              schema. Degrees Celsius is a plain unit, and US dollars are
+              declared summable." Point at the line at the bottom of the
+              slide for the sources.</p>
             <p>The highlights mark what changed: the schema is new, and
               nothing else in the spec moved. This click changes only the
               code. The next click runs it and changes only the output.</p>
+            <p><strong>matplotlib:</strong> the <code>matplotlib.units</code>
+              module lets a units library plug into matplotlib. Its docs say
+              it "also supports classes with units and units conversion", and
+              that "a units implementation must register with the Registry
+              converter dictionary and provide a ConversionInterface".
+              <code>ConversionInterface</code> is "the minimal interface for a
+              converter to take custom data types (or sequences) and convert
+              them to values Matplotlib can use", and <code>AxisInfo</code>
+              gives "default axis labeling, tick labeling, and limits". In
+              matplotlib, units convert values and label axes. They do not
+              decide which operations are valid. GoFish takes the idea of a
+              unit attached to the data and adds traits like
+              <code>CanSum</code>. Source:
+              matplotlib.org/stable/api/units_api.html, checked
+              2026-11-06.</p>
+            <p>The full citations for the footnote are in the notes of the
+              last CanSum step.</p>
           </aside>
         </section>
-
 
         <section class="code-slide" data-auto-animate data-auto-animate-id="canadd" data-auto-animate-duration="0.3">
           <p class="part" data-id="canadd-part">Semantic validity</p>
@@ -303,29 +318,32 @@ chart(data, {
   }))</code></pre>
             <div class="canadd-right">
               <div class="canadd-result" data-id="canadd-result-untyped">
-                <div class="code-pair-label">no schema <span class="code-pair-sub">· nothing is checked: it stacks</span></div>
+                <div class="code-pair-label">no schema <span class="code-pair-sub">it stacks, but temperatures do not add up</span></div>
                 <div class="canadd-out" data-chart="canadd-untyped" data-w="460" data-h="300" data-font-size="16"></div>
               </div>
               <div class="canadd-result is-current" data-id="canadd-result-temp">
-                <div class="code-pair-label">°C <span class="code-pair-sub">· no CanSum: GoFish refuses</span></div>
+                <div class="code-pair-label">°C <span class="code-pair-sub">no CanSum, so GoFish refuses</span></div>
                 <!-- Runs the spec on the left and shows the error GoFish
                      throws (data-expect-error), not a chart. -->
                 <div class="canadd-out canadd-error-box" data-chart="canadd-temp" data-expect-error data-w="460" data-h="300"></div>
               </div>
               <div class="canadd-result" data-id="canadd-result-usd">
-                <div class="code-pair-label">USD <span class="code-pair-sub">· declared summable: it stacks</span></div>
+                <div class="code-pair-label">USD <span class="code-pair-sub">declared summable, so it stacks</span></div>
                 <div class="canadd-out" data-chart="canadd-usd" data-w="460" data-h="300" data-font-size="16"></div>
                 <div class="canadd-tagline">constrains specs, not pictures</div>
               </div>
             </div>
           </div>
-          <p class="canadd-footnote" data-id="canadd-footnote">Inspired by Bartonicek, Urbanek &amp; Murrell (JCGS 2025), Flint (Wang et al., VIS 2026), and Huang &amp; Kay (GUGOG 2026).</p>
+          <p class="canadd-footnote" data-id="canadd-footnote">Inspired by Bartonicek, Urbanek &amp; Murrell (JCGS 2025), Flint (Wang et al., VIS 2026), Huang &amp; Kay (GUGOG 2026), and matplotlib's units.</p>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:05 (of the four steps' 0:30).
-              <strong>Running total:</strong> 6:20 of 7:00.</p>
-            <p><strong>Say:</strong> "Run it, and the same stack now gives an
-              error, because degrees Celsius has no <code>CanSum</code>. The
-              error suggests the fix: average them instead."</p>
+            <p><strong>Target:</strong> 0:05. <strong>Running total:</strong>
+              6:45 of 7:00.</p>
+            <p><strong>Say:</strong> "<code>stack</code> requires the column
+              it stacks to be summable. So run it, and the same stack now
+              gives an error, because degrees Celsius has no
+              <code>CanSum</code>. This is how GoFish can enforce correct
+              stacking. There are other cases it does not catch yet."</p>
+            <p>The error also suggests the fix: average them instead.</p>
             <p>If there is spare time: to stack °C you either declare the unit
               summable, which is a deliberate claim about your data, or you
               stack the means. The only thing it takes away is stacking
@@ -384,28 +402,29 @@ chart(data, {
   }))</code></pre>
             <div class="canadd-right">
               <div class="canadd-result" data-id="canadd-result-untyped" data-auto-animate-delay="0.3">
-                <div class="code-pair-label">no schema <span class="code-pair-sub">· nothing is checked: it stacks</span></div>
+                <div class="code-pair-label">no schema <span class="code-pair-sub">it stacks, but temperatures do not add up</span></div>
                 <div class="canadd-out" data-chart="canadd-untyped" data-w="460" data-h="300" data-font-size="16"></div>
               </div>
               <div class="canadd-result" data-id="canadd-result-temp" data-auto-animate-delay="0.3">
-                <div class="code-pair-label">°C <span class="code-pair-sub">· no CanSum: GoFish refuses</span></div>
+                <div class="code-pair-label">°C <span class="code-pair-sub">no CanSum, so GoFish refuses</span></div>
                 <!-- Runs the spec on the left and shows the error GoFish
                      throws (data-expect-error), not a chart. -->
                 <div class="canadd-out canadd-error-box" data-chart="canadd-temp" data-expect-error data-w="460" data-h="300"></div>
               </div>
               <div class="canadd-result is-current" data-id="canadd-result-usd" data-auto-animate-delay="0.3">
-                <div class="code-pair-label">USD <span class="code-pair-sub">· declared summable: it stacks</span></div>
+                <div class="code-pair-label">USD <span class="code-pair-sub">declared summable, so it stacks</span></div>
                 <div class="canadd-out" data-chart="canadd-usd" data-w="460" data-h="300" data-font-size="16"></div>
                 <div class="canadd-tagline">constrains specs, not pictures</div>
               </div>
             </div>
           </div>
-          <p class="canadd-footnote" data-id="canadd-footnote">Inspired by Bartonicek, Urbanek &amp; Murrell (JCGS 2025), Flint (Wang et al., VIS 2026), and Huang &amp; Kay (GUGOG 2026).</p>
+          <p class="canadd-footnote" data-id="canadd-footnote">Inspired by Bartonicek, Urbanek &amp; Murrell (JCGS 2025), Flint (Wang et al., VIS 2026), Huang &amp; Kay (GUGOG 2026), and matplotlib's units.</p>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:10 (of the four steps' 0:30).
-              <strong>Running total:</strong> 6:30 of 7:00.</p>
-            <p><strong>Say:</strong> "Stack the dollars instead, and it
-              works. This checks specs, not pictures, so every picture can
+            <p><strong>Target:</strong> 0:05. <strong>Running total:</strong>
+              6:50 of 7:00.</p>
+            <p><strong>Say:</strong> "Now switch to a column that is summable,
+              the US dollars, and we can stack safely."</p>
+            <p><strong>If there is time:</strong> "This checks specs, not pictures, so every picture can
               still be drawn. The rule lives on one operator,
               <code>stack</code>, and it covers every chart that uses
               <code>stack</code>. So far this is one operator and one
@@ -471,7 +490,7 @@ chart(data, {
           <p class="big-claim">Can we check whether a chart is valid by following the structure of its specification?</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
-              6:40 of 7:00. This ends semantic validity.</p>
+              7:00 of 7:00. This ends semantic validity.</p>
             <p><strong>Say:</strong> "So here is an open question. Can we
               check whether a chart is valid by following the structure of
               its specification? This is like syntax-directed type checking,
