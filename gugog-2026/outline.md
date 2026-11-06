@@ -10,7 +10,7 @@ Note, 2026-11-04, later the same day: the talk has a new hook, and the opening i
 
 Note, 2026-11-05 (later): the circle slide now uses the user's drawing, and the islands drawings are colored as islands, green land with yellow shores in blue water. On the circle slide, GUGOG itself is one light green island with a yellow shore, and the grammars inside it are darker green with no shore.
 
-Note, 2026-11-06, night: a new slide, "Add a label under a planet", sits between "Operators also work directly on marks" and "`spread` is `align` plus `distribute`". It is on trial and may be cut. It adds the label and arrow from "same core, three shapes of data" to the planets, placed by `align` and `distribute`, so the next slide can show that `spread` is made of the same two relations. With it, the talk runs 7:00 before the panel, and 7:15 with the panel. See "Changes, 2026-11-06, night" below.
+Note, 2026-11-06, night: a new slide, "Add a label under a planet", sits between "Operators also work directly on marks" and "`spread` is `align` plus `distribute`". It is on trial and may be cut. It adds the label and arrow from "same core, three shapes of data" to the planets, placed by `align` and `distribute`, so the next slide can show that `spread` is made of the same two relations. The next slide now keeps the label, and the three planets slides share one fixed frame, so the planets do not move. With it, the talk runs 7:00 before the panel, and 7:15 with the panel. See "Changes, 2026-11-06, night" below.
 
 Note, 2026-11-06, evening: the ribbon buildup now explains the data and shows how the rows are grouped at each step, the way the SciPy 2026 deck does. A new first step, "Start with the data", shows the first rows of the seafood table. On the four steps after it, a small copy of the table sits in the top right corner, and a data pipeline under the code shows how each operator groups the rows. The planets code now writes out the four circles. Auto-animate steps now take 0.3 seconds, and the new chart and title appear at once while the code moves, as in the thesis defense deck. The talk now runs 6:45 before the panel. See "Changes, 2026-11-06, evening" below.
 
@@ -28,11 +28,17 @@ This section updates "Changes, 2026-11-06, evening" below. Everything not named 
 
 - A new slide, "Add a label under a planet", comes between the two planets slides. It is on trial: the user wants to see it, and it may be cut for time.
 - It shows the label and arrow from the planets on "same core, three shapes of data", written like the two planets slides: no `const planets`, no map, and the same four circle lines. The box and the label go in a `layer`, and three relations place the label: `align` puts it under Mercury, `distribute` puts it 20 pixels below the box, and an arrow points from it to Mercury. The live chart is `planets-row-label` in `charts.ts`, and it runs the code shown with the styling filled in.
-- The flow is now: operators on marks, then a label placed by relations, then `spread` written as the same two relations. The magic move into the new slide wraps the box in a `layer` and adds the label lines. The magic move out of it drops the label again and turns `spread` into the `layer` and its two relations.
-- "`spread` is `align` plus `distribute`" is unchanged. Keeping the label there too would need 19 lines of code, and they do not fit with the picture at this font size.
-- The new slide's 15 lines push the picture down by about 65 pixels. The planets keep their size.
+- The flow is now: operators on marks, then a label placed by relations, then `spread` written as the same two relations. The magic move into the new slide wraps the box in a `layer` and adds the label lines. The magic move out of it turns only `spread` into the `layer` and its two relations.
+- "`spread` is `align` plus `distribute`" now keeps the label, the outer `layer` and its `relate`, and the arrow. It is the label slide with only the `spread` written out as a `layer` with `align` and `distribute`, so the magic move between them changes only the `spread` part. Its live chart, `planets-relate`, runs that code.
+- The three planets slides now share one fixed frame. The code is at 0.61em, the size the other code slides use, in a box as tall as the longest code (18 lines). The picture sits under it at the same place and scale (1.2, down from 1.4) on all three slides. The planets do not move at all between the slides; only the code changes, and the label and arrow appear under the row. The first slide's code box now has empty space under its 8 lines.
 
-To cut the slide: delete its section (and the comment above it) in `sections/03-gofish-intro.html`, delete `planetsRowLabel` and its `planets-row-label` key in `charts.ts`, and take 0:15 off the running totals from "`spread` is `align` plus `distribute`" on. The slides on either side do not depend on it.
+To cut the label slide:
+
+1. Delete its section (and the comment above it) in `sections/03-gofish-intro.html`, and delete `planetsRowLabel` and its `planets-row-label` key in `charts.ts`.
+2. Take the label back out of "`spread` is `align` plus `distribute`": its code loses the outer `layer([`, the `.name("planets")`, the `text` line, and the outer `.relate` with its three lines, and `planetsRelate` in `charts.ts` returns `planetsRelateBox()` without `withLabel`.
+3. Take 0:15 off the running totals from "`spread` is `align` plus `distribute`" on.
+
+The shared frame can stay. The code box could then be made shorter (11 lines) and the picture larger again.
 
 ### Slide order and timing
 

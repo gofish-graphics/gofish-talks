@@ -453,19 +453,23 @@ const planetsRow = () =>
     ]),
   ]);
 
-// "Add a label under a planet" (on trial since 2026-11-06, night): the row
-// above with the label and arrow of planetsLabeled, written the way that
-// slide shows it, one layer around the box and the label. To cut the slide,
-// delete this function and its "planets-row-label" key.
-const planetsRowLabel = () =>
+// "Add a label under a planet" (on trial since 2026-11-06, night) and the
+// slide after it: a box of planets with the label and arrow of
+// planetsLabeled, written the way those slides show it, one layer around
+// the box and the label. To cut the label slide, delete planetsRowLabel and
+// its "planets-row-label" key, and make planetsRelate return
+// planetsRelateBox() without withLabel.
+const withLabel = (planets: any) =>
   layer([
-    planetsRow(),
+    planets,
     text({ text: "Mercury", fill: "#E94560", fontSize: 14 }).name("label"),
   ]).relate(({ mercury, planets, label }) => [
     Constraint.align({ x: "middle" }, [mercury, label]),
     Constraint.distribute({ dir: "y", spacing: 20 }, [planets, label]),
     arrow({ stroke: "#E94560" }, [label, mercury]),
   ]);
+
+const planetsRowLabel = () => withLabel(planetsRow());
 
 const planetsLabeled = () => {
   const planets = planetsRow();
@@ -487,8 +491,8 @@ const planetsLabeled = () => {
 // code in nightly 20261106) builds a layer over its children and relates
 // them with Constraint.align on the cross axis (its `alignment`) and
 // Constraint.distribute along `dir` (its `spacing`). This render must look
-// the same as "planets"; that is the slide's point.
-const planetsRelate = () =>
+// the same as "planets-row-label"; that is the slide's point.
+const planetsRelateBox = () =>
   planetsBox([
     layer([
       circle({ r: 15, fill: "#F5E3C8", stroke: "#EFC9A2", strokeWidth: 3 }).name("mercury"),
@@ -500,6 +504,9 @@ const planetsRelate = () =>
       Constraint.distribute({ dir: "x", spacing: 50 }, [mercury, venus, earth, mars]),
     ]),
   ]);
+
+// Since 2026-11-06 (night) this slide keeps the label of the slide before it.
+const planetsRelate = () => withLabel(planetsRelateBox());
 
 // The chart level: the thesis deck's seafood walkthrough
 // (phd-thesis-20260618/presentation/sections/03-gofish.html), four of its

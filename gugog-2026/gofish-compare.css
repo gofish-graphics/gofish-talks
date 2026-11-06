@@ -538,36 +538,44 @@
 }
 
 /* Operators on marks, then relations (03, since 2026-11-06): the planets
-   code on top, the render under it, scaled up from its 440x160 size. The
-   code block is always as wide as its longest line and as tall as eleven
-   lines, so the picture under it does not move when the code grows from
-   eight lines to eleven. */
+   code on top, the render under it, scaled up from its 440x160 size.
+   Since 2026-11-06 (night) the three planets slides share one fixed frame:
+   the code block is as wide as the longest line and as tall as the longest
+   code (18 lines, on "spread is align plus distribute"), at the 0.61em the
+   other code slides use, and the render sits at the same place and scale
+   under it on all three slides. So the planets never move; only the code
+   changes, and the label and arrow appear under the row. GoFish draws the
+   row at the top of the 440x160 render with or without the label, so the
+   circles stay put. */
 .spread-relate-body {
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
 .reveal .code-slide .spread-relate-body pre {
-  font-size: 0.68em;
+  font-size: 0.61em;
   margin: 0 auto;
-  width: 88ch;
+  width: 92ch;
 }
 
 .reveal .code-slide .spread-relate-body pre code {
+  box-sizing: border-box;
+  height: calc(18 * 1.3em + 0.8em);
   line-height: 1.3;
   max-height: none;
-  min-height: 14.5em;
 }
 
 .spread-relate-box {
-  align-items: center;
+  align-items: flex-start;
   display: flex;
-  height: 280px;
+  height: calc(160px * var(--spread-relate-scale));
   justify-content: center;
-  margin-top: 0.6rem;
+  margin-top: 0.5rem;
+  --spread-relate-scale: 1.2;
 }
 
 .spread-relate-render {
-  transform: scale(1.4);
+  transform: scale(var(--spread-relate-scale));
+  transform-origin: top center;
 }
 
 /* The core slide (03), after the crash course: the planets code on the
