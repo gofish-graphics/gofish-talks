@@ -10,9 +10,75 @@ Note, 2026-11-04, later the same day: the talk has a new hook, and the opening i
 
 Note, 2026-11-05 (later): the circle slide now uses the user's drawing, and the islands drawings are colored as islands, green land with yellow shores in blue water. On the circle slide, GUGOG itself is one light green island with a yellow shore, and the grammars inside it are darker green with no shore.
 
+Note, 2026-11-06, later the same day: the GoFish intro now builds the ribbon chart step by step, then shows operators used directly on marks and how `spread` is made of relations, and the GoTree specs slide is back in the answer. The talk now runs 6:25 before the panel. See "Changes, 2026-11-06, later" below.
+
 Note, 2026-11-06: the talk is restructured around the user's new story. See "Restructure, 2026-11-06" below. It replaces the slide order, parts, and timing described in the older sections.
 
 Note, 2026-11-05: part 2 and part 3 are restructured, following the user's notes. A new circle slide, "one language that holds all of them", now opens part 2. It shows the user's drawing of one circle around all the islands. Its notes are the bridge: you could hold every grammar without unifying anything, by bundling each one as a separate component, but then you could not mix them, and mixing needs something the islands have in common. A new GoTree intro, "GoTree adds operators for laying out trees", joins the Atom and PiCCL intros. A short "What is GoFish?" slide after the verbs slide says that GoFish extends the grammar of graphics with verbs, like the thesis defense deck's slide of that name. The crash course is now the chart API only, two steps, stacked bars to the ribbon chart. The planets diagram moves to a new slide after it, "under the chart API is a smaller, more direct core", and the PiCCL bottle slide gets a callout that points at the same core lines in its spec. The three GoTree code slides in 4a are hidden, and GoTree in GoFish is shown only on "same core, three shapes of data". The total stays 7:00. See "Changes to the deck" and "Time".
+
+## Changes, 2026-11-06, later
+
+This section updates the slide order and timing in "Restructure, 2026-11-06" below. Everything not named here stays as that section describes it.
+
+### What changed
+
+- The GoFish intro now has three stages, following the user's notes. First, operators in a chart: the ribbon chart is built in four steps. Second, operators used directly on marks, with no data table: the planets diagram. Third, relations: the same planets, with `spread` written as `align` plus `distribute`, and the same picture.
+- The ribbon buildup replaces the two-step crash course. Its four steps are four slides of the thesis defense deck's seafood walkthrough (`phd-thesis-20260618/presentation/sections/03-gofish.html`), with their titles in sentence case: "Spread into bars", "Stack within each lake", "Sort the stacks", and "Draw the ribbon". The last step uses the shorter `.layer(ribbon(...))` form, which is the GUGOG paper's Figure 2. Each step has its own live chart, and the code moves word by word between steps. The thesis deck adds the spacing between lakes just before the ribbon. Here every step has it, shown as `...`, so the bars do not move.
+- "Operators also work directly on marks" shows the planets from the GoFish repo's Basics tutorial story: four circles, placed in a row by `spread`, inside `enclose`.
+- "`spread` is `align` plus `distribute`" moves the same code one step: the `spread` line becomes a `layer` with `.relate(...)`, `Constraint.align({ y: "middle" }, ...)` and `Constraint.distribute({ dir: "x", spacing: 50 }, ...)`. The picture does not change. This is how GoFish really defines `spread`. In `packages/gofish-graphics/src/ast/graphicalOperators/spread.tsx` (the same code in nightly 20261106), `spread` builds a layer over its children and relates them with `align` on the other axis and `distribute` along its direction. Its defaults are a baseline alignment and 8 pixels of spacing. `stack` is `spread` with the marks glued together.
+- These two planets slides replace the hidden core slide ("under the chart API is a smaller, more direct core"), whose markup is now only in git history. "Same core, three shapes of data" still shows the labeled planets.
+- On "They add graphical operators and relations", the line "An operator places its marks completely. A relation sets only some properties. So operators can be built from relations." is gone, and so is the matching spoken point. The planets slides now show it with code.
+- On the bottle slide, the tinted lines and their tag now say "relations", not "core". The tag reads "relations written directly, as with the planets".
+- The GoTree specs slide is shown again, moved to just before "same core, three shapes of data". Its title is now "GoTree in GoFish keeps GoTree's own words", and it is no longer an auto-animate slide. The GoTree data and picture slide and "`combine` compiles to GoFish constraints" stay hidden.
+
+### Slide order and timing
+
+Problem, 1:20, and Question, 1:00, are unchanged. They end at 2:20.
+
+GoFish intro, 1:20.
+
+10. "What is GoFish?" 0:10. Running total 2:30.
+11. "Spread into bars". 0:10. Running total 2:40.
+12. "Stack within each lake". 0:10. Running total 2:50.
+13. "Sort the stacks". 0:10. Running total 3:00.
+14. "Draw the ribbon". 0:10. Running total 3:10.
+15. "Operators also work directly on marks". 0:15. Running total 3:25.
+16. "`spread` is `align` plus `distribute`". 0:15. Running total 3:40.
+
+Answer, 1:25.
+
+17. Atom comparison. 0:10. Running total 3:50.
+18. The PiCCL bottle chart in GoFish. 0:15. Running total 4:05.
+19. "GoTree in GoFish keeps GoTree's own words". 0:15. Running total 4:20.
+20. "Same core, three shapes of data". 0:20. Running total 4:40.
+21. "Unify the domains and keep their structure". 0:15. Running total 4:55.
+22. Figure 6, "the surfaces work together". 0:10. Running total 5:05.
+
+Semantic validity, 1:00.
+
+23. "Validity rules belong to operators". 0:10. Running total 5:15.
+24. Huang and Kay quote. 0:10. Running total 5:25.
+25. CanSum, four steps. 0:10, 0:05, 0:05, 0:10. Running totals 5:35, 5:40, 5:45, 5:55.
+26. "Open question". 0:10. Running total 6:05.
+
+Conclusion, 0:20.
+
+27. "The grammar of graphics needs verbs". 0:20. Running total 6:25.
+
+Panel.
+
+28. Questions for the panel. 0:35. Running total 7:00.
+
+### Over 6:00
+
+The main story now runs 6:25, past the 6:00 mark, and leaves only 0:35 for the panel. Nothing was cut. These are the cuts I would suggest, in order:
+
+- "Sort the stacks" (0:10). Sort in the "Draw the ribbon" step instead.
+- Figure 6, "the surfaces work together" (0:10).
+- "What is GoFish?" (0:10). Say its line over the operators and relations slide.
+- The Huang and Kay quote (0:10). Say the point over the validity opener.
+
+The first three bring the main story to 5:55.
 
 ## Restructure, 2026-11-06
 

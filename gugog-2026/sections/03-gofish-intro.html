@@ -41,8 +41,8 @@
           <p class="gofish-what-sub">MIT-licensed and open source, for JavaScript and Python, at <strong>gofish.graphics</strong></p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
-              2:30 of 7:00. This slide and the crash course are the GoFish
-              intro, 0:30 in all.</p>
+              2:30 of 7:00. This slide, the ribbon buildup, and the two
+              planets slides are the GoFish intro, 1:20 in all.</p>
             <p><strong>Say:</strong> "If the grammar of graphics had
               operators and relations, you would get GoFish. GoFish adds them
               to the grammar of graphics. It keeps the marks, channels,
@@ -52,7 +52,7 @@
             <p>The paper's own sentence: "GoFish extends the Grammar of
               Graphics with relations and operators for composing marks
               together."</p>
-            <p><strong>Lead into the crash course:</strong> "Here is what
+            <p><strong>Lead into the ribbon buildup:</strong> "Here is what
               that looks like."</p>
             <p><strong>Source:</strong> the thesis defense deck's "What Is
               GoFish?" slide. Its first line there is "GoFish is an expressive
@@ -64,18 +64,27 @@
           </aside>
         </section>
 
-        <!-- ═══ PART 3 CONTINUED: A GOFISH CRASH COURSE, ~0:20 ══════════════
-             Two auto-animated states of one picture, the chart API only
-             (since 2026-11-05):
-               1. stacked bars
-               2. + a ribbon, which makes the ribbon chart
-             Until 2026-11-05 the crash course had three states and two
-             columns, with the core level (the planets diagram and its code)
-             on the left. The user cut the planets column because it was too
-             much at once. The planets now have their own slide right after
-             this one, the core slide. Without the planets column the old
-             second state was the same as the first on the chart side, so it
-             was dropped.
+        <!-- ═══ GOFISH INTRO CONTINUED: THE RIBBON BUILDUP, ~0:40 ══════════
+             Since 2026-11-06 (later), four auto-animated states of one
+             spec, which build the ribbon chart one step at a time, the way
+             the thesis defense deck does
+             (phd-thesis-20260618/presentation/sections/03-gofish.html). The
+             four steps are four of that deck's slides, with their titles in
+             sentence case:
+               1. "Step 1: Spread Into Bars"
+               2. "Step 2: Stack Within Each Lake"
+               3. "Sort the Stacks"
+               4. "Step 3d: Draw the Ribbon", in the shorter
+                  .layer(ribbon(...)) form of the thesis deck's stage 3b
+                  figure, which is the GUGOG paper's Figure 2.
+             The thesis deck's other steps (empty slots, grouped bars and
+             heat map, spacing, and naming, selecting, and regrouping the
+             bars) are left out to keep this to four clicks. The thesis deck
+             adds spacing: 64 just before the ribbon; here it is in every
+             step's full spec and shown as "...", so the bars keep their
+             place from step to step.
+             This replaces the two-state crash course (stacked bars, then
+             the ribbon), which lived here from 2026-11-05 to 2026-11-06.
              Layout: the code on the left, the render on the right, both
              large. The code is 18.5px, like the bottle slide's.
              Shown code elides styling with "..." (the thesis deck's style);
@@ -88,24 +97,93 @@
              you navigate before an animation ends: see the CanSum slides in
              04b-validity.html. For the same reason the header row has no
              data-id: the logo inside it is matched by its src, so the row
-             must not be matched as well. Every render is live:
-             renderCharts() in ../charts.ts draws it from the full version of
-             the code printed beside it (gofish-graphics nightly).
-             Seafood code: the thesis deck's ribbon walkthrough
-             (phd-thesis-20260618/presentation/sections/03-gofish.html,
-             "Spread the Lakes Apart", and the .layer(ribbon) step of its
-             stage 3b figure), which is the GUGOG paper's Figure 2. -->
+             must not be matched as well. The char marks point at what each
+             step adds. -->
         <section class="code-slide crash-slide" data-auto-animate data-auto-animate-id="crash-course">
           <div class="gofish-intro-head">
             <img src="./images/gofish-intro/gofish-logo.png" alt="GoFish logo" />
             <div>
-              <h2>GoFish composes marks with operators</h2>
+              <h2>Spread into bars</h2>
             </div>
           </div>
           <div class="crash-solo">
             <div>
-              <p class="code-pair-label" data-id="crash-chart-label">chart API <span class="code-pair-sub">· short specs</span></p>
-              <pre data-id="crash-chart-code" data-magic-move><code class="language-ts" data-line-numbers>chart(seafood)
+              <p class="code-pair-label" data-id="crash-chart-label">chart API</p>
+              <pre data-id="crash-chart-code" data-magic-move><code class="language-ts" data-line-numbers data-char-marks="3:5-41">chart(seafood)
+  .flow(
+    spread({ by: "lake", dir: "x", ... }),
+  )
+  .mark(rect({ h: "count" }))</code></pre>
+            </div>
+            <div class="crash-chart-box" data-id="crash-chart-box">
+              <div class="crash-render" data-chart="seafood-bars" data-w="520" data-h="420"></div>
+            </div>
+          </div>
+          <aside class="notes">
+            <p><strong>Target:</strong> 0:10 (0:40 for the four steps).
+              <strong>Running total:</strong> 2:40 of 7:00.</p>
+            <p>The code shown leaves out styling (the spacing between the
+              lakes, and later the ribbon's opacity) and marks each place with
+              <code>...</code>, in the thesis deck's style. The live render
+              uses the full spec in <code>../charts.ts</code>.</p>
+            <p><strong>Say:</strong> "Let's build a chart. Here is a table of
+              fish caught in six lakes. <code>spread</code> is an operator. It
+              splits the rows by lake and puts the lakes side by side, and the
+              mark is a rectangle as tall as the count. So we get one bar per
+              lake."</p>
+            <p><strong>Source:</strong> the thesis deck's "Step 1: Spread
+              Into Bars" slide, with the GoFish repo's seafood data and the
+              thesis deck's lake names. Rendered live.</p>
+          </aside>
+        </section>
+
+        <section class="code-slide crash-slide" data-auto-animate data-auto-animate-id="crash-course">
+          <div class="gofish-intro-head">
+            <img src="./images/gofish-intro/gofish-logo.png" alt="GoFish logo" />
+            <div>
+              <h2>Stack within each lake</h2>
+            </div>
+          </div>
+          <div class="crash-solo">
+            <div>
+              <p class="code-pair-label" data-id="crash-chart-label">chart API</p>
+              <pre data-id="crash-chart-code" data-magic-move><code class="language-ts" data-line-numbers data-char-marks="4:5-38, 6:28-42">chart(seafood)
+  .flow(
+    spread({ by: "lake", dir: "x", ... }),
+    stack({ by: "species", dir: "y" }),
+  )
+  .mark(rect({ h: "count", fill: "species" }))</code></pre>
+            </div>
+            <div class="crash-chart-box" data-id="crash-chart-box">
+              <div class="crash-render" data-chart="seafood-stacked-unsorted" data-w="520" data-h="420"></div>
+            </div>
+          </div>
+          <aside class="notes">
+            <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
+              2:50 of 7:00.</p>
+            <p><strong>Say:</strong> "Add a second operator,
+              <code>stack</code>. Inside each lake it splits the rows again,
+              by species, and piles them up. Color the rectangles by species,
+              and we have stacked bars."</p>
+            <p>The species are stacked in the data's own row order, so the
+              same species sits at a different height in different lakes. The
+              next step fixes that.</p>
+            <p><strong>Source:</strong> the thesis deck's "Step 2: Stack
+              Within Each Lake" slide. Rendered live.</p>
+          </aside>
+        </section>
+
+        <section class="code-slide crash-slide" data-auto-animate data-auto-animate-id="crash-course">
+          <div class="gofish-intro-head">
+            <img src="./images/gofish-intro/gofish-logo.png" alt="GoFish logo" />
+            <div>
+              <h2>Sort the stacks</h2>
+            </div>
+          </div>
+          <div class="crash-solo">
+            <div>
+              <p class="code-pair-label" data-id="crash-chart-label">chart API</p>
+              <pre data-id="crash-chart-code" data-magic-move><code class="language-ts" data-line-numbers data-char-marks="4:17-46">chart(seafood)
   .flow(
     spread({ by: "lake", dir: "x", ... }),
     stack({ by: field("species").sort("count"), dir: "y" }),
@@ -117,25 +195,13 @@
             </div>
           </div>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:10 (0:20 for the two crash-course
-              states). <strong>Running total:</strong> 2:40 of 7:00.</p>
-            <p>The code shown leaves out styling parameters (spacing and
-              opacity) and marks each with <code>...</code>, in the thesis
-              deck's style. The live render uses the full spec in
-              <code>../charts.ts</code>.</p>
-            <p><strong>Say:</strong> "Here's a stacked bar chart in GoFish.
-              <code>spread</code> lays out the lakes side by side, and
-              <code>stack</code> piles the species inside each one. Those are
-              operators. Each one takes a set of marks and makes a new
-              mark."</p>
-            <p><strong>Sources:</strong> the stacked bars are the thesis
-              deck's "Spread the Lakes Apart" slide
-              (<code>presentation/sections/03-gofish.html</code>), with the
-              GoFish repo's seafood data and the thesis deck's lake names.
-              Rendered live. The spoken tagline from the old version of this
-              slide ("a compositional language for visual structure, open
-              source", from the SciPy deck's GoFish card) moved to the "What
-              is GoFish?" slide before this one, in a shorter form.</p>
+            <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
+              3:00 of 7:00.</p>
+            <p><strong>Say:</strong> "Now sort each stack by count, so in
+              every lake the biggest catch is on top. Only one part of one
+              line changed."</p>
+            <p><strong>Source:</strong> the thesis deck's "Sort the Stacks"
+              slide. Rendered live.</p>
           </aside>
         </section>
 
@@ -143,12 +209,12 @@
           <div class="gofish-intro-head">
             <img src="./images/gofish-intro/gofish-logo.png" alt="GoFish logo" />
             <div>
-              <h2>Add one thing, get a new graphic</h2>
+              <h2>Draw the ribbon</h2>
             </div>
           </div>
           <div class="crash-solo">
             <div>
-              <p class="code-pair-label" data-id="crash-chart-label">chart API <span class="code-pair-sub">· + a ribbon</span></p>
+              <p class="code-pair-label" data-id="crash-chart-label">chart API</p>
               <pre data-id="crash-chart-code" data-magic-move><code class="language-ts" data-line-numbers data-char-marks="7:3-40">chart(seafood)
   .flow(
     spread({ by: "lake", dir: "x", ... }),
@@ -163,114 +229,156 @@
           </div>
           <aside class="notes">
             <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
-              2:50 of 7:00.</p>
-            <p>The code shown leaves out styling parameters (spacing and
-              opacity) and marks each with <code>...</code>, in the thesis
-              deck's style. The live render uses the full spec in
-              <code>../charts.ts</code>.</p>
-            <p><strong>Say:</strong> "Add one line, <code>ribbon</code>,
-              which connects each species across the lakes, and the stacked
-              bars become a ribbon chart. A ribbon is a relation that also
-              draws: it connects marks that are already placed."</p>
+              3:10 of 7:00.</p>
+            <p><strong>Say:</strong> "Last, add one line,
+              <code>ribbon</code>. It connects each species across the lakes,
+              and the stacked bars become a ribbon chart. A ribbon is a
+              relation that also draws. It connects marks that are already
+              placed."</p>
             <p>The paper's caption for this chart: "operators arrange the
               rectangles, and a relational mark connects them."</p>
-            <p><strong>Lead into the answer:</strong> "Now let's write the
-              three grammars from before in GoFish. First Atom."</p>
-            <p><strong>Sources:</strong> the thesis deck's stage 3b figure
+            <p><strong>Lead into the next slide:</strong> "Operators and
+              relations are not two separate worlds. Here is how they
+              connect."</p>
+            <p><strong>Sources:</strong> the thesis deck's "Step 3d: Draw the
+              Ribbon" slide, in the shorter form of its stage 3b figure
               (<code>.layer(ribbon({ by: "species", opacity: 0.8 }))</code>,
-              <code>scripts/generate-gofish-stage-assets.mjs</code>). It is the
-              GUGOG paper's Figure 2 ("A GoFish ribbon chart: operators arrange
-              the rectangles, and a relational mark connects them"); the
-              paper's listing is the same spec, wrapped for a narrow column and
-              with <code>{ axes: true }</code>. Rendered live. The bars become
-              the ribbon chart by a crossfade, not a GoFish animation.</p>
+              <code>scripts/generate-gofish-stage-assets.mjs</code>). The
+              thesis slide writes the same ribbon out in three steps: name
+              the bars, select them in a second chart, and group them by
+              species. It is the GUGOG paper's Figure 2 ("A GoFish ribbon
+              chart: operators arrange the rectangles, and a relational mark
+              connects them"); the paper's listing is the same spec, wrapped
+              for a narrow column and with <code>{ axes: true }</code>.
+              Rendered live. The bars become the ribbon chart by a crossfade,
+              not a GoFish animation.</p>
           </aside>
         </section>
 
-        <!-- ═══ PART 3 CONTINUED: THE CORE, ~0:20 ═══════════════════════════
-             Added 2026-11-05. One slide, no animation. The chart API from
-             the crash course is built on a lower-level core, where marks are
-             placed by explicit relations such as align and distribute. The
-             planets diagram that used to be the crash course's left column
-             is shown here, in its labeled state. The PiCCL bottle slide in
-             03b-code-comparisons.html points back here with a callout on its
-             own low-level lines, and the hierarchy slide in 4a calls this
-             the bottom row, "core: marks + verbs".
-             Planets code: the GoFish repo's tutorial stories (origin/main
-             7b902ed38), packages/gofish-graphics/stories/tutorials/
-             Basics.stories.tsx and Diagrams.stories.tsx, restructured into
-             consts (see charts.ts), shown with styling elided. The render is
-             the "planets-label" chart in ../charts.ts. The char marks point at
-             the core's composition words: layer, relate, align, distribute. -->
-        <!-- Hidden 2026-11-06: not in the new story. The "same core, three
-             shapes of data" slide (04a-domain-design.html) still shows the
-             planets as the core. Remove data-visibility="hidden" to bring it
-             back. -->
-        <section class="code-slide core-slide" data-visibility="hidden">
-          <p class="part">3 · The grammar of graphics needs verbs</p>
-          <h2>under the chart API is a smaller, more direct core</h2>
-          <div class="core-split">
+        <!-- ═══ GOFISH INTRO CONTINUED: OPERATORS ON MARKS, THEN RELATIONS,
+             ~0:30 ═══════════════════════════════════════════════════════
+             Added 2026-11-06 (later), following the user's three stages:
+               (a) operators in the chart flow: the ribbon buildup above;
+               (b) operators used directly on marks, with no chart(): the
+                   planets diagram, enclose around spread;
+               (c) relations: the same planets diagram with spread written
+                   as align plus distribute, and the same picture.
+             (b) and (c) are two auto-animated states of one code block, so
+             the one magic move the audience sees is the spread line turning
+             into the layer and its two relations. The circles are named in
+             (b) already, though nothing there uses the names, so that line
+             does not change.
+             These two slides replace the hidden core slide ("under the
+             chart API is a smaller, more direct core", 2026-11-05), which
+             showed the same planets with a label and an arrow placed by
+             relations. That slide's markup is in git history. The "same
+             core, three shapes of data" slide (04a-domain-design.html)
+             still shows the labeled planets in its core column.
+             (c) is faithful to the source. gofish-graphics' Spread
+             (packages/gofish-graphics/src/ast/graphicalOperators/spread.tsx
+             on origin/main, and the same code in nightly 20261106) says it
+             "elaborates to layer + distribute + align": it builds a layer
+             over its children and relates them with Constraint.align on the
+             cross axis, from its `alignment` option (default "baseline"),
+             and Constraint.distribute along `dir`, from its `spacing`
+             option (default 8). Its other distribute options (anchor
+             "edge", order "forward", no glue) are the distribute defaults,
+             so (c) leaves them out. stack is the same spread with
+             glue: true.
+             Planets code: the GoFish repo's Basics tutorial story
+             (packages/gofish-graphics/stories/tutorials/Basics.stories.tsx),
+             with the circles bound to a const. Renders: "planets" and
+             "planets-relate" in ../charts.ts, which run the code shown with
+             the styling filled in.
+             The animation follows the buildup's pattern: the code block has
+             data-magic-move, the render box has a data-id, and the render
+             inside has none. Its auto-animate id differs from the
+             buildup's, so the step from the ribbon chart to (b) is a plain
+             slide change. -->
+        <section class="code-slide spread-relate-slide" data-auto-animate data-auto-animate-id="spread-relate">
+          <div class="gofish-intro-head">
+            <img src="./images/gofish-intro/gofish-logo.png" alt="GoFish logo" />
             <div>
-              <p class="code-pair-label">core <span class="code-pair-sub">· marks placed by explicit relations</span></p>
-              <pre><code class="language-ts" data-line-numbers data-char-marks="10:1-5, 11:4-9, 12:5-20, 13:5-25">const planets = enclose({ ... }, [
-  spread(
-    { dir: "x", alignment: "middle", ... },
-    data.map((d) =&gt; circle({ r: d.r, ... }).name(d.name))
-  ),
-]).name("planets");
-
-const label = text({ text: "Mercury", ... }).name("label");
-
-layer([planets, label])
-  .relate(({ mercury, planets, label }) =&gt; [
-    Constraint.align({ x: "middle" }, [mercury, label]),
-    Constraint.distribute({ dir: "y", ... }, [planets, label]),
-    arrow({ ... }, [label, mercury]),
-  ])</code></pre>
+              <h2>Operators also work directly on marks</h2>
             </div>
-            <div class="core-render-box">
-              <div class="core-render" data-chart="planets-label" data-w="440" data-h="160"></div>
+          </div>
+          <div class="spread-relate-body">
+            <pre data-id="spread-relate-code" data-magic-move><code class="language-ts" data-line-numbers data-char-marks="3:1-7, 4:3-8">const planets = data.map((d) =&gt; circle({ r: d.r, ... }).name(d.name));
+
+enclose({ ... }, [
+  spread({ dir: "x", alignment: "middle", spacing: 50 }, planets),
+])</code></pre>
+            <div class="spread-relate-box" data-id="spread-relate-box">
+              <div class="spread-relate-render" data-chart="planets" data-w="440" data-h="160"></div>
             </div>
           </div>
           <aside class="notes">
-            <p><strong>Hidden since 2026-11-06.</strong> Not counted in the
-              running totals.</p>
-            <p><strong>Target:</strong> 0:20 if shown.</p>
-            <p>The code shown leaves out styling parameters (padding, fill,
-              stroke, colors, font size, spacing) and marks each with
-              <code>...</code>, in the thesis deck's style. The live render
-              uses the full spec in <code>../charts.ts</code>.</p>
-            <p><strong>Say:</strong> "The chart API, with
-              <code>spread</code>, <code>stack</code>, and the rest, is built
-              on a smaller, more direct core. Here there is no data table. The
-              planets are four <code>circle</code> marks. <code>spread</code>
-              puts them in a row, and <code>enclose</code> draws the
-              background around them. Then we <code>layer</code> a label on
-              top and <code>relate</code> the marks directly: the label
-              lines up with Mercury, it sits below the background, and an
-              arrow runs from the label to Mercury. In the core, marks are
-              placed by explicit relations like align and distribute. The
-              chart API is built out of these."</p>
-            <p>Why this slide is here: it gives the audience the core before
-              the comparisons. The bottle slide two slides later mixes the
-              chart API with these same core lines, and the hierarchy slide
-              in part 4a can then say "the bottom row is the core you saw"
-              instead of explaining it from scratch.</p>
-            <p><strong>Lead into the Atom comparison:</strong> "Now let's go
-              back to the islands from before and write them with these
-              verbs. First Atom."</p>
-            <p><strong>Sources:</strong> the GoFish repo's Basics and
-              Diagrams tutorial stories
-              (<code>packages/gofish-graphics/stories/tutorials/Basics.stories.tsx</code>
-              and <code>Diagrams.stories.tsx</code> on origin/main), styled
-              after the thesis deck's Bluefish planets. The code is
-              restructured from the stories: the background group and the
-              label are bound to consts (<code>const planets</code>,
-              <code>const label</code>), and the circles and the group are
-              named so the relations can refer to them. The marks, options,
-              and relations are the stories' own, and the arrow code is the
-              Diagrams story's own. Shown with styling elided; the render runs
-              the full code. Rendered live. Until 2026-11-05 this code was the
-              left column of the crash course, built up over two states.</p>
+            <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
+              3:25 of 7:00.</p>
+            <p><strong>Say:</strong> "Operators are not only for charts. You
+              can use them directly on marks, with no data table. Here are
+              four circles for the inner planets. <code>spread</code> puts
+              them in a row, 50 pixels apart and lined up on their middles,
+              and <code>enclose</code> draws the dark box around them.
+              <code>spread</code> places its marks completely: every planet
+              gets an x and a y."</p>
+            <p>The code shown leaves out the styling (the circles' colors and
+              stroke, and the box's padding, color, and corners) and marks
+              each place with <code>...</code>. The live render uses the full
+              spec in <code>../charts.ts</code>.</p>
+            <p><strong>Source:</strong> the GoFish repo's Basics tutorial
+              story
+              (<code>packages/gofish-graphics/stories/tutorials/Basics.stories.tsx</code>),
+              the planets that the thesis deck draws in Bluefish. Rendered
+              live.</p>
           </aside>
         </section>
+
+        <section class="code-slide spread-relate-slide" data-auto-animate data-auto-animate-id="spread-relate">
+          <div class="gofish-intro-head">
+            <img src="./images/gofish-intro/gofish-logo.png" alt="GoFish logo" />
+            <div>
+              <h2><code>spread</code> is <code>align</code> plus <code>distribute</code></h2>
+            </div>
+          </div>
+          <div class="spread-relate-body">
+            <pre data-id="spread-relate-code" data-magic-move><code class="language-ts" data-line-numbers data-char-marks="5:5-20, 6:5-25">const planets = data.map((d) =&gt; circle({ r: d.r, ... }).name(d.name));
+
+enclose({ ... }, [
+  layer(planets).relate(({ mercury, venus, earth, mars }) =&gt; [
+    Constraint.align({ y: "middle" }, [mercury, venus, earth, mars]),
+    Constraint.distribute({ dir: "x", spacing: 50 }, [mercury, venus, earth, mars]),
+  ]),
+])</code></pre>
+            <div class="spread-relate-box" data-id="spread-relate-box">
+              <div class="spread-relate-render" data-chart="planets-relate" data-w="440" data-h="160"></div>
+            </div>
+          </div>
+          <aside class="notes">
+            <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
+              3:40 of 7:00. This ends the GoFish intro.</p>
+            <p><strong>Say:</strong> "And here is the same picture, with
+              <code>spread</code> written as two relations. A relation sets
+              only some properties of a set of marks. <code>align</code> gives
+              the planets a shared position, the same middle in y.
+              <code>distribute</code> sets the spacing between them in x.
+              Neither one places the planets by itself, but together they do.
+              That is how GoFish defines <code>spread</code>. An operator
+              places its marks completely, and it is made of relations."</p>
+            <p><strong>Lead into the answer:</strong> "Now let's write the
+              three grammars from before in GoFish. First Atom."</p>
+            <p><strong>If asked:</strong> this is the real definition, not a
+              teaching version. In the GoFish source, <code>spread</code>
+              builds a <code>layer</code> over its children and relates them
+              with <code>Constraint.align</code> on the other axis and
+              <code>Constraint.distribute</code> along its direction. Its
+              defaults are a baseline alignment and 8 pixels of spacing.
+              <code>stack</code> is the same <code>spread</code> with the
+              marks glued together, with no gaps.</p>
+            <p><strong>Source:</strong>
+              <code>packages/gofish-graphics/src/ast/graphicalOperators/spread.tsx</code>
+              in the GoFish repo, the same code as nightly 20261106. Both
+              renders are live.</p>
+          </aside>
+        </section>
+

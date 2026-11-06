@@ -148,13 +148,104 @@
           </aside>
         </section>
 
-        <!-- Three surfaces side by side: the core slide's planets, the crash
-             course's ribbon chart, and the GoTree tree, each labeled by the
-             shape of data it works on. Renders: the same charts.ts functions
-             as the core slide and the crash course (planets-label,
-             seafood-ribbon) and the paper's Figure 5 SVG. Since 2026-11-05
-             the GoTree code slides before it are hidden, so this slide is
-             where the audience first sees GoTree written in GoFish. -->
+        <!-- GoTree's own spec beside gofish-gotree's. Hidden from 2026-11-05
+             with the two other GoTree code slides, and shown again since
+             2026-11-06 (later), moved here from after the hierarchy slide.
+             The other two (the data and picture slide, and "combine compiles
+             to GoFish constraints") stay hidden where they were. It used to
+             be the second state of an auto-animate pair with the data and
+             picture slide; that slide is hidden and not adjacent, so this
+             one no longer has data-auto-animate or data-ids. Its neighbors
+             (the bottle and "same core, three shapes of data") are not
+             auto-animate slides. -->
+        <section class="code-slide gotree-specs-slide">
+          <p class="part">Answer</p>
+          <h2>GoTree in GoFish keeps GoTree's own words</h2>
+          <div class="code-pair">
+            <div>
+              <p class="code-pair-label">GoTree <span class="code-pair-sub">· its own language</span></p>
+              <pre><code class="language-json" data-line-numbers data-code-regions="A 2:16-2:31, B 3:16-3:33, C 7:5-7:44, D 8:7-9:37, E 11:5-12:34, F 13:7-14:39">{
+  "Element": { "Node": "circle",
+               "Link": "straight" },
+  "CoordinateSystem": { "Category": "cartesian" },
+  "Layout": {
+    "Category":"AxisIndependent", "Mode":"bottom-up",
+    "X": { "Root": { "Relation": "within" },
+      "Subtree": { "Relation": "flatten",
+                   "Margin": "0.3w" }
+    },
+    "Y": { "Root": { "Relation": "juxtapose",
+                "Margin": "0.2" },
+      "Subtree": { "Relation": "align",
+                   "Alignment": "top" }
+    },
+    "SubtreeWidth": "adaptive",
+    "SubtreeHeight": "adaptive"
+  }
+}</code></pre>
+            </div>
+            <div>
+              <p class="code-pair-label">gofish-gotree <span class="code-pair-sub">· a library on GoFish</span></p>
+              <pre><code class="language-ts" data-line-numbers data-code-regions="A 2:3-2:30, B 3:3-3:41, C 5:5-5:45, E 6:5-6:42, D 9:5-9:42, F 10:5-10:44">tree({
+  node: () =&gt; circle({ r: 9 }),
+  link: { kind: "line", curve: "linear" },
+  parentChild: combine({
+    x: { kind: "align", alignment: "middle" },
+    y: { kind: "distribute", spacing: 90 },
+  }),
+  sibling: combine({
+    x: { kind: "distribute", spacing: 24 },
+    y: { kind: "align", alignment: "start" },
+  }),
+}, hierarchy);</code></pre>
+            </div>
+          </div>
+          <aside class="notes">
+            <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
+              4:20 of 7:00.</p>
+            <p><strong>Say:</strong> "GoTree's input is a tree, not a table,
+              so it does not fit the chart API. So we rebuilt GoTree as a
+              small library on GoFish. On the left is GoTree's own spec, in
+              its own JSON language. On the right is the GoFish version. It
+              keeps GoTree's words: a node, a link, a rule for parents and
+              children, and a rule for siblings. And each of GoTree's
+              relations becomes a GoFish relation, <code>align</code> or
+              <code>distribute</code>, like the planets."</p>
+            <p>The colors pair the parts: <code>within</code> and
+              <code>align</code> become <code>align</code>, and
+              <code>juxtapose</code> and <code>flatten</code> become
+              <code>distribute</code>. The picture this draws comes on the
+              next slide, on the right.</p>
+            <p><strong>Lead into the next slide:</strong> "Here are all three
+              side by side."</p>
+            <p><strong>If asked:</strong> GoFish is not trying to be the one
+              definitive grammar. It is a shared core that domain grammars
+              can build on, which fits Andrew McNutt's view that domain
+              languages should be built from small parts that do one thing
+              well.</p>
+            <p><strong>Sources:</strong> code is the final GUGOG
+              paper's Figure 5 (section 3.3 "GoTree"), from
+              <code>examples/gotree-node-link.json</code> and
+              <code>examples/gofish-gotree-node-link.ts</code>, copied exactly.
+              The paper's role letters: A node = <code>circle</code>, B link =
+              <code>line</code>, C <code>within</code> = x
+              <code>align</code> middle, D <code>flatten</code> = x
+              <code>distribute</code>, E <code>juxtapose</code> = y
+              <code>distribute</code>, F <code>align</code> top = y
+              <code>align</code> start. Paper caption: "GoTree uses relative
+              margins and adaptive dimensions; GoFish here uses fixed gaps."
+              The <code>combine</code> code that turns these rules into
+              GoFish constraints is on the hidden slide
+              "<code>combine</code> compiles to GoFish constraints".</p>
+          </aside>
+        </section>
+
+        <!-- Three surfaces side by side: the planets with a label (from the
+             core slide, removed 2026-11-06), the ribbon buildup's ribbon
+             chart, and the GoTree tree, each labeled by the shape of data it
+             works on. Renders: charts.ts functions (planets-label,
+             seafood-ribbon) and the paper's Figure 5 SVG. Since 2026-11-06
+             (later) the GoTree specs slide comes right before it. -->
         <section class="code-slide recap-slide">
           <p class="part">Answer</p>
           <h2>same core, three shapes of data</h2>
@@ -197,24 +288,20 @@ layer([planets, label])
           <p class="recap-core">one core underneath: the same verbs and constraints</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:20. <strong>Running total:</strong>
-              3:35 of 7:00. Since 2026-11-06 it comes right after the bottle
-              and before the hierarchy slide.</p>
-            <p><strong>Say:</strong> "In the middle is the chart API from the
-              crash course. On the left is GoFish's core, where you place marks
-              by writing relations directly, like the tinted lines in the
-              bottle. And on the right is GoTree. Its input is a tree, not a
-              table of rows, so it does not fit the chart API. So we rebuilt
-              GoTree as a small library on GoFish. It keeps GoTree's own words: a
-              node, a link, a rule for parents and children, and a rule for
-              siblings. Underneath, each of those rules turns into the same
-              align and distribute relations you saw in the core. What
-              differs isn't the core, it's the shape of the data: low-level
-              marks, tabular rows, a hierarchy. Three surfaces on one
-              core."</p>
+              4:40 of 7:00. Since 2026-11-06 it comes after the bottle and
+              the GoTree specs, and before the hierarchy slide.</p>
+            <p><strong>Say:</strong> "Here are all three side by side. In
+              the middle is the chart API from the ribbon chart. On the left
+              are marks placed with relations directly, like the planets. And
+              on the right is GoTree. Underneath, all three use the same
+              align and distribute relations. What differs isn't the core,
+              it's the shape of the data: marks, rows of a table, and a tree.
+              Three surfaces on one core."</p>
             <p><strong>Lead into the hierarchy slide:</strong> "So what does
               this give us?"</p>
             <p>GoTree was introduced earlier (its intro slide, "GoTree adds
-              operators for laying out trees"). Its relations map onto the
+              operators for laying out trees"), and its specs are on the slide
+              just before this one. Its relations map onto the
               core: GoTree's <code>within</code> and <code>align</code> become
               <code>align</code>, and <code>juxtapose</code> and
               <code>flatten</code> become <code>distribute</code>. The
@@ -224,22 +311,24 @@ layer([planets, label])
               lines.</p>
             <p>The specs are cut down to their essential lines with
               <code>...</code>, more than on the earlier slides, to fit three
-              columns. Core: the core slide's planets spec with
+              columns. Core: the planets spec of the old core slide (in git
+              history; the planets slides in the GoFish intro show the same
+              planets without the label) with
               the <code>enclose</code> body and the label's options elided,
               and the align and distribute operands elided (they are
               <code>[mercury, label]</code> and <code>[planets, label]</code>).
-              Tabular: the crash course's ribbon spec, with
+              Tabular: the ribbon buildup's ribbon spec, with
               <code>field("species").sort("count")</code> shortened to
               <code>field("species")...</code>. Hierarchical: the paper's
               Figure 5 gofish-gotree spec with the <code>combine</code>
-              options elided (shown in full on the hidden GoTree specs
-              slide).</p>
+              options elided (shown in full on the GoTree specs slide just
+              before).</p>
             <p><strong>Sources:</strong> the planets and ribbon renders are
-              drawn live by the same <code>charts.ts</code> functions as the
-              core slide and the crash course (<code>planetsLabeled</code>,
+              drawn live by <code>charts.ts</code> functions
+              (<code>planetsLabeled</code>,
               <code>seafoodRibbon</code>), scaled down to fit their columns.
               The tree is the paper's Figure 5 render. No "zoom out" animation
-              from the crash course: it is too far back in the deck for
+              from the ribbon buildup: it is too far back in the deck for
               auto-animate to connect.</p>
             <p>If asked about the paper: this is Andrew McNutt's compile tower,
               with GoFish as one floor of it.</p>
@@ -254,8 +343,8 @@ layer([planets, label])
              flat row of nouns. Right: the same five charts on three rows,
              where each row is built from the one below and the bottom row is
              GoFish's core. The middle row is domain languages; "tree layout"
-             is the one for tree data, which is GoTree (its code slides are
-             hidden since 2026-11-05; it comes back on the recap slide). The
+             is the one for tree data, which is GoTree (its specs slide and
+             the recap slide come before this one). The
              faded middle block and faded leaf show that the middle is not a
              closed set of three kinds: new DSLs can keep being added. It is
              called a hierarchy, not a tree, so it is not confused with the
@@ -319,7 +408,7 @@ layer([planets, label])
           <p class="flat-vs-hierarchy-line">Each domain keeps its own structure, and all of them share the parts underneath.</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
-              3:50 of 7:00.</p>
+              4:55 of 7:00.</p>
             <p>Since 2026-11-06 this slide is the takeaway of the answer. It
               comes after "same core, three shapes of data" and before Figure
               6.</p>
@@ -352,7 +441,7 @@ layer([planets, label])
             <p><strong>The leaves</strong> are charts the audience has
               already seen. The population pyramid, GoTree silhouette tree,
               Sankey tree, and Bluefish pulley diagram are on the splash wall. The ribbon
-              chart is from the crash course.</p>
+              chart is from the ribbon buildup.</p>
             <p><strong>If asked where the idea comes from:</strong> this is
               Herbert Simon's point ("The Architecture of Complexity," 1962,
               p. 478): hierarchic
@@ -365,9 +454,15 @@ layer([planets, label])
              (this one, the specs, and "combine compiles to GoFish
              constraints") for now. GoTree is introduced on its own intro
              slide in part 2 (01c-compress-islands.html) and comes back on
-             "same core, three shapes of data" below. To restore them, remove
+             "same core, three shapes of data". To restore them, remove
              data-visibility="hidden" from all three, and set their Targets
              back into the running totals (0:15, 0:20, 0:20).
+             Since 2026-11-06 (later) the specs slide is shown again, moved
+             to just before "same core, three shapes of data", without
+             auto-animate. This slide and the combine slide stay hidden
+             here. To show this one again, put it right before the specs
+             slide and give both data-auto-animate and the gotree-part and
+             gotree-title data-ids back.
              GoTree, step 1: the data and the picture, no specs. The
              fragment is step 2: this data is a tree, not a table. -->
         <section class="code-slide" data-auto-animate data-auto-animate-id="gotree" data-visibility="hidden">
@@ -396,9 +491,9 @@ layer([planets, label])
             </div>
           </div>
           <aside class="notes">
-            <p><strong>Hidden</strong> (2026-11-05), with the next two
-              slides. Not counted in the running totals. To show them, remove
-              <code>data-visibility="hidden"</code> from all three.</p>
+            <p><strong>Hidden</strong> (2026-11-05). Not counted in the
+              running totals. See the comment above it for how to show
+              it.</p>
             <p><strong>Target if shown:</strong> 0:15 (the GoTree beat was
               0:55 over three slides: 0:15 here, 0:20 for the specs, 0:20 for
               <code>combine</code>).</p>
@@ -435,97 +530,13 @@ layer([planets, label])
           </aside>
         </section>
 
-        <!-- Hidden (2026-11-05), with the slide before; see its comment. -->
-        <section class="code-slide" data-auto-animate data-auto-animate-id="gotree" data-visibility="hidden">
-          <p class="part" data-id="gotree-part">4a · Does one language cost domain design?</p>
-          <h2 data-id="gotree-title">GoTree, a grammar for trees</h2>
-          <div class="code-pair">
-            <div>
-              <p class="code-pair-label">GoTree <span class="code-pair-sub">· its own language</span></p>
-              <pre><code class="language-json" data-line-numbers data-code-regions="A 2:16-2:31, B 3:16-3:33, C 7:5-7:44, D 8:7-9:37, E 11:5-12:34, F 13:7-14:39">{
-  "Element": { "Node": "circle",
-               "Link": "straight" },
-  "CoordinateSystem": { "Category": "cartesian" },
-  "Layout": {
-    "Category":"AxisIndependent", "Mode":"bottom-up",
-    "X": { "Root": { "Relation": "within" },
-      "Subtree": { "Relation": "flatten",
-                   "Margin": "0.3w" }
-    },
-    "Y": { "Root": { "Relation": "juxtapose",
-                "Margin": "0.2" },
-      "Subtree": { "Relation": "align",
-                   "Alignment": "top" }
-    },
-    "SubtreeWidth": "adaptive",
-    "SubtreeHeight": "adaptive"
-  }
-}</code></pre>
-            </div>
-            <div>
-              <p class="code-pair-label">gofish-gotree <span class="code-pair-sub">· a library on GoFish</span></p>
-              <pre><code class="language-ts" data-line-numbers data-code-regions="A 2:3-2:30, B 3:3-3:41, C 5:5-5:45, E 6:5-6:42, D 9:5-9:42, F 10:5-10:44">tree({
-  node: () =&gt; circle({ r: 9 }),
-  link: { kind: "line", curve: "linear" },
-  parentChild: combine({
-    x: { kind: "align", alignment: "middle" },
-    y: { kind: "distribute", spacing: 90 },
-  }),
-  sibling: combine({
-    x: { kind: "distribute", spacing: 24 },
-    y: { kind: "align", alignment: "start" },
-  }),
-}, hierarchy);</code></pre>
-            </div>
-          </div>
-          <aside class="notes">
-            <p><strong>Hidden</strong> (2026-11-05); see the slide before.
-              <strong>Target if shown:</strong> 0:20.</p>
-            <p>Evidence for the answer to the first objection: this DSL keeps its own words, and
-              they are built from the core's verbs. Andrew McNutt's survey
-              (the quote before the hierarchy slide) already points the way: small
-              modular language components, and domain languages that compile
-              to ones that do one thing well. This slide is one instance of
-              that idea, credited to him, not an argument with him.</p>
-            <p>GoFish is not trying to be the single definitive grammar that
-              Park et al. call for (the call McNutt pushes back on). It is a
-              shared core that domain grammars can build on, which is
-              consistent with McNutt's point.</p>
-            <p><strong>Say:</strong> Here's an example of the modular
-              approach Andrew described. Same tree as the
-              last slide; now here's how it's written. On the left is GoTree's
-              own spec, in its own JSON language. On the right is GoTree
-              rebuilt as a library on GoFish. It keeps GoTree's
-              tree words: a node, a link, a parent-child rule, a sibling rule.
-              And each of GoTree's relations is a GoFish verb:
-              <code>within</code> and <code>align</code> are
-              <code>align</code>, <code>juxtapose</code> and
-              <code>flatten</code> are <code>distribute</code>.</p>
-            <p>The render is on the previous slide; this slide shows only
-              the two specs, so they get the room.</p>
-            <p><strong>Sources:</strong> code and render are the final GUGOG
-              paper's Figure 5 (section 3.3 "GoTree"), from
-              <code>examples/gotree-node-link.json</code>,
-              <code>examples/gofish-gotree-node-link.ts</code> and
-              <code>figures/gofish-gotree-node-link.svg</code>, copied exactly.
-              The paper's role letters: A node = <code>circle</code>, B link =
-              <code>line</code>, C <code>within</code> = x
-              <code>align</code> middle, D <code>flatten</code> = x
-              <code>distribute</code>, E <code>juxtapose</code> = y
-              <code>distribute</code>, F <code>align</code> top = y
-              <code>align</code> start. Paper caption: "GoTree uses relative
-              margins and adaptive dimensions; GoFish here uses fixed gaps."
-              The v3 draft has its own GoTree listing (<code>parentChild:
-              spread(...)</code>, <code>link: { interpolation }</code>), but it
-              uses an older API and has no render, so the final paper's
-              executed figure is used here instead.</p>
-            <p>GoTree appears only here, not in the 03c code comparisons, so
-              each example does one job.</p>
-          </aside>
-        </section>
+        <!-- The GoTree specs slide that was here moved on 2026-11-06
+             (later) to the answer, just before "same core, three shapes of
+             data", and is shown again. -->
 
-        <!-- Hidden (2026-11-05), with the two GoTree slides before; see the
-             first one's comment. -->
+        <!-- Hidden (2026-11-05), with the GoTree data and picture slide
+             before; see its comment. The specs slide it followed moved to
+             before "same core, three shapes of data" on 2026-11-06. -->
         <section class="code-slide" data-visibility="hidden">
           <p class="part">4a · Does one language cost domain design?</p>
           <h2><code>combine</code> compiles to GoFish constraints</h2>
@@ -609,7 +620,7 @@ layer([planets, label])
           <p class="source-line" style="text-align: center">GUGOG paper, Figure 6</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
-              4:00 of 7:00. This ends the answer.</p>
+              5:05 of 7:00. This ends the answer.</p>
             <ul>
               <li>One graphic that uses all three surfaces. The tree is laid
                 out by the hierarchical surface (gofish-gotree). Each leaf is

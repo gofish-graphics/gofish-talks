@@ -7,7 +7,7 @@
 // Both are schematic. The numbers below only give the shapes; no axis shows
 // them, and none of them was measured.
 //
-// Part 3 (the GoFish crash course): the planets and the seafood charts.
+// Part 3 (the GoFish intro: the ribbon buildup and the planets): the planets and the seafood charts.
 // These are the full specs; the slides print them with styling elided.
 import {
   chart,
@@ -419,7 +419,7 @@ const compressionRateSteps = {
   ...rateSteps("compression-rates-step", rateModel(0.012)),
 };
 
-// ─── Part 3: the GoFish crash course ──────────────────────────────────────
+// ─── Part 3: the GoFish intro ─────────────────────────────────────────────
 // The core level: the four inner planets on a dark background, from the
 // GoFish repo's tutorial stories (origin/main 7b902ed38):
 // packages/gofish-graphics/stories/tutorials/Basics.stories.tsx (no label)
@@ -478,11 +478,64 @@ const planetsLabeled = () => {
   ]);
 };
 
-// The chart level: the thesis deck's seafood walkthrough. The stacked bars
-// are its "Spread the Lakes Apart" slide; the ribbon chart adds the
-// .layer(ribbon(...)) step of its stage 3b figure (the GUGOG paper's
-// Figure 2). data/seafood.json is the GoFish repo's seafood fixture with the
-// thesis deck's lake names.
+// The relations slide (since 2026-11-06, later): the same planets diagram,
+// with spread written as the align and distribute it elaborates to.
+// gofish-graphics' Spread (src/ast/graphicalOperators/spread.tsx, the same
+// code in nightly 20261106) builds a layer over its children and relates
+// them with Constraint.align on the cross axis (its `alignment`) and
+// Constraint.distribute along `dir` (its `spacing`). This render must look
+// the same as "planets"; that is the slide's point.
+const planetsRelate = () =>
+  enclose(
+    {
+      padding: 20,
+      fill: "#252150",
+      stroke: "none",
+      shape: Shape.box({ rx: 16 }),
+    },
+    [
+      layer(
+        data.map((d) =>
+          circle({
+            r: d.r,
+            fill: d.fill,
+            stroke: d.stroke,
+            strokeWidth: 3,
+          }).name(d.name)
+        )
+      ).relate(({ mercury, venus, earth, mars }) => [
+        Constraint.align({ y: "middle" }, [mercury, venus, earth, mars]),
+        Constraint.distribute({ dir: "x", spacing: 50 }, [
+          mercury,
+          venus,
+          earth,
+          mars,
+        ]),
+      ]),
+    ]
+  ).name("planets");
+
+// The chart level: the thesis deck's seafood walkthrough
+// (phd-thesis-20260618/presentation/sections/03-gofish.html), four of its
+// steps: "Step 1: Spread Into Bars", "Step 2: Stack Within Each Lake",
+// "Sort the Stacks", and "Draw the Ribbon" in the .layer(ribbon(...)) form
+// of its stage 3b figure (the GUGOG paper's Figure 2). The thesis adds
+// spacing: 64 just before the ribbon; here every step has it, so the bars
+// keep their width and place from step to step. data/seafood.json is the
+// GoFish repo's seafood fixture with the thesis deck's lake names.
+const seafoodBars = () =>
+  chart(seafood)
+    .flow(spread({ by: "lake", dir: "x", spacing: 64 }))
+    .mark(rect({ h: "count" }));
+
+const seafoodStackedUnsorted = () =>
+  chart(seafood)
+    .flow(
+      spread({ by: "lake", dir: "x", spacing: 64 }),
+      stack({ by: "species", dir: "y" }),
+    )
+    .mark(rect({ h: "count", fill: "species" }));
+
 const seafoodStacked = () =>
   chart(seafood)
     .flow(
@@ -499,7 +552,7 @@ const seafoodRibbon = () =>
     )
     .mark(rect({ h: "count", fill: "species" }))
     .layer(ribbon({ by: "species", opacity: 0.8 }));
-// (The slides show both seafood specs with spacing and opacity elided.)
+// (The slides show the seafood specs with spacing and opacity elided.)
 
 // ─── Part 4b: validity against freedom of arrangement (CanSum) ────────────
 // One dataset with a temperature column and a USD column, and three steps of
@@ -572,6 +625,9 @@ const charts: Record<string, (fontSize: number) => Renderable> = {
   ...compressionRateSteps,
   planets: planetsRow,
   "planets-label": planetsLabeled,
+  "planets-relate": planetsRelate,
+  "seafood-bars": seafoodBars,
+  "seafood-stacked-unsorted": seafoodStackedUnsorted,
   "seafood-stacked": seafoodStacked,
   "seafood-ribbon": seafoodRibbon,
   "canadd-untyped": citiesStacked("temp"),

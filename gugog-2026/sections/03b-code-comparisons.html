@@ -1,6 +1,7 @@
         <!-- ═══ ANSWER: THE ISLANDS IN GOFISH, ~0:25 ══════════════════════
-             Since 2026-11-06 these two open the answer, right after the
-             crash course; the core slide that came before them is hidden.
+             Since 2026-11-06 these two open the answer. Since 2026-11-06
+             (later) they come right after the planets slide "spread is align
+             plus distribute", which ends the GoFish intro.
              Two slides: Atom vs GoFish, and the PiCCL bottle chart in
              GoFish. They are the evidence that the islands from part 2
              reduce to one shared set of operators. The Atom and PiCCL intro
@@ -66,7 +67,7 @@
           <aside class="notes">
             <p><strong>Target:</strong> 0:10. Atom was already introduced,
               so this slide does not have to introduce it.
-              <strong>Running total:</strong> 3:00 of 7:00. The answer starts
+              <strong>Running total:</strong> 3:50 of 7:00. The answer starts
               here.</p>
             <p><strong>The beat (this slide and the next):</strong> 1. A shared
               language makes it possible to compare grammars: once each
@@ -74,7 +75,7 @@
               and see exactly what differs. The islands can reach each other. 2. The grammars are not so different
               after all: they share most of their structure, and the
               differences come down to small, nameable pieces.</p>
-            <p>The lead into this slide is the end of the crash course: "Now
+            <p>The lead into this slide is the end of the GoFish intro: "Now
               let's write the three grammars from before in GoFish. First
               Atom."</p>
             <p><strong>Say:</strong> Here's Atom's Titanic example, with the
@@ -124,18 +125,20 @@
              The PiCCL intro slide in part 2 (01c-compress-islands.html)
              shows PiCCL's own figures.
              The char marks point at the four operators the notes name.
-             The callout (2026-11-05): a code region with the role "core"
-             (talk-template's data-code-regions; its color is in
-             ../gofish-compare.css) tints the low-level lines, layer and the
-             .relate(...) block, and puts "core" in the gutter where each part
-             starts. The tag under the code says what they are: relations,
-             written directly. -->
+             The callout (2026-11-05): a code region tints the low-level
+             lines, layer and the .relate(...) block, and puts its role name
+             in the gutter where each part starts (talk-template's
+             data-code-regions; its color is in ../gofish-compare.css).
+             Since 2026-11-06 (later) the role is "relations", not "core",
+             and the tag under the code points back at the planets slide
+             "spread is align plus distribute", two slides before, which
+             writes relations the same way. -->
         <section class="code-slide bottle-slide">
           <p class="part">Answer</p>
           <h2>The PiCCL bottle chart in GoFish</h2>
           <div class="split bottle-split">
             <div>
-              <pre><code class="language-ts" data-line-numbers data-char-marks="2:9-14, 3:9-13, 4:5-8, 10:6-11" data-code-regions="core 3:9-3:15, core 10:5-14:3">chart(bottleData, { axes: false })
+              <pre><code class="language-ts" data-line-numbers data-char-marks="2:9-14, 3:9-13, 4:5-8, 10:6-11" data-code-regions="relations 3:9-3:15, relations 10:5-14:3">chart(bottleData, { axes: false })
   .flow(spread({ by: "category", dir: "x", ... }))
   .mark(layer([
     atop({ blendMode: "color" }, [
@@ -149,7 +152,7 @@
     Constraint.distribute({ dir: "y", ... }, [line, label]),
     Constraint.align({ x: "end" }, [label, line]),
   ]))</code></pre>
-              <p class="core-callout"><span class="core-callout-tag">core</span> relations, written directly</p>
+              <p class="core-callout"><span class="core-callout-tag">relations</span> written directly, as with the planets</p>
             </div>
             <div>
               <!-- Live: the "piccl-bottle" chart in ../charts.ts runs the
@@ -161,19 +164,19 @@
           <aside class="notes">
             <p><strong>Target:</strong> 0:15. PiCCL was already introduced,
               so this slide does not have to introduce it. <strong>Running
-              total:</strong> 3:15 of 7:00.</p>
+              total:</strong> 4:05 of 7:00.</p>
             <p><strong>The callout</strong> (since 2026-11-05; reworded
-              2026-11-06, because the core slide it pointed back to is
-              hidden): the blue tinted lines, tagged "core", are GoFish's
-              lower level, where you write relations directly:
+              2026-11-06): the blue tinted lines, tagged "relations", are
+              relations written directly, the same way as on the planets
+              slide, "spread is align plus distribute":
               <code>layer</code>, and <code>.relate(...)</code> with
               <code>Constraint.align</code> and
               <code>Constraint.distribute</code>. The rest of the spec is the
-              chart API from the crash course. Say: "And look at the tinted
-              lines. Here the relations are written directly: line up the
-              line with the bottle, and put the label above the line. The
-              operators and the relations mix in one spec, because they are
-              one language."</p>
+              chart API from the ribbon buildup. Say: "And look at the tinted
+              lines. Here the relations are written directly, like with the
+              planets: line up the line with the bottle, and put the label
+              above the line. The operators and the relations mix in one
+              spec, because they are one language."</p>
             <p><strong>Say:</strong> This bottle chart comes from PiCCL, by
               Shi and others at VIS 2025. It is built from the PiCCL parts we
               saw earlier. A picture of a bottle gets a green rectangle drawn
@@ -196,8 +199,7 @@
               the differences are small parts you can point to. What the two
               islands share is operators and relations.</p>
             <p><strong>Lead into the next slide:</strong> "And here is the
-              third one, GoTree, next to the other kinds of GoFish
-              code."</p>
+              third one, GoTree."</p>
             <p><strong>Source:</strong> The spec is the GoFish repo's bottle
               story, <code>packages/gofish-graphics/stories/piccl/Bottle.stories.tsx</code>,
               as of gofish-graphics nightly 20261106. It last changed in
