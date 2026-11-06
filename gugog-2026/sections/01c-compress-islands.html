@@ -124,7 +124,7 @@
 
         <section class="grammar-intro-slide">
           <p class="part">Question</p>
-          <h2>PiCCL adds operators for combining pictures</h2>
+          <h2>PiCCL adds operators for compositing images</h2>
           <div class="grammar-intro-figs grammar-intro-side">
             <div>
               <p class="code-pair-label">pictorial charts</p>
@@ -141,10 +141,14 @@
               1:45 of 7:00.</p>
             <p><strong>Say:</strong> And here's PiCCL, by Shi and others at
               VIS 2025, a grammar for pictorial charts like these. Its marks
-              are ordinary pictures and shapes. What PiCCL added is a set of
-              operators for repeating pictures and combining them, e.g., "A
-              atop B" paints one shape onto another and keeps only the part
-              inside it.</p>
+              are ordinary pictures and shapes. What is special about PiCCL is
+              image compositing. It has operators that combine two pictures
+              into one, like the ones in image editors. For example, "A atop
+              B" paints one shape onto another and keeps only the part inside
+              it. That is how a bottle picture gets filled up to a number.</p>
+            <p>Title changed on 2026-11-06, late night, from "PiCCL adds
+              operators for combining pictures", because image compositing is
+              the idea that sets PiCCL apart.</p>
             <p><strong>Lead into GoTree:</strong> "And one more, for a
               different shape of data."</p>
             <p><strong>Source:</strong> Shi et al., "PiCCL: Data-Driven
@@ -183,14 +187,14 @@
             }
           </style>
           <p class="part">Question</p>
-          <h2>GoTree adds operators for laying out trees</h2>
+          <h2>GoTree draws any tree in many layouts</h2>
           <div class="grammar-intro-figs grammar-intro-side gotree-figs">
             <div>
               <p class="code-pair-label">tree visualizations</p>
               <img class="grammar-fig gotree-examples" src="./images/comparisons/gotree-examples.png" alt="A gallery of tree visualizations from the GoTree paper: indented outline, pixel tree, 1D treemap, BarcodeTree, garden layout, thread arc, treemap with oval, cascaded treemap, dendrogram, DeepTree, outside-in tree, spiral tree, and nested pie tree" />
             </div>
             <div>
-              <p class="code-pair-label">layout operators</p>
+              <p class="code-pair-label">layout rules for each axis</p>
               <img class="grammar-fig gotree-ops" src="./images/comparisons/gotree-operators.png" alt="GoTree's layout operators: a parent and its children can be placed by include, juxtapose, or within on each axis, and siblings by align or flatten" />
             </div>
           </div>
@@ -200,20 +204,28 @@
               1:55 of 7:00.</p>
             <p><strong>Say:</strong> And here's GoTree, by Guozheng Li, Min
               Tian, Qinmei Xu, Michael McGuffin, and Xiaoru Yuan, at CHI 2020.
-              It is a grammar for tree visualizations, like all of these. Its
-              marks are plain nodes and links. What GoTree added is a small set
-              of layout operators. On each axis, a parent and its children can
-              be placed by include, juxtapose, or within, and siblings can be
-              aligned or flattened. Mix those per axis and you get all of
-              these layouts.</p>
+              It is a grammar for tree visualizations, like all of these. What
+              is interesting about GoTree is that one spec does not care about
+              the shape of the tree. It works for a tree of any depth and any
+              number of children. And the same few rules give very different
+              pictures: outlines, treemaps, node-link trees, and more. To do
+              that, GoTree lays out a tree with relations on each axis. A
+              parent and its children are placed by include, juxtapose, or
+              within, and siblings are aligned or flattened.</p>
+            <p>Reframed on 2026-11-06, late night. Until then the title was
+              "GoTree adds operators for laying out trees", and the notes
+              said its layout operators were what it added. GoTree's own idea
+              is the abstraction over the shape of the tree data and over the
+              pictures it makes. Its relations are how it does that, and they
+              come back on the "GoTree's layouts with GoFish's relations"
+              slide.</p>
             <p><strong>Lead into the next slide:</strong> "So what did these
               three grammars add? None of them mainly added a new kind of mark
               or channel."</p>
             <p>GoTree is also the island whose data is not a table. It comes
-              back on the "same core, three shapes of data" slide in the
-              answer, rebuilt as a library on GoFish. The GoTree code slides
-              are hidden, so that slide is the only place its GoFish version
-              appears.</p>
+              back in the answer, rebuilt as a library on GoFish, on "GoTree's
+              layouts with GoFish's relations" and "same core, three shapes of
+              data".</p>
             <p><strong>Source:</strong> Guozheng Li, Min Tian, Qinmei Xu,
               Michael J. McGuffin, and Xiaoru Yuan, "GoTree: A Grammar of Tree
               Visualizations", Proc. CHI 2020, doi 10.1145/3313831.3376297, as

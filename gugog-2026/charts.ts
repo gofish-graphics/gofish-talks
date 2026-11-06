@@ -584,8 +584,10 @@ type Renderable = {
 // This is the GoFish repo's bottle story as of gofish-graphics nightly
 // 20261106 (packages/gofish-graphics/stories/piccl/Bottle.stories.tsx, last
 // changed in df2fd1de, "paint is now atop"), with the same data, options and
-// image (stories/assets/wilsonblanco.png). The slide prints it with styling
-// elided.
+// image (stories/assets/wilsonblanco.png). The slides print it with styling
+// elided. Since 2026-11-06, late night, the bottle is built in three steps,
+// and the widths, spacing, and label style differ from the story so the
+// bottles stay in place (see below).
 const bottleData = [
   { category: "a", amount: 30 },
   { category: "d", amount: 60 },
@@ -593,17 +595,59 @@ const bottleData = [
   { category: "c", amount: 100 },
 ];
 
+// The buildup on the bottle slides (2026-11-06, late night), following the
+// SciPy 2026 deck's bottle steps (scipy-2026/charts.ts, renderBottleBarBase
+// and renderBottleChart): step 1 layers a gray bar and a green bar, step 2
+// swaps the layer for atop and the gray bar for the bottle picture, and
+// step 3 is the full story, pdBottle below. The green is "lime", the same
+// color as the story's "#00ff00", so the slides can show it as a word.
+// The bottles stay in place across the three steps. Each category takes the
+// same width on every step: in steps 1 and 2 a bar or picture as wide as the
+// bottle plus a wide gap, and in step 3 the line, which runs from the
+// bottle's left edge to the right end of its label, plus a small gap. The
+// story's fill and line are 175 wide and its spacing is 20, which would make
+// step 3 wider than step 2, because atop takes the picture's bounds. Only
+// these widths, the spacing, and the label's font and color differ from the
+// story; the slides elide them as "...". The bottle picture is 157 by 650
+// pixels, and the steps render v(100) at BOTTLE_H units tall (data-h, plus
+// the label's height on step 3).
+const BOTTLE_H = 240;
+const BOTTLE_W = (BOTTLE_H * 157) / 650;
+const LINE_W = BOTTLE_W + 46;
+const BOTTLE_GAP = 8;
+const BOTTLE_PITCH_GAP = LINE_W + BOTTLE_GAP - BOTTLE_W;
+
+const pdBottleBars = () =>
+  chart(bottleData, { axes: false })
+    .flow(spread({ by: "category", dir: "x", spacing: BOTTLE_PITCH_GAP, axes: { x: false } } as any))
+    .mark(
+      layer([
+        rect({ h: v(100), fill: "gray", w: BOTTLE_W }),
+        rect({ h: "amount", fill: "lime", w: BOTTLE_W }),
+      ])
+    );
+
+const pdBottleTinted = () =>
+  chart(bottleData, { axes: false })
+    .flow(spread({ by: "category", dir: "x", spacing: BOTTLE_PITCH_GAP, axes: { x: false } } as any))
+    .mark(
+      atop({ blendMode: "color" }, [
+        image({ href: bottlePng, h: v(100), filter: Filter.grayscale } as any),
+        rect({ h: "amount", fill: "lime", w: BOTTLE_W }),
+      ])
+    );
+
 const pdBottle = () =>
   chart(bottleData, { axes: false })
-    .flow(spread({ by: "category", dir: "x", spacing: 20, axes: { x: false } } as any))
+    .flow(spread({ by: "category", dir: "x", spacing: BOTTLE_GAP, axes: { x: false } } as any))
     .mark(
       layer([
         atop({ blendMode: "color" }, [
           image({ href: bottlePng, h: v(100), filter: Filter.grayscale } as any),
-          rect({ h: "amount", w: 175, fill: "#00ff00" }),
+          rect({ h: "amount", fill: "lime", w: BOTTLE_W }),
         ]).name("bottle"),
-        rect({ h: 1, fill: "#666", w: 175, y: "amount" } as any).name("line"),
-        text({ fontSize: 35, fill: "#666", text: (d: any) => `${d.amount}%` } as any).name("label"),
+        rect({ h: 1, fill: MUTED, w: LINE_W, y: "amount" } as any).name("line"),
+        text({ fontSize: 20, fontFamily: FONT, fill: MUTED, text: (d: any) => `${d.amount}%` } as any).name("label"),
       ]).relate(({ line, label, bottle }: any) => [
         Constraint.align({ x: "start" }, [bottle, line]),
         Constraint.distribute({ dir: "y", spacing: 0 }, [line, label]),
@@ -612,6 +656,8 @@ const pdBottle = () =>
     );
 
 const charts: Record<string, (fontSize: number) => Renderable> = {
+  "piccl-bottle-bars": pdBottleBars,
+  "piccl-bottle-tinted": pdBottleTinted,
   "piccl-bottle": pdBottle,
   "usage-curve": usageCurve,
   ...compressionSteps,

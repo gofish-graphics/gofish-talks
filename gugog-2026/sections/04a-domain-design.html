@@ -1,7 +1,9 @@
         <!-- ═══ ANSWER CONTINUED, ~0:45 ═════════════════════════════════
-             Since 2026-11-06 the visible slides here are "same core, three
-             shapes of data", then the hierarchy slide (the takeaway: one
-             grammar can keep each domain's structure), then Figure 6. The
+             Since 2026-11-06, late night, the visible slides here are
+             "GoTree's layouts with GoFish's relations", "same core, three
+             shapes of data", "All three grammars in one picture" (a remake
+             of the paper's Figure 6), and then the hierarchy slide (the
+             takeaway: one grammar can keep each domain's structure). The
              McNutt quote is hidden. The older description of this part
              follows.
              PART 4a: DOES ONE LANGUAGE COST DOMAIN DESIGN?
@@ -159,8 +161,15 @@
              (the bottle and "same core, three shapes of data") are not
              auto-animate slides. -->
         <section class="code-slide gotree-specs-slide">
+          <style>
+            .reveal .gotree-specs-slide .gotree-point {
+              font-size: 0.7em;
+              margin: 0.6em 0 0;
+              text-align: center;
+            }
+          </style>
           <p class="part">Answer</p>
-          <h2>GoTree in GoFish keeps GoTree's own words</h2>
+          <h2>GoTree's layouts with GoFish's relations</h2>
           <div class="code-pair">
             <div>
               <p class="code-pair-label">GoTree <span class="code-pair-sub">· its own language</span></p>
@@ -200,17 +209,28 @@
 }, hierarchy);</code></pre>
             </div>
           </div>
+          <p class="gotree-point">GoTree has four relation names to learn: within, flatten, juxtapose, and align. GoFish's align and distribute do the same work.</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
-              4:55 of 7:00.</p>
+              5:05 of 7:00.</p>
             <p><strong>Say:</strong> "GoTree's input is a tree, not a table,
               so it does not fit the chart API. So we rebuilt GoTree as a
-              small library on GoFish. On the left is GoTree's own spec, in
-              its own JSON language. On the right is the GoFish version. It
-              keeps GoTree's words: a node, a link, a rule for parents and
-              children, and a rule for siblings. And each of GoTree's
-              relations becomes a GoFish relation, <code>align</code> or
-              <code>distribute</code>, like the planets."</p>
+              small library on GoFish. On the left is GoTree's own spec. To
+              read it, you have to learn four new relation names: within,
+              flatten, juxtapose, and align. Or we can just use the GoFish
+              ones. On the right, the same layout is written with
+              <code>align</code> and <code>distribute</code>, like the
+              planets. The library keeps GoTree's good idea: one spec works
+              for any tree, with a rule for parents and children and a rule
+              for siblings, and you change the rules to get other layouts.
+              But it says the rules with the relations we already have."</p>
+            <p>Be fair to GoTree: its relation names made sense in its own
+              setting, as a language for trees alone. They are only extra
+              words once there is a shared set of relations to use
+              instead.</p>
+            <p>Retitled on 2026-11-06, late night. It was "GoTree in GoFish
+              keeps GoTree's own words", which now says the opposite of the
+              point. The on-slide line under the code is new.</p>
             <p>The colors pair the parts: <code>within</code> and
               <code>align</code> become <code>align</code>, and
               <code>juxtapose</code> and <code>flatten</code> become
@@ -288,8 +308,10 @@ layer([planets, label])
           <p class="recap-core">one core underneath: the same verbs and constraints</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:20. <strong>Running total:</strong>
-              5:15 of 7:00. Since 2026-11-06 it comes after the bottle and
-              the GoTree specs, and before the hierarchy slide.</p>
+              5:25 of 7:00. Since 2026-11-06 it comes after the bottle and
+              the GoTree specs. Since 2026-11-06, late night, the next slide
+              is "All three grammars in one picture", then the hierarchy
+              slide.</p>
             <p><strong>Say:</strong> "Here are all three side by side. In
               the middle is the chart API from the ribbon chart. On the left
               are marks placed with relations directly, like the planets. And
@@ -297,10 +319,10 @@ layer([planets, label])
               align and distribute relations. What differs isn't the core,
               it's the shape of the data: marks, rows of a table, and a tree.
               Three surfaces on one core."</p>
-            <p><strong>Lead into the hierarchy slide:</strong> "So what does
-              this give us?"</p>
-            <p>GoTree was introduced earlier (its intro slide, "GoTree adds
-              operators for laying out trees"), and its specs are on the slide
+            <p><strong>Lead into the next slide:</strong> "And because they
+              share one core, you can mix them."</p>
+            <p>GoTree was introduced earlier (its intro slide, "GoTree draws
+              any tree in many layouts"), and its specs are on the slide
               just before this one. Its relations map onto the
               core: GoTree's <code>within</code> and <code>align</code> become
               <code>align</code>, and <code>juxtapose</code> and
@@ -332,6 +354,60 @@ layer([planets, label])
               auto-animate to connect.</p>
             <p>If asked about the paper: this is Andrew McNutt's compile tower,
               with GoFish as one floor of it.</p>
+          </aside>
+        </section>
+
+        <!-- The kicker: all three grammars in one picture. Since
+             2026-11-06, late night, it comes right after "same core, three
+             shapes of data"; before, it came after the hierarchy slide as
+             "the surfaces work together" and closed the answer. Until then
+             it showed the GUGOG camera-ready paper's Figure 6
+             (gugog-2026-camera-ready-v3/figures/gofish-tree-waffle.png, still
+             in images/tradeoffs/), whose waffles had two to eight bottles.
+             It now shows a remake with ten bottles per waffle, where one
+             waffle is empty, one is full, and two are partly filled
+             (images/tradeoffs/gofish-tree-waffle-tenths.png). The source is
+             ../sources/tree-waffle/main.ts, the paper's own source updated
+             for nightly 20261106 (atop for paint) and for gofish-gotree on
+             GoFish origin/main. It is a picture, not a live chart, because
+             gofish-gotree is not on npm; the paper's figure was a picture
+             too. No GoFish story has this example. A gofish-gotree tree
+             (GoTree) whose leaves are waffles (Atom) of bottle glyphs made
+             with atop (PiCCL). -->
+        <section class="figure-slide">
+          <style>
+            .reveal .figure-slide .tree-waffle {
+              display: block;
+              margin: 0.6em auto 0;
+              max-height: 440px;
+            }
+          </style>
+          <p class="part">Answer</p>
+          <h2>All three grammars in one picture</h2>
+          <img class="tree-waffle" src="./images/tradeoffs/gofish-tree-waffle-tenths.png" alt="A GoFish tree with four leaves. Each leaf is a waffle of ten bottles, and each bottle is filled with green. The first waffle is empty, the second is a little under half full, the third is full, and the fourth is almost three quarters full." />
+          <p class="source-line" style="text-align: center">After the GUGOG paper, Figure 6</p>
+          <aside class="notes">
+            <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
+              5:35 of 7:00.</p>
+            <p><strong>Say:</strong> "And because they share one core, you
+              can mix them. This is one picture that uses all three. The tree
+              is laid out the GoTree way. Each leaf is a waffle chart, like
+              Atom's. And each square of the waffle is a bottle, filled with
+              PiCCL's atop. Each waffle has ten bottles. This one is empty,
+              this one is full, and these two are partly filled. Nothing had
+              to be translated between the three."</p>
+            <p><strong>Lead into the hierarchy slide:</strong> "So what does
+              this give us?"</p>
+            <p><strong>Source:</strong> a remake of the GUGOG camera-ready
+              paper's Figure 6, "A GoFish graphic combining a tree, waffles,
+              and images." The paper's code is
+              <code>examples/gofish-tree-waffle.ts</code>. The remake's code is
+              <code>sources/tree-waffle/main.ts</code> in this deck. It uses
+              <code>atop</code> where the paper used <code>paint</code>, gives
+              each waffle ten bottles, and fills them in order from a share,
+              so one bottle can be partly full. Each waffle sits on a white
+              card, so the links stop at its top. The tree places the four
+              waffles itself, so there is no outer <code>spread</code>.</p>
           </aside>
         </section>
 
@@ -408,10 +484,11 @@ layer([planets, label])
           <p class="flat-vs-hierarchy-line">Each domain keeps its own structure, and all of them share the parts underneath.</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
-              5:30 of 7:00.</p>
-            <p>Since 2026-11-06 this slide is the takeaway of the answer. It
-              comes after "same core, three shapes of data" and before Figure
-              6.</p>
+              5:50 of 7:00. This ends the answer.</p>
+            <p>Since 2026-11-06 this slide is the takeaway of the answer.
+              Since 2026-11-06, late night, it comes after "All three grammars
+              in one picture" (the old Figure 6 slide) and ends the
+              answer.</p>
             <ul>
               <li><strong>Left:</strong> "In the grammar of graphics, every
                 chart sits directly on one flat layer of concepts. To reach a
@@ -430,8 +507,20 @@ layer([planets, label])
               <li>The faded blocks show that the middle row is open. New
                 domain languages can keep being added to it.</li>
             </ul>
-            <p><strong>Lead into Figure 6:</strong> "And because they share
-              that core, the domains can be mixed in one graphic."</p>
+            <p><strong>Lead into semantic validity:</strong> "So one grammar
+              can draw many more charts. That has a cost."</p>
+            <p><strong>Only if there is time</strong> (until 2026-11-06 this
+              was the bridge to the validity part; credit Jason Brunson's GUGOG
+              paper, "Balancing constriction and expansion for domain-specific
+              grammars"): "Jason's paper argues that each domain needs a
+              dialect, with its own objects and its own constraints on how
+              they combine. GoTree is a dialect in that sense, with its own
+              objects. His second half, the constraints, is where the
+              objection comes in. The more you let people extend the
+              language, the more it seems you give up safety." His words, for
+              reference: "From each specialty should be derived a graphical
+              dialect, constituting both permitted objects and constraints on
+              their combination."</p>
             <p><strong>If asked</strong> whether one language must give up
               each domain's design (Andrew McNutt's "No Grammar to Rule Them
               All", IEEE VIS 2022, whose quote slide is hidden): this is the
@@ -600,62 +689,3 @@ layer([planets, label])
           </aside>
         </section>
 
-
-        <!-- Picture only: the GUGOG camera-ready paper's Figure 6
-             (gugog-2026-camera-ready-v3/figures/gofish-tree-waffle.png),
-             copied exactly. A gofish-gotree tree whose leaves are chart-level
-             waffles of low-level bottle glyphs: all three surfaces in one
-             graphic. -->
-        <section class="figure-slide">
-          <style>
-            .reveal .figure-slide .tree-waffle {
-              display: block;
-              margin: 0.3em auto 0;
-              max-height: 480px;
-            }
-          </style>
-          <p class="part">Answer</p>
-          <h2>the surfaces work together</h2>
-          <img class="tree-waffle" src="./images/tradeoffs/gofish-tree-waffle.png" alt="A GoFish tree whose four leaves are waffles of bottle glyphs, each bottle filled with green to a data value" />
-          <p class="source-line" style="text-align: center">GUGOG paper, Figure 6</p>
-          <aside class="notes">
-            <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
-              5:40 of 7:00. This ends the answer.</p>
-            <ul>
-              <li>One graphic that uses all three surfaces. The tree is laid
-                out by the hierarchical surface (gofish-gotree). Each leaf is
-                a waffle written at the chart level. Each unit of a waffle is
-                a bottle glyph built from low-level marks: an image and a
-                data-sized fill rectangle.</li>
-              <li>This is the hierarchy holding together: three of its parts
-                mixed in one graphic, because they are one language. Each
-                domain kept its own design, and nothing had to be translated
-                between them.</li>
-            </ul>
-            <p><strong>Lead into semantic validity:</strong> "So one grammar
-              can draw many more charts. That has a cost."</p>
-            <p><strong>Only if there is time</strong> (until 2026-11-06 this
-              was the bridge to the validity part; credit
-              Jason Brunson's GUGOG paper, "Balancing constriction and
-              expansion for domain-specific grammars"): "Jason's paper argues
-              that each domain needs a dialect, with its own objects and its
-              own constraints on how they combine. GoTree is a dialect in
-              that sense, with its own objects. His second half, the
-              constraints, is where the objection comes in. The more you let
-              people extend the language, the more it seems you give up
-              safety."</p>
-            <p>His words, for reference: "From each specialty should be
-              derived a graphical dialect, constituting both permitted objects
-              and constraints on their combination." He proposes this as a
-              middle ground between extensions that allow misleading graphics
-              and a separate re-implementation for each domain. Keep the
-              reference at this level in the talk; his geometric data
-              analysis case study is not needed here.</p>
-            <p><strong>Source:</strong> GUGOG camera-ready paper, Figure 6,
-              "A GoFish graphic combining a tree, waffles, and images." The
-              code is <code>examples/gofish-tree-waffle.ts</code> in the
-              paper's folder. The tree places the four waffles itself, so
-              there is no outer <code>spread</code>. The internal nodes are
-              small circles.</p>
-          </aside>
-        </section>

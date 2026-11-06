@@ -10,6 +10,8 @@ Note, 2026-11-04, later the same day: the talk has a new hook, and the opening i
 
 Note, 2026-11-05 (later): the circle slide now uses the user's drawing, and the islands drawings are colored as islands, green land with yellow shores in blue water. On the circle slide, GUGOG itself is one light green island with a yellow shore, and the grammars inside it are darker green with no shore.
 
+Note, 2026-11-06, late night, part A: the PiCCL bottle is now built in three steps that lead to image compositing, following the SciPy 2026 deck's bottle steps. GoTree is reframed: its own idea is that one spec works for any tree and gives many layouts, and gofish-gotree keeps that idea but writes the layout with GoFish's align and distribute in place of GoTree's four relation names. The tree of bottle waffles, remade with ten bottles per waffle, now comes right after "same core, three shapes of data" as "All three grammars in one picture". The answer grows by 0:10, so with part B the talk runs 7:30 before the panel. See "Changes, 2026-11-06, late night, part A" below.
+
 Note, 2026-11-06, late night, part B: the semantic validity part carries the user's new script, in the same slide order. The opener now says "Very expressive! Did we lose safety and correctness?" The notes of the CanSum steps now say why the stacked temperatures are wrong, where the idea of tracking units came from (Huang and Kay, Flint, and the units in matplotlib), and that other cases are not caught yet. The part grows from 1:00 to 1:20, so the talk runs 7:20 before the panel. See "Changes, 2026-11-06, late night, part B" below.
 
 Note, 2026-11-06, night: a new slide, "Add a label under a planet", sits between "Operators also work directly on marks" and "`spread` is `align` plus `distribute`". It is on trial and may be cut. It adds the label and arrow from "same core, three shapes of data" to the planets, placed by `align` and `distribute`, so the next slide can show that `spread` is made of the same two relations. The next slide now keeps the label, and the three planets slides share one fixed frame, so the planets do not move. With it, the talk runs 7:00 before the panel, and 7:15 with the panel. See "Changes, 2026-11-06, night" below.
@@ -21,6 +23,50 @@ Note, 2026-11-06, later the same day: the GoFish intro now builds the ribbon cha
 Note, 2026-11-06: the talk is restructured around the user's new story. See "Restructure, 2026-11-06" below. It replaces the slide order, parts, and timing described in the older sections.
 
 Note, 2026-11-05: part 2 and part 3 are restructured, following the user's notes. A new circle slide, "one language that holds all of them", now opens part 2. It shows the user's drawing of one circle around all the islands. Its notes are the bridge: you could hold every grammar without unifying anything, by bundling each one as a separate component, but then you could not mix them, and mixing needs something the islands have in common. A new GoTree intro, "GoTree adds operators for laying out trees", joins the Atom and PiCCL intros. A short "What is GoFish?" slide after the verbs slide says that GoFish extends the grammar of graphics with verbs, like the thesis defense deck's slide of that name. The crash course is now the chart API only, two steps, stacked bars to the ribbon chart. The planets diagram moves to a new slide after it, "under the chart API is a smaller, more direct core", and the PiCCL bottle slide gets a callout that points at the same core lines in its spec. The three GoTree code slides in 4a are hidden, and GoTree in GoFish is shown only on "same core, three shapes of data". The total stays 7:00. See "Changes to the deck" and "Time".
+
+## Changes, 2026-11-06, late night, part A
+
+This section updates the answer and the question parts of "Changes, 2026-11-06, night" below. Part B, just after it, covers semantic validity. Everything not named here stays as those sections describe it.
+
+### What changed
+
+- The PiCCL bottle slide is now three auto-animate steps, like the ribbon buildup. The code is on the left and moves word by word. The live chart is on the right, in a fixed box, and the bottles do not move from step to step. The steps follow the SciPy 2026 deck's bottle steps ("normalized bars", "paint the bottle", "layer on labels"), in TypeScript and with `atop` in place of `paint`:
+  1. "The PiCCL bottle chart starts as two bars". 0:05. A `layer` of a gray rectangle as tall as 100 and a green ("lime") rectangle as tall as the amount, spread by category.
+  2. "Composite the green onto a bottle picture". 0:10. The `layer` becomes `atop({ blendMode: "color" }, [...])` and the gray rectangle becomes the bottle picture. This is the peak of the buildup, because image compositing is PiCCL's own idea.
+  3. "Mark the amount with a line and a label". 0:10. The full spec, with the line and label placed by `.relate(...)`. The "relations" tint and tag stay on this step, because the buildup makes the relations the one new thing on it.
+- From the SciPy deck, these slides keep the order, the gray and green bars, and the code of each step. They drop the SciPy deck's layout of three charts side by side with arrows, its fragments, its bar chart's axes and muted colors, and its Python syntax. Each step is its own slide here, and the bars use the same gray and green as the code says.
+- To keep the bottles still, the live charts differ from the GoFish repo's bottle story in styling only, which the slides elide as `...`. Every category takes the same width on every step. The bars are as wide as the bottle picture, the line runs from the bottle to the end of its label, and the label is in the deck's font. The story's 175-wide fill and line would make step 3 wider than step 2, because `atop` takes the picture's bounds. The charts are `piccl-bottle-bars`, `piccl-bottle-tinted`, and `piccl-bottle` in `charts.ts`.
+- The PiCCL intro is now titled "PiCCL adds operators for compositing images", and its notes say that image compositing is PiCCL's distinctive idea.
+- The GoTree intro is now titled "GoTree draws any tree in many layouts", and its right figure is labeled "layout rules for each axis". Its notes say that GoTree's interesting idea is that one spec works for any shape of tree and that the same few rules give very different pictures, and that it lays trees out with relations on each axis to do this.
+- The GoTree specs slide is now titled "GoTree's layouts with GoFish's relations". A line under the code says "GoTree has four relation names to learn: within, flatten, juxtapose, and align. GoFish's align and distribute do the same work." The notes say that gofish-gotree keeps GoTree's idea and writes it with the relations GoFish already has, and that GoTree's names made sense in its own setting. The color pairs still support the point: C (within) and F (align) map to `align`, and D (flatten) and E (juxtapose) map to `distribute`.
+- On "They add graphical operators and relations", the relations card now says "GoTree builds every layout from relations on each axis. Its juxtapose puts children beside their parent, and its align lines up siblings." This is still an honest example of a relation, from the paper's own description of GoTree, but it no longer reads as if relations were GoTree's main idea. The notes add a short line to say that these grammars did much more, that their other ideas were interesting and important at the time, and that they shaped GoFish's design too.
+- The kicker is back in the place the user asked for. It was never removed: it was the Figure 6 slide, "the surfaces work together", after the hierarchy slide. It now comes right after "same core, three shapes of data", titled "All three grammars in one picture". Its picture is a remake of the paper's Figure 6, which was a picture, not a live chart. Each waffle now has ten bottles, five across and two high. One waffle is empty, one is full, and two are partly filled, with one bottle partly full in each. Each waffle sits on a white card, so the links stop at its top. The source is `sources/tree-waffle/main.ts`, the paper's source updated for nightly 20261106 (`atop`) and gofish-gotree on GoFish origin/main. It stays a picture, because gofish-gotree is not on npm. No GoFish story has this example. The image is `images/tradeoffs/gofish-tree-waffle-tenths.png`; the paper's image is still in the same folder.
+- The hierarchy slide now ends the answer, and its notes carry the lead into semantic validity and the optional Brunson bridge.
+
+### Slide order and timing
+
+Everything up to the Atom comparison is unchanged and ends at 4:25.
+
+Answer, 1:35.
+
+19. Atom comparison. 0:10. Running total 4:25.
+20. Bottle step 1, "The PiCCL bottle chart starts as two bars". 0:05. Running total 4:30.
+21. Bottle step 2, "Composite the green onto a bottle picture". 0:10. Running total 4:40.
+22. Bottle step 3, "Mark the amount with a line and a label". 0:10. Running total 4:50.
+23. "GoTree's layouts with GoFish's relations". 0:15. Running total 5:05.
+24. "Same core, three shapes of data". 0:20. Running total 5:25.
+25. "All three grammars in one picture". 0:10. Running total 5:35.
+26. "Unify the domains and keep their structure". 0:15. Running total 5:50.
+
+Semantic validity, 1:20, as part B describes it, but each running total is 0:10 later: 6:55 after the Huang and Kay quote, 7:10 at the end of the part. The running totals in `04b-validity.html` were not changed here, because another change was editing that file; they are 0:10 early.
+
+Conclusion, 0:20. Running total 7:30.
+
+Panel, 0:15. Running total 7:45.
+
+### Over 7:00
+
+The talk now runs 7:30 before the panel. Nothing was cut. The bottle buildup costs 0:10 more than the single bottle slide. Cutting the label slide on trial saves 0:15, and cutting "All three grammars in one picture" saves 0:10. The cuts in "Changes, 2026-11-06, evening" still apply.
 
 ## Changes, 2026-11-06, late night, part B
 

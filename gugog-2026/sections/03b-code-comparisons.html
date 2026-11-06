@@ -2,7 +2,7 @@
              Since 2026-11-06 these two open the answer. Since 2026-11-06
              (later) they come right after the planets slide "spread is align
              plus distribute", which ends the GoFish intro.
-             Two slides: Atom vs GoFish, and the PiCCL bottle chart in
+             Atom vs GoFish, then the PiCCL bottle chart (three steps since 2026-11-06, late night) in
              GoFish. They are the evidence that the islands from part 2
              reduce to one shared set of operators. The Atom and PiCCL intro
              slides moved to part 2 (now 01c-compress-islands.html) on
@@ -109,41 +109,165 @@
           </aside>
         </section>
 
-        <!-- The PiCCL bottle chart, GoFish spec only (2026-11-03). Layout
-             follows the thesis defense deck's "Paint the Bars as Bottles"
-             slide (phd-thesis-20260618/presentation/sections/
-             03d-evidence-bottle.html): one split, code on the left, the
-             chart on the right, a PiCCL credit line under them. The spec is
-             the GoFish repo's bottle story as of gofish-graphics nightly
+        <!-- The PiCCL bottle chart, built up in three steps (2026-11-06, late
+             night). Until then it was one slide with the full spec, laid out
+             like the thesis defense deck's "Paint the Bars as Bottles" slide
+             (phd-thesis-20260618/presentation/sections/
+             03d-evidence-bottle.html); that version is in git history.
+             The steps follow the SciPy 2026 deck's bottle steps
+             (scipy-2026/sections/04-closing.html, "beyond standard charts",
+             pictorial charts; its charts are renderBottleBarBase and
+             renderBottleChart in scipy-2026/charts.ts):
+               1. "normalized bars": a gray bar as tall as 100 and a green
+                  bar as tall as the amount, in one layer.
+               2. "paint the bottle": the layer becomes atop with the color
+                  blend mode, and the gray bar becomes the bottle picture.
+                  This is the step the slides lead to, because image
+                  compositing is PiCCL's own idea.
+               3. "layer on labels": the line and the label, placed by
+                  relations.
+             The SciPy deck shows the three charts side by side with arrows
+             and the three specs under them, revealed by fragments, in
+             Python and with paint. Here each step is its own auto-animate
+             slide, with the code on the left, moved word by word
+             (data-magic-move), and one chart on the right in a fixed box,
+             as in the ribbon buildup. The chart is drawn live on nightly
+             20261106, where paint is atop. Its box has a data-id and the
+             render inside has none, so the new chart replaces the old one
+             in place (see 03-gofish-intro.html). The code box is as tall as
+             the longest step's code, and both columns are pinned to the
+             top, so the chart does not move when the code grows. The
+             bottles also stay put across steps: the gray bar, the bottle
+             picture and the fill all use the same width and the same
+             height scale.
+             The spec is the GoFish repo's bottle story as of nightly
              20261106 (packages/gofish-graphics/stories/piccl/
-             Bottle.stories.tsx, last changed in df2fd1de) with styling
-             (widths, colors, font size, spacing, the image's grayscale
-             filter) elided as "...". Since 2026-11-06 it uses atop, which
-             replaced paint in that commit, and the chart is drawn live from
-             the full spec ("piccl-bottle" in ../charts.ts) instead of shown
-             as the paper's image.
-             The PiCCL intro slide in part 2 (01c-compress-islands.html)
-             shows PiCCL's own figures.
-             The char marks point at the four operators the notes name.
-             The callout (2026-11-05): a code region tints the low-level
-             lines, layer and the .relate(...) block, and puts its role name
-             in the gutter where each part starts (talk-template's
-             data-code-regions; its color is in ../gofish-compare.css).
-             Since 2026-11-06 (later) the role is "relations", not "core",
-             and the tag under the code points back at the planets slide
-             "spread is align plus distribute", two slides before, which
-             writes relations the same way. -->
-        <section class="code-slide bottle-slide">
+             Bottle.stories.tsx, last changed in df2fd1de), with styling
+             (widths, the line's color, font size, spacing, the image's
+             grayscale filter) elided as "...". The fills are shown, and the
+             green is written "lime", the same color as the story's
+             "#00ff00". charts.ts holds the full specs ("piccl-bottle-bars",
+             "piccl-bottle-tinted", "piccl-bottle").
+             Step 3 keeps the "relations" code region from 2026-11-05: it
+             tints layer and the .relate(...) block, with a tag under the
+             code (talk-template's data-code-regions; colored in
+             ../gofish-compare.css). Steps 1 and 2 use char marks for what
+             each adds. -->
+        <section class="code-slide bottle-slide bottle-step" data-auto-animate data-auto-animate-id="bottle" data-auto-animate-unmatched="false">
+          <style>
+            .reveal .code-slide .bottle-step-split {
+              align-items: start;
+              display: grid;
+              gap: 0 1.2rem;
+              grid-template-columns: 752px 1fr;
+              margin-top: 1.6rem;
+            }
+            .reveal .code-slide .bottle-step-split pre {
+              font-size: 0.66em;
+              margin: 0;
+              width: 100%;
+            }
+            .reveal .code-slide .bottle-step-split pre code {
+              line-height: 1.3;
+              max-height: none;
+              min-height: calc(14 * 1.3em);
+            }
+            .reveal .code-slide .bottle-step-box {
+              align-items: flex-end;
+              display: flex;
+              height: 400px;
+              justify-content: center;
+            }
+            .reveal .code-slide .bottle-step-box .bottle-render {
+              zoom: 1;
+            }
+            .reveal .code-slide.bottle-step .source-line {
+              margin-top: 0.8rem;
+            }
+          </style>
           <p class="part">Answer</p>
-          <h2>The PiCCL bottle chart in GoFish</h2>
-          <div class="split bottle-split">
+          <h2>The PiCCL bottle chart starts as two bars</h2>
+          <div class="bottle-step-split">
             <div>
-              <pre><code class="language-ts" data-line-numbers data-char-marks="2:9-14, 3:9-13, 4:5-8, 10:6-11" data-code-regions="relations 3:9-3:15, relations 10:5-14:3">chart(bottleData, { axes: false })
+              <pre data-id="bottle-code" data-magic-move><code class="language-ts" data-line-numbers data-char-marks="4:5-9">chart(bottleData, { axes: false })
+  .flow(spread({ by: "category", dir: "x", ... }))
+  .mark(
+    layer([
+      rect({ h: v(100), fill: "gray", ... }),
+      rect({ h: "amount", fill: "lime", ... }),
+    ])
+  )</code></pre>
+            </div>
+            <div class="bottle-step-box" data-id="bottle-box">
+              <div class="bottle-render" data-chart="piccl-bottle-bars" data-w="440" data-h="240"></div>
+            </div>
+          </div>
+          <p class="source-line">Bottle chart from PiCCL · Shi et al., IEEE VIS 2025</p>
+          <aside class="notes">
+            <p><strong>Target:</strong> 0:05 (0:25 for the three steps).
+              <strong>Running total:</strong> 4:30 of 7:00.</p>
+            <p><strong>Say:</strong> "Now PiCCL's bottle chart. Start with
+              plain bars. For each category, a gray bar shows the whole
+              bottle, and a green bar on top of it shows the amount."</p>
+            <p><strong>Source:</strong> the first step of the SciPy 2026
+              deck's bottle steps, "normalized bars", written in TypeScript
+              with the same widths as the bottle, so the next step does not
+              move the picture. Drawn live from
+              <code>piccl-bottle-bars</code> in <code>../charts.ts</code>.</p>
+          </aside>
+        </section>
+
+        <section class="code-slide bottle-slide bottle-step" data-auto-animate data-auto-animate-id="bottle" data-auto-animate-unmatched="false">
+          <p class="part">Answer</p>
+          <h2>Composite the green onto a bottle picture</h2>
+          <div class="bottle-step-split">
+            <div>
+              <pre data-id="bottle-code" data-magic-move><code class="language-ts" data-line-numbers data-char-marks="4:5-31, 5:7-11">chart(bottleData, { axes: false })
+  .flow(spread({ by: "category", dir: "x", ... }))
+  .mark(
+    atop({ blendMode: "color" }, [
+      image({ href: bottlePng, h: v(100), ... }),
+      rect({ h: "amount", fill: "lime", ... }),
+    ])
+  )</code></pre>
+            </div>
+            <div class="bottle-step-box" data-id="bottle-box">
+              <div class="bottle-render" data-chart="piccl-bottle-tinted" data-w="440" data-h="240"></div>
+            </div>
+          </div>
+          <p class="source-line">Bottle chart from PiCCL · Shi et al., IEEE VIS 2025</p>
+          <aside class="notes">
+            <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
+              4:40 of 7:00.</p>
+            <p>This is the step to slow down on. Image compositing is PiCCL's
+              own idea.</p>
+            <p><strong>Say:</strong> "Here is PiCCL's idea. Swap the gray bar
+              for a picture of a bottle, and swap <code>layer</code> for
+              <code>atop</code>. <code>atop</code> draws the green bar onto the
+              picture and keeps only the part inside the bottle. The color
+              blend mode tints the glass and keeps its shine. So each bottle
+              is filled up to its amount. In GoFish this is one more operator,
+              next to <code>spread</code> and <code>layer</code>."</p>
+            <p><strong>Source:</strong> the SciPy deck's second step, "paint
+              the bottle". Its <code>paint</code> is now <code>atop</code>
+              (GoFish commit df2fd1de, in nightly 20261106). The picture also
+              takes <code>filter: Filter.grayscale</code>, which is left out
+              as <code>...</code>. Drawn live from
+              <code>piccl-bottle-tinted</code>.</p>
+          </aside>
+        </section>
+
+        <section class="code-slide bottle-slide bottle-step" data-auto-animate data-auto-animate-id="bottle" data-auto-animate-unmatched="false">
+          <p class="part">Answer</p>
+          <h2>Mark the amount with a line and a label</h2>
+          <div class="bottle-step-split">
+            <div>
+              <pre data-id="bottle-code" data-magic-move><code class="language-ts" data-line-numbers data-code-regions="relations 3:9-3:15, relations 10:5-14:3">chart(bottleData, { axes: false })
   .flow(spread({ by: "category", dir: "x", ... }))
   .mark(layer([
     atop({ blendMode: "color" }, [
       image({ href: bottlePng, h: v(100), ... }),
-      rect({ h: "amount", ... }),
+      rect({ h: "amount", fill: "lime", ... }),
     ]).name("bottle"),
     rect({ h: 1, y: "amount", ... }).name("line"),
     text({ text: (d) =&gt; `${d.amount}%`, ... }).name("label"),
@@ -154,64 +278,33 @@
   ]))</code></pre>
               <p class="core-callout"><span class="core-callout-tag">relations</span> written directly, as with the planets</p>
             </div>
-            <div>
-              <!-- Live: the "piccl-bottle" chart in ../charts.ts runs the
-                   full version of the spec on the left. -->
-              <div class="bottle-render" data-chart="piccl-bottle" data-w="800" data-h="330"></div>
+            <div class="bottle-step-box" data-id="bottle-box">
+              <div class="bottle-render" data-chart="piccl-bottle" data-w="440" data-h="266"></div>
             </div>
           </div>
           <p class="source-line">Bottle chart from PiCCL · Shi et al., IEEE VIS 2025</p>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:15. PiCCL was already introduced,
-              so this slide does not have to introduce it. <strong>Running
-              total:</strong> 4:40 of 7:00.</p>
-            <p><strong>The callout</strong> (since 2026-11-05; reworded
-              2026-11-06): the blue tinted lines, tagged "relations", are
-              relations written directly, the same way as on the planets
-              slide, "spread is align plus distribute":
-              <code>layer</code>, and <code>.relate(...)</code> with
-              <code>Constraint.align</code> and
-              <code>Constraint.distribute</code>. The rest of the spec is the
-              chart API from the ribbon buildup. Say: "And look at the tinted
-              lines. Here the relations are written directly, like with the
-              planets: line up the line with the bottle, and put the label
-              above the line. The operators and the relations mix in one
-              spec, because they are one language."</p>
-            <p><strong>Say:</strong> This bottle chart comes from PiCCL, by
-              Shi and others at VIS 2025. It is built from the PiCCL parts we
-              saw earlier. A picture of a bottle gets a green rectangle drawn
-              on top of it, as tall as the number, and only the part inside
-              the bottle shows. A line and a label mark the top of the green.
-              In GoFish, those same parts are a few operators, relations, and
-              marks.
-              <code>spread</code> repeats the bottle for each category.
-              <code>atop</code> draws the green rectangle onto the bottle
-              picture and keeps only the part inside the bottle, like PiCCL's
-              own atop. <code>layer</code> adds the line and the label, and
-              <code>relate</code> lines them up with the top of the green. So
-              PiCCL's idea fits into GoFish as a few operators and marks, and you
-              do not need a new language for it.</p>
+            <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
+              4:50 of 7:00.</p>
+            <p><strong>Say:</strong> "Last, a line and a label at the top of
+              the green. The tinted lines are relations, written the same way
+              as with the planets. Line up the line with the bottle, and put
+              the label just above the line. The operators and the relations
+              mix in one spec, because they are one language."</p>
             <p><strong>The point of the two comparisons:</strong> these are
               the same pictures from earlier, now written with one shared set
-              of operators and relations. The same <code>spread</code> does the work of Atom's
-              <code>gridxy</code> and of PiCCL's repeating. Written in one
-              language, the two islands share most of their structure, and
-              the differences are small parts you can point to. What the two
-              islands share is operators and relations.</p>
+              of operators and relations. The same <code>spread</code> does
+              the work of Atom's <code>gridxy</code> and of PiCCL's
+              repeating. PiCCL's compositing fits in as one more operator, so
+              you do not need a new language for it.</p>
             <p><strong>Lead into the next slide:</strong> "And here is the
               third one, GoTree."</p>
-            <p><strong>Source:</strong> The spec is the GoFish repo's bottle
-              story, <code>packages/gofish-graphics/stories/piccl/Bottle.stories.tsx</code>,
-              as of gofish-graphics nightly 20261106. It last changed in
-              df2fd1de (2026-11-04), where <code>paint</code> became
-              <code>atop</code> and the image got
-              <code>filter: Filter.grayscale</code>. The slide leaves out the
-              styling (widths, colors, font size, spacing, the grayscale
-              filter) and marks each place with <code>...</code>. The chart is
-              drawn live from the full spec. The GUGOG paper's Figure 4 shows
-              the older <code>paint</code> version of this spec, so the slide
-              no longer matches the paper's listing word for word. The layout
-              follows the thesis deck's "Paint the Bars as Bottles" slide. The
-              highlights mark the four operators named above.</p>
+            <p><strong>Source:</strong> the SciPy deck's third step, "layer on
+              labels". The spec is the GoFish repo's bottle story,
+              <code>packages/gofish-graphics/stories/piccl/Bottle.stories.tsx</code>,
+              as of nightly 20261106, with styling left out as
+              <code>...</code>. The GUGOG paper's Figure 4 shows the older
+              <code>paint</code> version of this spec. Drawn live from
+              <code>piccl-bottle</code>.</p>
           </aside>
         </section>
