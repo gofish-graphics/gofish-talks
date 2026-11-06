@@ -10,6 +10,8 @@ Note, 2026-11-04, later the same day: the talk has a new hook, and the opening i
 
 Note, 2026-11-05 (later): the circle slide now uses the user's drawing, and the islands drawings are colored as islands, green land with yellow shores in blue water. On the circle slide, GUGOG itself is one light green island with a yellow shore, and the grammars inside it are darker green with no shore.
 
+Note, 2026-11-06, night: a new slide, "Add a label under a planet", sits between "Operators also work directly on marks" and "`spread` is `align` plus `distribute`". It is on trial and may be cut. It adds the label and arrow from "same core, three shapes of data" to the planets, placed by `align` and `distribute`, so the next slide can show that `spread` is made of the same two relations. With it, the talk runs 7:00 before the panel, and 7:15 with the panel. See "Changes, 2026-11-06, night" below.
+
 Note, 2026-11-06, evening: the ribbon buildup now explains the data and shows how the rows are grouped at each step, the way the SciPy 2026 deck does. A new first step, "Start with the data", shows the first rows of the seafood table. On the four steps after it, a small copy of the table sits in the top right corner, and a data pipeline under the code shows how each operator groups the rows. The planets code now writes out the four circles. Auto-animate steps now take 0.3 seconds, and the new chart and title appear at once while the code moves, as in the thesis defense deck. The talk now runs 6:45 before the panel. See "Changes, 2026-11-06, evening" below.
 
 Note, 2026-11-06, later the same day: the GoFish intro now builds the ribbon chart step by step, then shows operators used directly on marks and how `spread` is made of relations, and the GoTree specs slide is back in the answer. The talk now runs 6:25 before the panel. See "Changes, 2026-11-06, later" below.
@@ -17,6 +19,58 @@ Note, 2026-11-06, later the same day: the GoFish intro now builds the ribbon cha
 Note, 2026-11-06: the talk is restructured around the user's new story. See "Restructure, 2026-11-06" below. It replaces the slide order, parts, and timing described in the older sections.
 
 Note, 2026-11-05: part 2 and part 3 are restructured, following the user's notes. A new circle slide, "one language that holds all of them", now opens part 2. It shows the user's drawing of one circle around all the islands. Its notes are the bridge: you could hold every grammar without unifying anything, by bundling each one as a separate component, but then you could not mix them, and mixing needs something the islands have in common. A new GoTree intro, "GoTree adds operators for laying out trees", joins the Atom and PiCCL intros. A short "What is GoFish?" slide after the verbs slide says that GoFish extends the grammar of graphics with verbs, like the thesis defense deck's slide of that name. The crash course is now the chart API only, two steps, stacked bars to the ribbon chart. The planets diagram moves to a new slide after it, "under the chart API is a smaller, more direct core", and the PiCCL bottle slide gets a callout that points at the same core lines in its spec. The three GoTree code slides in 4a are hidden, and GoTree in GoFish is shown only on "same core, three shapes of data". The total stays 7:00. See "Changes to the deck" and "Time".
+
+## Changes, 2026-11-06, night
+
+This section updates "Changes, 2026-11-06, evening" below. Everything not named here stays as that section describes it.
+
+### What changed
+
+- A new slide, "Add a label under a planet", comes between the two planets slides. It is on trial: the user wants to see it, and it may be cut for time.
+- It shows the label and arrow from the planets on "same core, three shapes of data", written like the two planets slides: no `const planets`, no map, and the same four circle lines. The box and the label go in a `layer`, and three relations place the label: `align` puts it under Mercury, `distribute` puts it 20 pixels below the box, and an arrow points from it to Mercury. The live chart is `planets-row-label` in `charts.ts`, and it runs the code shown with the styling filled in.
+- The flow is now: operators on marks, then a label placed by relations, then `spread` written as the same two relations. The magic move into the new slide wraps the box in a `layer` and adds the label lines. The magic move out of it drops the label again and turns `spread` into the `layer` and its two relations.
+- "`spread` is `align` plus `distribute`" is unchanged. Keeping the label there too would need 19 lines of code, and they do not fit with the picture at this font size.
+- The new slide's 15 lines push the picture down by about 65 pixels. The planets keep their size.
+
+To cut the slide: delete its section (and the comment above it) in `sections/03-gofish-intro.html`, delete `planetsRowLabel` and its `planets-row-label` key in `charts.ts`, and take 0:15 off the running totals from "`spread` is `align` plus `distribute`" on. The slides on either side do not depend on it.
+
+### Slide order and timing
+
+Everything up to "Operators also work directly on marks" is unchanged and ends at 3:45.
+
+GoFish intro, 1:55.
+
+16. "Operators also work directly on marks". 0:15. Running total 3:45.
+17. "Add a label under a planet" (on trial). 0:15. Running total 4:00.
+18. "`spread` is `align` plus `distribute`". 0:15. Running total 4:15.
+
+Answer, 1:25.
+
+19. Atom comparison. 0:10. Running total 4:25.
+20. The PiCCL bottle chart in GoFish. 0:15. Running total 4:40.
+21. "GoTree in GoFish keeps GoTree's own words". 0:15. Running total 4:55.
+22. "Same core, three shapes of data". 0:20. Running total 5:15.
+23. "Unify the domains and keep their structure". 0:15. Running total 5:30.
+24. Figure 6, "the surfaces work together". 0:10. Running total 5:40.
+
+Semantic validity, 1:00.
+
+25. "Validity rules belong to operators". 0:10. Running total 5:50.
+26. Huang and Kay quote. 0:10. Running total 6:00.
+27. CanSum, four steps. 0:10, 0:05, 0:05, 0:10. Running totals 6:10, 6:15, 6:20, 6:30.
+28. "Open question". 0:10. Running total 6:40.
+
+Conclusion, 0:20.
+
+29. "The grammar of graphics needs verbs". 0:20. Running total 7:00.
+
+Panel.
+
+30. Questions for the panel. 0:15. Running total 7:15.
+
+### Over 7:00
+
+The main story now runs 7:00 and leaves no time for the panel. Cutting the new slide brings it back to 6:45. The cuts suggested in "Changes, 2026-11-06, evening" still apply.
 
 ## Changes, 2026-11-06, evening
 

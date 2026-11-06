@@ -41,8 +41,9 @@
           <p class="gofish-what-sub">MIT-licensed and open source, for JavaScript and Python, at <strong>gofish.graphics</strong></p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
-              2:30 of 7:00. This slide, the ribbon buildup, and the two
-              planets slides are the GoFish intro, 1:40 in all.</p>
+              2:30 of 7:00. This slide, the ribbon buildup, and the three
+              planets slides are the GoFish intro, 1:55 in all (1:40
+              without "Add a label under a planet", which is on trial).</p>
             <p><strong>Say:</strong> "If the grammar of graphics had
               operators and relations, you would get GoFish. GoFish adds them
               to the grammar of graphics. It keeps the marks, channels,
@@ -644,6 +645,94 @@
           </aside>
         </section>
 
+        <!-- ═══ ON TRIAL: ADD A LABEL UNDER A PLANET, ~0:15 ════════════
+             Added 2026-11-06 (night), between "Operators also work directly
+             on marks" and "spread is align plus distribute". It may be cut
+             for time. It is self-contained: to cut it, delete this comment
+             and the section below, the "planets-row-label" chart in
+             ../charts.ts, and add 0:15 back to the running totals (see
+             outline.md, "Changes, 2026-11-06, night"). The slides on either
+             side do not depend on it.
+             It shows the label and arrow of the labeled planets on "same
+             core, three shapes of data" (the "planets-label" chart), written
+             like its two neighbors: the same four circle lines, so the magic
+             move from the slide before only wraps the box in a layer and
+             adds the label lines. The step to the next slide drops the label
+             again and turns spread into the layer and its two relations;
+             keeping the label there would need 19 lines, which do not fit
+             with the picture at this font size.
+             The animation is the same as on its neighbors: the code block
+             has data-magic-move, the render box has a data-id, and the
+             render inside it has none. The 15 lines of code push the render
+             box down by about 65 pixels. Its own style block puts the
+             picture at the top of the box, at the same size as on its
+             neighbors, so the label fits on the slide; the box keeps its
+             280 pixel height (its empty bottom runs past the slide edge),
+             because a matched box that changes size squashes the picture
+             while it moves. -->
+        <section class="code-slide spread-relate-slide planets-label-slide" data-auto-animate data-auto-animate-id="spread-relate" data-auto-animate-unmatched="false">
+          <style>
+            .reveal .planets-label-slide .spread-relate-box {
+              align-items: flex-start;
+              height: 280px;
+              margin-top: 0.3rem;
+            }
+            .reveal .planets-label-slide .spread-relate-render {
+              transform: scale(1.4);
+              transform-origin: top center;
+            }
+          </style>
+          <div class="gofish-intro-head">
+            <img src="./images/gofish-intro/gofish-logo.png" alt="GoFish logo" />
+            <div>
+              <h2>Add a label under a planet</h2>
+            </div>
+          </div>
+          <div class="spread-relate-body">
+            <pre data-id="spread-relate-code" data-magic-move><code class="language-ts" data-line-numbers data-char-marks="12:3-18, 13:3-23">layer([
+  enclose({ ... }, [
+    spread({ dir: "x", alignment: "middle", spacing: 50 }, [
+      circle({ r: 15, fill: "#F5E3C8", ... }).name("mercury"),
+      circle({ r: 36, fill: "#D2913C", ... }).name("venus"),
+      circle({ r: 38, fill: "#3E8CCC", ... }).name("earth"),
+      circle({ r: 21, fill: "#F4BC80", ... }).name("mars"),
+    ]),
+  ]).name("planets"),
+  text({ text: "Mercury", ... }).name("label"),
+]).relate(({ mercury, planets, label }) =&gt; [
+  Constraint.align({ x: "middle" }, [mercury, label]),
+  Constraint.distribute({ dir: "y", spacing: 20 }, [planets, label]),
+  arrow({ ... }, [label, mercury]),
+])</code></pre>
+            <div class="spread-relate-box" data-id="spread-relate-box">
+              <div class="spread-relate-render" data-chart="planets-row-label" data-w="440" data-h="160"></div>
+            </div>
+          </div>
+          <aside class="notes">
+            <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
+              4:00 of 7:00. This slide is on trial since 2026-11-06 and may
+              be cut.</p>
+            <p><strong>Say:</strong> "Now let's add a label under Mercury.
+              The label is a text mark. We put it in a layer with the box of
+              planets, and we give the layer three relations.
+              <code>align</code> puts the label at the same middle in x as
+              Mercury. <code>distribute</code> puts the label 20 pixels below
+              the box. And an arrow connects the label to Mercury. Relations
+              let us place one mark against any other mark, even a mark
+              inside another operator."</p>
+            <p><strong>Lead into the next slide:</strong> "These are the same
+              two relations that <code>spread</code> uses."</p>
+            <p>The code shown leaves out the styling as before. The label's
+              color and size and the arrow's color are marked with
+              <code>...</code>.</p>
+            <p><strong>Source:</strong> the label and arrow from the GoFish
+              repo's Diagrams tutorial story
+              (<code>packages/gofish-graphics/stories/tutorials/Diagrams.stories.tsx</code>),
+              the same as on "same core, three shapes of data". Rendered
+              live.</p>
+          </aside>
+        </section>
+
         <section class="code-slide spread-relate-slide" data-auto-animate data-auto-animate-id="spread-relate" data-auto-animate-unmatched="false">
           <div class="gofish-intro-head">
             <img src="./images/gofish-intro/gofish-logo.png" alt="GoFish logo" />
@@ -669,7 +758,7 @@
           </div>
           <aside class="notes">
             <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
-              4:00 of 7:00. This ends the GoFish intro.</p>
+              4:15 of 7:00. This ends the GoFish intro.</p>
             <p><strong>Say:</strong> "And here is the same picture, with
               <code>spread</code> written as two relations. A relation sets
               only some properties of a set of marks. <code>align</code> gives

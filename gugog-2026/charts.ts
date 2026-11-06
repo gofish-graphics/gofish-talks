@@ -453,6 +453,20 @@ const planetsRow = () =>
     ]),
   ]);
 
+// "Add a label under a planet" (on trial since 2026-11-06, night): the row
+// above with the label and arrow of planetsLabeled, written the way that
+// slide shows it, one layer around the box and the label. To cut the slide,
+// delete this function and its "planets-row-label" key.
+const planetsRowLabel = () =>
+  layer([
+    planetsRow(),
+    text({ text: "Mercury", fill: "#E94560", fontSize: 14 }).name("label"),
+  ]).relate(({ mercury, planets, label }) => [
+    Constraint.align({ x: "middle" }, [mercury, label]),
+    Constraint.distribute({ dir: "y", spacing: 20 }, [planets, label]),
+    arrow({ stroke: "#E94560" }, [label, mercury]),
+  ]);
+
 const planetsLabeled = () => {
   const planets = planetsRow();
 
@@ -596,6 +610,7 @@ const charts: Record<string, (fontSize: number) => Renderable> = {
   ...compressionSteps,
   ...compressionRateSteps,
   planets: planetsRow,
+  "planets-row-label": planetsRowLabel,
   "planets-label": planetsLabeled,
   "planets-relate": planetsRelate,
   "seafood-bars": seafoodBars,
