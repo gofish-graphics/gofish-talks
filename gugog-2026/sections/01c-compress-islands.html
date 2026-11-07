@@ -16,38 +16,62 @@
              the examples; it does not assert it first. -->
 
         <!-- The circle slide (2026-11-05). The user's drawing is
-             images/opening/grammars-circle.svg. -->
-        <section class="circle-slide">
+             images/opening/grammars-circle.svg.
+             Since 2026-11-07, later, it has no title and no on-slide
+             question (both are in the notes), and it continues the tangle
+             (01-islands.html): it shares the tangle's auto-animate id and
+             its frame (the same .grammars-stack, at the same place), and
+             the circle drawing sits over it. On the tangle slide the
+             islands and the arrows are shown; here the same two pictures
+             are in the stack at opacity 0, so they fade out while the
+             circle drawing (unmatched) fades in: a crossfade.
+             The circle drawing is the same tldraw drawing as the islands,
+             with the circle around them: its islands are at exactly the
+             same places in drawing units (within half a unit). But the
+             circle reaches past the islands' water box, by about 46 units
+             on the left, 66 on top, 16 on the right and 47 at the bottom,
+             so at the tangle's scale it would be 782px tall, taller than
+             the slide. It is drawn at 0.86 of the tangle's scale (736 by
+             694px), placed so the islands land as near as they can to the
+             tangle's islands: on average 30px away, at most 36px. -->
+        <section class="grammars-slide circle-slide" data-auto-animate data-auto-animate-id="grammars">
           <style>
-            .reveal .circle-slide .circle-drawing {
+            .reveal .circle-slide .grammars-stack img {
+              opacity: 0;
+            }
+            .reveal .circle-slide img.circle-drawing {
               border-radius: 0;
-              display: block;
-              height: 480px;
-              margin: 0.2em auto 0;
+              height: 694px;
+              left: 258px;
+              margin: 0;
               max-height: none;
               max-width: none;
-            }
-            .reveal .circle-slide .circle-question {
-              margin-top: 0.3em;
-              text-align: center;
+              position: absolute;
+              top: 6px;
+              width: 736px;
             }
           </style>
-          <h2>We want a grand unified grammar of graphics</h2>
+          <div class="grammars-stack" data-id="grammars-stack">
+            <img data-id="grammars-base" src="./images/opening/grammars.svg" alt="" />
+            <img src="./images/opening/grammars-arrows.svg" alt="" />
+          </div>
           <img class="circle-drawing" src="./images/opening/grammars-circle.svg"
             alt="One large circle labeled GUGOG that holds every grammar: the grammar of graphics in the middle and Atom, PiCCL, AnnoGram, Gemini, Neo, Canis, GoTree, GenomeSpy, Gosling, and Mascot around it" />
-          <p class="big-claim fragment circle-question">Why can't these grammars be unified with the grammar of graphics?</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:20, with the question.
               <strong>Running total:</strong> 1:20 of 7:00. This ends the
               problem.</p>
             <p>The picture is the islands drawing again, with one circle
-              labeled GUGOG around all of them.</p>
-            <p><strong>Say:</strong> "We would love one grammar that holds
-              all of these: a grand unified grammar of graphics, or
-              GUGOG."</p>
-            <p>(Click for the question.) "So a natural question is this: why
-              can't these grammars be unified with the grammar of graphics?
-              Let's look at three of them."</p>
+              labeled GUGOG around all of them. Since 2026-11-07, later, the
+              slide has no title and no on-slide question; the arrows fade
+              out and the circle fades in.</p>
+            <p><strong>Say</strong> (the old title's point): "We would love
+              a grand unified grammar of graphics: one grammar that holds all
+              of these, a GUGOG."</p>
+            <p>(The question, which used to be on the slide after a click.)
+              "So a natural question is this: why can't these grammars be
+              unified with the grammar of graphics? Let's look at three of
+              them."</p>
             <p>Do not answer the question here. The next three slides look at
               the evidence, and the slide after them says what the grammars
               have in common.</p>
