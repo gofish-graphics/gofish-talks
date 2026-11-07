@@ -49,7 +49,7 @@ const cells = (share: number) =>
 const bottleUnit = (data: any) => {
   const amount = data[0]?.amount ?? data.amount;
   return atop({ blendMode: "color" }, [
-    image({ href: bottlePng, h: BOTTLE_H, filter: Filter.grayscale } as any),
+    image({ href: bottlePng, h: BOTTLE_H, filter: Filter.grayscale }),
     rect({ y: BOTTLE_H - (amount / 100) * BOTTLE_H, h: (amount / 100) * BOTTLE_H, w: 40, fill: "lime" }),
   ])(data);
 };

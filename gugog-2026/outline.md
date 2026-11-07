@@ -10,7 +10,7 @@ Note, 2026-11-04, later the same day: the talk has a new hook, and the opening i
 
 Note, 2026-11-05 (later): the circle slide now uses the user's drawing, and the islands drawings are colored as islands, green land with yellow shores in blue water. On the circle slide, GUGOG itself is one light green island with a yellow shore, and the grammars inside it are darker green with no shore.
 
-Note, 2026-11-07: GoFish is now introduced through the three grammars' examples, not a separate crash course. Each example teaches one GoFish idea. Atom teaches the chart flow: a plain stacked bar chart becomes Atom's unit chart with a small code change. PiCCL's bottle teaches operators on marks and then relations. GoTree's slide is unchanged. The ribbon buildup, the three planets slides, the Atom comparison and the open question slide are hidden. The labels above the slide titles are gone from the whole deck, the middle dots in slide text are gone, and "All three grammars in one picture" now shows its code. The talk now runs 6:20 before the panel, 1:10 less than before. See "Changes, 2026-11-07" below.
+Note, 2026-11-07: GoFish is now introduced through the three grammars' examples, not a separate crash course. Each example teaches one GoFish idea. Atom teaches the chart flow: a plain stacked bar chart becomes Atom's unit chart with a small code change. PiCCL's bottle teaches operators on marks and then relations. GoTree's slide is unchanged. The ribbon buildup, the three planets slides, the Atom comparison, "same core, three shapes of data" and the open question slide are hidden. The labels above the slide titles are gone from the whole deck, the middle dots in slide text are gone, and "All three grammars in one picture" now shows its code. The talk now runs 6:00 before the panel, 1:30 less than before. See "Changes, 2026-11-07" below.
 
 Note, 2026-11-06, late night, part A: the PiCCL bottle is now built in three steps that lead to image compositing, following the SciPy 2026 deck's bottle steps. GoTree is reframed: its own idea is that one spec works for any tree and gives many layouts, and gofish-gotree keeps that idea but writes the layout with GoFish's align and distribute in place of GoTree's four relation names. The tree of bottle waffles, remade with ten bottles per waffle, now comes right after "same core, three shapes of data" as "All three grammars in one picture". The answer grows by 0:10, so with part B the talk runs 7:30 before the panel. See "Changes, 2026-11-06, late night, part A" below.
 
@@ -40,18 +40,18 @@ This section updates the slide order and timing of "Changes, 2026-11-06, late ni
 - The bars and the units sit in the same frame. Both charts use the same lake spacing, the bars are as wide as a row of five units, and both are drawn at the same size, so the tallest bar is as tall as the tallest column of units. Only the x axis is drawn, under the chart, which the slides ask for with a render option (`data-x-axis`), like the existing `legend: false`. The charts are `atom-stacked` and `atom-units` in `charts.ts`.
 - The PiCCL bottle steps now read as two parts. Step 1's notes say that operators also work directly on marks, and that `layer` is an operator on two rectangles. Step 2 is unchanged. Step 3 is now titled "Add relations to place a line and a label", its tag reads "relations place one mark against another", and its notes explain what a relation is, as the hidden planets slide did. Step 1 grows to 0:10 and step 3 to 0:15.
 - "`spread` is `align` plus `distribute`" is no longer a slide. The GoTree slide's notes have one optional line: GoTree's rule for siblings, distribute on x and align on y, is what `spread` does.
-- Hidden, with a comment saying why, so they can be compared or brought back: the five ribbon buildup slides and the three planets slides (`03-gofish-intro.html`), the Atom comparison "Atom's `gridxy` is GoFish's `spread`" (`03b-code-comparisons.html`), and the open question slide (`04b-validity.html`, hidden by the user). The open question's spoken framing, syntax-directed type checking, is now in the conclusion's notes next to its "Open question" bullet.
-- Notes that pointed at hidden slides are fixed: the lead out of "What is GoFish?", the bottle's "as with the planets" tag and notes, the GoTree slide's "like the planets", the "same core, three shapes of data" notes (the ribbon chart and the planets are now new to the audience there), the lead out of the last CanSum step, the panel slide's cut list, and the story summary on the title slide.
+- Hidden, with a comment saying why, so they can be compared or brought back: the five ribbon buildup slides and the three planets slides (`03-gofish-intro.html`), the Atom comparison "Atom's `gridxy` is GoFish's `spread`" (`03b-code-comparisons.html`), "same core, three shapes of data" (`04a-domain-design.html`), and the open question slide (`04b-validity.html`, hidden by the user). The open question's spoken framing, syntax-directed type checking, is now in the conclusion's notes next to its "Open question" bullet. "Same core, three shapes of data" is hidden because its planets and ribbon examples are no longer shown earlier, and "All three grammars in one picture" makes the shared-core point more strongly. Its spoken points moved to that slide: the GoTree slide now leads in with "And because they share one core, you can mix them", and the picture slide's notes say that Atom, PiCCL and GoTree in GoFish all use the same core operators and relations, and that the differences are in the shape of the data (rows of a table, a picture, a tree).
+- Notes that pointed at hidden slides are fixed: the lead out of "What is GoFish?", the bottle's "as with the planets" tag and notes, the GoTree slide's "like the planets", the "same core, three shapes of data" notes (the ribbon chart and the planets are now new to the audience there), the lead out of the last CanSum step, the GoTree intro's notes and comment in `01c-compress-islands.html`, the panel slide's cut list, and the story summary on the title slide.
 - The labels above the slide titles ("Problem", "Question", "Answer", "Semantic validity", "Conclusion", "Panel", and older numbered ones on hidden slides) are removed from every section file, hidden slides included. The CanSum steps' label had a `data-id`, removed on all four steps together, so the titles still match and do not move. The CSS rule `.part` stays in the shared template, because the SciPy 2026 deck still uses it. The title slide's venue line "GUGOG @ IEEE VIS 2026" is a different element and stays.
 - Middle dots are gone from slide text. Source lines now put the authors in parentheses, for example "Bottle chart from PiCCL (Shi et al., IEEE VIS 2025)". Code captions keep only their first part: "GoTree", "gofish-gotree", "Atom", "core", "tabular", "hierarchical", "the data", and "the picture". The hidden `combine` slide's caption is now two sentences. The old part labels quoted in this outline use commas.
 - On the bottle's second and third steps, the picture's `filter: Filter.grayscale` is now shown, on its own line under `image(...)`, because it is part of how the compositing works: the bottle is drawn in grays, and the color blend mode takes its color from the green rectangle. The type of `image` in nightly 20261106 accepts `filter`, so the `as any` casts on those two `image` calls in `charts.ts` are gone. The third step's code box is now 15 lines tall.
-- "All three grammars in one picture" now shows its code beside the picture. It is `sources/tree-waffle/main.ts` in three parts, in the file's order: `bottleUnit` (PiCCL, with `atop`), `waffle` (Atom, two spreads), and the `tree` call (GoTree). Each part is tinted and tagged with its grammar's name. Styling and setup are left out as `...`: the TypeScript casts, how `amount` is read, the fill's y and height, the picture's height and filter, spacing, node and card and link styling, the two `combine` rules, the `cells` helper, the `hierarchy` data, and the render call. The slide grows from 0:10 to 0:15.
+- "All three grammars in one picture" now shows its code beside the picture. It is `sources/tree-waffle/main.ts` in three parts, in the file's order: `bottleUnit` (PiCCL, with `atop`), `waffle` (Atom, two spreads), and the `tree` call (GoTree). Each part is tinted and tagged with its grammar's name. Styling and setup are left out as `...`: the TypeScript casts, how `amount` is read, the fill's y and height, the picture's height, spacing, node and card and link styling, the two `combine` rules, the `cells` helper, the `hierarchy` data, and the render call. The slide grows from 0:10 to 0:15.
 
 ### Slide order and timing
 
 Problem, 1:20, and Question, 1:10, are unchanged. They end at 2:30 with "What is GoFish?".
 
-Examples, which introduce GoFish and are the answer, 2:20.
+Examples, which introduce GoFish and are the answer, 2:00.
 
 10. Atom, "Start with the data". 0:10. Running total 2:40.
 11. Atom, "A stacked bar chart is a flow of operators". 0:15. Running total 2:55.
@@ -60,29 +60,28 @@ Examples, which introduce GoFish and are the answer, 2:20.
 14. PiCCL, "Composite the green onto a bottle picture". 0:10. Running total 3:30.
 15. PiCCL, "Add relations to place a line and a label". 0:15. Running total 3:45.
 16. "GoTree's layouts with GoFish's relations". 0:15. Running total 4:00.
-17. "Same core, three shapes of data". 0:20. Running total 4:20.
-18. "All three grammars in one picture". 0:15. Running total 4:35.
-19. "Unify the domains and keep their structure". 0:15. Running total 4:50.
+17. "All three grammars in one picture". 0:15. Running total 4:15.
+18. "Unify the domains and keep their structure". 0:15. Running total 4:30.
 
 Semantic validity, 1:10.
 
-20. "Very expressive! Did we lose safety and correctness?" 0:05. Running total 4:55.
-21. Huang and Kay quote. 0:10. Running total 5:05.
-22. CanSum, four steps. 0:30, 0:15, 0:05, 0:05. Running totals 5:35, 5:50, 5:55, 6:00.
+19. "Very expressive! Did we lose safety and correctness?" 0:05. Running total 4:35.
+20. Huang and Kay quote. 0:10. Running total 4:45.
+21. CanSum, four steps. 0:30, 0:15, 0:05, 0:05. Running totals 5:15, 5:30, 5:35, 5:40.
 
 Conclusion, 0:20.
 
-23. "The grammar of graphics needs verbs". 0:20. Running total 6:20.
+22. "The grammar of graphics needs verbs". 0:20. Running total 6:00.
 
 Panel.
 
-24. Questions for the panel. 0:15. Running total 6:35.
+23. Questions for the panel. 0:15. Running total 6:15.
 
 The running totals in `04b-validity.html` are correct again; part A had left them 0:10 early.
 
 ### Time
 
-The talk now runs 6:20 before the panel, down from 7:30. From "What is GoFish?" to the end of the hierarchy slide used to take 3:20 and now takes 2:20, so the new way of introducing GoFish saves 1:00. That already counts the extra 0:05 on the picture slide for its code. Hiding the open question saves 0:10 more. This leaves 0:40 for the panel within 7:00.
+The talk now runs 6:00 before the panel, down from 7:30. From "What is GoFish?" to the end of the hierarchy slide used to take 3:20 and now takes 2:00. The new way of introducing GoFish saves 1:00, which already counts the extra 0:05 on the picture slide for its code, and hiding "same core, three shapes of data" saves 0:20. Hiding the open question saves 0:10 more. This leaves 1:00 for the panel within 7:00.
 
 ## Changes, 2026-11-06, late night, part A
 

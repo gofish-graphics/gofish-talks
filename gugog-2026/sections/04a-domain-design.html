@@ -1,7 +1,8 @@
         <!-- ═══ ANSWER CONTINUED, ~0:45 ═════════════════════════════════
              Since 2026-11-06, late night, the visible slides here are
              "GoTree's layouts with GoFish's relations", "same core, three
-             shapes of data", "All three grammars in one picture" (a remake
+             shapes of data" (hidden since 2026-11-07), "All three grammars
+             in one picture" (a remake
              of the paper's Figure 6), and then the hierarchy slide (the
              takeaway: one grammar can keep each domain's structure). The
              McNutt quote is hidden. The older description of this part
@@ -156,8 +157,8 @@
              be the second state of an auto-animate pair with the data and
              picture slide; that slide is hidden and not adjacent, so this
              one no longer has data-auto-animate or data-ids. Its neighbors
-             (the bottle and "same core, three shapes of data") are not
-             auto-animate slides. -->
+             (the bottle, and since 2026-11-07 "All three grammars in one
+             picture") are not auto-animate slides. -->
         <section class="code-slide gotree-specs-slide">
           <style>
             .reveal .gotree-specs-slide .gotree-point {
@@ -237,8 +238,8 @@
               distribute on x and align on y, is what <code>spread</code>
               does. In GoFish, <code>spread</code> is made of those two
               relations."</p>
-            <p><strong>Lead into the next slide:</strong> "Here are all three
-              side by side."</p>
+            <p><strong>Lead into the next slide:</strong> "And because they
+              share one core, you can mix them."</p>
             <p><strong>If asked:</strong> GoFish is not trying to be the one
               definitive grammar. It is a shared core that domain grammars
               can build on, which fits Andrew McNutt's view that domain
@@ -267,7 +268,14 @@
              works on. Renders: charts.ts functions (planets-label,
              seafood-ribbon) and the paper's Figure 5 SVG. Since 2026-11-06
              (later) the GoTree specs slide comes right before it. -->
-        <section class="code-slide recap-slide">
+        <!-- Hidden on 2026-11-07. The new story introduces GoFish through
+             the three grammars, so its planets and ribbon examples are no
+             longer shown earlier in the talk, and "All three grammars in
+             one picture" makes the shared-core point more strongly. Its
+             spoken points are now in that slide's notes. Remove
+             data-visibility="hidden" to bring it back, and add its 0:20
+             back to the running totals. -->
+        <section class="code-slide recap-slide" data-visibility="hidden">
           <h2>same core, three shapes of data</h2>
           <div class="recap-grid">
             <div>
@@ -307,8 +315,8 @@ layer([planets, label])
           </div>
           <p class="recap-core">one core underneath: the same verbs and constraints</p>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:20. <strong>Running total:</strong>
-              4:20 of 7:00. Since 2026-11-06 it comes after the bottle and
+            <p><strong>Hidden since 2026-11-07.</strong> Target if shown:
+              0:20. Since 2026-11-06 it comes after the bottle and
               the GoTree specs. Since 2026-11-06, late night, the next slide
               is "All three grammars in one picture", then the hierarchy
               slide.</p>
@@ -360,8 +368,9 @@ layer([planets, label])
         </section>
 
         <!-- The kicker: all three grammars in one picture. Since
-             2026-11-06, late night, it comes right after "same core, three
-             shapes of data"; before, it came after the hierarchy slide as
+             2026-11-06, late night, it came right after "same core, three
+             shapes of data", and since 2026-11-07, when that slide was
+             hidden, right after the GoTree specs slide; before, it came after the hierarchy slide as
              "the surfaces work together" and closed the answer. Until then
              it showed the GUGOG camera-ready paper's Figure 6
              (gugog-2026-camera-ready-v3/figures/gofish-tree-waffle.png, still
@@ -382,7 +391,7 @@ layer([planets, label])
               align-items: center;
               display: grid;
               gap: 0 1.2rem;
-              grid-template-columns: 590px 1fr;
+              grid-template-columns: 630px 1fr;
               margin-top: 0.8rem;
             }
             .reveal .tree-waffle-slide pre {
@@ -425,7 +434,7 @@ layer([planets, label])
             <pre><code class="language-ts" data-line-numbers data-code-regions="PiCCL 1:1-7:2, Atom 9:1-15:22, GoTree 17:1-24:13">const bottleUnit = (data) =&gt; {
   const amount = ...;
   return atop({ blendMode: "color" }, [
-    image({ href: bottlePng, ... }),
+    image({ href: bottlePng, h: ..., filter: Filter.grayscale }),
     rect({ h: ..., fill: "lime", ... }),
   ])(data);
 };
@@ -451,17 +460,22 @@ tree({
           <p class="source-line" style="text-align: center">After the GUGOG paper, Figure 6</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
-              4:35 of 7:00. It grew from 0:10 on 2026-11-07, when the code was
-              added.</p>
-            <p><strong>Say:</strong> "And because they share one core, you
-              can mix them. This is one picture that uses all three. The tree
+              4:15 of 7:00. It grew from 0:10 on 2026-11-07, when the code was
+              added. Since then it also carries the points of the hidden
+              "same core, three shapes of data" slide.</p>
+            <p><strong>Say</strong> (after the lead from the GoTree slide,
+              "And because they share one core, you can mix them"): "This is
+              one picture that uses all three. The tree
               is laid out the GoTree way, with <code>tree</code>. Each leaf is
               a waffle chart, like Atom's, made with two spreads. And each
               square of the waffle is a bottle, filled with PiCCL's
               <code>atop</code>. The tree's leaves call the waffle, and the
               waffle's mark is the bottle. Each waffle has ten bottles. This one is empty,
               this one is full, and these two are partly filled. Nothing had
-              to be translated between the three."</p>
+              to be translated between the three. Atom, PiCCL and GoTree in
+              GoFish all use the same core operators and relations. What
+              differs is the shape of the data: rows of a table, a picture,
+              and a tree."</p>
             <p><strong>Lead into the hierarchy slide:</strong> "So what does
               this give us?"</p>
             <p><strong>Source:</strong> a remake of the GUGOG camera-ready
@@ -482,8 +496,7 @@ tree({
               <code>...</code>: the TypeScript casts (<code>as any</code> and
               <code>: any</code>), the way <code>amount</code> is read from
               the data, the fill rectangle's y and height (computed from
-              <code>amount</code>), the picture's height and grayscale
-              filter, the spacing, the node circle and card styling, the
+              <code>amount</code>), the picture's height, the spacing, the node circle and card styling, the
               link styling, the two <code>combine</code> rules (the same
               align and distribute rules as on the GoTree slide), the
               <code>cells</code> helper and the <code>hierarchy</code> data,
@@ -563,7 +576,7 @@ tree({
           <p class="flat-vs-hierarchy-line">Each domain keeps its own structure, and all of them share the parts underneath.</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
-              4:50 of 7:00. This ends the answer.</p>
+              4:30 of 7:00. This ends the answer.</p>
             <p>Since 2026-11-06 this slide is the takeaway of the answer.
               Since 2026-11-06, late night, it comes after "All three grammars
               in one picture" (the old Figure 6 slide) and ends the
