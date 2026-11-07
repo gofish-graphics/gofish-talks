@@ -10,7 +10,7 @@ Note, 2026-11-04, later the same day: the talk has a new hook, and the opening i
 
 Note, 2026-11-05 (later): the circle slide now uses the user's drawing, and the islands drawings are colored as islands, green land with yellow shores in blue water. On the circle slide, GUGOG itself is one light green island with a yellow shore, and the grammars inside it are darker green with no shore.
 
-Note, 2026-11-07, later: semantic validity is now bonus slides. The whole section (the opener, the Huang and Kay quote, the four CanSum steps, and the hidden open question) comes after the panel slide, behind a new divider slide titled "Bonus slides". The conclusion lost its third bullet, the open question, whose point is now in the last CanSum step's notes. The hierarchy slide now leads into the conclusion. The talk now runs 5:00 before the panel, which leaves 2:00 for the panel. See "Changes, 2026-11-07, later" below.
+Note, 2026-11-07, later: semantic validity is now bonus slides. The whole section (the opener, the Huang and Kay quote, the four CanSum steps, and the hidden open question) comes after the panel slide, behind a new divider slide titled "Bonus slides". The conclusion lost its third bullet, the open question, whose point is now in the last CanSum step's notes. The hierarchy slide now leads into the conclusion. The Atom walkthrough builds up again, with "Spread into bars" and "Stack within each lake" before the unit chart. The talk now runs 5:05 before the panel, which leaves 1:55 for the panel. See "Changes, 2026-11-07, later" below.
 
 Note, 2026-11-07: GoFish is now introduced through the three grammars' examples, not a separate crash course. Each example teaches one GoFish idea. Atom teaches the chart flow: a plain stacked bar chart becomes Atom's unit chart with a small code change. PiCCL's bottle teaches operators on marks and then relations. GoTree's slide is unchanged. The ribbon buildup, the three planets slides, the Atom comparison, "same core, three shapes of data" and the open question slide are hidden. The labels above the slide titles are gone from the whole deck, the middle dots in slide text are gone, and "All three grammars in one picture" now shows its code. The three grammar intros are now two steps each: the example charts alone, then the operators. The talk now runs 6:15 before the panel, 1:15 less than before. See "Changes, 2026-11-07" below.
 
@@ -40,25 +40,34 @@ This section updates the slide order and timing of "Changes, 2026-11-07" just be
 - The hierarchy slide now leads into the conclusion ("To sum up."). Its old lead into validity is kept in its notes for reference.
 - The panel's cut list no longer has "Cut the semantic validity opener". The panel's fourth question, about checking validity, is unchanged.
 - The grammar intros' operator figures no longer fade in on step 2. Each one is already on step 1, smaller than the example charts and hidden behind them, and slides out from behind them as the charts move away. Going back reverses it.
+- The Atom walkthrough builds up again before the unit chart: "Start with the data", "Spread into bars", "Stack within each lake" (until now "A stacked bar chart is a flow of operators"), then "Atom draws one square for each fish". The ribbon buildup's first three steps moved from `03-gofish-intro.html` to `03b-code-comparisons.html`, so they are not duplicated. "Sort the stacks" and "Draw the ribbon" stay hidden in `03-gofish-intro.html`. The pipeline grows one stage per step, and the bars keep their width, spacing and baseline through the unit chart (new chart `atom-bars`). "Spread into bars" is 0:10. "Stack within each lake" drops from 0:15 to 0:10, because `spread` is now explained on the step before it. The unit chart step no longer shows a pipeline. What it showed (103, 137 and 88 units, then rows of five) is in its notes. The code and the chart do not move when the pipeline goes, because the code column is pinned at the top.
 - No new pair animates by accident: the hierarchy slide, the conclusion, the panel slide, the divider, and the validity opener have no `data-auto-animate`. The four CanSum steps still pair with each other as before.
 
 ### Slide order and timing
 
-Problem, question, and examples, up to the hierarchy slide, are unchanged. Running total 4:45.
+Problem and question are unchanged. Running total 2:45.
 
-22. "The grammar of graphics needs verbs". 0:15. Running total 5:00.
-23. Questions for the panel. 0:15. Running total 5:15.
+13. Atom, "Start with the data". 0:10. Running total 2:55.
+14. Atom, "Spread into bars". 0:10. Running total 3:05.
+15. Atom, "Stack within each lake". 0:10. Running total 3:15.
+16. Atom, "Atom draws one square for each fish". 0:15. Running total 3:30.
+17. to 19. The PiCCL bottle steps. 0:10, 0:10, 0:15. Running totals 3:40, 3:50, 4:05.
+20. "GoTree's layouts with GoFish's relations". 0:15. Running total 4:20.
+21. "All three grammars in one picture". 0:15. Running total 4:35.
+22. "Unify the domains and keep their structure". 0:15. Running total 4:50.
+23. "The grammar of graphics needs verbs". 0:15. Running total 5:05.
+24. Questions for the panel. 0:15. Running total 5:20.
 
 Bonus slides, after the panel, not counted.
 
-24. "Bonus slides" divider.
-25. "Very expressive! Did we lose safety and correctness?" 0:05 if shown.
-26. Huang and Kay quote. 0:10 if shown.
-27. CanSum, four steps. 0:30, 0:15, 0:05, 0:05 if shown.
+25. "Bonus slides" divider.
+26. "Very expressive! Did we lose safety and correctness?" 0:05 if shown.
+27. Huang and Kay quote. 0:10 if shown.
+28. CanSum, four steps. 0:30, 0:15, 0:05, 0:05 if shown.
 
 ### Time
 
-The talk now runs 5:00 before the panel, down from 6:15. Moving semantic validity out saves 1:10, and the shorter conclusion saves 0:05. This leaves 2:00 for the panel within 7:00.
+The talk now runs 5:05 before the panel, down from 6:15. Moving semantic validity out saves 1:10, and the shorter conclusion saves 0:05. The Atom buildup adds 0:05 (0:10 for "Spread into bars", less 0:05 on the stacked step). This leaves 1:55 for the panel within 7:00.
 
 ## Changes, 2026-11-07
 

@@ -567,6 +567,13 @@ const UNIT_GAP = 2;
 const UNITS_PER_ROW = 5;
 const UNIT_ROW_W = UNITS_PER_ROW * UNIT + (UNITS_PER_ROW - 1) * UNIT_GAP;
 const LAKE_GAP = 40;
+// The Atom steps' "Spread into bars" (2026-11-07, later): the same frame as
+// atomStacked, so the bars keep their width, spacing and baseline.
+const atomBars = () =>
+  chart(seafood)
+    .flow(spread({ by: "lake", dir: "x", spacing: LAKE_GAP }))
+    .mark(rect({ w: UNIT_ROW_W, h: "count" }));
+
 const atomStacked = () =>
   chart(seafood)
     .flow(
@@ -708,6 +715,7 @@ const charts: Record<string, (fontSize: number) => Renderable> = {
   "seafood-stacked-unsorted": seafoodStackedUnsorted,
   "seafood-stacked": seafoodStacked,
   "seafood-ribbon": seafoodRibbon,
+  "atom-bars": atomBars,
   "atom-stacked": atomStacked,
   "atom-units": atomUnits,
   "canadd-untyped": citiesStacked("temp"),

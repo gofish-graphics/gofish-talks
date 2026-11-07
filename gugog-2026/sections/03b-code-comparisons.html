@@ -29,17 +29,19 @@
              Added 2026-11-07. GoFish is now introduced through the three
              grammars' examples, and each example teaches one GoFish idea.
              Atom teaches the chart flow, that is, operators in the chart
-             API. These three steps replace both the ribbon buildup and the
+             API. These four steps replace both the ribbon buildup and the
              planets slides (hidden in 03-gofish-intro.html) and the Atom
              comparison slide "Atom's gridxy is GoFish's spread" (hidden
              below). Their content is merged here:
                0. "Start with the data": the ribbon buildup's first step, as
                   it was.
-               1. A plain stacked bar chart, with the ribbon buildup's
-                  small data table and data transformation pipeline (the
-                  SciPy 2026 deck's, see the comment above the ribbon
-                  buildup). Its spec is the buildup's "Stack within each
-                  lake" step.
+               1. "Spread into bars" and "Stack within each lake": the
+                  ribbon buildup's next two steps, moved here on
+                  2026-11-07, later (not copied), with its small data table
+                  and data transformation pipeline (the SciPy 2026 deck's,
+                  see the comment above the ribbon buildup in
+                  03-gofish-intro.html). The pipeline grows one stage per
+                  step.
                2. Atom's version of the same chart, a unit chart with one
                   square for each fish. The spec is the GoFish repo's waffle
                   story on origin/main and in nightly 20261106
@@ -49,7 +51,11 @@
                   The stack line becomes those three lines, and the mark
                   gets a fixed size. The Atom comparison's points (Atom's
                   gridxy layouts are GoFish spreads, the credit to Atom, and
-                  the honest difference in packing) are in its notes.
+                  the honest difference in packing) are in its notes. Since
+                  2026-11-07, later, this step has no pipeline; the code
+                  column is pinned at the top, so the code and the chart do
+                  not move when the pipeline goes. What the pipeline showed
+                  is in the notes.
              The seafood data replaces the Titanic data of the Atom
              comparison so that the unit chart is a small step from the bar
              chart. The GoFish repo's Atom stories (stories/atom/) use the
@@ -63,8 +69,9 @@
              (data-auto-animate-unmatched="false"), and the code then moves.
              The auto-animate id is "atom", so the slides before and after
              (What is GoFish?, and the bottle's first step) change plainly.
-             The charts are "atom-stacked" and "atom-units" in ../charts.ts.
-             To keep the picture still, both charts use the same lake
+             The charts are "atom-bars", "atom-stacked" and "atom-units" in
+             ../charts.ts.
+             To keep the picture still, all three charts use the same lake
              spacing, the bars are as wide as a row of five units, and the
              bars' height scale matches the units. The slides elide those
              widths and the spacing as "...". -->
@@ -90,7 +97,7 @@
             </div>
           </div>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:10 (0:40 for the three Atom
+            <p><strong>Target:</strong> 0:10 (0:45 for the four Atom
               steps). <strong>Running total:</strong> 2:55 of 7:00.</p>
             <p>The lead in, from "What is GoFish?": "Let's see GoFish by
               writing the three grammars from before in it. Each one shows
@@ -109,7 +116,7 @@
         </section>
 
         <section class="code-slide crash-slide atom-step" data-auto-animate data-auto-animate-id="atom" data-auto-animate-unmatched="false">
-          <h2>A stacked bar chart is a flow of operators</h2>
+          <h2>Spread into bars</h2>
           <div class="mini-data-table" data-id="atom-mini-table">
             <table>
               <thead>
@@ -126,7 +133,92 @@
           <div class="crash-solo">
             <div>
               <p class="code-pair-label" data-id="atom-chart-label">chart API</p>
-              <pre data-id="atom-chart-code" data-magic-move><code class="language-ts" data-line-numbers data-char-marks="3:5-41, 4:5-38">chart(seafood)
+              <pre data-id="atom-chart-code" data-magic-move><code class="language-ts" data-line-numbers data-char-marks="3:5-41">chart(seafood)
+  .flow(
+    spread({ by: "lake", dir: "x", ... }),
+  )
+  .mark(rect({ h: "count", ... }))</code></pre>
+              <h3 class="transform-heading">Data transformation pipeline</h3>
+              <div class="transform-build" aria-label="How the seafood rows are grouped at this step.">
+                <div class="transform-stage transform-data" data-id="atom-pipe-data">
+                  <span class="transform-stage-label">seafood</span>
+                  <span class="transform-stage-detail">30 rows</span>
+                  <span class="transform-fields">lake, species, count</span>
+                </div>
+                <div class="transform-step" data-id="atom-pipe-lake-step">
+                  <span class="transform-arrow">↓</span>
+                  <code>group_by("lake")</code>
+                </div>
+                <div class="transform-groups transform-lakes" data-id="atom-pipe-lakes">
+                  <div class="transform-group"><b>Primrose</b><span>5 rows</span></div>
+                  <div class="transform-group"><b>Concord</b><span>5 rows</span></div>
+                  <span class="transform-ellipsis">…</span>
+                  <div class="transform-group"><b>Vulcan</b><span>5 rows</span></div>
+                </div>
+                <div class="transform-step" data-id="atom-pipe-rect-step-bars">
+                  <span class="transform-arrow">↓</span>
+                </div>
+                <div class="transform-groups transform-rects" data-id="atom-pipe-rects-1">
+                  <div class="transform-rects-one"><span class="transform-rect-cell"><i aria-hidden="true"></i><b>rect</b></span></div>
+                  <div class="transform-rects-one"><span class="transform-rect-cell"><i aria-hidden="true"></i><b>rect</b></span></div>
+                  <span class="transform-ellipsis">…</span>
+                  <div class="transform-rects-one"><span class="transform-rect-cell"><i aria-hidden="true"></i><b>rect</b></span></div>
+                </div>
+                <div class="transform-leaf-note" data-id="atom-pipe-leaf-1">
+                  <b>each <span class="viz-mark">rect</span></b>
+                  <code><i>h</i> = sum(count)</code>
+                </div>
+              </div>
+            </div>
+            <div class="crash-chart-box" data-id="atom-chart-box">
+              <div class="crash-render" data-chart="atom-bars" data-x-axis="start" data-w="520" data-h="319"></div>
+            </div>
+          </div>
+          <aside class="notes">
+            <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
+              3:05 of 7:00.</p>
+            <p><strong>Say:</strong> "A chart in GoFish has a flow of
+              operators. <code>spread</code> is an operator. It splits the
+              rows by lake, so we get six groups of five rows, and it puts
+              the lakes side by side. The mark is a rectangle. Each group
+              becomes one rectangle, as tall as the sum of its counts. So we
+              get one bar per lake."</p>
+            <p>The pipeline under the code shows how the rows are grouped.
+              The small table in the corner is there so you do not have to
+              remember the fields. The code shown leaves out the spacing
+              between the lakes and the width of the bars, and marks each
+              place with <code>...</code>. The live render uses the full spec
+              in <code>../charts.ts</code>.</p>
+            <p><strong>Source:</strong> the ribbon buildup's "Spread into
+              bars" step, moved here from 03-gofish-intro.html on 2026-11-07,
+              later. It is the thesis deck's "Step 1: Spread Into Bars"
+              slide. The pipeline and the small table are the SciPy 2026
+              deck's, from its "add a second grouping" slide. Rendered live
+              from <code>atom-bars</code>, in the same frame as the other
+              Atom charts.</p>
+          </aside>
+        </section>
+
+
+        <section class="code-slide crash-slide atom-step" data-auto-animate data-auto-animate-id="atom" data-auto-animate-unmatched="false">
+          <h2>Stack within each lake</h2>
+          <div class="mini-data-table" data-id="atom-mini-table">
+            <table>
+              <thead>
+                <tr><th>lake</th><th>species</th><th>count</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Primrose</td><td>Bass</td><td>23</td></tr>
+                <tr><td>Primrose</td><td>Trout</td><td>31</td></tr>
+                <tr><td>Primrose</td><td>Catfish</td><td>29</td></tr>
+                <tr><td>…</td><td>…</td><td>…</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="crash-solo">
+            <div>
+              <p class="code-pair-label" data-id="atom-chart-label">chart API</p>
+              <pre data-id="atom-chart-code" data-magic-move><code class="language-ts" data-line-numbers data-char-marks="4:5-38, 6:28-42">chart(seafood)
   .flow(
     spread({ by: "lake", dir: "x", ... }),
     stack({ by: "species", dir: "y" }),
@@ -180,24 +272,25 @@
             </div>
           </div>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
-              3:10 of 7:00.</p>
-            <p><strong>Say:</strong> "Here is a plain stacked bar chart in
-              GoFish. The chart has a flow of operators. <code>spread</code>
-              splits the rows by lake and puts the lakes side by side.
-              <code>stack</code> splits each lake again by species and piles
-              them up. The mark is a rectangle, as tall as its count and
-              colored by species. The pipeline under the code shows how the
-              rows are grouped at each step."</p>
-            <p>The small table in the corner is there so you do not have to
-              remember the fields. The code shown leaves out the spacing
-              between the lakes and the width of the bars, and marks each
-              place with <code>...</code>. The live render uses the full spec
-              in <code>../charts.ts</code>.</p>
+            <p><strong>Target:</strong> 0:10 (0:15 until 2026-11-07, later,
+              when it was "A stacked bar chart is a flow of operators" and
+              also introduced <code>spread</code>). <strong>Running
+              total:</strong> 3:15 of 7:00.</p>
+            <p><strong>Say:</strong> "Add a second operator,
+              <code>stack</code>. Inside each lake it splits the rows again,
+              by species, so each group is now one row. It piles them up.
+              Color the rectangles by species, and we have stacked bars."</p>
+            <p>The code shown leaves out the spacing between the lakes and
+              the width of the bars, and marks each place with
+              <code>...</code>. The live render uses the full spec in
+              <code>../charts.ts</code>.</p>
             <p><strong>Source:</strong> the ribbon buildup's "Stack within
-              each lake" step (hidden since 2026-11-07), which is the thesis
-              deck's "Step 2: Stack Within Each Lake" slide. The pipeline and
-              the small table are the SciPy 2026 deck's. Rendered live.</p>
+              each lake" step, which is the thesis deck's "Step 2: Stack
+              Within Each Lake" slide. Since 2026-11-07, later, the ribbon
+              buildup's own copy of this step is gone from
+              03-gofish-intro.html (its first three steps moved here). The
+              pipeline and the small table are the SciPy 2026 deck's.
+              Rendered live.</p>
           </aside>
         </section>
 
@@ -227,49 +320,6 @@
     spread({ dir: "x", ... }),
   )
   .mark(rect({ w: 8, h: 8, fill: "species" }))</code></pre>
-              <h3 class="transform-heading">Data transformation pipeline</h3>
-              <div class="transform-build" aria-label="How the seafood rows become units at this step.">
-                <div class="transform-stage transform-data" data-id="atom-pipe-data">
-                  <span class="transform-stage-label">seafood</span>
-                  <span class="transform-stage-detail">30 rows</span>
-                  <span class="transform-fields">lake, species, count</span>
-                </div>
-                <div class="transform-step" data-id="atom-pipe-lake-step">
-                  <span class="transform-arrow">↓</span>
-                  <code>group_by("lake")</code>
-                </div>
-                <div class="transform-groups transform-lakes" data-id="atom-pipe-lakes">
-                  <div class="transform-group"><b>Primrose</b><span>5 rows</span></div>
-                  <div class="transform-group"><b>Concord</b><span>5 rows</span></div>
-                  <span class="transform-ellipsis">…</span>
-                  <div class="transform-group"><b>Vulcan</b><span>5 rows</span></div>
-                </div>
-                <div class="transform-step" data-id="atom-pipe-repeat-step">
-                  <span class="transform-arrow">↓</span>
-                  <code>repeat("count")</code>
-                </div>
-                <div class="transform-groups transform-lakes" data-id="atom-pipe-units">
-                  <div class="transform-group"><b>Primrose</b><span>103 units</span></div>
-                  <div class="transform-group"><b>Concord</b><span>137 units</span></div>
-                  <span class="transform-ellipsis">…</span>
-                  <div class="transform-group"><b>Vulcan</b><span>88 units</span></div>
-                </div>
-                <div class="transform-step" data-id="atom-pipe-chunk-step">
-                  <span class="transform-arrow">↓</span>
-                  <code>group_by(chunk(5))</code>
-                </div>
-                <div class="transform-groups transform-lakes" data-id="atom-pipe-unit-rows">
-                  <div class="transform-group"><b>21 rows</b><span>of 5 units</span></div>
-                  <div class="transform-group"><b>28 rows</b><span>of 5 units</span></div>
-                  <span class="transform-ellipsis">…</span>
-                  <div class="transform-group"><b>18 rows</b><span>of 5 units</span></div>
-                </div>
-                <div class="transform-leaf-note" data-id="atom-pipe-leaf-units">
-                  <b>each <span class="viz-mark">rect</span></b>
-                  <code>one unit</code>
-                  <code><i>fill</i> = species</code>
-                </div>
-              </div>
             </div>
             <div class="crash-chart-box" data-id="atom-chart-box">
               <div class="crash-render" data-chart="atom-units" data-x-axis="end" data-w="520" data-h="319"></div>
@@ -278,7 +328,7 @@
           <p class="source-line">Unit charts from Atom (Park, Drucker, Fernandez &amp; Elmqvist, IEEE TVCG 2018)</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
-              3:25 of 7:00.</p>
+              3:30 of 7:00.</p>
             <p><strong>Say:</strong> "Atom draws a unit chart in place of the
               bars, with one square for each fish. In GoFish that is a small
               change to the same flow. In place of <code>stack</code>, we
@@ -287,6 +337,13 @@
               of five, and the rows on top of each other. Each square is the
               same size. The bars are still there, and they are now made of
               fish. Atom's nested layouts are these spreads."</p>
+            <p>Since 2026-11-07, later, this step has no data pipeline. What
+              its pipeline showed, if asked: after the lake groups,
+              <code>repeat("count")</code> turns each lake's five rows into one
+              row per fish (103 units for Primrose, 137 for Concord, 88 for
+              Vulcan), and then <code>chunk(5)</code> groups them into rows
+              of five (21, 28 and 18 rows), and each rect is one unit colored
+              by species.</p>
             <p><strong>If there is time:</strong> "Atom calls each of these
               layouts <code>gridxy</code>. Its nested layouts were an
               inspiration for the way GoFish writes operators in a flow."</p>
@@ -505,7 +562,7 @@
           <p class="source-line">Bottle chart from PiCCL (Shi et al., IEEE VIS 2025)</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:10 (0:35 for the three steps).
-              <strong>Running total:</strong> 3:35 of 7:00.</p>
+              <strong>Running total:</strong> 3:40 of 7:00.</p>
             <p>PiCCL shows two ideas of GoFish, in two parts. Steps 1 and 2
               show operators used directly on marks. Step 3 adds
               relations.</p>
@@ -542,7 +599,7 @@
           <p class="source-line">Bottle chart from PiCCL (Shi et al., IEEE VIS 2025)</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
-              3:45 of 7:00.</p>
+              3:50 of 7:00.</p>
             <p>This is the step to slow down on. Image compositing is PiCCL's
               own idea.</p>
             <p><strong>Say:</strong> "Here is PiCCL's idea. Swap the gray bar
@@ -592,7 +649,7 @@
           <p class="source-line">Bottle chart from PiCCL (Shi et al., IEEE VIS 2025)</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
-              4:00 of 7:00.</p>
+              4:05 of 7:00.</p>
             <p><strong>Say:</strong> "Now the second part, relations. We add
               a line and a label at the top of the green. A relation sets
               only some properties of a set of marks. The tinted lines are
