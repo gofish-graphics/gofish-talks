@@ -12,7 +12,12 @@
              This is a deliberate simplification. Relational marks (ribbon,
              arrow), refs, and "spread is a layer plus align and distribute"
              are left out here; they are in the notes and in the hidden
-             backup slide right after this one. -->
+             backup slide right after this one.
+             2026-11-07, later: each card's sentence and examples became a
+             drawing (inline SVG). The operator card shows spread: four bars
+             at even gaps on one baseline, in a dashed box, the new mark. The
+             relations card shows align: bars at uneven gaps, tops on one
+             dashed line. The sentences moved to the notes. -->
         <section class="opsrel-slide">
           <style>
             .reveal .opsrel-slide .opsrel-grid {
@@ -36,16 +41,14 @@
               font-size: 1.1em;
               margin: 0 0 0.45em;
             }
-            .reveal .opsrel-slide .opsrel-card p {
-              font-size: 0.98em;
-              line-height: 1.3;
-              margin: 0.4em 0 0.7em;
-            }
-            .reveal .opsrel-slide .opsrel-card .opsrel-examples {
-              color: var(--muted);
-              font-size: 0.8em;
-              line-height: 1.4;
-              margin: 0;
+            /* The two drawings share one size, so the cards stay equal
+               height. Both use the same bar fill, so the bars read as the
+               same kind of mark; the accent dashes are what the verb adds. */
+            .reveal .opsrel-slide .opsrel-pic {
+              display: block;
+              height: auto;
+              margin: 0.5em auto 0;
+              width: 82%;
             }
             .reveal .opsrel-slide .big-claim {
               margin-top: 1.5em;
@@ -82,14 +85,24 @@
             <div class="opsrel-card">
               <h3>Graphical operators</h3>
               <span class="opsig"><span class="opsig-fn">spread</span>(mark, …, mark)<span class="opsig-op"> → </span><span class="opsig-out">mark</span></span>
-              <p>An operator places a set of marks and makes one new mark that holds them.</p>
-              <p class="opsrel-examples">Atom's FillX and PiCCL's atop are operators.</p>
+              <svg class="opsrel-pic" viewBox="0 0 300 150" role="img" aria-label="Four bars, evenly spaced and resting on one baseline, inside a dashed box">
+                <rect x="30" y="22" width="246" height="116" fill="none" stroke="#b24a3b" stroke-width="2.5" stroke-dasharray="8 6" rx="6" />
+                <rect x="42" y="70" width="40" height="58" fill="#ddd6ca" stroke="#27231f" stroke-width="1.5" rx="2" />
+                <rect x="104" y="35" width="40" height="93" fill="#ddd6ca" stroke="#27231f" stroke-width="1.5" rx="2" />
+                <rect x="166" y="83" width="40" height="45" fill="#ddd6ca" stroke="#27231f" stroke-width="1.5" rx="2" />
+                <rect x="228" y="50" width="40" height="78" fill="#ddd6ca" stroke="#27231f" stroke-width="1.5" rx="2" />
+              </svg>
             </div>
             <div class="opsrel-card">
               <h3>Relations</h3>
               <span class="opsig"><span class="opsig-fn">align</span>(mark, …, mark)<span class="opsig-op"> → </span><span class="opsig-out">boolean</span></span>
-              <p>A relation is a fact about a set of marks, such as a shared top edge. GoFish places the marks so that it is true.</p>
-              <p class="opsrel-examples">GoTree's juxtapose and align are relations.</p>
+              <svg class="opsrel-pic" viewBox="0 0 300 150" role="img" aria-label="Four bars with uneven gaps, their top edges on one dashed line">
+                <rect x="24" y="35" width="40" height="70" fill="#ddd6ca" stroke="#27231f" stroke-width="1.5" rx="2" />
+                <rect x="74" y="35" width="40" height="45" fill="#ddd6ca" stroke="#27231f" stroke-width="1.5" rx="2" />
+                <rect x="154" y="35" width="40" height="95" fill="#ddd6ca" stroke="#27231f" stroke-width="1.5" rx="2" />
+                <rect x="226" y="35" width="40" height="60" fill="#ddd6ca" stroke="#27231f" stroke-width="1.5" rx="2" />
+                <line x1="8" y1="35" x2="292" y2="35" stroke="#b24a3b" stroke-width="2.5" stroke-dasharray="8 6" />
+              </svg>
             </div>
           </div>
           <p class="big-claim fragment">Neither one fits any of the seven concepts of the grammar of graphics.</p>
@@ -100,15 +113,17 @@
             <ul>
               <li>"So what did these three grammars add? Two kinds of
                 things."</li>
-              <li>"The first is graphical operators. An operator takes some
-                marks, places them, and gives back one new mark that holds
-                them. Marks go in, and one mark comes out. Atom's FillX and
-                PiCCL's atop are operators. In GoFish, spread is one."</li>
+              <li>"The first is graphical operators. An operator places a
+                set of marks and makes one new mark that holds them. Here
+                spread lines up four bars at even gaps, and the dashed box is
+                the new mark. Marks go in, and one mark comes out. Atom's
+                FillX and PiCCL's atop are operators."</li>
               <li>"The second is relations. A relation takes some marks and
-                gives back a boolean, true or false. Align is true when the
-                marks share an edge. GoFish places the marks so that it is
-                true. GoTree builds its layouts from relations like juxtapose
-                and align."</li>
+                gives back a boolean, true or false. It is a fact about a set
+                of marks, such as a shared top edge. Here the gaps are
+                uneven, but align is true: every top sits on the dashed line.
+                GoFish places the marks so that it is true. GoTree's
+                juxtapose and align are relations."</li>
               <li>(Click.) "The grammar of graphics does not have these.
                 Neither one fits any of its seven concepts."</li>
             </ul>
