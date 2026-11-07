@@ -49,11 +49,12 @@
               box-shadow: 4px 5px 0 rgba(30, 30, 30, 0.11);
               display: grid;
               gap: 0.8em;
-              grid-template-columns: 300px 1fr;
-              padding: 0.45em 0.7em 0.55em;
+              grid-template-columns: 330px 1fr;
+              padding: 0.45em 0.7em 0.55em 0;
             }
             .reveal .opsrel-slide .opsrel-head {
               align-items: center;
+              padding-left: 22px;
               display: flex;
               flex-direction: column;
             }
@@ -63,7 +64,7 @@
               margin: 0 0 0.25em;
             }
             .reveal .opsrel-slide .opsrel-card .opsig {
-              font-size: 0.6em;
+              font-size: 0.55em;
             }
             /* The two drawings share one size. Both use the same bar fill,
                so the bars read as the same kind of mark; the accent dashes
@@ -160,7 +161,7 @@
                 <div class="opsrel-fig"><div class="opsrel-fig-label"><span class="opsrel-fig-who">PiCCL</span> compositing operators</div><img src="./images/comparisons/piccl-operators.png" alt="PiCCL's compositing operators" /></div>
               </div>
             </div>
-            <div class="opsrel-card">
+            <div class="opsrel-card fragment">
               <div class="opsrel-head">
               <h3>Relations</h3>
               <span class="opsig"><span class="opsig-fn">align</span>(mark, …, mark)<span class="opsig-op"> → </span><span class="opsig-out">boolean</span></span>
@@ -193,7 +194,7 @@
                 FillX and PiCCL's atop are operators." (Point at the figures
                 to the right.) "These are their operator figures, from the slides
                 we just saw."</li>
-              <li>"The second is relations. A relation takes some marks and
+              <li>(Click: the relations row appears.) "The second is relations. A relation takes some marks and
                 gives back a boolean, true or false. It is a fact about a set
                 of marks, such as a shared top edge. Here the gaps are
                 uneven, but align is true: every top sits on the dashed line.
@@ -202,7 +203,7 @@
                 snapping and matching relations." (Point at the figures to the
                 right.) "Those are PiCCL's snapping and matching relations and GoTree's layout rules. So PiCCL
                 adds both kinds."</li>
-              <li>(Click.) "The grammar of graphics does not have these.
+              <li>(Second click.) "The grammar of graphics does not have these.
                 Neither one fits any of its seven concepts."</li>
             </ul>
             <p><strong>Lead into the next slide:</strong> "So what if we add
