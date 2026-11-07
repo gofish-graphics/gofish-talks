@@ -14,16 +14,26 @@
              grammars-arrows.svg has only the arrows. Both were split out of
              one export, so they share a viewBox and line up exactly. To edit,
              change the circles or arrows in each file, or re-export from
-             tldraw and split again. -->
+             tldraw and split again.
+             Since 2026-11-07, later, both files have the same viewBox as
+             images/opening/grammars-circle.svg, moved into their own
+             coordinates (the circle drawing's islands are the same shapes,
+             shifted by exactly 501.7787, 1074.46 in tldraw units). That
+             viewBox is the circle's box, which holds the water box too. So
+             the islands slide, the tangle slide, and the circle slide
+             (01c-compress-islands.html) draw all three files in one
+             .grammars-stack of one size and place, and every island sits on
+             the same pixels on all three. If you re-export, keep that
+             viewBox. -->
         <section class="grammars-slide" data-auto-animate data-auto-animate-id="grammars">
           <style>
             .reveal .slides section.grammars-slide {
               padding-top: 0;
             }
             .reveal .grammars-slide .grammars-stack {
-              aspect-ratio: 1418 / 1271;
-              height: 690px;
-              margin: 15px auto 0;
+              aspect-ratio: 855.9 / 806.81;
+              height: 694px;
+              margin: 8px auto 0;
               position: relative;
             }
             .reveal .grammars-slide .grammars-stack img {
