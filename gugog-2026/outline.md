@@ -54,6 +54,7 @@ This section updates the slide order and timing of "Changes, 2026-11-07" just be
 - On the Atom steps, the data table moves and shrinks from its big place on "Start with the data" into the top right corner, instead of vanishing and coming back. It is the same table (same card style, with the vertical dots row) on all four steps, shrunk in the corner.
 - The PiCCL intro's title is now "PiCCL adds compositing operators and snapping relations" (one line).
 - On "They add graphical operators and relations", the relations row comes in on a click, in a space it holds from the start, and the line about the seven concepts comes on a second click. The head of each row has more room on the left.
+- New slide after "GoTree's layouts with GoFish's relations": "spread is align plus distribute" (0:15). It shows spread over four bars in a dashed box, and on a click what spread elaborates to in GoFish (a layer with Constraint.align and Constraint.distribute), with a dashed baseline and gap markers added to the drawing. It ties the examples together: the operator from the Atom chart is the two relations from the bottle and GoTree. Running totals after it move by 0:15: the picture 4:50, the hierarchy 5:05, the conclusion 5:20, the panel 5:35.
 - No new pair animates by accident: the hierarchy slide, the conclusion, the panel slide, the divider, and the validity opener have no `data-auto-animate`. The four CanSum steps still pair with each other as before.
 
 ### Slide order and timing
