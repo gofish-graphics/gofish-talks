@@ -920,3 +920,32 @@
 .reveal .grammar-intro-first .intro-behind .grammar-fig {
   box-shadow: none;
 }
+
+/* The Atom steps' data table (since 2026-11-07, later): one matched
+   wrapper with the same table on all four steps, so auto-animate moves and
+   shrinks it from the chart's place on step 1 into the top right corner.
+   The inner div has a fixed width and takes the zoom, so the wrapper keeps
+   one shape and Reveal scales it evenly. */
+.reveal .atom-step .atom-data-inner {
+  width: 556px;
+}
+
+.reveal .atom-step .atom-data .crash-data-table {
+  margin: 0;
+}
+
+.reveal .atom-step .atom-data:not(.atom-data-corner) {
+  justify-self: start;
+  margin-top: 1.75rem;
+}
+
+.reveal .atom-step .atom-data-corner {
+  position: absolute;
+  right: 0.5em;
+  top: 0.35em;
+  z-index: 2;
+}
+
+.reveal .atom-step .atom-data-corner .atom-data-inner {
+  zoom: 0.38;
+}

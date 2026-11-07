@@ -63,7 +63,13 @@
              Animation, as in the ribbon buildup: the code has
              data-magic-move, the chart box has a data-id and the render
              inside it has none, and each pipeline row and the small table
-             have their own data-id with nothing matched inside them. A row
+             have their own data-id with nothing matched inside them.
+             The data table is one matched wrapper (.atom-data, data-id
+             atom-data-table) with the same table on all four steps, since
+             2026-11-07, later: big in the chart's place on step 1, and
+             shrunk with zoom on its inner div (never on the wrapper, which
+             Reveal transforms) into the top right corner on steps 2 to 4,
+             so it moves and shrinks in one piece. See ../gofish-compare.css. A row
              whose content changes gets a new data-id. The new title, chart
              and pipeline rows appear at once
              (data-auto-animate-unmatched="false"), and the code then moves.
@@ -82,18 +88,20 @@
               <p class="code-pair-label" data-id="atom-chart-label">chart API</p>
               <pre data-id="atom-chart-code" data-magic-move><code class="language-ts" data-line-numbers>chart(seafood)</code></pre>
             </div>
-            <div class="crash-chart-box" data-id="atom-chart-box">
-              <table class="crash-data-table">
-                <thead>
-                  <tr><th>lake</th><th>species</th><th>count</th></tr>
-                </thead>
-                <tbody>
-                  <tr><td>Primrose</td><td>Bass</td><td>23</td></tr>
-                  <tr><td>Primrose</td><td>Trout</td><td>31</td></tr>
-                  <tr><td>Primrose</td><td>Catfish</td><td>29</td></tr>
-                  <tr class="ellipsis-row"><td>&#8942;</td><td>&#8942;</td><td>&#8942;</td></tr>
-                </tbody>
-              </table>
+            <div class="atom-data" data-id="atom-data-table">
+              <div class="atom-data-inner">
+                <table class="crash-data-table">
+                  <thead>
+                    <tr><th>lake</th><th>species</th><th>count</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Primrose</td><td>Bass</td><td>23</td></tr>
+                    <tr><td>Primrose</td><td>Trout</td><td>31</td></tr>
+                    <tr><td>Primrose</td><td>Catfish</td><td>29</td></tr>
+                    <tr class="ellipsis-row"><td>&#8942;</td><td>&#8942;</td><td>&#8942;</td></tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
           <aside class="notes">
@@ -117,18 +125,20 @@
 
         <section class="code-slide crash-slide atom-step" data-auto-animate data-auto-animate-id="atom" data-auto-animate-unmatched="false">
           <h2>Spread into bars</h2>
-          <div class="mini-data-table" data-id="atom-mini-table">
-            <table>
-              <thead>
-                <tr><th>lake</th><th>species</th><th>count</th></tr>
-              </thead>
-              <tbody>
-                <tr><td>Primrose</td><td>Bass</td><td>23</td></tr>
-                <tr><td>Primrose</td><td>Trout</td><td>31</td></tr>
-                <tr><td>Primrose</td><td>Catfish</td><td>29</td></tr>
-                <tr><td>…</td><td>…</td><td>…</td></tr>
-              </tbody>
-            </table>
+          <div class="atom-data atom-data-corner" data-id="atom-data-table">
+            <div class="atom-data-inner">
+              <table class="crash-data-table">
+                <thead>
+                  <tr><th>lake</th><th>species</th><th>count</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Primrose</td><td>Bass</td><td>23</td></tr>
+                  <tr><td>Primrose</td><td>Trout</td><td>31</td></tr>
+                  <tr><td>Primrose</td><td>Catfish</td><td>29</td></tr>
+                  <tr class="ellipsis-row"><td>&#8942;</td><td>&#8942;</td><td>&#8942;</td></tr>
+                </tbody>
+              </table>
+            </div>
           </div>
           <div class="crash-solo">
             <div>
@@ -202,18 +212,20 @@
 
         <section class="code-slide crash-slide atom-step" data-auto-animate data-auto-animate-id="atom" data-auto-animate-unmatched="false">
           <h2>Stack within each lake</h2>
-          <div class="mini-data-table" data-id="atom-mini-table">
-            <table>
-              <thead>
-                <tr><th>lake</th><th>species</th><th>count</th></tr>
-              </thead>
-              <tbody>
-                <tr><td>Primrose</td><td>Bass</td><td>23</td></tr>
-                <tr><td>Primrose</td><td>Trout</td><td>31</td></tr>
-                <tr><td>Primrose</td><td>Catfish</td><td>29</td></tr>
-                <tr><td>…</td><td>…</td><td>…</td></tr>
-              </tbody>
-            </table>
+          <div class="atom-data atom-data-corner" data-id="atom-data-table">
+            <div class="atom-data-inner">
+              <table class="crash-data-table">
+                <thead>
+                  <tr><th>lake</th><th>species</th><th>count</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Primrose</td><td>Bass</td><td>23</td></tr>
+                  <tr><td>Primrose</td><td>Trout</td><td>31</td></tr>
+                  <tr><td>Primrose</td><td>Catfish</td><td>29</td></tr>
+                  <tr class="ellipsis-row"><td>&#8942;</td><td>&#8942;</td><td>&#8942;</td></tr>
+                </tbody>
+              </table>
+            </div>
           </div>
           <div class="crash-solo">
             <div>
@@ -296,18 +308,20 @@
 
         <section class="code-slide crash-slide atom-step" data-auto-animate data-auto-animate-id="atom" data-auto-animate-unmatched="false">
           <h2>Atom draws one square for each fish</h2>
-          <div class="mini-data-table" data-id="atom-mini-table">
-            <table>
-              <thead>
-                <tr><th>lake</th><th>species</th><th>count</th></tr>
-              </thead>
-              <tbody>
-                <tr><td>Primrose</td><td>Bass</td><td>23</td></tr>
-                <tr><td>Primrose</td><td>Trout</td><td>31</td></tr>
-                <tr><td>Primrose</td><td>Catfish</td><td>29</td></tr>
-                <tr><td>…</td><td>…</td><td>…</td></tr>
-              </tbody>
-            </table>
+          <div class="atom-data atom-data-corner" data-id="atom-data-table">
+            <div class="atom-data-inner">
+              <table class="crash-data-table">
+                <thead>
+                  <tr><th>lake</th><th>species</th><th>count</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Primrose</td><td>Bass</td><td>23</td></tr>
+                  <tr><td>Primrose</td><td>Trout</td><td>31</td></tr>
+                  <tr><td>Primrose</td><td>Catfish</td><td>29</td></tr>
+                  <tr class="ellipsis-row"><td>&#8942;</td><td>&#8942;</td><td>&#8942;</td></tr>
+                </tbody>
+              </table>
+            </div>
           </div>
           <div class="crash-solo">
             <div>
