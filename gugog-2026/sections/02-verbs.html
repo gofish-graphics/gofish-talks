@@ -3,64 +3,93 @@
              "Data, Marks, Channels, Coordinates" (from the thesis defense
              deck), which said the grammar of graphics has a rich set of
              nouns and almost no verbs. Now it names what Atom, PiCCL, and
-             GoTree added: graphical operators, which take a set of marks and
-             make a new mark, and relations, which take a set of marks and
-             produce a property. The wording follows the paper's section 2,
-             "Background: GoFish Composition". Its one click says that
-             neither fits the seven concepts of the grammar of graphics,
-             which leads into "What is GoFish?" (03-gofish-intro.html).
-             Until 2026-11-06 (later) a line under the cards said that an
-             operator places its marks completely, a relation sets only some
-             properties, and so operators can be built from relations. It is
-             gone: the slide "spread is align plus distribute"
-             (03-gofish-intro.html) now shows this with code. -->
+             GoTree added: graphical operators and relations. Its one click
+             says that neither fits the seven concepts of the grammar of
+             graphics, which leads into "What is GoFish?"
+             (03-gofish-intro.html).
+             2026-11-07: each card now leads with a signature in code form,
+             spread(mark, …, mark) → mark and align(mark, …, mark) → boolean.
+             This is a deliberate simplification. Relational marks (ribbon,
+             arrow), refs, and "spread is a layer plus align and distribute"
+             are left out here; they are in the notes and in the hidden
+             backup slide right after this one. -->
         <section class="opsrel-slide">
           <style>
             .reveal .opsrel-slide .opsrel-grid {
               display: grid;
               gap: 1.2em;
-              grid-template-columns: 1fr 1fr;
+              grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
               margin-top: 1.3em;
             }
             .reveal .opsrel-slide .opsrel-card {
+              align-items: center;
               background: #fff;
               border: 2px solid #27231f;
               border-radius: 6px 9px 5px 8px;
               box-shadow: 4px 5px 0 rgba(30, 30, 30, 0.11);
-              padding: 0.8em 0.9em 1em;
+              display: flex;
+              flex-direction: column;
+              padding: 0.9em 0.8em 1.1em;
             }
             .reveal .opsrel-slide .opsrel-card h3 {
               color: var(--accent);
               font-size: 1.1em;
-              margin: 0 0 0.4em;
+              margin: 0 0 0.45em;
             }
             .reveal .opsrel-slide .opsrel-card p {
-              font-size: 0.95em;
+              font-size: 0.98em;
               line-height: 1.3;
-              margin: 0 0 0.7em;
+              margin: 0.4em 0 0.7em;
             }
             .reveal .opsrel-slide .opsrel-card .opsrel-examples {
               color: var(--muted);
-              font-size: 0.78em;
-              line-height: 1.45;
+              font-size: 0.8em;
+              line-height: 1.4;
               margin: 0;
             }
             .reveal .opsrel-slide .big-claim {
-              margin-top: 1.6em;
+              margin-top: 1.5em;
               text-align: center;
+            }
+            /* A signature in code form, shared with the backup slide below. */
+            .reveal .opsig {
+              background: #f6f2e9;
+              border: 1.5px solid rgba(39, 35, 31, 0.25);
+              border-radius: 6px;
+              color: var(--ink);
+              display: inline-block;
+              font-family: "Fira Code", ui-monospace, monospace;
+              font-size: 0.86em;
+              font-weight: 500;
+              margin: 0.15em 0 0.4em;
+              padding: 0.25em 0.65em;
+              white-space: nowrap;
+            }
+            .reveal .opsig .opsig-fn {
+              color: var(--accent);
+              font-weight: 650;
+            }
+            .reveal .opsig .opsig-op {
+              color: var(--muted);
+              padding: 0 0.15em;
+            }
+            .reveal .opsig .opsig-out {
+              font-weight: 650;
             }
           </style>
           <h2>They add graphical operators and relations</h2>
           <div class="opsrel-grid">
             <div class="opsrel-card">
               <h3>Graphical operators</h3>
-              <p>An operator takes a set of marks and makes a new mark.</p>
-              <p class="opsrel-examples">Atom's FillX and MaxFill arrange units into a block.<br />PiCCL's atop and replicate make a new picture from old ones.</p>
+              <span class="opsig"><span class="opsig-fn">spread</span>(mark, …, mark)<span class="opsig-op"> → </span><span class="opsig-out">mark</span></span>
+              <p>An operator places a set of marks and makes one new mark that holds them.</p>
+              <p class="opsrel-examples">Atom's FillX and PiCCL's atop are operators.</p>
             </div>
             <div class="opsrel-card">
               <h3>Relations</h3>
-              <p>A relation takes a set of marks and produces a property, such as a shared position.</p>
-              <p class="opsrel-examples">GoTree builds every layout from relations on each axis.<br />Its juxtapose puts children beside their parent, and its align lines up siblings.</p>
+              <span class="opsig"><span class="opsig-fn">align</span>(mark, …, mark)<span class="opsig-op"> → </span><span class="opsig-out">boolean</span></span>
+              <p>A relation is a fact about a set of marks, such as a shared top edge. GoFish places the marks so that it is true.</p>
+              <p class="opsrel-examples">GoTree's juxtapose and align are relations.</p>
             </div>
           </div>
           <p class="big-claim fragment">Neither one fits any of the seven concepts of the grammar of graphics.</p>
@@ -69,52 +98,59 @@
               2:35 of 7:00.</p>
             <p><strong>Say:</strong></p>
             <ul>
-              <li>"So what did these three grammars add? None of them mainly
-                added a new kind of mark or channel. They added two kinds of
+              <li>"So what did these three grammars add? Two kinds of
                 things."</li>
-              <li>"The first is graphical operators. An operator takes a set
-                of marks and makes a new mark. Atom's FillX takes a group of
-                units and makes one block of them. PiCCL's atop takes two
-                pictures and makes one picture."</li>
-              <li>"The second is relations. A relation takes a set of marks
-                and produces a property, such as where they sit. GoTree builds
-                all of its layouts from relations. Its juxtapose puts the
-                children beside their parent, and its align lines up sibling
-                subtrees at the top."</li>
+              <li>"The first is graphical operators. An operator takes some
+                marks, places them, and gives back one new mark that holds
+                them. Marks go in, and one mark comes out. Atom's FillX and
+                PiCCL's atop are operators. In GoFish, spread is one."</li>
+              <li>"The second is relations. A relation takes some marks and
+                gives back a boolean, true or false. Align is true when the
+                marks share an edge. GoFish places the marks so that it is
+                true. GoTree builds its layouts from relations like juxtapose
+                and align."</li>
               <li>(Click.) "The grammar of graphics does not have these.
                 Neither one fits any of its seven concepts."</li>
             </ul>
-            <p><strong>Say, briefly:</strong> "These grammars did a lot
-              more than this, and at the time their other ideas were
-              interesting and important too. They shaped GoFish's design as
-              well. Here I am only looking at what they share."</p>
-            <p>On 2026-11-06, late night, the relations examples were
-              reworded. GoTree's own idea is that one spec works for any tree
-              and gives many layouts (see its intro slide). Its relations are
-              how it builds those layouts, so they are still an honest example
-              of a relation, but the card no longer reads as if relations were
-              GoTree's main idea.</p>
+            <p><strong>Lead into the next slide:</strong> "So what if we add
+              them?"</p>
             <p>This is what the title of the paper means by verbs. Operators
               and relations are the verbs. Say "verbs" only if it helps; the
               slides use the two names.</p>
-            <p><strong>Lead into the next slide:</strong> "So what if we add
-              them?"</p>
-            <p><strong>If asked, or as backup:</strong></p>
+            <p><strong>If asked, or as backup</strong> (the hidden slide
+              right after this one shows the precise version):</p>
             <ul>
-              <li>Fair to the grammar of graphics: facets, coordinate
-                transformations, and position adjustments like stack and dodge
-                do combine marks. The paper's point is that they do not
-                express all the constructions that the domain-specific
-                grammars need.</li>
+              <li>A relation can also draw. A ribbon or an arrow takes marks
+                that are already placed and draws a new mark between them,
+                without moving them. The paper calls these relational marks:
+                "Like a typical mark, a relational mark can draw on the
+                screen. However, unlike a typical mark, a relational mark
+                takes children like other relations."</li>
+              <li>A relation does not hold its marks. It points to marks that
+                something else holds, by name. GoFish calls such a name a
+                ref. So the precise signature of align is
+                <code>align(ref, …, ref) → boolean</code>, and of ribbon is
+                <code>ribbon(ref, …, ref) → mark</code>.</li>
+              <li>Operators are made of relations. <code>spread</code> is a
+                <code>layer</code>, which holds marks without placing them,
+                plus <code>align</code> and <code>distribute</code>, which
+                place every one. <code>stack</code> is the same spread with no
+                gaps. Not every operator works this way. <code>atop</code>
+                composites its pictures directly.</li>
               <li>The paper's own definitions (section 2): relations relate
-                two or more marks. They can be spatial constraints, like
-                alignment, or marks that connect other marks, like a ribbon.
-                Operators are a way to write relations over arrays of
+                two or more marks, either with spatial constraints, like
+                alignment, or with marks that connect other marks, like a
+                ribbon. Operators are a way to write relations over arrays of
                 data-driven marks, and an operator must lay out its children
                 fully. So <code>spread</code> can be an operator,
                 <code>ribbon</code> can be one because its children are
                 already placed, and <code>distribute</code> cannot, because it
                 only constrains one axis.</li>
+              <li>Fair to the grammar of graphics: facets, coordinate
+                transformations, and position adjustments like stack and dodge
+                do combine marks. The paper's point is that they do not
+                express all the constructions that the domain-specific
+                grammars need.</li>
               <li>Relations come from the graphical perception literature:
                 Gestalt grouping (common region, connection, alignment,
                 proximity), Larkin and Simon on diagrams, and Pinker on how
@@ -124,7 +160,109 @@
               "Background: GoFish Composition", and its introduction, which
               says that the grammar of graphics "lacks verbs that take
               graphical objects and compose them into new graphical
-              objects".</p>
+              objects". The layer, align, and distribute definition of spread
+              is in
+              <code>packages/gofish-graphics/src/ast/graphicalOperators/spread.tsx</code>.</p>
+          </aside>
+        </section>
+
+        <!-- Hidden backup for questions: the precise version of the slide
+             above. Operators hold their marks; relations and relational
+             marks point to marks held elsewhere, through refs; and spread is
+             a layer plus align and distribute. Unhide it only to answer a
+             question about relational marks, refs, or how operators relate
+             to relations. -->
+        <section class="opsig-backup-slide" data-visibility="hidden">
+          <style>
+            .reveal .opsig-backup-slide .opsig-table {
+              align-items: center;
+              display: grid;
+              gap: 0.7em 0.9em;
+              grid-template-columns: auto 1fr;
+              margin: 1.1em auto 0;
+              text-align: left;
+              width: 100%;
+            }
+            .reveal .opsig-backup-slide .opsig {
+              font-size: 0.82em;
+              margin: 0;
+            }
+            .reveal .opsig-backup-slide .opsig-what {
+              font-size: 0.82em;
+              line-height: 1.3;
+              margin: 0;
+            }
+            .reveal .opsig-backup-slide .opsig-what b {
+              color: var(--accent);
+            }
+            .reveal .opsig-backup-slide .opsig-link {
+              background: #fff;
+              border: 2px solid #27231f;
+              border-radius: 6px 9px 5px 8px;
+              box-shadow: 4px 5px 0 rgba(30, 30, 30, 0.11);
+              margin-top: 1.1em;
+              padding: 0.7em 0.9em 0.75em;
+              text-align: left;
+            }
+            .reveal .opsig-backup-slide .opsig-link .opsig {
+              margin: 0 0 0.25em;
+            }
+            .reveal .opsig-backup-slide .opsig-link p {
+              font-size: 0.82em;
+              line-height: 1.3;
+              margin: 0;
+            }
+            .reveal .opsig-backup-slide .opsig-link p code {
+              font-family: "Fira Code", monospace;
+            }
+            .reveal .opsig-backup-slide .opsig-footnote {
+              color: var(--muted);
+              font-size: 0.72em;
+              margin-top: 0.9em;
+              text-align: left;
+            }
+          </style>
+          <h2>Operators hold marks, and relations point to them</h2>
+          <div class="opsig-table">
+            <span class="opsig"><span class="opsig-fn">spread</span>(mark, …, mark)<span class="opsig-op"> → </span><span class="opsig-out">mark</span></span>
+            <p class="opsig-what"><b>Operator.</b> It holds its marks, places all of them, and makes one new mark around them.</p>
+            <span class="opsig"><span class="opsig-fn">align</span>(ref, …, ref)<span class="opsig-op"> → </span><span class="opsig-out">boolean</span></span>
+            <p class="opsig-what"><b>Relation.</b> It points to marks held elsewhere. It is a fact, and GoFish places the marks so that it is true.</p>
+            <span class="opsig"><span class="opsig-fn">ribbon</span>(ref, …, ref)<span class="opsig-op"> → </span><span class="opsig-out">mark</span></span>
+            <p class="opsig-what"><b>Relational mark.</b> It points to marks that are already placed and draws a new mark between them.</p>
+          </div>
+          <div class="opsig-link">
+            <span class="opsig"><span class="opsig-fn">spread</span>(a, b) <span class="opsig-op">=</span> <span class="opsig-fn">layer</span>(a, b) <span class="opsig-op">where</span> <span class="opsig-fn">align</span>(a, b) <span class="opsig-op">and</span> <span class="opsig-fn">distribute</span>(a, b)</span>
+            <p>Most operators are a <code>layer</code> plus relations. A <code>layer</code> holds marks without placing them, and the relations place every one.</p>
+          </div>
+          <p class="opsig-footnote">A ref is a name for a mark that something else holds.</p>
+          <aside class="notes">
+            <p><strong>Backup, for questions only.</strong></p>
+            <p><strong>Say:</strong> "This is the precise version. An
+              operator holds its marks and places every one of them. A
+              relation does not hold marks. It points to marks that something
+              else holds, using a name called a ref, and it gives back a
+              boolean. A relational mark like ribbon also points to marks, and
+              it draws something new between them without moving them. The
+              bottom line ties the two together. Spread is a layer, which
+              holds marks without placing them, plus align and distribute,
+              which place every one. That is the definition in the GoFish
+              source code."</p>
+            <p><strong>Left out even here:</strong> <code>enclose</code> is a
+              relational mark that can hold a new mark of its own instead of
+              pointing to one. <code>atop</code> is an operator that is not a
+              layer plus relations; it composites its pictures directly. An
+              arrow's bounding box does include the boxes of its two ends,
+              so the real difference from an operator is that it does not
+              place them.</p>
+            <p><strong>Source:</strong> the GUGOG paper, section 2. In the
+              GoFish repo:
+              <code>ast/graphicalOperators/spread.tsx</code> ("elaborates to
+              layer + distribute + align"), <code>ast/_ref.tsx</code> (a ref
+              "draws nothing of its own" and stands where its target is),
+              <code>ast/constraints/relate.ts</code> (names in
+              <code>.relate()</code> become refs), and
+              <code>ast/constraints/align.ts</code> (align takes refs).</p>
           </aside>
         </section>
 
