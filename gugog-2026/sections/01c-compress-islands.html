@@ -180,21 +180,21 @@
           <h2>PiCCL adds operators for compositing images</h2>
           <div class="grammar-intro-figs">
             <div class="intro-fig intro-fig-chart" data-id="piccl-intro-chart">
-              <div class="intro-fig-inner" style="zoom: 1.85">
+              <div class="intro-fig-inner" style="zoom: 2.4">
                 <div class="code-pair-label">pictorial charts</div>
-                <svg class="grammar-fig piccl-teaser" viewBox="0 0 1783 977" style="width: 380px; height: 208px" role="img" aria-label="Three real-world pictorial charts from the PiCCL paper: a dollar bill under a line chart, memory chips as bars, and glasses filled with colored liquid"><image href="./images/comparisons/piccl-teaser.png" width="1783" height="977" /></svg>
+                <svg class="grammar-fig piccl-teaser" viewBox="0 0 1783 977" style="width: 288px; height: 158px" role="img" aria-label="Three real-world pictorial charts from the PiCCL paper: a dollar bill under a line chart, memory chips as bars, and glasses filled with colored liquid"><image href="./images/comparisons/piccl-teaser.png" width="1783" height="977" /></svg>
               </div>
             </div>
             <div class="intro-fig intro-fig-ops intro-behind" data-id="piccl-intro-ops" aria-hidden="true">
-              <div class="intro-fig-inner" style="zoom: 1.2">
+              <div class="intro-fig-inner" style="zoom: 1">
                 <div class="code-pair-label">compositing operators</div>
-                <svg class="grammar-fig piccl-ops" viewBox="0 0 1991 1134" style="width: 460px; height: 262px"><image href="./images/comparisons/piccl-operators.png" width="1991" height="1134" /></svg>
+                <svg class="grammar-fig piccl-ops" viewBox="0 0 1991 1134" style="width: 457px; height: 260px"><image href="./images/comparisons/piccl-operators.png" width="1991" height="1134" /></svg>
               </div>
             </div>
             <div class="intro-fig intro-fig-ops intro-fig-snap intro-behind" data-id="piccl-intro-snap" aria-hidden="true">
-              <div class="intro-fig-inner" style="zoom: 0.85">
-                <div class="code-pair-label">snapping relations</div>
-                <svg class="grammar-fig piccl-snap" viewBox="0 0 2176 1115" style="width: 710px; height: 364px"><image href="./images/intros/piccl-snapping.png" width="2176" height="1115" /></svg>
+              <div class="intro-fig-inner" style="zoom: 1">
+                <div class="code-pair-label">snapping and matching relations</div>
+                <svg class="grammar-fig piccl-snap" viewBox="0 0 2176 1115" style="width: 508px; height: 260px"><image href="./images/intros/piccl-snapping.png" width="2176" height="1115" /></svg>
               </div>
             </div>
           </div>
@@ -211,38 +211,39 @@
         <section class="grammar-intro-slide" data-auto-animate data-auto-animate-id="piccl-intro">
           <h2>PiCCL adds operators for compositing images</h2>
           <style>
-            /* Step 2 (since 2026-11-07, later): the charts and the
-               compositing operators stack on the left, and the snapping
-               relations fill the right. */
+            /* Step 2 (since 2026-11-07, later): the charts on top, and
+               the compositing operators and the snapping and matching
+               relations side by side under them, at the same height, so
+               neither looks more important. */
             .reveal .grammar-intro-slide .grammar-intro-figs.piccl-figs {
-              align-items: center;
+              align-items: end;
               column-gap: 1.6rem;
               grid-template-columns: auto auto;
               justify-content: center;
-              margin-top: 0.6rem;
-              row-gap: 0.4rem;
+              margin-top: 0.4rem;
+              row-gap: 0.6rem;
             }
-            .reveal .piccl-figs > .intro-fig-chart { grid-area: 1 / 1; }
+            .reveal .piccl-figs > .intro-fig-chart { grid-area: 1 / 1 / 2 / 3; justify-self: center; }
             .reveal .piccl-figs > .intro-fig-ops { grid-area: 2 / 1; }
-            .reveal .piccl-figs > .intro-fig-snap { grid-area: 1 / 2 / 3 / 3; }
+            .reveal .piccl-figs > .intro-fig-snap { grid-area: 2 / 2; }
           </style>
           <div class="grammar-intro-figs piccl-figs">
             <div class="intro-fig intro-fig-chart" data-id="piccl-intro-chart">
               <div class="intro-fig-inner">
                 <div class="code-pair-label">pictorial charts</div>
-                <svg class="grammar-fig piccl-teaser" viewBox="0 0 1783 977" style="width: 380px; height: 208px" role="img" aria-label="Three real-world pictorial charts from the PiCCL paper: a dollar bill under a line chart, memory chips as bars, and glasses filled with colored liquid"><image href="./images/comparisons/piccl-teaser.png" width="1783" height="977" /></svg>
+                <svg class="grammar-fig piccl-teaser" viewBox="0 0 1783 977" style="width: 288px; height: 158px" role="img" aria-label="Three real-world pictorial charts from the PiCCL paper: a dollar bill under a line chart, memory chips as bars, and glasses filled with colored liquid"><image href="./images/comparisons/piccl-teaser.png" width="1783" height="977" /></svg>
               </div>
             </div>
             <div class="intro-fig intro-fig-ops" data-id="piccl-intro-ops">
               <div class="intro-fig-inner">
                 <div class="code-pair-label">compositing operators</div>
-                <svg class="grammar-fig piccl-ops" viewBox="0 0 1991 1134" style="width: 460px; height: 262px" role="img" aria-label="PiCCL's compositing operator table, with star and rectangle examples of over, in, out, atop, and xor"><image href="./images/comparisons/piccl-operators.png" width="1991" height="1134" /></svg>
+                <svg class="grammar-fig piccl-ops" viewBox="0 0 1991 1134" style="width: 457px; height: 260px" role="img" aria-label="PiCCL's compositing operator table, with star and rectangle examples of over, in, out, atop, and xor"><image href="./images/comparisons/piccl-operators.png" width="1991" height="1134" /></svg>
               </div>
             </div>
             <div class="intro-fig intro-fig-ops intro-fig-snap" data-id="piccl-intro-snap">
               <div class="intro-fig-inner">
-                <div class="code-pair-label">snapping relations</div>
-                <svg class="grammar-fig piccl-snap" viewBox="0 0 2176 1115" style="width: 710px; height: 364px" role="img" aria-label="PiCCL's snapping relations: a blue and an orange rotated rectangle, before and after point snapping, line snapping, orientation matching, and length matching"><image href="./images/intros/piccl-snapping.png" width="2176" height="1115" /></svg>
+                <div class="code-pair-label">snapping and matching relations</div>
+                <svg class="grammar-fig piccl-snap" viewBox="0 0 2176 1115" style="width: 508px; height: 260px" role="img" aria-label="PiCCL's snapping and matching relations: a blue and an orange rotated rectangle, before and after point snapping, line snapping, orientation matching, and length matching"><image href="./images/intros/piccl-snapping.png" width="2176" height="1115" /></svg>
               </div>
             </div>
           </div>
@@ -255,13 +256,14 @@
               into one, like the ones in image editors. For example, "A atop
               B" paints one shape onto another and keeps only the part inside
               it. That is how a bottle picture gets filled up to a number.</p>
-            <p>(Point at the right.) "PiCCL also adds relations, which it
-              calls snapping: point snapping, line snapping, orientation
+            <p>(Point at the lower right.) "PiCCL also adds relations, for
+              snapping and matching: point snapping, line snapping, orientation
               matching, and length matching. Each one moves a picture so that
               a point, a line, an angle, or a length matches another
               picture's."</p>
             <p>So PiCCL adds both kinds of things: compositing operators and
-              snapping relations. The snapping figure (since 2026-11-07,
+              snapping and matching relations. The snapping and matching
+              figure (since 2026-11-07,
               later) is from the PiCCL paper, given by the user, and is at
               images/intros/piccl-snapping.png.</p>
             <p>Title changed on 2026-11-06, late night, from "PiCCL adds
