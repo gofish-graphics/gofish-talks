@@ -506,11 +506,15 @@
              green is written "lime", the same color as the story's
              "#00ff00". charts.ts holds the full specs ("piccl-bottle-bars",
              "piccl-bottle-tinted", "piccl-bottle").
-             Step 3 keeps the "relations" code region from 2026-11-05: it
-             tints layer and the .relate(...) block, with a tag under the
-             code (talk-template's data-code-regions; colored in
-             ../gofish-compare.css). Steps 1 and 2 use char marks for what
-             each adds. -->
+             Step 3 keeps the "relations" code region from 2026-11-05, with
+             a tag under the code (talk-template's data-code-regions;
+             colored in ../gofish-compare.css). Since 2026-11-07, later, the
+             region covers only the .relate(...) call, and everything else
+             new on step 3 (layer, the line and label marks, and the three
+             .name calls) gets the char marks every step uses for what it
+             adds. Step 1 has a line under the code and chart about glyphs.
+             Only step 1 has it; the split has a fixed height, so the source
+             line does not move when it goes. -->
         <section class="code-slide bottle-slide bottle-step" data-auto-animate data-auto-animate-id="bottle" data-auto-animate-unmatched="false">
           <style>
             .reveal .code-slide .bottle-step-split {
@@ -518,7 +522,19 @@
               display: grid;
               gap: 0 1.2rem;
               grid-template-columns: 752px 1fr;
+              grid-template-rows: auto 1fr;
+              /* A fixed height (2026-11-07, later), so the source line stays
+                 put whether or not step 1's line under the code and chart
+                 is there. */
+              height: 470px;
               margin-top: 1.6rem;
+            }
+            .reveal .code-slide .bottle-point {
+              align-self: start;
+              font-size: 0.7em;
+              grid-column: 1 / -1;
+              margin: 0.6em 0 0;
+              text-align: center;
             }
             .reveal .code-slide .bottle-step-split pre {
               font-size: 0.66em;
@@ -558,6 +574,7 @@
             <div class="bottle-step-box" data-id="bottle-box">
               <div class="bottle-render" data-chart="piccl-bottle-bars" data-w="440" data-h="240"></div>
             </div>
+            <p class="bottle-point"><code>.mark()</code> can accept glyphs made by applying operators directly to other marks</p>
           </div>
           <p class="source-line">Bottle chart from PiCCL (Shi et al., IEEE VIS 2025)</p>
           <aside class="notes">
@@ -625,7 +642,7 @@
           <h2>Add relations to place a line and a label</h2>
           <div class="bottle-step-split">
             <div>
-              <pre data-id="bottle-code" data-magic-move><code class="language-ts" data-line-numbers data-code-regions="relations 3:9-3:15, relations 11:5-15:3">chart(bottleData, { axes: false })
+              <pre data-id="bottle-code" data-magic-move><code class="language-ts" data-line-numbers data-char-marks="3:9-15, 8:7-21, 9:5-49, 10:5-60, 11:3-4" data-code-regions="relations 11:5-15:4">chart(bottleData, { axes: false })
   .flow(spread({ by: "category", dir: "x", ... }))
   .mark(layer([
     atop({ blendMode: "color" }, [
