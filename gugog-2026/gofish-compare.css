@@ -149,10 +149,12 @@
   --region-tint: #d6e8f2;
 }
 
+/* Since 2026-11-07, later, the bottle steps have no gutter label: the
+   "relations" name inside the code box pushed the code to the right. The
+   tag under the code already names the tint, so the gutter is hidden and
+   the code starts at the same left edge on all three steps. */
 .reveal .bottle-slide pre code.has-code-regions td.hljs-ln-numbers {
-  font-size: 0.75em;
-  opacity: 1;
-  width: 2.6em;
+  display: none;
 }
 
 .reveal .code-slide .core-callout {
