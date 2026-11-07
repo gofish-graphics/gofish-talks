@@ -163,6 +163,14 @@
              picture") are not auto-animate slides. -->
         <section class="code-slide gotree-specs-slide">
           <style>
+            .reveal .gotree-specs-slide img.gotree-tree {
+              border-radius: 0;
+              display: block;
+              margin: 1.2em auto 0;
+              max-height: none;
+              max-width: 100%;
+              width: 100%;
+            }
             .reveal .gotree-specs-slide .gotree-point {
               font-size: 0.7em;
               margin: 0.6em 0 0;
@@ -216,6 +224,10 @@
     y: align({ alignment: "start" }),
   },
 }, hierarchy);</code></pre>
+              <!-- The tree this code draws (2026-11-07, later): the paper's
+                   Figure 5 render, made by gofish-gotree. The deck has no
+                   render made by GoTree itself. -->
+              <img class="gotree-tree" src="./images/tradeoffs/gofish-gotree-node-link.svg" alt="The tree this spec draws: a root, a row of fourteen children, and a row of leaves, joined by straight lines" />
             </div>
           </div>
           <p class="gotree-point">GoTree has four relation names to learn: within, flatten, juxtapose, and align. GoFish's align and distribute do the same work.</p>
@@ -240,6 +252,11 @@
             <p>Retitled on 2026-11-06, late night. It was "GoTree in GoFish
               keeps GoTree's own words", which now says the opposite of the
               point. The on-slide line under the code is new.</p>
+            <p>Since 2026-11-07, later, the tree that this code draws is under
+              the gofish-gotree code. It is the paper's Figure 5 render, made
+              by gofish-gotree; the deck has no render made by GoTree
+              itself. Point at it once: "This is the tree both specs
+              describe."</p>
             <p>The colors pair the parts: <code>within</code> and
               <code>align</code> become <code>align</code>, and
               <code>juxtapose</code> and <code>flatten</code> become
