@@ -670,7 +670,7 @@ const pdBottleTinted = () =>
     .flow(spread({ by: "category", dir: "x", spacing: BOTTLE_PITCH_GAP, axes: { x: false } } as any))
     .mark(
       atop({ blendMode: "color" }, [
-        image({ href: bottlePng, h: v(100), filter: Filter.grayscale } as any),
+        image({ href: bottlePng, h: v(100), filter: Filter.grayscale }),
         rect({ h: "amount", fill: "lime", w: BOTTLE_W }),
       ])
     );
@@ -681,7 +681,7 @@ const pdBottle = () =>
     .mark(
       layer([
         atop({ blendMode: "color" }, [
-          image({ href: bottlePng, h: v(100), filter: Filter.grayscale } as any),
+          image({ href: bottlePng, h: v(100), filter: Filter.grayscale }),
           rect({ h: "amount", fill: "lime", w: BOTTLE_W }),
         ]).name("bottle"),
         rect({ h: 1, fill: MUTED, w: LINE_W, y: "amount" } as any).name("line"),
