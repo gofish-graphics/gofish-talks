@@ -845,7 +845,7 @@
   text-align: center;
 }
 
-.reveal .grammar-intro-slide img.grammar-fig {
+.reveal .grammar-intro-slide .grammar-fig {
   background: white;
   border: 2px solid #27231f;
   border-radius: 7px 10px 6px 9px;
@@ -853,26 +853,7 @@
   box-sizing: border-box;
   display: block;
   margin: 0 auto;
-  max-width: 100%;
-  object-fit: contain;
   padding: 8px;
-}
-
-.reveal .grammar-intro-slide img.atom-teaser {
-  height: 210px;
-}
-
-.reveal .grammar-intro-slide img.atom-ops {
-  height: 250px;
-}
-
-.reveal .grammar-intro-slide img.piccl-teaser {
-  height: auto;
-  width: 100%;
-}
-
-.reveal .grammar-intro-slide img.piccl-ops {
-  height: 390px;
 }
 
 .reveal .grammar-intro-slide .source-line {
@@ -900,82 +881,42 @@
   min-height: calc(8 * 1.3em);
 }
 
-/* Step 1 of each grammar intro (01c, since 2026-11-07): only the example
-   charts, large and centered. Step 2 is the two-figure layout above. */
-.reveal .grammar-intro-first .grammar-intro-figs {
-  align-content: center;
-  height: 470px;
-  margin-top: 0.4rem;
-}
-
-.reveal .grammar-intro-first img.atom-teaser {
-  height: 290px;
-}
-
-.reveal .grammar-intro-first img.piccl-teaser {
-  height: 430px;
-  width: auto;
-}
-
-.reveal .grammar-intro-first img.gotree-examples {
-  height: auto;
-  width: 960px;
-}
-
-/* The operator figure slides out from behind the example charts
-   (2026-11-07, later). On step 1 the operator figure is already in the
-   slide, stacked in the same grid cell as the charts, smaller than them
-   and below them, so it is fully covered (its own shadow is off). It has
-   the same data-id as on step 2, so auto-animate moves and grows it from
-   behind the charts to its place while the charts move away. The charts
-   and the operator figure are siblings with their own data-ids, never
-   nested. Each step-1 size has the step-2 figure's aspect ratio, so the
-   figure grows without stretching. On both steps the charts sit above the
-   operator figure, so during the move it comes from behind them. */
-.reveal .grammar-intro-first .grammar-intro-figs > div {
-  display: grid;
-  grid-template-columns: 100%;
-  justify-items: center;
-}
-
-.reveal .grammar-intro-first .grammar-intro-figs > div > * {
-  grid-column: 1;
-}
-
-.reveal .grammar-intro-first .grammar-intro-figs img.grammar-fig {
-  align-self: center;
-  grid-row: 2;
-  /* Reveal's img max-height of 95% would resolve against the grid row
-     here and shrink the charts. */
-  max-height: none;
-}
-
-.reveal .grammar-intro-slide img.grammar-fig {
+/* Grammar intro figures (01c), since 2026-11-07, later. Each figure is
+   one matched element: a wrapper (.intro-fig) with the data-id, holding its
+   label and its picture, so auto-animate moves and scales the label with
+   its box. Nothing inside a wrapper is matched: the label is a div, not a
+   p (Reveal matches p by text), and the picture is an inline svg with an
+   <image>, not an img (Reveal matches img by src). The sizes are set on
+   the svg, so both steps lay out the same picture at the same size.
+   Step 1 scales a wrapper's contents with zoom on .intro-fig-inner, never
+   on the wrapper itself, because Reveal sets a transform on the wrapper.
+   On step 1 the operator figure and its label are already there, in the
+   same grid cell as the charts, smaller (zoom 0.9) and below them, so
+   they are hidden. They slide out from behind the charts on step 2. The
+   charts sit above the operator figure on both steps. */
+.reveal .grammar-intro-slide .intro-fig {
   position: relative;
   z-index: 1;
 }
 
-.reveal .grammar-intro-slide img.grammar-fig.atom-ops,
-.reveal .grammar-intro-slide img.grammar-fig.piccl-ops,
-.reveal .grammar-intro-slide img.grammar-fig.gotree-ops {
+.reveal .grammar-intro-slide .intro-fig-ops {
   z-index: 0;
 }
 
-.reveal .grammar-intro-first img.grammar-fig.intro-behind {
+.reveal .grammar-intro-first .grammar-intro-figs {
+  align-content: center;
+  display: grid;
+  grid-template-columns: 100%;
+  height: 470px;
+  justify-items: center;
+  margin-top: 0.4rem;
+}
+
+.reveal .grammar-intro-first .grammar-intro-figs > .intro-fig {
+  align-self: center;
+  grid-area: 1 / 1;
+}
+
+.reveal .grammar-intro-first .intro-behind .grammar-fig {
   box-shadow: none;
-}
-
-.reveal .grammar-intro-first img.grammar-fig.atom-ops.intro-behind {
-  height: 262px;
-  width: 732px;
-}
-
-.reveal .grammar-intro-first img.grammar-fig.piccl-ops.intro-behind {
-  height: 402px;
-  width: 691px;
-}
-
-.reveal .grammar-intro-first img.grammar-fig.gotree-ops.intro-behind {
-  height: 359px;
-  width: 543px;
 }

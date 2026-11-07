@@ -89,7 +89,13 @@
              charts, in the same grid cell and below them, so it is hidden.
              It has its own data-id (atom-intro-ops and so on), so it slides
              out from behind the charts and grows to its place. It is a
-             sibling of the chart image, never nested in it. The
+             sibling of the chart image, never nested in it. Since then,
+             too, each label is glued to its picture: the data-id is on a
+             wrapper (.intro-fig) that holds the label (a div) and the
+             picture (an inline svg with an image, so Reveal does not match
+             it by src), and nothing inside the wrapper is matched. Step 1
+             sizes its wrappers with zoom on an inner div. See
+             ../gofish-compare.css. The
              titles, labels and source lines match by their text, so they
              stay put. Each pair has its own auto-animate id, so the
              neighbors change plainly.
@@ -99,10 +105,17 @@
         <section class="grammar-intro-slide grammar-intro-stack grammar-intro-first" data-auto-animate data-auto-animate-id="atom-intro">
           <h2>Atom adds operators for arranging units</h2>
           <div class="grammar-intro-figs">
-            <div>
-              <p class="code-pair-label">unit charts</p>
-              <img class="grammar-fig atom-teaser" data-id="atom-intro-chart" src="./images/comparisons/atom-teaser.png" alt="Unit visualizations of Titanic passengers from the Atom paper: one circle per passenger, grouped by class, survival and sex, and age" />
-              <img class="grammar-fig atom-ops intro-behind" data-id="atom-intro-ops" src="./images/comparisons/atom-operators.png" alt="" aria-hidden="true" />
+            <div class="intro-fig intro-fig-chart" data-id="atom-intro-chart">
+              <div class="intro-fig-inner" style="zoom: 1.38">
+                <div class="code-pair-label">unit charts</div>
+                <svg class="grammar-fig atom-teaser" viewBox="0 0 3018 740" style="width: 795px; height: 210px" role="img" aria-label="Unit visualizations of Titanic passengers from the Atom paper: one circle per passenger, grouped by class, survival and sex, and age"><image href="./images/comparisons/atom-teaser.png" width="3018" height="740" /></svg>
+              </div>
+            </div>
+            <div class="intro-fig intro-fig-ops intro-behind" data-id="atom-intro-ops" aria-hidden="true">
+              <div class="intro-fig-inner" style="zoom: 0.9">
+                <div class="code-pair-label">layout operators</div>
+                <svg class="grammar-fig atom-ops" viewBox="0 0 1080 366" style="width: 699px; height: 250px"><image href="./images/comparisons/atom-operators.png" width="1080" height="366" /></svg>
+              </div>
             </div>
           </div>
           <p class="source-line">Atom: A Grammar for Unit Visualizations (Park, Drucker, Fernandez &amp; Elmqvist, IEEE TVCG 2018)</p>
@@ -129,13 +142,17 @@
         <section class="grammar-intro-slide grammar-intro-stack" data-auto-animate data-auto-animate-id="atom-intro">
           <h2>Atom adds operators for arranging units</h2>
           <div class="grammar-intro-figs">
-            <div>
-              <p class="code-pair-label">unit charts</p>
-              <img class="grammar-fig atom-teaser" data-id="atom-intro-chart" src="./images/comparisons/atom-teaser.png" alt="Unit visualizations of Titanic passengers from the Atom paper: one circle per passenger, grouped by class, survival and sex, and age" />
+            <div class="intro-fig intro-fig-chart" data-id="atom-intro-chart">
+              <div class="intro-fig-inner">
+                <div class="code-pair-label">unit charts</div>
+                <svg class="grammar-fig atom-teaser" viewBox="0 0 3018 740" style="width: 795px; height: 210px" role="img" aria-label="Unit visualizations of Titanic passengers from the Atom paper: one circle per passenger, grouped by class, survival and sex, and age"><image href="./images/comparisons/atom-teaser.png" width="3018" height="740" /></svg>
+              </div>
             </div>
-            <div>
-              <p class="code-pair-label">layout operators</p>
-              <img class="grammar-fig atom-ops" data-id="atom-intro-ops" src="./images/comparisons/atom-operators.png" alt="Atom's layout operators, Map2D, FillX, FillY, MaxFill, and Pack, each shown under uniform sizing and under count and sum sizing" />
+            <div class="intro-fig intro-fig-ops" data-id="atom-intro-ops">
+              <div class="intro-fig-inner">
+                <div class="code-pair-label">layout operators</div>
+                <svg class="grammar-fig atom-ops" viewBox="0 0 1080 366" style="width: 699px; height: 250px" role="img" aria-label="Atom's layout operators, Map2D, FillX, FillY, MaxFill, and Pack, each shown under uniform sizing and under count and sum sizing"><image href="./images/comparisons/atom-operators.png" width="1080" height="366" /></svg>
+              </div>
             </div>
           </div>
           <p class="source-line">Atom: A Grammar for Unit Visualizations (Park, Drucker, Fernandez &amp; Elmqvist, IEEE TVCG 2018)</p>
@@ -158,10 +175,17 @@
         <section class="grammar-intro-slide grammar-intro-first" data-auto-animate data-auto-animate-id="piccl-intro">
           <h2>PiCCL adds operators for compositing images</h2>
           <div class="grammar-intro-figs">
-            <div>
-              <p class="code-pair-label">pictorial charts</p>
-              <img class="grammar-fig piccl-teaser" data-id="piccl-intro-chart" src="./images/comparisons/piccl-teaser.png" alt="Three real-world pictorial charts from the PiCCL paper: a dollar bill under a line chart, memory chips as bars, and glasses filled with colored liquid" />
-              <img class="grammar-fig piccl-ops intro-behind" data-id="piccl-intro-ops" src="./images/comparisons/piccl-operators.png" alt="" aria-hidden="true" />
+            <div class="intro-fig intro-fig-chart" data-id="piccl-intro-chart">
+              <div class="intro-fig-inner" style="zoom: 1.51">
+                <div class="code-pair-label">pictorial charts</div>
+                <svg class="grammar-fig piccl-teaser" viewBox="0 0 1783 977" style="width: 503px; height: 285px" role="img" aria-label="Three real-world pictorial charts from the PiCCL paper: a dollar bill under a line chart, memory chips as bars, and glasses filled with colored liquid"><image href="./images/comparisons/piccl-teaser.png" width="1783" height="977" /></svg>
+              </div>
+            </div>
+            <div class="intro-fig intro-fig-ops intro-behind" data-id="piccl-intro-ops" aria-hidden="true">
+              <div class="intro-fig-inner" style="zoom: 0.9">
+                <div class="code-pair-label">compositing operators</div>
+                <svg class="grammar-fig piccl-ops" viewBox="0 0 1991 1134" style="width: 670px; height: 390px"><image href="./images/comparisons/piccl-operators.png" width="1991" height="1134" /></svg>
+              </div>
             </div>
           </div>
           <p class="source-line">PiCCL: Data-Driven Composition of Bespoke Pictorial Charts (Shi et al., IEEE VIS 2025)</p>
@@ -177,13 +201,17 @@
         <section class="grammar-intro-slide" data-auto-animate data-auto-animate-id="piccl-intro">
           <h2>PiCCL adds operators for compositing images</h2>
           <div class="grammar-intro-figs grammar-intro-side">
-            <div>
-              <p class="code-pair-label">pictorial charts</p>
-              <img class="grammar-fig piccl-teaser" data-id="piccl-intro-chart" src="./images/comparisons/piccl-teaser.png" alt="Three real-world pictorial charts from the PiCCL paper: a dollar bill under a line chart, memory chips as bars, and glasses filled with colored liquid" />
+            <div class="intro-fig intro-fig-chart" data-id="piccl-intro-chart">
+              <div class="intro-fig-inner">
+                <div class="code-pair-label">pictorial charts</div>
+                <svg class="grammar-fig piccl-teaser" viewBox="0 0 1783 977" style="width: 503px; height: 285px" role="img" aria-label="Three real-world pictorial charts from the PiCCL paper: a dollar bill under a line chart, memory chips as bars, and glasses filled with colored liquid"><image href="./images/comparisons/piccl-teaser.png" width="1783" height="977" /></svg>
+              </div>
             </div>
-            <div>
-              <p class="code-pair-label">compositing operators</p>
-              <img class="grammar-fig piccl-ops" data-id="piccl-intro-ops" src="./images/comparisons/piccl-operators.png" alt="PiCCL's compositing operator table, with star and rectangle examples of over, in, out, atop, and xor" />
+            <div class="intro-fig intro-fig-ops" data-id="piccl-intro-ops">
+              <div class="intro-fig-inner">
+                <div class="code-pair-label">compositing operators</div>
+                <svg class="grammar-fig piccl-ops" viewBox="0 0 1991 1134" style="width: 670px; height: 390px" role="img" aria-label="PiCCL's compositing operator table, with star and rectangle examples of over, in, out, atop, and xor"><image href="./images/comparisons/piccl-operators.png" width="1991" height="1134" /></svg>
+              </div>
             </div>
           </div>
           <p class="source-line">PiCCL: Data-Driven Composition of Bespoke Pictorial Charts (Shi et al., IEEE VIS 2025)</p>
@@ -228,21 +256,20 @@
             .reveal .grammar-intro-slide .grammar-intro-figs.gotree-figs {
               grid-template-columns: 1.15fr 0.85fr;
             }
-            .reveal .grammar-intro-slide img.gotree-examples {
-              height: auto;
-              width: 100%;
-            }
-            .reveal .grammar-intro-slide img.gotree-ops {
-              height: auto;
-              width: 100%;
-            }
           </style>
           <h2>GoTree draws any tree in many layouts</h2>
           <div class="grammar-intro-figs">
-            <div>
-              <p class="code-pair-label">tree visualizations</p>
-              <img class="grammar-fig gotree-examples" data-id="gotree-intro-chart" src="./images/comparisons/gotree-examples.png" alt="A gallery of tree visualizations from the GoTree paper: indented outline, pixel tree, 1D treemap, BarcodeTree, garden layout, thread arc, treemap with oval, cascaded treemap, dendrogram, DeepTree, outside-in tree, spiral tree, and nested pie tree" />
-              <img class="grammar-fig gotree-ops intro-behind" data-id="gotree-intro-ops" src="./images/comparisons/gotree-operators.png" alt="" aria-hidden="true" />
+            <div class="intro-fig intro-fig-chart" data-id="gotree-intro-chart">
+              <div class="intro-fig-inner" style="zoom: 1.22">
+                <div class="code-pair-label">tree visualizations</div>
+                <svg class="grammar-fig gotree-examples" viewBox="0 0 867 367" style="width: 723px; height: 318px" role="img" aria-label="A gallery of tree visualizations from the GoTree paper: indented outline, pixel tree, 1D treemap, BarcodeTree, garden layout, thread arc, treemap with oval, cascaded treemap, dendrogram, DeepTree, outside-in tree, spiral tree, and nested pie tree"><image href="./images/comparisons/gotree-examples.png" width="867" height="367" /></svg>
+              </div>
+            </div>
+            <div class="intro-fig intro-fig-ops intro-behind" data-id="gotree-intro-ops" aria-hidden="true">
+              <div class="intro-fig-inner" style="zoom: 0.9">
+                <div class="code-pair-label">layout rules for each axis</div>
+                <svg class="grammar-fig gotree-ops" viewBox="0 0 785 508" style="width: 534px; height: 353px"><image href="./images/comparisons/gotree-operators.png" width="785" height="508" /></svg>
+              </div>
             </div>
           </div>
           <p class="source-line">GoTree: A Grammar of Tree Visualizations (Li, Tian, Xu, McGuffin &amp; Yuan, ACM CHI 2020)</p>
@@ -258,13 +285,17 @@
         <section class="grammar-intro-slide" data-auto-animate data-auto-animate-id="gotree-intro">
           <h2>GoTree draws any tree in many layouts</h2>
           <div class="grammar-intro-figs grammar-intro-side gotree-figs">
-            <div>
-              <p class="code-pair-label">tree visualizations</p>
-              <img class="grammar-fig gotree-examples" data-id="gotree-intro-chart" src="./images/comparisons/gotree-examples.png" alt="A gallery of tree visualizations from the GoTree paper: indented outline, pixel tree, 1D treemap, BarcodeTree, garden layout, thread arc, treemap with oval, cascaded treemap, dendrogram, DeepTree, outside-in tree, spiral tree, and nested pie tree" />
+            <div class="intro-fig intro-fig-chart" data-id="gotree-intro-chart">
+              <div class="intro-fig-inner">
+                <div class="code-pair-label">tree visualizations</div>
+                <svg class="grammar-fig gotree-examples" viewBox="0 0 867 367" style="width: 723px; height: 318px" role="img" aria-label="A gallery of tree visualizations from the GoTree paper: indented outline, pixel tree, 1D treemap, BarcodeTree, garden layout, thread arc, treemap with oval, cascaded treemap, dendrogram, DeepTree, outside-in tree, spiral tree, and nested pie tree"><image href="./images/comparisons/gotree-examples.png" width="867" height="367" /></svg>
+              </div>
             </div>
-            <div>
-              <p class="code-pair-label">layout rules for each axis</p>
-              <img class="grammar-fig gotree-ops" data-id="gotree-intro-ops" src="./images/comparisons/gotree-operators.png" alt="GoTree's layout operators: a parent and its children can be placed by include, juxtapose, or within on each axis, and siblings by align or flatten" />
+            <div class="intro-fig intro-fig-ops" data-id="gotree-intro-ops">
+              <div class="intro-fig-inner">
+                <div class="code-pair-label">layout rules for each axis</div>
+                <svg class="grammar-fig gotree-ops" viewBox="0 0 785 508" style="width: 534px; height: 353px" role="img" aria-label="GoTree's layout operators: a parent and its children can be placed by include, juxtapose, or within on each axis, and siblings by align or flatten"><image href="./images/comparisons/gotree-operators.png" width="785" height="508" /></svg>
+              </div>
             </div>
           </div>
           <p class="source-line">GoTree: A Grammar of Tree Visualizations (Li, Tian, Xu, McGuffin &amp; Yuan, ACM CHI 2020)</p>
