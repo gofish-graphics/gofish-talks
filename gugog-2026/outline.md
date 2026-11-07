@@ -10,7 +10,7 @@ Note, 2026-11-04, later the same day: the talk has a new hook, and the opening i
 
 Note, 2026-11-05 (later): the circle slide now uses the user's drawing, and the islands drawings are colored as islands, green land with yellow shores in blue water. On the circle slide, GUGOG itself is one light green island with a yellow shore, and the grammars inside it are darker green with no shore.
 
-Note, 2026-11-07: GoFish is now introduced through the three grammars' examples, not a separate crash course. Each example teaches one GoFish idea. Atom teaches the chart flow: a plain stacked bar chart becomes Atom's unit chart with a small code change. PiCCL's bottle teaches operators on marks and then relations. GoTree's slide is unchanged. The ribbon buildup, the three planets slides, the Atom comparison, "same core, three shapes of data" and the open question slide are hidden. The labels above the slide titles are gone from the whole deck, the middle dots in slide text are gone, and "All three grammars in one picture" now shows its code. The talk now runs 6:00 before the panel, 1:30 less than before. See "Changes, 2026-11-07" below.
+Note, 2026-11-07: GoFish is now introduced through the three grammars' examples, not a separate crash course. Each example teaches one GoFish idea. Atom teaches the chart flow: a plain stacked bar chart becomes Atom's unit chart with a small code change. PiCCL's bottle teaches operators on marks and then relations. GoTree's slide is unchanged. The ribbon buildup, the three planets slides, the Atom comparison, "same core, three shapes of data" and the open question slide are hidden. The labels above the slide titles are gone from the whole deck, the middle dots in slide text are gone, and "All three grammars in one picture" now shows its code. The three grammar intros are now two steps each: the example charts alone, then the operators. The talk now runs 6:15 before the panel, 1:15 less than before. See "Changes, 2026-11-07" below.
 
 Note, 2026-11-06, late night, part A: the PiCCL bottle is now built in three steps that lead to image compositing, following the SciPy 2026 deck's bottle steps. GoTree is reframed: its own idea is that one spec works for any tree and gives many layouts, and gofish-gotree keeps that idea but writes the layout with GoFish's align and distribute in place of GoTree's four relation names. The tree of bottle waffles, remade with ten bottles per waffle, now comes right after "same core, three shapes of data" as "All three grammars in one picture". The answer grows by 0:10, so with part B the talk runs 7:30 before the panel. See "Changes, 2026-11-06, late night, part A" below.
 
@@ -47,41 +47,54 @@ This section updates the slide order and timing of "Changes, 2026-11-06, late ni
 - On the bottle's second and third steps, the picture's `filter: Filter.grayscale` is now shown, on its own line under `image(...)`, because it is part of how the compositing works: the bottle is drawn in grays, and the color blend mode takes its color from the green rectangle. The type of `image` in nightly 20261106 accepts `filter`, so the `as any` casts on those two `image` calls in `charts.ts` are gone. The third step's code box is now 15 lines tall.
 - "All three grammars in one picture" now shows its code beside the picture. It is `sources/tree-waffle/main.ts` in three parts, in the file's order: `bottleUnit` (PiCCL, with `atop`), `waffle` (Atom, two spreads), and the `tree` call (GoTree). Each part is tinted and tagged with its grammar's name. Styling and setup are left out as `...`: the TypeScript casts, how `amount` is read, the fill's y and height, the picture's height, spacing, node and card and link styling, the two `combine` rules, the `cells` helper, the `hierarchy` data, and the render call. The slide grows from 0:10 to 0:15.
 
+- The three grammar intros in `01c-compress-islands.html` are now two auto-animate steps each. Step 1 shows only the example charts, large and centered, and its notes say what the charts are. In step 2 the charts move and shrink (up for Atom, whose figures stack, and to the left for PiCCL and GoTree, whose figures sit side by side), and the operator figure appears where they were. Its notes are about the operators. Each intro takes 0:05 more.
+
 ### Slide order and timing
 
-Problem, 1:20, and Question, 1:10, are unchanged. They end at 2:30 with "What is GoFish?".
+Problem, 1:20, is unchanged.
+
+Question, 1:25.
+
+5. Atom intro, step 1, the unit charts. 0:10. Running total 1:30.
+6. Atom intro, step 2, the layout operators. 0:10. Running total 1:40.
+7. PiCCL intro, step 1, the pictorial charts. 0:05. Running total 1:45.
+8. PiCCL intro, step 2, the compositing operators. 0:10. Running total 1:55.
+9. GoTree intro, step 1, the tree visualizations. 0:05. Running total 2:00.
+10. GoTree intro, step 2, the layout rules. 0:10. Running total 2:10.
+11. "They add graphical operators and relations". 0:25. Running total 2:35.
+12. "What is GoFish?". 0:10. Running total 2:45.
 
 Examples, which introduce GoFish and are the answer, 2:00.
 
-10. Atom, "Start with the data". 0:10. Running total 2:40.
-11. Atom, "A stacked bar chart is a flow of operators". 0:15. Running total 2:55.
-12. Atom, "Atom draws one square for each fish". 0:15. Running total 3:10.
-13. PiCCL, "The PiCCL bottle chart starts as two bars". 0:10. Running total 3:20.
-14. PiCCL, "Composite the green onto a bottle picture". 0:10. Running total 3:30.
-15. PiCCL, "Add relations to place a line and a label". 0:15. Running total 3:45.
-16. "GoTree's layouts with GoFish's relations". 0:15. Running total 4:00.
-17. "All three grammars in one picture". 0:15. Running total 4:15.
-18. "Unify the domains and keep their structure". 0:15. Running total 4:30.
+13. Atom, "Start with the data". 0:10. Running total 2:55.
+14. Atom, "A stacked bar chart is a flow of operators". 0:15. Running total 3:10.
+15. Atom, "Atom draws one square for each fish". 0:15. Running total 3:25.
+16. PiCCL, "The PiCCL bottle chart starts as two bars". 0:10. Running total 3:35.
+17. PiCCL, "Composite the green onto a bottle picture". 0:10. Running total 3:45.
+18. PiCCL, "Add relations to place a line and a label". 0:15. Running total 4:00.
+19. "GoTree's layouts with GoFish's relations". 0:15. Running total 4:15.
+20. "All three grammars in one picture". 0:15. Running total 4:30.
+21. "Unify the domains and keep their structure". 0:15. Running total 4:45.
 
 Semantic validity, 1:10.
 
-19. "Very expressive! Did we lose safety and correctness?" 0:05. Running total 4:35.
-20. Huang and Kay quote. 0:10. Running total 4:45.
-21. CanSum, four steps. 0:30, 0:15, 0:05, 0:05. Running totals 5:15, 5:30, 5:35, 5:40.
+22. "Very expressive! Did we lose safety and correctness?" 0:05. Running total 4:50.
+23. Huang and Kay quote. 0:10. Running total 5:00.
+24. CanSum, four steps. 0:30, 0:15, 0:05, 0:05. Running totals 5:30, 5:45, 5:50, 5:55.
 
 Conclusion, 0:20.
 
-22. "The grammar of graphics needs verbs". 0:20. Running total 6:00.
+25. "The grammar of graphics needs verbs". 0:20. Running total 6:15.
 
 Panel.
 
-23. Questions for the panel. 0:15. Running total 6:15.
+26. Questions for the panel. 0:15. Running total 6:30.
 
 The running totals in `04b-validity.html` are correct again; part A had left them 0:10 early.
 
 ### Time
 
-The talk now runs 6:00 before the panel, down from 7:30. From "What is GoFish?" to the end of the hierarchy slide used to take 3:20 and now takes 2:00. The new way of introducing GoFish saves 1:00, which already counts the extra 0:05 on the picture slide for its code, and hiding "same core, three shapes of data" saves 0:20. Hiding the open question saves 0:10 more. This leaves 1:00 for the panel within 7:00.
+The talk now runs 6:15 before the panel, down from 7:30. From "What is GoFish?" to the end of the hierarchy slide used to take 3:20 and now takes 2:00. The new way of introducing GoFish saves 1:00, which already counts the extra 0:05 on the picture slide for its code. Hiding "same core, three shapes of data" saves 0:20, and hiding the open question saves 0:10. The two-step grammar intros add 0:15. This leaves 0:45 for the panel within 7:00.
 
 ## Changes, 2026-11-06, late night, part A
 

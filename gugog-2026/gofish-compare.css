@@ -897,3 +897,25 @@
 .reveal .code-slide.atom-step .crash-solo pre code {
   min-height: calc(8 * 1.3em);
 }
+
+/* Step 1 of each grammar intro (01c, since 2026-11-07): only the example
+   charts, large and centered. Step 2 is the two-figure layout above. */
+.reveal .grammar-intro-first .grammar-intro-figs {
+  align-content: center;
+  height: 470px;
+  margin-top: 0.4rem;
+}
+
+.reveal .grammar-intro-first img.atom-teaser {
+  height: 290px;
+}
+
+.reveal .grammar-intro-first img.piccl-teaser {
+  height: 430px;
+  width: auto;
+}
+
+.reveal .grammar-intro-first img.gotree-examples {
+  height: auto;
+  width: 960px;
+}

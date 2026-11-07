@@ -77,15 +77,55 @@
              images/piccl/piccl-operator.png), which took them from the
              papers. Atom's figures are both wide, so they stack; PiCCL's sit
              side by side as in the thesis deck. Styles: ../gofish-compare.css.
+             Since 2026-11-07 each intro is two auto-animate steps. Step 1
+             (class grammar-intro-first) shows only the example charts, large
+             and centered. Step 2 is the old slide: the charts move (up for
+             Atom, whose figures are wide and stack, and to the left for
+             PiCCL and GoTree, whose figures sit side by side) and shrink,
+             and the operator figure appears where they were. The chart
+             image has the same data-id on both steps and is not inside any
+             matched wrapper; the operator figure is only on step 2. The
+             titles, labels and source lines match by their text, so they
+             stay put. Each pair has its own auto-animate id, so the
+             neighbors change plainly.
              The GoFish versions of Atom and PiCCL come after the GoFish
              intro, in 03b-code-comparisons.html. GoTree's is on the GoTree
              specs slide in 04a-domain-design.html. -->
-        <section class="grammar-intro-slide grammar-intro-stack">
+        <section class="grammar-intro-slide grammar-intro-stack grammar-intro-first" data-auto-animate data-auto-animate-id="atom-intro">
           <h2>Atom adds operators for arranging units</h2>
           <div class="grammar-intro-figs">
             <div>
               <p class="code-pair-label">unit charts</p>
-              <img class="grammar-fig atom-teaser" src="./images/comparisons/atom-teaser.png" alt="Unit visualizations of Titanic passengers from the Atom paper: one circle per passenger, grouped by class, survival and sex, and age" />
+              <img class="grammar-fig atom-teaser" data-id="atom-intro-chart" src="./images/comparisons/atom-teaser.png" alt="Unit visualizations of Titanic passengers from the Atom paper: one circle per passenger, grouped by class, survival and sex, and age" />
+            </div>
+          </div>
+          <p class="source-line">Atom: A Grammar for Unit Visualizations (Park, Drucker, Fernandez &amp; Elmqvist, IEEE TVCG 2018)</p>
+          <aside class="notes">
+            <p><strong>Target:</strong> 0:10 (0:20 for both steps).
+              <strong>Running total:</strong> 1:30 of 7:00.</p>
+            <p>The lead into this slide is the question on the circle slide:
+              "Why can't these grammars be unified with the grammar of
+              graphics? Let's look at three of them."</p>
+            <p>This slide and the next two (PiCCL and GoTree) show the
+              evidence before the next slide names what they added. The ideas
+              are Atom's, PiCCL's, and GoTree's, and the credit goes to their
+              authors. Since 2026-11-07 each one is two steps: first the
+              charts alone, then the charts move aside and the operators
+              appear where they were.</p>
+            <p><strong>Say:</strong> Here's Atom, by Park, Drucker,
+              Fernandez, and Elmqvist. It is a grammar for unit
+              visualizations, where one mark stands for one thing, like one
+              passenger on the Titanic. Its marks are plain circles and
+              rectangles.</p>
+          </aside>
+        </section>
+
+        <section class="grammar-intro-slide grammar-intro-stack" data-auto-animate data-auto-animate-id="atom-intro">
+          <h2>Atom adds operators for arranging units</h2>
+          <div class="grammar-intro-figs">
+            <div>
+              <p class="code-pair-label">unit charts</p>
+              <img class="grammar-fig atom-teaser" data-id="atom-intro-chart" src="./images/comparisons/atom-teaser.png" alt="Unit visualizations of Titanic passengers from the Atom paper: one circle per passenger, grouped by class, survival and sex, and age" />
             </div>
             <div>
               <p class="code-pair-label">layout operators</p>
@@ -94,20 +134,9 @@
           </div>
           <p class="source-line">Atom: A Grammar for Unit Visualizations (Park, Drucker, Fernandez &amp; Elmqvist, IEEE TVCG 2018)</p>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
-              1:35 of 7:00.</p>
-            <p>The lead into this slide is the question on the circle slide:
-              "Why can't these grammars be unified with the grammar of
-              graphics? Let's look at three of them."</p>
-            <p>This slide and the next two (PiCCL and GoTree) show the
-              evidence before the next slide names what they added. The ideas
-              are Atom's, PiCCL's, and GoTree's, and the credit goes to their
-              authors.</p>
-            <p><strong>Say:</strong> Here's Atom, by Park, Drucker,
-              Fernandez, and Elmqvist. It is a grammar for unit
-              visualizations, where one mark stands for one thing, like one
-              passenger on the Titanic. Its marks are plain circles and
-              rectangles. What Atom added is a small set of layout operators,
+            <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
+              1:40 of 7:00.</p>
+            <p><strong>Say:</strong> What Atom added is a small set of layout operators,
               like FillX and MaxFill. They split a space into cells and
               arrange the units inside them, and you nest them to place every
               unit.</p>
@@ -120,12 +149,30 @@
           </aside>
         </section>
 
-        <section class="grammar-intro-slide">
+        <section class="grammar-intro-slide grammar-intro-first" data-auto-animate data-auto-animate-id="piccl-intro">
+          <h2>PiCCL adds operators for compositing images</h2>
+          <div class="grammar-intro-figs">
+            <div>
+              <p class="code-pair-label">pictorial charts</p>
+              <img class="grammar-fig piccl-teaser" data-id="piccl-intro-chart" src="./images/comparisons/piccl-teaser.png" alt="Three real-world pictorial charts from the PiCCL paper: a dollar bill under a line chart, memory chips as bars, and glasses filled with colored liquid" />
+            </div>
+          </div>
+          <p class="source-line">PiCCL: Data-Driven Composition of Bespoke Pictorial Charts (Shi et al., IEEE VIS 2025)</p>
+          <aside class="notes">
+            <p><strong>Target:</strong> 0:05 (0:15 for both steps).
+              <strong>Running total:</strong> 1:45 of 7:00.</p>
+            <p><strong>Say:</strong> And here's PiCCL, by Shi and others at
+              VIS 2025, a grammar for pictorial charts like these. Its marks
+              are ordinary pictures and shapes.</p>
+          </aside>
+        </section>
+
+        <section class="grammar-intro-slide" data-auto-animate data-auto-animate-id="piccl-intro">
           <h2>PiCCL adds operators for compositing images</h2>
           <div class="grammar-intro-figs grammar-intro-side">
             <div>
               <p class="code-pair-label">pictorial charts</p>
-              <img class="grammar-fig piccl-teaser" src="./images/comparisons/piccl-teaser.png" alt="Three real-world pictorial charts from the PiCCL paper: a dollar bill under a line chart, memory chips as bars, and glasses filled with colored liquid" />
+              <img class="grammar-fig piccl-teaser" data-id="piccl-intro-chart" src="./images/comparisons/piccl-teaser.png" alt="Three real-world pictorial charts from the PiCCL paper: a dollar bill under a line chart, memory chips as bars, and glasses filled with colored liquid" />
             </div>
             <div>
               <p class="code-pair-label">compositing operators</p>
@@ -135,10 +182,8 @@
           <p class="source-line">PiCCL: Data-Driven Composition of Bespoke Pictorial Charts (Shi et al., IEEE VIS 2025)</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
-              1:45 of 7:00.</p>
-            <p><strong>Say:</strong> And here's PiCCL, by Shi and others at
-              VIS 2025, a grammar for pictorial charts like these. Its marks
-              are ordinary pictures and shapes. What is special about PiCCL is
+              1:55 of 7:00.</p>
+            <p><strong>Say:</strong> What is special about PiCCL is
               image compositing. It has operators that combine two pictures
               into one, like the ones in image editors. For example, "A atop
               B" paints one shape onto another and keeps only the part inside
@@ -171,7 +216,7 @@
              "GoTree's layouts with GoFish's relations" and "All three
              grammars in one picture" (since 2026-11-07, when "same core,
              three shapes of data" was hidden). -->
-        <section class="grammar-intro-slide">
+        <section class="grammar-intro-slide grammar-intro-first" data-auto-animate data-auto-animate-id="gotree-intro">
           <style>
             .reveal .grammar-intro-slide .grammar-intro-figs.gotree-figs {
               grid-template-columns: 1.15fr 0.85fr;
@@ -186,10 +231,28 @@
             }
           </style>
           <h2>GoTree draws any tree in many layouts</h2>
+          <div class="grammar-intro-figs">
+            <div>
+              <p class="code-pair-label">tree visualizations</p>
+              <img class="grammar-fig gotree-examples" data-id="gotree-intro-chart" src="./images/comparisons/gotree-examples.png" alt="A gallery of tree visualizations from the GoTree paper: indented outline, pixel tree, 1D treemap, BarcodeTree, garden layout, thread arc, treemap with oval, cascaded treemap, dendrogram, DeepTree, outside-in tree, spiral tree, and nested pie tree" />
+            </div>
+          </div>
+          <p class="source-line">GoTree: A Grammar of Tree Visualizations (Li, Tian, Xu, McGuffin &amp; Yuan, ACM CHI 2020)</p>
+          <aside class="notes">
+            <p><strong>Target:</strong> 0:05 (0:15 for both steps).
+              <strong>Running total:</strong> 2:00 of 7:00.</p>
+            <p><strong>Say:</strong> And here's GoTree, by Guozheng Li, Min
+              Tian, Qinmei Xu, Michael McGuffin, and Xiaoru Yuan, at CHI 2020.
+              It is a grammar for tree visualizations, like all of these.</p>
+          </aside>
+        </section>
+
+        <section class="grammar-intro-slide" data-auto-animate data-auto-animate-id="gotree-intro">
+          <h2>GoTree draws any tree in many layouts</h2>
           <div class="grammar-intro-figs grammar-intro-side gotree-figs">
             <div>
               <p class="code-pair-label">tree visualizations</p>
-              <img class="grammar-fig gotree-examples" src="./images/comparisons/gotree-examples.png" alt="A gallery of tree visualizations from the GoTree paper: indented outline, pixel tree, 1D treemap, BarcodeTree, garden layout, thread arc, treemap with oval, cascaded treemap, dendrogram, DeepTree, outside-in tree, spiral tree, and nested pie tree" />
+              <img class="grammar-fig gotree-examples" data-id="gotree-intro-chart" src="./images/comparisons/gotree-examples.png" alt="A gallery of tree visualizations from the GoTree paper: indented outline, pixel tree, 1D treemap, BarcodeTree, garden layout, thread arc, treemap with oval, cascaded treemap, dendrogram, DeepTree, outside-in tree, spiral tree, and nested pie tree" />
             </div>
             <div>
               <p class="code-pair-label">layout rules for each axis</p>
@@ -199,11 +262,8 @@
           <p class="source-line">GoTree: A Grammar of Tree Visualizations (Li, Tian, Xu, McGuffin &amp; Yuan, ACM CHI 2020)</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
-              1:55 of 7:00.</p>
-            <p><strong>Say:</strong> And here's GoTree, by Guozheng Li, Min
-              Tian, Qinmei Xu, Michael McGuffin, and Xiaoru Yuan, at CHI 2020.
-              It is a grammar for tree visualizations, like all of these. What
-              is interesting about GoTree is that one spec does not care about
+              2:10 of 7:00.</p>
+            <p><strong>Say:</strong> What is interesting about GoTree is that one spec does not care about
               the shape of the tree. It works for a tree of any depth and any
               number of children. And the same few rules give very different
               pictures: outlines, treemaps, node-link trees, and more. To do
