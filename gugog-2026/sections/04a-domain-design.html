@@ -195,17 +195,26 @@
             </div>
             <div>
               <p class="code-pair-label">gofish-gotree</p>
-              <pre><code class="language-ts" data-line-numbers data-code-regions="A 2:3-2:30, B 3:3-3:41, C 5:5-5:45, E 6:5-6:42, D 9:5-9:42, F 10:5-10:44">tree({
-  node: () =&gt; circle({ r: 9 }),
-  link: { kind: "line", curve: "linear" },
-  parentChild: combine({
-    x: { kind: "align", alignment: "middle" },
-    y: { kind: "distribute", spacing: 90 },
-  }),
-  sibling: combine({
-    x: { kind: "distribute", spacing: 24 },
-    y: { kind: "align", alignment: "start" },
-  }),
+              <!-- Simplified syntax (2026-11-07, later, the user's choice):
+                   the layout rules are written as curried relation
+                   functions, node as a mark, and link as a line mark,
+                   because that reads more easily for people new to GoFish.
+                   gofish-gotree today writes node: () =&gt; circle(...),
+                   link: { kind: "line", ... } (link options in the
+                   current source), and parentChild: combine({ x: { kind:
+                   "align", alignment: "middle" }, ... }). The render is a
+                   static picture, so nothing that runs changes. -->
+              <pre><code class="language-ts" data-line-numbers data-code-regions="A 2:3-2:24, B 3:3-3:39, C 5:5-5:37, E 6:5-6:34, D 9:5-9:34, F 10:5-10:36">tree({
+  node: circle({ r: 9 }),
+  link: line({ curve: Curve.linear() }),
+  parentChild: {
+    x: align({ alignment: "middle" }),
+    y: distribute({ spacing: 90 }),
+  },
+  sibling: {
+    x: distribute({ spacing: 24 }),
+    y: align({ alignment: "start" }),
+  },
 }, hierarchy);</code></pre>
             </div>
           </div>
@@ -250,7 +259,22 @@
             <p><strong>Sources:</strong> code is the final GUGOG
               paper's Figure 5 (section 3.3 "GoTree"), from
               <code>examples/gotree-node-link.json</code> and
-              <code>examples/gofish-gotree-node-link.ts</code>, copied exactly.
+              <code>examples/gofish-gotree-node-link.ts</code>. The GoTree
+              side is copied exactly. The gofish-gotree side, since
+              2026-11-07, later, is a simplified form, by the user's choice,
+              because it is easier to read for people new to GoFish: the
+              layout rules are curried relation functions
+              (<code>x: align({ alignment: "middle" })</code>), the node is a
+              mark with no callback (<code>node: circle({ r: 9 })</code>),
+              and the link is a line mark (<code>link: line({ curve:
+              Curve.linear() })</code>). The current library writes
+              <code>node: () =&gt; circle(...)</code>, <code>link: { kind:
+              "line", ... }</code> (the current source passes link options
+              such as <code>{ curve: Curve.linear() }</code>), and
+              <code>parentChild: combine({ x: { kind: "align", alignment:
+              "middle" }, ... })</code>. The render is a static picture, so
+              nothing that runs changes. If asked, say the slide shows a
+              simpler form of the library's syntax.
               The paper's role letters: A node = <code>circle</code>, B link =
               <code>line</code>, C <code>within</code> = x
               <code>align</code> middle, D <code>flatten</code> = x
@@ -258,8 +282,8 @@
               <code>distribute</code>, F <code>align</code> top = y
               <code>align</code> start. Paper caption: "GoTree uses relative
               margins and adaptive dimensions; GoFish here uses fixed gaps."
-              The <code>combine</code> code that turns these rules into
-              GoFish constraints is on the hidden slide
+              The library's <code>combine</code> code that turns these rules
+              into GoFish constraints is on the hidden slide
               "<code>combine</code> compiles to GoFish constraints".</p>
           </aside>
         </section>
@@ -425,6 +449,25 @@ layer([planets, label])
               --region-ink: #8d4700;
               --region-tint: #f6ece1;
             }
+            /* Where one grammar calls the next: the call is marked in the
+               color of the grammar it calls, stronger than that grammar's
+               region tint so it reads on top of the caller's tint. */
+            .reveal .tree-waffle-slide pre code .char-mark[data-mark-key="20:25-33"] {
+              --char-mark-edge: #165d83;
+              background: #b9d3e4;
+              text-decoration-color: #165d83;
+            }
+            /* The region tint is wrapped inside each mark, so clear it
+               there, or it would paint over the mark's color. */
+            .reveal .tree-waffle-slide pre code .char-mark[data-mark-key="20:25-33"] .code-region,
+            .reveal .tree-waffle-slide pre code .char-mark[data-mark-key="15:11-20"] .code-region {
+              background: transparent;
+            }
+            .reveal .tree-waffle-slide pre code .char-mark[data-mark-key="15:11-20"] {
+              --char-mark-edge: #8d4700;
+              background: #efcfa9;
+              text-decoration-color: #8d4700;
+            }
             .reveal .tree-waffle-slide .tree-waffle {
               display: block;
               margin: 0;
@@ -433,7 +476,19 @@ layer([planets, label])
           </style>
           <h2>All three grammars in one picture</h2>
           <div class="tree-waffle-split">
-            <pre><code class="language-ts" data-line-numbers data-code-regions="PiCCL 1:1-7:2, Atom 9:1-15:22, GoTree 17:1-24:13">const bottleUnit = (data) =&gt; {
+            <!-- Simplified syntax (2026-11-07, later, the user's choice): the
+                 tree's link is a line mark and its layout rules are curried
+                 relation functions, because that reads more easily for
+                 people new to GoFish. gofish-gotree today writes link: {
+                 curve: Curve.linear(), ... } and parentChild: combine({ x:
+                 { kind: "align", alignment: "middle" }, ... }), as
+                 ../sources/tree-waffle/main.ts still does. The node keeps
+                 its callback, because it uses the data. The picture is
+                 static, so nothing that runs changes.
+                 The two char marks show where one grammar plugs into the
+                 next: waffle(d) in the GoTree part in Atom's color, and
+                 bottleUnit in the Atom part in PiCCL's color. -->
+            <pre><code class="language-ts" data-line-numbers data-char-marks="15:11-20, 20:25-33" data-code-regions="PiCCL 1:1-7:2, Atom 9:1-15:22, GoTree 17:1-24:13">const bottleUnit = (data) =&gt; {
   const amount = ...;
   return atop({ blendMode: "color" }, [
     image({ href: bottlePng, h: ..., filter: Filter.grayscale }),
@@ -453,9 +508,9 @@ tree({
   node: (d) =&gt; d.height
     ? circle({ ... })
     : enclose({ ... }, [waffle(d)]),
-  link: { ... },
-  parentChild: combine({ x: ..., y: ... }),
-  sibling: combine({ x: ..., y: ... }),
+  link: line({ ... }),
+  parentChild: { x: align({ ... }), y: distribute({ ... }) },
+  sibling: { x: distribute({ ... }), y: align({ ... }) },
 }, hierarchy)</code></pre>
             <img class="tree-waffle" src="./images/tradeoffs/gofish-tree-waffle-tenths.png" alt="A GoFish tree with four leaves. Each leaf is a waffle of ten bottles, and each bottle is filled with green. The first waffle is empty, the second is a little under half full, the third is full, and the fourth is almost three quarters full." />
           </div>
@@ -499,10 +554,27 @@ tree({
               <code>: any</code>), the way <code>amount</code> is read from
               the data, the fill rectangle's y and height (computed from
               <code>amount</code>), the picture's height, the spacing, the node circle and card styling, the
-              link styling, the two <code>combine</code> rules (the same
-              align and distribute rules as on the GoTree slide), the
+              link styling, the options of the align and distribute rules
+              (the same rules as on the GoTree slide), the
               <code>cells</code> helper and the <code>hierarchy</code> data,
               and the render call.</p>
+            <p><strong>Simplified syntax</strong> (since 2026-11-07, later,
+              the user's choice): the tree's link is shown as
+              <code>line({ ... })</code> and its layout rules as curried
+              relation functions, <code>parentChild: { x: align({ ... }), y:
+              distribute({ ... }) }</code>, because that is easier to read for
+              people new to GoFish. The current library, and
+              <code>sources/tree-waffle/main.ts</code>, write <code>link: {
+              curve: Curve.linear(), ... }</code> and <code>parentChild:
+              combine({ x: { kind: "align", alignment: "middle" }, ...
+              })</code>. The node keeps its callback, because it uses the
+              data. The picture is static, so nothing that runs changes.</p>
+            <p><strong>The two marked calls</strong> show where one grammar
+              plugs into the next: <code>waffle(d)</code> in the GoTree part
+              is marked in Atom's blue, and <code>bottleUnit</code> in
+              <code>.mark(bottleUnit)</code> in the Atom part is marked in
+              PiCCL's brown. Point at them for "The tree's leaves call the
+              waffle, and the waffle's mark is the bottle."</p>
           </aside>
         </section>
 
