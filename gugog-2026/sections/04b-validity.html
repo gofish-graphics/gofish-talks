@@ -18,12 +18,30 @@
              incorrect, step 2's notes say where the idea of tracking units
              came from, step 3's notes give the rule and its limit, and
              step 4 stacks a summable column. The open question slide is at
-             the end of this file. -->
+             the end of this file.
+             Since 2026-11-07, later, these are bonus slides: vite.config.ts
+             puts this file after the panel slide (05-panel.html), behind the
+             "Bonus slides" divider below. They have no running totals. -->
+
+        <!-- "Bonus slides" divider (2026-11-07, later). It marks where the
+             main talk ends. Like the panel slide before it and the opener
+             after it, it has no data-auto-animate, so neither pair
+             animates. -->
+        <section class="statement bonus-divider">
+          <h2>Bonus slides</h2>
+          <aside class="notes">
+            <p><strong>Bonus.</strong> The main talk ends at the panel
+              slide. Everything after this divider is semantic validity
+              (the opener, the Huang and Kay quote, and the four CanSum
+              steps), for the panel or questions. Shown in full it takes
+              about 1:10.</p>
+          </aside>
+        </section>
         <section class="statement validity-open-slide">
           <p class="big-claim">Very expressive! Did we lose safety and correctness?</p>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:05. <strong>Running total:</strong>
-              4:50 of 7:00.</p>
+            <p><strong>Bonus slide.</strong> Not in the main talk's running
+              total. <strong>Target if shown:</strong> 0:05.</p>
             <p><strong>Say:</strong> "Very expressive! But did we lose safety
               and correctness? It seems like there are a lot more ways for a
               GoFish spec to go wrong."</p>
@@ -52,9 +70,9 @@
           </blockquote>
           <p class="long-quote-cite">Cynthia Huang &amp; Matthew Kay, <em>Semantic Validity vs. Graphical Arrangement in Visualization Grammars</em>, GUGOG 2026</p>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:10 (shown, not recited; read the
-              accent phrase aloud). <strong>Running total:</strong> 5:00 of
-              7:00.</p>
+            <p><strong>Bonus slide.</strong> Not in the main talk's running
+              total. <strong>Target if shown:</strong> 0:10 (shown, not
+              recited; read the accent phrase aloud).</p>
             <p><strong>Say:</strong> "Cynthia and Matt, who are on the panel, frame it
               as a tradeoff. If you check every operation, you limit what
               people can draw. If you let people draw anything, checking is
@@ -172,8 +190,8 @@ chart(data)
           </div>
           <p class="canadd-footnote" data-id="canadd-footnote">Inspired by Bartonicek, Urbanek &amp; Murrell (JCGS 2025), Flint (Wang et al., VIS 2026), Huang &amp; Kay (GUGOG 2026), and matplotlib's units.</p>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:30. <strong>Running total:</strong>
-              5:30 of 7:00.</p>
+            <p><strong>Bonus slide.</strong> Not in the main talk's running
+              total. <strong>Target if shown:</strong> 0:30.</p>
             <p><strong>Say:</strong> "Back to my question. It's true that there
               are more ways for a spec to go wrong! Here's the stacked bar
               chart example we will see in the next talk. It stacks the
@@ -255,8 +273,8 @@ chart(data, {
           </div>
           <p class="canadd-footnote" data-id="canadd-footnote">Inspired by Bartonicek, Urbanek &amp; Murrell (JCGS 2025), Flint (Wang et al., VIS 2026), Huang &amp; Kay (GUGOG 2026), and matplotlib's units.</p>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
-              5:45 of 7:00.</p>
+            <p><strong>Bonus slide.</strong> Not in the main talk's running
+              total. <strong>Target if shown:</strong> 0:15.</p>
             <p><strong>Say:</strong> "After reading Cynthia and Matt's paper,
               looking at Flint, and learning about units of measure in
               matplotlib, I had an idea. GoFish could catch this by tracking
@@ -331,8 +349,8 @@ chart(data, {
           </div>
           <p class="canadd-footnote" data-id="canadd-footnote">Inspired by Bartonicek, Urbanek &amp; Murrell (JCGS 2025), Flint (Wang et al., VIS 2026), Huang &amp; Kay (GUGOG 2026), and matplotlib's units.</p>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:05. <strong>Running total:</strong>
-              5:50 of 7:00.</p>
+            <p><strong>Bonus slide.</strong> Not in the main talk's running
+              total. <strong>Target if shown:</strong> 0:05.</p>
             <p><strong>Say:</strong> "<code>stack</code> requires the column
               it stacks to be summable. So run it, and the same stack now
               gives an error, because degrees Celsius has no
@@ -414,8 +432,8 @@ chart(data, {
           </div>
           <p class="canadd-footnote" data-id="canadd-footnote">Inspired by Bartonicek, Urbanek &amp; Murrell (JCGS 2025), Flint (Wang et al., VIS 2026), Huang &amp; Kay (GUGOG 2026), and matplotlib's units.</p>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:05. <strong>Running total:</strong>
-              5:55 of 7:00.</p>
+            <p><strong>Bonus slide.</strong> Not in the main talk's running
+              total. <strong>Target if shown:</strong> 0:05.</p>
             <p><strong>Say:</strong> "Now switch to a column that is summable,
               the US dollars, and we can stack safely."</p>
             <p><strong>If there is time:</strong> "This checks specs, not pictures, so every picture can
@@ -441,9 +459,20 @@ chart(data, {
               one unit on x to equal one unit on y. GoFish tracks at the type level whether two axes have the
               same type, and if they do, it uses the same scale for both by
               default.</p>
-            <p><strong>Lead into the conclusion:</strong> "To sum up."</p>
-            <p>This step ends semantic validity since 2026-11-07, when the
-              open question slide was hidden.</p>
+            <p><strong>The open question, if there is time</strong> (the
+              conclusion's third bullet until 2026-11-07, later, when these
+              slides became bonus slides): "Can validity rules attached to
+              operators cover every chart that uses them? Can we check
+              whether a chart is valid by following the structure of its
+              specification? This is like syntax-directed type checking,
+              where the checker follows the structure of the program. Not
+              every type system works that way. And reasonable people
+              disagree that the structure of a specification is the right
+              place to check validity. I believe it is well suited to it, and
+              showing that is future work."</p>
+            <p>This step is the last visible slide of the deck since
+              2026-11-07, later, when semantic validity became bonus slides
+              after the panel slide.</p>
             <p><strong>Source:</strong> written for this slide, after the
               GoFish repo's CanSum test
               (<code>packages/gofish-graphics/src/tests/measure.test.ts</code>,
@@ -478,11 +507,11 @@ chart(data, {
 
         <!-- The open question (2026-11-06). The user hid it on 2026-11-07.
              Its spoken framing (syntax-directed type checking) is now in
-             the conclusion slide's notes, next to its "Open question"
-             bullet (05-panel.html). Remove data-visibility="hidden" to
+             the last CanSum step's notes, with the open question that was
+             the conclusion's third bullet until 2026-11-07, later. Remove data-visibility="hidden" to
              bring it back, and add its 0:10 back to the running totals.
              It has no data-auto-animate, so the CanSum step before it does
-             not pair with it, and neither does the conclusion. -->
+             not pair with it. -->
         <section class="statement open-question-slide" data-visibility="hidden">
           <h2>Open question</h2>
           <p class="big-claim">Can we check whether a chart is valid by following the structure of its specification?</p>

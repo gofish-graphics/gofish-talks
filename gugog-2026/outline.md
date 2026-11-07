@@ -10,6 +10,8 @@ Note, 2026-11-04, later the same day: the talk has a new hook, and the opening i
 
 Note, 2026-11-05 (later): the circle slide now uses the user's drawing, and the islands drawings are colored as islands, green land with yellow shores in blue water. On the circle slide, GUGOG itself is one light green island with a yellow shore, and the grammars inside it are darker green with no shore.
 
+Note, 2026-11-07, later: semantic validity is now bonus slides. The whole section (the opener, the Huang and Kay quote, the four CanSum steps, and the hidden open question) comes after the panel slide, behind a new divider slide titled "Bonus slides". The conclusion lost its third bullet, the open question, whose point is now in the last CanSum step's notes. The hierarchy slide now leads into the conclusion. The talk now runs 5:00 before the panel, which leaves 2:00 for the panel. See "Changes, 2026-11-07, later" below.
+
 Note, 2026-11-07: GoFish is now introduced through the three grammars' examples, not a separate crash course. Each example teaches one GoFish idea. Atom teaches the chart flow: a plain stacked bar chart becomes Atom's unit chart with a small code change. PiCCL's bottle teaches operators on marks and then relations. GoTree's slide is unchanged. The ribbon buildup, the three planets slides, the Atom comparison, "same core, three shapes of data" and the open question slide are hidden. The labels above the slide titles are gone from the whole deck, the middle dots in slide text are gone, and "All three grammars in one picture" now shows its code. The three grammar intros are now two steps each: the example charts alone, then the operators. The talk now runs 6:15 before the panel, 1:15 less than before. See "Changes, 2026-11-07" below.
 
 Note, 2026-11-06, late night, part A: the PiCCL bottle is now built in three steps that lead to image compositing, following the SciPy 2026 deck's bottle steps. GoTree is reframed: its own idea is that one spec works for any tree and gives many layouts, and gofish-gotree keeps that idea but writes the layout with GoFish's align and distribute in place of GoTree's four relation names. The tree of bottle waffles, remade with ten bottles per waffle, now comes right after "same core, three shapes of data" as "All three grammars in one picture". The answer grows by 0:10, so with part B the talk runs 7:30 before the panel. See "Changes, 2026-11-06, late night, part A" below.
@@ -25,6 +27,37 @@ Note, 2026-11-06, later the same day: the GoFish intro now builds the ribbon cha
 Note, 2026-11-06: the talk is restructured around the user's new story. See "Restructure, 2026-11-06" below. It replaces the slide order, parts, and timing described in the older sections.
 
 Note, 2026-11-05: part 2 and part 3 are restructured, following the user's notes. A new circle slide, "one language that holds all of them", now opens part 2. It shows the user's drawing of one circle around all the islands. Its notes are the bridge: you could hold every grammar without unifying anything, by bundling each one as a separate component, but then you could not mix them, and mixing needs something the islands have in common. A new GoTree intro, "GoTree adds operators for laying out trees", joins the Atom and PiCCL intros. A short "What is GoFish?" slide after the verbs slide says that GoFish extends the grammar of graphics with verbs, like the thesis defense deck's slide of that name. The crash course is now the chart API only, two steps, stacked bars to the ribbon chart. The planets diagram moves to a new slide after it, "under the chart API is a smaller, more direct core", and the PiCCL bottle slide gets a callout that points at the same core lines in its spec. The three GoTree code slides in 4a are hidden, and GoTree in GoFish is shown only on "same core, three shapes of data". The total stays 7:00. See "Changes to the deck" and "Time".
+
+## Changes, 2026-11-07, later
+
+This section updates the slide order and timing of "Changes, 2026-11-07" just below. Everything not named here stays as that section describes it.
+
+### What changed
+
+- Semantic validity is now bonus slides. `vite.config.ts` puts `04b-validity.html` after `05-panel.html`, so the slides moved as a whole and were not copied. The file opens with a plain divider slide titled "Bonus slides", which marks where the main talk ends.
+- The bonus slides have no running totals. Each one's notes say "Bonus slide" and give its target if shown. Shown in full they take about 1:10.
+- The conclusion's third bullet, "Open question. Can validity rules attached to operators cover every chart that uses them?", is removed, because the main talk no longer presents validity. Its point and the notes on syntax-directed type checking are now in the last CanSum step's notes. The conclusion's notes say how to put the bullet back. The conclusion's target drops from 0:20 to 0:15.
+- The hierarchy slide now leads into the conclusion ("To sum up."). Its old lead into validity is kept in its notes for reference.
+- The panel's cut list no longer has "Cut the semantic validity opener". The panel's fourth question, about checking validity, is unchanged.
+- No new pair animates by accident: the hierarchy slide, the conclusion, the panel slide, the divider, and the validity opener have no `data-auto-animate`. The four CanSum steps still pair with each other as before.
+
+### Slide order and timing
+
+Problem, question, and examples, up to the hierarchy slide, are unchanged. Running total 4:45.
+
+22. "The grammar of graphics needs verbs". 0:15. Running total 5:00.
+23. Questions for the panel. 0:15. Running total 5:15.
+
+Bonus slides, after the panel, not counted.
+
+24. "Bonus slides" divider.
+25. "Very expressive! Did we lose safety and correctness?" 0:05 if shown.
+26. Huang and Kay quote. 0:10 if shown.
+27. CanSum, four steps. 0:30, 0:15, 0:05, 0:05 if shown.
+
+### Time
+
+The talk now runs 5:00 before the panel, down from 6:15. Moving semantic validity out saves 1:10, and the shorter conclusion saves 0:05. This leaves 2:00 for the panel within 7:00.
 
 ## Changes, 2026-11-07
 

@@ -21,9 +21,11 @@ export default defineConfig({
         "03-gofish-intro.html",
         "03b-code-comparisons.html",
         "04a-domain-design.html",
-        "04b-validity.html",
         "04c-next-cliff.html",
         "05-panel.html",
+        // Bonus slides, after the panel slide (since 2026-11-07): the
+        // "Bonus slides" divider and semantic validity.
+        "04b-validity.html",
       ],
     }),
   ],
