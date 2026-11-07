@@ -17,14 +17,20 @@
              drawing (inline SVG). The operator card shows spread: four bars
              at even gaps on one baseline, in a dashed box, the new mark. The
              relations card shows align: bars at uneven gaps, tops on one
-             dashed line. The sentences moved to the notes. -->
+             dashed line. The sentences moved to the notes.
+             2026-11-07, later still: under each drawing are the intro
+             slides' figures, sorted by kind, with the intro slides' labels.
+             Operators: Atom's layout operators and PiCCL's compositing
+             operators. Relations: PiCCL's snapping relations and GoTree's
+             layout rules. They are plain images and do not animate in from
+             the intro slides, which are three slides back. -->
         <section class="opsrel-slide">
           <style>
             .reveal .opsrel-slide .opsrel-grid {
               display: grid;
               gap: 1.2em;
               grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-              margin-top: 1.3em;
+              margin-top: 0.7em;
             }
             .reveal .opsrel-slide .opsrel-card {
               align-items: center;
@@ -47,11 +53,47 @@
             .reveal .opsrel-slide .opsrel-pic {
               display: block;
               height: auto;
-              margin: 0.5em auto 0;
-              width: 82%;
+              margin: 0.3em auto 0;
+              width: 52%;
+            }
+            /* The intro slides' own figures under each drawing (since
+               2026-11-07, later), sorted by kind, with the intro slides'
+               labels. Plain images: they do not animate in. */
+            .reveal .opsrel-slide .opsrel-figs {
+              align-items: end;
+              display: flex;
+              gap: 1.1em;
+              justify-content: center;
+              margin-top: 0.5em;
+              width: 100%;
+            }
+            .reveal .opsrel-slide .opsrel-fig {
+              text-align: center;
+            }
+            .reveal .opsrel-slide .opsrel-fig-label {
+              font-family: var(--heading-font, inherit);
+              font-size: 0.5em;
+              font-weight: 700;
+              margin-bottom: 0.2em;
+            }
+            .reveal .opsrel-slide .opsrel-fig-who {
+              color: var(--accent);
+            }
+            .reveal .opsrel-slide .opsrel-fig img {
+              background: #fff;
+              border: 1.5px solid #27231f;
+              border-radius: 5px 7px 4px 6px;
+              box-sizing: border-box;
+              display: block;
+              height: 120px;
+              margin: 0 auto;
+              max-height: none;
+              max-width: none;
+              padding: 4px;
+              width: auto;
             }
             .reveal .opsrel-slide .big-claim {
-              margin-top: 1.5em;
+              margin-top: 0.8em;
               text-align: center;
             }
             /* A signature in code form, shared with the backup slide below. */
@@ -92,6 +134,10 @@
                 <rect x="166" y="83" width="40" height="45" fill="#ddd6ca" stroke="#27231f" stroke-width="1.5" rx="2" />
                 <rect x="228" y="50" width="40" height="78" fill="#ddd6ca" stroke="#27231f" stroke-width="1.5" rx="2" />
               </svg>
+              <div class="opsrel-figs">
+                <div class="opsrel-fig"><div class="opsrel-fig-label"><span class="opsrel-fig-who">Atom</span> layout operators</div><img src="./images/comparisons/atom-operators.png" alt="Atom's layout operators" /></div>
+                <div class="opsrel-fig"><div class="opsrel-fig-label"><span class="opsrel-fig-who">PiCCL</span> compositing operators</div><img src="./images/comparisons/piccl-operators.png" alt="PiCCL's compositing operators" /></div>
+              </div>
             </div>
             <div class="opsrel-card">
               <h3>Relations</h3>
@@ -103,6 +149,10 @@
                 <rect x="226" y="35" width="40" height="60" fill="#ddd6ca" stroke="#27231f" stroke-width="1.5" rx="2" />
                 <line x1="8" y1="35" x2="292" y2="35" stroke="#b24a3b" stroke-width="2.5" stroke-dasharray="8 6" />
               </svg>
+              <div class="opsrel-figs">
+                <div class="opsrel-fig"><div class="opsrel-fig-label"><span class="opsrel-fig-who">PiCCL</span> snapping relations</div><img src="./images/intros/piccl-snapping.png" alt="PiCCL's snapping relations" /></div>
+                <div class="opsrel-fig"><div class="opsrel-fig-label"><span class="opsrel-fig-who">GoTree</span> layout rules for each axis</div><img src="./images/comparisons/gotree-operators.png" alt="GoTree's layout rules" /></div>
+              </div>
             </div>
           </div>
           <p class="big-claim fragment">Neither one fits any of the seven concepts of the grammar of graphics.</p>
@@ -117,13 +167,18 @@
                 set of marks and makes one new mark that holds them. Here
                 spread lines up four bars at even gaps, and the dashed box is
                 the new mark. Marks go in, and one mark comes out. Atom's
-                FillX and PiCCL's atop are operators."</li>
+                FillX and PiCCL's atop are operators." (Point under the
+                drawing.) "These are their operator figures, from the slides
+                we just saw."</li>
               <li>"The second is relations. A relation takes some marks and
                 gives back a boolean, true or false. It is a fact about a set
                 of marks, such as a shared top edge. Here the gaps are
                 uneven, but align is true: every top sits on the dashed line.
                 GoFish places the marks so that the relation is true. GoTree's
-                juxtapose and align are relations."</li>
+                juxtapose and align are relations, and so are PiCCL's
+                snapping relations." (Point under the drawing.) "Those are
+                PiCCL's snapping relations and GoTree's layout rules. So PiCCL
+                adds both kinds."</li>
               <li>(Click.) "The grammar of graphics does not have these.
                 Neither one fits any of its seven concepts."</li>
             </ul>
