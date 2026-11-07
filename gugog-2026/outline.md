@@ -39,6 +39,7 @@ This section updates the slide order and timing of "Changes, 2026-11-07" just be
 - The conclusion's third bullet, "Open question. Can validity rules attached to operators cover every chart that uses them?", is removed, because the main talk no longer presents validity. Its point and the notes on syntax-directed type checking are now in the last CanSum step's notes. The conclusion's notes say how to put the bullet back. The conclusion's target drops from 0:20 to 0:15.
 - The hierarchy slide now leads into the conclusion ("To sum up."). Its old lead into validity is kept in its notes for reference.
 - The panel's cut list no longer has "Cut the semantic validity opener". The panel's fourth question, about checking validity, is unchanged.
+- The grammar intros' operator figures no longer fade in on step 2. Each one is already on step 1, smaller than the example charts and hidden behind them, and slides out from behind them as the charts move away. Going back reverses it.
 - No new pair animates by accident: the hierarchy slide, the conclusion, the panel slide, the divider, and the validity opener have no `data-auto-animate`. The four CanSum steps still pair with each other as before.
 
 ### Slide order and timing

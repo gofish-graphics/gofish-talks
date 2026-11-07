@@ -919,3 +919,61 @@
   height: auto;
   width: 960px;
 }
+
+/* The operator figure slides out from behind the example charts
+   (2026-11-07, later). On step 1 the operator figure is already in the
+   slide, stacked in the same grid cell as the charts, smaller than them
+   and below them, so it is fully covered (its own shadow is off). It has
+   the same data-id as on step 2, so auto-animate moves and grows it from
+   behind the charts to its place while the charts move away. The charts
+   and the operator figure are siblings with their own data-ids, never
+   nested. Each step-1 size has the step-2 figure's aspect ratio, so the
+   figure grows without stretching. On both steps the charts sit above the
+   operator figure, so during the move it comes from behind them. */
+.reveal .grammar-intro-first .grammar-intro-figs > div {
+  display: grid;
+  grid-template-columns: 100%;
+  justify-items: center;
+}
+
+.reveal .grammar-intro-first .grammar-intro-figs > div > * {
+  grid-column: 1;
+}
+
+.reveal .grammar-intro-first .grammar-intro-figs img.grammar-fig {
+  align-self: center;
+  grid-row: 2;
+  /* Reveal's img max-height of 95% would resolve against the grid row
+     here and shrink the charts. */
+  max-height: none;
+}
+
+.reveal .grammar-intro-slide img.grammar-fig {
+  position: relative;
+  z-index: 1;
+}
+
+.reveal .grammar-intro-slide img.grammar-fig.atom-ops,
+.reveal .grammar-intro-slide img.grammar-fig.piccl-ops,
+.reveal .grammar-intro-slide img.grammar-fig.gotree-ops {
+  z-index: 0;
+}
+
+.reveal .grammar-intro-first img.grammar-fig.intro-behind {
+  box-shadow: none;
+}
+
+.reveal .grammar-intro-first img.grammar-fig.atom-ops.intro-behind {
+  height: 262px;
+  width: 732px;
+}
+
+.reveal .grammar-intro-first img.grammar-fig.piccl-ops.intro-behind {
+  height: 402px;
+  width: 691px;
+}
+
+.reveal .grammar-intro-first img.grammar-fig.gotree-ops.intro-behind {
+  height: 359px;
+  width: 543px;
+}
