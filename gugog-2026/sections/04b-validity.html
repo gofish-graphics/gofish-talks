@@ -20,11 +20,10 @@
              step 4 stacks a summable column. The open question slide is at
              the end of this file. -->
         <section class="statement validity-open-slide">
-          <p class="part">Semantic validity</p>
           <p class="big-claim">Very expressive! Did we lose safety and correctness?</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:05. <strong>Running total:</strong>
-              5:55 of 7:00.</p>
+              4:55 of 7:00.</p>
             <p><strong>Say:</strong> "Very expressive! But did we lose safety
               and correctness? It seems like there are a lot more ways for a
               GoFish spec to go wrong."</p>
@@ -41,7 +40,6 @@
              their question in their own words and credits them for it.
              -->
         <section class="quote-slide">
-          <p class="part">Semantic validity</p>
           <blockquote class="long-quote quote-short">
             <p>Can semantic and graphical expressivity be combined within a
               single system, or are users better served by clearly distinct
@@ -55,7 +53,7 @@
           <p class="long-quote-cite">Cynthia Huang &amp; Matthew Kay, <em>Semantic Validity vs. Graphical Arrangement in Visualization Grammars</em>, GUGOG 2026</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:10 (shown, not recited; read the
-              accent phrase aloud). <strong>Running total:</strong> 6:05 of
+              accent phrase aloud). <strong>Running total:</strong> 5:05 of
               7:00.</p>
             <p><strong>Say:</strong> "Cynthia and Matt, who are on the panel, frame it
               as a tradeoff. If you check every operation, you limit what
@@ -136,7 +134,6 @@
              from the slide's corner on the other, and it flies in from the
              top left. -->
         <section class="code-slide" data-auto-animate data-auto-animate-id="canadd" data-auto-animate-duration="0.3">
-          <p class="part" data-id="canadd-part">Semantic validity</p>
           <h2 data-id="canadd-title"><code>stack</code> needs <code>CanSum</code></h2>
           <div class="canadd-grid">
             <pre data-id="canadd-code" data-magic-move><code class="language-ts" data-line-numbers>const data = [
@@ -176,7 +173,7 @@ chart(data)
           <p class="canadd-footnote" data-id="canadd-footnote">Inspired by Bartonicek, Urbanek &amp; Murrell (JCGS 2025), Flint (Wang et al., VIS 2026), Huang &amp; Kay (GUGOG 2026), and matplotlib's units.</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:30. <strong>Running total:</strong>
-              6:35 of 7:00.</p>
+              5:35 of 7:00.</p>
             <p><strong>Say:</strong> "Back to my question. It's true that there
               are more ways for a spec to go wrong! Here's the stacked bar
               chart example we will see in the next talk. It stacks the
@@ -215,7 +212,6 @@ chart(data)
         </section>
 
         <section class="code-slide" data-auto-animate data-auto-animate-id="canadd" data-auto-animate-duration="0.3">
-          <p class="part" data-id="canadd-part">Semantic validity</p>
           <h2 data-id="canadd-title"><code>stack</code> needs <code>CanSum</code></h2>
           <div class="canadd-grid">
             <pre data-id="canadd-code" data-magic-move><code class="language-ts" data-line-numbers data-char-marks="8:11-13, 9:3-11, 10:5-21, 11:5-53, 12:3-4, 13:1-2">const data = [
@@ -260,7 +256,7 @@ chart(data, {
           <p class="canadd-footnote" data-id="canadd-footnote">Inspired by Bartonicek, Urbanek &amp; Murrell (JCGS 2025), Flint (Wang et al., VIS 2026), Huang &amp; Kay (GUGOG 2026), and matplotlib's units.</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
-              6:50 of 7:00.</p>
+              5:50 of 7:00.</p>
             <p><strong>Say:</strong> "After reading Cynthia and Matt's paper,
               looking at Flint, and learning about units of measure in
               matplotlib, I had an idea. GoFish could catch this by tracking
@@ -292,7 +288,6 @@ chart(data, {
         </section>
 
         <section class="code-slide" data-auto-animate data-auto-animate-id="canadd" data-auto-animate-duration="0.3">
-          <p class="part" data-id="canadd-part">Semantic validity</p>
           <h2 data-id="canadd-title"><code>stack</code> needs <code>CanSum</code></h2>
           <div class="canadd-grid">
             <pre data-id="canadd-code" data-magic-move><code class="language-ts" data-line-numbers data-char-marks="8:11-13, 9:3-11, 10:5-21, 11:5-53, 12:3-4, 13:1-2">const data = [
@@ -337,7 +332,7 @@ chart(data, {
           <p class="canadd-footnote" data-id="canadd-footnote">Inspired by Bartonicek, Urbanek &amp; Murrell (JCGS 2025), Flint (Wang et al., VIS 2026), Huang &amp; Kay (GUGOG 2026), and matplotlib's units.</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:05. <strong>Running total:</strong>
-              6:55 of 7:00.</p>
+              5:55 of 7:00.</p>
             <p><strong>Say:</strong> "<code>stack</code> requires the column
               it stacks to be summable. So run it, and the same stack now
               gives an error, because degrees Celsius has no
@@ -376,7 +371,6 @@ chart(data, {
         </section>
 
         <section class="code-slide" data-auto-animate data-auto-animate-id="canadd" data-auto-animate-duration="0.3">
-          <p class="part" data-id="canadd-part">Semantic validity</p>
           <h2 data-id="canadd-title"><code>stack</code> needs <code>CanSum</code></h2>
           <div class="canadd-grid">
             <pre data-id="canadd-code" data-magic-move><code class="language-ts" data-line-numbers data-char-marks="19:8-12">const data = [
@@ -421,7 +415,7 @@ chart(data, {
           <p class="canadd-footnote" data-id="canadd-footnote">Inspired by Bartonicek, Urbanek &amp; Murrell (JCGS 2025), Flint (Wang et al., VIS 2026), Huang &amp; Kay (GUGOG 2026), and matplotlib's units.</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:05. <strong>Running total:</strong>
-              7:00 of 7:00.</p>
+              6:00 of 7:00.</p>
             <p><strong>Say:</strong> "Now switch to a column that is summable,
               the US dollars, and we can stack safely."</p>
             <p><strong>If there is time:</strong> "This checks specs, not pictures, so every picture can
@@ -447,8 +441,9 @@ chart(data, {
               one unit on x to equal one unit on y. GoFish tracks at the type level whether two axes have the
               same type, and if they do, it uses the same scale for both by
               default.</p>
-            <p><strong>Lead into the open question:</strong> "This raises a
-              bigger question."</p>
+            <p><strong>Lead into the conclusion:</strong> "To sum up."</p>
+            <p>This step ends semantic validity since 2026-11-07, when the
+              open question slide was hidden.</p>
             <p><strong>Source:</strong> written for this slide, after the
               GoFish repo's CanSum test
               (<code>packages/gofish-graphics/src/tests/measure.test.ts</code>,
@@ -481,16 +476,19 @@ chart(data, {
           </aside>
         </section>
 
-        <!-- The open question (2026-11-06). It ends the semantic validity
-             part. It has no data-auto-animate, so the CanSum step before it
-             does not pair with it. -->
-        <section class="statement open-question-slide">
-          <p class="part">Semantic validity</p>
+        <!-- The open question (2026-11-06). The user hid it on 2026-11-07.
+             Its spoken framing (syntax-directed type checking) is now in
+             the conclusion slide's notes, next to its "Open question"
+             bullet (05-panel.html). Remove data-visibility="hidden" to
+             bring it back, and add its 0:10 back to the running totals.
+             It has no data-auto-animate, so the CanSum step before it does
+             not pair with it, and neither does the conclusion. -->
+        <section class="statement open-question-slide" data-visibility="hidden">
           <h2>Open question</h2>
           <p class="big-claim">Can we check whether a chart is valid by following the structure of its specification?</p>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
-              7:10 of 7:00. This ends semantic validity.</p>
+            <p><strong>Target if shown:</strong> 0:10. Hidden since
+              2026-11-07.</p>
             <p><strong>Say:</strong> "So here is an open question. Can we
               check whether a chart is valid by following the structure of
               its specification? This is like syntax-directed type checking,

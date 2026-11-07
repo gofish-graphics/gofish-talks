@@ -10,6 +10,8 @@ Note, 2026-11-04, later the same day: the talk has a new hook, and the opening i
 
 Note, 2026-11-05 (later): the circle slide now uses the user's drawing, and the islands drawings are colored as islands, green land with yellow shores in blue water. On the circle slide, GUGOG itself is one light green island with a yellow shore, and the grammars inside it are darker green with no shore.
 
+Note, 2026-11-07: GoFish is now introduced through the three grammars' examples, not a separate crash course. Each example teaches one GoFish idea. Atom teaches the chart flow: a plain stacked bar chart becomes Atom's unit chart with a small code change. PiCCL's bottle teaches operators on marks and then relations. GoTree's slide is unchanged. The ribbon buildup, the three planets slides, the Atom comparison and the open question slide are hidden. The labels above the slide titles are gone from the whole deck, the middle dots in slide text are gone, and "All three grammars in one picture" now shows its code. The talk now runs 6:20 before the panel, 1:10 less than before. See "Changes, 2026-11-07" below.
+
 Note, 2026-11-06, late night, part A: the PiCCL bottle is now built in three steps that lead to image compositing, following the SciPy 2026 deck's bottle steps. GoTree is reframed: its own idea is that one spec works for any tree and gives many layouts, and gofish-gotree keeps that idea but writes the layout with GoFish's align and distribute in place of GoTree's four relation names. The tree of bottle waffles, remade with ten bottles per waffle, now comes right after "same core, three shapes of data" as "All three grammars in one picture". The answer grows by 0:10, so with part B the talk runs 7:30 before the panel. See "Changes, 2026-11-06, late night, part A" below.
 
 Note, 2026-11-06, late night, part B: the semantic validity part carries the user's new script, in the same slide order. The opener now says "Very expressive! Did we lose safety and correctness?" The notes of the CanSum steps now say why the stacked temperatures are wrong, where the idea of tracking units came from (Huang and Kay, Flint, and the units in matplotlib), and that other cases are not caught yet. The part grows from 1:00 to 1:20, so the talk runs 7:20 before the panel. See "Changes, 2026-11-06, late night, part B" below.
@@ -23,6 +25,63 @@ Note, 2026-11-06, later the same day: the GoFish intro now builds the ribbon cha
 Note, 2026-11-06: the talk is restructured around the user's new story. See "Restructure, 2026-11-06" below. It replaces the slide order, parts, and timing described in the older sections.
 
 Note, 2026-11-05: part 2 and part 3 are restructured, following the user's notes. A new circle slide, "one language that holds all of them", now opens part 2. It shows the user's drawing of one circle around all the islands. Its notes are the bridge: you could hold every grammar without unifying anything, by bundling each one as a separate component, but then you could not mix them, and mixing needs something the islands have in common. A new GoTree intro, "GoTree adds operators for laying out trees", joins the Atom and PiCCL intros. A short "What is GoFish?" slide after the verbs slide says that GoFish extends the grammar of graphics with verbs, like the thesis defense deck's slide of that name. The crash course is now the chart API only, two steps, stacked bars to the ribbon chart. The planets diagram moves to a new slide after it, "under the chart API is a smaller, more direct core", and the PiCCL bottle slide gets a callout that points at the same core lines in its spec. The three GoTree code slides in 4a are hidden, and GoTree in GoFish is shown only on "same core, three shapes of data". The total stays 7:00. See "Changes to the deck" and "Time".
+
+## Changes, 2026-11-07
+
+This section updates the slide order and timing of "Changes, 2026-11-06, late night, part A" and part B below. Everything not named here stays as those sections describe it.
+
+### What changed
+
+- GoFish is introduced through the three grammars' examples, in place of the ribbon buildup and the planets slides. Each example teaches one GoFish idea, in this order. Atom teaches the chart flow, that is, operators in the chart API. PiCCL teaches operators used directly on marks, and then relations. GoTree shows its layouts written with the same relations.
+- Atom is now three auto-animate steps, in `03b-code-comparisons.html`, with the code on the left and a live chart on the right:
+  1. "Start with the data". 0:10. The ribbon buildup's first step: `chart(seafood)` and the first rows of the seafood table.
+  2. "A stacked bar chart is a flow of operators". 0:15. A plain stacked bar chart, `spread` by lake and `stack` by species, with the small data table in the top right corner and the data transformation pipeline under the code, both from the ribbon buildup.
+  3. "Atom draws one square for each fish". 0:15. Atom's version of the same chart, a unit chart. The `stack` line becomes three lines: `derive` repeats each row as many times as its count, then a `spread` by `chunk(5)` and a `spread` along x put the fish in rows of five. The mark gets a fixed size, and the lake `spread` gets `alignment: "end"` so the columns share a baseline. This is the GoFish repo's waffle story (`stories/forwardsyntax/WaffleChart.stories.tsx`), the same on origin/main and in nightly 20261106. The pipeline shows the rows becoming units and rows of five. The notes carry the old Atom comparison's points: Atom's nested `gridxy` layouts are these spreads, the credit to Atom for GoFish's flow syntax, and the paper's honest difference about packing.
+- The bars and the units sit in the same frame. Both charts use the same lake spacing, the bars are as wide as a row of five units, and both are drawn at the same size, so the tallest bar is as tall as the tallest column of units. Only the x axis is drawn, under the chart, which the slides ask for with a render option (`data-x-axis`), like the existing `legend: false`. The charts are `atom-stacked` and `atom-units` in `charts.ts`.
+- The PiCCL bottle steps now read as two parts. Step 1's notes say that operators also work directly on marks, and that `layer` is an operator on two rectangles. Step 2 is unchanged. Step 3 is now titled "Add relations to place a line and a label", its tag reads "relations place one mark against another", and its notes explain what a relation is, as the hidden planets slide did. Step 1 grows to 0:10 and step 3 to 0:15.
+- "`spread` is `align` plus `distribute`" is no longer a slide. The GoTree slide's notes have one optional line: GoTree's rule for siblings, distribute on x and align on y, is what `spread` does.
+- Hidden, with a comment saying why, so they can be compared or brought back: the five ribbon buildup slides and the three planets slides (`03-gofish-intro.html`), the Atom comparison "Atom's `gridxy` is GoFish's `spread`" (`03b-code-comparisons.html`), and the open question slide (`04b-validity.html`, hidden by the user). The open question's spoken framing, syntax-directed type checking, is now in the conclusion's notes next to its "Open question" bullet.
+- Notes that pointed at hidden slides are fixed: the lead out of "What is GoFish?", the bottle's "as with the planets" tag and notes, the GoTree slide's "like the planets", the "same core, three shapes of data" notes (the ribbon chart and the planets are now new to the audience there), the lead out of the last CanSum step, the panel slide's cut list, and the story summary on the title slide.
+- The labels above the slide titles ("Problem", "Question", "Answer", "Semantic validity", "Conclusion", "Panel", and older numbered ones on hidden slides) are removed from every section file, hidden slides included. The CanSum steps' label had a `data-id`, removed on all four steps together, so the titles still match and do not move. The CSS rule `.part` stays in the shared template, because the SciPy 2026 deck still uses it. The title slide's venue line "GUGOG @ IEEE VIS 2026" is a different element and stays.
+- Middle dots are gone from slide text. Source lines now put the authors in parentheses, for example "Bottle chart from PiCCL (Shi et al., IEEE VIS 2025)". Code captions keep only their first part: "GoTree", "gofish-gotree", "Atom", "core", "tabular", "hierarchical", "the data", and "the picture". The hidden `combine` slide's caption is now two sentences. The old part labels quoted in this outline use commas.
+- "All three grammars in one picture" now shows its code beside the picture. It is `sources/tree-waffle/main.ts` in three parts, in the file's order: `bottleUnit` (PiCCL, with `atop`), `waffle` (Atom, two spreads), and the `tree` call (GoTree). Each part is tinted and tagged with its grammar's name. Styling and setup are left out as `...`: the TypeScript casts, how `amount` is read, the fill's y and height, the picture's height and filter, spacing, node and card and link styling, the two `combine` rules, the `cells` helper, the `hierarchy` data, and the render call. The slide grows from 0:10 to 0:15.
+
+### Slide order and timing
+
+Problem, 1:20, and Question, 1:10, are unchanged. They end at 2:30 with "What is GoFish?".
+
+Examples, which introduce GoFish and are the answer, 2:20.
+
+10. Atom, "Start with the data". 0:10. Running total 2:40.
+11. Atom, "A stacked bar chart is a flow of operators". 0:15. Running total 2:55.
+12. Atom, "Atom draws one square for each fish". 0:15. Running total 3:10.
+13. PiCCL, "The PiCCL bottle chart starts as two bars". 0:10. Running total 3:20.
+14. PiCCL, "Composite the green onto a bottle picture". 0:10. Running total 3:30.
+15. PiCCL, "Add relations to place a line and a label". 0:15. Running total 3:45.
+16. "GoTree's layouts with GoFish's relations". 0:15. Running total 4:00.
+17. "Same core, three shapes of data". 0:20. Running total 4:20.
+18. "All three grammars in one picture". 0:15. Running total 4:35.
+19. "Unify the domains and keep their structure". 0:15. Running total 4:50.
+
+Semantic validity, 1:10.
+
+20. "Very expressive! Did we lose safety and correctness?" 0:05. Running total 4:55.
+21. Huang and Kay quote. 0:10. Running total 5:05.
+22. CanSum, four steps. 0:30, 0:15, 0:05, 0:05. Running totals 5:35, 5:50, 5:55, 6:00.
+
+Conclusion, 0:20.
+
+23. "The grammar of graphics needs verbs". 0:20. Running total 6:20.
+
+Panel.
+
+24. Questions for the panel. 0:15. Running total 6:35.
+
+The running totals in `04b-validity.html` are correct again; part A had left them 0:10 early.
+
+### Time
+
+The talk now runs 6:20 before the panel, down from 7:30. From "What is GoFish?" to the end of the hierarchy slide used to take 3:20 and now takes 2:20, so the new way of introducing GoFish saves 1:00. That already counts the extra 0:05 on the picture slide for its code. Hiding the open question saves 0:10 more. This leaves 0:40 for the panel within 7:00.
 
 ## Changes, 2026-11-06, late night, part A
 
@@ -390,7 +449,7 @@ Times are targets. Each slide shows its target and running total in its speaker 
 
 ### 1. Why there are islands (about 1:35)
 
-The slides are in `00-title.html`, `00b-splash.html`, `01-islands.html`, and `01b-compression.html`. The islands and the tangle have no part label, because the drawing fills the slide. The compression chart and its variants carry "1 · Why there are islands".
+The slides are in `00-title.html`, `00b-splash.html`, `01-islands.html`, and `01b-compression.html`. The islands and the tangle have no part label, because the drawing fills the slide. The compression chart and its variants carry "1, Why there are islands".
 
 1. **Title.** 0:00. Running total 0:00.
 2. **Splash: these are all GoFish programs.** 0:10, down from 0:15, because the hook now comes on the next slide. Running total 0:10.
@@ -416,7 +475,7 @@ Leads into part 2 with: "So let's do to the islands what the grammar of graphics
 
 ### 2. Compress the islands (about 0:55)
 
-The slides are in `01c-compress-islands.html`. All four carry "2 · Compress the islands".
+The slides are in `01c-compress-islands.html`. All four carry "2, Compress the islands".
 
 6. **One language that holds all of them (the circle).** 0:20. Running total 1:55. New on 2026-11-05.
    - The user's drawing (`images/opening/grammars-circle.svg`, added 2026-11-05): the islands inside one circle labeled GUGOG.
@@ -429,7 +488,7 @@ The slides are in `01c-compress-islands.html`. All four carry "2 · Compress the
    - Lead into GoTree: "And one more, for a different shape of data."
 9. **GoTree adds operators for laying out trees.** 0:10. Running total 2:30. New on 2026-11-05.
    - The defense deck's GoTree figures: the paper's gallery of tree layouts and its layout operator figure. GoTree's marks are plain nodes and links. What it added is a set of layout operators: on each axis a parent and its children are placed by include, juxtapose, or within, and siblings are aligned or flattened.
-   - Source line: "GoTree: A Grammar of Tree Visualizations · Li, Tian, Xu, McGuffin & Yuan, ACM CHI 2020", as in the GUGOG paper's bibliography.
+   - Source line: "GoTree: A Grammar of Tree Visualizations (Li, Tian, Xu, McGuffin & Yuan, ACM CHI 2020)", as in the GUGOG paper's bibliography.
    - Atom, PiCCL, and GoTree are the evidence for the verbs slide. All credit for their ideas goes to their authors.
 
 Leads into part 3 with: "So none of these three islands mainly added a new kind of mark or channel. Each one added new ways to arrange and combine things. I think most of the other islands are like this too. They add ways to arrange, combine, repeat, or connect marks."
@@ -493,7 +552,7 @@ Leads into part 5 with: "So growth does not have to cost safety. But the growth 
 
 ### 5. The next cliff (about 1:05)
 
-The slides are in `04c-next-cliff.html` and `05-panel.html`. Both carry the label "5 · The next cliff".
+The slides are in `04c-next-cliff.html` and `05-panel.html`. Both carry the label "5, The next cliff".
 
 22. **Where we are now.** 0:25. Running total 6:20.
     - "We replaced a typology of charts with a grammar. But our verbs are themselves a typology of operators, and that is the next cliff." Then the existing script: when you need a layout that is not in the set, today you add it from outside the language, which is the same add-a-new-primitive move the grammar of graphics makes past its cliff. So we have to compress again. "I think the way past it is a layout or constraint language that is more expressive than what we have now. That is the question I would most like help with."
@@ -534,7 +593,7 @@ If it runs long, cut these first:
   - The islands and tangle move from before the compression chart to after it, into their own file, `01b-islands.html`.
   - McNutt now opens part 4a, as the first objection.
   - 2026-11-04: the islands and tangle move back to before the compression chart, so the hook comes first and the chart explains it. The Atom and PiCCL intros stay after the chart, so they move out of the islands file into their own file, `01c-compress-islands.html`, with the link to `gofish-compare.css` at its top.
-  - 2026-11-03, later the same day: the Atom and PiCCL intros move from `03b-code-comparisons.html` to the end of `01b-islands.html`, before the verbs slide, under "2 · Past the cliff". Their titles now say what each grammar added: "Atom adds operators for arranging units" and "PiCCL adds operators for combining pictures". They are short so each fits on one line, and the notes say the longer versions. The source lines keep the papers' full titles and authors. The link to `gofish-compare.css` moves to the top of `01b-islands.html`, before the first slide that uses it. The thesis defense deck put the nouns slide before its islands, as their cause, and its hidden "Limitations of Marks/Channels Lead to New Grammars with New Compositional Rules" slide showed Atom's operator figure. This talk uses the same figures and the GUGOG paper's wording ("verbs for arranging, compositing, repeating, or otherwise relating marks"), but shows the operators first and names the pattern after.
+  - 2026-11-03, later the same day: the Atom and PiCCL intros move from `03b-code-comparisons.html` to the end of `01b-islands.html`, before the verbs slide, under "2, Past the cliff". Their titles now say what each grammar added: "Atom adds operators for arranging units" and "PiCCL adds operators for combining pictures". They are short so each fits on one line, and the notes say the longer versions. The source lines keep the papers' full titles and authors. The link to `gofish-compare.css` moves to the top of `01b-islands.html`, before the first slide that uses it. The thesis defense deck put the nouns slide before its islands, as their cause, and its hidden "Limitations of Marks/Channels Lead to New Grammars with New Compositional Rules" slide showed Atom's operator figure. This talk uses the same figures and the GUGOG paper's wording ("verbs for arranging, compositing, repeating, or otherwise relating marks"), but shows the operators first and names the pattern after.
 - Hidden slides, each with `data-visibility="hidden"` and a comment saying why:
   - 2026-11-05: the three GoTree code slides in 4a (the data and the picture, the specs, and "`combine` compiles to GoFish constraints"). The user cut them for now.
   - The usage curve. The compression chart's left panel covers it.
@@ -542,7 +601,7 @@ If it runs long, cut these first:
   - The Steele quote. Part 4 is now two objections, not a big language against a small one.
   - "From I to we" and the Haskell aside stay hidden.
 - Renamed files: `04a-big-or-small.html` is now `04a-domain-design.html`. On 2026-11-04, `01b-islands.html` became `01-islands.html` (the islands and the tangle only), and `01-compression.html` became `01b-compression.html`, so the file order matches the talk order. The Atom and PiCCL intros are in the new file `01c-compress-islands.html`.
-- New part labels: "1 · Why there are islands" (shown on the compression chart and its variants, and not on the islands drawing, which fills the slide), "2 · Compress the islands" (shown on the Atom and PiCCL intros), "3 · The grammar of graphics needs verbs", "4a · Does one language cost domain design?", "4b · Does growth cost safety?", "5 · The next cliff". The crash course still has no label.
+- New part labels: "1, Why there are islands" (shown on the compression chart and its variants, and not on the islands drawing, which fills the slide), "2, Compress the islands" (shown on the Atom and PiCCL intros), "3, The grammar of graphics needs verbs", "4a, Does one language cost domain design?", "4b, Does growth cost safety?", "5, The next cliff". The crash course still has no label.
 - Rewritten notes and lead lines at every part boundary, as written above.
 - Slide text is unchanged, apart from the part labels, the titles of the Atom and PiCCL intros, and, on 2026-11-04, the compression chart's closing line.
 
@@ -552,8 +611,8 @@ If it runs long, cut these first:
 - The circle slide comes right after the compression chart, not right after the tangle as the user first said, because the chart's closing line, "What if we compress the islands?", is the question the circle answers, and the tangle's lead, "Why are there so many islands?", still works into the chart. Putting it right after the tangle is a one-slide move from `01c-compress-islands.html` to the end of `01-islands.html`; its lead line would then need to change.
 - "What is GoFish?" is its own short slide. If time is short it can go, and its line can be said over the verbs slide.
 - The hook has no text on the islands slide. A small line such as "I love visualization grammars. I can't use them together." could go on it, but the drawing would have to shrink on both slides of the auto-animate pair.
-- The panel slide carries "5 · The next cliff", because its first question is the next cliff. It could instead go back to its own label, such as "6 · Questions for the panel".
-- "1 · Why there are islands" shows on the compression chart but not on the islands drawing. A small label could go on the drawing if the audience needs it.
+- The panel slide carries "5, The next cliff", because its first question is the next cliff. It could instead go back to its own label, such as "6, Questions for the panel".
+- "1, Why there are islands" shows on the compression chart but not on the islands drawing. A small label could go on the drawing if the audience needs it.
 - The Steele quote could come back as the opening of part 5, where "a language that can grow" meets the next cliff.
 
 ## References

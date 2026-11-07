@@ -33,6 +33,9 @@ import {
   atop,
   Filter,
   v,
+  derive,
+  repeat,
+  chunk,
 } from "gofish-graphics";
 import bottlePng from "./images/comparisons/wilsonblanco.png";
 import seafood from "./data/seafood.json";
@@ -547,6 +550,41 @@ const seafoodRibbon = () =>
     .layer(ribbon({ by: "species", opacity: 0.8 }));
 // (The slides show the seafood specs with spacing and opacity elided.)
 
+// The Atom steps (03b, since 2026-11-07): a plain stacked bar chart, then
+// Atom's version of it, a unit chart with one square for each fish. The unit
+// chart is the GoFish repo's waffle story
+// (packages/gofish-graphics/stories/forwardsyntax/WaffleChart.stories.tsx):
+// repeat each row "count" times, then lay the units out in rows of five.
+// To keep the picture still from one step to the next, both charts use the
+// same lake spacing, the bars are as wide as a row of five units
+// (5 * 8 + 4 * 2 = 48), and both are drawn at the same size (data-h on the
+// slides), which is the height the units take with their axis. The bars
+// fill that height, so the tallest bar is as tall as the tallest column of
+// units and the baselines line up. The slides elide the spacing and widths
+// as "...".
+const UNIT = 8;
+const UNIT_GAP = 2;
+const UNITS_PER_ROW = 5;
+const UNIT_ROW_W = UNITS_PER_ROW * UNIT + (UNITS_PER_ROW - 1) * UNIT_GAP;
+const LAKE_GAP = 40;
+const atomStacked = () =>
+  chart(seafood)
+    .flow(
+      spread({ by: "lake", dir: "x", spacing: LAKE_GAP }),
+      stack({ by: "species", dir: "y" }),
+    )
+    .mark(rect({ w: UNIT_ROW_W, h: "count", fill: "species" }));
+
+const atomUnits = () =>
+  chart(seafood)
+    .flow(
+      spread({ by: "lake", dir: "x", alignment: "end", spacing: LAKE_GAP }),
+      derive((rows: any[]) => rows.flatMap((d) => repeat(d, "count"))),
+      spread({ by: chunk(UNITS_PER_ROW), dir: "y", reverse: true, spacing: UNIT_GAP }),
+      spread({ dir: "x", spacing: UNIT_GAP }),
+    )
+    .mark(rect({ w: UNIT, h: UNIT, fill: "species" }));
+
 // ─── Part 4b: validity against freedom of arrangement (CanSum) ────────────
 // One dataset with a temperature column and a USD column, and three steps of
 // one spec. With no schema, GoFish checks nothing and stacks the
@@ -670,6 +708,8 @@ const charts: Record<string, (fontSize: number) => Renderable> = {
   "seafood-stacked-unsorted": seafoodStackedUnsorted,
   "seafood-stacked": seafoodStacked,
   "seafood-ribbon": seafoodRibbon,
+  "atom-stacked": atomStacked,
+  "atom-units": atomUnits,
   "canadd-untyped": citiesStacked("temp"),
   "canadd-temp": citiesStacked("temp", citiesSchema),
   "canadd-usd": citiesStacked("usd", citiesSchema),
@@ -699,6 +739,16 @@ export function renderCharts(root: ParentNode = document) {
         );
       return;
     }
-    make(fontSize).render(el, { w, h, legend: false });
+    // data-x-axis="start" or "end": draw only the x axis, on that side. The
+    // Atom steps use it so the bars and the units sit in the same frame,
+    // with the lake names under them. Like legend: false, it is a render
+    // option, not part of the spec shown. The side differs between the two
+    // charts because GoFish counts it in each chart's own y direction: the
+    // bars' y axis points up, so "start" is the bottom, and the units' rows
+    // are laid out downward, so "end" is the bottom (as in the GoFish
+    // repo's waffle story).
+    const side = el.dataset.xAxis as "start" | "end" | undefined;
+    const axes = side ? { x: { side }, y: false } : undefined;
+    make(fontSize).render(el, { w, h, legend: false, ...(axes ? { axes } : {}) });
   });
 }

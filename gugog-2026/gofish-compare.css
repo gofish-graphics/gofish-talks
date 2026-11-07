@@ -884,3 +884,16 @@
 .reveal .code-slide .bottle-render {
   zoom: 0.64;
 }
+
+/* The Atom steps' code column is 20px wider than the ribbon buildup's, for
+   the 60-character spread line of the last step. */
+.atom-step .crash-solo {
+  grid-template-columns: 700px 1fr;
+}
+
+/* All three Atom steps keep the code box as tall as the last step's code
+   (eight lines), the data step too, so the pipeline under it does not
+   slide when the code grows. */
+.reveal .code-slide.atom-step .crash-solo pre code {
+  min-height: calc(8 * 1.3em);
+}

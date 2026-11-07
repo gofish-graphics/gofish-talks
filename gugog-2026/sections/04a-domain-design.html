@@ -34,7 +34,6 @@
              against a small one, so the quote has no place in the spine.
              Remove data-visibility="hidden" to bring it back. -->
         <section class="quote-slide statement" data-visibility="hidden">
-          <p class="part">4a · Does one language cost domain design?</p>
           <blockquote class="long-quote quote-short">
             <p style="max-width: none">I should not design a small language, and I should not design
               a large one. I need to design <strong>a language that can
@@ -90,7 +89,6 @@
              notes keep a backup line about it. Remove
              data-visibility="hidden" to bring it back. -->
         <section class="quote-slide" data-visibility="hidden">
-          <p class="part">4a · Does one language cost domain design?</p>
           <blockquote class="long-quote quote-short">
             <p>… we suggest that consideration of <strong>small modular
               language components</strong> may be helpful in the continuation
@@ -168,11 +166,10 @@
               text-align: center;
             }
           </style>
-          <p class="part">Answer</p>
           <h2>GoTree's layouts with GoFish's relations</h2>
           <div class="code-pair">
             <div>
-              <p class="code-pair-label">GoTree <span class="code-pair-sub">· its own language</span></p>
+              <p class="code-pair-label">GoTree</p>
               <pre><code class="language-json" data-line-numbers data-code-regions="A 2:16-2:31, B 3:16-3:33, C 7:5-7:44, D 8:7-9:37, E 11:5-12:34, F 13:7-14:39">{
   "Element": { "Node": "circle",
                "Link": "straight" },
@@ -194,7 +191,7 @@
 }</code></pre>
             </div>
             <div>
-              <p class="code-pair-label">gofish-gotree <span class="code-pair-sub">· a library on GoFish</span></p>
+              <p class="code-pair-label">gofish-gotree</p>
               <pre><code class="language-ts" data-line-numbers data-code-regions="A 2:3-2:30, B 3:3-3:41, C 5:5-5:45, E 6:5-6:42, D 9:5-9:42, F 10:5-10:44">tree({
   node: () =&gt; circle({ r: 9 }),
   link: { kind: "line", curve: "linear" },
@@ -212,15 +209,15 @@
           <p class="gotree-point">GoTree has four relation names to learn: within, flatten, juxtapose, and align. GoFish's align and distribute do the same work.</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
-              5:05 of 7:00.</p>
+              4:00 of 7:00.</p>
             <p><strong>Say:</strong> "GoTree's input is a tree, not a table,
               so it does not fit the chart API. So we rebuilt GoTree as a
               small library on GoFish. On the left is GoTree's own spec. To
               read it, you have to learn four new relation names: within,
               flatten, juxtapose, and align. Or we can just use the GoFish
               ones. On the right, the same layout is written with
-              <code>align</code> and <code>distribute</code>, like the
-              planets. The library keeps GoTree's good idea: one spec works
+              <code>align</code> and <code>distribute</code>, the relations
+              from the bottle chart. The library keeps GoTree's good idea: one spec works
               for any tree, with a rule for parents and children and a rule
               for siblings, and you change the rules to get other layouts.
               But it says the rules with the relations we already have."</p>
@@ -236,6 +233,10 @@
               <code>juxtapose</code> and <code>flatten</code> become
               <code>distribute</code>. The picture this draws comes on the
               next slide, on the right.</p>
+            <p><strong>Optional line:</strong> "GoTree's rule for siblings,
+              distribute on x and align on y, is what <code>spread</code>
+              does. In GoFish, <code>spread</code> is made of those two
+              relations."</p>
             <p><strong>Lead into the next slide:</strong> "Here are all three
               side by side."</p>
             <p><strong>If asked:</strong> GoFish is not trying to be the one
@@ -267,11 +268,10 @@
              seafood-ribbon) and the paper's Figure 5 SVG. Since 2026-11-06
              (later) the GoTree specs slide comes right before it. -->
         <section class="code-slide recap-slide">
-          <p class="part">Answer</p>
           <h2>same core, three shapes of data</h2>
           <div class="recap-grid">
             <div>
-              <p class="code-pair-label">core <span class="code-pair-sub">· marks and relations</span></p>
+              <p class="code-pair-label">core</p>
               <div class="recap-render recap-planets"><div data-chart="planets-label" data-w="440" data-h="160"></div></div>
               <pre><code class="language-ts" data-line-numbers>const planets = enclose({ ... }, [ ... ]);
 const label = text({ ... }).name("label");
@@ -284,7 +284,7 @@ layer([planets, label])
   ])</code></pre>
             </div>
             <div>
-              <p class="code-pair-label">tabular <span class="code-pair-sub">· rows</span></p>
+              <p class="code-pair-label">tabular</p>
               <div class="recap-render recap-ribbon"><div data-chart="seafood-ribbon" data-w="540" data-h="230"></div></div>
               <pre><code class="language-ts" data-line-numbers>chart(seafood)
   .flow(
@@ -295,7 +295,7 @@ layer([planets, label])
   .layer(ribbon({ by: "species", ... }))</code></pre>
             </div>
             <div>
-              <p class="code-pair-label">hierarchical <span class="code-pair-sub">· a nested tree</span></p>
+              <p class="code-pair-label">hierarchical</p>
               <div class="recap-render"><img src="./images/tradeoffs/gofish-gotree-node-link.svg" alt="The GoTree node-link tree rendered by gofish-gotree" /></div>
               <pre><code class="language-ts" data-line-numbers>tree({
   node: () =&gt; circle({ r: 9 }),
@@ -308,14 +308,15 @@ layer([planets, label])
           <p class="recap-core">one core underneath: the same verbs and constraints</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:20. <strong>Running total:</strong>
-              5:25 of 7:00. Since 2026-11-06 it comes after the bottle and
+              4:20 of 7:00. Since 2026-11-06 it comes after the bottle and
               the GoTree specs. Since 2026-11-06, late night, the next slide
               is "All three grammars in one picture", then the hierarchy
               slide.</p>
             <p><strong>Say:</strong> "Here are all three side by side. In
-              the middle is the chart API from the ribbon chart. On the left
-              are marks placed with relations directly, like the planets. And
-              on the right is GoTree. Underneath, all three use the same
+              the middle is the chart API, here drawing a ribbon chart from
+              the fish data. On the left are marks placed with relations
+              directly, a row of planets with a label. And on the right is
+              GoTree. Underneath, all three use the same
               align and distribute relations. What differs isn't the core,
               it's the shape of the data: marks, rows of a table, and a tree.
               Three surfaces on one core."</p>
@@ -334,12 +335,12 @@ layer([planets, label])
             <p>The specs are cut down to their essential lines with
               <code>...</code>, more than on the earlier slides, to fit three
               columns. Core: the planets spec of the old core slide (in git
-              history; the planets slides in the GoFish intro show the same
-              planets without the label) with
+              history; the hidden planets slides in the GoFish intro show the
+              same planets) with
               the <code>enclose</code> body and the label's options elided,
               and the align and distribute operands elided (they are
               <code>[mercury, label]</code> and <code>[planets, label]</code>).
-              Tabular: the ribbon buildup's ribbon spec, with
+              Tabular: the hidden ribbon buildup's ribbon spec, with
               <code>field("species").sort("count")</code> shortened to
               <code>field("species")...</code>. Hierarchical: the paper's
               Figure 5 gofish-gotree spec with the <code>combine</code>
@@ -349,9 +350,10 @@ layer([planets, label])
               drawn live by <code>charts.ts</code> functions
               (<code>planetsLabeled</code>,
               <code>seafoodRibbon</code>), scaled down to fit their columns.
-              The tree is the paper's Figure 5 render. No "zoom out" animation
-              from the ribbon buildup: it is too far back in the deck for
-              auto-animate to connect.</p>
+              The tree is the paper's Figure 5 render. Since 2026-11-07 the
+              audience has not seen the ribbon chart or the planets before
+              this slide; they are new examples here, and the notes above
+              say them that way.</p>
             <p>If asked about the paper: this is Andrew McNutt's compile tower,
               with GoFish as one floor of it.</p>
           </aside>
@@ -374,26 +376,90 @@ layer([planets, label])
              too. No GoFish story has this example. A gofish-gotree tree
              (GoTree) whose leaves are waffles (Atom) of bottle glyphs made
              with atop (PiCCL). -->
-        <section class="figure-slide">
+        <section class="code-slide figure-slide tree-waffle-slide">
           <style>
-            .reveal .figure-slide .tree-waffle {
+            .reveal .tree-waffle-slide .tree-waffle-split {
+              align-items: center;
+              display: grid;
+              gap: 0 1.2rem;
+              grid-template-columns: 590px 1fr;
+              margin-top: 0.8rem;
+            }
+            .reveal .tree-waffle-slide pre {
+              font-size: 0.5em;
+              margin: 0;
+              width: 100%;
+            }
+            .reveal .tree-waffle-slide pre code {
+              line-height: 1.3;
+              max-height: none;
+            }
+            .reveal .tree-waffle-slide pre code.has-code-regions td.hljs-ln-numbers {
+              font-size: 0.8em;
+              opacity: 1;
+              width: 4.2em;
+            }
+            .reveal .tree-waffle-slide .code-region[data-role="GoTree"],
+            .reveal .tree-waffle-slide .code-region-badge[data-role="GoTree"] {
+              --region-ink: #007368;
+              --region-tint: #e3f1ef;
+            }
+            .reveal .tree-waffle-slide .code-region[data-role="Atom"],
+            .reveal .tree-waffle-slide .code-region-badge[data-role="Atom"] {
+              --region-ink: #165d83;
+              --region-tint: #e4eef4;
+            }
+            .reveal .tree-waffle-slide .code-region[data-role="PiCCL"],
+            .reveal .tree-waffle-slide .code-region-badge[data-role="PiCCL"] {
+              --region-ink: #8d4700;
+              --region-tint: #f6ece1;
+            }
+            .reveal .tree-waffle-slide .tree-waffle {
               display: block;
-              margin: 0.6em auto 0;
-              max-height: 440px;
+              margin: 0;
+              width: 100%;
             }
           </style>
-          <p class="part">Answer</p>
           <h2>All three grammars in one picture</h2>
-          <img class="tree-waffle" src="./images/tradeoffs/gofish-tree-waffle-tenths.png" alt="A GoFish tree with four leaves. Each leaf is a waffle of ten bottles, and each bottle is filled with green. The first waffle is empty, the second is a little under half full, the third is full, and the fourth is almost three quarters full." />
+          <div class="tree-waffle-split">
+            <pre><code class="language-ts" data-line-numbers data-code-regions="PiCCL 1:1-7:2, Atom 9:1-15:22, GoTree 17:1-24:13">const bottleUnit = (data) =&gt; {
+  const amount = ...;
+  return atop({ blendMode: "color" }, [
+    image({ href: bottlePng, ... }),
+    rect({ h: ..., fill: "lime", ... }),
+  ])(data);
+};
+
+const waffle = (d) =&gt;
+  chart(cells(d.data.share), { axes: false })
+    .flow(
+      spread({ by: "row", dir: "y", reverse: true, ... }),
+      spread({ by: "col", dir: "x", ... }),
+    )
+    .mark(bottleUnit);
+
+tree({
+  node: (d) =&gt; d.height
+    ? circle({ ... })
+    : enclose({ ... }, [waffle(d)]),
+  link: { ... },
+  parentChild: combine({ x: ..., y: ... }),
+  sibling: combine({ x: ..., y: ... }),
+}, hierarchy)</code></pre>
+            <img class="tree-waffle" src="./images/tradeoffs/gofish-tree-waffle-tenths.png" alt="A GoFish tree with four leaves. Each leaf is a waffle of ten bottles, and each bottle is filled with green. The first waffle is empty, the second is a little under half full, the third is full, and the fourth is almost three quarters full." />
+          </div>
           <p class="source-line" style="text-align: center">After the GUGOG paper, Figure 6</p>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
-              5:35 of 7:00.</p>
+            <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
+              4:35 of 7:00. It grew from 0:10 on 2026-11-07, when the code was
+              added.</p>
             <p><strong>Say:</strong> "And because they share one core, you
               can mix them. This is one picture that uses all three. The tree
-              is laid out the GoTree way. Each leaf is a waffle chart, like
-              Atom's. And each square of the waffle is a bottle, filled with
-              PiCCL's atop. Each waffle has ten bottles. This one is empty,
+              is laid out the GoTree way, with <code>tree</code>. Each leaf is
+              a waffle chart, like Atom's, made with two spreads. And each
+              square of the waffle is a bottle, filled with PiCCL's
+              <code>atop</code>. The tree's leaves call the waffle, and the
+              waffle's mark is the bottle. Each waffle has ten bottles. This one is empty,
               this one is full, and these two are partly filled. Nothing had
               to be translated between the three."</p>
             <p><strong>Lead into the hierarchy slide:</strong> "So what does
@@ -408,6 +474,20 @@ layer([planets, label])
               so one bottle can be partly full. Each waffle sits on a white
               card, so the links stop at its top. The tree places the four
               waffles itself, so there is no outer <code>spread</code>.</p>
+            <p><strong>The code shown</strong> (since 2026-11-07) is that
+              file's three parts, in its order: <code>bottleUnit</code>
+              (PiCCL), <code>waffle</code> (Atom), and the <code>tree</code>
+              call (GoTree), tinted and tagged by grammar with
+              talk-template's data-code-regions. Left out as
+              <code>...</code>: the TypeScript casts (<code>as any</code> and
+              <code>: any</code>), the way <code>amount</code> is read from
+              the data, the fill rectangle's y and height (computed from
+              <code>amount</code>), the picture's height and grayscale
+              filter, the spacing, the node circle and card styling, the
+              link styling, the two <code>combine</code> rules (the same
+              align and distribute rules as on the GoTree slide), the
+              <code>cells</code> helper and the <code>hierarchy</code> data,
+              and the render call.</p>
           </aside>
         </section>
 
@@ -440,7 +520,6 @@ layer([planets, label])
               text-align: center;
             }
           </style>
-          <p class="part">Answer</p>
           <h2>Unify the domains and keep their structure</h2>
           <svg class="flat-vs-hierarchy" viewBox="-2 0 1144 276" role="img" aria-label="Left: five charts (a population pyramid, a ribbon chart, a GoTree silhouette tree, a Sankey tree, and a Bluefish pulley diagram) as an icicle of two rows. All five charts sit directly on one flat row of nouns that holds marks, encoding channels, coordinate transforms, and more. Right: the same five charts as an icicle of three rows. The charts sit on a middle row of domain languages (chart, tree layout, and diagram, plus a faded block for more), and the middle row sits on a bottom row, a core of marks and verbs.">
             <rect x="0" y="66" width="98" height="98" rx="7" fill="#fff" stroke="#27231f" stroke-width="2"/>
@@ -484,7 +563,7 @@ layer([planets, label])
           <p class="flat-vs-hierarchy-line">Each domain keeps its own structure, and all of them share the parts underneath.</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
-              5:50 of 7:00. This ends the answer.</p>
+              4:50 of 7:00. This ends the answer.</p>
             <p>Since 2026-11-06 this slide is the takeaway of the answer.
               Since 2026-11-06, late night, it comes after "All three grammars
               in one picture" (the old Figure 6 slide) and ends the
@@ -555,11 +634,10 @@ layer([planets, label])
              GoTree, step 1: the data and the picture, no specs. The
              fragment is step 2: this data is a tree, not a table. -->
         <section class="code-slide" data-auto-animate data-auto-animate-id="gotree" data-visibility="hidden">
-          <p class="part" data-id="gotree-part">4a · Does one language cost domain design?</p>
           <h2 data-id="gotree-title">GoTree, a grammar for trees</h2>
           <div class="gotree-data">
             <div>
-              <p class="code-pair-label">the data <span class="code-pair-sub">· a nested tree</span></p>
+              <p class="code-pair-label">the data</p>
               <pre><code class="language-ts" data-line-numbers>const hierarchy = {
   name: "root",
   children: [
@@ -575,7 +653,7 @@ layer([planets, label])
               <p class="gotree-gesture fragment">not rows: where does <code>chart(data).flow(...)</code> go?</p>
             </div>
             <div>
-              <p class="code-pair-label">the picture <span class="code-pair-sub">· GoTree's node-link tree</span></p>
+              <p class="code-pair-label">the picture</p>
               <img class="gotree-big" src="./images/tradeoffs/gofish-gotree-node-link.svg" alt="A node-link tree: a root, a row of fourteen children, and a row of leaves joined by straight lines" />
             </div>
           </div>
@@ -627,7 +705,6 @@ layer([planets, label])
              before; see its comment. The specs slide it followed moved to
              before "same core, three shapes of data" on 2026-11-06. -->
         <section class="code-slide" data-visibility="hidden">
-          <p class="part">4a · Does one language cost domain design?</p>
           <h2><code>combine</code> compiles to GoFish constraints</h2>
           <pre><code class="language-ts" data-line-numbers data-char-marks="7:13-28, 11:13-33">export const combine = (opts: CombineOptions): Combiner =&gt; {
   …
@@ -649,7 +726,7 @@ layer([planets, label])
             )
           );
         } …</code></pre>
-          <p class="source-line gotree-source">gofish-gotree/src/helpers.ts · the whole library is about 550 lines</p>
+          <p class="source-line gotree-source">gofish-gotree/src/helpers.ts. The whole library is about 550 lines.</p>
           <p class="big-claim">
             Domain grammars keep their own design and share a core.
           </p>

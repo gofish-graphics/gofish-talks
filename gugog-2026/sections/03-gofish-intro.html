@@ -34,16 +34,15 @@
               text-align: center;
             }
           </style>
-          <p class="part">Question</p>
           <h2>What is GoFish?</h2>
           <img class="gofish-what-logo" src="./images/gofish-intro/gofish-logo.png" alt="GoFish logo" />
           <p class="big-claim">GoFish adds graphical operators and relations to the grammar of graphics.</p>
           <p class="gofish-what-sub">MIT-licensed and open source, for JavaScript and Python, at <strong>gofish.graphics</strong></p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
-              2:30 of 7:00. This slide, the ribbon buildup, and the three
-              planets slides are the GoFish intro, 1:55 in all (1:40
-              without "Add a label under a planet", which is on trial).</p>
+              2:30 of 7:00. Since 2026-11-07 this is the only GoFish intro
+              slide. The three grammars' examples after it introduce the rest
+              of GoFish, one idea each.</p>
             <p><strong>Say:</strong> "If the grammar of graphics had
               operators and relations, you would get GoFish. GoFish adds them
               to the grammar of graphics. It keeps the marks, channels,
@@ -53,8 +52,9 @@
             <p>The paper's own sentence: "GoFish extends the Grammar of
               Graphics with relations and operators for composing marks
               together."</p>
-            <p><strong>Lead into the ribbon buildup:</strong> "Here is what
-              that looks like."</p>
+            <p><strong>Lead into the Atom steps:</strong> "Let's see GoFish
+              by writing the three grammars from before in it. Each one shows
+              one idea of GoFish. First Atom."</p>
             <p><strong>Source:</strong> the thesis defense deck's "What Is
               GoFish?" slide. Its first line there is "GoFish is an expressive
               visualization library built on Bluefish that integrates our
@@ -65,6 +65,16 @@
           </aside>
         </section>
 
+        <!-- Hidden on 2026-11-07. GoFish is now introduced through the
+             three grammars' examples (03b-code-comparisons.html): Atom's
+             steps teach the chart flow and reuse this buildup's data step,
+             small table and pipeline. The five ribbon slides below and the
+             three planets slides after them are hidden, not deleted, so the
+             user can compare and switch back. To switch back, remove
+             data-visibility="hidden" from these eight sections, hide the
+             three Atom steps in 03b-code-comparisons.html and show the Atom
+             comparison there again, and restore the running totals (see
+             outline.md, "Changes, 2026-11-07"). -->
         <!-- ═══ GOFISH INTRO CONTINUED: THE RIBBON BUILDUP, ~1:00 ══════════
              Since 2026-11-06 (later), auto-animated states of one spec,
              which build the ribbon chart one step at a time, the way the
@@ -128,7 +138,7 @@
              row whose content changes from one step to the next gets a new
              data-id, so it is replaced, not stretched. The char marks point
              at what each step adds. -->
-        <section class="code-slide crash-slide crash-data-slide" data-auto-animate data-auto-animate-id="crash-course" data-auto-animate-unmatched="false">
+        <section data-visibility="hidden" class="code-slide crash-slide crash-data-slide" data-auto-animate data-auto-animate-id="crash-course" data-auto-animate-unmatched="false">
           <div class="gofish-intro-head">
             <img src="./images/gofish-intro/gofish-logo.png" alt="GoFish logo" />
             <div>
@@ -170,7 +180,7 @@
           </aside>
         </section>
 
-        <section class="code-slide crash-slide" data-auto-animate data-auto-animate-id="crash-course" data-auto-animate-unmatched="false">
+        <section data-visibility="hidden" class="code-slide crash-slide" data-auto-animate data-auto-animate-id="crash-course" data-auto-animate-unmatched="false">
           <div class="gofish-intro-head">
             <img src="./images/gofish-intro/gofish-logo.png" alt="GoFish logo" />
             <div>
@@ -256,7 +266,7 @@
           </aside>
         </section>
 
-        <section class="code-slide crash-slide" data-auto-animate data-auto-animate-id="crash-course" data-auto-animate-unmatched="false">
+        <section data-visibility="hidden" class="code-slide crash-slide" data-auto-animate data-auto-animate-id="crash-course" data-auto-animate-unmatched="false">
           <div class="gofish-intro-head">
             <img src="./images/gofish-intro/gofish-logo.png" alt="GoFish logo" />
             <div>
@@ -347,7 +357,7 @@
           </aside>
         </section>
 
-        <section class="code-slide crash-slide" data-auto-animate data-auto-animate-id="crash-course" data-auto-animate-unmatched="false">
+        <section data-visibility="hidden" class="code-slide crash-slide" data-auto-animate data-auto-animate-id="crash-course" data-auto-animate-unmatched="false">
           <div class="gofish-intro-head">
             <img src="./images/gofish-intro/gofish-logo.png" alt="GoFish logo" />
             <div>
@@ -436,7 +446,7 @@
           </aside>
         </section>
 
-        <section class="code-slide crash-slide" data-auto-animate data-auto-animate-id="crash-course" data-auto-animate-unmatched="false">
+        <section data-visibility="hidden" class="code-slide crash-slide" data-auto-animate data-auto-animate-id="crash-course" data-auto-animate-unmatched="false">
           <div class="gofish-intro-head">
             <img src="./images/gofish-intro/gofish-logo.png" alt="GoFish logo" />
             <div>
@@ -558,6 +568,10 @@
           </aside>
         </section>
 
+        <!-- Hidden on 2026-11-07, with the ribbon buildup above (see the
+             comment there). The PiCCL bottle steps now show operators on
+             marks and then relations, and the GoTree slide's notes say that
+             GoTree's sibling rule is what spread does. -->
         <!-- ═══ GOFISH INTRO CONTINUED: OPERATORS ON MARKS, THEN RELATIONS,
              ~0:30 ═══════════════════════════════════════════════════════
              Added 2026-11-06 (later), following the user's three stages:
@@ -603,7 +617,7 @@
              (data-auto-animate-unmatched="false"). Its auto-animate id differs from the
              buildup's, so the step from the ribbon chart to (b) is a plain
              slide change. -->
-        <section class="code-slide spread-relate-slide" data-auto-animate data-auto-animate-id="spread-relate" data-auto-animate-unmatched="false">
+        <section data-visibility="hidden" class="code-slide spread-relate-slide" data-auto-animate data-auto-animate-id="spread-relate" data-auto-animate-unmatched="false">
           <div class="gofish-intro-head">
             <img src="./images/gofish-intro/gofish-logo.png" alt="GoFish logo" />
             <div>
@@ -668,7 +682,7 @@
              render inside it has none. The three planets slides share one
              fixed frame (../gofish-compare.css), so the planets do not move;
              only the label and arrow appear. -->
-        <section class="code-slide spread-relate-slide" data-auto-animate data-auto-animate-id="spread-relate" data-auto-animate-unmatched="false">
+        <section data-visibility="hidden" class="code-slide spread-relate-slide" data-auto-animate data-auto-animate-id="spread-relate" data-auto-animate-unmatched="false">
           <div class="gofish-intro-head">
             <img src="./images/gofish-intro/gofish-logo.png" alt="GoFish logo" />
             <div>
@@ -720,7 +734,7 @@
           </aside>
         </section>
 
-        <section class="code-slide spread-relate-slide" data-auto-animate data-auto-animate-id="spread-relate" data-auto-animate-unmatched="false">
+        <section data-visibility="hidden" class="code-slide spread-relate-slide" data-auto-animate data-auto-animate-id="spread-relate" data-auto-animate-unmatched="false">
           <div class="gofish-intro-head">
             <img src="./images/gofish-intro/gofish-logo.png" alt="GoFish logo" />
             <div>
