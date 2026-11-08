@@ -163,6 +163,24 @@
              picture") are not auto-animate slides. -->
         <section class="code-slide gotree-specs-slide">
           <style>
+            /* The relation names (2026-11-08): GoTree's four on the left
+               (within, flatten, juxtapose, align) and GoFish's align and
+               distribute on the right, in one style, a bold accent
+               underline with no fill, so it reads over the A to F tints. */
+            .reveal .gotree-specs-slide pre code .char-mark,
+            .reveal .gotree-specs-slide pre code .char-mark-first,
+            .reveal .gotree-specs-slide pre code .char-mark-last {
+              background: transparent;
+              box-shadow: none;
+              font-weight: 700;
+              text-decoration: underline;
+              text-decoration-color: var(--accent);
+              text-decoration-thickness: 3px;
+              text-underline-offset: 3px;
+            }
+            .reveal .gotree-specs-slide pre code .char-mark .code-region {
+              background: transparent;
+            }
             .reveal .gotree-specs-slide img.gotree-tree {
               border-radius: 0;
               display: block;
@@ -181,7 +199,7 @@
           <div class="code-pair">
             <div>
               <p class="code-pair-label">GoTree</p>
-              <pre><code class="language-json" data-line-numbers data-code-regions="A 2:16-2:31, B 3:16-3:33, C 7:5-7:44, D 8:7-9:37, E 11:5-12:34, F 13:7-14:39">{
+              <pre><code class="language-json" data-line-numbers data-code-regions="A 2:16-2:31, B 3:16-3:33, C 7:5-7:44, D 8:7-9:37, E 11:5-12:34, F 13:7-14:39" data-char-marks="7:35-40, 8:33-39, 11:35-43, 13:33-37">{
   "Element": { "Node": "circle",
                "Link": "straight" },
   "CoordinateSystem": { "Category": "cartesian" },
@@ -212,7 +230,7 @@
                    current source), and parentChild: combine({ x: { kind:
                    "align", alignment: "middle" }, ... }). The render is a
                    static picture, so nothing that runs changes. -->
-              <pre><code class="language-ts" data-line-numbers data-code-regions="A 2:3-2:24, B 3:3-3:39, C 5:5-5:37, E 6:5-6:34, D 9:5-9:34, F 10:5-10:36">tree({
+              <pre><code class="language-ts" data-line-numbers data-code-regions="A 2:3-2:24, B 3:3-3:39, C 5:5-5:37, E 6:5-6:34, D 9:5-9:34, F 10:5-10:36" data-char-marks="5:8-12, 6:8-17, 9:8-17, 10:8-12">tree({
   node: circle({ r: 9 }),
   link: line({ curve: Curve.linear() }),
   parentChild: {

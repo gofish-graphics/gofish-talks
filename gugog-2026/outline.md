@@ -60,6 +60,7 @@ This section updates the slide order and timing of "Changes, 2026-11-07" just be
 - (2026-11-08) "They add graphical operators and relations" now starts with only the title. Click 1 shows the operators row, click 2 the relations row, click 3 the line about the seven concepts. Both rows hold their places from the start.
 - (2026-11-08) A new slide before the bottle steps, "Next, PiCCL's bottle chart" (0:05), shows the finished chart large, so the audience sees where the build-up goes. It is GoFish's render of step 3; the PiCCL paper's own figure is not on this machine. Running totals from the bottle on move by 0:05: bottle steps 3:45, 3:55, 4:10; GoTree 4:25; the picture 4:40; spread 4:55; the hierarchy 5:10; the conclusion 5:25; the panel 5:40.
 - (2026-11-08) "Stack within each lake" ends with a click that shows a small preview of the waffle under the stacked bars, labeled "next: one square per fish". It is the same chart as the next step, and the waffle then takes the bars' place on that step. No time added.
+- (2026-11-08) "GoTree's layouts with GoFish's relations" marks GoTree's four relation names (within, flatten, juxtapose, align) with a bold accent underline, and GoFish's align and distribute on the right in the same style, so the pairing with the line under the code is visible.
 - No new pair animates by accident: the hierarchy slide, the conclusion, the panel slide, the divider, and the validity opener have no `data-auto-animate`. The four CanSum steps still pair with each other as before.
 
 ### Slide order and timing
