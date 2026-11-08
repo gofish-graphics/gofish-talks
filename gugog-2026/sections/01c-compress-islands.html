@@ -216,8 +216,9 @@
             <p>(Click: gray labels cover some tiles.) "Many of them come
               from existing grammars: Canis, Animated Vega-Lite, ChartAccent,
               Vega-Label, PiCCL, Bluefish, GoTree, and Atom. We wrote all of
-              them in one shared language. I'm going to show you three
-              examples of that now."</p>
+              them in one shared language."</p>
+            <p>Since 2026-11-08 the "three examples" lead is on the next
+              slide, the tangle and the GUGOG side by side.</p>
             <p>The argument: GoFish writes many existing grammars in one
               shared core.</p>
             <p>The hierarchy slide in 4a comes back to some of these same
@@ -261,6 +262,65 @@
                 diverging Likert, Nightingale rose, stringline, Voronoi cells,
                 labeled heatmap, 2D histogram, circle timeline.</li>
             </ul>
+          </aside>
+        </section>
+
+        <!-- Today and the GUGOG, side by side (2026-11-08), after the
+             splash and before the grammar intros. Left: the tangle
+             (grammars.svg with grammars-arrows.svg on top, as on the tangle
+             slide in 01-islands.html). Right: the GUGOG circle
+             (grammars-circle.svg). All three files share one viewBox, so
+             the two stacks have the same size and every island sits in the
+             same spot in both. No title and no captions. No auto-animate,
+             so the change from the splash is plain. -->
+        <section class="worlds-slide">
+          <style>
+            .reveal .slides section.worlds-slide {
+              padding-top: 0;
+            }
+            .reveal .worlds-slide .worlds-pair {
+              display: flex;
+              gap: 20px;
+              justify-content: center;
+              margin-top: 70px;
+            }
+            .reveal .worlds-slide .worlds-stack {
+              aspect-ratio: 855.9 / 806.81;
+              position: relative;
+              width: 620px;
+            }
+            .reveal .worlds-slide .worlds-stack img {
+              border-radius: 0;
+              height: 100%;
+              left: 0;
+              margin: 0;
+              max-height: none;
+              max-width: none;
+              position: absolute;
+              top: 0;
+              width: 100%;
+            }
+          </style>
+          <div class="worlds-pair">
+            <div class="worlds-stack">
+              <img src="./images/opening/grammars.svg" alt="" />
+              <img src="./images/opening/grammars-arrows.svg"
+                alt="Today: the grammar of graphics and the other grammars as islands, with arrows between almost every pair, a tangle" />
+            </div>
+            <div class="worlds-stack">
+              <img src="./images/opening/grammars-circle.svg"
+                alt="The same islands inside one large circle labeled GUGOG" />
+            </div>
+          </div>
+          <aside class="notes">
+            <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
+              1:35 of 7:00.</p>
+            <p><strong>Say:</strong> "To understand why today we live in the
+              world on the left and not the world on the right, we need to
+              understand what is missing from the grammar of graphics, that
+              these other grammars feel the need to add."</p>
+            <p><strong>Lead into the Atom intro:</strong> "Let's look at
+              three of them. First Atom."</p>
           </aside>
         </section>
 
@@ -326,7 +386,7 @@
           <p class="source-line">Atom: A Grammar for Unit Visualizations (Park, Drucker, Fernandez &amp; Elmqvist, IEEE TVCG 2018)</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:10 (0:20 for both steps).
-              <strong>Running total:</strong> 1:35 of 7:00.</p>
+              <strong>Running total:</strong> 1:45 of 7:00.</p>
             <p>The lead into this slide is the question on the circle slide:
               "Why can't these grammars be unified with the grammar of
               graphics? Let's look at three of them."</p>
@@ -363,7 +423,7 @@
           <p class="source-line">Atom: A Grammar for Unit Visualizations (Park, Drucker, Fernandez &amp; Elmqvist, IEEE TVCG 2018)</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
-              1:45 of 7:00.</p>
+              1:55 of 7:00.</p>
             <p><strong>Say:</strong> What Atom added is a small set of layout operators,
               like FillX and MaxFill. They split a space into cells and
               arrange the units inside them, and you nest them to place every
@@ -402,7 +462,7 @@
           <p class="source-line">PiCCL: Data-Driven Composition of Bespoke Pictorial Charts (Shi et al., IEEE VIS 2025)</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:05 (0:15 for both steps).
-              <strong>Running total:</strong> 1:50 of 7:00.</p>
+              <strong>Running total:</strong> 2:00 of 7:00.</p>
             <p><strong>Say:</strong> And here's PiCCL, by Shi and others at
               VIS 2025, a grammar for pictorial charts like these. Its marks
               are ordinary pictures and shapes.</p>
@@ -451,7 +511,7 @@
           <p class="source-line">PiCCL: Data-Driven Composition of Bespoke Pictorial Charts (Shi et al., IEEE VIS 2025)</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
-              2:00 of 7:00.</p>
+              2:10 of 7:00.</p>
             <p><strong>Say:</strong> What is special about PiCCL is
               image compositing. It has operators that combine two pictures
               into one, like the ones in image editors. For example, "A atop
@@ -522,7 +582,7 @@
           <p class="source-line">GoTree: A Grammar of Tree Visualizations (Li, Tian, Xu, McGuffin &amp; Yuan, ACM CHI 2020)</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:05 (0:15 for both steps).
-              <strong>Running total:</strong> 2:05 of 7:00.</p>
+              <strong>Running total:</strong> 2:15 of 7:00.</p>
             <p><strong>Say:</strong> And here's GoTree, by Guozheng Li, Min
               Tian, Qinmei Xu, Michael McGuffin, and Xiaoru Yuan, at CHI 2020.
               It is a grammar for tree visualizations, like all of these.</p>
@@ -548,7 +608,7 @@
           <p class="source-line">GoTree: A Grammar of Tree Visualizations (Li, Tian, Xu, McGuffin &amp; Yuan, ACM CHI 2020)</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
-              2:15 of 7:00.</p>
+              2:25 of 7:00.</p>
             <p><strong>Say:</strong> What is interesting about GoTree is that one spec does not care about
               the shape of the tree. It works for a tree of any depth and any
               number of children. And the same few rules give very different
