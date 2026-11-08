@@ -171,3 +171,10 @@
 .reveal pre.spec-mini {
   box-shadow: 4px 5px 3px rgba(30, 30, 30, 0.11);
 }
+
+/* The code inside a code box has a white background with square corners.
+   At the box's rounded corners that white showed over the curve of the
+   black border. Clipping the box to its rounded inner edge fixes it. */
+.reveal pre {
+  overflow: hidden;
+}
