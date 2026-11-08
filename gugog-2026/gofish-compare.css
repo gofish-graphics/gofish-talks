@@ -976,3 +976,12 @@
 .reveal .atom-step .atom-next-render {
   zoom: 0.42;
 }
+
+/* The Atom steps' data transformation pipeline is hidden for now
+   (2026-11-08). The code box stays where it was, at the top of its
+   column, so the code and chart sit in the same place on all the Atom
+   steps. To bring the pipeline back, delete this rule. */
+.reveal .atom-step .transform-heading,
+.reveal .atom-step .transform-build {
+  display: none;
+}

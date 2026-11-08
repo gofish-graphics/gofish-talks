@@ -194,8 +194,9 @@
               the lakes side by side. The mark is a rectangle. Each group
               becomes one rectangle, as tall as the sum of its counts. So we
               get one bar per lake."</p>
-            <p>The pipeline under the code shows how the rows are grouped.
-              The small table in the corner is there so you do not have to
+            <p>(Pipeline hidden since 2026-11-08.) The pipeline under the
+              code shows how the rows are grouped.</p>
+            <p>The small table in the corner is there so you do not have to
               remember the fields. The code shown leaves out the spacing
               between the lakes and the width of the bars, and marks each
               place with <code>...</code>. The live render uses the full spec
@@ -207,6 +208,82 @@
               deck's, from its "add a second grouping" slide. Rendered live
               from <code>atom-bars</code>, in the same frame as the other
               Atom charts.</p>
+          </aside>
+        </section>
+
+        <!-- Stacked bars, the chart first (2026-11-08): the stacked chart
+             with the previous step's code, so the chart and the code do not
+             change at once. The next step changes only the code. The
+             pipeline here is the previous step's, since the code is. -->
+        <section class="code-slide crash-slide atom-step" data-auto-animate data-auto-animate-id="atom" data-auto-animate-unmatched="false">
+          <h2>Stack within each lake</h2>
+          <div class="atom-data atom-data-corner" data-id="atom-data-table">
+            <div class="atom-data-inner">
+              <table class="crash-data-table">
+                <thead>
+                  <tr><th>lake</th><th>species</th><th>count</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Primrose</td><td>Bass</td><td>23</td></tr>
+                  <tr><td>Primrose</td><td>Trout</td><td>31</td></tr>
+                  <tr><td>Primrose</td><td>Catfish</td><td>29</td></tr>
+                  <tr class="ellipsis-row"><td>&#8942;</td><td>&#8942;</td><td>&#8942;</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="crash-solo">
+            <div>
+              <p class="code-pair-label" data-id="atom-chart-label">chart API</p>
+              <pre data-id="atom-chart-code" data-magic-move><code class="language-ts" data-line-numbers>chart(seafood)
+  .flow(
+    spread({ by: "lake", dir: "x", ... }),
+  )
+  .mark(rect({ h: "count", ... }))</code></pre>
+              <h3 class="transform-heading">Data transformation pipeline</h3>
+              <div class="transform-build" aria-label="How the seafood rows are grouped at this step.">
+                <div class="transform-stage transform-data" data-id="atom-pipe-data">
+                  <span class="transform-stage-label">seafood</span>
+                  <span class="transform-stage-detail">30 rows</span>
+                  <span class="transform-fields">lake, species, count</span>
+                </div>
+                <div class="transform-step" data-id="atom-pipe-lake-step">
+                  <span class="transform-arrow">↓</span>
+                  <code>group_by("lake")</code>
+                </div>
+                <div class="transform-groups transform-lakes" data-id="atom-pipe-lakes">
+                  <div class="transform-group"><b>Primrose</b><span>5 rows</span></div>
+                  <div class="transform-group"><b>Concord</b><span>5 rows</span></div>
+                  <span class="transform-ellipsis">…</span>
+                  <div class="transform-group"><b>Vulcan</b><span>5 rows</span></div>
+                </div>
+                <div class="transform-step" data-id="atom-pipe-rect-step-bars">
+                  <span class="transform-arrow">↓</span>
+                </div>
+                <div class="transform-groups transform-rects" data-id="atom-pipe-rects-1">
+                  <div class="transform-rects-one"><span class="transform-rect-cell"><i aria-hidden="true"></i><b>rect</b></span></div>
+                  <div class="transform-rects-one"><span class="transform-rect-cell"><i aria-hidden="true"></i><b>rect</b></span></div>
+                  <span class="transform-ellipsis">…</span>
+                  <div class="transform-rects-one"><span class="transform-rect-cell"><i aria-hidden="true"></i><b>rect</b></span></div>
+                </div>
+                <div class="transform-leaf-note" data-id="atom-pipe-leaf-1">
+                  <b>each <span class="viz-mark">rect</span></b>
+                  <code><i>h</i> = sum(count)</code>
+                </div>
+              </div>
+            </div>
+            <div class="crash-chart-box" data-id="atom-chart-box">
+              <div class="crash-render" data-chart="atom-stacked" data-x-axis="start" data-w="520" data-h="319"></div>
+            </div>
+          </div>
+          <aside class="notes">
+            <p><strong>Target:</strong> 0:05. <strong>Running total:</strong>
+              3:05 of 7:00.</p>
+            <p><strong>Say:</strong> "Now we want stacked bars, one piece
+              for each kind of fish."</p>
+            <p>Since 2026-11-08 the change from bars to stacked bars is two
+              steps: the chart changes first, here, with the old code, and
+              the code changes on the next click.</p>
           </aside>
         </section>
 
@@ -295,9 +372,11 @@
             </div>
           </div>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:10 (0:15 until 2026-11-07, later,
-              when it was "A stacked bar chart is a flow of operators" and
-              also introduced <code>spread</code>). <strong>Running
+            <p><strong>Target:</strong> 0:05 (since 2026-11-08, when the
+              step before it took the chart change; 0:10 before that, and
+              0:15 until 2026-11-07, later, when it was "A stacked bar chart
+              is a flow of operators" and also introduced
+              <code>spread</code>). <strong>Running
               total:</strong> 3:10 of 7:00.</p>
             <p><strong>Say:</strong> "Add a second operator,
               <code>stack</code>. Inside each lake it splits the rows again,
@@ -312,7 +391,8 @@
               Within Each Lake" slide. Since 2026-11-07, later, the ribbon
               buildup's own copy of this step is gone from
               03-gofish-intro.html (its first three steps moved here). The
-              pipeline and the small table are the SciPy 2026 deck's.
+              pipeline (hidden since 2026-11-08) and the small table are the
+              SciPy 2026 deck's.
               Rendered live.</p>
             <p>(Click, at the end.) A small waffle appears under the bars:
               "Next, Atom draws one square for each fish."</p>
