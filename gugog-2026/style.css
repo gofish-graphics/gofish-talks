@@ -29,7 +29,7 @@
   background: white;
   border: 2px solid #27231f;
   border-radius: 6px 9px 5px 8px;
-  box-shadow: 4px 5px 0 rgba(30, 30, 30, 0.11);
+  box-shadow: 4px 5px 3px rgba(30, 30, 30, 0.11);
   display: block;
   margin: 0 auto;
   max-height: 250px;
@@ -52,7 +52,7 @@
   border: 2px solid #27231f;
   border-collapse: collapse;
   border-radius: 6px 9px 5px 8px;
-  box-shadow: 4px 5px 0 rgba(30, 30, 30, 0.11);
+  box-shadow: 4px 5px 3px rgba(30, 30, 30, 0.11);
   font-family: "Shantell Sans Local", ui-monospace, "SF Mono", monospace;
   margin: 0 auto;
   width: 100%;
@@ -96,7 +96,7 @@
   background: white;
   border: 2px solid #27231f;
   border-radius: 6px 9px 5px 8px;
-  box-shadow: 4px 5px 0 rgba(30, 30, 30, 0.11);
+  box-shadow: 4px 5px 3px rgba(30, 30, 30, 0.11);
   display: flex;
   height: 250px;
   justify-content: center;
@@ -156,4 +156,18 @@
 .reveal .compression-subtitle .source-line {
   font-size: 0.75em !important;
   margin: 0 0 0 0.6em !important;
+}
+
+/* Soft offset shadows (2026-11-08). A hard offset shadow on a rounded box
+   leaves a small notch of background at the top-right corner, between the
+   box's curve and the shadow's curve. A 3px blur hides it. These three rules
+   override the template's hard shadows for this deck only. */
+.chart-container {
+  box-shadow: 4px 5px 3px rgba(30, 30, 30, 0.11);
+}
+.note-card {
+  box-shadow: 5px 6px 3px rgba(30, 30, 30, 0.12);
+}
+.reveal pre.spec-mini {
+  box-shadow: 4px 5px 3px rgba(30, 30, 30, 0.11);
 }
