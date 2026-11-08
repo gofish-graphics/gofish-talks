@@ -529,6 +529,44 @@
              adds. Step 1 has a line under the code and chart about glyphs.
              Only step 1 has it; the split has a fixed height, so the source
              line does not move when it goes. -->
+        <!-- The bottle goal (2026-11-08): the finished chart before the
+             three steps, so the audience sees where the build-up is going.
+             The PiCCL paper is not on this machine, so this is the GoFish
+             render of step 3 ("piccl-bottle" in ../charts.ts), shown large.
+             It has no auto-animate id, so the change into step 1 is a plain
+             slide change. -->
+        <section class="bottle-goal-slide">
+          <style>
+            .reveal .bottle-goal-slide .bottle-goal-box {
+              display: flex;
+              height: 470px;
+              justify-content: center;
+              align-items: center;
+              margin-top: 0.6rem;
+            }
+            .reveal .bottle-goal-slide .bottle-render {
+              zoom: 1.6;
+            }
+            .reveal .bottle-goal-slide .source-line {
+              margin-top: 1rem;
+            }
+          </style>
+          <h2>Next, PiCCL's bottle chart</h2>
+          <div class="bottle-goal-box">
+            <div class="bottle-render" data-chart="piccl-bottle" data-w="440" data-h="266"></div>
+          </div>
+          <p class="source-line">Bottle chart from PiCCL (Shi et al., IEEE VIS 2025)</p>
+          <aside class="notes">
+            <p><strong>Target:</strong> 0:05. <strong>Running total:</strong>
+              3:35 of 7:00.</p>
+            <p><strong>Say:</strong> "Here is the chart we're building next:
+              PiCCL's bottle chart, where each bottle fills up to its
+              value."</p>
+            <p>This is GoFish's render of the finished chart (step 3), not
+              the PiCCL paper's figure.</p>
+          </aside>
+        </section>
+
         <section class="code-slide bottle-slide bottle-step" data-auto-animate data-auto-animate-id="bottle" data-auto-animate-unmatched="false">
           <style>
             .reveal .code-slide .bottle-step-split {
@@ -593,7 +631,7 @@
           <p class="source-line">Bottle chart from PiCCL (Shi et al., IEEE VIS 2025)</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:10 (0:35 for the three steps).
-              <strong>Running total:</strong> 3:40 of 7:00.</p>
+              <strong>Running total:</strong> 3:45 of 7:00.</p>
             <p>PiCCL shows two ideas of GoFish, in two parts. Steps 1 and 2
               show operators used directly on marks. Step 3 adds
               relations.</p>
@@ -630,7 +668,7 @@
           <p class="source-line">Bottle chart from PiCCL (Shi et al., IEEE VIS 2025)</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
-              3:50 of 7:00.</p>
+              3:55 of 7:00.</p>
             <p>This is the step to slow down on. Image compositing is PiCCL's
               own idea.</p>
             <p><strong>Say:</strong> "Here is PiCCL's idea. Swap the gray bar
@@ -680,7 +718,7 @@
           <p class="source-line">Bottle chart from PiCCL (Shi et al., IEEE VIS 2025)</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
-              4:05 of 7:00.</p>
+              4:10 of 7:00.</p>
             <p><strong>Say:</strong> "Now the second part, relations. We add
               a line and a label at the top of the green. A relation sets
               only some properties of a set of marks. The tinted lines are
