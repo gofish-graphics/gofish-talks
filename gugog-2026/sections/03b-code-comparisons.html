@@ -281,6 +281,16 @@
             </div>
             <div class="crash-chart-box" data-id="atom-chart-box">
               <div class="crash-render" data-chart="atom-stacked" data-x-axis="start" data-w="520" data-h="319"></div>
+              <!-- A preview of the next step's waffle (2026-11-08), on a
+                   click: the same "atom-units" chart as step 4, small, under
+                   the stacked bars. It is absolutely placed, so the bars do
+                   not move when it appears, and it has no data-id, so it
+                   just goes away on the change to step 4, where the waffle
+                   takes the bars' place. -->
+              <div class="atom-next fragment">
+                <span class="atom-next-label">next: one square per fish &#8594;</span>
+                <div class="crash-render atom-next-render" data-chart="atom-units" data-x-axis="end" data-w="520" data-h="319"></div>
+              </div>
             </div>
           </div>
           <aside class="notes">
@@ -303,6 +313,8 @@
               03-gofish-intro.html (its first three steps moved here). The
               pipeline and the small table are the SciPy 2026 deck's.
               Rendered live.</p>
+            <p>(Click, at the end.) A small waffle appears under the bars:
+              "Next, Atom draws one square for each fish."</p>
           </aside>
         </section>
 

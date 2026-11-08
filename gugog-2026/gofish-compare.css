@@ -949,3 +949,30 @@
 .reveal .atom-step .atom-data-corner .atom-data-inner {
   zoom: 0.38;
 }
+
+/* "Stack within each lake": a small preview of the next step's waffle,
+   on a click, under the stacked bars (since 2026-11-08). Absolutely
+   placed in the chart box, so nothing else moves. */
+.reveal .atom-step .crash-chart-box {
+  position: relative;
+}
+
+.reveal .atom-step .atom-next {
+  align-items: center;
+  display: flex;
+  gap: 0.6em;
+  position: absolute;
+  right: 0;
+  top: 382px;
+}
+
+.reveal .atom-step .atom-next-label {
+  color: var(--muted);
+  font-size: 0.5em;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.reveal .atom-step .atom-next-render {
+  zoom: 0.42;
+}
