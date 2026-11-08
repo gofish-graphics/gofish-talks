@@ -42,6 +42,42 @@
               grid-auto-rows: 1fr;
               margin-top: 0.35em;
             }
+            .reveal .opsrel-slide .opsrel-gofish {
+              align-items: center;
+              background: rgba(60, 60, 60, 0.62);
+              display: flex;
+              flex-direction: column;
+              /* The section box is 1204 by 654, inset in the 1280 by
+                 720 slide; these offsets reach the slide's edges. */
+              inset: -22px -38px -44px -38px;
+              justify-content: center;
+              position: absolute;
+              z-index: 10;
+            }
+            /* The logo and URL sit on a paper card, as in the splash's
+               logo cell, so the green reads on the gray. */
+            .reveal .opsrel-slide .opsrel-gofish-card {
+              align-items: center;
+              background: var(--paper);
+              border-radius: 10px;
+              display: flex;
+              flex-direction: column;
+              padding: 20px 48px 22px;
+            }
+            .reveal .opsrel-slide .opsrel-gofish img {
+              border-radius: 0;
+              height: 300px;
+              margin: 0;
+              max-height: none;
+              max-width: none;
+              width: auto;
+            }
+            .reveal .opsrel-slide .opsrel-gofish p {
+              color: #4cb05e;
+              font-size: 1.1em;
+              font-weight: 700;
+              margin: 0.2em 0 0;
+            }
             .reveal .opsrel-slide .opsrel-card {
               align-items: center;
               background: #fff;
@@ -181,6 +217,16 @@
             </div>
           </div>
           <p class="big-claim fragment">Neither one fits any of the seven concepts of the grammar of graphics.</p>
+          <!-- The last click (2026-11-08): a gray cover over the whole
+               slide, the same gray as the splash's grammar labels, with the
+               GoFish logo and URL on top. It is absolutely placed, so
+               nothing under it moves. -->
+          <div class="opsrel-gofish fragment">
+            <div class="opsrel-gofish-card">
+              <img src="./images/splash/gofish-logo.png" alt="GoFish" />
+              <p>gofish.graphics</p>
+            </div>
+          </div>
           <aside class="notes">
             <p><strong>Target:</strong> 0:25. <strong>Running total:</strong>
               2:50 of 7:00.</p>
@@ -208,12 +254,13 @@
               <li>(Third click.) "The grammar of graphics does not have these.
                 Neither one fits any of its seven concepts."</li>
             </ul>
-            <p>(Still on the third click, since 2026-11-08, from the hidden
-              "What is GoFish?" slide.) "These are what GoFish adds to the
-              grammar of graphics. If the grammar of graphics had operators
-              and relations, you would get GoFish. It keeps the marks,
-              channels, scales, and coordinates, and adds operators and
-              relations. It is open source, for JavaScript and Python."</p>
+            <p>(Fourth click, since 2026-11-08: a gray cover and the GoFish
+              logo.) "GoFish adds these to the grammar of graphics! Let's see
+              how that helps us out."</p>
+            <p>Only if there is time, from the hidden "What is GoFish?"
+              slide: "It keeps the marks, channels, scales, and coordinates,
+              and adds operators and relations. It is open source, for
+              JavaScript and Python."</p>
             <p><strong>Lead into the Atom steps:</strong> "Let's see GoFish
               by writing the three grammars from before in it. Each one shows
               one idea of GoFish. First Atom."</p>
