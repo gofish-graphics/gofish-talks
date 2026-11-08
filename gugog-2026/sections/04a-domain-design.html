@@ -821,11 +821,11 @@ sibling: {
             <rect x="119" y="66" width="98" height="98" rx="7" fill="#fff" stroke="#27231f" stroke-width="2"/>
             <image href="./images/hierarchy/scatter-plot.png" x="123" y="70" width="90" height="90" preserveAspectRatio="xMidYMid meet"><title>scatter plot</title></image>
             <rect x="221" y="10" width="98" height="98" rx="7" fill="#fff" stroke="#27231f" stroke-width="2"/>
-            <image href="./images/gofish-intro/ribbon-chart.svg" x="225" y="14" width="90" height="90" preserveAspectRatio="xMidYMid meet"><title>ribbon chart</title></image>
+            <image href="./images/hierarchy/ribbon-chart.png" x="225" y="14" width="90" height="90" preserveAspectRatio="xMidYMid meet"><title>ribbon chart</title></image>
             <rect x="323" y="10" width="98" height="98" rx="7" fill="#fff" stroke="#27231f" stroke-width="2"/>
-            <image href="./images/splash/waffle-chart.png" x="327" y="14" width="90" height="90" preserveAspectRatio="xMidYMid meet"><title>waffle chart</title></image>
+            <image href="./images/hierarchy/waffle-chart.png" x="327" y="14" width="90" height="90" preserveAspectRatio="xMidYMid meet"><title>waffle chart</title></image>
             <rect x="425" y="10" width="98" height="98" rx="7" fill="#fff" stroke="#27231f" stroke-width="2"/>
-            <image href="./images/splash/nested-mosaic-chart.png" x="429" y="14" width="90" height="90" preserveAspectRatio="xMidYMid meet"><title>mosaic chart</title></image>
+            <image href="./images/hierarchy/mosaic-chart.png" x="429" y="14" width="90" height="90" preserveAspectRatio="xMidYMid meet"><title>mosaic chart</title></image>
             <rect x="221" y="114" width="98" height="50" rx="7" fill="#e9e5de" stroke="#8a8279" stroke-width="2" stroke-dasharray="6 5"/><text x="270" y="139" text-anchor="middle" dominant-baseline="central" font-size="15" fill="#5b544c">ribbon mark</text>
             <rect x="323" y="114" width="98" height="50" rx="7" fill="#e9e5de" stroke="#8a8279" stroke-width="2" stroke-dasharray="6 5"/><text x="372" y="139" text-anchor="middle" dominant-baseline="central" font-size="15" fill="#5b544c">waffle mark</text>
             <rect x="425" y="114" width="98" height="50" rx="7" fill="#e9e5de" stroke="#8a8279" stroke-width="2" stroke-dasharray="6 5"/><text x="474" y="139" text-anchor="middle" dominant-baseline="central" font-size="15" fill="#5b544c">mosaic mark</text>
@@ -843,11 +843,11 @@ sibling: {
             <rect x="703" y="10" width="98" height="98" rx="7" fill="#fff" stroke="#27231f" stroke-width="2"/>
             <image href="./images/hierarchy/scatter-plot.png" x="707" y="14" width="90" height="90" preserveAspectRatio="xMidYMid meet"><title>scatter plot</title></image>
             <rect x="805" y="10" width="98" height="98" rx="7" fill="#fff" stroke="#27231f" stroke-width="2"/>
-            <image href="./images/gofish-intro/ribbon-chart.svg" x="809" y="14" width="90" height="90" preserveAspectRatio="xMidYMid meet"><title>ribbon chart</title></image>
+            <image href="./images/hierarchy/ribbon-chart.png" x="809" y="14" width="90" height="90" preserveAspectRatio="xMidYMid meet"><title>ribbon chart</title></image>
             <rect x="907" y="10" width="98" height="98" rx="7" fill="#fff" stroke="#27231f" stroke-width="2"/>
-            <image href="./images/splash/waffle-chart.png" x="911" y="14" width="90" height="90" preserveAspectRatio="xMidYMid meet"><title>waffle chart</title></image>
+            <image href="./images/hierarchy/waffle-chart.png" x="911" y="14" width="90" height="90" preserveAspectRatio="xMidYMid meet"><title>waffle chart</title></image>
             <rect x="1009" y="10" width="98" height="98" rx="7" fill="#fff" stroke="#27231f" stroke-width="2"/>
-            <image href="./images/splash/nested-mosaic-chart.png" x="1013" y="14" width="90" height="90" preserveAspectRatio="xMidYMid meet"><title>mosaic chart</title></image>
+            <image href="./images/hierarchy/mosaic-chart.png" x="1013" y="14" width="90" height="90" preserveAspectRatio="xMidYMid meet"><title>mosaic chart</title></image>
             <rect x="601" y="114" width="200" height="50" rx="7" fill="#5b8fa8" stroke="#5b8fa8" stroke-width="2"/><text x="701" y="139" text-anchor="middle" dominant-baseline="central" font-size="18" fill="#fff">basic charts</text>
             <rect x="805" y="114" width="98" height="50" rx="7" fill="#5b8fa8" stroke="#5b8fa8" stroke-width="2"/><text x="854" y="139" text-anchor="middle" dominant-baseline="central" font-size="15" fill="#fff">ribbons</text>
             <rect x="907" y="114" width="98" height="50" rx="7" fill="#5b8fa8" stroke="#5b8fa8" stroke-width="2"/><text x="956" y="139" text-anchor="middle" dominant-baseline="central" font-size="15" fill="#fff">unit charts</text>
@@ -905,9 +905,13 @@ sibling: {
               small modular language components.</p>
             <p><strong>The leaves:</strong> the bar chart and scatter plot are
               simple GoFish renders made for this slide
-              (images/hierarchy/), the ribbon chart is the ribbon buildup's,
-              and the waffle and mosaic charts are from the splash wall's
-              outer ring. Until 2026-11-08 the leaves were a population
+              (images/hierarchy/). Since 2026-11-08, later, the ribbon,
+              waffle, and mosaic are too, in the same clean style: the
+              ribbon and waffle are the deck's own seafood specs with fewer
+              lakes, and the mosaic is a four-column spread of glued stacks
+              whose widths and heights come from the data. They were drawn
+              with the deck's GoFish (nightly 20261106) and have no axes or
+              legends. Until 2026-11-08 the leaves were a population
               pyramid, a ribbon chart, a GoTree tree, a Sankey tree, and a
               Bluefish pulley, which the grammar of graphics cannot easily
               make. The core's "relations" is bold, since the font has no
