@@ -675,14 +675,14 @@ tree({
             }
             /* align in red and distribute in blue, in both code blocks
                and in the drawing. */
-            .reveal .spread-is-slide pre.spread-is-elab code .char-mark[data-mark-key="2:14-18"],
+            .reveal .spread-is-slide pre.spread-is-elab code .char-mark[data-mark-key="4:16-20"],
             .reveal .spread-is-slide pre.spread-is-gotree code .char-mark[data-mark-key="2:6-10"],
             .reveal .spread-is-slide pre.spread-is-gotree code .char-mark[data-mark-key="7:6-10"] {
               --char-mark-edge: rgba(178, 74, 59, 0.6);
               background: rgba(178, 74, 59, 0.16);
               text-decoration-color: #b24a3b;
             }
-            .reveal .spread-is-slide pre.spread-is-elab code .char-mark[data-mark-key="3:14-23"],
+            .reveal .spread-is-slide pre.spread-is-elab code .char-mark[data-mark-key="5:16-25"],
             .reveal .spread-is-slide pre.spread-is-gotree code .char-mark[data-mark-key="3:6-15"],
             .reveal .spread-is-slide pre.spread-is-gotree code .char-mark[data-mark-key="6:6-15"] {
               --char-mark-edge: rgba(47, 111, 159, 0.6);
@@ -715,15 +715,18 @@ tree({
   .mark(rect({ h: "value" }))</code></pre>
               <div class="fragment" data-fragment-index="1">
                 <p class="spread-is-eq">=</p>
-                <pre><code class="language-ts" data-line-numbers>// a, b, c, d: one rect({ h: "value" }) per category
-spread({ dir: "x", spacing: 22 }, [a, b, c, d])</code></pre>
+                <pre><code class="language-ts" data-line-numbers>spread({ dir: "x", spacing: 22 },
+  groupBy(data, "category").map((group) =&gt;
+    rect({ h: sum(group, "value") })))</code></pre>
               </div>
               <div class="fragment" data-fragment-index="2">
                 <p class="spread-is-eq">=</p>
-                <pre class="spread-is-elab"><code class="language-ts" data-line-numbers data-char-marks="2:14-18, 3:14-23">layer([a, b, c, d]).relate(({ a, b, c, d }) =&gt; [
-  Constraint.align({ y: "baseline" }, [a, b, c, d]),
-  Constraint.distribute({ dir: "x", spacing: 22 }, [a, b, c, d]),
-])</code></pre>
+                <pre class="spread-is-elab"><code class="language-ts" data-line-numbers data-char-marks="4:16-20, 5:16-25">layer(groupBy(data, "category").map((group) =&gt;
+    rect({ h: sum(group, "value") }).name("bars")))
+  .relate(({ bars }) =&gt; [
+    Constraint.align({ y: "baseline" }, bars),
+    Constraint.distribute({ dir: "x", spacing: 22 }, bars),
+  ])</code></pre>
               </div>
               <div class="fragment" data-fragment-index="4">
                 <svg class="spread-is-pic" viewBox="0 0 300 175" role="img" aria-label="Four bars, evenly spaced on one baseline, inside a dashed box. The baseline is a dashed line labeled align, and the three gaps have arrows labeled distribute">
@@ -765,17 +768,28 @@ sibling: {
               the labels "chart syntax" and "tree syntax", and three stages
               on the left.</p>
             <p><strong>Say:</strong> "Here is a bar chart in the chart syntax:
-              spread the categories along x." (Click.) "That flow is the same
-              as one spread over four rectangles, one per category." (Click.)
-              "And that spread is a layer plus two relations: align, in red,
+              spread the categories along x." (Click.) "This is what the flow does
+              with the data: group it by category, make one rectangle per
+              group, as tall as the group's total, and spread them." (Click.)
+              "And that spread is a layer of those bars plus two relations: align, in red,
               puts the bars on one baseline, and distribute, in blue, puts
               the same gap between them." (Click.) "The tree syntax's layout
               rules from a minute ago are the same align and distribute."
               (Click: the drawing.) "So the chart operator and the tree
               rules both come down to align and distribute."</p>
-            <p>The code is simplified in two ways: a, b, c, and d stand for
-              four named marks, and the gofish-gotree rules use the curried
-              align and distribute of the GoTree slide. Otherwise the
+            <p>Since 2026-11-08, later, the middle and bottom stages spell out
+              what the flow does with the data, in the form of the thesis
+              deck's "Operators Become Relations" and "Relations Become Core
+              Constraints" slides (presentation/sections/07-bonus.html):
+              groupBy(data, "category").map(...) makes one rect per group.
+              The code is simplified: groupBy and sum are written as plain
+              functions (GoFish's groupBy is lodash's, and the flow computes
+              the group's total itself); every bar is named "bars" and the
+              .relate callback gets them as one array, where real GoFish
+              hands the callback the layer's named children (stories write
+              .relate((n) =&gt; [...]) and pick them out by name); and the
+              gofish-gotree rules use the curried align and distribute of the
+              GoTree slide. Otherwise the
               elaboration is what spread does in GoFish (spread.tsx, nightly
               20261106): a layer, with Constraint.align on the cross axis
               from its alignment option (default baseline) and
