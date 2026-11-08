@@ -582,15 +582,30 @@ const atomStacked = () =>
     )
     .mark(rect({ w: UNIT_ROW_W, h: "count", fill: "species" }));
 
+// The waffle as a function (2026-11-08), in the form the SciPy 2026 deck
+// and the thesis deck use: waffle({ count, fill, columns, cell }) returns a
+// mark, which is a whole chart of one square per fish. The slide shows this
+// definition under the spec, with the spacing elided as "...".
+const waffle =
+  ({ count = "count", fill, columns = UNITS_PER_ROW, cell = UNIT }: {
+    count?: string;
+    fill: string;
+    columns?: number;
+    cell?: number;
+  }) =>
+  (data: any[]) =>
+    chart(data, { axes: false })
+      .flow(
+        derive((rows: any[]) => rows.flatMap((row) => repeat(row, count))),
+        spread({ by: chunk(columns), dir: "y", reverse: true, spacing: UNIT_GAP }),
+        spread({ dir: "x", spacing: UNIT_GAP }),
+      )
+      .mark(rect({ w: cell, h: cell, fill }));
+
 const atomUnits = () =>
   chart(seafood)
-    .flow(
-      spread({ by: "lake", dir: "x", alignment: "end", spacing: LAKE_GAP }),
-      derive((rows: any[]) => rows.flatMap((d) => repeat(d, "count"))),
-      spread({ by: chunk(UNITS_PER_ROW), dir: "y", reverse: true, spacing: UNIT_GAP }),
-      spread({ dir: "x", spacing: UNIT_GAP }),
-    )
-    .mark(rect({ w: UNIT, h: UNIT, fill: "species" }));
+    .flow(spread({ by: "lake", dir: "x", alignment: "end", spacing: LAKE_GAP }))
+    .mark(waffle({ count: "count", fill: "species" }) as any);
 
 // ─── Part 4b: validity against freedom of arrangement (CanSum) ────────────
 // One dataset with a temperature column and a USD column, and three steps of

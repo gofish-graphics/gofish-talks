@@ -985,3 +985,17 @@
 .reveal .atom-step .transform-build {
   display: none;
 }
+
+/* The waffle's definition under the spec on the last Atom step
+   (2026-11-08), smaller than the spec so its longest line fits. */
+.reveal .code-slide.atom-step .crash-solo .atom-waffle-def {
+  margin-top: 1rem;
+}
+
+.reveal .code-slide.atom-step .crash-solo .atom-waffle-def pre {
+  font-size: 0.5em;
+}
+
+.reveal .code-slide.atom-step .crash-solo .atom-waffle-def pre code {
+  min-height: 0;
+}

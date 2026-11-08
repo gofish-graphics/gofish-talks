@@ -419,14 +419,27 @@
           <div class="crash-solo">
             <div>
               <p class="code-pair-label" data-id="atom-chart-label">chart API</p>
-              <pre data-id="atom-chart-code" data-magic-move><code class="language-ts" data-line-numbers data-char-marks="3:36-51, 4:5-55, 5:5-58, 6:5-29, 8:15-24">chart(seafood)
+              <pre data-id="atom-chart-code" data-magic-move><code class="language-ts" data-line-numbers data-char-marks="3:36-51, 5:9-14, 5:18-31">chart(seafood)
   .flow(
     spread({ by: "lake", dir: "x", alignment: "end", ... }),
-    derive((d) => d.flatMap((r) => repeat(r, "count"))),
-    spread({ by: chunk(5), dir: "y", reverse: true, ... }),
-    spread({ dir: "x", ... }),
   )
-  .mark(rect({ w: 8, h: 8, fill: "species" }))</code></pre>
+  .mark(waffle({ count: "count", fill: "species" }))</code></pre>
+              <!-- The waffle's definition (2026-11-08), in the form of the
+                   SciPy 2026 and thesis decks' waffle function, under the
+                   spec. It has no data-id, so it appears at once. The
+                   render uses the same function (waffle in ../charts.ts). -->
+              <div class="atom-waffle-def">
+                <p class="code-pair-label">waffle</p>
+                <pre><code class="language-ts" data-line-numbers>function waffle({ count = "count", fill, columns = 5, cell = 8 }) {
+  return chart({ axes: false })
+    .flow(
+      derive((rows) => rows.flatMap((row) => repeat(row, count))),
+      spread({ by: chunk(columns), dir: "y", reverse: true, ... }),
+      spread({ dir: "x", ... }),
+    )
+    .mark(rect({ w: cell, h: cell, fill }));
+}</code></pre>
+              </div>
             </div>
             <div class="crash-chart-box" data-id="atom-chart-box">
               <div class="crash-render" data-chart="atom-units" data-x-axis="end" data-w="520" data-h="319"></div>
@@ -437,13 +450,18 @@
             <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
               3:25 of 7:00.</p>
             <p><strong>Say:</strong> "Atom draws a unit chart in place of the
-              bars, with one square for each fish. In GoFish that is a small
-              change to the same flow. In place of <code>stack</code>, we
-              repeat each row as many times as its count, so each fish
-              becomes its own row. Then two more spreads put the fish in rows
-              of five, and the rows on top of each other. Each square is the
-              same size. The bars are still there, and they are now made of
-              fish. Atom's nested layouts are these spreads."</p>
+              bars, with one square for each fish. In GoFish the stacked
+              bar's mark becomes a waffle. And waffle is not a new kind of
+              mark. It is a small function, here under the spec, written
+              with the same operators: repeat each row as many times as its
+              count, so each fish becomes its own row, then two spreads put
+              the fish in rows of five, and the rows on top of each other.
+              The bars are still there, and they are now made of fish.
+              Atom's nested layouts are these spreads."</p>
+            <p>Since 2026-11-08 the spec calls <code>waffle(...)</code> and
+              its definition is on the slide, in the form the SciPy 2026 and
+              thesis decks use. The same name appears in the Atom block of
+              "All three grammars in one picture".</p>
             <p>Since 2026-11-07, later, this step has no data pipeline. What
               its pipeline showed, if asked: after the lake groups,
               <code>repeat("count")</code> turns each lake's five rows into one
