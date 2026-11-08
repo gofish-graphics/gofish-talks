@@ -305,118 +305,6 @@
           </aside>
         </section>
 
-        <!-- spread is align plus distribute (2026-11-07, later). It comes
-             after the examples, where spread (the Atom steps) and align and
-             distribute (the bottle's relations and GoTree) have all been
-             used in real code, and ties them together: the operator is the
-             two relations. The drawing is the spread drawing from "They add
-             graphical operators and relations" (02-verbs.html). One click
-             shows what spread elaborates to, and adds a dashed baseline
-             (align) and gap markers (distribute) to the drawing. Nothing
-             moves: the elaboration's space is held from the start.
-             The code follows gofish-graphics' Spread (spread.tsx, nightly
-             20261106, see the comment on the hidden "spread is align plus
-             distribute" slide in 03-gofish-intro.html): it "elaborates to
-             layer + distribute + align", with Constraint.align on the cross
-             axis from its alignment option (default "baseline") and
-             Constraint.distribute along dir from its spacing option.
-             Simplified: a, b, c, d stand for four named marks. -->
-        <section class="spread-is-slide">
-          <style>
-            .reveal .spread-is-slide .spread-is-grid {
-              align-items: center;
-              display: grid;
-              gap: 1.4em;
-              grid-template-columns: auto 380px;
-              justify-content: center;
-              margin-top: 2.2em;
-            }
-            .reveal .spread-is-slide pre {
-              border: 2px solid #27231f;
-              border-radius: 6px 9px 5px 8px;
-              box-shadow: 4px 5px 0 rgba(30, 30, 30, 0.11);
-              font-size: 0.6em;
-              margin: 0;
-              width: auto;
-            }
-            .reveal .spread-is-slide .spread-is-eq {
-              color: var(--muted);
-              font-family: "Fira Code", monospace;
-              font-size: 0.9em;
-              margin: 0.25em 0;
-              text-align: center;
-            }
-            .reveal .spread-is-slide svg {
-              display: block;
-              height: auto;
-              width: 380px;
-            }
-            .reveal .spread-is-slide .spread-is-key {
-              font-family: "Fira Code", monospace;
-              font-size: 15px;
-              font-weight: 600;
-            }
-            .reveal .spread-is-slide .spread-is-point {
-              font-size: 0.8em;
-              margin-top: 1.8em;
-              text-align: center;
-            }
-          </style>
-          <h2><code>spread</code> is <code>align</code> plus <code>distribute</code></h2>
-          <div class="spread-is-grid">
-            <div>
-              <pre><code class="language-ts">spread({ dir: "x", spacing: 22 }, [a, b, c, d])</code></pre>
-              <div class="fragment" data-fragment-index="1">
-                <p class="spread-is-eq">=</p>
-                <pre><code class="language-ts">layer([a, b, c, d]).relate(({ a, b, c, d }) =&gt; [
-  Constraint.align({ y: "baseline" }, [a, b, c, d]),
-  Constraint.distribute({ dir: "x", spacing: 22 }, [a, b, c, d]),
-])</code></pre>
-              </div>
-            </div>
-            <svg viewBox="0 0 300 175" role="img" aria-label="Four bars, evenly spaced on one baseline, inside a dashed box; after the click, the baseline is a dashed line labeled align, and the three gaps have arrows labeled distribute">
-              <defs>
-                <marker id="sad-arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
-                  <path d="M 1 1 L 9 5 L 1 9" fill="none" stroke="#2f6f9f" stroke-width="1.8" />
-                </marker>
-              </defs>
-              <rect x="30" y="22" width="246" height="116" fill="none" stroke="#b24a3b" stroke-width="2.5" stroke-dasharray="8 6" rx="6" />
-                <rect x="42" y="70" width="40" height="58" fill="#ddd6ca" stroke="#27231f" stroke-width="1.5" rx="2" />
-                <rect x="104" y="35" width="40" height="93" fill="#ddd6ca" stroke="#27231f" stroke-width="1.5" rx="2" />
-                <rect x="166" y="83" width="40" height="45" fill="#ddd6ca" stroke="#27231f" stroke-width="1.5" rx="2" />
-                <rect x="228" y="50" width="40" height="78" fill="#ddd6ca" stroke="#27231f" stroke-width="1.5" rx="2" />
-              <g class="fragment" data-fragment-index="1">
-                <line x1="8" y1="128" x2="292" y2="128" stroke="#b24a3b" stroke-width="2.5" stroke-dasharray="8 6" />
-                <text class="spread-is-key" x="153" y="160" text-anchor="middle" fill="#b24a3b">align</text>
-                <line x1="85" y1="104" x2="101" y2="104" stroke="#2f6f9f" stroke-width="2.2" marker-start="url(#sad-arrow)" marker-end="url(#sad-arrow)" />
-                <line x1="147" y1="104" x2="163" y2="104" stroke="#2f6f9f" stroke-width="2.2" marker-start="url(#sad-arrow)" marker-end="url(#sad-arrow)" />
-                <line x1="209" y1="104" x2="225" y2="104" stroke="#2f6f9f" stroke-width="2.2" marker-start="url(#sad-arrow)" marker-end="url(#sad-arrow)" />
-                <text class="spread-is-key" x="153" y="14" text-anchor="middle" fill="#2f6f9f">distribute</text>
-              </g>
-            </svg>
-          </div>
-          <p class="spread-is-point fragment" data-fragment-index="1">The operator from the Atom chart is the two relations from the bottle and GoTree.</p>
-          <aside class="notes">
-            <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
-              4:35 of 7:00.</p>
-            <p><strong>Say:</strong> "We have now used both kinds of verbs.
-              Here is how they fit together. The spread that made Atom's bars
-              puts four marks in a row." (Click.) "Inside GoFish, it is a
-              layer that holds the marks, plus two relations: align puts
-              them on one baseline, and distribute puts the same gap between
-              them. These are the same align and distribute that placed the
-              bottle's label and laid out GoTree's tree. So GoFish's
-              operators are built from its relations."</p>
-            <p>The code is simplified in one way: a, b, c, and d stand for
-              four named marks. Otherwise it is what spread elaborates to in
-              GoFish (spread.tsx, nightly 20261106): a layer, with
-              Constraint.align on the cross axis from its alignment option
-              (default baseline) and Constraint.distribute along its
-              direction from its spacing option. stack is the same spread
-              with the marks glued together, with no gaps.</p>
-          </aside>
-        </section>
-
         <!-- Three surfaces side by side: the planets with a label (from the
              core slide, removed 2026-11-06), the ribbon buildup's ribbon
              chart, and the GoTree tree, each labeled by the shape of data it
@@ -646,7 +534,7 @@ tree({
           <p class="source-line" style="text-align: center">After the GUGOG paper, Figure 6</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
-              4:50 of 7:00. It grew from 0:10 on 2026-11-07, when the code was
+              4:35 of 7:00. It grew from 0:10 on 2026-11-07, when the code was
               added. Since then it also carries the points of the hidden
               "same core, three shapes of data" slide.</p>
             <p><strong>Say</strong> (after the lead from the GoTree slide,
@@ -704,6 +592,164 @@ tree({
               <code>.mark(bottleUnit)</code> in the Atom part is marked in
               PiCCL's brown. Point at them for "The tree's leaves call the
               waffle, and the waffle's mark is the bottle."</p>
+          </aside>
+        </section>
+
+        <!-- spread is align plus distribute (2026-11-07, later; moved and
+             rebuilt 2026-11-08). It comes right after "All three grammars in
+             one picture", once spread (the Atom steps) and align and
+             distribute (the bottle's relations and GoTree) have all been
+             used in real code, and ties them together.
+             Step 0: the spread call. Click 1: what spread elaborates to in
+             GoFish. Click 2: gofish-gotree's layout rules, in the same
+             simplified syntax as "GoTree's layouts with GoFish's
+             relations" (curried align and distribute, see that slide's
+             comment). Click 3: the abstract drawing from "They add
+             graphical operators and relations" (02-verbs.html), with a
+             dashed baseline (align) and gap arrows (distribute), and the
+             line under it. align is marked red and distribute blue, in the
+             code and in the drawing. Every fragment holds its space from
+             the start, so nothing moves.
+             The elaboration follows gofish-graphics' Spread (spread.tsx,
+             nightly 20261106, see the comment on the hidden "spread is
+             align plus distribute" slide in 03-gofish-intro.html): it
+             "elaborates to layer + distribute + align", with
+             Constraint.align on the cross axis from its alignment option
+             (default "baseline") and Constraint.distribute along dir from
+             its spacing option. Simplified: a, b, c, d stand for four named
+             marks. -->
+        <section class="spread-is-slide">
+          <style>
+            .reveal .spread-is-slide .spread-is-grid {
+              align-items: start;
+              display: grid;
+              gap: 0.9em 1.4em;
+              grid-template-columns: auto auto;
+              justify-content: center;
+              margin-top: 0.6em;
+            }
+            .reveal .spread-is-slide pre {
+              border: 2px solid #27231f;
+              border-radius: 6px 9px 5px 8px;
+              box-shadow: 4px 5px 0 rgba(30, 30, 30, 0.11);
+              font-size: 0.5em;
+              margin: 0;
+              width: auto;
+            }
+            .reveal .spread-is-slide pre code td.hljs-ln-numbers {
+              display: none;
+            }
+            .reveal .spread-is-slide .code-pair-label {
+              margin: 0 0 0.2em;
+              text-align: center;
+            }
+            .reveal .spread-is-slide .spread-is-eq {
+              color: var(--muted);
+              font-family: "Fira Code", monospace;
+              font-size: 0.8em;
+              margin: 0.1em 0;
+              text-align: center;
+            }
+            /* align in red and distribute in blue, in both code blocks
+               and in the drawing. */
+            .reveal .spread-is-slide pre.spread-is-elab code .char-mark[data-mark-key="2:14-18"],
+            .reveal .spread-is-slide pre.spread-is-gotree code .char-mark[data-mark-key="2:6-10"],
+            .reveal .spread-is-slide pre.spread-is-gotree code .char-mark[data-mark-key="7:6-10"] {
+              --char-mark-edge: rgba(178, 74, 59, 0.6);
+              background: rgba(178, 74, 59, 0.16);
+              text-decoration-color: #b24a3b;
+            }
+            .reveal .spread-is-slide pre.spread-is-elab code .char-mark[data-mark-key="3:14-23"],
+            .reveal .spread-is-slide pre.spread-is-gotree code .char-mark[data-mark-key="3:6-15"],
+            .reveal .spread-is-slide pre.spread-is-gotree code .char-mark[data-mark-key="6:6-15"] {
+              --char-mark-edge: rgba(47, 111, 159, 0.6);
+              background: rgba(47, 111, 159, 0.16);
+              text-decoration-color: #2f6f9f;
+            }
+            .reveal .spread-is-slide svg.spread-is-pic {
+              display: block;
+              height: auto;
+              margin: 0 auto;
+              width: 330px;
+            }
+            .reveal .spread-is-slide .spread-is-key {
+              font-family: "Fira Code", monospace;
+              font-size: 15px;
+              font-weight: 600;
+            }
+            .reveal .spread-is-slide .spread-is-point {
+              font-size: 0.75em;
+              margin-top: 0.5em;
+              text-align: center;
+            }
+          </style>
+          <h2><code>spread</code> is <code>align</code> plus <code>distribute</code></h2>
+          <div class="spread-is-grid">
+            <div>
+              <p class="code-pair-label">GoFish</p>
+              <pre><code class="language-ts" data-line-numbers>spread({ dir: "x", spacing: 22 }, [a, b, c, d])</code></pre>
+              <div class="fragment" data-fragment-index="1">
+                <p class="spread-is-eq">=</p>
+                <pre class="spread-is-elab"><code class="language-ts" data-line-numbers data-char-marks="2:14-18, 3:14-23">layer([a, b, c, d]).relate(({ a, b, c, d }) =&gt; [
+  Constraint.align({ y: "baseline" }, [a, b, c, d]),
+  Constraint.distribute({ dir: "x", spacing: 22 }, [a, b, c, d]),
+])</code></pre>
+              </div>
+            </div>
+            <div class="fragment" data-fragment-index="2">
+              <p class="code-pair-label">gofish-gotree</p>
+              <pre class="spread-is-gotree"><code class="language-ts" data-line-numbers data-char-marks="2:6-10, 3:6-15, 6:6-15, 7:6-10">parentChild: {
+  x: align({ alignment: "middle" }),
+  y: distribute({ spacing: 90 }),
+},
+sibling: {
+  x: distribute({ spacing: 24 }),
+  y: align({ alignment: "start" }),
+},</code></pre>
+            </div>
+          </div>
+          <div class="fragment" data-fragment-index="3">
+            <svg class="spread-is-pic" viewBox="0 0 300 175" role="img" aria-label="Four bars, evenly spaced on one baseline, inside a dashed box. The baseline is a dashed line labeled align, and the three gaps have arrows labeled distribute">
+              <defs>
+                <marker id="sad-arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                  <path d="M 1 1 L 9 5 L 1 9" fill="none" stroke="#2f6f9f" stroke-width="1.8" />
+                </marker>
+              </defs>
+              <rect x="30" y="22" width="246" height="116" fill="none" stroke="#b24a3b" stroke-width="2.5" stroke-dasharray="8 6" rx="6" opacity="0.45" />
+                <rect x="42" y="70" width="40" height="58" fill="#ddd6ca" stroke="#27231f" stroke-width="1.5" rx="2" />
+                <rect x="104" y="35" width="40" height="93" fill="#ddd6ca" stroke="#27231f" stroke-width="1.5" rx="2" />
+                <rect x="166" y="83" width="40" height="45" fill="#ddd6ca" stroke="#27231f" stroke-width="1.5" rx="2" />
+                <rect x="228" y="50" width="40" height="78" fill="#ddd6ca" stroke="#27231f" stroke-width="1.5" rx="2" />
+              <line x1="8" y1="128" x2="292" y2="128" stroke="#b24a3b" stroke-width="2.5" stroke-dasharray="8 6" />
+              <text class="spread-is-key" x="153" y="160" text-anchor="middle" fill="#b24a3b">align</text>
+              <line x1="85" y1="104" x2="101" y2="104" stroke="#2f6f9f" stroke-width="2.2" marker-start="url(#sad-arrow)" marker-end="url(#sad-arrow)" />
+              <line x1="147" y1="104" x2="163" y2="104" stroke="#2f6f9f" stroke-width="2.2" marker-start="url(#sad-arrow)" marker-end="url(#sad-arrow)" />
+              <line x1="209" y1="104" x2="225" y2="104" stroke="#2f6f9f" stroke-width="2.2" marker-start="url(#sad-arrow)" marker-end="url(#sad-arrow)" />
+              <text class="spread-is-key" x="153" y="14" text-anchor="middle" fill="#2f6f9f">distribute</text>
+            </svg>
+            <p class="spread-is-point">The operator from the Atom chart is built from the same two relations GoTree uses.</p>
+          </div>
+          <aside class="notes">
+            <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
+              4:50 of 7:00.</p>
+            <p><strong>Say:</strong> "We have now used both kinds of verbs,
+              so here is how they fit together. This is the spread that made
+              Atom's bars." (Click.) "Inside GoFish, spread is a layer plus
+              two relations: align, in red, puts the marks on one baseline,
+              and distribute, in blue, puts the same gap between them."
+              (Click.) "And these are GoTree's layout rules from a minute
+              ago: the same align and distribute." (Click.) "So the operator
+              from the Atom chart is built from the same two relations GoTree
+              uses."</p>
+            <p>The code is simplified in two ways: a, b, c, and d stand for
+              four named marks, and the gofish-gotree rules use the curried
+              align and distribute of the GoTree slide. Otherwise the
+              elaboration is what spread does in GoFish (spread.tsx, nightly
+              20261106): a layer, with Constraint.align on the cross axis
+              from its alignment option (default baseline) and
+              Constraint.distribute along its direction from its spacing
+              option. stack is the same spread with the marks glued
+              together, with no gaps.</p>
           </aside>
         </section>
 
