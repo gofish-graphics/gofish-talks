@@ -741,7 +741,7 @@
           </div>
           <p class="source-line">Bottle chart from PiCCL (Shi et al., IEEE VIS 2025)</p>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:10 (0:35 for the three steps).
+            <p><strong>Target:</strong> 0:10 (0:40 for the four steps).
               <strong>Running total:</strong> 3:40 of 7:00.</p>
             <p>PiCCL shows two ideas of GoFish, in two parts. Steps 1 and 2
               show operators used directly on marks. Step 3 adds
@@ -802,10 +802,48 @@
         </section>
 
         <section class="code-slide bottle-slide bottle-step" data-auto-animate data-auto-animate-id="bottle" data-auto-animate-unmatched="false">
-          <h2>Add relations to place a line and a label</h2>
+          <h2>Add a line and a label</h2>
           <div class="bottle-step-split">
             <div>
-              <pre data-id="bottle-code" data-magic-move><code class="language-ts" data-line-numbers data-char-marks="3:9-15, 8:7-21, 9:5-49, 10:5-60, 11:3-4" data-code-regions="relations 11:5-15:4">chart(bottleData, { axes: false })
+              <pre data-id="bottle-code" data-magic-move><code class="language-ts" data-line-numbers data-char-marks="3:9-15, 8:7-21, 9:5-49, 10:5-60, 11:3-4">chart(bottleData, { axes: false })
+  .flow(spread({ by: "category", dir: "x", ... }))
+  .mark(layer([
+    atop({ blendMode: "color" }, [
+      image({ href: bottlePng, h: v(100),
+              filter: Filter.grayscale }),
+      rect({ h: "amount", fill: "lime", ... }),
+    ]).name("bottle"),
+    rect({ h: 1, y: "amount", ... }).name("line"),
+    text({ text: (d) =&gt; `${d.amount}%`, ... }).name("label"),
+  ]))</code></pre>
+            </div>
+            <div class="bottle-step-box" data-id="bottle-box">
+              <div class="bottle-render" data-chart="piccl-bottle-unplaced" data-w="440" data-h="240"></div>
+            </div>
+          </div>
+          <p class="source-line">Bottle chart from PiCCL (Shi et al., IEEE VIS 2025)</p>
+          <aside class="notes">
+            <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
+              4:00 of 7:00.</p>
+            <p><strong>Say:</strong> "Now we add a line and a label at the
+              top of the green. We put them in a layer with the bottle and
+              give each one a name. But nothing says where they go, so they
+              land in the wrong place."</p>
+            <p>Since 2026-11-08 the old third step is two steps: this one adds
+              the marks, and the next adds the relations. The chart here is
+              the real render of this spec, with no relations
+              (<code>piccl-bottle-unplaced</code> in ../charts.ts).</p>
+          </aside>
+        </section>
+
+        <!-- Step 3b (2026-11-08): only the .relate(...) is new, so it
+             is the only change in the code, and the chart shows the line
+             and the label placed. -->
+        <section class="code-slide bottle-slide bottle-step" data-auto-animate data-auto-animate-id="bottle" data-auto-animate-unmatched="false">
+          <h2>Add relations to place the line and the label</h2>
+          <div class="bottle-step-split">
+            <div>
+              <pre data-id="bottle-code" data-magic-move><code class="language-ts" data-line-numbers data-code-regions="relations 11:5-15:4">chart(bottleData, { axes: false })
   .flow(spread({ by: "category", dir: "x", ... }))
   .mark(layer([
     atop({ blendMode: "color" }, [
@@ -828,10 +866,11 @@
           </div>
           <p class="source-line">Bottle chart from PiCCL (Shi et al., IEEE VIS 2025)</p>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
-              4:05 of 7:00.</p>
-            <p><strong>Say:</strong> "Now the second part, relations. We add
-              a line and a label at the top of the green. A relation sets
+            <p><strong>Target:</strong> 0:10 (0:15 for the old single step,
+              before 2026-11-08). <strong>Running total:</strong>
+              4:10 of 7:00.</p>
+            <p><strong>Say:</strong> "Now the second part, relations. A
+              relation sets
               only some properties of a set of marks. The tinted lines are
               the relations. <code>align</code> lines up the line with the
               bottle, and <code>distribute</code> puts the label just above

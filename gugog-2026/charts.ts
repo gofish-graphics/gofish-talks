@@ -697,6 +697,23 @@ const pdBottleTinted = () =>
       ])
     );
 
+// Step 3a (2026-11-08): the line and the label in the layer, with no
+// relations, so they are drawn where the layer puts them by default. This
+// is pdBottle below without its .relate(...), rendered for real.
+const pdBottleUnplaced = () =>
+  chart(bottleData, { axes: false })
+    .flow(spread({ by: "category", dir: "x", spacing: BOTTLE_GAP, axes: { x: false } } as any))
+    .mark(
+      layer([
+        atop({ blendMode: "color" }, [
+          image({ href: bottlePng, h: v(100), filter: Filter.grayscale }),
+          rect({ h: "amount", fill: "lime", w: BOTTLE_W }),
+        ]).name("bottle"),
+        rect({ h: 1, fill: MUTED, w: LINE_W, y: "amount" } as any).name("line"),
+        text({ fontSize: 20, fontFamily: FONT, fill: MUTED, text: (d: any) => `${d.amount}%` } as any).name("label"),
+      ])
+    );
+
 const pdBottle = () =>
   chart(bottleData, { axes: false })
     .flow(spread({ by: "category", dir: "x", spacing: BOTTLE_GAP, axes: { x: false } } as any))
@@ -718,6 +735,7 @@ const pdBottle = () =>
 const charts: Record<string, (fontSize: number) => Renderable> = {
   "piccl-bottle-bars": pdBottleBars,
   "piccl-bottle-tinted": pdBottleTinted,
+  "piccl-bottle-unplaced": pdBottleUnplaced,
   "piccl-bottle": pdBottle,
   "usage-curve": usageCurve,
   ...compressionSteps,
