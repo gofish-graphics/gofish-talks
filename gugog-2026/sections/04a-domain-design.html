@@ -654,7 +654,7 @@ tree({
               border: 2px solid #27231f;
               border-radius: 6px 9px 5px 8px;
               box-shadow: 4px 5px 0 rgba(30, 30, 30, 0.11);
-              font-size: 0.5em;
+              font-size: 0.58em;
               margin: 0;
               width: auto;
             }
@@ -669,7 +669,8 @@ tree({
               color: var(--muted);
               font-family: "Fira Code", monospace;
               font-size: 0.8em;
-              margin: 0.1em 0;
+              margin: 0;
+              line-height: 1.3;
               text-align: center;
             }
             /* align in red and distribute in blue, in both code blocks
@@ -691,8 +692,8 @@ tree({
             .reveal .spread-is-slide svg.spread-is-pic {
               display: block;
               height: auto;
-              margin: 0 auto;
-              width: 330px;
+              margin: 0.3em auto 0;
+              width: 250px;
             }
             .reveal .spread-is-slide .spread-is-key {
               font-family: "Fira Code", monospace;
@@ -705,33 +706,27 @@ tree({
               text-align: center;
             }
           </style>
-          <h2><code>spread</code> is <code>align</code> plus <code>distribute</code></h2>
+          <h2>Everything is built on relations!</h2>
           <div class="spread-is-grid">
-            <div>
-              <p class="code-pair-label">GoFish</p>
-              <pre><code class="language-ts" data-line-numbers>spread({ dir: "x", spacing: 22 }, [a, b, c, d])</code></pre>
+            <div class="spread-is-left">
+              <p class="code-pair-label">chart syntax</p>
+              <pre><code class="language-ts" data-line-numbers>chart(data)
+  .flow(spread({ by: "category", dir: "x", spacing: 22 }))
+  .mark(rect({ h: "value" }))</code></pre>
               <div class="fragment" data-fragment-index="1">
+                <p class="spread-is-eq">=</p>
+                <pre><code class="language-ts" data-line-numbers>// a, b, c, d: one rect({ h: "value" }) per category
+spread({ dir: "x", spacing: 22 }, [a, b, c, d])</code></pre>
+              </div>
+              <div class="fragment" data-fragment-index="2">
                 <p class="spread-is-eq">=</p>
                 <pre class="spread-is-elab"><code class="language-ts" data-line-numbers data-char-marks="2:14-18, 3:14-23">layer([a, b, c, d]).relate(({ a, b, c, d }) =&gt; [
   Constraint.align({ y: "baseline" }, [a, b, c, d]),
   Constraint.distribute({ dir: "x", spacing: 22 }, [a, b, c, d]),
 ])</code></pre>
               </div>
-            </div>
-            <div class="fragment" data-fragment-index="2">
-              <p class="code-pair-label">gofish-gotree</p>
-              <pre class="spread-is-gotree"><code class="language-ts" data-line-numbers data-char-marks="2:6-10, 3:6-15, 6:6-15, 7:6-10">parentChild: {
-  x: align({ alignment: "middle" }),
-  y: distribute({ spacing: 90 }),
-},
-sibling: {
-  x: distribute({ spacing: 24 }),
-  y: align({ alignment: "start" }),
-},</code></pre>
-            </div>
-          </div>
-          <div class="fragment" data-fragment-index="3">
-            <svg class="spread-is-pic" viewBox="0 0 300 175" role="img" aria-label="Four bars, evenly spaced on one baseline, inside a dashed box. The baseline is a dashed line labeled align, and the three gaps have arrows labeled distribute">
+              <div class="fragment" data-fragment-index="4">
+                <svg class="spread-is-pic" viewBox="0 0 300 175" role="img" aria-label="Four bars, evenly spaced on one baseline, inside a dashed box. The baseline is a dashed line labeled align, and the three gaps have arrows labeled distribute">
               <defs>
                 <marker id="sad-arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
                   <path d="M 1 1 L 9 5 L 1 9" fill="none" stroke="#2f6f9f" stroke-width="1.8" />
@@ -749,20 +744,35 @@ sibling: {
               <line x1="209" y1="104" x2="225" y2="104" stroke="#2f6f9f" stroke-width="2.2" marker-start="url(#sad-arrow)" marker-end="url(#sad-arrow)" />
               <text class="spread-is-key" x="153" y="14" text-anchor="middle" fill="#2f6f9f">distribute</text>
             </svg>
-            <p class="spread-is-point">The operator from the Atom chart is built from the same two relations GoTree uses.</p>
+              </div>
+            </div>
+            <div class="fragment" data-fragment-index="3">
+              <p class="code-pair-label">tree syntax</p>
+              <pre class="spread-is-gotree"><code class="language-ts" data-line-numbers data-char-marks="2:6-10, 3:6-15, 6:6-15, 7:6-10">parentChild: {
+  x: align({ alignment: "middle" }),
+  y: distribute({ spacing: 90 }),
+},
+sibling: {
+  x: distribute({ spacing: 24 }),
+  y: align({ alignment: "start" }),
+},</code></pre>
+            </div>
           </div>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
-              5:05 of 7:00.</p>
-            <p><strong>Say:</strong> "We have now used both kinds of verbs,
-              so here is how they fit together. This is the spread that made
-              Atom's bars." (Click.) "Inside GoFish, spread is a layer plus
-              two relations: align, in red, puts the marks on one baseline,
-              and distribute, in blue, puts the same gap between them."
-              (Click.) "And these are GoTree's layout rules from a minute
-              ago: the same align and distribute." (Click.) "So the operator
-              from the Atom chart is built from the same two relations GoTree
-              uses."</p>
+            <p><strong>Target:</strong> 0:20 since 2026-11-08 (0:15 before),
+              with four clicks. <strong>Running total:</strong> 5:10 of
+              7:00. The slide was reworked that day: the title,
+              the labels "chart syntax" and "tree syntax", and three stages
+              on the left.</p>
+            <p><strong>Say:</strong> "Here is a bar chart in the chart syntax:
+              spread the categories along x." (Click.) "That flow is the same
+              as one spread over four rectangles, one per category." (Click.)
+              "And that spread is a layer plus two relations: align, in red,
+              puts the bars on one baseline, and distribute, in blue, puts
+              the same gap between them." (Click.) "The tree syntax's layout
+              rules from a minute ago are the same align and distribute."
+              (Click: the drawing.) "So the chart operator and the tree
+              rules both come down to align and distribute."</p>
             <p>The code is simplified in two ways: a, b, c, and d stand for
               four named marks, and the gofish-gotree rules use the curried
               align and distribute of the GoTree slide. Otherwise the
@@ -813,7 +823,7 @@ sibling: {
               text-align: center;
             }
           </style>
-          <svg class="flat-vs-hierarchy" viewBox="-2 -64 1144 340" role="img" aria-label="Left, GoG: a bar chart and a scatter plot sit directly on one flat row of concepts (marks, encoding channels, coordinate transforms, and more). A ribbon chart, a waffle chart, and a mosaic chart each sit on a dashed gray block, a ribbon mark, a waffle mark, and a mosaic mark, added outside the language. Right, GUGOG: the same five charts sit on a middle row built with relations (basic charts under the bar chart and scatter plot, then ribbons, unit charts, and mosaics), and the middle row sits on a core of marks and relations.">
+          <svg class="flat-vs-hierarchy" viewBox="-2 -64 1144 340" role="img" aria-label="Left, GoG: a bar chart and a scatter plot sit directly on one flat row of concepts (marks, encoding channels, coordinate transforms, and more). A ribbon chart, a waffle chart, and a mosaic chart each sit on a dashed gray block, a ribbon mark, a waffle mark, and a mosaic mark, added outside the language. Right, GUGOG: five charts (a population pyramid, a ribbon chart, a GoTree silhouette tree, a Sankey tree, and a Bluefish pulley diagram) as an icicle of three rows. The charts sit on a middle row of domain languages (chart, tree layout, and diagram, plus a faded block for more), and the middle row sits on a bottom row, a core of marks and relations.">
             <text x="270" y="-28" text-anchor="middle" font-size="36" font-weight="760" font-family="Shantell Sans Local, Shantell Sans, sans-serif" fill="#1e1e1e">GoG</text>
             <text x="854" y="-28" text-anchor="middle" font-size="36" font-weight="760" font-family="Shantell Sans Local, Shantell Sans, sans-serif" fill="#1e1e1e">GUGOG</text>
             <rect x="17" y="66" width="98" height="98" rx="7" fill="#fff" stroke="#27231f" stroke-width="2"/>
@@ -838,43 +848,47 @@ sibling: {
             <line x1="492" y1="182" x2="492" y2="214" stroke="#fff" stroke-opacity="0.45" stroke-width="1.5"/>
             <text x="516" y="198" text-anchor="middle" dominant-baseline="central" font-size="24" fill="#fff" opacity="0.5">…</text>
             <text x="270" y="262" text-anchor="middle" font-size="26" fill="#1e1e1e">one flat layer, new marks bolted on</text>
-            <rect x="601" y="10" width="98" height="98" rx="7" fill="#fff" stroke="#27231f" stroke-width="2"/>
-            <image href="./images/hierarchy/bar-chart.png" x="605" y="14" width="90" height="90" preserveAspectRatio="xMidYMid meet"><title>bar chart</title></image>
-            <rect x="703" y="10" width="98" height="98" rx="7" fill="#fff" stroke="#27231f" stroke-width="2"/>
-            <image href="./images/hierarchy/scatter-plot.png" x="707" y="14" width="90" height="90" preserveAspectRatio="xMidYMid meet"><title>scatter plot</title></image>
-            <rect x="805" y="10" width="98" height="98" rx="7" fill="#fff" stroke="#27231f" stroke-width="2"/>
-            <image href="./images/hierarchy/ribbon-chart.png" x="809" y="14" width="90" height="90" preserveAspectRatio="xMidYMid meet"><title>ribbon chart</title></image>
-            <rect x="907" y="10" width="98" height="98" rx="7" fill="#fff" stroke="#27231f" stroke-width="2"/>
-            <image href="./images/hierarchy/waffle-chart.png" x="911" y="14" width="90" height="90" preserveAspectRatio="xMidYMid meet"><title>waffle chart</title></image>
-            <rect x="1009" y="10" width="98" height="98" rx="7" fill="#fff" stroke="#27231f" stroke-width="2"/>
-            <image href="./images/hierarchy/mosaic-chart.png" x="1013" y="14" width="90" height="90" preserveAspectRatio="xMidYMid meet"><title>mosaic chart</title></image>
-            <rect x="601" y="114" width="200" height="50" rx="7" fill="#5b8fa8" stroke="#5b8fa8" stroke-width="2"/><text x="701" y="139" text-anchor="middle" dominant-baseline="central" font-size="18" fill="#fff">basic charts</text>
-            <rect x="805" y="114" width="98" height="50" rx="7" fill="#5b8fa8" stroke="#5b8fa8" stroke-width="2"/><text x="854" y="139" text-anchor="middle" dominant-baseline="central" font-size="15" fill="#fff">ribbons</text>
-            <rect x="907" y="114" width="98" height="50" rx="7" fill="#5b8fa8" stroke="#5b8fa8" stroke-width="2"/><text x="956" y="139" text-anchor="middle" dominant-baseline="central" font-size="15" fill="#fff">unit charts</text>
-            <rect x="1009" y="114" width="98" height="50" rx="7" fill="#5b8fa8" stroke="#5b8fa8" stroke-width="2"/><text x="1058" y="139" text-anchor="middle" dominant-baseline="central" font-size="15" fill="#fff">mosaics</text>
+            <rect x="570" y="10" width="98" height="98" rx="7" fill="#fff" stroke="#27231f" stroke-width="2"/>
+            <image href="./images/splash/population-pyramid.png" x="574" y="14" width="90" height="90" preserveAspectRatio="xMidYMid slice"><title>population pyramid</title></image>
+            <rect x="672" y="10" width="98" height="98" rx="7" fill="#fff" stroke="#27231f" stroke-width="2"/>
+            <image href="./images/gofish-intro/ribbon-chart.svg" x="676" y="14" width="90" height="90" preserveAspectRatio="xMidYMid slice"><title>ribbon chart</title></image>
+            <rect x="782" y="10" width="98" height="98" rx="7" fill="#fff" stroke="#27231f" stroke-width="2"/>
+            <image href="./images/splash/gotree-multilevel-silhouette-tree.png" x="786" y="14" width="90" height="90" preserveAspectRatio="xMidYMid slice"><title>GoTree silhouette tree</title></image>
+            <rect x="884" y="10" width="98" height="98" rx="7" fill="#fff" stroke="#27231f" stroke-width="2"/>
+            <image href="./images/splash/sankey-tree.png" x="888" y="14" width="90" height="90" preserveAspectRatio="xMidYMid slice"><title>Sankey tree</title></image>
+            <rect x="994" y="10" width="98" height="98" rx="7" fill="#fff" stroke="#27231f" stroke-width="2"/>
+            <image href="./images/splash/bluefish-pulley.png" x="998" y="14" width="90" height="90" preserveAspectRatio="xMidYMin slice"><title>Bluefish pulley diagram</title></image>
+            <g opacity="0.4"><rect x="1104" y="10" width="34" height="98" rx="7" fill="#fff" stroke="#27231f" stroke-width="2" stroke-dasharray="5 5"/><text x="1121" y="59" text-anchor="middle" dominant-baseline="central" font-size="24" fill="#1e1e1e">…</text></g>
+            <rect x="570" y="114" width="200" height="50" rx="7" fill="#5b8fa8" stroke="#5b8fa8" stroke-width="2"/><text x="670" y="139" text-anchor="middle" dominant-baseline="central" font-size="21" fill="#fff">chart</text>
+            <rect x="782" y="114" width="200" height="50" rx="7" fill="#5b8fa8" stroke="#5b8fa8" stroke-width="2"/><text x="882" y="139" text-anchor="middle" dominant-baseline="central" font-size="21" fill="#fff">tree layout</text>
+            <rect x="994" y="114" width="98" height="50" rx="7" fill="#5b8fa8" stroke="#5b8fa8" stroke-width="2"/><text x="1043" y="139" text-anchor="middle" dominant-baseline="central" font-size="21" fill="#fff">diagram</text>
+            <g opacity="0.4"><rect x="1104" y="114" width="34" height="50" rx="7" fill="#5b8fa8" stroke="#5b8fa8" stroke-width="2"/><text x="1121" y="139" text-anchor="middle" dominant-baseline="central" font-size="24" fill="#fff">…</text></g>
             <rect x="570" y="170" width="568" height="56" rx="7" fill="#b24a3b" stroke="#b24a3b" stroke-width="2"/><text x="854" y="198" text-anchor="middle" dominant-baseline="central" font-size="21" fill="#fff">core: marks and <tspan font-weight="700">relations</tspan></text>
-            <text x="854" y="262" text-anchor="middle" font-size="26" fill="#1e1e1e">a hierarchy, built with relations</text>
+            <text x="854" y="262" text-anchor="middle" font-size="26" fill="#1e1e1e">a hierarchy: many domains, one grammar</text>
           </svg>
           <aside class="notes">
             <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
-              5:20 of 7:00. This ends the answer.</p>
+              5:25 of 7:00. This ends the answer.</p>
             <p>Since 2026-11-06 this slide is the takeaway of the answer.
               Since 2026-11-06, late night, it comes after "All three grammars
               in one picture" (the old Figure 6 slide) and ends the
               answer.</p>
-            <p>Since 2026-11-08 the leaves are a bar chart, a scatter plot, a
-              ribbon chart, a waffle chart, and a mosaic chart, the same
-              thumbnails on both sides.</p>
+            <p>Since 2026-11-08 the left side's leaves are a bar chart, a
+              scatter plot, a ribbon chart, a waffle chart, and a mosaic
+              chart. The right side is as before, except that "relations" in
+              the core is bold.</p>
             <ul>
               <li><strong>Left:</strong> "In the grammar of graphics, basic
                 charts like bars and scatter plots sit right on its flat
                 layer of concepts. But a ribbon, a waffle, or a mosaic does
                 not. Each one needs a new mark, bolted on from outside the
                 language."</li>
-              <li><strong>Right:</strong> "With relations, GoFish builds a
-                middle layer, like the spread we just saw: basic charts,
-                ribbons, unit charts, mosaics. All of it sits on one core of
-                marks and relations."</li>
+              <li><strong>Right:</strong> "With operators and relations, the
+                charts sit on domain languages: charts, tree layouts,
+                diagrams. Those are built from one shared core of marks and
+                relations, the bottom row, like the spread we just saw."</li>
+              <li>The faded blocks on the right show that the middle row is
+                open. New domain languages can keep being added to it.</li>
               <li><strong>The takeaway:</strong> "So the domains keep their
                 own character, and they are still unified. A universal grammar
                 can keep each domain's own structure, in a hierarchy, with
@@ -903,18 +917,15 @@ sibling: {
               answer. Each domain gets its own language, with its own words,
               built inside one grammar. That is close to his suggestion of
               small modular language components.</p>
-            <p><strong>The leaves:</strong> the bar chart and scatter plot are
-              simple GoFish renders made for this slide
-              (images/hierarchy/). Since 2026-11-08, later, the ribbon,
-              waffle, and mosaic are too, in the same clean style: the
-              ribbon and waffle are the deck's own seafood specs with fewer
-              lakes, and the mosaic is a four-column spread of glued stacks
-              whose widths and heights come from the data. They were drawn
-              with the deck's GoFish (nightly 20261106) and have no axes or
-              legends. Until 2026-11-08 the leaves were a population
-              pyramid, a ribbon chart, a GoTree tree, a Sankey tree, and a
-              Bluefish pulley, which the grammar of graphics cannot easily
-              make. The core's "relations" is bold, since the font has no
+            <p><strong>The leaves.</strong> Left: a bar chart, a scatter plot,
+              a ribbon chart, a waffle chart, and a mosaic chart, clean
+              GoFish renders made for this slide on 2026-11-08
+              (images/hierarchy/, drawn with the deck's GoFish, nightly
+              20261106, with no axes or legends). Right: charts the audience
+              has already seen. The population pyramid, GoTree silhouette
+              tree, Sankey tree, and Bluefish pulley diagram are on the
+              splash wall, and the ribbon chart is from the ribbon buildup.
+              The core's "relations" is bold, since the font has no
               italic.</p>
             <p><strong>If asked where the idea comes from:</strong> this is
               Herbert Simon's point ("The Architecture of Complexity," 1962,
