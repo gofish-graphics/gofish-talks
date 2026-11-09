@@ -38,231 +38,33 @@
               alt="One large circle labeled GUGOG that holds every grammar: the grammar of graphics in the middle and Atom, PiCCL, AnnoGram, Gemini, Neo, Canis, GoTree, GenomeSpy, Gosling, and Mascot around it" />
           </div>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:20, with the question.
-              <strong>Running total:</strong> 1:15 of 7:00. This ends the
-              problem.</p>
+            <p><strong>Target:</strong> 0:20. <strong>Running total:</strong>
+              1:05 of 7:00. This ends the problem.</p>
             <p>The picture is the islands drawing again, with one circle
-              labeled GUGOG around all of them. Since 2026-11-07, later, the
-              slide has no title and no on-slide question; the arrows fade
-              out and the circle fades in.</p>
-            <p><strong>Say</strong> (the old title's point): "We would love
-              a grand unified grammar of graphics: one grammar that holds all
-              of these, a GUGOG."</p>
-            <p><strong>Say the goal directly</strong> (the user's words, 2026-11-08; it heads off "I'm going to rebuild your grammar and make it obsolete"): "Here is my goal. I want people to be able to use all of these grammars. And I want to understand what a data-driven graphic is at its core. To do that, I need to write these grammars in one shared language, because then we can see how much they have in common."</p>
-            <p>(The question, which used to be on the slide after a click.)
-              "So a natural question is this: why can't these grammars be
-              unified with the grammar of graphics?"</p>
-            <p>Next slide (since 2026-11-08): the splash, where GoFish is
-              named, then the three grammars.</p>
-            <p>Do not answer the question here. The next three slides look at
-              the evidence, and the slide after them says what the grammars
-              have in common.</p>
+              labeled GUGOG around all of them. The slide has no title; the
+              arrows fade out and the circle fades in.</p>
+            <p><strong>Say</strong> (the user's script, 2026-11-09,
+              verbatim): "I would love a world with a GUGOG, one where this
+              diversity of grammars is built with a common set of
+              abstractions."</p>
+            <p><strong>Lead into the operators and relations slide</strong>
+              (the script, verbatim): "In order to build a GUGOG, we need to
+              look beyond marks and channels to see what it is that these new
+              grammars are building on that the GOG doesn't provide. And when
+              I looked, I found two things."</p>
+            <p>Since 2026-11-09 the next slide is the operators and relations
+              slide, which introduces relations first. The splash, where
+              GoFish is named, comes after it.</p>
+            <p>Only if there is time, the goal in the user's words of
+              2026-11-08 (it heads off "I'm going to rebuild your grammar and
+              make it obsolete"): "I want people to be able to use all of
+              these grammars. And I want to understand what a data-driven
+              graphic is at its core."</p>
             <p>Fairness: building a separate grammar was the right move for
               each of these teams. Each one needed something the grammar of
               graphics did not have, and built it with the tools that existed.
               The point is only that today their ideas are hard to put
               together, and that is a problem we all share.</p>
-          </aside>
-        </section>
-
-        <!-- ═══ GOFISH: SPLASH SCREEN, ~0:15 WITH ITS CLICK ═══════════════
-             Since 2026-11-08 this slide comes right after the circle slide
-             and before the grammar intros, and it names GoFish, in place of
-             the "What is GoFish?" slide (hidden in 03-gofish-intro.html).
-             So the URL sits under the logo. Before that it opened the talk,
-             right after the title, in its own file (00b-splash.html). It has
-             no auto-animate, so the change from the circle is plain. -->
-        <!-- A full-bleed wall of real GoFish renders. The wall runs past the
-             1280x720 slide on every side so it still fills the window at
-             other aspect ratios; the outer ring of tiles only shows as
-             slivers. Sources for every tile are in the speaker notes. -->
-        <section class="splash">
-          <style>
-            .reveal .slides section.splash {
-              padding: 0;
-            }
-            .reveal .splash .splash-wall {
-              background: #e2dbcc;
-              display: grid;
-              gap: 4px;
-              grid-template-columns: 120px repeat(8, 1fr) 120px;
-              grid-template-rows: 160px repeat(6, 1fr) 160px;
-              height: 1048px;
-              left: -124px;
-              position: absolute;
-              top: -164px;
-              width: 1528px;
-            }
-            .reveal .splash .tile {
-              background: #fff;
-              min-height: 0;
-              min-width: 0;
-              overflow: hidden;
-            }
-            .reveal .splash .tile img,
-            .reveal .splash .tile video {
-              border-radius: 0;
-              display: block;
-              height: 100%;
-              margin: 0;
-              max-height: none;
-              max-width: none;
-              object-fit: cover;
-              object-position: var(--pos, center);
-              width: 100%;
-            }
-            .reveal .splash .tile.fit {
-              padding: 6px;
-            }
-            .reveal .splash .tile.fit img,
-            .reveal .splash .tile.fit video {
-              object-fit: contain;
-            }
-            .reveal .splash .splash-logo {
-              align-items: center;
-              background: var(--paper);
-              display: flex;
-              flex-direction: column;
-              justify-content: center;
-              overflow: hidden;
-              padding: 6px 0 10px;
-            }
-            .reveal .splash .splash-logo img {
-              border-radius: 0;
-              flex: 1 1 0;
-              margin: 0;
-              max-height: none;
-              max-width: 92%;
-              min-height: 0;
-              object-fit: contain;
-              width: 92%;
-            }
-            /* The grammar labels (2026-11-08): one click covers the
-               tiles that came from other grammars with a gray layer and
-               the grammar's name. Each label is inside its tile, so it
-               stays inside it. */
-            .reveal .splash .tile {
-              position: relative;
-            }
-            .reveal .splash .grammar-tag {
-              align-items: center;
-              background: rgba(60, 60, 60, 0.62);
-              color: #fff;
-              display: flex;
-              font-size: 0.8em;
-              font-weight: 700;
-              inset: 0;
-              justify-content: center;
-              line-height: 1.1;
-              padding: 4px;
-              position: absolute;
-              text-align: center;
-            }
-            .reveal .splash .splash-url {
-              color: #4cb05e; /* the fish body in gofish-logo.png */
-              font-size: 0.95em;
-              font-weight: 700;
-              line-height: 1.1;
-              margin: 0;
-            }
-          </style>
-          <div class="splash-wall">
-            <div class="tile fit" style="grid-area: 2 / 2 / span 1 / span 2"><img src="./images/splash/croissant-recolored.png" alt="Croissant chart" /></div>
-            <div class="tile" style="grid-area: 2 / 4 / span 1 / span 2; --pos: left center"><img src="./images/splash/bluefish-python-tutor.png" alt="Bluefish: Python Tutor memory diagram" /></div>
-            <div class="tile fit" style="grid-area: 2 / 6 / span 1 / span 1"><img src="./images/splash/gotree-multilevel-silhouette-tree.png" alt="GoTree: multilevel silhouette tree" /><span class="grammar-tag fragment" data-fragment-index="0">GoTree</span></div>
-            <div class="tile fit" style="grid-area: 2 / 7 / span 1 / span 1"><img src="./images/splash/polar-ribbon-chart.png" alt="Polar ribbon chart" /></div>
-            <div class="tile" style="grid-area: 2 / 8 / span 1 / span 2; --pos: center"><img src="./images/splash/atom-titanic-unit-violin.png" alt="Atom: Titanic unit violins" /><span class="grammar-tag fragment" data-fragment-index="0">Atom</span></div>
-            <div class="tile fit" style="grid-area: 3 / 2 / span 2 / span 2"><img src="./images/splash/voronoi-treemap.png" alt="Voronoi treemap of country populations" /></div>
-            <div class="tile fit" style="grid-area: 3 / 4 / span 2 / span 1"><img src="./images/splash/bluefish-pulley.png" alt="Bluefish: pulley" /><span class="grammar-tag fragment" data-fragment-index="0">Bluefish</span></div>
-            <div class="tile fit" style="grid-area: 3 / 5 / span 1 / span 2"><video src="./images/splash/canis-fig1b-build.mp4" poster="./images/splash/canis-fig1b-build-poster.png" data-autoplay autoplay loop muted playsinline></video><span class="grammar-tag fragment" data-fragment-index="0">Canis</span></div>
-            <div class="tile" style="grid-area: 3 / 7 / span 2 / span 2; --pos: 30% center"><img src="./images/splash/chartaccent-sub-saharan-africa.png" alt="ChartAccent: Sub-Saharan Africa" /><span class="grammar-tag fragment" data-fragment-index="0">ChartAccent</span></div>
-            <div class="tile" style="grid-area: 3 / 9 / span 2 / span 1; --pos: center"><video src="./images/splash/bird-migration-trails.mp4" poster="./images/splash/bird-migration-trails-poster.png" data-autoplay autoplay loop muted playsinline></video><span class="grammar-tag fragment" data-fragment-index="0">Animated Vega-Lite</span></div>
-            <div class="tile" style="grid-area: 5 / 2 / span 1 / span 1; --pos: 40% center"><img src="./images/splash/partition-hexbin-car-mileage.png" alt="Partition: hexbin of car mileage and weight" /></div>
-            <div class="tile fit" style="grid-area: 5 / 3 / span 1 / span 1"><img src="./images/splash/flower-chart.png" alt="Flower chart" /></div>
-            <div class="tile" style="grid-area: 5 / 4 / span 2 / span 1; --pos: left top"><img src="./images/splash/bluefish-dfscq-log.png" alt="Bluefish: DFSCQ file system log" /></div>
-            <div class="tile" style="grid-area: 5 / 7 / span 1 / span 2; --pos: center 30%"><img src="./images/splash/point-labels-avoiding-trend-line.png" alt="Point labels avoiding a trend line" /><span class="grammar-tag fragment" data-fragment-index="0">Vega-Label</span></div>
-            <div class="tile fit" style="grid-area: 5 / 9 / span 1 / span 1"><img src="./images/splash/bubble-treemap.png" alt="Bubble treemap" /></div>
-            <div class="tile" style="grid-area: 6 / 2 / span 1 / span 2; --pos: center"><img src="./images/splash/penguin-mass-beeswarm.png" alt="Penguin mass beeswarm" /></div>
-            <div class="tile fit" style="grid-area: 6 / 5 / span 1 / span 2"><img src="./images/splash/piccl-bottle-fill.png" alt="PICCL: bottle fill chart" /><span class="grammar-tag fragment" data-fragment-index="0">PiCCL</span></div>
-            <div class="tile fit" style="grid-area: 6 / 7 / span 1 / span 1"><img src="./images/splash/bluefish-topologies.png" alt="Bluefish: three-point set topologies" /></div>
-            <div class="tile" style="grid-area: 6 / 8 / span 1 / span 1; --pos: center"><img src="./images/splash/population-pyramid.png" alt="Population pyramid" /></div>
-            <div class="tile fit" style="grid-area: 6 / 9 / span 1 / span 1"><img src="./images/splash/hyperedges-over-a-graph.png" alt="Hyperedges over a graph" /></div>
-            <div class="tile" style="grid-area: 7 / 2 / span 1 / span 2; --pos: 30% center"><img src="./images/splash/seattle-highs-calendar-heatmap.png" alt="Seattle highs calendar heatmap" /></div>
-            <div class="tile" style="grid-area: 7 / 4 / span 1 / span 1; --pos: left top"><img src="./images/splash/bluefish-ohm-parse-tree.png" alt="Bluefish: Ohm parse tree" /></div>
-            <div class="tile fit" style="grid-area: 7 / 5 / span 1 / span 2"><img src="./images/splash/bluefish-quantum-circuit.png" alt="Bluefish: quantum circuit equivalence" /></div>
-            <div class="tile" style="grid-area: 7 / 7 / span 1 / span 1; --pos: center"><img src="./images/splash/ridgeline-chart.png" alt="Ridgeline chart" /></div>
-            <div class="tile" style="grid-area: 7 / 8 / span 1 / span 1; --pos: 30% center"><img src="./images/splash/bump-chart.png" alt="Bump chart" /></div>
-            <div class="tile" style="grid-area: 7 / 9 / span 1 / span 1; --pos: center"><img src="./images/splash/sankey-tree.png" alt="Sankey tree" /></div>
-            <div class="splash-logo" style="grid-area: 4 / 5 / span 2 / span 2"><img src="./images/splash/gofish-logo.png" alt="GoFish" /><p class="splash-url">gofish.graphics</p></div>
-            <div class="tile edge" style="grid-area: 1 / 1 / span 1 / span 3; --pos: center" aria-hidden="true"><img src="./images/splash/balloon-chart.png" alt="" /></div>
-            <div class="tile edge" style="grid-area: 1 / 4 / span 1 / span 2; --pos: center" aria-hidden="true"><img src="./images/splash/marginal-histogram-jointplot.png" alt="" /></div>
-            <div class="tile edge" style="grid-area: 1 / 6 / span 1 / span 2; --pos: center" aria-hidden="true"><img src="./images/splash/sunflower-equal-scale.png" alt="" /></div>
-            <div class="tile edge" style="grid-area: 1 / 8 / span 1 / span 3; --pos: center" aria-hidden="true"><img src="./images/splash/2d-histogram-of-movie-ratings.png" alt="" /></div>
-            <div class="tile edge" style="grid-area: 8 / 1 / span 1 / span 3; --pos: center" aria-hidden="true"><img src="./images/splash/circle-timeline.png" alt="" /></div>
-            <div class="tile edge" style="grid-area: 8 / 4 / span 1 / span 2; --pos: center" aria-hidden="true"><img src="./images/splash/diverging-likert-chart.png" alt="" /></div>
-            <div class="tile edge" style="grid-area: 8 / 6 / span 1 / span 2; --pos: center" aria-hidden="true"><img src="./images/splash/nightingale-rose-chart.png" alt="" /></div>
-            <div class="tile edge" style="grid-area: 8 / 8 / span 1 / span 3; --pos: center" aria-hidden="true"><img src="./images/splash/stringline-chart.png" alt="" /></div>
-            <div class="tile edge" style="grid-area: 2 / 1 / span 3 / span 1; --pos: center" aria-hidden="true"><img src="./images/splash/voronoi-cells-of-a-scatterplot.png" alt="" /></div>
-            <div class="tile edge" style="grid-area: 5 / 1 / span 3 / span 1; --pos: center" aria-hidden="true"><img src="./images/splash/labeled-heatmap.png" alt="" /></div>
-            <div class="tile edge" style="grid-area: 2 / 10 / span 3 / span 1; --pos: center" aria-hidden="true"><img src="./images/splash/nested-mosaic-chart.png" alt="" /></div>
-            <div class="tile edge" style="grid-area: 5 / 10 / span 3 / span 1; --pos: center" aria-hidden="true"><img src="./images/splash/waffle-chart.png" alt="" /></div>
-          </div>
-          <aside class="notes">
-            <p><strong>Target:</strong> 0:15, with the click.
-              <strong>Running total:</strong> 1:30 of 7:00. Since 2026-11-08
-              this slide names GoFish, in place of the hidden "What is
-              GoFish?" slide.</p>
-            <p><strong>Say:</strong> "GoFish is our attempt at this. These
-              are all GoFish programs."</p>
-            <p>(Click: gray labels cover some tiles.) "Many of them come
-              from existing grammars: Canis, Animated Vega-Lite, ChartAccent,
-              Vega-Label, PiCCL, Bluefish, GoTree, and Atom. We wrote all of
-              them in one shared language."</p>
-            <p><strong>Lead into the next slide:</strong> "I'm going to
-              show you three examples of that now."</p>
-            <p>The argument: GoFish writes many existing grammars in one
-              shared core.</p>
-            <p>The hierarchy slide in 4a comes back to some of these same
-              charts as its leaves.</p>
-            <ul>
-              <li>Only if there is time, point at a few kinds: Atom units,
-                GoTree trees, Bluefish diagrams, and the Canis animation.</li>
-              <li>Tiles, left to right, top to bottom: croissant chart
-                (Croissant.stories.tsx); Bluefish Python Tutor
-                (bluefish/PythonTutor/PythonTutor.stories.tsx); GoTree
-                silhouette tree (gofish-gotree MultilevelSilhouetteTree.stories.tsx);
-                polar ribbon (Ribbon.stories.tsx); Atom unit violins
-                (atom/Violin.stories.tsx); Voronoi treemap of country
-                populations (forwardsyntax/VoronoiTreemap.stories.tsx); Bluefish pulley
-                (bluefish/Pulley.stories.tsx); Canis staged build, animated
-                (animation/build-in/canis-1b-selection.ts); ChartAccent
-                Sub-Saharan Africa (EncloseShapes.stories.tsx); bird migration with
-                trails, animated, from Animated Vega-Lite (Zong et al., IEEE
-                VIS 2022; animated-vega-lite/BirdMigration.stories.tsx, story
-                D_Trails, recorded from gofish-graphics origin/main 299783950;
-                it replaced the Bluefish insertion sort on 2026-11-08); partition: hexbin of
-                car mileage (Partition.stories.tsx); flower chart
-                (FlowerChart.stories.tsx); Bluefish DFSCQ log
-                (bluefish/DFSCQ.stories.tsx); point labels avoiding a trend
-                line (LabelPlacement.stories.tsx); bubble treemap
-                (BubbleTreemap.stories.tsx); penguin beeswarm
-                (Separate.stories.tsx); PICCL bottle fill
-                (piccl/Bottle.stories.tsx); Bluefish topologies
-                (bluefish/Topology.stories.tsx); population pyramid
-                (Bar/Diverging.stories.tsx); hyperedges over a graph
-                (EncloseShapes.stories.tsx); Seattle calendar heatmap
-                (Bin.stories.tsx); Bluefish Ohm parse tree
-                (bluefish/OhmParseTree.stories.tsx); Bluefish quantum circuit
-                (bluefish/QuantumCircuit.stories.tsx); ridgeline
-                (RidgelineChart.stories.tsx); bump chart
-                (lowlevel/BumpChart.stories.tsx); Sankey tree
-                (lowlevel/SankeyTree.stories.tsx). The GoFish logo sits in the
-                middle.</li>
-              <li>Outer ring, seen only as slivers at the window edges: balloon,
-                marginal histogram, sunflower, nested mosaic, waffle,
-                diverging Likert, Nightingale rose, stringline, Voronoi cells,
-                labeled heatmap, 2D histogram, circle timeline.</li>
-            </ul>
           </aside>
         </section>
 
@@ -322,106 +124,6 @@
               these other grammars feel the need to add."</p>
             <p><strong>Lead into the Atom intro:</strong> "Let's look at
               three of them. First Atom."</p>
-          </aside>
-        </section>
-
-        <!-- The three targets (2026-11-08), in place of the six grammar
-             intro slides below, which are hidden. One slide shows the three
-             graphics that the next part rebuilds in GoFish, each in a white
-             framed box with the name of the system it comes from glued on
-             top, in the intro figures' label style (larger here). They are
-             the same renders the later slides end on: the Atom waffle
-             ("atom-units", the last Atom step), the finished bottles
-             ("piccl-bottle", the last bottle step and the bottle goal slide),
-             and the GoTree node-link tree
-             (images/tradeoffs/gofish-gotree-node-link.svg, the GoTree specs
-             slide). The tree is about five times as wide as it is tall, so
-             it gets its own row under the other two. -->
-        <section class="targets-slide">
-          <style>
-            .reveal .targets-slide h2 {
-              margin-bottom: 0.3em;
-            }
-            .reveal .targets-slide .targets-grid {
-              display: grid;
-              gap: 16px 40px;
-              grid-template-columns: auto auto;
-              justify-content: center;
-            }
-            .reveal .targets-slide .target-card-wide {
-              grid-column: 1 / -1;
-            }
-            .reveal .targets-slide .code-pair-label {
-              font-size: 0.72em !important;
-              text-align: center;
-            }
-            .reveal .targets-slide .target-box {
-              align-items: center;
-              background: white;
-              border: 2px solid #27231f;
-              border-radius: 7px 10px 6px 9px;
-              box-shadow: 5px 6px 3px rgba(30, 30, 30, 0.11);
-              box-sizing: border-box;
-              display: flex;
-              justify-content: center;
-              padding: 8px 12px;
-            }
-            .reveal .targets-slide .target-atom {
-              zoom: 0.74;
-            }
-            .reveal .targets-slide .target-bottle {
-              zoom: 0.86;
-            }
-            .reveal .targets-slide .target-box img {
-              border-radius: 0;
-              display: block;
-              height: 170px;
-              margin: 0;
-              max-height: none;
-              max-width: none;
-              width: auto;
-            }
-            .reveal .targets-slide .source-line {
-              margin-top: 0.8em !important;
-              text-align: center;
-            }
-          </style>
-          <h2>Three graphics to rebuild in GoFish</h2>
-          <div class="targets-grid">
-            <div class="target-card">
-              <div class="code-pair-label">Atom</div>
-              <div class="target-box"><div class="target-atom" data-chart="atom-units" data-x-axis="end" data-w="520" data-h="319"></div></div>
-            </div>
-            <div class="target-card">
-              <div class="code-pair-label">PiCCL</div>
-              <div class="target-box"><div class="target-bottle" data-chart="piccl-bottle" data-w="440" data-h="266"></div></div>
-            </div>
-            <div class="target-card target-card-wide">
-              <div class="code-pair-label">GoTree</div>
-              <div class="target-box"><img src="./images/tradeoffs/gofish-gotree-node-link.svg" alt="GoTree: a node-link tree, a root, a row of fourteen children, and a row of leaves joined by straight lines" /></div>
-            </div>
-          </div>
-          <p class="source-line">Atom (Park et al., IEEE TVCG 2018), PiCCL (Shi et al., IEEE VIS 2025), GoTree (Li et al., ACM CHI 2020)</p>
-          <aside class="notes">
-            <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
-              1:40 of 7:00.</p>
-            <p><strong>Say:</strong> "Here are three graphics from three
-              grammars: an Atom unit chart, a PiCCL bottle chart, and a
-              GoTree node-link tree. We'll rebuild each one in GoFish."</p>
-            <p>The next slide, "They add graphical operators and
-              relations", opens with "So what did these three grammars add?
-              Two kinds of things."</p>
-            <p>Since 2026-11-08 this one slide replaces the six grammar
-              intro slides (two steps each for Atom, PiCCL, and GoTree), which
-              are hidden after it. The pictures are GoFish's renders, the
-              same ones the later slides end on, so the audience recognizes
-              each target when it is built.</p>
-            <p><strong>Sources:</strong> Park, Drucker, Fernandez and
-              Elmqvist, "ATOM: A Grammar for Unit Visualizations", IEEE TVCG
-              2018. Shi et al., "PiCCL: Data-Driven Composition of Bespoke
-              Pictorial Charts", IEEE VIS 2025. Li, Tian, Xu, McGuffin and
-              Yuan, "GoTree: A Grammar of Tree Visualizations", ACM CHI
-              2020.</p>
           </aside>
         </section>
 
