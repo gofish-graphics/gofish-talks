@@ -217,8 +217,8 @@
               from existing grammars: Canis, Animated Vega-Lite, ChartAccent,
               Vega-Label, PiCCL, Bluefish, GoTree, and Atom. We wrote all of
               them in one shared language."</p>
-            <p>Since 2026-11-08 the "three examples" lead is on the next
-              slide, the tangle and the GUGOG side by side.</p>
+            <p><strong>Lead into the next slide:</strong> "I'm going to
+              show you three examples of that now."</p>
             <p>The argument: GoFish writes many existing grammars in one
               shared core.</p>
             <p>The hierarchy slide in 4a comes back to some of these same
@@ -324,6 +324,108 @@
           </aside>
         </section>
 
+        <!-- The three targets (2026-11-08), in place of the six grammar
+             intro slides below, which are hidden. One slide shows the three
+             graphics that the next part rebuilds in GoFish, each in a white
+             framed box with the name of the system it comes from glued on
+             top, in the intro figures' label style (larger here). They are
+             the same renders the later slides end on: the Atom waffle
+             ("atom-units", the last Atom step), the finished bottles
+             ("piccl-bottle", the last bottle step and the bottle goal slide),
+             and the GoTree node-link tree
+             (images/tradeoffs/gofish-gotree-node-link.svg, the GoTree specs
+             slide). The tree is about five times as wide as it is tall, so
+             it gets its own row under the other two. -->
+        <section class="targets-slide">
+          <style>
+            .reveal .targets-slide h2 {
+              margin-bottom: 0.3em;
+            }
+            .reveal .targets-slide .targets-grid {
+              display: grid;
+              gap: 16px 40px;
+              grid-template-columns: auto auto;
+              justify-content: center;
+            }
+            .reveal .targets-slide .target-card-wide {
+              grid-column: 1 / -1;
+            }
+            .reveal .targets-slide .code-pair-label {
+              font-size: 0.72em !important;
+              text-align: center;
+            }
+            .reveal .targets-slide .target-box {
+              align-items: center;
+              background: white;
+              border: 2px solid #27231f;
+              border-radius: 7px 10px 6px 9px;
+              box-shadow: 5px 6px 3px rgba(30, 30, 30, 0.11);
+              box-sizing: border-box;
+              display: flex;
+              justify-content: center;
+              padding: 8px 12px;
+            }
+            .reveal .targets-slide .target-atom {
+              zoom: 0.74;
+            }
+            .reveal .targets-slide .target-bottle {
+              zoom: 0.86;
+            }
+            .reveal .targets-slide .target-box img {
+              border-radius: 0;
+              display: block;
+              height: 170px;
+              margin: 0;
+              max-height: none;
+              max-width: none;
+              width: auto;
+            }
+            .reveal .targets-slide .source-line {
+              margin-top: 0.8em !important;
+              text-align: center;
+            }
+          </style>
+          <h2>Three graphics to rebuild in GoFish</h2>
+          <div class="targets-grid">
+            <div class="target-card">
+              <div class="code-pair-label">Atom</div>
+              <div class="target-box"><div class="target-atom" data-chart="atom-units" data-x-axis="end" data-w="520" data-h="319"></div></div>
+            </div>
+            <div class="target-card">
+              <div class="code-pair-label">PiCCL</div>
+              <div class="target-box"><div class="target-bottle" data-chart="piccl-bottle" data-w="440" data-h="266"></div></div>
+            </div>
+            <div class="target-card target-card-wide">
+              <div class="code-pair-label">GoTree</div>
+              <div class="target-box"><img src="./images/tradeoffs/gofish-gotree-node-link.svg" alt="GoTree: a node-link tree, a root, a row of fourteen children, and a row of leaves joined by straight lines" /></div>
+            </div>
+          </div>
+          <p class="source-line">Atom (Park et al., IEEE TVCG 2018), PiCCL (Shi et al., IEEE VIS 2025), GoTree (Li et al., ACM CHI 2020)</p>
+          <aside class="notes">
+            <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
+              1:35 of 7:00.</p>
+            <p><strong>Say:</strong> "Here are three graphics from three
+              grammars: an Atom unit chart, a PiCCL bottle chart, and a
+              GoTree node-link tree. We'll rebuild each one in GoFish."</p>
+            <p>The next slide, "They add graphical operators and
+              relations", opens with "So what did these three grammars add?
+              Two kinds of things."</p>
+            <p>Since 2026-11-08 this one slide replaces the six grammar
+              intro slides (two steps each for Atom, PiCCL, and GoTree), which
+              are hidden after it. The pictures are GoFish's renders, the
+              same ones the later slides end on, so the audience recognizes
+              each target when it is built.</p>
+            <p><strong>Sources:</strong> Park, Drucker, Fernandez and
+              Elmqvist, "ATOM: A Grammar for Unit Visualizations", IEEE TVCG
+              2018. Shi et al., "PiCCL: Data-Driven Composition of Bespoke
+              Pictorial Charts", IEEE VIS 2025. Li, Tian, Xu, McGuffin and
+              Yuan, "GoTree: A Grammar of Tree Visualizations", ACM CHI
+              2020.</p>
+          </aside>
+        </section>
+
+        <!-- Hidden on 2026-11-08: the six grammar intro slides below, in
+             favor of the one targets slide above. Kept, not deleted. -->
         <!-- Grammar intro slides (2026-11-03, moved from
              03b-code-comparisons.html the same day, and into this file on
              2026-11-04). Each slide shows the
@@ -367,7 +469,7 @@
              The GoFish versions of Atom and PiCCL come after the GoFish
              intro, in 03b-code-comparisons.html. GoTree's is on the GoTree
              specs slide in 04a-domain-design.html. -->
-        <section class="grammar-intro-slide grammar-intro-stack grammar-intro-first" data-auto-animate data-auto-animate-id="atom-intro">
+        <section data-visibility="hidden" class="grammar-intro-slide grammar-intro-stack grammar-intro-first" data-auto-animate data-auto-animate-id="atom-intro">
           <h2>Atom adds operators for arranging units</h2>
           <div class="grammar-intro-figs">
             <div class="intro-fig intro-fig-chart" data-id="atom-intro-chart">
@@ -404,7 +506,7 @@
           </aside>
         </section>
 
-        <section class="grammar-intro-slide grammar-intro-stack" data-auto-animate data-auto-animate-id="atom-intro">
+        <section data-visibility="hidden" class="grammar-intro-slide grammar-intro-stack" data-auto-animate data-auto-animate-id="atom-intro">
           <h2>Atom adds operators for arranging units</h2>
           <div class="grammar-intro-figs">
             <div class="intro-fig intro-fig-chart" data-id="atom-intro-chart">
@@ -437,7 +539,7 @@
           </aside>
         </section>
 
-        <section class="grammar-intro-slide grammar-intro-first" data-auto-animate data-auto-animate-id="piccl-intro">
+        <section data-visibility="hidden" class="grammar-intro-slide grammar-intro-first" data-auto-animate data-auto-animate-id="piccl-intro">
           <h2>PiCCL adds compositing operators and snapping relations</h2>
           <div class="grammar-intro-figs">
             <div class="intro-fig intro-fig-chart" data-id="piccl-intro-chart">
@@ -469,7 +571,7 @@
           </aside>
         </section>
 
-        <section class="grammar-intro-slide" data-auto-animate data-auto-animate-id="piccl-intro">
+        <section data-visibility="hidden" class="grammar-intro-slide" data-auto-animate data-auto-animate-id="piccl-intro">
           <h2>PiCCL adds compositing operators and snapping relations</h2>
           <style>
             /* Step 2 (since 2026-11-07, later): the charts on top, and
@@ -558,7 +660,7 @@
              "GoTree's layouts with GoFish's relations" and "All three
              grammars in one picture" (since 2026-11-07, when "same core,
              three shapes of data" was hidden). -->
-        <section class="grammar-intro-slide grammar-intro-first" data-auto-animate data-auto-animate-id="gotree-intro">
+        <section data-visibility="hidden" class="grammar-intro-slide grammar-intro-first" data-auto-animate data-auto-animate-id="gotree-intro">
           <style>
             .reveal .grammar-intro-slide .grammar-intro-figs.gotree-figs {
               grid-template-columns: 1.15fr 0.85fr;
@@ -589,7 +691,7 @@
           </aside>
         </section>
 
-        <section class="grammar-intro-slide" data-auto-animate data-auto-animate-id="gotree-intro">
+        <section data-visibility="hidden" class="grammar-intro-slide" data-auto-animate data-auto-animate-id="gotree-intro">
           <h2>GoTree adds relations for laying out trees</h2>
           <div class="grammar-intro-figs grammar-intro-side gotree-figs">
             <div class="intro-fig intro-fig-chart" data-id="gotree-intro-chart">
