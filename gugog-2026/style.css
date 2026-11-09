@@ -179,10 +179,11 @@
   overflow: hidden;
 }
 
-/* Slide titles 11% smaller deck-wide (2026-11-09, the user's request), the
-   smallest step that keeps the user's two-line titles to their own line
-   break and the longest one-line titles on one line. The template's size is
-   1.4em. */
+/* Slide titles slightly smaller deck-wide (2026-11-09, the user's request):
+   1.38em, the largest size, with a few pixels to spare, at which the longest
+   one-line titles ("These grammars add verbs..." and "Reuse constraints for
+   GoTree...") stay on one line and the two-line titles break only at the
+   user's <br>. At 1.4em, the template's size, those two wrap. */
 .reveal .slides h2 {
-  font-size: 1.246em;
+  font-size: 1.38em;
 }
