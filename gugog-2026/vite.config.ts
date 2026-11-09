@@ -13,6 +13,7 @@ export default defineConfig({
       // Slide order.
       sections: [
         "00-title.html",
+        "00b-gog-flat.html",
         "01-islands.html",
         "01b-compression.html",
         "01c-compress-islands.html",
