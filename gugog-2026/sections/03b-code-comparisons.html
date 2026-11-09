@@ -182,6 +182,12 @@
             </div>
             <div class="crash-chart-box" data-id="atom-chart-box">
               <div class="crash-render" data-chart="atom-slots" data-x-axis="start" data-w="520" data-h="319"></div>
+              <!-- A preview of the next step's chart (2026-11-08), on a
+                   click, as on "Stack within each lake". -->
+              <div class="atom-next fragment">
+                <span class="atom-next-label" aria-hidden="true">&#8594;</span>
+                <div class="crash-render atom-next-render" data-chart="atom-bars" data-x-axis="start" data-w="520" data-h="319"></div>
+              </div>
             </div>
           </div>
           <aside class="notes">
@@ -200,6 +206,8 @@
             <p>The small table in the corner is there so you do not have to
               remember the fields. The code shown leaves out the spacing
               between the lakes, and marks it with <code>...</code>.</p>
+            <p>(Click: preview of the next chart.) "Next, a bar in each
+              space."</p>
           </aside>
         </section>
 
@@ -262,11 +270,17 @@
             </div>
             <div class="crash-chart-box" data-id="atom-chart-box">
               <div class="crash-render" data-chart="atom-bars" data-x-axis="start" data-w="520" data-h="319"></div>
+              <!-- A preview of the next step's chart (2026-11-08), on a
+                   click, as on "Stack within each lake". -->
+              <div class="atom-next fragment">
+                <span class="atom-next-label" aria-hidden="true">&#8594;</span>
+                <div class="crash-render atom-next-render" data-chart="atom-stacked" data-x-axis="start" data-w="520" data-h="319"></div>
+              </div>
             </div>
           </div>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:05. <strong>Running total:</strong>
-              2:25 of 7:00.</p>
+            <p><strong>Target:</strong> 0:10, with the preview click.
+              <strong>Running total:</strong> 2:30 of 7:00.</p>
             <p><strong>Say:</strong> "Then the mark says what to draw in each
               space: a rectangle, as tall as the sum of the counts. So we get
               one bar per lake."</p>
@@ -284,85 +298,10 @@
               deck's, from its "add a second grouping" slide. Rendered live
               from <code>atom-bars</code>, in the same frame as the other
               Atom charts.</p>
+            <p>(Click: preview of the next chart.) "Now we want stacked bars,
+              one piece for each kind of fish."</p>
           </aside>
         </section>
-
-        <!-- Stacked bars, the chart first (2026-11-08): the stacked chart
-             with the previous step's code, so the chart and the code do not
-             change at once. The next step changes only the code. The
-             pipeline here is the previous step's, since the code is. -->
-        <section class="code-slide crash-slide atom-step" data-auto-animate data-auto-animate-id="atom" data-auto-animate-unmatched="false">
-          <h2>Stack within each lake</h2>
-          <div class="atom-data atom-data-corner" data-id="atom-data-table">
-            <div class="atom-data-inner">
-              <table class="crash-data-table">
-                <thead>
-                  <tr><th>lake</th><th>species</th><th>count</th></tr>
-                </thead>
-                <tbody>
-                  <tr><td>Primrose</td><td>Bass</td><td>23</td></tr>
-                  <tr><td>Primrose</td><td>Trout</td><td>31</td></tr>
-                  <tr><td>Primrose</td><td>Catfish</td><td>29</td></tr>
-                  <tr class="ellipsis-row"><td>&#8942;</td><td>&#8942;</td><td>&#8942;</td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div class="crash-solo">
-            <div>
-              <p class="code-pair-label" data-id="atom-chart-label">chart API</p>
-              <pre data-id="atom-chart-code" data-magic-move><code class="language-ts" data-line-numbers>chart(seafood)
-  .flow(
-    spread({ by: "lake", dir: "x", ... }),
-  )
-  .mark(rect({ h: "count", ... }))</code></pre>
-              <h3 class="transform-heading">Data transformation pipeline</h3>
-              <div class="transform-build" aria-label="How the seafood rows are grouped at this step.">
-                <div class="transform-stage transform-data" data-id="atom-pipe-data">
-                  <span class="transform-stage-label">seafood</span>
-                  <span class="transform-stage-detail">30 rows</span>
-                  <span class="transform-fields">lake, species, count</span>
-                </div>
-                <div class="transform-step" data-id="atom-pipe-lake-step">
-                  <span class="transform-arrow">↓</span>
-                  <code>group_by("lake")</code>
-                </div>
-                <div class="transform-groups transform-lakes" data-id="atom-pipe-lakes">
-                  <div class="transform-group"><b>Primrose</b><span>5 rows</span></div>
-                  <div class="transform-group"><b>Concord</b><span>5 rows</span></div>
-                  <span class="transform-ellipsis">…</span>
-                  <div class="transform-group"><b>Vulcan</b><span>5 rows</span></div>
-                </div>
-                <div class="transform-step" data-id="atom-pipe-rect-step-bars">
-                  <span class="transform-arrow">↓</span>
-                </div>
-                <div class="transform-groups transform-rects" data-id="atom-pipe-rects-1">
-                  <div class="transform-rects-one"><span class="transform-rect-cell"><i aria-hidden="true"></i><b>rect</b></span></div>
-                  <div class="transform-rects-one"><span class="transform-rect-cell"><i aria-hidden="true"></i><b>rect</b></span></div>
-                  <span class="transform-ellipsis">…</span>
-                  <div class="transform-rects-one"><span class="transform-rect-cell"><i aria-hidden="true"></i><b>rect</b></span></div>
-                </div>
-                <div class="transform-leaf-note" data-id="atom-pipe-leaf-1">
-                  <b>each <span class="viz-mark">rect</span></b>
-                  <code><i>h</i> = sum(count)</code>
-                </div>
-              </div>
-            </div>
-            <div class="crash-chart-box" data-id="atom-chart-box">
-              <div class="crash-render" data-chart="atom-stacked" data-x-axis="start" data-w="520" data-h="319"></div>
-            </div>
-          </div>
-          <aside class="notes">
-            <p><strong>Target:</strong> 0:05. <strong>Running total:</strong>
-              2:30 of 7:00.</p>
-            <p><strong>Say:</strong> "Now we want stacked bars, one piece
-              for each kind of fish."</p>
-            <p>Since 2026-11-08 the change from bars to stacked bars is two
-              steps: the chart changes first, here, with the old code, and
-              the code changes on the next click.</p>
-          </aside>
-        </section>
-
 
         <section class="code-slide crash-slide atom-step" data-auto-animate data-auto-animate-id="atom" data-auto-animate-unmatched="false">
           <h2>Stack within each lake</h2>
@@ -442,14 +381,14 @@
                    just goes away on the change to step 4, where the waffle
                    takes the bars' place. -->
               <div class="atom-next fragment">
-                <span class="atom-next-label">next: one square per fish &#8594;</span>
+                <span class="atom-next-label" aria-hidden="true">&#8594;</span>
                 <div class="crash-render atom-next-render" data-chart="atom-units" data-x-axis="end" data-w="520" data-h="319"></div>
               </div>
             </div>
           </div>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:05 (since 2026-11-08, when the
-              step before it took the chart change; 0:10 before that, and
+            <p><strong>Target:</strong> 0:05 (since 2026-11-08, when its
+              opening line moved to the preview click on the step before; 0:10 before that, and
               0:15 until 2026-11-07, later, when it was "A stacked bar chart
               is a flow of operators" and also introduced
               <code>spread</code>). <strong>Running
@@ -470,8 +409,9 @@
               pipeline (hidden since 2026-11-08) and the small table are the
               SciPy 2026 deck's.
               Rendered live.</p>
-            <p>(Click, at the end.) A small waffle appears under the bars:
-              "Next, Atom draws one square for each fish."</p>
+            <p>(Click: preview of the next chart.) A small waffle appears
+              under the bars. "Next, Atom draws one square for each
+              fish."</p>
           </aside>
         </section>
 
@@ -812,6 +752,13 @@
             </div>
             <div class="bottle-step-box" data-id="bottle-box">
               <div class="bottle-render" data-chart="piccl-bottle-bars" data-w="440" data-h="240"></div>
+              <!-- A preview of the next step's chart (2026-11-08), on a
+                   click, in the empty top of the chart box, as on the Atom
+                   steps. -->
+              <div class="bottle-next fragment">
+                <span class="atom-next-label" aria-hidden="true">&#8594;</span>
+                <div class="bottle-render bottle-next-render" data-chart="piccl-bottle-tinted" data-w="440" data-h="240"></div>
+              </div>
             </div>
             <p class="bottle-point"><code>.mark()</code> can accept glyphs made by applying operators directly to other marks</p>
           </div>
@@ -831,6 +778,8 @@
               with the same widths as the bottle, so the next step does not
               move the picture. Drawn live from
               <code>piccl-bottle-bars</code> in <code>../charts.ts</code>.</p>
+            <p>(Click: preview of the next chart.) "Next, the green goes
+              onto a picture of a bottle."</p>
           </aside>
         </section>
 
@@ -850,6 +799,13 @@
             </div>
             <div class="bottle-step-box" data-id="bottle-box">
               <div class="bottle-render" data-chart="piccl-bottle-tinted" data-w="440" data-h="240"></div>
+              <!-- A preview of the next step's chart (2026-11-08), on a
+                   click, in the empty top of the chart box, as on the Atom
+                   steps. -->
+              <div class="bottle-next fragment">
+                <span class="atom-next-label" aria-hidden="true">&#8594;</span>
+                <div class="bottle-render bottle-next-render" data-chart="piccl-bottle-unplaced" data-w="440" data-h="240"></div>
+              </div>
             </div>
           </div>
           <p class="source-line">Bottle chart from PiCCL (Shi et al., IEEE VIS 2025)</p>
@@ -874,6 +830,8 @@
               mode then takes its color from the green rectangle. Drawn live
               from
               <code>piccl-bottle-tinted</code>.</p>
+            <p>(Click: preview of the next chart.) "Next, a line and a
+              label."</p>
           </aside>
         </section>
 
@@ -895,6 +853,13 @@
             </div>
             <div class="bottle-step-box" data-id="bottle-box">
               <div class="bottle-render" data-chart="piccl-bottle-unplaced" data-w="440" data-h="240"></div>
+              <!-- A preview of the next step's chart (2026-11-08), on a
+                   click, in the empty top of the chart box, as on the Atom
+                   steps. -->
+              <div class="bottle-next fragment">
+                <span class="atom-next-label" aria-hidden="true">&#8594;</span>
+                <div class="bottle-render bottle-next-render" data-chart="piccl-bottle" data-w="440" data-h="266"></div>
+              </div>
             </div>
           </div>
           <p class="source-line">Bottle chart from PiCCL (Shi et al., IEEE VIS 2025)</p>
@@ -909,6 +874,8 @@
               the marks, and the next adds the relations. The chart here is
               the real render of this spec, with no relations
               (<code>piccl-bottle-unplaced</code> in ../charts.ts).</p>
+            <p>(Click: preview of the next chart.) "Next, relations put them
+              in place."</p>
           </aside>
         </section>
 

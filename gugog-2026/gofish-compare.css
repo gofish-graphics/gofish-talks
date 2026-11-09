@@ -1006,3 +1006,29 @@
 .reveal [data-chart="atom-slots"] rect {
   stroke-dasharray: 6 4;
 }
+
+/* Previews of the next chart on the PiCCL bottle steps (2026-11-08), on a
+   click, in the empty top of the chart box, like the Atom steps'
+   .atom-next. Absolutely placed, so nothing else moves. */
+.reveal .bottle-step .bottle-step-box {
+  position: relative;
+}
+
+.reveal .bottle-step .bottle-next {
+  align-items: center;
+  display: flex;
+  gap: 0.6em;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.reveal .bottle-step .atom-next-label {
+  color: var(--muted);
+  font-size: 0.5em;
+  font-weight: 700;
+}
+
+.reveal .code-slide .bottle-step-box .bottle-render.bottle-next-render {
+  zoom: 0.46;
+}
