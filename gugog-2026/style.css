@@ -178,3 +178,11 @@
 .reveal pre {
   overflow: hidden;
 }
+
+/* Slide titles 11% smaller deck-wide (2026-11-09, the user's request), the
+   smallest step that keeps the user's two-line titles to their own line
+   break and the longest one-line titles on one line. The template's size is
+   1.4em. */
+.reveal .slides h2 {
+  font-size: 1.246em;
+}

@@ -46,6 +46,23 @@
               top: 100px;
               width: 594px;
             }
+            .reveal .grammars-slide .tangle-points {
+              font-size: 0.8em;
+              left: -10px;
+              position: absolute;
+              text-align: left;
+              top: 250px;
+              width: 330px;
+            }
+            .reveal .grammars-slide .tangle-points p {
+              margin: 0 0 0.3em;
+            }
+            .reveal .grammars-slide .tangle-points ul {
+              margin: 0 0 0 1em;
+            }
+            .reveal .grammars-slide .tangle-points li {
+              margin-bottom: 0.3em;
+            }
             .reveal .grammars-slide .grammars-stack img {
               border-radius: 0;
               height: 100%;
@@ -58,7 +75,7 @@
               width: 100%;
             }
           </style>
-          <h2>Domain-specific grammars explore new abstractions, but are incompatible with the GoG.</h2>
+          <h2>Domain-specific grammars capture this structure,<br>but they aren't compatible with the GoG or each other</h2>
           <div class="grammars-stack" data-id="grammars-stack">
             <img data-id="grammars-base" src="./images/opening/grammars.svg"
               alt="Hand drawing: a big circle labeled GoG in the middle, with smaller circles around it for Atom, PiCCL, AnnoGram, Gemini, Mascot, Gosling, Neo, GenomeSpy, GoTree, and Canis" />
@@ -84,7 +101,18 @@
         </section>
 
         <section class="grammars-slide" data-auto-animate data-auto-animate-id="grammars">
-          <h2>That makes it difficult to compare grammars, compose them, and integrate them into mainstream charting libraries</h2>
+          <h2>Domain-specific grammars capture this structure,<br>but they aren't compatible with the GoG or each other</h2>
+          <!-- The user's bullets (2026-11-09), in the clear space to the
+               left of the drawing, absolutely placed so the drawing does not
+               move. They fade in with the arrows. -->
+          <div class="tangle-points">
+            <p>They're difficult to</p>
+            <ul>
+              <li>compare with each other</li>
+              <li>compose in a single graphic</li>
+              <li>integrate into mainstream charting libraries</li>
+            </ul>
+          </div>
           <div class="grammars-stack" data-id="grammars-stack">
             <img data-id="grammars-base" src="./images/opening/grammars.svg" alt="" />
             <img src="./images/opening/grammars-arrows.svg"
@@ -98,6 +126,11 @@
               with each other, compose them in the same graphic, e.g.
               animations, labels, and integrate them into industry-grade
               visualization libraries."</p>
+            <p>Since 2026-11-09 this slide has the islands slide's title (so
+              the title does not change) and the user's bullets to the left of
+              the drawing: "They're difficult to compare with each other,
+              compose in a single graphic, integrate into mainstream charting
+              libraries."</p>
             <p><strong>Source:</strong> the paper's abstract ("difficult to
               compare, combine, and carry into practice") and the second
               paragraph of its introduction. Until 2026-11-09 the notes here
