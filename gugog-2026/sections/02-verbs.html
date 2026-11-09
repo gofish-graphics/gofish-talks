@@ -192,28 +192,31 @@
               whose last line leads in: "And when I looked, I found two
               things." Relations come first, and their row is on top, so the
               build reads top to bottom.</p>
-            <p><strong>Say:</strong></p>
+            <p><strong>Say</strong> (the user's script, 2026-11-09, with
+              only fillers like "like" and "you know" taken out):</p>
             <ul>
               <li>(The slide starts with only the title.)</li>
-              <li>(Click: the relations row appears.) "The first is relations. A relation points to marks that
-                something else holds. It is a fact about those marks, true or
-                false, such as a shared top edge. Here the gaps are
-                uneven, but align is true: every top sits on the dashed line.
-                GoFish places the marks so that the relation is true. GoTree's
-                juxtapose and align are relations, and so are PiCCL's
-                snapping and matching relations." (Point at the figures to the
-                right.) "Those are PiCCL's snapping and matching relations and GoTree's layout rules."</li>
-              <li>(Second click: the operators row appears.) "The second is
-                graphical operators. An operator holds its
-                marks. It places them and returns one new mark. Here
-                spread lines up four bars at even gaps, and the dashed box is
-                the new mark. Marks go in, and one mark comes out. Atom's
-                FillX and PiCCL's atop are operators." (Point at the figures
-                to the right.) "These are their operator figures, from the
-                Atom and PiCCL papers. So PiCCL adds both kinds."</li>
+              <li>(Click: the relations row appears.) "Relations. A relation
+                is some predicate on a collection of marks, such as they're
+                all vertically aligned or they share a point or
+                orientation."</li>
+              <li>(Second click: the operators row appears.) "And relations
+                can also be composed into graphical operators, which are
+                functions from a collection of marks to a new mark that is a
+                spatial composition of those existing marks using things like
+                scatter or spread layouts or tree maps, image compositing,
+                etc."</li>
             </ul>
-            <p><strong>Lead into the splash</strong> (the user's phrase):
-              "That's why I'm building GoFish."</p>
+            <p>Next slide: the splash, which opens "And so I built
+              GoFish".</p>
+            <p>Before 2026-11-09 the clicks explained more: an operator holds
+              its marks, places them, and returns one new mark (spread lines
+              up four bars at even gaps, and the dashed box is the new mark;
+              Atom's FillX and PiCCL's atop are operators); a relation points
+              to marks that something else holds, and GoFish places the marks
+              so that it is true (GoTree's juxtapose and align and PiCCL's
+              snapping and matching are relations). Use these only if
+              asked.</p>
             <p>The title names GoFish before the splash does; that is the
               user's title and is kept as is.</p>
             <p>Since 2026-11-08, later, the slide ends on its second row. The
@@ -424,15 +427,24 @@
             <p><strong>Target:</strong> 0:15, with the click.
               <strong>Running total:</strong> 1:40 of 7:00. This slide names
               GoFish.</p>
-            <p><strong>Lead-in</strong> (the user's phrase): "That's why I'm
-              building GoFish." <strong>Say:</strong> "These are all GoFish
-              programs."</p>
-            <p>(Click: gray labels cover some tiles.) "Many of them come
-              from existing grammars: Canis, Animated Vega-Lite, ChartAccent,
-              Vega-Label, PiCCL, Bluefish, GoTree, and Atom. We wrote all of
-              them in one shared language."</p>
-            <p><strong>Lead into the next slide:</strong> "I'm going to
-              show you three examples of that now."</p>
+            <p><strong>Say</strong> (the user's script, 2026-11-09): "And so
+              I built GoFish, which takes these ideas and plugs them back into
+              the GOG."</p>
+            <p>(Click: gray labels cover some tiles.) "Notice that several of
+              the examples are from previous VisGrammars. That's because I
+              use re-implementations to test and improve and generalize these
+              sorts of abstractions, and also just because I really love
+              those grammar papers and I understand them better by
+              implementing them in GoFish and seeing how they connect to other
+              systems. In the rest of this talk, I'm going to show you how
+              GoFish can help us compare grammars, compose them with each
+              other, and potentially provide an avenue for broader usage via
+              three examples."</p>
+            <p>(User may drop this third point, "potentially provide an
+              avenue for broader usage": the user says the talk does not
+              really prove it.)</p>
+            <p>The labels name Canis, Animated Vega-Lite, ChartAccent,
+              Vega-Label, PiCCL, Bluefish, GoTree, and Atom.</p>
             <p>The argument: GoFish writes many existing grammars in one
               shared core.</p>
             <p>The hierarchy slide in 4a comes back to some of these same
@@ -559,9 +571,8 @@
           <aside class="notes">
             <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
               1:50 of 7:00.</p>
-            <p><strong>Say:</strong> "Here are three graphics from three
-              grammars: an Atom unit chart, a PiCCL bottle chart, and a
-              GoTree node-link tree. We'll rebuild each one in GoFish."</p>
+            <p><strong>Say:</strong> "Here are the three: an Atom unit
+              chart, a PiCCL bottle chart, and a GoTree node-link tree."</p>
             <p><strong>Lead into the Atom steps:</strong> "Let's see how
               operators and relations help, by rebuilding these three
               graphics in GoFish. Each one shows one idea of GoFish. First
