@@ -886,7 +886,7 @@
           <h2>Add relations to place the line and the label</h2>
           <div class="bottle-step-split">
             <div>
-              <pre data-id="bottle-code" data-magic-move><code class="language-ts" data-line-numbers data-code-regions="relations 11:5-15:4">chart(bottleData, { axes: false })
+              <pre data-id="bottle-code" data-magic-move><code class="language-ts" data-line-numbers data-char-marks="11:5-42, 12:5-53, 13:5-60, 14:5-50, 15:3-3">chart(bottleData, { axes: false })
   .flow(spread({ by: "category", dir: "x", ... }))
   .mark(layer([
     atop({ blendMode: "color" }, [
@@ -901,7 +901,6 @@
     Constraint.distribute({ dir: "y", ... }, [line, label]),
     Constraint.align({ x: "end" }, [label, line]),
   ]))</code></pre>
-              <p class="core-callout"><span class="core-callout-tag">relations</span> place one mark against another</p>
             </div>
             <div class="bottle-step-box" data-id="bottle-box">
               <div class="bottle-render" data-chart="piccl-bottle" data-w="440" data-h="266"></div>
@@ -914,7 +913,7 @@
               3:35 of 7:00.</p>
             <p><strong>Say:</strong> "Now the second part, relations. A
               relation sets
-              only some properties of a set of marks. The tinted lines are
+              only some properties of a set of marks. The highlighted lines are
               the relations. <code>align</code> lines up the line with the
               bottle, and <code>distribute</code> puts the label just above
               the line. Neither one places a mark by itself, but together
