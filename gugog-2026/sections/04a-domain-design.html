@@ -195,7 +195,7 @@
               text-align: center;
             }
           </style>
-          <h2>GoTree's layouts with GoFish's relations</h2>
+          <h2>Reuse constraints for GoTree in a custom embedded grammar!</h2>
           <div class="code-pair">
             <div>
               <p class="code-pair-label">GoTree</p>
@@ -229,17 +229,20 @@
                    link: { kind: "line", ... } (link options in the
                    current source), and parentChild: combine({ x: { kind:
                    "align", alignment: "middle" }, ... }). The render is a
-                   static picture, so nothing that runs changes. -->
-              <pre><code class="language-ts" data-line-numbers data-code-regions="A 2:3-2:24, B 3:3-3:39, C 5:5-5:37, E 6:5-6:34, D 9:5-9:34, F 10:5-10:36" data-char-marks="5:8-12, 6:8-17, 9:8-17, 10:8-12">tree({
+                   static picture, so nothing that runs changes.
+                   2026-11-09: the relations carry the Constraint. prefix
+                   (the user's request), as on the bottle slide, to show
+                   that they are the same align and distribute. -->
+              <pre><code class="language-ts" data-line-numbers data-code-regions="A 2:3-2:24, B 3:3-3:39, C 5:5-5:48, E 6:5-6:45, D 9:5-9:45, F 10:5-10:47" data-char-marks="5:19-23, 6:19-28, 9:19-28, 10:19-23">tree({
   node: circle({ r: 9 }),
   link: line({ curve: Curve.linear() }),
   parentChild: {
-    x: align({ alignment: "middle" }),
-    y: distribute({ spacing: 90 }),
+    x: Constraint.align({ alignment: "middle" }),
+    y: Constraint.distribute({ spacing: 90 }),
   },
   sibling: {
-    x: distribute({ spacing: 24 }),
-    y: align({ alignment: "start" }),
+    x: Constraint.distribute({ spacing: 24 }),
+    y: Constraint.align({ alignment: "start" }),
   },
 }, hierarchy);</code></pre>
               <!-- The tree this code draws (2026-11-07, later): the paper's
@@ -509,7 +512,7 @@ layer([planets, label])
               width: 100%;
             }
           </style>
-          <h2>All three grammars in one picture</h2>
+          <h2>Compose all three!</h2>
           <div class="tree-waffle-split">
             <!-- Simplified syntax (2026-11-07, later, the user's choice): the
                  tree's link is a line mark and its layout rules are curried
@@ -828,8 +831,8 @@ sibling: {
             .reveal svg.flat-vs-hierarchy {
               overflow: visible; /* the GUGOG caption runs off the slide on purpose */
               display: block;
-              margin: 2.6em auto 0;
-              max-height: 560px;
+              margin: 0.6em auto 0;
+              max-height: 520px;
               width: 100%;
             }
             .reveal .flat-vs-hierarchy-line {
@@ -838,6 +841,7 @@ sibling: {
               text-align: center;
             }
           </style>
+          <h2>GUGOG: Many dialects but a shared core</h2>
           <svg class="flat-vs-hierarchy" viewBox="-2 -64 1144 340" role="img" aria-label="Left, GoG: five charts (a bar chart, a scatter plot, a ribbon chart, a waffle chart, and a mosaic chart, plus a faded slot for more) sit directly on one flat row of marks. Right, GUGOG: five charts (a population pyramid, a ribbon chart, a GoTree silhouette tree, a Sankey tree, and a Bluefish pulley diagram) sit on a middle row of domain languages (charts, trees, and diagrams, plus a faded block for more), and the middle row sits on a core of marks and relations.">
             <text x="270" y="-28" text-anchor="middle" font-size="36" font-weight="760" font-family="Shantell Sans Local, Shantell Sans, sans-serif" fill="#1e1e1e">GoG</text>
             <text x="854" y="-28" text-anchor="middle" font-size="36" font-weight="760" font-family="Shantell Sans Local, Shantell Sans, sans-serif" fill="#1e1e1e">GUGOG</text>

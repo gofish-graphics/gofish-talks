@@ -183,7 +183,7 @@
             <div class="crash-chart-box" data-id="atom-chart-box">
               <div class="crash-render" data-chart="atom-slots" data-x-axis="start" data-w="520" data-h="319"></div>
               <!-- A preview of the next step's chart (2026-11-08), on a
-                   click, as on "Stack within each lake". -->
+                   click, as on "Stack by species within each lake". -->
               <div class="atom-next fragment">
                 <svg class="next-arrow" viewBox="0 0 44 16" aria-hidden="true"><path d="M2 8 H40 M31 2 L40 8 L31 14" /></svg>
                 <div class="crash-render atom-next-render" data-chart="atom-bars" data-x-axis="start" data-w="520" data-h="319"></div>
@@ -212,7 +212,7 @@
         </section>
 
         <section class="code-slide crash-slide atom-step" data-auto-animate data-auto-animate-id="atom" data-auto-animate-unmatched="false">
-          <h2>Spread into bars</h2>
+          <h2>Draw a rect for each lake</h2>
           <div class="atom-data atom-data-corner" data-id="atom-data-table">
             <div class="atom-data-inner">
               <table class="crash-data-table">
@@ -271,7 +271,7 @@
             <div class="crash-chart-box" data-id="atom-chart-box">
               <div class="crash-render" data-chart="atom-bars" data-x-axis="start" data-w="520" data-h="319"></div>
               <!-- A preview of the next step's chart (2026-11-08), on a
-                   click, as on "Stack within each lake". -->
+                   click, as on "Stack by species within each lake". -->
               <div class="atom-next fragment">
                 <svg class="next-arrow" viewBox="0 0 44 16" aria-hidden="true"><path d="M2 8 H40 M31 2 L40 8 L31 14" /></svg>
                 <div class="crash-render atom-next-render" data-chart="atom-stacked" data-x-axis="start" data-w="520" data-h="319"></div>
@@ -304,7 +304,7 @@
         </section>
 
         <section class="code-slide crash-slide atom-step" data-auto-animate data-auto-animate-id="atom" data-auto-animate-unmatched="false">
-          <h2>Stack within each lake</h2>
+          <h2>Stack by species within each lake</h2>
           <div class="atom-data atom-data-corner" data-id="atom-data-table">
             <div class="atom-data-inner">
               <table class="crash-data-table">
@@ -416,7 +416,7 @@
         </section>
 
         <section class="code-slide crash-slide atom-step" data-auto-animate data-auto-animate-id="atom" data-auto-animate-unmatched="false">
-          <h2>Atom draws one square for each fish</h2>
+          <h2>Draw one square per fish (Atom)</h2>
           <div class="atom-data atom-data-corner" data-id="atom-data-table">
             <div class="atom-data-inner">
               <table class="crash-data-table">
@@ -738,7 +738,7 @@
               margin-top: 0.8rem;
             }
           </style>
-          <h2>The PiCCL bottle chart starts as two bars</h2>
+          <h2>Layer two rects to make a glyph</h2>
           <div class="bottle-step-split">
             <div>
               <pre data-id="bottle-code" data-magic-move><code class="language-ts" data-line-numbers data-char-marks="4:5-9">chart(bottleData, { axes: false })
@@ -784,7 +784,7 @@
         </section>
 
         <section class="code-slide bottle-slide bottle-step" data-auto-animate data-auto-animate-id="bottle" data-auto-animate-unmatched="false">
-          <h2>Composite the green onto a bottle picture</h2>
+          <h2>rect -&gt; image &amp; paint the rect atop the image</h2>
           <div class="bottle-step-split">
             <div>
               <pre data-id="bottle-code" data-magic-move><code class="language-ts" data-line-numbers data-char-marks="4:5-31, 5:7-11, 6:15-38">chart(bottleData, { axes: false })
@@ -883,7 +883,7 @@
              is the only change in the code, and the chart shows the line
              and the label placed. -->
         <section class="code-slide bottle-slide bottle-step" data-auto-animate data-auto-animate-id="bottle" data-auto-animate-unmatched="false">
-          <h2>Add relations to place the line and the label</h2>
+          <h2>Relate the bottle, line, and label with constraints</h2>
           <div class="bottle-step-split">
             <div>
               <pre data-id="bottle-code" data-magic-move><code class="language-ts" data-line-numbers data-char-marks="11:5-42, 12:5-53, 13:5-60, 14:5-50, 15:3-3">chart(bottleData, { axes: false })
