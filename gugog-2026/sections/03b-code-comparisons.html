@@ -125,7 +125,7 @@
         </section>
 
         <section class="code-slide crash-slide atom-step" data-auto-animate data-auto-animate-id="atom" data-auto-animate-unmatched="false">
-          <h2>Spread into bars</h2>
+          <h2>Spread by lake</h2>
           <div class="atom-data atom-data-corner" data-id="atom-data-table">
             <div class="atom-data-inner">
               <table class="crash-data-table">
@@ -145,6 +145,85 @@
             <div>
               <p class="code-pair-label" data-id="atom-chart-label">chart API</p>
               <pre data-id="atom-chart-code" data-magic-move><code class="language-ts" data-line-numbers data-char-marks="3:5-41">chart(seafood)
+  .flow(
+    spread({ by: "lake", dir: "x", ... }),
+  )</code></pre>
+              <h3 class="transform-heading">Data transformation pipeline</h3>
+              <div class="transform-build" aria-label="How the seafood rows are grouped at this step.">
+                <div class="transform-stage transform-data" data-id="atom-pipe-data">
+                  <span class="transform-stage-label">seafood</span>
+                  <span class="transform-stage-detail">30 rows</span>
+                  <span class="transform-fields">lake, species, count</span>
+                </div>
+                <div class="transform-step" data-id="atom-pipe-lake-step">
+                  <span class="transform-arrow">↓</span>
+                  <code>group_by("lake")</code>
+                </div>
+                <div class="transform-groups transform-lakes" data-id="atom-pipe-lakes">
+                  <div class="transform-group"><b>Primrose</b><span>5 rows</span></div>
+                  <div class="transform-group"><b>Concord</b><span>5 rows</span></div>
+                  <span class="transform-ellipsis">…</span>
+                  <div class="transform-group"><b>Vulcan</b><span>5 rows</span></div>
+                </div>
+                <div class="transform-step" data-id="atom-pipe-rect-step-bars">
+                  <span class="transform-arrow">↓</span>
+                </div>
+                <div class="transform-groups transform-rects" data-id="atom-pipe-rects-1">
+                  <div class="transform-rects-one"><span class="transform-rect-cell"><i aria-hidden="true"></i><b>rect</b></span></div>
+                  <div class="transform-rects-one"><span class="transform-rect-cell"><i aria-hidden="true"></i><b>rect</b></span></div>
+                  <span class="transform-ellipsis">…</span>
+                  <div class="transform-rects-one"><span class="transform-rect-cell"><i aria-hidden="true"></i><b>rect</b></span></div>
+                </div>
+                <div class="transform-leaf-note" data-id="atom-pipe-leaf-1">
+                  <b>each <span class="viz-mark">rect</span></b>
+                  <code><i>h</i> = sum(count)</code>
+                </div>
+              </div>
+            </div>
+            <div class="crash-chart-box" data-id="atom-chart-box">
+              <div class="crash-render" data-chart="atom-slots" data-x-axis="start" data-w="520" data-h="319"></div>
+            </div>
+          </div>
+          <aside class="notes">
+            <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
+              2:20 of 7:00.</p>
+            <p><strong>Say:</strong> "A chart in GoFish has a flow of
+              operators. <code>spread</code> splits the rows by lake, and
+              puts the six groups side by side. Each dashed box is one lake's
+              space."</p>
+            <p>Since 2026-11-08 the old "Spread into bars" step is two: this
+              one adds only the flow and draws each lake's space as a dashed
+              box ("atom-slots" in ../charts.ts, in the form of the SciPy 2026
+              deck's "place one slot per site" step), and the next adds the
+              mark, and the bars fill the same boxes. The code box, the chart
+              frame, and the corner table stay put.</p>
+            <p>The small table in the corner is there so you do not have to
+              remember the fields. The code shown leaves out the spacing
+              between the lakes, and marks it with <code>...</code>.</p>
+          </aside>
+        </section>
+
+        <section class="code-slide crash-slide atom-step" data-auto-animate data-auto-animate-id="atom" data-auto-animate-unmatched="false">
+          <h2>Spread into bars</h2>
+          <div class="atom-data atom-data-corner" data-id="atom-data-table">
+            <div class="atom-data-inner">
+              <table class="crash-data-table">
+                <thead>
+                  <tr><th>lake</th><th>species</th><th>count</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Primrose</td><td>Bass</td><td>23</td></tr>
+                  <tr><td>Primrose</td><td>Trout</td><td>31</td></tr>
+                  <tr><td>Primrose</td><td>Catfish</td><td>29</td></tr>
+                  <tr class="ellipsis-row"><td>&#8942;</td><td>&#8942;</td><td>&#8942;</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="crash-solo">
+            <div>
+              <p class="code-pair-label" data-id="atom-chart-label">chart API</p>
+              <pre data-id="atom-chart-code" data-magic-move><code class="language-ts" data-line-numbers data-char-marks="5:3-34">chart(seafood)
   .flow(
     spread({ by: "lake", dir: "x", ... }),
   )
@@ -186,14 +265,11 @@
             </div>
           </div>
           <aside class="notes">
-            <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
-              2:20 of 7:00.</p>
-            <p><strong>Say:</strong> "A chart in GoFish has a flow of
-              operators. <code>spread</code> is an operator. It splits the
-              rows by lake, so we get six groups of five rows, and it puts
-              the lakes side by side. The mark is a rectangle. Each group
-              becomes one rectangle, as tall as the sum of its counts. So we
-              get one bar per lake."</p>
+            <p><strong>Target:</strong> 0:05. <strong>Running total:</strong>
+              2:25 of 7:00.</p>
+            <p><strong>Say:</strong> "Then the mark says what to draw in each
+              space: a rectangle, as tall as the sum of the counts. So we get
+              one bar per lake."</p>
             <p>(Pipeline hidden since 2026-11-08.) The pipeline under the
               code shows how the rows are grouped.</p>
             <p>The small table in the corner is there so you do not have to
@@ -278,7 +354,7 @@
           </div>
           <aside class="notes">
             <p><strong>Target:</strong> 0:05. <strong>Running total:</strong>
-              2:25 of 7:00.</p>
+              2:30 of 7:00.</p>
             <p><strong>Say:</strong> "Now we want stacked bars, one piece
               for each kind of fish."</p>
             <p>Since 2026-11-08 the change from bars to stacked bars is two
@@ -377,7 +453,7 @@
               0:15 until 2026-11-07, later, when it was "A stacked bar chart
               is a flow of operators" and also introduced
               <code>spread</code>). <strong>Running
-              total:</strong> 2:30 of 7:00.</p>
+              total:</strong> 2:35 of 7:00.</p>
             <p><strong>Say:</strong> "Add a second operator,
               <code>stack</code>. Inside each lake it splits the rows again,
               by species, so each group is now one row. It piles them up.
@@ -448,7 +524,7 @@
           <p class="source-line">Unit charts from Atom (Park, Drucker, Fernandez &amp; Elmqvist, IEEE TVCG 2018)</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:15. <strong>Running total:</strong>
-              2:45 of 7:00.</p>
+              2:50 of 7:00.</p>
             <p><strong>Say:</strong> "Atom draws a unit chart in place of the
               bars, with one square for each fish. In GoFish the stacked
               bar's mark becomes a waffle. And waffle is not a new kind of
@@ -669,7 +745,7 @@
           <p class="source-line">Bottle chart from PiCCL (Shi et al., IEEE VIS 2025)</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:05. <strong>Running total:</strong>
-              2:50 of 7:00.</p>
+              2:55 of 7:00.</p>
             <p><strong>Say:</strong> "Here is the chart we're building next:
               PiCCL's bottle chart, where each bottle fills up to its
               value."</p>
@@ -742,7 +818,7 @@
           <p class="source-line">Bottle chart from PiCCL (Shi et al., IEEE VIS 2025)</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:10 (0:40 for the four steps).
-              <strong>Running total:</strong> 3:00 of 7:00.</p>
+              <strong>Running total:</strong> 3:05 of 7:00.</p>
             <p>PiCCL shows two ideas of GoFish, in two parts. Steps 1 and 2
               show operators used directly on marks. Step 3 adds
               relations.</p>
@@ -779,7 +855,7 @@
           <p class="source-line">Bottle chart from PiCCL (Shi et al., IEEE VIS 2025)</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
-              3:10 of 7:00.</p>
+              3:15 of 7:00.</p>
             <p>This is the step to slow down on. Image compositing is PiCCL's
               own idea.</p>
             <p><strong>Say:</strong> "Here is PiCCL's idea. Swap the gray bar
@@ -824,7 +900,7 @@
           <p class="source-line">Bottle chart from PiCCL (Shi et al., IEEE VIS 2025)</p>
           <aside class="notes">
             <p><strong>Target:</strong> 0:10. <strong>Running total:</strong>
-              3:20 of 7:00.</p>
+              3:25 of 7:00.</p>
             <p><strong>Say:</strong> "Now we add a line and a label at the
               top of the green. We put them in a layer with the bottle and
               give each one a name. But nothing says where they go, so they
@@ -868,7 +944,7 @@
           <aside class="notes">
             <p><strong>Target:</strong> 0:10 (0:15 for the old single step,
               before 2026-11-08). <strong>Running total:</strong>
-              3:30 of 7:00.</p>
+              3:35 of 7:00.</p>
             <p><strong>Say:</strong> "Now the second part, relations. A
               relation sets
               only some properties of a set of marks. The tinted lines are

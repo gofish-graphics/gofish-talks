@@ -999,3 +999,10 @@
 .reveal .code-slide.atom-step .crash-solo .atom-waffle-def pre code {
   min-height: 0;
 }
+
+/* The Atom "Spread by lake" step's lake spaces (2026-11-08): dashed boxes.
+   GoFish nightly 20261106's rect mark drops strokeDasharray, so the dash is
+   set here. See atomSlots in ../charts.ts. */
+.reveal [data-chart="atom-slots"] rect {
+  stroke-dasharray: 6 4;
+}

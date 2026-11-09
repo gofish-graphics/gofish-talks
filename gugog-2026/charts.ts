@@ -36,6 +36,7 @@ import {
   derive,
   repeat,
   chunk,
+  datum,
 } from "gofish-graphics";
 import bottlePng from "./images/comparisons/wilsonblanco.png";
 import seafood from "./data/seafood.json";
@@ -574,6 +575,28 @@ const atomBars = () =>
     .flow(spread({ by: "lake", dir: "x", spacing: LAKE_GAP }))
     .mark(rect({ w: UNIT_ROW_W, h: "count" }));
 
+// The Atom steps' "Spread by lake" (2026-11-08): spread alone, before the
+// mark. Each lake's space is drawn as a dashed box, in the form of the SciPy
+// 2026 deck's "place one slot per site" step (renderVizSiteSlots in
+// scipy-2026/charts.ts): a rect with a constant height, no fill, and a dashed
+// stroke. It uses atomBars' spacing and width, so the bars on the next step
+// fill these boxes in place. The constant height makes every box as tall as
+// the frame, which is as tall as the tallest bar. GoFish nightly 20261106's
+// rect drops strokeDasharray (enclose and ribbon keep it), so the dashes are
+// set in ../gofish-compare.css on [data-chart="atom-slots"] rect.
+const atomSlots = () =>
+  chart(seafood)
+    .flow(spread({ by: "lake", dir: "x", spacing: LAKE_GAP }))
+    .mark(
+      rect({
+        w: UNIT_ROW_W,
+        h: datum(1),
+        fill: "none",
+        stroke: "#27231f",
+        strokeWidth: 1.5,
+      }),
+    );
+
 const atomStacked = () =>
   chart(seafood)
     .flow(
@@ -748,6 +771,7 @@ const charts: Record<string, (fontSize: number) => Renderable> = {
   "seafood-stacked-unsorted": seafoodStackedUnsorted,
   "seafood-stacked": seafoodStacked,
   "seafood-ribbon": seafoodRibbon,
+  "atom-slots": atomSlots,
   "atom-bars": atomBars,
   "atom-stacked": atomStacked,
   "atom-units": atomUnits,
