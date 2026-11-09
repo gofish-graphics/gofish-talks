@@ -1032,3 +1032,36 @@
 .reveal .code-slide .bottle-step-box .bottle-render.bottle-next-render {
   zoom: 0.46;
 }
+
+/* The previews' arrow (2026-11-08, later): a drawn arrow, 44px long, in
+   place of a text arrow, which was too small to see. */
+.reveal .next-arrow {
+  display: block;
+  flex: none;
+  height: 16px;
+  width: 44px;
+}
+
+.reveal .next-arrow path {
+  fill: none;
+  stroke: var(--muted);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 3;
+}
+
+/* The PiCCL previews sit below and to the right of the chart, as on the
+   Atom steps, and are clipped to their own box, so the guide lines of the
+   line and label preview stay inside it. */
+.reveal .bottle-step .bottle-next {
+  top: 424px;
+}
+
+.reveal .code-slide .bottle-step-box .bottle-render.bottle-next-render {
+  overflow: hidden;
+  zoom: 0.6;
+}
+
+.reveal .bottle-next-render svg {
+  overflow: hidden;
+}
